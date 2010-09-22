@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+
+<record id="view_asterisk_server_company_form" model="ir.ui.view">
+    <field name="name">asterisk.server.company</field>
+    <field name="model">res.company</field>
+    <field name="inherit_id" ref="base.view_company_form" />
+    <field name="arch"  type="xml">
+        <notebook>
+            <page position="inside" string="IPBX">
+                <separator colspan="4" string="Asterisk servers for click2dial" />
+                <field nolabel="1" name="asterisk_server_ids" />
+            </page>
+        </notebook>
+    </field>
+</record>
+
+<record id="view_asterisk_server_form" model="ir.ui.view">
+    <field name="name">asterisk.server.form</field>
+    <field name="model">asterisk.server</field>
+    <field name="type">form</field>
+    <field name="arch" type="xml">
+        <form string="Asterisk servers">
+            <field name="name" select="1" />
+            <field name="ip_address" select="1" />
+            <field name="port" select="2" />
+            <field name="login" select="2" />
+            <field name="password" password="True" />
+            <field name="context" />
+            <field name="extension_priority" />
+            <field name="out_prefix" />
+            <field name="national_prefix" />
+            <field name="international_prefix" />
+            <field name="country_prefix" select="1" />
+            <field name="alert-info" />
+            <field name="wait_time" />
+        </form>
+    </field>
+</record>
+
+<record id="view_asterisk_server_tree" model="ir.ui.view">
+    <field name="name">asterisk.server.tree</field>
+    <field name="model">asterisk.server</field>
+    <field name="type">tree</field>
+    <field name="arch" type="xml">
+        <tree string="Asterisk servers">
+            <field name="name" />
+            <field name="ip_address" />
+            <field name="port" />
+            <field name="country_prefix" />
+        </tree>
+    </field>
+</record>
+
+<record id="action_asterisk_server" model="ir.actions.act_window">
+    <field name="name">Asterisk Servers</field>
+    <field name="res_model">asterisk.server</field>
+    <field name="view_type">form</field>
+    <field name="view_mode">tree,form</field>
+</record>
+
+</data>
+</openerp>
