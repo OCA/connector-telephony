@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<openerp>
+<data noupdate="1">
+
+<record id="ir_model_access_asterisk_server_user" model="ir.model.access">
+    <field name="model_id" ref="asterisk_click2dial.model_asterisk_server"/>
+    <field name="name" eval="&quot;&quot;&quot;asterisk.server_user&quot;&quot;&quot;" />
+    <field name="group_id" ref="base.group_user"/>
+    <field name="perm_read" eval="1"/>
+    <field name="perm_write" eval="0"/>
+    <field name="perm_unlink" eval="0"/>
+    <field name="perm_create" eval="0"/>
+
+</record>
+
+<record id="ir_model_access_asterisk_server_system" model="ir.model.access">
+    <field name="model_id" ref="asterisk_click2dial.model_asterisk_server"/>
+    <field name="name" eval="&quot;&quot;&quot;asterisk.server_system&quot;&quot;&quot;"/>
+    <field name="group_id" ref="base.group_system"/>
+    <field name="perm_read" eval="1"/>
+    <field name="perm_write" eval="1"/>
+    <field name="perm_unlink" eval="1"/>
+    <field name="perm_create" eval="1"/>
+</record>
+
+
+</data>
+</openerp>
