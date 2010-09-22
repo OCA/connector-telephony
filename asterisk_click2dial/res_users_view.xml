@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+
+<record id="view_res_users_inherit_internal_number" model="ir.ui.view">
+    <field name="name">res.users.inherit.internal.number</field>
+    <field name="model">res.users</field>
+    <field name="type">form</field>
+    <field name="inherit_id" ref="base.view_users_form"/>
+    <field name="arch" type="xml">
+        <field name="context_tz" position="after">
+            <field name="internal_number" select="2"/>
+            <field name="asterisk_chan_type"/>
+            <field name="callerid" select="2"/>
+            <field name="asterisk_server_id"/>
+        </field>
+    </field>
+</record>
+
+</data>
+</openerp>
