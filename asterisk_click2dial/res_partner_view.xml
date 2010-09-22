@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+
+<record id="view_res_partner_address_inherit_form1" model="ir.ui.view">
+    <field name="name">res.partner.address.inherit.form1</field>
+    <field name="model">res.partner.address</field>
+    <field name="type">form</field>
+    <field name="inherit_id" ref="base.view_partner_address_form1"/>
+    <field name="arch" type="xml">
+      <data>
+        <field name="phone" position="replace">
+            <label string="Phone : " align="1.0" />
+            <group colspan="1" col="2">
+                <field name="phone" nolabel="1"/>
+                <button name="action_dial_phone" string="Dial" type="object"/>
+            </group>
+        </field>
+        <field name="mobile" position="replace">
+            <label string="Mobile : " align="1.0" />
+            <group colspan="1" col="2">
+                <field name="mobile" nolabel="1"/>
+                <button name="action_dial_mobile" string="Dial" type="object"/>
+            </group>
+        </field>
+      </data>
+    </field>
+</record>
+
+<record id="view_res_partner_address_inherit_form2" model="ir.ui.view">
+    <field name="name">res.partner.address.inherit.form2</field>
+    <field name="model">res.partner.address</field>
+    <field name="type">form</field>
+    <field name="inherit_id" ref="base.view_partner_address_form2"/>
+    <field name="arch" type="xml">
+      <data>
+        <field name="phone" position="replace">
+            <label string="Phone : " align="1.0" />
+            <group colspan="1" col="2">
+                <field name="phone" nolabel="1"/>
+                <button name="action_dial_phone" string="Dial" type="object"/>
+            </group>
+        </field>
+        <field name="mobile" position="replace">
+            <label string="Mobile : " align="1.0" />
+            <group colspan="1" col="2">
+                <field name="mobile" nolabel="1"/>
+                <button name="action_dial_mobile" string="Dial" type="object"/>
+            </group>
+        </field>
+      </data>
+    </field>
+</record>
+
+<record id="view_res_partner_inherit_form" model="ir.ui.view">
+    <field name="name">res.partner.inherit.form</field>
+    <field name="model">res.partner</field>
+    <field name="type">form</field>
+    <field name="inherit_id" ref="base.view_partner_form"/>
+    <field name="arch" type="xml">
+      <data>
+        <field name="phone" position="replace">
+            <label string="Phone : " align="1.0" />
+            <group colspan="1" col="2">
+                <field name="phone" nolabel="1"/>
+                <button name="action_dial_phone" string="Dial" type="object"/>
+            </group>
+        </field>
+        <field name="mobile" position="replace">
+            <label string="Mobile : " align="1.0" />
+            <group colspan="1" col="2">
+                <field name="mobile" nolabel="1"/>
+                <button name="action_dial_mobile" string="Dial" type="object"/>
+            </group>
+        </field>
+      </data>
+    </field>
+</record>
+
+
+
+</data>
+</openerp>
