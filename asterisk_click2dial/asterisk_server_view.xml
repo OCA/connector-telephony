@@ -33,7 +33,7 @@
             <field name="national_prefix" />
             <field name="international_prefix" />
             <field name="country_prefix" select="1" />
-            <field name="alert-info" />
+            <field name="alert_info" />
             <field name="wait_time" />
         </form>
     </field>

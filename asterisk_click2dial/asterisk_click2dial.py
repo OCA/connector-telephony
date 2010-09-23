@@ -44,7 +44,7 @@ class asterisk_server(osv.osv):
         'context'  : fields.char('Dialplan context', size=50, required=True, help="Asterisk dialplan context from which the calls will be made. Refer to /etc/asterisk/extensions.conf on your Asterisk server."),
         'wait_time' : fields.integer('Wait time (sec)', required=True, help="Amount of time (in seconds) Asterisk will try to reach the user's phone before hanging up."),
         'extension_priority' : fields.integer('Extension priority', required=True, help="Priority of the extension in the Asterisk dialplan. Refer to /etc/asterisk/extensions.conf on your Asterisk server."),
-        'alert-info' : fields.char('Alert-Info SIP header', size=40, help="Set Alert-Info header in SIP request to user's IP Phone. If empty, the Alert-Info header will not be added. You can use it to have a special ring tone for click2dial, for example you could choose a silent ring tone."),
+        'alert_info' : fields.char('Alert-Info SIP header', size=40, help="Set Alert-Info header in SIP request to user's IP Phone. If empty, the Alert-Info header will not be added. You can use it to have a special ring tone for click2dial, for example you could choose a silent ring tone."),
         'company_id' : fields.many2one('res.company', 'Company', help="Company who uses the Asterisk server."),
     }
 
@@ -220,8 +220,8 @@ class asterisk_server(osv.osv):
             sock.send('CallerId: '+str(user.callerid)+'\r\n')
             sock.send('Exten: '+str(ast_number)+'\r\n')
             sock.send('Context: '+str(ast_server.context)+'\r\n')
-            if not ast_server.alert-info and user.asterisk_chan_type == 'SIP':
-                sock.send('Variable: SIPAddHeader=Alert-Info: '+str(ast_server.alert-info)+'\r\n')
+            if not ast_server.alert_info and user.asterisk_chan_type == 'SIP':
+                sock.send('Variable: SIPAddHeader=Alert_Info: '+str(ast_server.alert_info)+'\r\n')
             sock.send('Priority: '+str(ast_server.extension_priority)+'\r\n\r\n')
             sock.send('Action: Logoff\r\n\r\n')
             sock.close()
