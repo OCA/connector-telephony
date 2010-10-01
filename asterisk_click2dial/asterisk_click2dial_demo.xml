@@ -8,7 +8,7 @@
             <field name="login">click2dial</field>
             <field name="password">mypassword</field>
             <field name="context">from-internal</field>
-            <field name="alert-info">info=&lt;Bellcore-dr5&gt;</field>
+            <field name="alert_info">info=&lt;Bellcore-dr5&gt;</field>
             <field name="company_id" ref="base.main_company" />
         </record>
         <record id="base.user_root" model="res.users">
