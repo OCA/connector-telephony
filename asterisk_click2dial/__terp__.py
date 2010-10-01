@@ -35,7 +35,7 @@ Here is how it works :
 4) Asterisk dials the phone number found in OpenERP in place of the user.
 5) If the remote party answers, the user can talk to his correspondent.
 
-Documentation for this module is available on the Akretion Web site : http://www.akretion.com/""",
+A detailed documentation for this module is available on the Akretion Web site : http://www.akretion.com/en/blog/2010/09/23/akretion-and-anevia-present-the-asterisk_click2dial-module-unleash-your-asterisk-phones-in-openerp/""",
     'author': 'Alexis de Lattre',
     'website': 'http://www.akretion.com/',
     'depends': ['base'],
