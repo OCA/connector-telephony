@@ -21,30 +21,34 @@
 
 # TODO list :
 # Wait time don't seem to be taken into account
+# In fact, maybe it the waittime for external correspondants !
+# -> if yes, default waittime should be changed from 15 to 30
 
 from osv import osv, fields
-# Lib required to open a socket towards Asterisk
+# Lib required to open a socket (needed to communicate with Asterisk server)
 import socket
 # Lib required to print logs
 import netsvc
+
 
 class asterisk_server(osv.osv):
     _name = "asterisk.server"
     _description = "Asterisk Servers"
     _columns = {
-        'name'  : fields.char('Asterisk server name', size=50, required=True, help="Asterisk server name."),
-        'ip_address'  : fields.char('Asterisk IP addr. or DNS', size=50, required=True, help="IPv4 address or DNS name of the Asterisk server."),
-        'port'        : fields.integer('Port', required=True, help="TCP port on which the Asterisk Manager Interface listens. Defined in /etc/asterisk/manager.conf on Asterisk."),
-        'out_prefix'  : fields.char('Out prefix', size=4, help="Prefix to dial to place outgoing calls. If you don't use a prefix to place outgoing calls, leave empty."),
+        'name' : fields.char('Asterisk server name', size=50, required=True, help="Asterisk server name."),
+        'ip_address' : fields.char('Asterisk IP addr. or DNS', size=50, required=True, help="IPv4 address or DNS name of the Asterisk server."),
+        'port' : fields.integer('Port', required=True, help="TCP port on which the Asterisk Manager Interface listens. Defined in /etc/asterisk/manager.conf on Asterisk."),
+        'out_prefix' : fields.char('Out prefix', size=4, help="Prefix to dial to place outgoing calls. If you don't use a prefix to place outgoing calls, leave empty."),
         'national_prefix' : fields.char('National prefix', size=4, help="Prefix for national phone calls (don't include the 'out prefix'). For e.g., in France, the phone numbers look like '01 41 98 12 42' : the National prefix is '0'."),
         'international_prefix' : fields.char('International prefix', size=4, help="Prefix to add to make international phone calls (don't include the 'out prefix'). For e.g., in France, the International prefix is '00'."),
         'country_prefix' : fields.char('My country prefix', size=4, help="Phone prefix of the country where the Asterisk server is located. For e.g. the phone prefix for France is '33'. If the phone number to dial starts with the 'My country prefix', OpenERP will remove the country prefix from the phone number and add the 'out prefix' followed by the 'national prefix'. If the phone number to dial doesn't start with the 'My country prefix', OpenERP will add the 'out prefix' followed by the 'international prefix'."),
-        'login' : fields.char('AMI login', size=30, required=True, help="Login that OpenERP will use to communicate with the Asterisk Manager Interface. Refer to /etc/asterisk/manager.conf on your Asterisk server."), 
+        'national_format_allowed' : fields.boolean('National format allowed ?', help="Do we allow to use click2dial on phone numbers written in national format, e.g. 01 41 98 12 42, or only in the international format, e.g. +33 1 41 98 12 42 ?"),
+        'login' : fields.char('AMI login', size=30, required=True, help="Login that OpenERP will use to communicate with the Asterisk Manager Interface. Refer to /etc/asterisk/manager.conf on your Asterisk server."),
         'password' : fields.char('AMI password', size=30, required=True, help="Password that Asterisk will use to communicate with the Asterisk Manager Interface. Refer to /etc/asterisk/manager.conf on your Asterisk server."),
-        'context'  : fields.char('Dialplan context', size=50, required=True, help="Asterisk dialplan context from which the calls will be made. Refer to /etc/asterisk/extensions.conf on your Asterisk server."),
+        'context' : fields.char('Dialplan context', size=50, required=True, help="Asterisk dialplan context from which the calls will be made. Refer to /etc/asterisk/extensions.conf on your Asterisk server."),
         'wait_time' : fields.integer('Wait time (sec)', required=True, help="Amount of time (in seconds) Asterisk will try to reach the user's phone before hanging up."),
         'extension_priority' : fields.integer('Extension priority', required=True, help="Priority of the extension in the Asterisk dialplan. Refer to /etc/asterisk/extensions.conf on your Asterisk server."),
-        'alert-info' : fields.char('Alert-Info SIP header', size=40, help="Set Alert-Info header in SIP request to user's IP Phone. If empty, the Alert-Info header will not be added. You can use it to have a special ring tone for click2dial, for example you could choose a silent ring tone."),
+        'alert_info' : fields.char('Alert-Info SIP header', size=40, help="Set Alert-Info header in SIP request to user's IP Phone. If empty, the Alert-Info header will not be added. You can use it to have a special ring tone for click2dial, for example you could choose a silent ring tone."),
         'company_id' : fields.many2one('res.company', 'Company', help="Company who uses the Asterisk server."),
     }
 
@@ -103,9 +107,6 @@ class asterisk_server(osv.osv):
                 return False
         return True
 
-    # TODO : is it possible to read the field name inside the constraint
-    # function in order to avoid using as many functions as fields to
-    # check prefix ?
     _constraints = [
         (_only_digits_out_prefix, "Only use digits for the 'out prefix' or leave empty", ['out_prefix']),
         (_only_digits_country_prefix, "Only use digits for the 'country prefix'", ['country_prefix']),
@@ -116,6 +117,7 @@ class asterisk_server(osv.osv):
         (_check_port, 'TCP ports range from 1 to 65535', ['port']),
     ]
 
+
     # This function is dedicated to the transformation of the number
     # available in OpenERP to the number that Asterisk should dial.
     # You may have to inherit this function in another module specific
@@ -123,29 +125,22 @@ class asterisk_server(osv.osv):
     # the OpenERP numbers.
     def reformat_number(self, cr, uid, ids, erp_number, ast_server, context):
         logger = netsvc.Logger()
-        invalid_format_msg = "The phone number is not written in valid international format. Example of valid international format : +33 1 41 98 12 42"
+        error_title_msg = "Invalid phone number"
+        invalid_international_format_msg = "The phone number is not written in valid international format. Example of valid international format : +33 1 41 98 12 42"
+        invalid_national_format_msg = "The phone number is not written in valid national format."
+        invalid_format_msg = "The phone number is not written in valid format."
 
         # Let's call the variable tmp_number now
         tmp_number = erp_number
         logger.notifyChannel('asterisk_click2dial', netsvc.LOG_DEBUG, 'Number before reformat = ' + tmp_number)
 
+        # Check if empty
+        if not tmp_number:
+            raise osv.except_osv(error_title_msg, invalid_format_msg)
+
         # First, we remove all stupid caracters and spaces
-        try:
-            for i in [' ', '.', '(', ')', '[', ']', '-', '/']:
-                tmp_number = tmp_number.replace(i, '')
-        except:
-            raise osv.except_osv('Invalid phone number', invalid_format_msg)
-
-        # Remove the starting '+' of the number
-        if tmp_number[0]=='+':
-            tmp_number = tmp_number.replace('+','')
-            logger.notifyChannel('asterisk_click2dial', netsvc.LOG_DEBUG, 'Number after removal of special char = ' + tmp_number)
-        else:
-            raise osv.except_osv('Invalid phone number', invalid_format_msg)
-
-        # At this stage, 'tmp_number' should only contain digits
-        if not tmp_number.isdigit():
-            raise osv.except_osv('Invalid phone number', invalid_format_msg)
+        for i in [' ', '.', '(', ')', '[', ']', '-', '/']:
+            tmp_number = tmp_number.replace(i, '')
 
         # Before starting to use prefix, we convert empty prefix whose value
         # is False to an empty string
@@ -154,23 +149,42 @@ class asterisk_server(osv.osv):
         international_prefix = (ast_server.international_prefix or '')
         out_prefix = (ast_server.out_prefix or '')
 
-        logger.notifyChannel('asterisk_click2dial', netsvc.LOG_DEBUG, 'Country prefix = ' + country_prefix)
-        if country_prefix == tmp_number[0:len(country_prefix)]:
-            # If the number is a national number,
-            # remove 'my country prefix' and add 'national prefix'
-            tmp_number = (national_prefix) + tmp_number[len(country_prefix):len(tmp_number)]
-            logger.notifyChannel('asterisk_click2dial', netsvc.LOG_DEBUG, 'National prefix = ' + national_prefix + ' - Number with national prefix = ' + tmp_number)
+        # International format
+        if tmp_number[0]=='+':
+            # Remove the starting '+' of the number
+            tmp_number = tmp_number.replace('+','')
+            logger.notifyChannel('asterisk_click2dial', netsvc.LOG_DEBUG, 'Number after removal of special char = ' + tmp_number)
 
-        else:
-            # If the number is an international number,
-            # add 'international prefix'
-            tmp_number = international_prefix + tmp_number
-            logger.notifyChannel('asterisk_click2dial', netsvc.LOG_DEBUG, 'International prefix = ' + international_prefix + ' - Number with international prefix = ' + tmp_number)
+            # At this stage, 'tmp_number' should only contain digits
+            if not tmp_number.isdigit():
+                raise osv.except_osv(error_title_msg, invalid_format_msg)
 
-        # Add 'out prefix' to all numbers - Caution : out prefix can be False
+            logger.notifyChannel('asterisk_click2dial', netsvc.LOG_DEBUG, 'Country prefix = ' + country_prefix)
+            if country_prefix == tmp_number[0:len(country_prefix)]:
+                # If the number is a national number,
+                # remove 'my country prefix' and add 'national prefix'
+                tmp_number = (national_prefix) + tmp_number[len(country_prefix):len(tmp_number)]
+                logger.notifyChannel('asterisk_click2dial', netsvc.LOG_DEBUG, 'National prefix = ' + national_prefix + ' - Number with national prefix = ' + tmp_number)
+
+            else:
+                # If the number is an international number,
+                # add 'international prefix'
+                tmp_number = international_prefix + tmp_number
+                logger.notifyChannel('asterisk_click2dial', netsvc.LOG_DEBUG, 'International prefix = ' + international_prefix + ' - Number with international prefix = ' + tmp_number)
+
+        # National format, allowed
+        elif ast_server.national_format_allowed:
+            # No treatment required
+            if not tmp_number.isdigit():
+                raise osv.except_osv(error_title_msg, invalid_national_format_msg)
+
+        # National format, disallowed
+        elif not ast_server.national_format_allowed:
+            raise osv.except_osv(error_title_msg, invalid_international_format_msg)
+
+        # Add 'out prefix' to all numbers
         tmp_number = out_prefix + tmp_number
-        logger.notifyChannel('asterisk_click2dial', netsvc.LOG_DEBUG, 'Out prefix = ' + out_prefix)
-        logger.notifyChannel('asterisk_click2dial', netsvc.LOG_DEBUG, 'Number that will be sent to Asterisk = ' + tmp_number)
+        logger.notifyChannel('asterisk_click2dial', netsvc.LOG_DEBUG, 'Out prefix = ' + out_prefix + ' - Number to be sent to Asterisk = ' + tmp_number)
         return tmp_number
 
     # Open the socket to the Asterisk Manager Interface
@@ -206,6 +220,7 @@ class asterisk_server(osv.osv):
         try:
             ast_ip = socket.gethostbyname(str(ast_server.ip_address))
         except:
+            logger.notifyChannel('asterisk_click2dial', netsvc.LOG_DEBUG, "Can't resolve the Asterisk server's DNS : " + str(ast_server.ip_address))
             raise osv.except_osv('Wrong DNS', "Can't resolve the DNS name of the Asterisk server.")
         try:
             sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -220,8 +235,8 @@ class asterisk_server(osv.osv):
             sock.send('CallerId: '+str(user.callerid)+'\r\n')
             sock.send('Exten: '+str(ast_number)+'\r\n')
             sock.send('Context: '+str(ast_server.context)+'\r\n')
-            if not ast_server.alert-info and user.asterisk_chan_type == 'SIP':
-                sock.send('Variable: SIPAddHeader=Alert-Info: '+str(ast_server.alert-info)+'\r\n')
+            if not ast_server.alert_info and user.asterisk_chan_type == 'SIP':
+                sock.send('Variable: SIPAddHeader=Alert_Info: '+str(ast_server.alert_info)+'\r\n')
             sock.send('Priority: '+str(ast_server.extension_priority)+'\r\n\r\n')
             sock.send('Action: Logoff\r\n\r\n')
             sock.close()
@@ -233,14 +248,15 @@ class asterisk_server(osv.osv):
 asterisk_server()
 
 
+# Parameters specific for each user
 class res_users(osv.osv):
     _name = "res.users"
     _inherit = "res.users"
     _columns = {
-         'internal_number'  : fields.char('Internal number', size=15, help="User's internal phone number."),
+        'internal_number' : fields.char('Internal number', size=15, help="User's internal phone number."),
         'callerid' : fields.char('Caller ID', size=50, help="Caller ID used for the calls initiated by this user."),
-         'asterisk_chan_type'  : fields.selection([('SIP', 'SIP'), ('IAX2', 'IAX2'), ('DAHDI', 'DAHDI'), ('Zap', 'Zap'), ('Skinny', 'Skinny'), ('MGCP', 'MGCP'), ('mISDN', 'mISDN'), ('H323', 'H323')], 'Asterisk channel type', help="Asterisk channel type, as used in the Asterisk dialplan. If the user has a regular IP phone, the channel type is 'SIP'."),
-         'asterisk_server_id' : fields.many2one('asterisk.server', 'Asterisk server', help="Asterisk server on which the user's phone is connected."),
+        'asterisk_chan_type' : fields.selection([('SIP', 'SIP'), ('IAX2', 'IAX2'), ('DAHDI', 'DAHDI'), ('Zap', 'Zap'), ('Skinny', 'Skinny'), ('MGCP', 'MGCP'), ('mISDN', 'mISDN'), ('H323', 'H323')], 'Asterisk channel type', help="Asterisk channel type, as used in the Asterisk dialplan. If the user has a regular IP phone, the channel type is 'SIP'."),
+        'asterisk_server_id' : fields.many2one('asterisk.server', 'Asterisk server', help="Asterisk server on which the user's phone is connected."),
                }
 
     _defaults = {
@@ -266,6 +282,7 @@ class res_partner_address(osv.osv):
 res_partner_address()
 
 
+# This module supports multi-company
 class res_company(osv.osv):
     _name = "res.company"
     _inherit = "res.company"
