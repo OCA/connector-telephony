@@ -19,11 +19,6 @@
 #
 ##############################################################################
 
-# TODO list :
-# Wait time don't seem to be taken into account
-# In fact, maybe it the waittime for external correspondants !
-# -> if yes, default waittime should be changed from 15 to 30
-
 from osv import osv, fields
 # Lib required to open a socket (needed to communicate with Asterisk server)
 import socket
@@ -231,7 +226,7 @@ class asterisk_server(osv.osv):
             sock.send('Secret: '+str(ast_server.password)+'\r\n\r\n')
             sock.send('Action: originate\r\n')
             sock.send('Channel: ' + str(user.asterisk_chan_type) + '/' + str(user.internal_number)+'\r\n')
-            sock.send('WaitTime: '+str(ast_server.wait_time)+'\r\n')
+            sock.send('Timeout: '+str(ast_server.wait_time*1000)+'\r\n')
             sock.send('CallerId: '+str(user.callerid)+'\r\n')
             sock.send('Exten: '+str(ast_number)+'\r\n')
             sock.send('Context: '+str(ast_server.context)+'\r\n')
