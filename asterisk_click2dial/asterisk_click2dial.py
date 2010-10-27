@@ -24,6 +24,8 @@ from osv import osv, fields
 import socket
 # Lib required to print logs
 import netsvc
+# Lib to translate error messages
+from tools.translate import _
 
 
 class asterisk_server(osv.osv):
@@ -120,10 +122,10 @@ class asterisk_server(osv.osv):
     # the OpenERP numbers.
     def reformat_number(self, cr, uid, ids, erp_number, ast_server, context):
         logger = netsvc.Logger()
-        error_title_msg = "Invalid phone number"
-        invalid_international_format_msg = "The phone number is not written in valid international format. Example of valid international format : +33 1 41 98 12 42"
-        invalid_national_format_msg = "The phone number is not written in valid national format."
-        invalid_format_msg = "The phone number is not written in valid format."
+        error_title_msg = _("Invalid phone number")
+        invalid_international_format_msg = _("The phone number is not written in valid international format. Example of valid international format : +33 1 41 98 12 42")
+        invalid_national_format_msg = _("The phone number is not written in valid national format.")
+        invalid_format_msg = _("The phone number is not written in valid format.")
 
         # Let's call the variable tmp_number now
         tmp_number = erp_number
@@ -190,21 +192,23 @@ class asterisk_server(osv.osv):
 
         # Check if the number to dial is not empty
         if not erp_number:
-            raise osv.except_osv('Error', 'There is no phone number !')
+            raise osv.except_osv(_('Error :'), _('There is no phone number !'))
+        # Note : if I write 'Error' without ' :', it won't get translated...
+        # I don't understand why !
 
         # We check if the user has an Asterisk server configured
         if not user.asterisk_server_id.id:
-            raise osv.except_osv('No Asterisk server configured for the current user', "You must associate an Asterisk server to the current user.")
+            raise osv.except_osv(_('Error :'), _('No Asterisk server configured for the current user.'))
         else:
             ast_server = user.asterisk_server_id
 
         # We check if the current user has a chan type
         if not user.asterisk_chan_type:
-            raise osv.except_osv('No channel type configured for the current user', "You must configure an Asterisk channel type for the current user.")
+            raise osv.except_osv(_('Error :'), _('No channel type configured for the current user.'))
 
         # We check if the current user has an internal number
         if not user.internal_number:
-            raise osv.except_osv('No internal phone number configured for the current user', "You must configure an internal phone number for the current user.")
+            raise osv.except_osv(_('Error :'), _('No internal phone number configured for the current user'))
 
         # Convert the phone number in the format that will be sent to Asterisk
         ast_number = self.reformat_number(cr, uid, ids, erp_number, ast_server, context=context)
@@ -215,8 +219,8 @@ class asterisk_server(osv.osv):
         try:
             ast_ip = socket.gethostbyname(str(ast_server.ip_address))
         except:
-            logger.notifyChannel('asterisk_click2dial', netsvc.LOG_DEBUG, "Can't resolve the Asterisk server's DNS : " + str(ast_server.ip_address))
-            raise osv.except_osv('Wrong DNS', "Can't resolve the DNS name of the Asterisk server.")
+            logger.notifyChannel('asterisk_click2dial', netsvc.LOG_DEBUG, "Can't resolve the DNS of the Asterisk server : " + str(ast_server.ip_address))
+            raise osv.except_osv(_('Error :'), _("Can't resolve the DNS of the Asterisk server : ") + str(ast_server.ip_address))
         try:
             sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             sock.connect((ast_ip, ast_server.port))
@@ -237,7 +241,7 @@ class asterisk_server(osv.osv):
             sock.close()
         except:
             logger.notifyChannel('asterisk_click2dial', netsvc.LOG_WARNING, "Click2dial failed : unable to connect to Asterisk")
-            raise osv.except_osv('Asterisk server unreachable', "The connection from OpenERP to the Asterisk server failed. Please check the configuration on OpenERP and on Asterisk.")
+            raise osv.except_osv(_('Error :'), _("The connection from OpenERP to the Asterisk server failed. Please check the configuration on OpenERP and on Asterisk."))
         logger.notifyChannel('asterisk_click2dial', netsvc.LOG_INFO, "Asterisk Click2Dial from " + user.internal_number + ' to ' + ast_number)
 
 asterisk_server()

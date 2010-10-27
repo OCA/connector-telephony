@@ -332,3 +332,69 @@ msgstr ""
 msgid "You should enter a 'Wait time' value between 1 and 120 seconds"
 msgstr ""
 
+#. module: asterisk_click2dial
+#: code:addons/asterisk_click2dial/asterisk_click2dial.py:0
+#, python-format
+msgid "Can't resolve the DNS of the Asterisk server : "
+msgstr ""
+
+#. module: asterisk_click2dial
+#: code:addons/asterisk_click2dial/asterisk_click2dial.py:0
+#, python-format
+msgid "Invalid phone number"
+msgstr ""
+
+#. module: asterisk_click2dial
+#: code:addons/asterisk_click2dial/asterisk_click2dial.py:0
+#, python-format
+msgid "The phone number is not written in valid international format. Example of valid international format : +33 1 41 98 12 42"
+msgstr ""
+
+#. module: asterisk_click2dial
+#: code:addons/asterisk_click2dial/asterisk_click2dial.py:0
+#, python-format
+msgid "The phone number is not written in valid national format."
+msgstr ""
+
+#. module: asterisk_click2dial
+#: code:addons/asterisk_click2dial/asterisk_click2dial.py:0
+#, python-format
+msgid "The phone number is not written in valid format."
+msgstr ""
+
+#. module: asterisk_click2dial
+#: code:addons/asterisk_click2dial/asterisk_click2dial.py:0
+#, python-format
+msgid "Error :"
+msgstr ""
+
+#. module: asterisk_click2dial
+#: code:addons/asterisk_click2dial/asterisk_click2dial.py:0
+#, python-format
+msgid "There is no phone number !"
+msgstr ""
+
+#. module: asterisk_click2dial
+#: code:addons/asterisk_click2dial/asterisk_click2dial.py:0
+#, python-format
+msgid "No Asterisk server configured for the current user."
+msgstr ""
+
+#. module: asterisk_click2dial
+#: code:addons/asterisk_click2dial/asterisk_click2dial.py:0
+#, python-format
+msgid "No channel type configured for the current user."
+msgstr ""
+
+#. module: asterisk_click2dial
+#: code:addons/asterisk_click2dial/asterisk_click2dial.py:0
+#, python-format
+msgid "No internal phone number configured for the current user"
+msgstr ""
+
+#. module: asterisk_click2dial
+#: code:addons/asterisk_click2dial/asterisk_click2dial.py:0
+#, python-format
+msgid "The connection from OpenERP to the Asterisk server failed. Please check the configuration on OpenERP and on Asterisk."
+msgstr ""
+
