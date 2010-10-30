@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  Asterisk Click2dial module for OpenERP
+  Copyright (C) 2010 Alexis de Lattre <alexis@via.ecp.fr>
+  The licence is in the file __terp__.py
+
+  Default access rules for the new asterisk.server object
+-->
 
 <openerp>
 <data noupdate="1">

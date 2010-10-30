@@ -115,12 +115,15 @@ class asterisk_server(osv.osv):
     ]
 
 
-    # This function is dedicated to the transformation of the number
-    # available in OpenERP to the number that Asterisk should dial.
-    # You may have to inherit this function in another module specific
-    # for your company if you are not happy with the way I reformat
-    # the OpenERP numbers.
     def reformat_number(self, cr, uid, ids, erp_number, ast_server, context):
+        '''
+        This function is dedicated to the transformation of the number
+        available in OpenERP to the number that Asterisk should dial.
+        You may have to inherit this function in another module specific
+        for your company if you are not happy with the way I reformat
+        the OpenERP numbers.
+        '''
+
         logger = netsvc.Logger()
         error_title_msg = _("Invalid phone number")
         invalid_international_format_msg = _("The phone number is not written in valid international format. Example of valid international format : +33 1 41 98 12 42")
@@ -184,9 +187,12 @@ class asterisk_server(osv.osv):
         logger.notifyChannel('asterisk_click2dial', netsvc.LOG_DEBUG, 'Out prefix = ' + out_prefix + ' - Number to be sent to Asterisk = ' + tmp_number)
         return tmp_number
 
-    # Open the socket to the Asterisk Manager Interface
-    # and send instructions to Dial to Asterisk
     def dial(self, cr, uid, ids, erp_number, context):
+        '''
+        Open the socket to the Asterisk Manager Interface (AMI)
+        and send instructions to Dial to Asterisk. That's the important function !
+
+        '''
         logger = netsvc.Logger()
         user = self.pool.get('res.users').browse(cr, uid, uid, context=context)
 
@@ -269,12 +275,15 @@ class res_partner_address(osv.osv):
     _name = "res.partner.address"
     _inherit ="res.partner.address"
 
-    # Functions called by the button "Dial" in the partner address view
     def action_dial_phone(self, cr, uid, ids, context):
+        '''Function called by the button 'Dial' next to the 'phone' field
+        in the partner address view'''
         erp_number = self.read(cr, uid, ids, ['phone'], context=context)[0]['phone']
         self.pool.get('asterisk.server').dial(cr, uid, ids, erp_number, context)
 
     def action_dial_mobile(self, cr, uid, ids, context):
+        '''Function called by the button 'Dial' next to the 'mobile' field
+        in the partner address view'''
         erp_number = self.read(cr, uid, ids, ['mobile'], context=context)[0]['mobile']
         self.pool.get('asterisk.server').dial(cr, uid, ids, erp_number, context)
 
