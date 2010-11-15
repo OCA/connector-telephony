@@ -33,12 +33,13 @@ class asterisk_server(osv.osv):
     _description = "Asterisk Servers"
     _columns = {
         'name' : fields.char('Asterisk server name', size=50, required=True, help="Asterisk server name."),
+        'active' : fields.boolean('Active', help="The active field allows you to hide the Asterisk server without deleting it."),
         'ip_address' : fields.char('Asterisk IP addr. or DNS', size=50, required=True, help="IPv4 address or DNS name of the Asterisk server."),
         'port' : fields.integer('Port', required=True, help="TCP port on which the Asterisk Manager Interface listens. Defined in /etc/asterisk/manager.conf on Asterisk."),
         'out_prefix' : fields.char('Out prefix', size=4, help="Prefix to dial to place outgoing calls. If you don't use a prefix to place outgoing calls, leave empty."),
         'national_prefix' : fields.char('National prefix', size=4, help="Prefix for national phone calls (don't include the 'out prefix'). For e.g., in France, the phone numbers look like '01 41 98 12 42' : the National prefix is '0'."),
         'international_prefix' : fields.char('International prefix', size=4, help="Prefix to add to make international phone calls (don't include the 'out prefix'). For e.g., in France, the International prefix is '00'."),
-        'country_prefix' : fields.char('My country prefix', size=4, help="Phone prefix of the country where the Asterisk server is located. For e.g. the phone prefix for France is '33'. If the phone number to dial starts with the 'My country prefix', OpenERP will remove the country prefix from the phone number and add the 'out prefix' followed by the 'national prefix'. If the phone number to dial doesn't start with the 'My country prefix', OpenERP will add the 'out prefix' followed by the 'international prefix'."),
+        'country_prefix' : fields.char('My country prefix', required=True, size=4, help="Phone prefix of the country where the Asterisk server is located. For e.g. the phone prefix for France is '33'. If the phone number to dial starts with the 'My country prefix', OpenERP will remove the country prefix from the phone number and add the 'out prefix' followed by the 'national prefix'. If the phone number to dial doesn't start with the 'My country prefix', OpenERP will add the 'out prefix' followed by the 'international prefix'."),
         'national_format_allowed' : fields.boolean('National format allowed ?', help="Do we allow to use click2dial on phone numbers written in national format, e.g. 01 41 98 12 42, or only in the international format, e.g. +33 1 41 98 12 42 ?"),
         'login' : fields.char('AMI login', size=30, required=True, help="Login that OpenERP will use to communicate with the Asterisk Manager Interface. Refer to /etc/asterisk/manager.conf on your Asterisk server."),
         'password' : fields.char('AMI password', size=30, required=True, help="Password that Asterisk will use to communicate with the Asterisk Manager Interface. Refer to /etc/asterisk/manager.conf on your Asterisk server."),
@@ -50,6 +51,7 @@ class asterisk_server(osv.osv):
     }
 
     _defaults = {
+        'active': lambda *a: 1,
         'port': lambda *a: 5038,  # Default AMI port
         'out_prefix': lambda *a: '0',
         'national_prefix': lambda *a: '0',
