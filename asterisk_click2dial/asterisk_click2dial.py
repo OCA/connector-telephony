@@ -218,6 +218,10 @@ class asterisk_server(osv.osv):
         if not user.internal_number:
             raise osv.except_osv(_('Error :'), _('No internal phone number configured for the current user'))
 
+        # The user should also have a CallerID
+        if not user.callerid:
+            raise osv.except_osv(_('Error :'), _('No callerID configured for the current user'))
+
         # Convert the phone number in the format that will be sent to Asterisk
         ast_number = self.reformat_number(cr, uid, ids, erp_number, ast_server, context=context)
         logger.notifyChannel('asterisk_click2dial', netsvc.LOG_DEBUG, 'User dialing : channel = ' + user.asterisk_chan_type + '/' + user.internal_number + ' - Callerid = ' + user.callerid)
