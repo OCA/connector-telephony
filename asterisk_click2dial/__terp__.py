@@ -22,7 +22,7 @@
 
 {
     'name': 'Asterisk Click2dial',
-    'version': '0.1',
+    'version': '0.2',
     'category': 'Generic Modules/Others',
     'license': 'AGPL-3',
     'description': """This module adds a 'dial' button in the partner address
