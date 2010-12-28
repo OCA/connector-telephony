@@ -21,14 +21,14 @@
         <field name="phone" position="replace">
             <label string="Phone : " align="1.0" />
             <group colspan="1" col="5">
-                <field name="phone" nolabel="1" colspan="4" />
+                <field name="phone" nolabel="1" colspan="4" select="2" />
                 <button name="action_dial_phone" string="Dial" type="object"/>
             </group>
         </field>
         <field name="mobile" position="replace">
             <label string="Mobile : " align="1.0" />
             <group colspan="1" col="5">
-                <field name="mobile" nolabel="1" colspan="4" />
+                <field name="mobile" nolabel="1" colspan="4" select="2" />
                 <button name="action_dial_mobile" string="Dial" type="object"/>
             </group>
         </field>
@@ -46,14 +46,14 @@
         <field name="phone" position="replace">
             <label string="Phone : " align="1.0" />
             <group colspan="1" col="5">
-                <field name="phone" nolabel="1" colspan="4" />
+                <field name="phone" nolabel="1" colspan="4" select="2" />
                 <button name="action_dial_phone" string="Dial" type="object"/>
             </group>
         </field>
         <field name="mobile" position="replace">
             <label string="Mobile : " align="1.0" />
             <group colspan="1" col="5">
-                <field name="mobile" nolabel="1" colspan="4" />
+                <field name="mobile" nolabel="1" colspan="4" select="2" />
                 <button name="action_dial_mobile" string="Dial" type="object"/>
             </group>
         </field>
@@ -71,14 +71,14 @@
         <field name="phone" position="replace">
             <label string="Phone : " align="1.0" />
             <group colspan="1" col="5">
-                <field name="phone" nolabel="1" colspan="4" />
+                <field name="phone" nolabel="1" colspan="4" select="2" />
                 <button name="action_dial_phone" string="Dial" type="object"/>
             </group>
         </field>
         <field name="mobile" position="replace">
             <label string="Mobile : " align="1.0" />
             <group colspan="1" col="5">
-                <field name="mobile" nolabel="1" colspan="4" />
+                <field name="mobile" nolabel="1" colspan="4" select="2" />
                 <button name="action_dial_mobile" string="Dial" type="object"/>
             </group>
         </field>
