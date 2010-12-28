@@ -26,6 +26,8 @@ import socket
 import netsvc
 # Lib to translate error messages
 from tools.translate import _
+# Lib for regexp
+import re
 
 
 class asterisk_server(osv.osv):
@@ -304,19 +306,29 @@ class res_partner_address(osv.osv):
         '''
         res = {}
         logger = netsvc.Logger()
-        netsvc.Logger().notifyChannel('asterisk_click2dial', netsvc.LOG_DEBUG, u"Call get_name_from_phone_number with number = " + number)
-        res = self.search(cr, uid, [('phone', 'ilike', number)], context=context)
-        if len(res) == 0: # if we find nothing, we continue with mobile
-            res = self.search(cr, uid, [('mobile', 'ilike', number)], context=context)
-        if len(res) == 1: # if we have a single match
-            #print 'AST res =', res
-            partner_address = self.read(cr, uid, res[0], ['name'], context=context)['name']
-            logger.notifyChannel('asterisk_click2dial', netsvc.LOG_DEBUG, u"Answer get_name_from_phone_number with name = %s" % partner_address)
-            return partner_address
-        # TODO what do we do when we have more than 1 match ? We take the first one ?
-        # we don't do anything ?
-        else:
+        # We check that "number" is really a number
+        if not isinstance(number, str):
             return False
+        if not number.isdigit():
+            return False
+
+        netsvc.Logger().notifyChannel('asterisk_click2dial', netsvc.LOG_DEBUG, u"Call get_name_from_phone_number with number = %s" % number)
+        # Get all the partner addresses :
+        all_ids = self.search(cr, uid, [], context=context)
+        # For each partner address, we check if the number matches on the "phone" or "mobile" fields
+        for entry in self.browse(cr, uid, all_ids, context=context):
+            if entry.phone:
+                # We use a regexp on the phone field to remove non-digit caracters
+                if re.sub(r'\D', '', entry.phone).endswith(number):
+                    logger.notifyChannel('asterisk_click2dial', netsvc.LOG_DEBUG, u"Answer get_name_from_phone_number with name = %s" % entry.name)
+                    return entry.name
+            if entry.mobile:
+                if re.sub(r'\D', '', entry.mobile).endswith(number):
+                    logger.notifyChannel('asterisk_click2dial', netsvc.LOG_DEBUG, u"Answer get_name_from_phone_number with name = %s" % entry.name)
+                    return entry.name
+
+        logger.notifyChannel('asterisk_click2dial', netsvc.LOG_DEBUG, u"No match for phone number %s" % number)
+        return False
 
 res_partner_address()
 
