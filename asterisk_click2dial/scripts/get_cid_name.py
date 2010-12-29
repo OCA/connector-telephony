@@ -31,6 +31,9 @@
  exten => _0141981242,n,Voicemail(10@default,u)
  exten => _0141981242,n,Hangup()
 
+ It's probably a good idea to create a user in OpenERP dedicated to this task.
+ This user only needs read access on the 'res.partner.address' object.
+
 """
 
 __author__ = "Alexis de Lattre <alexis.delattre@akretion.com>"
@@ -64,8 +67,8 @@ default_cid_name = "Not in OpenERP"
 option_server = {'names': ('-s', '--server'), 'dest': 'server', 'type': 'string', 'help': 'DNS or IP address of the OpenERP server', 'action': 'store', 'default':'localhost'}
 option_port = {'names': ('-p', '--port'), 'dest': 'port', 'type': 'int', 'help': "Port of OpenERP's XML-RPC interface", 'action': 'store', 'default': 8069}
 option_database = {'names': ('-d', '--database'), 'dest': 'database', 'type': 'string', 'help': "OpenERP database name", 'action': 'store', 'default': 'openerp'}
-option_user = {'names': ('-u', '--user-id'), 'dest': 'user', 'type': 'int', 'help': "OpenERP user ID to use when connecting to OpenERP", 'action': 'store', 'default': 1}
-option_password = {'names': ('-w', '--password'), 'dest': 'password', 'type': 'string', 'help': "Password of the OpenERP user", 'action': 'store', 'default': 'admin'}
+option_user = {'names': ('-u', '--user-id'), 'dest': 'user', 'type': 'int', 'help': "OpenERP user ID to use when connecting to OpenERP", 'action': 'store', 'default': 2}
+option_password = {'names': ('-w', '--password'), 'dest': 'password', 'type': 'string', 'help': "Password of the OpenERP user", 'action': 'store', 'default': 'demo'}
 
 options = [option_server, option_port, option_database, option_user, option_password]
 
