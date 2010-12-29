@@ -7,11 +7,11 @@
 # Limiting the execution time of get_cid_name.py is important because
 # the script is designed to be executed at the beginning of each
 # incoming phone call... and if the script get stucks, the phone call
-# will also get stucks and you will miss a call !
+# will also get stucks and you will miss the call !
 
-# For Debian Lenny, you need to install the package "timeout"
-# For Ubuntu and Debian >= Squeeze, the "timeout" command is shipped in
-# the "coreutils" package
+# For Debian Lenny and Ubuntu Lucid, you need to install the package "timeout"
+# For Ubuntu >= Maverick and Debian >= Squeeze, the "timeout" command is shipped
+# in the "coreutils" package
 
 # The first argument of the "timeout" command is the maximum execution time
 # In this example, we chose 1 second
