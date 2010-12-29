@@ -32,8 +32,8 @@
  exten => _0141981242,n,Hangup()
 
  It's probably a good idea to create a user in OpenERP dedicated to this task.
- This user only needs read access on the 'res.partner.address' object.
-
+ This user only needs to be part of the group "Asterisk CallerID", which has
+ read access on the 'res.partner.address' object, nothing more.
 """
 
 __author__ = "Alexis de Lattre <alexis.delattre@akretion.com>"
