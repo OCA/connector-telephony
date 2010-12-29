@@ -298,11 +298,11 @@ class res_partner_address(osv.osv):
 
     def get_name_from_phone_number(self, cr, uid, number, context=None):
         '''Function to get name from phone number. Usefull for use from Asterisk
-        to add CallerID name to incoming calls
-        To use this function from a python console/script :
-        import xmlrpclib
-        sock = xmlrpclib.ServerProxy('http://localhost:8069/xmlrpc/object')
-        sock.execute("openerp_database", user_id_num, "user_passwd", 'res.partner.address', 'get_name_from_phone_number', '141983212')
+        to add CallerID name to incoming calls.
+        The "scripts/" subdirectory of this module has an AGI script that you can
+        install on your Asterisk IPBX : the script will be called from the Asterisk
+        dialplan via the AGI() function and it will use this function via an XML-RPC
+        request.
         '''
         res = {}
         logger = netsvc.Logger()
