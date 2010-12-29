@@ -46,7 +46,7 @@ Here is how it works :
 4) If it finds the name, it is add as CallerID name of the call, so as to be presented on the IP phone
    of the user.
 
-A detailed documentation for this module is available on the Akretion Web site : http://www.akretion.com/en/blog/2010/09/23/akretion-and-anevia-present-the-asterisk_click2dial-module-unleash-your-asterisk-phones-in-openerp/""",
+A detailed documentation for this module is available on the Akretion Web site : http://www.akretion.com/en/products-and-services/openerp-asterisk-voip-connector """,
     'author': 'Alexis de Lattre',
     'website': 'http://www.akretion.com/',
     'depends': ['base'],
