@@ -35,6 +35,17 @@ Here is how it works :
 4) Asterisk dials the phone number found in OpenERP in place of the user.
 5) If the remote party answers, the user can talk to his correspondent.
 
+This module also adds the ability to show the name of the calling party on incoming phone calls if the presented
+phone number is present in the Partner addresses of OpenERP.
+
+Here is how it works :
+1) On incoming phone calls, the Asterisk dialplan executes an AGI "get_cid_name_timeout.sh".
+2) The "get_cid_name_timeout.sh" script calls the "get_cid_name.py" script with a short timeout.
+3) The "get_cid_name.py" script will make an XML-RPC request on the OpenERP server to try to find the name
+   of the person corresponding to the phone number presented by the calling party.
+4) If it finds the name, it is add as CallerID name of the call, so as to be presented on the IP phone
+   of the user.
+
 A detailed documentation for this module is available on the Akretion Web site : http://www.akretion.com/en/blog/2010/09/23/akretion-and-anevia-present-the-asterisk_click2dial-module-unleash-your-asterisk-phones-in-openerp/""",
     'author': 'Alexis de Lattre',
     'website': 'http://www.akretion.com/',
