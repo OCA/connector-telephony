@@ -156,7 +156,7 @@ def main(options, arguments):
 
     sys.stdout.write('VERBOSE "CallerID Name = %s"\n' % res_ascii)
     sys.stdout.flush()
-    sys.stdout.write('SET CALLERID "%s" <%s>\n' % (res_ascii, input_cid_number))
+    sys.stdout.write('SET CALLERID "%s"<%s>\n' % (res_ascii, input_cid_number))
     sys.stdout.flush()
 
 if __name__ == '__main__':
