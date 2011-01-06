@@ -64,13 +64,24 @@ from optparse import OptionParser
 default_cid_name = "Not in OpenERP"
 
 # Define command line options
-option_server = {'names': ('-s', '--server'), 'dest': 'server', 'type': 'string', 'help': 'DNS or IP address of the OpenERP server', 'action': 'store', 'default':'localhost'}
-option_port = {'names': ('-p', '--port'), 'dest': 'port', 'type': 'int', 'help': "Port of OpenERP's XML-RPC interface", 'action': 'store', 'default': 8069}
-option_database = {'names': ('-d', '--database'), 'dest': 'database', 'type': 'string', 'help': "OpenERP database name", 'action': 'store', 'default': 'openerp'}
-option_user = {'names': ('-u', '--user-id'), 'dest': 'user', 'type': 'int', 'help': "OpenERP user ID to use when connecting to OpenERP", 'action': 'store', 'default': 2}
-option_password = {'names': ('-w', '--password'), 'dest': 'password', 'type': 'string', 'help': "Password of the OpenERP user", 'action': 'store', 'default': 'demo'}
+option_server = {'names': ('-s', '--server'), 'dest': 'server', 'type': 'string', 'help': 'DNS or IP address of the OpenERP server. Default = localhost', 'action': 'store', 'default':'localhost'}
+option_port = {'names': ('-p', '--port'), 'dest': 'port', 'type': 'int', 'help': "Port of OpenERP's XML-RPC interface. Default = 8069", 'action': 'store', 'default': 8069}
+option_database = {'names': ('-d', '--database'), 'dest': 'database', 'type': 'string', 'help': "OpenERP database name. Default = openerp", 'action': 'store', 'default': 'openerp'}
+option_user = {'names': ('-u', '--user-id'), 'dest': 'user', 'type': 'int', 'help': "OpenERP user ID to use when connecting to OpenERP. Default = 2", 'action': 'store', 'default': 2}
+option_password = {'names': ('-w', '--password'), 'dest': 'password', 'type': 'string', 'help': "Password of the OpenERP user. Default = demo", 'action': 'store', 'default': 'demo'}
+option_ascii = {'names': ('-a', '--ascii'), 'dest': 'ascii', 'help': "Convert name from UTF-8 to ASCII. Default = no, keep UTF-8", 'action': 'store_true', 'default': False}
 
-options = [option_server, option_port, option_database, option_user, option_password]
+options = [option_server, option_port, option_database, option_user, option_password, option_ascii]
+
+def stdout_write(string):
+    '''Wrapper on sys.stdout.write'''
+    sys.stdout.write(string.encode(sys.stdout.encoding, 'replace'))
+    sys.stdout.flush()
+
+def stderr_write(string):
+    '''Wrapper on sys.stderr.write'''
+    sys.stderr.write(string.encode(sys.stdout.encoding, 'replace'))
+    sys.stdout.flush()
 
 
 def reformat_phone_number_before_query_openerp(number):
@@ -104,33 +115,32 @@ def main(options, arguments):
             break
         variable, value = input_line.split(':') # TODO à protéger !
         if variable[:4] != 'agi_': # All AGI parameters start with 'agi_'
-            sys.stderr.write("Bad stdin variable : %s\n" % variable)
+            stderr_write("bad stdin variable : %s\n" % variable)
             continue
         variable = variable.strip()
         value = value.strip()
         if variable != '':
             stdinput[variable] = value
-    sys.stderr.write("Full AGI environnement :\n")
+    stderr_write("full AGI environnement :\n")
     for variable in stdinput.keys():
-        sys.stderr.write("%s = %s\n" % (variable, stdinput[variable]))
+        stderr_write("%s = %s\n" % (variable, stdinput[variable]))
 
     input_cid_number = stdinput.get('agi_callerid', False)
+    stderr_write('stdout encoding = %s\n' % sys.stdout.encoding)
 
     if not isinstance(input_cid_number, str):
         exit(0)
     # Match for particular cases and anonymous phone calls
     # To test anonymous call in France, dial 3651 + number
     if not input_cid_number.isdigit():
-        sys.stdout.write('VERBOSE "CallerID number (%s) is not a digit"\n' % input_cid_number)
-        sys.stdout.flush()
+        stdout_write('VERBOSE "CallerID number (%s) is not a digit"\n' % input_cid_number)
         exit(0)
 
-    sys.stdout.write('VERBOSE "CallerID number = %s"\n' % input_cid_number)
+    stdout_write('VERBOSE "CallerID number = %s"\n' % input_cid_number)
     query_number = reformat_phone_number_before_query_openerp(input_cid_number)
-    sys.stderr.write("phone number sent to OpenERP = %s\n" % query_number)
+    stderr_write("phone number sent to OpenERP = %s\n" % query_number)
 
-    sys.stdout.write('VERBOSE "Starting XML-RPC request on OpenERP %s:%s"\n' % (options.server, str(options.port)))
-    sys.stdout.flush()
+    stdout_write('VERBOSE "Starting XML-RPC request on OpenERP %s:%s"\n' % (options.server, str(options.port)))
 
     sock = xmlrpclib.ServerProxy('http://%s:%s/xmlrpc/object' % (options.server, str(options.port)))
 
@@ -139,8 +149,7 @@ def main(options, arguments):
     #import time
     #time.sleep(5)
 
-    sys.stdout.write('VERBOSE "End of XML-RPC request on OpenERP"\n')
-    sys.stdout.flush()
+    stdout_write('VERBOSE "End of XML-RPC request on OpenERP"\n')
 
     # Function to limit the size of the CID name to 40 chars
     if res:
@@ -150,14 +159,13 @@ def main(options, arguments):
         # if the number is not found in OpenERP, we put 'default_cid_name' as CID Name
         res = default_cid_name
 
-    # I am not sure how SIP and IP phones manage non-ASCII caracters, so I prefer
-    # to replace all non-ASCII caracters in the name
-    res_ascii = convert_to_ascii(res)
+    # All SIP phones should support UTF-8... but in case you have analog phones over TDM
+    # or buggy phones, you should use the command line option --ascii
+    if options.ascii:
+        res = convert_to_ascii(res)
 
-    sys.stdout.write('VERBOSE "CallerID Name = %s"\n' % res_ascii)
-    sys.stdout.flush()
-    sys.stdout.write('SET CALLERID "%s"<%s>\n' % (res_ascii, input_cid_number))
-    sys.stdout.flush()
+    stdout_write('VERBOSE "CallerID Name = %s"\n' % res)
+    stdout_write('SET CALLERID "%s"<%s>\n' % (res, input_cid_number))
 
 if __name__ == '__main__':
     parser = OptionParser()
