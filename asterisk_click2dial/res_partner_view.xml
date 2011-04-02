@@ -15,6 +15,7 @@
     <field name="name">res.partner.address.inherit.form1</field>
     <field name="model">res.partner.address</field>
     <field name="type">form</field>
+    <field name="priority">15</field>
     <field name="inherit_id" ref="base.view_partner_address_form1"/>
     <field name="arch" type="xml">
       <data>
@@ -40,6 +41,7 @@
     <field name="name">res.partner.address.inherit.form2</field>
     <field name="model">res.partner.address</field>
     <field name="type">form</field>
+    <field name="priority">15</field>
     <field name="inherit_id" ref="base.view_partner_address_form2"/>
     <field name="arch" type="xml">
       <data>
