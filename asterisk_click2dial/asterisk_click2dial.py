@@ -68,7 +68,7 @@ class asterisk_server(osv.osv):
             prefix_to_check = self.read(cr, uid, i, [prefix])[prefix]
             if not prefix_to_check:
                 if can_be_empty:
-                    return True
+                    continue
                 else:
                     return False
             else:
@@ -100,7 +100,7 @@ class asterisk_server(osv.osv):
             extension_priority_to_check = self.read(cr, uid, i, ['extension_priority'])['extension_priority']
             if extension_priority_to_check < 1:
                 return False
-            return True
+        return True
 
     def _check_port(self, cr, uid, ids):
         for i in ids:
