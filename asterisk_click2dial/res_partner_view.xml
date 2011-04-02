@@ -65,6 +65,7 @@
     <field name="name">res.partner.inherit.form</field>
     <field name="model">res.partner</field>
     <field name="type">form</field>
+    <field name="priority">15</field>
     <field name="inherit_id" ref="base.view_partner_form"/>
     <field name="arch" type="xml">
       <data>
