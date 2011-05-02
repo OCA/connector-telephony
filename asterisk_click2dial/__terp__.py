@@ -47,7 +47,7 @@ Here is how it works :
    of the user.
 
 A detailed documentation for this module is available on the Akretion Web site : http://www.akretion.com/en/products-and-services/openerp-asterisk-voip-connector """,
-    'author': 'Alexis de Lattre',
+    'author': 'Akretion',
     'website': 'http://www.akretion.com/',
     'depends': ['base'],
     'init_xml': [],

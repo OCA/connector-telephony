@@ -11,8 +11,8 @@
 <openerp>
 <data>
 
-<record id="view_res_partner_address_inherit_form1" model="ir.ui.view">
-    <field name="name">res.partner.address.inherit.form1</field>
+<record id="asterisk_res_partner_address_dial1" model="ir.ui.view">
+    <field name="name">asterisk.res.partner.address.dial1</field>
     <field name="model">res.partner.address</field>
     <field name="type">form</field>
     <field name="priority">15</field>
@@ -37,8 +37,8 @@
     </field>
 </record>
 
-<record id="view_res_partner_address_inherit_form2" model="ir.ui.view">
-    <field name="name">res.partner.address.inherit.form2</field>
+<record id="asterisk_res_partner_address_dial2" model="ir.ui.view">
+    <field name="name">asterisk.res.partner.address.dial2</field>
     <field name="model">res.partner.address</field>
     <field name="type">form</field>
     <field name="priority">15</field>
@@ -63,8 +63,8 @@
     </field>
 </record>
 
-<record id="view_res_partner_inherit_form" model="ir.ui.view">
-    <field name="name">res.partner.inherit.form</field>
+<record id="asterisk_res_partner_dial" model="ir.ui.view">
+    <field name="name">asterisk.res.partner.dial</field>
     <field name="model">res.partner</field>
     <field name="type">form</field>
     <field name="priority">15</field>
