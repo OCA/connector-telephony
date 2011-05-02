@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
   Asterisk Click2dial module for OpenERP
-  Copyright (C) 2010 Alexis de Lattre <alexis@via.ecp.fr>
+  Copyright (C) 2010-2011 Alexis de Lattre <alexis@via.ecp.fr>
   The licence is in the file __terp__.py
 -->
 
@@ -76,27 +76,13 @@
 <record id="view_asterisk_server_standalone_form" model="ir.ui.view">
     <field name="name">asterisk.server.standalone.form</field>
     <field name="model">asterisk.server</field>
+    <field name="inherit_id" ref="view_asterisk_server_form" />
     <field name="type">form</field>
     <field name="arch" type="xml">
-        <form string="Asterisk servers">
+        <field name="name" position="before">
             <field name="company_id" select="1" />
             <newline />
-            <field name="name" select="1" />
-            <field name="active" select="2" />
-            <field name="ip_address" select="1" />
-            <field name="port" select="2" />
-            <field name="login" select="2" />
-            <field name="password" password="True" />
-            <field name="context" />
-            <field name="extension_priority" />
-            <field name="out_prefix" />
-            <field name="national_prefix" />
-            <field name="international_prefix" />
-            <field name="country_prefix" select="1" />
-            <field name="national_format_allowed" />
-            <field name="alert_info" />
-            <field name="wait_time" />
-        </form>
+        </field>
     </field>
 </record>
 
@@ -104,15 +90,12 @@
 <record id="view_asterisk_server_standalone_tree" model="ir.ui.view">
     <field name="name">asterisk.server.standalone.tree</field>
     <field name="model">asterisk.server</field>
+    <field name="inherit_id" ref="view_asterisk_server_tree" />
     <field name="type">tree</field>
     <field name="arch" type="xml">
-        <tree string="Asterisk servers">
+        <field name="name" position="before">
             <field name="company_id" />
-            <field name="name" />
-            <field name="ip_address" />
-            <field name="port" />
-            <field name="country_prefix" />
-        </tree>
+        </field>
     </field>
 </record>
 
