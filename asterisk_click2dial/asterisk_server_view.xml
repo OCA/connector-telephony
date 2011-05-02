@@ -16,20 +16,21 @@
     <field name="arch"  type="xml">
         <notebook>
             <page position="inside" string="IPBX">
-                <separator colspan="4" string="Asterisk servers for click2dial" />
                 <field nolabel="1" name="asterisk_server_ids" />
             </page>
         </notebook>
     </field>
 </record>
 
-<!-- Form view for asterisk.server inside Company view -->
+<!-- Form view for asterisk.server -->
 <record id="view_asterisk_server_form" model="ir.ui.view">
     <field name="name">asterisk.server.form</field>
     <field name="model">asterisk.server</field>
     <field name="type">form</field>
     <field name="arch" type="xml">
         <form string="Asterisk servers">
+            <field name="company_id" select="1" invisible="not context.get('asterisk_server_main_view', False)" />
+            <newline />
             <field name="name" select="1" />
             <field name="active" select="2" />
             <field name="ip_address" select="1" />
@@ -49,13 +50,14 @@
     </field>
 </record>
 
-<!-- Tree view for asterisk.server inside company view -->
+<!-- Tree view for asterisk.server -->
 <record id="view_asterisk_server_tree" model="ir.ui.view">
     <field name="name">asterisk.server.tree</field>
     <field name="model">asterisk.server</field>
     <field name="type">tree</field>
     <field name="arch" type="xml">
         <tree string="Asterisk servers">
+            <field name="company_id" invisible="not context.get('asterisk_server_main_view', False)"/>
             <field name="name" />
             <field name="ip_address" />
             <field name="port" />
@@ -64,66 +66,17 @@
     </field>
 </record>
 
-<!-- Action for asterisk.server inside company view -->
+<!-- Action for asterisk.server -->
 <record id="action_asterisk_server" model="ir.actions.act_window">
     <field name="name">Asterisk servers</field>
     <field name="res_model">asterisk.server</field>
     <field name="view_type">form</field>
     <field name="view_mode">tree,form</field>
-</record>
-
-<!-- Form view for asterisk.server - standalone -->
-<record id="view_asterisk_server_standalone_form" model="ir.ui.view">
-    <field name="name">asterisk.server.standalone.form</field>
-    <field name="model">asterisk.server</field>
-    <field name="inherit_id" ref="view_asterisk_server_form" />
-    <field name="type">form</field>
-    <field name="arch" type="xml">
-        <field name="name" position="before">
-            <field name="company_id" select="1" />
-            <newline />
-        </field>
-    </field>
-</record>
-
-<!-- Tree view for asterisk.server - standalone -->
-<record id="view_asterisk_server_standalone_tree" model="ir.ui.view">
-    <field name="name">asterisk.server.standalone.tree</field>
-    <field name="model">asterisk.server</field>
-    <field name="inherit_id" ref="view_asterisk_server_tree" />
-    <field name="type">tree</field>
-    <field name="arch" type="xml">
-        <field name="name" position="before">
-            <field name="company_id" />
-        </field>
-    </field>
-</record>
-
-<!-- Action for asterisk.server - standalone -->
-<record id="action_asterisk_server_standalone" model="ir.actions.act_window">
-    <field name="name">Asterisk servers</field>
-    <field name="res_model">asterisk.server</field>
-    <field name="view_type">form</field>
-</record>
-
-<!-- Action view "tree" for asterisk.server - standalone -->
-<record id="action_asterisk_server_standalone_tree" model="ir.actions.act_window.view">
-    <field eval="10" name="sequence"/> <!-- open tree view first -->
-    <field name="view_mode">tree</field>
-    <field name="view_id" ref="view_asterisk_server_standalone_tree" />
-    <field name="act_window_id" ref="action_asterisk_server_standalone" />
-</record>
-
-<!-- Action view "form" for asterisk.server - standalone -->
-<record id="action_asterisk_server_standalone_form" model="ir.actions.act_window.view">
-    <field eval="20" name="sequence"/>
-    <field name="view_mode">form</field>
-    <field name="view_id" ref="view_asterisk_server_standalone_form" />
-    <field name="act_window_id" ref="action_asterisk_server_standalone" />
+    <field name="context">{'asterisk_server_main_view': True}</field>
 </record>
 
 <!-- Menu entry under Administration > Configuration -->
-<menuitem action="action_asterisk_server_standalone" id="act_menu_ast_server" parent="base.menu_config" />
+<menuitem action="action_asterisk_server" id="act_menu_ast_server" parent="base.menu_config" />
 
 
 </data>
