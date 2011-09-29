@@ -76,12 +76,12 @@ options = [option_server, option_port, option_ssl, option_database, option_user,
 
 def stdout_write(string):
     '''Wrapper on sys.stdout.write'''
-    sys.stdout.write(string.encode(sys.stdout.encoding, 'replace'))
+    sys.stdout.write(string.encode(sys.stdout.encoding or 'utf-8', 'replace'))
     sys.stdout.flush()
 
 def stderr_write(string):
     '''Wrapper on sys.stderr.write'''
-    sys.stderr.write(string.encode(sys.stdout.encoding, 'replace'))
+    sys.stderr.write(string.encode(sys.stdout.encoding or 'utf-8', 'replace'))
     sys.stdout.flush()
 
 
@@ -127,7 +127,7 @@ def main(options, arguments):
         stderr_write("%s = %s\n" % (variable, stdinput[variable]))
 
     input_cid_number = stdinput.get('agi_callerid', False)
-    stderr_write('stdout encoding = %s\n' % sys.stdout.encoding)
+    stderr_write('stdout encoding = %s\n' % sys.stdout.encoding or 'utf-8')
 
     if not isinstance(input_cid_number, str):
         exit(0)
