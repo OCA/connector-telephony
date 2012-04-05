@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
   Asterisk Click2dial module for OpenERP
-  Copyright (C) 2010 Alexis de Lattre <alexis@via.ecp.fr>
+  Copyright (C) 2010-2012 Alexis de Lattre <alexis@via.ecp.fr>
   The licence is in the file __terp__.py
 
   Inherit res_users view to add the click2dial-related fields
@@ -16,12 +16,14 @@
     <field name="type">form</field>
     <field name="inherit_id" ref="base.view_users_form"/>
     <field name="arch" type="xml">
-        <field name="context_tz" position="after">
-            <field name="internal_number" select="2"/>
-            <field name="asterisk_chan_type"/>
-            <field name="callerid" select="2"/>
-            <field name="asterisk_server_id"/>
-        </field>
+        <page string="User" position="after">
+            <page string="Telephony">
+                <field name="internal_number" select="2"/>
+                <field name="asterisk_chan_type"/>
+                <field name="callerid" />
+                <field name="asterisk_server_id"/>
+            </page>
+        </page>
     </field>
 </record>
 
