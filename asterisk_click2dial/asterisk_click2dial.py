@@ -238,27 +238,36 @@ class asterisk_server(osv.osv):
             raise osv.except_osv(_('Error :'), _("Can't resolve the DNS of the Asterisk server : ") + str(ast_server.ip_address))
         for result in res:
             af, socktype, proto, canonname, sockaddr = result
+            sock = socket.socket(af, socktype, proto)
             try:
-                sock = socket.socket(af, socktype, proto)
                 sock.connect(sockaddr)
-                sock.send('Action: login\r\n')
-                sock.send('Events: off\r\n')
-                sock.send('Username: '+str(ast_server.login)+'\r\n')
-                sock.send('Secret: '+str(ast_server.password)+'\r\n\r\n')
-                sock.send('Action: originate\r\n')
-                sock.send('Channel: ' + str(user.asterisk_chan_type) + '/' + str(user.internal_number)+'\r\n')
-                sock.send('Timeout: '+str(ast_server.wait_time*1000)+'\r\n')
-                sock.send('CallerId: '+str(user.callerid)+'\r\n')
-                sock.send('Exten: '+str(ast_number)+'\r\n')
-                sock.send('Context: '+str(ast_server.context)+'\r\n')
+                sock.send(('Action: login\r\n' +
+                    'Events: off\r\n' +
+                    'Username: ' + ast_server.login + '\r\n' +
+                    'Secret: ' + ast_server.password + '\r\n\r\n').encode('utf-8'))
+                logger.notifyChannel('asterisk_click2dial received', netsvc.LOG_DEBUG, sock.recv(1024) + '\n')
+                # TODO : parse the result and display appropriate error if login fails
+
+                originate_act = 'Action: originate\r\n' + \
+                    'Channel: ' + user.asterisk_chan_type + '/' + user.internal_number + '\r\n' + \
+                    'Priority: ' + unicode(ast_server.extension_priority) + '\r\n' + \
+                    'Timeout: ' + unicode(ast_server.wait_time*1000) + '\r\n' + \
+                    'CallerId: ' + user.callerid + '\r\n' + \
+                    'Exten: ' + ast_number + '\r\n' + \
+                    'Context: ' + ast_server.context + '\r\n'
                 if ast_server.alert_info and user.asterisk_chan_type == 'SIP':
-                    sock.send('Variable: SIPAddHeader=Alert-Info: '+str(ast_server.alert_info)+'\r\n')
-                sock.send('Priority: '+str(ast_server.extension_priority)+'\r\n\r\n')
-                sock.send('Action: Logoff\r\n\r\n')
-                sock.close()
+                    originate_act += 'Variable: SIPAddHeader=Alert-Info: ' + ast_server.alert_info + '\r\n'
+                originate_act += '\r\n'
+                #print "originate_act=", originate_act
+                sock.send(originate_act.encode('utf-8'))
+                logger.notifyChannel('asterisk_click2dial received', netsvc.LOG_DEBUG, sock.recv(1024) + '\n')
+                sock.send(('Action: Logoff\r\n\r\n').encode('utf-8'))
+                logger.notifyChannel('asterisk_click2dial received', netsvc.LOG_DEBUG, sock.recv(1024) + '\n')
             except:
                 logger.notifyChannel('asterisk_click2dial', netsvc.LOG_WARNING, "Click2dial failed : unable to connect to Asterisk")
                 raise osv.except_osv(_('Error :'), _("The connection from OpenERP to the Asterisk server failed. Please check the configuration on OpenERP and on Asterisk."))
+            finally:
+                sock.close()
             logger.notifyChannel('asterisk_click2dial', netsvc.LOG_INFO, "Asterisk Click2Dial from " + user.internal_number + ' to ' + ast_number)
 
 asterisk_server()
