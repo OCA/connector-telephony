@@ -40,7 +40,7 @@ __author__ = "Alexis de Lattre <alexis.delattre@akretion.com>"
 __date__ = "December 2010"
 __version__ = "0.1"
 
-#  Copyright (C) 2010 Alexis de Lattre <alexis.delattre@akretion.com>
+#  Copyright (C) 2010-2012 Alexis de Lattre <alexis.delattre@akretion.com>
 #
 #  This program is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Affero General Public License as

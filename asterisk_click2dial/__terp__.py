@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    Asterisk Click2dial module for OpenERP
-#    Copyright (C) 2010 Alexis de Lattre <alexis@via.ecp.fr>
+#    Copyright (C) 2010-2012 Alexis de Lattre <alexis@via.ecp.fr>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -51,7 +51,12 @@ A detailed documentation for this module is available on the Akretion Web site :
     'website': 'http://www.akretion.com/',
     'depends': ['base'],
     'init_xml': [],
-    'update_xml': ['asterisk_server_view.xml', 'res_users_view.xml', 'res_partner_view.xml', 'security/asterisk_server_security.xml'],
+    'update_xml': [
+        'asterisk_server_view.xml',
+        'res_users_view.xml',
+        'res_partner_view.xml',
+        'security/asterisk_server_security.xml',
+        ],
     'demo_xml': ['asterisk_click2dial_demo.xml'],
     'installable': True,
     'active': False,
