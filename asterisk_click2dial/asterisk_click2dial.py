@@ -37,7 +37,7 @@ class asterisk_server(osv.osv):
     _columns = {
         'name': fields.char('Asterisk server name', size=50, required=True, help="Asterisk server name."),
         'active': fields.boolean('Active', help="The active field allows you to hide the Asterisk server without deleting it."),
-        'ip_address': fields.char('Asterisk IP addr. or DNS', size=50, required=True, help="IPv4 address or DNS name of the Asterisk server."),
+        'ip_address': fields.char('Asterisk IP addr. or DNS', size=50, required=True, help="IP address or DNS name of the Asterisk server."),
         'port': fields.integer('Port', required=True, help="TCP port on which the Asterisk Manager Interface listens. Defined in /etc/asterisk/manager.conf on Asterisk."),
         'out_prefix': fields.char('Out prefix', size=4, help="Prefix to dial to place outgoing calls. If you don't use a prefix to place outgoing calls, leave empty."),
         'national_prefix': fields.char('National prefix', size=4, help="Prefix for national phone calls (don't include the 'out prefix'). For e.g., in France, the phone numbers look like '01 41 98 12 42' : the National prefix is '0'."),
