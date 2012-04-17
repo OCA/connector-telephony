@@ -23,12 +23,13 @@ from osv import osv, fields
 # Lib required to open a socket (needed to communicate with Asterisk server)
 import socket
 # Lib required to print logs
-import netsvc
+import logging
 # Lib to translate error messages
 from tools.translate import _
 # Lib for regexp
 import re
 
+_logger = logging.getLogger(__name__)
 
 class asterisk_server(osv.osv):
     '''Asterisk server object, to store all the parameters of the Asterisk IPBXs'''
@@ -106,7 +107,6 @@ class asterisk_server(osv.osv):
         the OpenERP numbers.
         '''
 
-        logger = netsvc.Logger()
         error_title_msg = _("Invalid phone number")
         invalid_international_format_msg = _("The phone number is not written in valid international format. Example of valid international format : +33 1 41 98 12 42")
         invalid_national_format_msg = _("The phone number is not written in valid national format.")
@@ -114,7 +114,7 @@ class asterisk_server(osv.osv):
 
         # Let's call the variable tmp_number now
         tmp_number = erp_number
-        logger.notifyChannel('click2dial', netsvc.LOG_DEBUG, 'Number before reformat = %s' % tmp_number)
+        _logger.debug('Number before reformat = %s' % tmp_number)
 
         # Check if empty
         if not tmp_number:
@@ -135,24 +135,24 @@ class asterisk_server(osv.osv):
         if tmp_number[0] == '+':
             # Remove the starting '+' of the number
             tmp_number = tmp_number.replace('+','')
-            logger.notifyChannel('click2dial', netsvc.LOG_DEBUG, 'Number after removal of special char = %s' % tmp_number)
+            _logger.debug('Number after removal of special char = %s' % tmp_number)
 
             # At this stage, 'tmp_number' should only contain digits
             if not tmp_number.isdigit():
                 raise osv.except_osv(error_title_msg, invalid_format_msg)
 
-            logger.notifyChannel('click2dial', netsvc.LOG_DEBUG, 'Country prefix = %s' % country_prefix)
+            _logger.debug('Country prefix = %s' % country_prefix)
             if country_prefix == tmp_number[0:len(country_prefix)]:
                 # If the number is a national number,
                 # remove 'my country prefix' and add 'national prefix'
                 tmp_number = (national_prefix) + tmp_number[len(country_prefix):len(tmp_number)]
-                logger.notifyChannel('click2dial', netsvc.LOG_DEBUG, 'National prefix = %s - Number with national prefix = %s' % (national_prefix, tmp_number))
+                _logger.debug('National prefix = %s - Number with national prefix = %s' % (national_prefix, tmp_number))
 
             else:
                 # If the number is an international number,
                 # add 'international prefix'
                 tmp_number = international_prefix + tmp_number
-                logger.notifyChannel('click2dial', netsvc.LOG_DEBUG, 'International prefix = %s - Number with international prefix = %s' % (international_prefix, tmp_number))
+                _logger.debug('International prefix = %s - Number with international prefix = %s' % (international_prefix, tmp_number))
 
         # National format, allowed
         elif ast_server.national_format_allowed:
@@ -166,7 +166,7 @@ class asterisk_server(osv.osv):
 
         # Add 'out prefix' to all numbers
         tmp_number = out_prefix + tmp_number
-        logger.notifyChannel('click2dial', netsvc.LOG_DEBUG, 'Out prefix = %s - Number to be sent to Asterisk = %s' % (out_prefix, tmp_number))
+        _logger.debug('Out prefix = %s - Number to be sent to Asterisk = %s' % (out_prefix, tmp_number))
         return tmp_number
 
 
@@ -187,7 +187,6 @@ class asterisk_server(osv.osv):
         and send instructions to Dial to Asterisk. That's the important function !
 
         '''
-        logger = netsvc.Logger()
         user = self.pool.get('res.users').browse(cr, uid, uid, context=context)
 
         # Check if the number to dial is not empty
@@ -200,9 +199,7 @@ class asterisk_server(osv.osv):
         if user.asterisk_server_id.id:
             ast_server = user.asterisk_server_id
         else:
-            print "user.company_id.id=", user.company_id.id
             asterisk_server_ids = self.search(cr, uid, [('company_id', '=', user.company_id.id)], context=context)
-            print "asterisk_server_ids=", asterisk_server_ids
         # If no asterisk server is configured on the user, we take the first one
             if not asterisk_server_ids:
                 raise osv.except_osv(_('Error :'), _("No Asterisk server configured for the company '%s'.") % user.company_id.name)
@@ -223,14 +220,14 @@ class asterisk_server(osv.osv):
 
         # Convert the phone number in the format that will be sent to Asterisk
         ast_number = self.reformat_number(cr, uid, ids, erp_number, ast_server, context=context)
-        logger.notifyChannel('click2dial', netsvc.LOG_DEBUG, "User dialing : channel = %s/%s - Callerid = %s" % (user.asterisk_chan_type, user.internal_number, user.callerid))
-        logger.notifyChannel('click2dial', netsvc.LOG_DEBUG, "Asterisk server = %s:%d" % (ast_server.ip_address, ast_server.port))
+        _logger.debug("User dialing : channel = %s/%s - Callerid = %s" % (user.asterisk_chan_type, user.internal_number, user.callerid))
+        _logger.debug("Asterisk server = %s:%d" % (ast_server.ip_address, ast_server.port))
 
         # Connect to the Asterisk Manager Interface, using IPv6-ready code
         try:
             res = socket.getaddrinfo(str(ast_server.ip_address), ast_server.port, socket.AF_UNSPEC, socket.SOCK_STREAM)
         except:
-            logger.notifyChannel('click2dial', netsvc.LOG_WARNING, "Can't resolve the DNS of the Asterisk server '%s'" % ast_server.ip_address)
+            _logger.warning("Can't resolve the DNS of the Asterisk server '%s'" % ast_server.ip_address)
             raise osv.except_osv(_('Error :'), _("Can't resolve the DNS of the Asterisk server : '%s'" % ast_server.ip_address))
         for result in res:
             af, socktype, proto, canonname, sockaddr = result
@@ -238,7 +235,7 @@ class asterisk_server(osv.osv):
             try:
                 sock.connect(sockaddr)
                 header_received = sock.recv(1024)
-                logger.notifyChannel('click2dial', netsvc.LOG_DEBUG, 'Header received from Asterisk : %s' % header_received)
+                _logger.debug('Header received from Asterisk : %s' % header_received)
 
                 # Login to Asterisk
                 login_act = 'Action: login\r\n' + \
@@ -248,7 +245,7 @@ class asterisk_server(osv.osv):
                 sock.send(login_act.encode('ascii'))
                 login_answer = self._parse_asterisk_answer(cr, uid, sock, context=context)
                 if 'Response: Success' in login_answer:
-                    logger.notifyChannel('click2dial', netsvc.LOG_DEBUG, "Successful authentification to Asterisk : %s" % login_answer)
+                    _logger.debug("Successful authentification to Asterisk : %s" % login_answer)
                 else:
                     raise osv.except_osv(_('Error :'), _("Authentification to Asterisk failed :\n%s" % login_answer))
 
@@ -266,7 +263,7 @@ class asterisk_server(osv.osv):
                 sock.send(originate_act.encode('ascii'))
                 originate_answer = self._parse_asterisk_answer(cr, uid, sock, context=context)
                 if 'Response: Success' in originate_answer:
-                    logger.notifyChannel('click2dial', netsvc.LOG_DEBUG, 'Successfull originate command : %s' % originate_answer)
+                    _logger.debug('Successfull originate command : %s' % originate_answer)
                 else:
                     raise osv.except_osv(_('Error :'), _("Click to dial with Asterisk failed :\n%s" % originate_answer))
 
@@ -274,16 +271,16 @@ class asterisk_server(osv.osv):
                 sock.send(('Action: Logoff\r\n\r\n').encode('ascii'))
                 logout_answer = self._parse_asterisk_answer(cr, uid, sock, context=context)
                 if 'Response: Goodbye' in logout_answer:
-                    logger.notifyChannel('click2dial', netsvc.LOG_DEBUG, 'Successfull logout from Asterisk : %s' % logout_answer)
+                    _logger.debug('Successfull logout from Asterisk : %s' % logout_answer)
                 else:
-                    logger.notifyChannel('click2dial', netsvc.LOG_WARNING, 'Logout from Asterisk failed : %s' % logout_answer)
+                    _logger.warning('Logout from Asterisk failed : %s' % logout_answer)
             # we catch only network problems here
             except socket.error:
-                logger.notifyChannel('click2dial', netsvc.LOG_WARNING, "Click2dial failed : unable to connect to Asterisk")
+                _logger.warning("Click2dial failed : unable to connect to Asterisk")
                 raise osv.except_osv(_('Error :'), _("The connection from OpenERP to the Asterisk server failed. Please check the configuration on OpenERP and on Asterisk."))
             finally:
                 sock.close()
-            logger.notifyChannel('click2dial', netsvc.LOG_INFO, "Asterisk Click2Dial from %s/%s to %s" % (user.asterisk_chan_type, user.internal_number, ast_number))
+            _logger.info("Asterisk Click2Dial from %s/%s to %s" % (user.asterisk_chan_type, user.internal_number, ast_number))
 
         return True
 
@@ -359,14 +356,13 @@ class res_partner_address(osv.osv):
         request.
         '''
         res = {}
-        logger = netsvc.Logger()
         # We check that "number" is really a number
         if not isinstance(number, str):
             return False
         if not number.isdigit():
             return False
 
-        netsvc.Logger().notifyChannel('click2dial', netsvc.LOG_DEBUG, u"Call get_name_from_phone_number with number = %s" % number)
+        _logger.debug(u"Call get_name_from_phone_number with number = %s" % number)
         # Get all the partner addresses :
         all_ids = self.search(cr, uid, [], context=context)
         # For each partner address, we check if the number matches on the "phone" or "mobile" fields
@@ -374,14 +370,14 @@ class res_partner_address(osv.osv):
             if entry.phone:
                 # We use a regexp on the phone field to remove non-digit caracters
                 if re.sub(r'\D', '', entry.phone).endswith(number):
-                    logger.notifyChannel('click2dial', netsvc.LOG_DEBUG, u"Answer get_name_from_phone_number with name = %s" % entry.name)
+                    _logger.debug(u"Answer get_name_from_phone_number with name = %s" % entry.name)
                     return entry.name
             if entry.mobile:
                 if re.sub(r'\D', '', entry.mobile).endswith(number):
-                    logger.notifyChannel('click2dial', netsvc.LOG_DEBUG, u"Answer get_name_from_phone_number with name = %s" % entry.name)
+                    _logger.debug(u"Answer get_name_from_phone_number with name = %s" % entry.name)
                     return entry.name
 
-        logger.notifyChannel('click2dial', netsvc.LOG_DEBUG, u"No match for phone number %s" % number)
+        _logger.debug(u"No match for phone number %s" % number)
         return False
 
 res_partner_address()
