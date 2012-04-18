@@ -200,9 +200,7 @@ class asterisk_server(osv.osv):
         if user.asterisk_server_id.id:
             ast_server = user.asterisk_server_id
         else:
-            print "user.company_id.id=", user.company_id.id
             asterisk_server_ids = self.search(cr, uid, [('company_id', '=', user.company_id.id)], context=context)
-            print "asterisk_server_ids=", asterisk_server_ids
         # If no asterisk server is configured on the user, we take the first one
             if not asterisk_server_ids:
                 raise osv.except_osv(_('Error :'), _("No Asterisk server configured for the company '%s'.") % user.company_id.name)
