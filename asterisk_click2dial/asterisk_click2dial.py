@@ -319,10 +319,11 @@ class res_users(osv.osv):
     def _check_validity(self, cr, uid, ids):
         for user in self.browse(cr, uid, ids):
             for check_string in [('Internal number', user.internal_number), ('Caller ID', user.callerid)]:
-                try:
-                    plom = check_string[1].encode('ascii')
-                except UnicodeEncodeError:
-                    raise osv.except_osv(_('Error :'), _("The '%s' for the user '%s' should only have ASCII caracters" % (check_string[0], user.name)))
+                if check_string[1]:
+                    try:
+                        plom = check_string[1].encode('ascii')
+                    except UnicodeEncodeError:
+                        raise osv.except_osv(_('Error :'), _("The '%s' for the user '%s' should only have ASCII caracters" % (check_string[0], user.name)))
         return True
 
     _constraints = [
