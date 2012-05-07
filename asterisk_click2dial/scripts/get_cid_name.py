@@ -78,11 +78,17 @@ def stdout_write(string):
     '''Wrapper on sys.stdout.write'''
     sys.stdout.write(string.encode(sys.stdout.encoding or 'utf-8', 'replace'))
     sys.stdout.flush()
+    # When we output a command, we get an answer "200 result=1" on stdin
+    # Purge stdin to avoid these Asterisk error messages :
+    # utils.c ast_carefulwrite: write() returned error: Broken pipe
+    input_line = sys.stdin.readline()
+    return True
 
 def stderr_write(string):
     '''Wrapper on sys.stderr.write'''
     sys.stderr.write(string.encode(sys.stdout.encoding or 'utf-8', 'replace'))
     sys.stdout.flush()
+    return True
 
 
 def reformat_phone_number_before_query_openerp(number):
@@ -111,25 +117,31 @@ def main(options, arguments):
     # AGI passes parameters to the script on standard input
     stdinput = {}
     while 1:
-        input_line = sys.stdin.readline().strip()
-        if input_line == '':
+        input_line = sys.stdin.readline()
+        if not input_line:
             break
-        variable, value = input_line.split(':') # TODO à protéger !
+        line = input_line.strip()
+        try:
+            variable, value = line.split(':')
+        except:
+             break
         if variable[:4] != 'agi_': # All AGI parameters start with 'agi_'
             stderr_write("bad stdin variable : %s\n" % variable)
             continue
         variable = variable.strip()
         value = value.strip()
-        if variable != '':
+        if variable and value:
             stdinput[variable] = value
     stderr_write("full AGI environnement :\n")
-    for variable in stdinput.keys():
-        stderr_write("%s = %s\n" % (variable, stdinput[variable]))
 
-    input_cid_number = stdinput.get('agi_callerid', False)
+    for variable in stdinput.keys():
+        stderr_write("%s = %s\n" % (variable, stdinput.get(variable)))
+
+    input_cid_number = stdinput.get('agi_callerid')
     stderr_write('stdout encoding = %s\n' % sys.stdout.encoding or 'utf-8')
 
     if not isinstance(input_cid_number, str):
+        stdout_write('VERBOSE "CallerID number is empty"\n')
         exit(0)
     # Match for particular cases and anonymous phone calls
     # To test anonymous call in France, dial 3651 + number
@@ -171,6 +183,7 @@ def main(options, arguments):
 
     stdout_write('VERBOSE "CallerID Name = %s"\n' % res)
     stdout_write('SET CALLERID "%s"<%s>\n' % (res, input_cid_number))
+    return True
 
 if __name__ == '__main__':
     parser = OptionParser()
