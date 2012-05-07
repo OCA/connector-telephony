@@ -113,7 +113,6 @@
 </record>
 
 <menuitem id="menu_open_calling_partner_sales" parent="base.menu_address_book" action="action_open_calling_partner" sequence="50" />
-<menuitem id="menu_open_calling_partner_purchase" parent="base.menu_procurement_management_supplier" action="action_open_calling_partner" sequence="50" />
 
 </data>
 </openerp>
