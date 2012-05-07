@@ -89,7 +89,31 @@
     </field>
 </record>
 
+<!-- Get partner from incoming phone call -->
 
+<record id="view_open_calling_partner" model="ir.ui.view">
+    <field name="name">view_open_calling_partner</field>
+    <field name="model">wizard.open.calling.partner</field>
+    <field name="type">form</field>
+    <field name="arch" type="xml">
+        <form string="Open calling partner">
+            <button name="open_calling_partner" icon="gtk-ok" string="Go" type="object" />
+            <button special="cancel" icon="gtk-cancel" string="Cancel" />
+        </form>
+    </field>
+</record>
+
+
+<record id="action_open_calling_partner" model="ir.actions.act_window">
+    <field name="name">Open calling partner</field>
+    <field name="res_model">wizard.open.calling.partner</field>
+    <field name="view_type">form</field>
+    <field name="view_mode">form</field>
+    <field name="target">new</field>
+</record>
+
+<menuitem id="menu_open_calling_partner_sales" parent="base.menu_address_book" action="action_open_calling_partner" sequence="50" />
+<menuitem id="menu_open_calling_partner_purchase" parent="base.menu_procurement_management_supplier" action="action_open_calling_partner" sequence="50" />
 
 </data>
 </openerp>

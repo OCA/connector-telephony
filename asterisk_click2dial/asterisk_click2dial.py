@@ -98,7 +98,7 @@ class asterisk_server(osv.osv):
     ]
 
 
-    def reformat_number(self, cr, uid, ids, erp_number, ast_server, context=None):
+    def _reformat_number(self, cr, uid, erp_number, ast_server, context=None):
         '''
         This function is dedicated to the transformation of the number
         available in OpenERP to the number that Asterisk should dial.
@@ -170,18 +170,19 @@ class asterisk_server(osv.osv):
         return tmp_number
 
 
-    def _parse_asterisk_answer(self, cr, uid, sock, context=None):
+    def _parse_asterisk_answer(self, cr, uid, sock, end_string='\r\n\r\n', context=None):
         '''Parse the answer of the Asterisk Manager Interface'''
         answer = ''
         data = ''
-        while '\r\n\r\n' not in data:
+        while end_string not in data:
             data = sock.recv(1024)
             if data:
                 answer += data
         return answer
- 
 
-    def dial(self, cr, uid, ids, erp_number, context=None):
+
+
+    def _connect_to_asterisk(self, cr, uid, method='dial', options=None, context=None):
         '''
         Open the socket to the Asterisk Manager Interface (AMI)
         and send instructions to Dial to Asterisk. That's the important function !
@@ -189,9 +190,6 @@ class asterisk_server(osv.osv):
         '''
         user = self.pool.get('res.users').browse(cr, uid, uid, context=context)
 
-        # Check if the number to dial is not empty
-        if not erp_number:
-            raise osv.except_osv(_('Error :'), _('There is no phone number !'))
         # Note : if I write 'Error' without ' :', it won't get translated...
         # I don't understand why !
 
@@ -214,13 +212,8 @@ class asterisk_server(osv.osv):
         if not user.internal_number:
             raise osv.except_osv(_('Error :'), _('No internal phone number configured for the current user'))
 
-        # The user should also have a CallerID
-        if not user.callerid:
-            raise osv.except_osv(_('Error :'), _('No callerID configured for the current user'))
 
-        # Convert the phone number in the format that will be sent to Asterisk
-        ast_number = self.reformat_number(cr, uid, ids, erp_number, ast_server, context=context)
-        _logger.debug("User dialing : channel = %s/%s - Callerid = %s" % (user.asterisk_chan_type, user.internal_number, user.callerid))
+        _logger.debug("User's phone : %s/%s" % (user.asterisk_chan_type, user.internal_number))
         _logger.debug("Asterisk server = %s:%d" % (ast_server.ip_address, ast_server.port))
 
         # Connect to the Asterisk Manager Interface, using IPv6-ready code
@@ -249,23 +242,60 @@ class asterisk_server(osv.osv):
                 else:
                     raise osv.except_osv(_('Error :'), _("Authentification to Asterisk failed :\n%s" % login_answer))
 
-                # Dial with Asterisk
-                originate_act = 'Action: originate\r\n' + \
-                    'Channel: ' + user.asterisk_chan_type + '/' + user.internal_number + '\r\n' + \
-                    'Priority: ' + str(ast_server.extension_priority) + '\r\n' + \
-                    'Timeout: ' + str(ast_server.wait_time*1000) + '\r\n' + \
-                    'CallerId: ' + user.callerid + '\r\n' + \
-                    'Exten: ' + ast_number + '\r\n' + \
-                    'Context: ' + ast_server.context + '\r\n'
-                if ast_server.alert_info and user.asterisk_chan_type == 'SIP':
-                    originate_act += 'Variable: SIPAddHeader=Alert-Info: ' + ast_server.alert_info + '\r\n'
-                originate_act += '\r\n'
-                sock.send(originate_act.encode('ascii'))
-                originate_answer = self._parse_asterisk_answer(cr, uid, sock, context=context)
-                if 'Response: Success' in originate_answer:
-                    _logger.debug('Successfull originate command : %s' % originate_answer)
-                else:
-                    raise osv.except_osv(_('Error :'), _("Click to dial with Asterisk failed :\n%s" % originate_answer))
+                if method == 'dial':
+                    # Convert the phone number in the format that will be sent to Asterisk
+                    erp_number = options.get('erp_number')
+                    if not erp_number:
+                        raise osv.except_osv(_('Error :'), "Hara kiri : you must call the function with erp_number in the options")
+                    ast_number = self._reformat_number(cr, uid, erp_number, ast_server, context=context)
+
+                    # The user should have a CallerID
+                    if not user.callerid:
+                        raise osv.except_osv(_('Error :'), _('No callerID configured for the current user'))
+
+                    # Dial with Asterisk
+                    originate_act = 'Action: originate\r\n' + \
+                        'Channel: ' + user.asterisk_chan_type + '/' + user.internal_number + '\r\n' + \
+                        'Priority: ' + str(ast_server.extension_priority) + '\r\n' + \
+                        'Timeout: ' + str(ast_server.wait_time*1000) + '\r\n' + \
+                        'CallerId: ' + user.callerid + '\r\n' + \
+                        'Exten: ' + ast_number + '\r\n' + \
+                        'Context: ' + ast_server.context + '\r\n'
+                    if ast_server.alert_info and user.asterisk_chan_type == 'SIP':
+                        originate_act += 'Variable: SIPAddHeader=Alert-Info: ' + ast_server.alert_info + '\r\n'
+                    originate_act += '\r\n'
+                    sock.send(originate_act.encode('ascii'))
+                    originate_answer = self._parse_asterisk_answer(cr, uid, sock, context=context)
+                    if 'Response: Success' in originate_answer:
+                        _logger.debug('Successfull originate command : %s' % originate_answer)
+                    else:
+                        raise osv.except_osv(_('Error :'), _("Click to dial with Asterisk failed :\n%s" % originate_answer))
+
+                elif method == "get_calling_number":
+                    status_act = 'Action: Status\r\n\r\n' # TODO : add ActionID
+                    sock.send(status_act.encode('ascii'))
+                    status_answer = self._parse_asterisk_answer(cr, uid, sock, end_string='Event: StatusComplete', context=context)
+
+                    if 'Response: Success' in status_answer:
+                        _logger.debug('Successfull Status command : %s' % status_answer)
+                    else:
+                        raise osv.except_osv(_('Error :'), _("Status command to Asterisk failed :\n%s" % status_answer))
+
+                    # Parse answer
+                    calling_party_number = False
+                    status_answer_split = status_answer.split('\r\n\r\n')
+                    for event in status_answer_split:
+                        string_match = 'Channel: ' + user.asterisk_chan_type + '/' + user.internal_number
+                        if not string_match in event:
+                            continue
+                        event_split = event.split('\r\n')
+                        for event_line in event_split:
+                            if not 'CallerIDNum' in event_line:
+                                continue
+                            line_detail = event_line.split(': ')
+                            if len(line_detail) <> 2:
+                                raise osv.except_osv('Error :', "Hara kiri... this is not possible")
+                            calling_party_number = line_detail[1]
 
                 # Logout of Asterisk
                 sock.send(('Action: Logoff\r\n\r\n').encode('ascii'))
@@ -276,13 +306,19 @@ class asterisk_server(osv.osv):
                     _logger.warning('Logout from Asterisk failed : %s' % logout_answer)
             # we catch only network problems here
             except socket.error:
-                _logger.warning("Click2dial failed : unable to connect to Asterisk")
+                _logger.warning("Unable to connect to the Asterisk server '%s' IP '%s:%d'" % (ast_server.name, ast_server.ip_address, ast_server.port))
                 raise osv.except_osv(_('Error :'), _("The connection from OpenERP to the Asterisk server failed. Please check the configuration on OpenERP and on Asterisk."))
             finally:
                 sock.close()
+        if method == 'dial':
             _logger.info("Asterisk Click2Dial from %s/%s to %s" % (user.asterisk_chan_type, user.internal_number, ast_number))
+            return True
 
-        return True
+        elif method == "get_calling_number":
+            return calling_party_number
+
+        else:
+            return False
 
 asterisk_server()
 
@@ -333,20 +369,30 @@ res_users()
 
 
 class res_partner_address(osv.osv):
-    _name = "res.partner.address"
     _inherit = "res.partner.address"
+
+
+    def dial(self, cr, uid, ids, phone_field='phone', context=None):
+        '''Read the number to dial and call _connect_to_asterisk the right way'''
+        erp_number = self.read(cr, uid, ids, [phone_field], context=context)[0][phone_field]
+        # Check if the number to dial is not empty
+        if not erp_number:
+            raise osv.except_osv(_('Error :'), _('There is no phone number !'))
+        options = {'erp_number': erp_number}
+        return self.pool.get('asterisk.server')._connect_to_asterisk(cr, uid, method='dial', options=options, context=context)
+
 
     def action_dial_phone(self, cr, uid, ids, context=None):
         '''Function called by the button 'Dial' next to the 'phone' field
         in the partner address view'''
-        erp_number = self.read(cr, uid, ids, ['phone'], context=context)[0]['phone']
-        return self.pool.get('asterisk.server').dial(cr, uid, ids, erp_number, context=context)
+        return self.dial(cr, uid, ids, phone_field='phone', context=context)
+
 
     def action_dial_mobile(self, cr, uid, ids, context=None):
         '''Function called by the button 'Dial' next to the 'mobile' field
         in the partner address view'''
-        erp_number = self.read(cr, uid, ids, ['mobile'], context=context)[0]['mobile']
-        return self.pool.get('asterisk.server').dial(cr, uid, ids, erp_number, context=context)
+        return self.dial(cr, uid, ids, phone_field='mobile', context=context)
+
 
     def get_name_from_phone_number(self, cr, uid, number, context=None):
         '''Function to get name from phone number. Usefull for use from Asterisk
@@ -356,6 +402,13 @@ class res_partner_address(osv.osv):
         dialplan via the AGI() function and it will use this function via an XML-RPC
         request.
         '''
+        res = self.get_partner_from_phone_number(cr, uid, number, context=context)
+        if res:
+            return res[1]
+        else:
+            return False
+
+    def get_partner_from_phone_number(self, cr, uid, number, context=None):
         res = {}
         # We check that "number" is really a number
         if not isinstance(number, str):
@@ -372,16 +425,53 @@ class res_partner_address(osv.osv):
                 # We use a regexp on the phone field to remove non-digit caracters
                 if re.sub(r'\D', '', entry.phone).endswith(number):
                     _logger.debug(u"Answer get_name_from_phone_number with name = %s" % entry.name)
-                    return entry.name
+                    return (entry.partner_id.id, entry.name)
             if entry.mobile:
                 if re.sub(r'\D', '', entry.mobile).endswith(number):
                     _logger.debug(u"Answer get_name_from_phone_number with name = %s" % entry.name)
-                    return entry.name
+                    return (entry.partner_id.id, entry.name)
 
         _logger.debug(u"No match for phone number %s" % number)
         return False
 
 res_partner_address()
+
+
+class wizard_open_calling_partner(osv.osv_memory):
+    _name = "wizard.open.calling.partner"
+
+
+    def open_calling_partner(self, cr, uid, ids, context=None):
+        _logger.debug(u"Start wizard 'open calling partner'")
+        calling_number = self.pool.get('asterisk.server')._connect_to_asterisk(cr, uid, method='get_calling_number', context=context)
+        if calling_number:
+            # We match only on the end of the phone number
+            if len(calling_number) >= 9:
+                number_to_search = calling_number[-9:len(calling_number)]
+            else:
+                number_to_search = calling_number
+            partner = self.pool.get('res.partner.address').get_partner_from_phone_number(cr, uid, number_to_search, context=context)
+            if partner:
+                _logger.debug("Found a partner corresponding to the calling party : '%s'" % partner[1])
+                action = {
+                    'name': 'Calling partner',
+                    'view_type': 'form',
+                    'view_mode': 'form,tree',
+                    'res_model': 'res.partner',
+                    'type': 'ir.actions.act_window',
+                    'nodestroy': False, # close the pop-up wizard after action
+                    'target': 'current',
+                    'res_id': [partner[0]],
+                    }
+                return action
+            else:
+                _logger.debug("Could not find a partner corresponding to the calling number '%s'" % calling_number) # TODO : display an error message
+                raise osv.except_osv(_('Error :'), _("Could not find a partner corresponding to the calling number '%s'" % calling_number))
+        else:
+            _logger.debug("Could not retrieve the calling number from Asterisk") # TODO : display an error message
+            raise osv.except_osv(_('Error :'), _("Could not retrieve the calling number from Asterisk"))
+
+wizard_open_calling_partner()
 
 
 # This module supports multi-company
