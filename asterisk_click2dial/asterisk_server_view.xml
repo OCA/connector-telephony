@@ -2,7 +2,7 @@
 <!--
   Asterisk Click2dial module for OpenERP
   Copyright (C) 2010-2012 Alexis de Lattre <alexis@via.ecp.fr>
-  The licence is in the file __terp__.py
+  The licence is in the file __openerp__.py
 -->
 
 <openerp>
@@ -32,10 +32,10 @@
             <field name="company_id" select="1" invisible="not context.get('asterisk_server_main_view', False)" />
             <newline />
             <field name="name" select="1" />
-            <field name="active" select="2" />
+            <field name="active" />
             <field name="ip_address" select="1" />
-            <field name="port" select="2" />
-            <field name="login" select="2" />
+            <field name="port" />
+            <field name="login" />
             <field name="password" password="True" />
             <field name="context" />
             <field name="extension_priority" />
@@ -76,7 +76,7 @@
 </record>
 
 <!-- Menu entry under Administration > Configuration -->
-<menuitem action="action_asterisk_server" id="act_menu_ast_server" parent="base.menu_config" />
+<menuitem action="action_asterisk_server" id="act_menu_ast_server" parent="base.menu_res_company_global" sequence="30" />
 
 
 </data>
