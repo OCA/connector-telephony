@@ -55,13 +55,13 @@ class asterisk_server(osv.osv):
     }
 
     _defaults = {
-        'active': lambda *a: 1,
-        'port': lambda *a: 5038,  # Default AMI port
-        'out_prefix': lambda *a: '0',
-        'national_prefix': lambda *a: '0',
-        'international_prefix': lambda *a: '00',
-        'extension_priority': lambda *a: 1,
-        'wait_time': lambda *a: 15,
+        'active': True,
+        'port': 5038,  # Default AMI port
+        'out_prefix': '0',
+        'national_prefix': '0',
+        'international_prefix': '00',
+        'extension_priority': 1,
+        'wait_time': 15,
     }
 
     def _check_validity(self, cr, uid, ids):
@@ -325,8 +325,8 @@ asterisk_server()
 
 # Parameters specific for each user
 class res_users(osv.osv):
-    _name = "res.users"
     _inherit = "res.users"
+
     _columns = {
         'internal_number': fields.char('Internal number', size=15,
             help="User's internal phone number."),
@@ -348,7 +348,7 @@ class res_users(osv.osv):
                }
 
     _defaults = {
-        'asterisk_chan_type': lambda *a: 'SIP',
+        'asterisk_chan_type': 'SIP',
     }
 
     def _check_validity(self, cr, uid, ids):
@@ -465,10 +465,10 @@ class wizard_open_calling_partner(osv.osv_memory):
                     }
                 return action
             else:
-                _logger.debug("Could not find a partner corresponding to the calling number '%s'" % calling_number) # TODO : display an error message
+                _logger.debug("Could not find a partner corresponding to the calling number '%s'" % calling_number)
                 raise osv.except_osv(_('Error :'), _("Could not find a partner corresponding to the calling number '%s'" % calling_number))
         else:
-            _logger.debug("Could not retrieve the calling number from Asterisk") # TODO : display an error message
+            _logger.debug("Could not retrieve the calling number from Asterisk")
             raise osv.except_osv(_('Error :'), _("Could not retrieve the calling number from Asterisk"))
 
 wizard_open_calling_partner()
@@ -476,8 +476,8 @@ wizard_open_calling_partner()
 
 # This module supports multi-company
 class res_company(osv.osv):
-    _name = "res.company"
     _inherit = "res.company"
+
     _columns = {
         'asterisk_server_ids': fields.one2many('asterisk.server', 'company_id', 'Asterisk servers', help="List of Asterisk servers.")
     }
