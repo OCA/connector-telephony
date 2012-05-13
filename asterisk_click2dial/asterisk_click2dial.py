@@ -238,7 +238,7 @@ class asterisk_server(osv.osv):
                 sock.send(login_act.encode('ascii'))
                 login_answer = self._parse_asterisk_answer(cr, uid, sock, context=context)
                 if 'Response: Success' in login_answer:
-                    _logger.debug("Successful authentification to Asterisk : %s" % login_answer)
+                    _logger.debug("Successful authentification to Asterisk :\n%s" % login_answer)
                 else:
                     raise osv.except_osv(_('Error :'), _("Authentification to Asterisk failed :\n%s" % login_answer))
 
@@ -277,7 +277,7 @@ class asterisk_server(osv.osv):
                     status_answer = self._parse_asterisk_answer(cr, uid, sock, end_string='Event: StatusComplete', context=context)
 
                     if 'Response: Success' in status_answer:
-                        _logger.debug('Successfull Status command : %s' % status_answer)
+                        _logger.debug('Successfull Status command :\n%s' % status_answer)
                     else:
                         raise osv.except_osv(_('Error :'), _("Status command to Asterisk failed :\n%s" % status_answer))
 
@@ -285,7 +285,7 @@ class asterisk_server(osv.osv):
                     calling_party_number = False
                     status_answer_split = status_answer.split('\r\n\r\n')
                     for event in status_answer_split:
-                        string_match = 'Channel: ' + user.asterisk_chan_type + '/' + user.internal_number
+                        string_match = 'BridgedChannel: ' + user.asterisk_chan_type + '/' + user.internal_number
                         if not string_match in event:
                             continue
                         event_split = event.split('\r\n')
@@ -301,9 +301,9 @@ class asterisk_server(osv.osv):
                 sock.send(('Action: Logoff\r\n\r\n').encode('ascii'))
                 logout_answer = self._parse_asterisk_answer(cr, uid, sock, context=context)
                 if 'Response: Goodbye' in logout_answer:
-                    _logger.debug('Successfull logout from Asterisk : %s' % logout_answer)
+                    _logger.debug('Successfull logout from Asterisk :\n%s' % logout_answer)
                 else:
-                    _logger.warning('Logout from Asterisk failed : %s' % logout_answer)
+                    _logger.warning('Logout from Asterisk failed :\n%s' % logout_answer)
             # we catch only network problems here
             except socket.error:
                 _logger.warning("Unable to connect to the Asterisk server '%s' IP '%s:%d'" % (ast_server.name, ast_server.ip_address, ast_server.port))
@@ -315,6 +315,7 @@ class asterisk_server(osv.osv):
             return True
 
         elif method == "get_calling_number":
+            _logger.debug("Calling party number: %s" % calling_party_number)
             return calling_party_number
 
         else:
@@ -404,7 +405,7 @@ class res_partner_address(osv.osv):
         '''
         res = self.get_partner_from_phone_number(cr, uid, number, context=context)
         if res:
-            return res[1]
+            return res[2]
         else:
             return False
 
@@ -425,11 +426,11 @@ class res_partner_address(osv.osv):
                 # We use a regexp on the phone field to remove non-digit caracters
                 if re.sub(r'\D', '', entry.phone).endswith(number):
                     _logger.debug(u"Answer get_name_from_phone_number with name = %s" % entry.name)
-                    return (entry.partner_id.id, entry.name)
+                    return (entry.id, entry.partner_id.id, entry.name)
             if entry.mobile:
                 if re.sub(r'\D', '', entry.mobile).endswith(number):
                     _logger.debug(u"Answer get_name_from_phone_number with name = %s" % entry.name)
-                    return (entry.partner_id.id, entry.name)
+                    return (entry.id, entry.partner_id.id, entry.name)
 
         _logger.debug(u"No match for phone number %s" % number)
         return False
@@ -439,12 +440,22 @@ res_partner_address()
 
 class wizard_open_calling_partner(osv.osv_memory):
     _name = "wizard.open.calling.partner"
+    _description = "Open calling partner"
+    _columns = {
+        'calling_number': fields.char('Calling number', size=30, help="Phone number of calling party that has been obtained from Asterisk."),
+        'partner_address_id': fields.many2one('res.partner.address', 'Partner address', help="Partner address related to the calling number"),
+        'partner_id': fields.many2one('res.partner', 'Partner', help="Partner related to the calling number"),
+            }
 
-
-    def open_calling_partner(self, cr, uid, ids, context=None):
-        _logger.debug(u"Start wizard 'open calling partner'")
+    def default_get(self, cr, uid, fields, context=None):
+        '''Thanks to the default_get method, we are able to query Asterisk and
+        get the corresponding partner when we launch the wizard'''
+        res = {}
         calling_number = self.pool.get('asterisk.server')._connect_to_asterisk(cr, uid, method='get_calling_number', context=context)
+        #To test the code without Asterisk server
+        #calling_number = "0141981242"
         if calling_number:
+            res['calling_number'] = calling_number
             # We match only on the end of the phone number
             if len(calling_number) >= 9:
                 number_to_search = calling_number[-9:len(calling_number)]
@@ -452,24 +463,66 @@ class wizard_open_calling_partner(osv.osv_memory):
                 number_to_search = calling_number
             partner = self.pool.get('res.partner.address').get_partner_from_phone_number(cr, uid, number_to_search, context=context)
             if partner:
-                _logger.debug("Found a partner corresponding to the calling party : '%s'" % partner[1])
-                action = {
-                    'name': 'Calling partner',
-                    'view_type': 'form',
-                    'view_mode': 'form,tree',
-                    'res_model': 'res.partner',
-                    'type': 'ir.actions.act_window',
-                    'nodestroy': False, # close the pop-up wizard after action
-                    'target': 'current',
-                    'res_id': [partner[0]],
-                    }
-                return action
+                res['partner_address_id'] = partner[0]
+                res['partner_id'] = partner[1]
             else:
-                _logger.debug("Could not find a partner corresponding to the calling number '%s'" % calling_number)
                 raise osv.except_osv(_('Error :'), _("Could not find a partner corresponding to the calling number '%s'" % calling_number))
         else:
-            _logger.debug("Could not retrieve the calling number from Asterisk")
-            raise osv.except_osv(_('Error :'), _("Could not retrieve the calling number from Asterisk"))
+            _logger.debug("Could not get the calling number from Asterisk.")
+            raise osv.except_osv(_('Error :'), _("Could not get the calling number from Asterisk. Check your setup and look at the OpenERP debug logs."))
+
+        return res
+
+    def open_filtered_object(self, cr, uid, ids, oerp_object, context=None):
+        '''Returns the action that opens the list view of the 'oerp_object'
+        given as argument filtered on the partner'''
+        # This module only depends on "base"
+        # and I don't want to add a dependancy on "sale" or "account"
+        # So I just check here that the model exists, to avoid a crash
+        if not self.pool.get('ir.model').search(cr, uid, [('model', '=', oerp_object._name)], context=context):
+            raise osv.except_osv(_('Error :'), _("The object '%s' is not found in your OpenERP database, probably because the related module is not installed." % oerp_object._description))
+
+        partner = self.read(cr, uid, ids[0], ['partner_id'], context=context)['partner_id']
+        if partner:
+            action = {
+                'name': oerp_object._description,
+                'view_type': 'form',
+                'view_mode': 'tree,form',
+                'res_model': oerp_object._name,
+                'type': 'ir.actions.act_window',
+                'nodestroy': False, # close the pop-up wizard after action
+                'target': 'current',
+                'domain': [('partner_id', '=', partner[0])],
+                }
+            return action
+        else:
+            return False
+
+    def open_sale_orders(self, cr, uid, ids, context=None):
+        '''Function called by the related button of the wizard'''
+        return self.open_filtered_object(cr, uid, ids, self.pool.get('sale.order'), context=context)
+
+    def open_invoices(self, cr, uid, ids, context=None):
+        '''Function called by the related button of the wizard'''
+        return self.open_filtered_object(cr, uid, ids, self.pool.get('account.invoice'), context=context)
+
+    def open_partner(self, cr, uid, ids, context=None):
+        '''Function called by the related button of the wizard'''
+        partner = self.read(cr, uid, ids[0], ['partner_id'], context=context)['partner_id']
+        if partner:
+            action = {
+                'name': 'Calling partner',
+                'view_type': 'form',
+                'view_mode': 'form,tree',
+                'res_model': 'res.partner',
+                'type': 'ir.actions.act_window',
+                'nodestroy': False, # close the pop-up wizard after action
+                'target': 'current',
+                'res_id': [partner[0]],
+                }
+            return action
+        else:
+            return False
 
 wizard_open_calling_partner()
 

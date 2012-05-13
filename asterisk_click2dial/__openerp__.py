@@ -41,10 +41,10 @@ phone number is present in the partner addresses of OpenERP. Here is how it work
 . The "get_cid_name.py" script will make an XML-RPC request on the OpenERP server to try to find the name of the person corresponding to the phone number presented by the calling party.
 . If it finds the name, it is set as the CallerID name of the call, so as to be presented on the IP phone of the user.
 
-3) It adds a button "Open calling partner" in the menu "Sales > Address book" to open the partner form of the calling party in 2 clicks. Here is how it works :
+3) It adds a button "Open calling partner" in the menu "Sales > Address book" to get the partner corresponding to the calling party in one click. Here is how it works :
 . When the user clicks on the "Open calling partner" button, OpenERP sends a query to the Asterisk Manager Interface to get a list of the current phone calls
 . If it finds a phone call involving the user's phone, it gets the phone number of the calling party
-. It searches the phone number of the calling party in the Partner addresses of OpenERP and, if a record matches, it opens the form view of the corresponding partner.
+. It searches the phone number of the calling party in the Partner addresses of OpenERP and, if a record matches, it shows the name of the related Partner and proposes to open it, or open its related sale orders or invoices.
 
 A detailed documentation for this module is available on the Akretion Web site : http://www.akretion.com/en/products-and-services/openerp-asterisk-voip-connector """,
     'author': 'Akretion',
