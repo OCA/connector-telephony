@@ -58,6 +58,10 @@ A detailed documentation for this module is available on the Akretion Web site :
         'security/asterisk_server_security.xml',
         ],
     'demo_xml': ['asterisk_click2dial_demo.xml'],
+    'images': [
+        'images/sshot-click2dial.jpg',
+        'images/sshot-open_calling_party.jpg',
+        ],
     'installable': True,
     'active': False,
 }
