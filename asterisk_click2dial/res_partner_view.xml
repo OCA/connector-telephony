@@ -88,7 +88,13 @@
     <field name="type">form</field>
     <field name="arch" type="xml">
         <form string="Open calling partner">
-            <button name="open_calling_partner" icon="gtk-ok" string="Go" type="object" />
+            <field name="calling_number" readonly="1"/>
+            <field name="partner_address_id" readonly="1" />
+            <field name="partner_id" readonly="1" />
+            <newline />
+            <button name="open_partner" icon="gtk-go-forward" string="Partner form" type="object" />
+            <button name="open_sale_orders" icon="gtk-go-forward" string="Related sale orders" type="object" />
+            <button name="open_invoices" icon="gtk-go-forward" string="Related invoices" type="object" />
             <button special="cancel" icon="gtk-cancel" string="Cancel" />
         </form>
     </field>
