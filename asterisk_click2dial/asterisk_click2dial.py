@@ -466,7 +466,8 @@ class wizard_open_calling_partner(osv.osv_memory):
                 res['partner_address_id'] = partner[0]
                 res['partner_id'] = partner[1]
             else:
-                raise osv.except_osv(_('Error :'), _("Could not find a partner corresponding to the calling number '%s'" % calling_number))
+                res['partner_id'] = False
+                res['partner_address_id'] = False
         else:
             _logger.debug("Could not get the calling number from Asterisk.")
             raise osv.except_osv(_('Error :'), _("Could not get the calling number from Asterisk. Check your setup and look at the OpenERP debug logs."))
@@ -524,6 +525,30 @@ class wizard_open_calling_partner(osv.osv_memory):
         else:
             return False
 
+    def create_new_partner(self, cr, uid, ids, phone_type='phone', context=None):
+        '''Function called by the related button of the wizard'''
+        calling_number = self.read(cr, uid, ids[0], ['calling_number'], context=context)['calling_number']
+        # TODO : convert the number to the international format +33141981242
+        new_partner_dict = {'name': 'ENTER PARTNER NAME',
+        'address': [(0,0, {phone_type: calling_number})]}
+        new_partner_id = self.pool.get('res.partner').create(cr, uid, new_partner_dict, context=context)
+        action = {
+            'name': 'Create new partner',
+            'view_type': 'form',
+            'view_mode': 'form,tree',
+            'res_model': 'res.partner',
+            'type': 'ir.actions.act_window',
+            'nodestroy': False,
+            'target': 'current',
+            'res_id': [new_partner_id],
+        }
+        return action
+
+    def create_new_partner_phone(self, cr, uid, ids, context=None):
+        return self.create_new_partner(cr, uid, ids, phone_type='phone', context=context)
+
+    def create_new_partner_mobile(self, cr, uid, ids, context=None):
+        return self.create_new_partner(cr, uid, ids, phone_type='mobile', context=context)
 wizard_open_calling_partner()
 
 
