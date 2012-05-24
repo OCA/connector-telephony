@@ -92,10 +92,16 @@
             <field name="partner_address_id" readonly="1" />
             <field name="partner_id" readonly="1" />
             <newline />
-            <button name="open_partner" icon="gtk-go-forward" string="Partner form" type="object" />
-            <button name="open_sale_orders" icon="gtk-go-forward" string="Related sale orders" type="object" />
-            <button name="open_invoices" icon="gtk-go-forward" string="Related invoices" type="object" />
-            <button special="cancel" icon="gtk-cancel" string="Cancel" />
+            <button name="open_partner" icon="gtk-go-forward" string="Partner form" type="object" attrs="{'invisible':[('partner_id','=',False)]}"/>
+            <button name="open_sale_orders" icon="gtk-go-forward" string="Related sale orders" type="object" attrs="{'invisible':[('partner_id','=',False)]}" />
+            <button name="open_invoices" icon="gtk-go-forward" string="Related invoices" type="object" attrs="{'invisible':[('partner_id','=',False)]}" />
+            <button special="cancel" icon="gtk-cancel" string="Cancel" attrs="{'invisible':[('partner_id','=',False)]}" />
+            <newline />
+            <button name="create_new_partner_phone" icon="gtk-new" string="Create new partner with this phone number" type="object" attrs="{'invisible':[('partner_id','!=',False)]}" colspan="2"/>
+            <button name="create_new_partner_mobile" icon="gtk-new" string="Create new partner with this mobile number" type="object" attrs="{'invisible':[('partner_id','!=',False)]}" colspan="2"/>
+            <newline />
+            <button special="cancel" icon="gtk-cancel" string="Cancel" attrs="{'invisible':[('partner_id','!=',False)]}" colspan="4" />
+            <!-- I repeat the cancel button for layout reasons -->
         </form>
     </field>
 </record>
