@@ -50,7 +50,7 @@ class asterisk_server(osv.osv):
         'context': fields.char('Dialplan context', size=50, required=True, help="Asterisk dialplan context from which the calls will be made. Refer to /etc/asterisk/extensions.conf on your Asterisk server."),
         'wait_time': fields.integer('Wait time (sec)', required=True, help="Amount of time (in seconds) Asterisk will try to reach the user's phone before hanging up."),
         'extension_priority': fields.integer('Extension priority', required=True, help="Priority of the extension in the Asterisk dialplan. Refer to /etc/asterisk/extensions.conf on your Asterisk server."),
-        'alert_info': fields.char('Alert-Info SIP header', size=40, help="Set Alert-Info header in SIP request to user's IP Phone. If empty, the Alert-Info header will not be added. You can use it to have a special ring tone for click2dial, for example you could choose a silent ring tone."),
+        'alert_info': fields.char('Alert-Info SIP header', size=255, help="Set Alert-Info header in SIP request to user's IP Phone for the click2dial feature. If empty, the Alert-Info header will not be added. You can use it to have a special ring tone for click2dial (a silent one !) or to activate auto-answer for example. If you want to have several variable headers, separate them with '|'."),
         'company_id': fields.many2one('res.company', 'Company', help="Company who uses the Asterisk server."),
     }
 
@@ -178,8 +178,10 @@ class asterisk_server(osv.osv):
             data = sock.recv(1024)
             if data:
                 answer += data
+        # remove end_string from answer
+        if answer[-len(end_string):] == end_string:
+            answer = answer[:-len(end_string)]
         return answer
-
 
 
     def _connect_to_asterisk(self, cr, uid, method='dial', options=None, context=None):
@@ -262,7 +264,11 @@ class asterisk_server(osv.osv):
                         'Exten: ' + ast_number + '\r\n' + \
                         'Context: ' + ast_server.context + '\r\n'
                     if ast_server.alert_info and user.asterisk_chan_type == 'SIP':
-                        originate_act += 'Variable: SIPAddHeader=Alert-Info: ' + ast_server.alert_info + '\r\n'
+                        for server_alertinfo in ast_server.alert_info.split('|'):
+                            originate_act += 'Variable: SIPAddHeader=Alert-Info: ' + server_alertinfo + '\r\n'
+                    if user.alert_info and user.asterisk_chan_type == 'SIP':
+                        for user_alertinfo in user.alert_info.split('|'):
+                            originate_act += 'Variable: SIPAddHeader=Alert-Info: ' + user_alertinfo + '\r\n'
                     originate_act += '\r\n'
                     sock.send(originate_act.encode('ascii'))
                     originate_answer = self._parse_asterisk_answer(cr, uid, sock, context=context)
@@ -333,6 +339,8 @@ class res_users(osv.osv):
             help="User's internal phone number."),
         'callerid': fields.char('Caller ID', size=50,
             help="Caller ID used for the calls initiated by this user."),
+        # You'd probably think : Asterisk should reuse the callerID of sip.conf !
+        # But it cannot, cf http://lists.digium.com/pipermail/asterisk-users/2012-January/269787.html
         'asterisk_chan_type': fields.selection([
             ('SIP', 'SIP'),
             ('IAX2', 'IAX2'),
@@ -344,6 +352,7 @@ class res_users(osv.osv):
             ('H323', 'H323'),
             ], 'Asterisk channel type',
             help="Asterisk channel type, as used in the Asterisk dialplan. If the user has a regular IP phone, the channel type is 'SIP'."),
+        'alert_info': fields.char('User-specific Alert-Info SIP header', size=255, help="Set a user-specific Alert-Info header in SIP request to user's IP Phone for the click2dial feature. If empty, the Alert-Info header will not be added. You can use it to have a special ring tone for click2dial (a silent one !) or to activate auto-answer for example. If you want to have several variable headers, separate them with '|'."),
         'asterisk_server_id': fields.many2one('asterisk.server', 'Asterisk server',
             help="Asterisk server on which the user's phone is connected. If you leave this field empty, it will use the first Asterisk server of the user's company."),
                }
