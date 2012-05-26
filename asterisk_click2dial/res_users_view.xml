@@ -20,6 +20,7 @@
                 <field name="internal_number"/>
                 <field name="asterisk_chan_type"/>
                 <field name="callerid"/>
+                <field name="alert_info"/>
                 <field name="asterisk_server_id"/>
             </page>
         </page>
