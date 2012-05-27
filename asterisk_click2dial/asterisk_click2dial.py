@@ -170,6 +170,34 @@ class asterisk_server(osv.osv):
         return tmp_number
 
 
+    def _convert_number_to_international_format(self, cr, uid, number, ast_server, context=None):
+        '''Convert the number presented by the phone network to a number
+        in international format e.g. +33141981242'''
+        if number and number.isdigit() and len(number) > 5:
+            if number[0:len(ast_server.international_prefix)] == ast_server.international_prefix:
+                number = number[len(ast_server.international_prefix):]
+                number = '+' + number
+            elif number[0:len(ast_server.national_prefix)] == ast_server.national_prefix:
+                number = number[len(ast_server.national_prefix):]
+                number = '+' + ast_server.country_prefix + number
+        return number
+
+
+    def _get_asterisk_server_from_user(self, cr, uid, user, context=None):
+        '''Returns an asterisk.server browse object'''
+        # We check if the user has an Asterisk server configured
+        if user.asterisk_server_id.id:
+            ast_server = user.asterisk_server_id
+        else:
+            asterisk_server_ids = self.search(cr, uid, [('company_id', '=', user.company_id.id)], context=context)
+        # If no asterisk server is configured on the user, we take the first one
+            if not asterisk_server_ids:
+                raise osv.except_osv(_('Error :'), _("No Asterisk server configured for the company '%s'.") % user.company_id.name)
+            else:
+                ast_server = self.browse(cr, uid, asterisk_server_ids[0], context=context)
+        return ast_server
+
+
     def _parse_asterisk_answer(self, cr, uid, sock, end_string='\r\n\r\n', context=None):
         '''Parse the answer of the Asterisk Manager Interface'''
         answer = ''
@@ -195,17 +223,7 @@ class asterisk_server(osv.osv):
         # Note : if I write 'Error' without ' :', it won't get translated...
         # I don't understand why !
 
-        # We check if the user has an Asterisk server configured
-        if user.asterisk_server_id.id:
-            ast_server = user.asterisk_server_id
-        else:
-            asterisk_server_ids = self.search(cr, uid, [('company_id', '=', user.company_id.id)], context=context)
-        # If no asterisk server is configured on the user, we take the first one
-            if not asterisk_server_ids:
-                raise osv.except_osv(_('Error :'), _("No Asterisk server configured for the company '%s'.") % user.company_id.name)
-            else:
-                ast_server = self.browse(cr, uid, asterisk_server_ids[0], context=context)
-
+        ast_server = self._get_asterisk_server_from_user(cr, uid, user, context=context)
         # We check if the current user has a chan type
         if not user.asterisk_chan_type:
             raise osv.except_osv(_('Error :'), _('No channel type configured for the current user.'))
@@ -534,12 +552,17 @@ class wizard_open_calling_partner(osv.osv_memory):
         else:
             return False
 
+
     def create_new_partner(self, cr, uid, ids, phone_type='phone', context=None):
         '''Function called by the related button of the wizard'''
         calling_number = self.read(cr, uid, ids[0], ['calling_number'], context=context)['calling_number']
-        # TODO : convert the number to the international format +33141981242
+        user = self.pool.get('res.users').browse(cr, uid, uid, context=context)
+        ast_server = self.pool.get('asterisk.server')._get_asterisk_server_from_user(cr, uid, user, context=context)
+        # Convert the number to the international format
+        number_to_write = self.pool.get('asterisk.server')._convert_number_to_international_format(cr, uid, calling_number, ast_server, context=context)
+
         new_partner_dict = {'name': 'ENTER PARTNER NAME',
-        'address': [(0,0, {phone_type: calling_number})]}
+        'address': [(0,0, {phone_type: number_to_write})]}
         new_partner_id = self.pool.get('res.partner').create(cr, uid, new_partner_dict, context=context)
         action = {
             'name': 'Create new partner',
