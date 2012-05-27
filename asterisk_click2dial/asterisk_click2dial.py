@@ -174,10 +174,10 @@ class asterisk_server(osv.osv):
         '''Convert the number presented by the phone network to a number
         in international format e.g. +33141981242'''
         if number and number.isdigit() and len(number) > 5:
-            if number[0:len(ast_server.international_prefix)] == ast_server.international_prefix:
+            if ast_server.international_prefix and number[0:len(ast_server.international_prefix)] == ast_server.international_prefix:
                 number = number[len(ast_server.international_prefix):]
                 number = '+' + number
-            elif number[0:len(ast_server.national_prefix)] == ast_server.national_prefix:
+            elif ast_server.national_prefix and number[0:len(ast_server.national_prefix)] == ast_server.national_prefix:
                 number = number[len(ast_server.national_prefix):]
                 number = '+' + ast_server.country_prefix + number
         return number
@@ -468,11 +468,13 @@ res_partner_address()
 class wizard_open_calling_partner(osv.osv_memory):
     _name = "wizard.open.calling.partner"
     _description = "Open calling partner"
+
     _columns = {
         'calling_number': fields.char('Calling number', size=30, help="Phone number of calling party that has been obtained from Asterisk."),
         'partner_address_id': fields.many2one('res.partner.address', 'Partner address', help="Partner address related to the calling number"),
         'partner_id': fields.many2one('res.partner', 'Partner', help="Partner related to the calling number"),
             }
+
 
     def default_get(self, cr, uid, fields, context=None):
         '''Thanks to the default_get method, we are able to query Asterisk and
