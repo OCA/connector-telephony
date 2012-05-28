@@ -508,7 +508,7 @@ class wizard_open_calling_partner(osv.osv_memory):
                 res['partner_address_id'] = False
         else:
             _logger.debug("Could not get the calling number from Asterisk.")
-            raise osv.except_osv(_('Error :'), _("Could not get the calling number from Asterisk. Check your setup and look at the OpenERP debug logs."))
+            raise osv.except_osv(_('Error :'), _("Could not get the calling number from Asterisk. Are you currently on the phone ? If yes, check your setup and look at the OpenERP debug logs."))
 
         return res
 
