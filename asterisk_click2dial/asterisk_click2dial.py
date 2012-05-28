@@ -283,10 +283,14 @@ class asterisk_server(osv.osv):
                         'Context: ' + ast_server.context + '\r\n'
                     if ast_server.alert_info and user.asterisk_chan_type == 'SIP':
                         for server_alertinfo in ast_server.alert_info.split('|'):
-                            originate_act += 'Variable: SIPAddHeader=Alert-Info: ' + server_alertinfo + '\r\n'
+                            originate_act += 'Variable: SIPAddHeader=Alert-Info: ' + server_alertinfo.strip() + '\r\n'
                     if user.alert_info and user.asterisk_chan_type == 'SIP':
                         for user_alertinfo in user.alert_info.split('|'):
-                            originate_act += 'Variable: SIPAddHeader=Alert-Info: ' + user_alertinfo + '\r\n'
+                            originate_act += 'Variable: SIPAddHeader=Alert-Info: ' + user_alertinfo.strip() + '\r\n'
+                    if user.variable:
+                        for user_variable in user.variable.split('|'):
+                            originate_act += 'Variable: ' + user_variable.strip() + '\r\n'
+
                     originate_act += '\r\n'
                     sock.send(originate_act.encode('ascii'))
                     originate_answer = self._parse_asterisk_answer(cr, uid, sock, context=context)
@@ -371,6 +375,7 @@ class res_users(osv.osv):
             ], 'Asterisk channel type',
             help="Asterisk channel type, as used in the Asterisk dialplan. If the user has a regular IP phone, the channel type is 'SIP'."),
         'alert_info': fields.char('User-specific Alert-Info SIP header', size=255, help="Set a user-specific Alert-Info header in SIP request to user's IP Phone for the click2dial feature. If empty, the Alert-Info header will not be added. You can use it to have a special ring tone for click2dial (a silent one !) or to activate auto-answer for example. If you want to have several variable headers, separate them with '|'."),
+        'variable': fields.char('User-specific Variable', size=255, help="Set a user-specific 'Variable' field in the Asterisk Manager Interface 'originate' request for the click2dial feature. If you want to have several variable headers, separate them with '|'."),
         'asterisk_server_id': fields.many2one('asterisk.server', 'Asterisk server',
             help="Asterisk server on which the user's phone is connected. If you leave this field empty, it will use the first Asterisk server of the user's company."),
                }
@@ -436,6 +441,7 @@ class res_partner_address(osv.osv):
         else:
             return False
 
+
     def get_partner_from_phone_number(self, cr, uid, number, context=None):
         res = {}
         # We check that "number" is really a number
@@ -470,9 +476,12 @@ class wizard_open_calling_partner(osv.osv_memory):
     _description = "Open calling partner"
 
     _columns = {
-        'calling_number': fields.char('Calling number', size=30, help="Phone number of calling party that has been obtained from Asterisk."),
-        'partner_address_id': fields.many2one('res.partner.address', 'Partner address', help="Partner address related to the calling number"),
-        'partner_id': fields.many2one('res.partner', 'Partner', help="Partner related to the calling number"),
+        'calling_number': fields.char('Calling number', size=30, readonly=True, help="Phone number of calling party that has been obtained from Asterisk."),
+        'partner_address_id': fields.many2one('res.partner.address', 'Contact name', readonly=True, help="Partner contact related to the calling number"),
+        'partner_id': fields.many2one('res.partner', 'Partner', readonly=True, help="Partner related to the calling number"),
+        'to_update_partner_address_id': fields.many2one('res.partner.address', 'Contact to update', help="Partner contact on which the phone or mobile number will be written"),
+        'current_phone': fields.related('to_update_partner_address_id', 'phone', type='char', relation='res.partner.address', string='Current phone', readonly=True),
+        'current_mobile': fields.related('to_update_partner_address_id', 'mobile', type='char', relation='res.partner.address', string='Current mobile', readonly=True),
             }
 
 
@@ -503,6 +512,7 @@ class wizard_open_calling_partner(osv.osv_memory):
 
         return res
 
+
     def open_filtered_object(self, cr, uid, ids, oerp_object, context=None):
         '''Returns the action that opens the list view of the 'oerp_object'
         given as argument filtered on the partner'''
@@ -528,34 +538,53 @@ class wizard_open_calling_partner(osv.osv_memory):
         else:
             return False
 
+
     def open_sale_orders(self, cr, uid, ids, context=None):
         '''Function called by the related button of the wizard'''
         return self.open_filtered_object(cr, uid, ids, self.pool.get('sale.order'), context=context)
+
 
     def open_invoices(self, cr, uid, ids, context=None):
         '''Function called by the related button of the wizard'''
         return self.open_filtered_object(cr, uid, ids, self.pool.get('account.invoice'), context=context)
 
-    def open_partner(self, cr, uid, ids, context=None):
-        '''Function called by the related button of the wizard'''
-        partner = self.read(cr, uid, ids[0], ['partner_id'], context=context)['partner_id']
-        if partner:
-            action = {
-                'name': 'Calling partner',
+
+    def simple_open(self, cr, uid, ids, object_name='res.partner', context=None):
+        if object_name == 'res.partner':
+            field = 'partner_id'
+            label = 'Partner'
+        elif object_name == 'res.partner.address':
+            field = 'partner_address_id'
+            label = 'Contact'
+        else:
+            raise osv.except_osv(_('Error :'), "This object '%s' is not supported" % object_name)
+        record_to_open = self.read(cr, uid, ids[0], [field], context=context)[field]
+        if record_to_open:
+            return {
+                'name': label,
                 'view_type': 'form',
                 'view_mode': 'form,tree',
-                'res_model': 'res.partner',
+                'res_model': object_name,
                 'type': 'ir.actions.act_window',
                 'nodestroy': False, # close the pop-up wizard after action
                 'target': 'current',
-                'res_id': [partner[0]],
+                'res_id': [record_to_open[0]],
                 }
-            return action
         else:
             return False
 
 
-    def create_new_partner(self, cr, uid, ids, phone_type='phone', context=None):
+    def open_partner(self, cr, uid, ids, context=None):
+        '''Function called by the related button of the wizard'''
+        return self.simple_open(cr, uid, ids, object_name='res.partner', context=context)
+
+
+    def open_partner_address(self, cr, uid, ids, context=None):
+        '''Function called by the related button of the wizard'''
+        return self.simple_open(cr, uid, ids, object_name='res.partner.address', context=context)
+
+
+    def create_partner_address(self, cr, uid, ids, phone_type='phone', context=None):
         '''Function called by the related button of the wizard'''
         calling_number = self.read(cr, uid, ids[0], ['calling_number'], context=context)['calling_number']
         user = self.pool.get('res.users').browse(cr, uid, uid, context=context)
@@ -563,26 +592,65 @@ class wizard_open_calling_partner(osv.osv_memory):
         # Convert the number to the international format
         number_to_write = self.pool.get('asterisk.server')._convert_number_to_international_format(cr, uid, calling_number, ast_server, context=context)
 
-        new_partner_dict = {'name': 'ENTER PARTNER NAME',
-        'address': [(0,0, {phone_type: number_to_write})]}
-        new_partner_id = self.pool.get('res.partner').create(cr, uid, new_partner_dict, context=context)
+        new_partner_address_id = self.pool.get('res.partner.address').create(cr, uid, {phone_type: number_to_write}, context=context)
         action = {
-            'name': 'Create new partner',
+            'name': 'Create new contact',
             'view_type': 'form',
             'view_mode': 'form,tree',
-            'res_model': 'res.partner',
+            'res_model': 'res.partner.address',
             'type': 'ir.actions.act_window',
             'nodestroy': False,
             'target': 'current',
-            'res_id': [new_partner_id],
+            'res_id': [new_partner_address_id],
         }
         return action
 
-    def create_new_partner_phone(self, cr, uid, ids, context=None):
-        return self.create_new_partner(cr, uid, ids, phone_type='phone', context=context)
 
-    def create_new_partner_mobile(self, cr, uid, ids, context=None):
-        return self.create_new_partner(cr, uid, ids, phone_type='mobile', context=context)
+    def create_partner_address_phone(self, cr, uid, ids, context=None):
+        return self.create_partner_address(cr, uid, ids, phone_type='phone', context=context)
+
+
+    def create_partner_address_mobile(self, cr, uid, ids, context=None):
+        return self.create_partner_address(cr, uid, ids, phone_type='mobile', context=context)
+
+
+    def update_partner_address(self, cr, uid, ids, phone_type='mobile', context=None):
+        cur_wizard = self.browse(cr, uid, ids[0], context=context)
+        if not cur_wizard.to_update_partner_address_id:
+            raise osv.except_osv(_('Error :'), _("Select the contact to update."))
+        user = self.pool.get('res.users').browse(cr, uid, uid, context=context)
+        ast_server = self.pool.get('asterisk.server')._get_asterisk_server_from_user(cr, uid, user, context=context)
+        number_to_write = self.pool.get('asterisk.server')._convert_number_to_international_format(cr, uid, cur_wizard.calling_number, ast_server, context=context)
+        self.pool.get('res.partner.address').write(cr, uid, cur_wizard.to_update_partner_address_id.id, {phone_type: number_to_write}, context=context)
+        action = {
+            'name': 'Contact: ' + cur_wizard.to_update_partner_address_id.name,
+            'view_type': 'form',
+            'view_mode': 'form,tree',
+            'res_model': 'res.partner.address',
+            'type': 'ir.actions.act_window',
+            'nodestroy': False,
+            'target': 'current',
+            'res_id': [cur_wizard.to_update_partner_address_id.id]
+            }
+        return action
+
+
+    def update_partner_address_phone(self, cr, uid, ids, context=None):
+        return self.update_partner_address(cr, uid, ids, phone_type='phone', context=context)
+
+
+    def update_partner_address_mobile(self, cr, uid, ids, context=None):
+        return self.update_partner_address(cr, uid, ids, phone_type='mobile', context=context)
+
+
+    def onchange_to_update_partner_address(self, cr, uid, ids, to_update_partner_address_id, context=None):
+        to_update_partner_address = self.pool.get('res.partner.address').browse(cr, uid, to_update_partner_address_id, context=context)
+        res = {}
+        res['value'] = {}
+        res['value'].update({'current_phone': to_update_partner_address.phone,
+            'current_mobile': to_update_partner_address.mobile})
+        return res
+
 wizard_open_calling_partner()
 
 
