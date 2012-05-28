@@ -406,7 +406,7 @@ msgstr "Set a user-specific Alert-Info header in SIP request to user's IP Phone 
 
 #. module: asterisk_click2dial
 #: view:wizard.open.calling.partner:0
-msgid "With calling number as mobile"
+msgid "with calling number as mobile"
 msgstr "avec le numéro appelant comme portable"
 
 #. module: asterisk_click2dial

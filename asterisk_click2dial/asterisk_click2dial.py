@@ -644,11 +644,14 @@ class wizard_open_calling_partner(osv.osv_memory):
 
 
     def onchange_to_update_partner_address(self, cr, uid, ids, to_update_partner_address_id, context=None):
-        to_update_partner_address = self.pool.get('res.partner.address').browse(cr, uid, to_update_partner_address_id, context=context)
         res = {}
         res['value'] = {}
-        res['value'].update({'current_phone': to_update_partner_address.phone,
-            'current_mobile': to_update_partner_address.mobile})
+        if to_update_partner_address_id:
+            to_update_partner_address = self.pool.get('res.partner.address').browse(cr, uid, to_update_partner_address_id, context=context)
+            res['value'].update({'current_phone': to_update_partner_address.phone,
+                'current_mobile': to_update_partner_address.mobile})
+        else:
+            res['value'].update({'current_phone': False, 'current_mobile': False})
         return res
 
 wizard_open_calling_partner()
