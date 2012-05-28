@@ -21,6 +21,7 @@
                 <field name="asterisk_chan_type"/>
                 <field name="callerid"/>
                 <field name="alert_info"/>
+                <field name="variable"/>
                 <field name="asterisk_server_id"/>
             </page>
         </page>
