@@ -108,7 +108,7 @@
                 <label string="No partner contact found in OpenERP with this number" colspan="8" />
                 <separator string="Create a new contact" colspan="8" />
                 <button name="create_partner_address_phone" icon="gtk-new" string="with calling number as phone" type="object" colspan="4"/>
-                <button name="create_partner_address_mobile" icon="gtk-new" string="With calling number as mobile" type="object" colspan="4"/>
+                <button name="create_partner_address_mobile" icon="gtk-new" string="with calling number as mobile" type="object" colspan="4"/>
                 <newline />
 
                 <separator string="Update an existing contact" colspan="8" />
