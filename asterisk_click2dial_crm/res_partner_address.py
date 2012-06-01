@@ -62,7 +62,7 @@ class res_partner_address(osv.osv):
         '''
         if context is None:
             context = {}
-        super(res_partner_address, self).action_dial_phone(cr, uid, ids, context)
+        super(res_partner_address, self).action_dial_mobile(cr, uid, ids, context)
         crm_phonecall_id = self.create_phonecall(cr, uid, ids, context)
         partner = self.browse(cr, uid, ids[0], context).partner_id
         return {
