@@ -29,8 +29,12 @@
     "license" : "AGPL-3",
     'category': 'Generic Modules/Others',
     "description": """
-    Create a outbound phone call when the user makes a call phone by clicking
-    the click2dial button of the partner address view, and opens it in a new tab.
+    Create a outbound phone call in the CRM when the user makes a call phone
+    by clicking the click2dial button of the partner address view,
+    and opens it in a new tab.
+
+    Also proposes to create an inbound phone call in the CRM when the user receives
+    a phone calls and clicks on "Open calling partner".
     """,
     "depends": [
         'asterisk_click2dial',
@@ -39,6 +43,7 @@
     "init_xml" : [ ],
     "demo_xml" : [ ],
     "update_xml" : [
+        'open_calling_partner_view.xml',
     ],
     "installable": True,
 }
