@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenERP Server 6.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-06-02 23:46+0000\n"
-"PO-Revision-Date: 2012-06-02 23:46+0000\n"
+"POT-Creation-Date: 2012-06-02 23:47+0000\n"
+"PO-Revision-Date: 2012-06-02 23:47+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -18,61 +18,61 @@ msgstr ""
 #. module: asterisk_click2dial_crm
 #: model:ir.actions.act_window,name:asterisk_click2dial_crm.action_create_crm_phonecall
 msgid "Create CRM phonecall"
-msgstr ""
+msgstr "Créer un appel dans la CRM"
 
 #. module: asterisk_click2dial_crm
 #: code:addons/asterisk_click2dial_crm/wizard/create_crm_phonecall.py:45
 #, python-format
 msgid "Call with"
-msgstr ""
+msgstr "Conversation avec"
 
 #. module: asterisk_click2dial_crm
 #: view:wizard.open.calling.partner:0
 msgid "Create call in CRM"
-msgstr ""
+msgstr "Créer un appel dans la CRM"
 
 #. module: asterisk_click2dial_crm
 #: view:wizard.create.crm.phonecall:0
 msgid "CRM phone call"
-msgstr ""
+msgstr "Appel dans la CRM"
 
 #. module: asterisk_click2dial_crm
 #: view:wizard.create.crm.phonecall:0
 msgid "No"
-msgstr ""
+msgstr "Non"
 
 #. module: asterisk_click2dial_crm
 #: model:ir.model,name:asterisk_click2dial_crm.model_wizard_open_calling_partner
 msgid "wizard.open.calling.partner"
-msgstr ""
+msgstr "wizard.open.calling.partner"
 
 #. module: asterisk_click2dial_crm
 #: model:ir.model,name:asterisk_click2dial_crm.model_wizard_create_crm_phonecall
 msgid "wizard.create.crm.phonecall"
-msgstr ""
+msgstr "wizard.create.crm.phonecall"
 
 #. module: asterisk_click2dial_crm
 #: field:res.users,propose_creation_crm_phonecall:0
 msgid "Propose to create a call in CRM after a click2dial"
-msgstr ""
+msgstr "Propose de créer un appel dans la CRM après un click2dial"
 
 #. module: asterisk_click2dial_crm
 #: view:wizard.create.crm.phonecall:0
 msgid "Create a phone call in the CRM ?"
-msgstr ""
+msgstr "Créer un appel téléphonique dans la CRM ?"
 
 #. module: asterisk_click2dial_crm
 #: model:ir.model,name:asterisk_click2dial_crm.model_res_users
 msgid "res.users"
-msgstr ""
+msgstr "res.users"
 
 #. module: asterisk_click2dial_crm
 #: view:wizard.create.crm.phonecall:0
 msgid "Yes"
-msgstr ""
+msgstr "Oui"
 
 #. module: asterisk_click2dial_crm
 #: model:ir.model,name:asterisk_click2dial_crm.model_res_partner_address
 msgid "Partner Addresses"
-msgstr ""
+msgstr "Carnet d'adresses"
 
