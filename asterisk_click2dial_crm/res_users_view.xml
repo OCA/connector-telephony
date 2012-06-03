@@ -15,7 +15,24 @@
     <field name="inherit_id" ref="asterisk_click2dial.asterisk_res_users_internal_number"/>
     <field name="arch" type="xml">
         <field name="variable" position="after">
-            <field name="propose_creation_crm_phonecall"/>
+            <field name="context_propose_creation_crm_call"/>
+        </field>
+    </field>
+</record>
+
+<record id="asterisk_crm_preferences_option_view" model="ir.ui.view">
+    <field name="name">asterisk.crm.preferences.option.view</field>
+    <field name="model">res.users</field>
+    <field name="inherit_id" ref="base.view_users_form_simple_modif" />
+    <field name="arch" type="xml">
+        <field name="signature" position="after">
+            <group colspan="4" col="2" >
+            <!-- I create a group to avoid that the long "string" of the
+            field context_propose_creation_crm_call pushes all other fields
+            to the right -->
+                <separator string="Telephony preferences" colspan="2"/>
+                <field name="context_propose_creation_crm_call" readonly="0"/>
+            </group>
         </field>
     </field>
 </record>

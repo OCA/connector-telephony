@@ -50,7 +50,7 @@ class res_partner_address(osv.osv):
             'target': 'new',
             'context': context,
             }
-        if user.propose_creation_crm_phonecall:
+        if user.context_propose_creation_crm_call:
             return action_start_wizard
         else:
             return True
@@ -62,11 +62,14 @@ class res_users(osv.osv):
     _inherit = "res.users"
 
     _columns = {
-        'propose_creation_crm_phonecall': fields.boolean('Propose to create a call in CRM after a click2dial'),
+        # Field name starts with 'context_' to allow modification by the user
+        # in his preferences, cf server-61/openerp/addons/base/res/res_users.py
+        # line 377 in "def write" of "class users"
+        'context_propose_creation_crm_call': fields.boolean('Propose to create a call in CRM after a click2dial'),
         }
 
     _defaults = {
-        'propose_creation_crm_phonecall': True,
+        'context_propose_creation_crm_call': True,
         }
 
 res_users()

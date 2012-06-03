@@ -52,7 +52,7 @@ msgid "wizard.create.crm.phonecall"
 msgstr ""
 
 #. module: asterisk_click2dial_crm
-#: field:res.users,propose_creation_crm_phonecall:0
+#: field:res.users,context_propose_creation_crm_call:0
 msgid "Propose to create a call in CRM after a click2dial"
 msgstr ""
 
