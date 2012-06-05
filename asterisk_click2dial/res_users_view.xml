@@ -17,12 +17,15 @@
     <field name="arch" type="xml">
         <page string="User" position="after">
             <page string="Telephony">
+                <separator string="Standard parameters" colspan="4"/>
                 <field name="internal_number"/>
                 <field name="asterisk_chan_type"/>
                 <field name="callerid"/>
+                <field name="asterisk_server_id"/>
+                <separator string="Optional parameters - for experts only, can be left empty" colspan="4"/>
+                <field name="dial_suffix"/>
                 <field name="alert_info"/>
                 <field name="variable"/>
-                <field name="asterisk_server_id"/>
             </page>
         </page>
     </field>
