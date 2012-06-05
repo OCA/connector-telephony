@@ -22,7 +22,7 @@
 
 {
     'name': 'Asterisk Click2dial',
-    'version': '0.3',
+    'version': '0.4',
     'category': 'Extra Tools',
     'license': 'AGPL-3',
     'description': """This module adds 3 functionnalities :

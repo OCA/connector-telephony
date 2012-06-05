@@ -120,6 +120,10 @@ class asterisk_server(osv.osv):
         if not tmp_number:
             raise osv.except_osv(error_title_msg, invalid_format_msg)
 
+        # treat (0) as a special condition as we dont want an extra 0 to be inserted in the number
+        # FIXME all 0s after the country prefix should be stripped off
+        tmp_number = tmp_number.replace('(0)','')
+
         # First, we remove all stupid caracters and spaces
         for char_to_remove in [' ', '.', '(', ')', '[', ']', '-', '/']:
             tmp_number = tmp_number.replace(char_to_remove, '')
@@ -275,7 +279,7 @@ class asterisk_server(osv.osv):
 
                     # Dial with Asterisk
                     originate_act = 'Action: originate\r\n' + \
-                        'Channel: ' + user.asterisk_chan_type + '/' + user.internal_number + '\r\n' + \
+                        'Channel: ' + user.asterisk_chan_type + '/' + user.internal_number + ( ('/' + user.dial_suffix) if user.dial_suffix else '') + '\r\n' + \
                         'Priority: ' + str(ast_server.extension_priority) + '\r\n' + \
                         'Timeout: ' + str(ast_server.wait_time*1000) + '\r\n' + \
                         'CallerId: ' + user.callerid + '\r\n' + \
@@ -359,6 +363,8 @@ class res_users(osv.osv):
     _columns = {
         'internal_number': fields.char('Internal number', size=15,
             help="User's internal phone number."),
+        'dial_suffix': fields.char('User-specific dial suffix', size=15,
+            help="User-specific dial suffix such as aa=2wb for SCCP auto answer."),
         'callerid': fields.char('Caller ID', size=50,
             help="Caller ID used for the calls initiated by this user."),
         # You'd probably think : Asterisk should reuse the callerID of sip.conf !
@@ -372,6 +378,7 @@ class res_users(osv.osv):
             ('MGCP', 'MGCP'),
             ('mISDN', 'mISDN'),
             ('H323', 'H323'),
+            ('SCCP', 'SCCP'),
             ], 'Asterisk channel type',
             help="Asterisk channel type, as used in the Asterisk dialplan. If the user has a regular IP phone, the channel type is 'SIP'."),
         'alert_info': fields.char('User-specific Alert-Info SIP header', size=255, help="Set a user-specific Alert-Info header in SIP request to user's IP Phone for the click2dial feature. If empty, the Alert-Info header will not be added. You can use it to have a special ring tone for click2dial (a silent one !) or to activate auto-answer for example. If you want to have several variable headers, separate them with '|'."),
