@@ -14,7 +14,7 @@
     <field name="model">res.users</field>
     <field name="inherit_id" ref="asterisk_click2dial.asterisk_res_users_internal_number"/>
     <field name="arch" type="xml">
-        <field name="variable" position="after">
+        <field name="asterisk_server_id" position="after">
             <field name="context_propose_creation_crm_call"/>
         </field>
     </field>
