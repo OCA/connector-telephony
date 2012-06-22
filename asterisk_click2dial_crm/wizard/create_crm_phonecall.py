@@ -63,7 +63,7 @@ class wizard_create_crm_phonecall(osv.osv_memory):
             'name': partner_address.name,
             'domain': [('partner_id', '=', partner_address.partner_id.id)],
             'res_model': 'crm.phonecall',
-            'res_id': [crm_phonecall_id],
+            'res_id': crm_phonecall_id,
             'view_type': 'form',
             'view_mode': 'form,tree',
             'type': 'ir.actions.act_window',
