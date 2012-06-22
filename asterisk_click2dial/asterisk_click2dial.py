@@ -575,7 +575,7 @@ class wizard_open_calling_partner(osv.osv_memory):
                 'type': 'ir.actions.act_window',
                 'nodestroy': False, # close the pop-up wizard after action
                 'target': 'current',
-                'res_id': [record_to_open[0]],
+                'res_id': record_to_open[0],
                 }
         else:
             return False
@@ -608,7 +608,7 @@ class wizard_open_calling_partner(osv.osv_memory):
             'type': 'ir.actions.act_window',
             'nodestroy': False,
             'target': 'current',
-            'res_id': [new_partner_address_id],
+            'res_id': new_partner_address_id,
         }
         return action
 
@@ -637,7 +637,7 @@ class wizard_open_calling_partner(osv.osv_memory):
             'type': 'ir.actions.act_window',
             'nodestroy': False,
             'target': 'current',
-            'res_id': [cur_wizard.to_update_partner_address_id.id]
+            'res_id': cur_wizard.to_update_partner_address_id.id
             }
         return action
 
