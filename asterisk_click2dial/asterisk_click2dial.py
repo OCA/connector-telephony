@@ -317,8 +317,9 @@ class asterisk_server(osv.osv):
                     calling_party_number = False
                     status_answer_split = status_answer.split('\r\n\r\n')
                     for event in status_answer_split:
-                        string_match = 'BridgedChannel: ' + user.asterisk_chan_type + '/' + user.internal_number
-                        if not string_match in event:
+                        string_bridge_match = 'BridgedChannel: ' + user.asterisk_chan_type + '/' + user.internal_number
+                        string_link_match = 'Link: ' + user.asterisk_chan_type + '/' + user.internal_number # Asterisk 1.4 ? Or is it related to the fact that it's an IAX trunk ?
+                        if not string_bridge_match in event and not string_link_match in event:
                             continue
                         event_split = event.split('\r\n')
                         for event_line in event_split:
@@ -483,12 +484,15 @@ class wizard_open_calling_partner(osv.osv_memory):
     _description = "Open calling partner"
 
     _columns = {
-        'calling_number': fields.char('Calling number', size=30, readonly=True, help="Phone number of calling party that has been obtained from Asterisk."),
-        'partner_address_id': fields.many2one('res.partner.address', 'Contact name', readonly=True, help="Partner contact related to the calling number"),
-        'partner_id': fields.many2one('res.partner', 'Partner', readonly=True, help="Partner related to the calling number"),
+        # I can't set any field to readonly, because otherwize it would call
+        # default_get (and thus connect to Asterisk) a second time when the user
+        # clicks on one of the buttons
+        'calling_number': fields.char('Calling number', size=30, help="Phone number of calling party that has been obtained from Asterisk."),
+        'partner_address_id': fields.many2one('res.partner.address', 'Contact name', help="Partner contact related to the calling number. If there is none and you want to update an existing partner"),
+        'partner_id': fields.many2one('res.partner', 'Partner', help="Partner related to the calling number."),
         'to_update_partner_address_id': fields.many2one('res.partner.address', 'Contact to update', help="Partner contact on which the phone or mobile number will be written"),
-        'current_phone': fields.related('to_update_partner_address_id', 'phone', type='char', relation='res.partner.address', string='Current phone', readonly=True),
-        'current_mobile': fields.related('to_update_partner_address_id', 'mobile', type='char', relation='res.partner.address', string='Current mobile', readonly=True),
+        'current_phone': fields.related('to_update_partner_address_id', 'phone', type='char', relation='res.partner.address', string='Current phone'),
+        'current_mobile': fields.related('to_update_partner_address_id', 'mobile', type='char', relation='res.partner.address', string='Current mobile'),
             }
 
 
@@ -513,6 +517,7 @@ class wizard_open_calling_partner(osv.osv_memory):
             else:
                 res['partner_id'] = False
                 res['partner_address_id'] = False
+            res['to_update_partner_address_id'] = False
         else:
             _logger.debug("Could not get the calling number from Asterisk.")
             raise osv.except_osv(_('Error :'), _("Could not get the calling number from Asterisk. Are you currently on the phone ? If yes, check your setup and look at the OpenERP debug logs."))
