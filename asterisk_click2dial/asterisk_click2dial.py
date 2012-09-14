@@ -299,6 +299,7 @@ class res_users(osv.osv):
             help="Caller ID used for the calls initiated by this user."),
         'asterisk_chan_type': fields.selection([
             ('SIP', 'SIP'),
+            ('Local', 'Local'),
             ('IAX2', 'IAX2'),
             ('DAHDI', 'DAHDI'),
             ('Zap', 'Zap'),
