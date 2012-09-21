@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Asterisk Click2dial module for OpenERP
+  Copyright (C) 2012 Alexis de Lattre <alexis@via.ecp.fr>
+  The licence is in the file __openerp__.py
+-->
+
+<openerp>
+<data>
+
+<record id="reformat_all_phonenumbers_form" model="ir.ui.view">
+    <field name="name">reformat_all_phonenumbers.form</field>
+    <field name="model">reformat.all.phonenumbers</field>
+    <field name="type">form</field>
+    <field name="arch" type="xml">
+        <form string="Reformat all phone numbers">
+            <label string="This wizard reformats the phone, mobile and fax numbers of all partner contacts in standard international format e.g. +33141981242" colspan="4"/>
+            <button special="cancel" icon="gtk-cancel" string="Close" />
+            <button name="run_reformat_all_phonenumbers" icon="gtk-ok" string="Reformat all phone numbers" type="object" />
+            <label colspan="4" string="Phone numbers that couldn't be reformatted:"/>
+            <field name="phonenumbers_not_reformatted" colspan="4" nolabel="1"/>
+        </form>
+    </field>
+</record>
+
+<record id="reformat_all_phonenumbers_action" model="ir.actions.act_window">
+    <field name="name">Reformat all phone numbers</field>
+    <field name="res_model">reformat.all.phonenumbers</field>
+    <field name="view_type">form</field>
+    <field name="view_mode">form</field>
+    <field name="target">new</field>
+</record>
+
+<!-- Menu entry under Settings > Configuration -->
+<menuitem id="reformat_all_phonenumbers_menu" action="reformat_all_phonenumbers_action" parent="menu_asterisk_servers" sequence="100"/>
+
+
+</data>
+</openerp>
