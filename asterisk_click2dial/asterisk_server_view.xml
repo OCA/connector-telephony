@@ -43,7 +43,6 @@
             <field name="national_prefix" />
             <field name="international_prefix" />
             <field name="country_prefix" select="1" />
-            <field name="national_format_allowed" />
             <field name="alert_info" />
             <field name="wait_time" />
         </form>
@@ -76,7 +75,7 @@
 </record>
 
 <!-- Menu entry under Settings > Configuration -->
-<menuitem id="menu_asterisk_servers" name="Asterisk servers" parent="base.menu_config" groups="base.group_extended"/>
+<menuitem id="menu_asterisk_servers" name="Asterisk" parent="base.menu_config" groups="base.group_extended"/>
 <menuitem action="action_asterisk_server" id="act_menu_ast_server" parent="menu_asterisk_servers" sequence="50"/>
 
 
