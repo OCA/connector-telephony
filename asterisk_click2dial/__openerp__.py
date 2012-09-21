@@ -55,6 +55,8 @@ A detailed documentation for this module is available on the Akretion Web site :
         'asterisk_server_view.xml',
         'res_users_view.xml',
         'res_partner_view.xml',
+        'wizard/open_calling_partner_view.xml',
+        'wizard/reformat_all_phonenumbers_view.xml',
         'security/asterisk_server_security.xml',
         ],
     'demo_xml': ['asterisk_click2dial_demo.xml'],
