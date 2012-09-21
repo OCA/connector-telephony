@@ -26,8 +26,8 @@ import socket
 import logging
 # Lib to translate error messages
 from tools.translate import _
-# Lib for regexp
-import re
+# Lib for phone number reformating -> pip install phonenumbers
+import phonenumbers
 
 _logger = logging.getLogger(__name__)
 
@@ -44,7 +44,6 @@ class asterisk_server(osv.osv):
         'national_prefix': fields.char('National prefix', size=4, help="Prefix for national phone calls (don't include the 'out prefix'). For e.g., in France, the phone numbers look like '01 41 98 12 42' : the National prefix is '0'."),
         'international_prefix': fields.char('International prefix', required=True, size=4, help="Prefix to add to make international phone calls (don't include the 'out prefix'). For e.g., in France, the International prefix is '00'."),
         'country_prefix': fields.char('My country prefix', required=True, size=4, help="Phone prefix of the country where the Asterisk server is located. For e.g. the phone prefix for France is '33'. If the phone number to dial starts with the 'My country prefix', OpenERP will remove the country prefix from the phone number and add the 'out prefix' followed by the 'national prefix'. If the phone number to dial doesn't start with the 'My country prefix', OpenERP will add the 'out prefix' followed by the 'international prefix'."),
-        'national_format_allowed': fields.boolean('National format allowed ?', help="Do we allow to use click2dial on phone numbers written in national format, e.g. 01 41 98 12 42, or only in the international format, e.g. +33 1 41 98 12 42 ?"),
         'login': fields.char('AMI login', size=30, required=True, help="Login that OpenERP will use to communicate with the Asterisk Manager Interface. Refer to /etc/asterisk/manager.conf on your Asterisk server."),
         'password': fields.char('AMI password', size=30, required=True, help="Password that Asterisk will use to communicate with the Asterisk Manager Interface. Refer to /etc/asterisk/manager.conf on your Asterisk server."),
         'context': fields.char('Dialplan context', size=50, required=True, help="Asterisk dialplan context from which the calls will be made. Refer to /etc/asterisk/extensions.conf on your Asterisk server."),
@@ -120,53 +119,40 @@ class asterisk_server(osv.osv):
         if not tmp_number:
             raise osv.except_osv(error_title_msg, invalid_format_msg)
 
-        # treat (0) as a special condition as we dont want an extra 0 to be inserted in the number
-        # FIXME all 0s after the country prefix should be stripped off
-        tmp_number = tmp_number.replace('(0)','')
-
-        # First, we remove all stupid caracters and spaces
-        for char_to_remove in [' ', '.', '(', ')', '[', ']', '-', '/']:
-            tmp_number = tmp_number.replace(char_to_remove, '')
-
         # Before starting to use prefix, we convert empty prefix whose value
         # is False to an empty string
-        country_prefix = (ast_server.country_prefix or '')
-        national_prefix = (ast_server.national_prefix or '')
-        international_prefix = (ast_server.international_prefix or '')
-        out_prefix = (ast_server.out_prefix or '')
+        country_prefix = ast_server.country_prefix or ''
+        national_prefix = ast_server.national_prefix or ''
+        international_prefix = ast_server.international_prefix or ''
+        out_prefix = ast_server.out_prefix or ''
 
+        # Maybe one day we will use
+        # phonenumbers.format_out_of_country_calling_number(phonenumbers.parse('<phone_number_e164', None), 'FR')
+        # The country code seems to be OK with the ones of OpenERP
+        # But it returns sometimes numbers with '-'... we have to investigate this first
         # International format
-        if tmp_number[0] == '+':
+        if tmp_number[0] != '+':
+            raise # This should never happen
             # Remove the starting '+' of the number
-            tmp_number = tmp_number.replace('+','')
-            _logger.debug('Number after removal of special char = %s' % tmp_number)
+        tmp_number = tmp_number.replace('+','')
+        _logger.debug('Number after removal of special char = %s' % tmp_number)
 
-            # At this stage, 'tmp_number' should only contain digits
-            if not tmp_number.isdigit():
-                raise osv.except_osv(error_title_msg, invalid_format_msg)
+        # At this stage, 'tmp_number' should only contain digits
+        if not tmp_number.isdigit():
+            raise osv.except_osv(error_title_msg, invalid_format_msg)
 
-            _logger.debug('Country prefix = %s' % country_prefix)
-            if country_prefix == tmp_number[0:len(country_prefix)]:
-                # If the number is a national number,
-                # remove 'my country prefix' and add 'national prefix'
-                tmp_number = (national_prefix) + tmp_number[len(country_prefix):len(tmp_number)]
-                _logger.debug('National prefix = %s - Number with national prefix = %s' % (national_prefix, tmp_number))
+        _logger.debug('Country prefix = %s' % country_prefix)
+        if country_prefix == tmp_number[0:len(country_prefix)]:
+            # If the number is a national number,
+            # remove 'my country prefix' and add 'national prefix'
+            tmp_number = (national_prefix) + tmp_number[len(country_prefix):len(tmp_number)]
+            _logger.debug('National prefix = %s - Number with national prefix = %s' % (national_prefix, tmp_number))
 
-            else:
-                # If the number is an international number,
-                # add 'international prefix'
-                tmp_number = international_prefix + tmp_number
-                _logger.debug('International prefix = %s - Number with international prefix = %s' % (international_prefix, tmp_number))
-
-        # National format, allowed
-        elif ast_server.national_format_allowed:
-            # No treatment required
-            if not tmp_number.isdigit():
-                raise osv.except_osv(error_title_msg, invalid_national_format_msg)
-
-        # National format, disallowed
-        elif not ast_server.national_format_allowed:
-            raise osv.except_osv(error_title_msg, invalid_international_format_msg)
+        else:
+            # If the number is an international number,
+            # add 'international prefix'
+            tmp_number = international_prefix + tmp_number
+            _logger.debug('International prefix = %s - Number with international prefix = %s' % (international_prefix, tmp_number))
 
         # Add 'out prefix' to all numbers
         tmp_number = out_prefix + tmp_number
@@ -206,6 +192,10 @@ class asterisk_server(osv.osv):
         '''Parse the answer of the Asterisk Manager Interface'''
         answer = ''
         data = ''
+        # TODO : if there is an error, we will stay in the while loop
+        # ex : 
+        # Response: Error
+        # Message: Permission denied
         while end_string not in data:
             data = sock.recv(1024)
             if data:
@@ -306,7 +296,7 @@ class asterisk_server(osv.osv):
                 elif method == "get_calling_number":
                     status_act = 'Action: Status\r\n\r\n' # TODO : add ActionID
                     sock.send(status_act.encode('ascii'))
-                    status_answer = self._parse_asterisk_answer(cr, uid, sock, end_string='Event: StatusComplete', context=context)
+                    status_answer = self._parse_asterisk_answer(cr, uid, sock, end_string='Event: StatusComplete', context=context).decode('utf-8')
 
                     if 'Response: Success' in status_answer:
                         _logger.debug('Successfull Status command :\n%s' % status_answer)
@@ -414,26 +404,98 @@ class res_partner_address(osv.osv):
     _inherit = "res.partner.address"
 
 
-    def dial(self, cr, uid, ids, phone_field='phone', context=None):
+    def _format_phonenumber_to_e164(self, cr, uid, ids, name, arg, context=None):
+        result = {}
+        for addr in self.read(cr, uid, ids, ['phone', 'mobile', 'fax'], context=context):
+            result[addr['id']] = {}
+            for fromfield, tofield in [('phone', 'phone_e164'), ('mobile', 'mobile_e164'), ('fax', 'fax_e164')]:
+                if not addr.get(fromfield):
+                    res = False
+                else:
+                    try:
+                        res = phonenumbers.format_number(phonenumbers.parse(addr.get(fromfield), None), phonenumbers.PhoneNumberFormat.E164)
+                    except Exception, e:
+                        _logger.error("Cannot reformat the phone number '%s' to E.164 format. Error message: %s" % (addr.get(fromfield), e))
+                        _logger.error("You should fix this number and run the wizard 'Reformat all phone numbers' from the menu Settings > Configuration > Asterisk")
+                    # If I raise an exception here, it won't be possible to install
+                    # the module on a DB with bad phone numbers
+                        #raise osv.except_osv(_('Error :'), _("Cannot reformat the phone number '%s' to E.164 format. Error message: %s" % (addr.get(fromfield), e)))
+                        res = False
+                result[addr['id']][tofield] = res
+        #print "RESULT _format_phonenumber_to_e164", result
+        return result
+
+
+    _columns = {
+        'phone_e164': fields.function(_format_phonenumber_to_e164, type='char', size=64, string='Phone in E.164 format', readonly=True, multi="e164", store={
+            'res.partner.address': (lambda self, cr, uid, ids, c={}: ids, ['phone'], 10),
+            }),
+        'mobile_e164': fields.function(_format_phonenumber_to_e164, type='char', size=64, string='Mobile in E.164 format', readonly=True, multi="e164", store={
+            'res.partner.address': (lambda self, cr, uid, ids, c={}: ids, ['mobile'], 10),
+            }),
+        'fax_e164': fields.function(_format_phonenumber_to_e164, type='char', size=64, string='Fax in E.164 format', readonly=True, multi="e164", store={
+            'res.partner.address': (lambda self, cr, uid, ids, c={}: ids, ['fax'], 10),
+            }),
+        }
+
+    def _reformat_phonenumbers(self, cr, uid, vals, context=None):
+        """Reformat phone numbers in international format i.e. +33141981242"""
+        phonefields = ['phone', 'fax', 'mobile']
+        if any([vals.get(field) for field in phonefields]):
+            user = self.pool.get('res.users').browse(cr, uid, uid, context=context)
+            # country_id on res.company is a fields.function that looks at
+            # company_id.partner_id.addres(default).country_id
+            if user.company_id.country_id:
+                user_countrycode = user.company_id.country_id.code
+            else:
+                # We need to raise an exception here because, if we pass None as second arg of phonenumbers.parse(), it will raise an exception when you try to enter a phone number in national format... so it's better to raise the exception here
+                raise osv.except_osv(_('Error :'), _("You should set a country on the company '%s'" % user.company_id.name))
+            #print "user_countrycode=", user_countrycode
+            for field in phonefields:
+                if vals.get(field):
+                    try:
+                        res_parse = phonenumbers.parse(vals.get(field), user_countrycode)
+                    except Exception, e:
+                        raise osv.except_osv(_('Error :'), _("Cannot reformat the phone number '%s' to international format. Error message: %s" % (vals.get(field), e)))
+                    #print "res_parse=", res_parse
+                    vals[field] = phonenumbers.format_number(res_parse, phonenumbers.PhoneNumberFormat.INTERNATIONAL)
+        return vals
+
+
+    def create(self, cr, uid, vals, context=None):
+        vals_reformated = self._reformat_phonenumbers(cr, uid, vals, context=context)
+        return super(res_partner_address, self).create(cr, uid, vals_reformated, context=context)
+
+
+    def write(self, cr, uid, ids, vals, context=None):
+        vals_reformated = self._reformat_phonenumbers(cr, uid, vals, context=context)
+        return super(res_partner_address, self).write(cr, uid, ids, vals_reformated, context=context)
+
+
+    def dial(self, cr, uid, ids, phone_field=['phone', 'phone_e164'], context=None):
         '''Read the number to dial and call _connect_to_asterisk the right way'''
-        erp_number = self.read(cr, uid, ids, [phone_field], context=context)[0][phone_field]
+        erp_number_read = self.read(cr, uid, ids[0], phone_field, context=context)
+        erp_number_e164 = erp_number_read[phone_field[1]]
+        erp_number_display = erp_number_read[phone_field[0]]
         # Check if the number to dial is not empty
-        if not erp_number:
+        if not erp_number_display:
             raise osv.except_osv(_('Error :'), _('There is no phone number !'))
-        options = {'erp_number': erp_number}
+        elif erp_number_display and not erp_number_e164:
+            raise osv.except_osv(_('Error :'), _("The phone number isn't stored in the standard E.164 format. Try to run the wizard 'Reformat all phone numbers' from the menu Settings > Configuration > Asterisk."))
+        options = {'erp_number': erp_number_e164}
         return self.pool.get('asterisk.server')._connect_to_asterisk(cr, uid, method='dial', options=options, context=context)
 
 
     def action_dial_phone(self, cr, uid, ids, context=None):
         '''Function called by the button 'Dial' next to the 'phone' field
         in the partner address view'''
-        return self.dial(cr, uid, ids, phone_field='phone', context=context)
+        return self.dial(cr, uid, ids, phone_field=['phone', 'phone_e164'], context=context)
 
 
     def action_dial_mobile(self, cr, uid, ids, context=None):
         '''Function called by the button 'Dial' next to the 'mobile' field
         in the partner address view'''
-        return self.dial(cr, uid, ids, phone_field='mobile', context=context)
+        return self.dial(cr, uid, ids, phone_field=['mobile', 'mobile_e164'], context=context)
 
 
     def get_name_from_phone_number(self, cr, uid, number, context=None):
@@ -452,7 +514,6 @@ class res_partner_address(osv.osv):
 
 
     def get_partner_from_phone_number(self, cr, uid, number, context=None):
-        res = {}
         # We check that "number" is really a number
         if not isinstance(number, str):
             return False
@@ -460,214 +521,21 @@ class res_partner_address(osv.osv):
             return False
 
         _logger.debug(u"Call get_name_from_phone_number with number = %s" % number)
-        # Get all the partner addresses :
-        all_ids = self.search(cr, uid, [], context=context)
-        # For each partner address, we check if the number matches on the "phone" or "mobile" fields
-        for entry in self.browse(cr, uid, all_ids, context=context):
-            if entry.phone:
-                # We use a regexp on the phone field to remove non-digit caracters
-                if re.sub(r'\D', '', entry.phone).endswith(number):
-                    _logger.debug(u"Answer get_name_from_phone_number with name = %s" % entry.name)
-                    return (entry.id, entry.partner_id.id, entry.name)
-            if entry.mobile:
-                if re.sub(r'\D', '', entry.mobile).endswith(number):
-                    _logger.debug(u"Answer get_name_from_phone_number with name = %s" % entry.name)
-                    return (entry.id, entry.partner_id.id, entry.name)
-
-        _logger.debug(u"No match for phone number %s" % number)
-        return False
+        # We try to match a phone or mobile number with the same end
+        pg_seach_number = '%' + number
+        res_ids = self.search(cr, uid, ['|', ('phone_e164', 'ilike', pg_seach_number), ('mobile_e164', 'ilike', pg_seach_number)], context=context)
+        # TODO : use is_number_match() of the phonenumber lib ?
+        if len(res_ids) > 1:
+            _logger.warning(u"There are several partners addresses (IDS = %s) with the same phone number %s" % (str(res_ids), number))
+        if res_ids:
+            entry = self.read(cr, uid, res_ids[0], ['name', 'partner_id'], context=context)
+            _logger.debug(u"Answer get_partner_from_phone_number with name = %s" % entry['name'])
+            return (entry['id'], entry['partner_id'] and entry['partner_id'][0] or False, entry['name'])
+        else:
+            _logger.debug(u"No match for phone number %s" % number)
+            return False
 
 res_partner_address()
-
-
-class wizard_open_calling_partner(osv.osv_memory):
-    _name = "wizard.open.calling.partner"
-    _description = "Open calling partner"
-
-    _columns = {
-        # I can't set any field to readonly, because otherwize it would call
-        # default_get (and thus connect to Asterisk) a second time when the user
-        # clicks on one of the buttons
-        'calling_number': fields.char('Calling number', size=30, help="Phone number of calling party that has been obtained from Asterisk."),
-        'partner_address_id': fields.many2one('res.partner.address', 'Contact name', help="Partner contact related to the calling number. If there is none and you want to update an existing partner"),
-        'partner_id': fields.many2one('res.partner', 'Partner', help="Partner related to the calling number."),
-        'to_update_partner_address_id': fields.many2one('res.partner.address', 'Contact to update', help="Partner contact on which the phone or mobile number will be written"),
-        'current_phone': fields.related('to_update_partner_address_id', 'phone', type='char', relation='res.partner.address', string='Current phone'),
-        'current_mobile': fields.related('to_update_partner_address_id', 'mobile', type='char', relation='res.partner.address', string='Current mobile'),
-            }
-
-
-    def default_get(self, cr, uid, fields, context=None):
-        '''Thanks to the default_get method, we are able to query Asterisk and
-        get the corresponding partner when we launch the wizard'''
-        res = {}
-        calling_number = self.pool.get('asterisk.server')._connect_to_asterisk(cr, uid, method='get_calling_number', context=context)
-        #To test the code without Asterisk server
-        #calling_number = "0141981242"
-        if calling_number:
-            res['calling_number'] = calling_number
-            # We match only on the end of the phone number
-            if len(calling_number) >= 9:
-                number_to_search = calling_number[-9:len(calling_number)]
-            else:
-                number_to_search = calling_number
-            partner = self.pool.get('res.partner.address').get_partner_from_phone_number(cr, uid, number_to_search, context=context)
-            if partner:
-                res['partner_address_id'] = partner[0]
-                res['partner_id'] = partner[1]
-            else:
-                res['partner_id'] = False
-                res['partner_address_id'] = False
-            res['to_update_partner_address_id'] = False
-        else:
-            _logger.debug("Could not get the calling number from Asterisk.")
-            raise osv.except_osv(_('Error :'), _("Could not get the calling number from Asterisk. Are you currently on the phone ? If yes, check your setup and look at the OpenERP debug logs."))
-
-        return res
-
-
-    def open_filtered_object(self, cr, uid, ids, oerp_object, context=None):
-        '''Returns the action that opens the list view of the 'oerp_object'
-        given as argument filtered on the partner'''
-        # This module only depends on "base"
-        # and I don't want to add a dependancy on "sale" or "account"
-        # So I just check here that the model exists, to avoid a crash
-        if not self.pool.get('ir.model').search(cr, uid, [('model', '=', oerp_object._name)], context=context):
-            raise osv.except_osv(_('Error :'), _("The object '%s' is not found in your OpenERP database, probably because the related module is not installed." % oerp_object._description))
-
-        partner = self.read(cr, uid, ids[0], ['partner_id'], context=context)['partner_id']
-        if partner:
-            action = {
-                'name': oerp_object._description,
-                'view_type': 'form',
-                'view_mode': 'tree,form',
-                'res_model': oerp_object._name,
-                'type': 'ir.actions.act_window',
-                'nodestroy': False, # close the pop-up wizard after action
-                'target': 'current',
-                'domain': [('partner_id', '=', partner[0])],
-                }
-            return action
-        else:
-            return False
-
-
-    def open_sale_orders(self, cr, uid, ids, context=None):
-        '''Function called by the related button of the wizard'''
-        return self.open_filtered_object(cr, uid, ids, self.pool.get('sale.order'), context=context)
-
-
-    def open_invoices(self, cr, uid, ids, context=None):
-        '''Function called by the related button of the wizard'''
-        return self.open_filtered_object(cr, uid, ids, self.pool.get('account.invoice'), context=context)
-
-
-    def simple_open(self, cr, uid, ids, object_name='res.partner', context=None):
-        if object_name == 'res.partner':
-            field = 'partner_id'
-            label = 'Partner'
-        elif object_name == 'res.partner.address':
-            field = 'partner_address_id'
-            label = 'Contact'
-        else:
-            raise osv.except_osv(_('Error :'), "This object '%s' is not supported" % object_name)
-        record_to_open = self.read(cr, uid, ids[0], [field], context=context)[field]
-        if record_to_open:
-            return {
-                'name': label,
-                'view_type': 'form',
-                'view_mode': 'form,tree',
-                'res_model': object_name,
-                'type': 'ir.actions.act_window',
-                'nodestroy': False, # close the pop-up wizard after action
-                'target': 'current',
-                'res_id': record_to_open[0],
-                }
-        else:
-            return False
-
-
-    def open_partner(self, cr, uid, ids, context=None):
-        '''Function called by the related button of the wizard'''
-        return self.simple_open(cr, uid, ids, object_name='res.partner', context=context)
-
-
-    def open_partner_address(self, cr, uid, ids, context=None):
-        '''Function called by the related button of the wizard'''
-        return self.simple_open(cr, uid, ids, object_name='res.partner.address', context=context)
-
-
-    def create_partner_address(self, cr, uid, ids, phone_type='phone', context=None):
-        '''Function called by the related button of the wizard'''
-        calling_number = self.read(cr, uid, ids[0], ['calling_number'], context=context)['calling_number']
-        user = self.pool.get('res.users').browse(cr, uid, uid, context=context)
-        ast_server = self.pool.get('asterisk.server')._get_asterisk_server_from_user(cr, uid, user, context=context)
-        # Convert the number to the international format
-        number_to_write = self.pool.get('asterisk.server')._convert_number_to_international_format(cr, uid, calling_number, ast_server, context=context)
-
-        new_partner_address_id = self.pool.get('res.partner.address').create(cr, uid, {phone_type: number_to_write}, context=context)
-        action = {
-            'name': 'Create new contact',
-            'view_type': 'form',
-            'view_mode': 'form,tree',
-            'res_model': 'res.partner.address',
-            'type': 'ir.actions.act_window',
-            'nodestroy': False,
-            'target': 'current',
-            'res_id': new_partner_address_id,
-        }
-        return action
-
-
-    def create_partner_address_phone(self, cr, uid, ids, context=None):
-        return self.create_partner_address(cr, uid, ids, phone_type='phone', context=context)
-
-
-    def create_partner_address_mobile(self, cr, uid, ids, context=None):
-        return self.create_partner_address(cr, uid, ids, phone_type='mobile', context=context)
-
-
-    def update_partner_address(self, cr, uid, ids, phone_type='mobile', context=None):
-        cur_wizard = self.browse(cr, uid, ids[0], context=context)
-        if not cur_wizard.to_update_partner_address_id:
-            raise osv.except_osv(_('Error :'), _("Select the contact to update."))
-        user = self.pool.get('res.users').browse(cr, uid, uid, context=context)
-        ast_server = self.pool.get('asterisk.server')._get_asterisk_server_from_user(cr, uid, user, context=context)
-        number_to_write = self.pool.get('asterisk.server')._convert_number_to_international_format(cr, uid, cur_wizard.calling_number, ast_server, context=context)
-        self.pool.get('res.partner.address').write(cr, uid, cur_wizard.to_update_partner_address_id.id, {phone_type: number_to_write}, context=context)
-        action = {
-            'name': 'Contact: ' + cur_wizard.to_update_partner_address_id.name,
-            'view_type': 'form',
-            'view_mode': 'form,tree',
-            'res_model': 'res.partner.address',
-            'type': 'ir.actions.act_window',
-            'nodestroy': False,
-            'target': 'current',
-            'res_id': cur_wizard.to_update_partner_address_id.id
-            }
-        return action
-
-
-    def update_partner_address_phone(self, cr, uid, ids, context=None):
-        return self.update_partner_address(cr, uid, ids, phone_type='phone', context=context)
-
-
-    def update_partner_address_mobile(self, cr, uid, ids, context=None):
-        return self.update_partner_address(cr, uid, ids, phone_type='mobile', context=context)
-
-
-    def onchange_to_update_partner_address(self, cr, uid, ids, to_update_partner_address_id, context=None):
-        res = {}
-        res['value'] = {}
-        if to_update_partner_address_id:
-            to_update_partner_address = self.pool.get('res.partner.address').browse(cr, uid, to_update_partner_address_id, context=context)
-            res['value'].update({'current_phone': to_update_partner_address.phone,
-                'current_mobile': to_update_partner_address.mobile})
-        else:
-            res['value'].update({'current_phone': False, 'current_mobile': False})
-        return res
-
-wizard_open_calling_partner()
 
 
 # This module supports multi-company
