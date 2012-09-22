@@ -79,9 +79,8 @@ option_ascii = {'names': ('-a', '--ascii'), 'dest': 'ascii', 'help': "Convert na
 option_geoloc = {'names': ('-g', '--geoloc'), 'dest': 'geoloc', 'help': "Try to geolocate phone numbers unknown to OpenERP. This features requires the 'phonenumbers' Python lib. To install it, run 'sudo pip install phonenumbers' Default = no", 'action': 'store_true', 'default': False}
 option_geoloc_lang = {'names': ('-l', '--geoloc-lang'), 'dest': 'lang', 'help': "Language in which the name of the country and city name will be displayed by the geolocalisation database. Use the 2 letters ISO code of the language. Default = 'en'", 'action': 'store', 'default': "en"}
 option_geoloc_country = {'names': ('-c', '--geoloc-country'), 'dest': 'country', 'help': "2 letters ISO code for your country e.g. 'FR' for France. This will be used by the geolocalisation system to parse the phone number of the calling party. Default = 'FR'", 'action': 'store', 'default': "FR"}
-option_geoloc_cityonly = {'names': ('-t', '--geoloc-city-only'), 'dest': 'cityonly', 'help': "Only display the city name, instead of displaying both the country and the city. Default = no", 'action': 'store_true', 'default': False}
 
-options = [option_server, option_port, option_ssl, option_database, option_user, option_password, option_ascii, option_geoloc, option_geoloc_lang, option_geoloc_country, option_geoloc_cityonly]
+options = [option_server, option_port, option_ssl, option_database, option_user, option_password, option_ascii, option_geoloc, option_geoloc_lang, option_geoloc_country]
 
 def stdout_write(string):
     '''Wrapper on sys.stdout.write'''
@@ -99,20 +98,25 @@ def stderr_write(string):
     sys.stdout.flush()
     return True
 
-def geolocate_phone_number(number, country_code, lang):
+def geolocate_phone_number(number, my_country_code, lang):
     import phonenumbers
     import phonenumbers.geocoder
     res = ''
-    phonenum = phonenumbers.parse(number, country_code.upper())
+    phonenum = phonenumbers.parse(number, my_country_code.upper())
     city = phonenumbers.area_description_for_number(phonenum, lang.lower())
-    if not options.cityonly:
-        country = phonenumbers.country_name_for_number(phonenum, lang.lower())
+    #country = phonenumbers.country_name_for_number(phonenum, lang.lower())
+    country_code = phonenumbers.region_code_for_number(phonenum)
+    if country_code == my_country_code.upper():
+    # We don't display the country name when it's my own country
+        if city:
+            res = city
+    else:
+        # Convert country code to country name
+        country = phonenumbers.geocoder._region_display_name(country_code, lang.lower())
         if country and city:
             res = country + ' ' + city
         elif country and not city:
             res = country
-    elif city:
-        res = city
     return res
 
 def reformat_phone_number_before_query_openerp(number):
