@@ -309,16 +309,16 @@ class asterisk_server(osv.osv):
                     for event in status_answer_split:
                         string_bridge_match = 'BridgedChannel: ' + user.asterisk_chan_type + '/' + user.internal_number
                         string_link_match = 'Link: ' + user.asterisk_chan_type + '/' + user.internal_number # Asterisk 1.4 ? Or is it related to the fact that it's an IAX trunk ?
-                        if not string_bridge_match in event and not string_link_match in event:
-                            continue
-                        event_split = event.split('\r\n')
-                        for event_line in event_split:
-                            if not 'CallerIDNum' in event_line:
-                                continue
-                            line_detail = event_line.split(': ')
-                            if len(line_detail) <> 2:
-                                raise osv.except_osv('Error :', "Hara kiri... this is not possible")
-                            calling_party_number = line_detail[1]
+                        if string_bridge_match in event or string_link_match in event:
+                            _logger.debug("Found a matching Event")
+                            event_split = event.split('\r\n')
+                            for event_line in event_split:
+                                if 'CallerIDNum' in event_line:
+                                    line_detail = event_line.split(': ')
+                                    if len(line_detail) <> 2:
+                                        raise osv.except_osv('Error :', "Hara kiri... this is not possible")
+                                    calling_party_number = line_detail[1]
+                                    _logger.debug("The calling party number is '%s'" % calling_party_number)
 
                 # Logout of Asterisk
                 sock.send(('Action: Logoff\r\n\r\n').encode('ascii'))
@@ -338,7 +338,6 @@ class asterisk_server(osv.osv):
             return True
 
         elif method == "get_calling_number":
-            _logger.debug("Calling party number: %s" % calling_party_number)
             return calling_party_number
 
         else:
