@@ -515,15 +515,15 @@ class res_partner_address(osv.osv):
     def get_partner_from_phone_number(self, cr, uid, number, context=None):
         # We check that "number" is really a number
         _logger.debug(u"Call get_name_from_phone_number with number = %s" % number)
-        if not isinstance(number, str):
-            _logger.warning(u"Number should be a 'str' but it is a '%s'" % type(number))
+        if not isinstance(number, (str, unicode)):
+            _logger.warning(u"Number should be a 'str' or 'unicode' but it is a '%s'" % type(number))
             return False
             _logger.warning(u"Number should only contain digits.")
         if not number.isdigit():
             return False
 
         # We try to match a phone or mobile number with the same end
-        pg_seach_number = '%' + number
+        pg_seach_number = str('%' + number)
         res_ids = self.search(cr, uid, ['|', ('phone_e164', 'ilike', pg_seach_number), ('mobile_e164', 'ilike', pg_seach_number)], context=context)
         # TODO : use is_number_match() of the phonenumber lib ?
         if len(res_ids) > 1:
