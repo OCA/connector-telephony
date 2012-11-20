@@ -11,15 +11,16 @@
 <data>
 
 <record id="asterisk_res_users_internal_number" model="ir.ui.view">
-    <field name="name">asterisk.res.users.internal.number</field>
+    <field name="name">asterisk.res.users.telephony_tab</field>
     <field name="model">res.users</field>
     <field name="inherit_id" ref="base.view_users_form"/>
     <field name="arch" type="xml">
         <page string="User" position="after">
             <page string="Telephony">
                 <separator string="Standard parameters" colspan="4"/>
-                <field name="internal_number"/>
                 <field name="asterisk_chan_type"/>
+                <field name="resource"/>
+                <field name="internal_number"/>
                 <field name="callerid"/>
                 <field name="asterisk_server_id"/>
                 <separator string="Optional parameters - for experts only, can be left empty" colspan="4"/>
