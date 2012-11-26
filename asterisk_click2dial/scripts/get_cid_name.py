@@ -168,7 +168,7 @@ def main(options, arguments):
     # If we already have a "True" caller ID name
     # i.e. not just digits, but a real name, then we don't try to
     # connect to OpenERP or geoloc, we just keep it
-    if stdinput.get('agi_calleridname') and not stdinput.get('agi_calleridname').isdigit():
+    if stdinput.get('agi_calleridname') and not stdinput.get('agi_calleridname').isdigit() and stdinput.get('agi_calleridname').lower() not in ['asterisk', 'unknown', 'anonymous']:
         stdout_write('VERBOSE "Incoming CallerID name is %s"\n' % stdinput.get('agi_calleridname'))
         stdout_write('VERBOSE "As it is a real name, we do not change it"\n')
         return True
