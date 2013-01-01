@@ -74,8 +74,8 @@
     <field name="context">{'asterisk_server_main_view': True}</field>
 </record>
 
-<!-- Menu entry under Settings > Configuration -->
-<menuitem id="menu_asterisk_servers" name="Asterisk" parent="base.menu_config" groups="base.group_extended"/>
+<!-- Menu entry under Settings > Technical -->
+<menuitem id="menu_asterisk_servers" name="Asterisk" parent="base.menu_custom"/>
 <menuitem action="action_asterisk_server" id="act_menu_ast_server" parent="menu_asterisk_servers" sequence="50"/>
 
 

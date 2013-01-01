@@ -4,79 +4,64 @@
   Copyright (C) 2010-2012 Alexis de Lattre <alexis@via.ecp.fr>
   The licence is in the file __openerp__.py
 
-  Inherit partner_address views to add 'Dial' button next to 'phone'
+  Inherit partner views to add 'Dial' button next to 'phone'
   and 'mobile' fields
 -->
 
 <openerp>
 <data>
 
-<record id="asterisk_res_partner_address_dial1" model="ir.ui.view">
-    <field name="name">asterisk.res.partner.address.dial1</field>
-    <field name="model">res.partner.address</field>
+<record id="asterisk_res_partner_simplified_form_dial" model="ir.ui.view">
+    <field name="name">asterisk.res.partner.simplified.form.dial</field>
+    <field name="model">res.partner</field>
     <field name="priority">15</field>
-    <field name="inherit_id" ref="base.view_partner_address_form1"/>
+    <field name="inherit_id" ref="base.view_partner_simple_form"/>
     <field name="arch" type="xml">
-      <data>
         <field name="phone" position="replace">
             <group colspan="2" col="8">
                 <field name="phone" colspan="7" />
-                <button name="action_dial_phone" string="Dial" type="object"/>
+                <button name="action_dial_phone" string="Dial" type="object" attrs="{'invisible':[('phone','=',False)]}"/>
             </group>
         </field>
         <field name="mobile" position="replace">
             <group colspan="2" col="8">
                 <field name="mobile" colspan="7" />
-                <button name="action_dial_mobile" string="Dial" type="object"/>
+                <button name="action_dial_mobile" string="Dial" type="object" attrs="{'invisible':[('mobile','=',False)]}"/>
             </group>
         </field>
-      </data>
     </field>
 </record>
 
-<record id="asterisk_res_partner_address_dial2" model="ir.ui.view">
-    <field name="name">asterisk.res.partner.address.dial2</field>
-    <field name="model">res.partner.address</field>
-    <field name="priority">15</field>
-    <field name="inherit_id" ref="base.view_partner_address_form2"/>
-    <field name="arch" type="xml">
-      <data>
-        <field name="phone" position="replace">
-            <group colspan="2" col="8">
-                <field name="phone" colspan="7" />
-                <button name="action_dial_phone" string="Dial" type="object"/>
-            </group>
-        </field>
-        <field name="mobile" position="replace">
-            <group colspan="2" col="8">
-                <field name="mobile" colspan="7" />
-                <button name="action_dial_mobile" string="Dial" type="object"/>
-            </group>
-        </field>
-      </data>
-    </field>
-</record>
-
-<record id="asterisk_res_partner_dial" model="ir.ui.view">
-    <field name="name">asterisk.res.partner.dial</field>
+<record id="asterisk_res_partner_form_dial" model="ir.ui.view">
+    <field name="name">asterisk.res.partner.form.dial</field>
     <field name="model">res.partner</field>
     <field name="priority">15</field>
     <field name="inherit_id" ref="base.view_partner_form"/>
     <field name="arch" type="xml">
-      <data>
-        <field name="phone" position="replace">
+        <xpath expr="//group/group/field[@name='phone']" position="replace">
             <group colspan="2" col="8">
                 <field name="phone" colspan="7" />
-                <button name="action_dial_phone" string="Dial" type="object"/>
+                <button name="action_dial_phone" string="Dial" type="object" attrs="{'invisible':[('phone','=',False)]}"/>
             </group>
-        </field>
-        <field name="mobile" position="replace">
+        </xpath>
+        <xpath expr="//group/group/field[@name='mobile']" position="replace">
             <group colspan="2" col="8">
                 <field name="mobile" colspan="7" />
-                <button name="action_dial_mobile" string="Dial" type="object"/>
+                <button name="action_dial_mobile" string="Dial" type="object" attrs="{'invisible':[('mobile','=',False)]}"/>
             </group>
-        </field>
-      </data>
+        </xpath>
+        <xpath expr="//form[@string='Contact']/div/group/field[@name='phone']" position="replace">
+            <group colspan="2" col="8">
+                <field name="phone" colspan="7" />
+                <button name="action_dial_phone" string="Dial" type="object" attrs="{'invisible':[('phone','=',False)]}"/>
+            </group>
+        </xpath>
+        <xpath expr="//form[@string='Contact']/div/group/field[@name='mobile']" position="replace">
+            <group colspan="2" col="8">
+                <field name="mobile" colspan="7" />
+                <button name="action_dial_mobile" string="Dial" type="object" attrs="{'invisible':[('mobile','=',False)]}"/>
+            </group>
+        </xpath>
     </field>
 </record>
 
