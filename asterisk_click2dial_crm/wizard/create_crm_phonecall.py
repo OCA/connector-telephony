@@ -31,10 +31,10 @@ class wizard_create_crm_phonecall(osv.osv_memory):
     _name = "wizard.create.crm.phonecall"
 
     def button_create_outgoing_phonecall(self, cr, uid, ids, context=None):
-        partner_address = self.pool.get('res.partner.address').browse(cr, uid, context.get('partner_address_id'), context=context)
-        return self._create_open_crm_phonecall(cr, uid, partner_address, crm_categ='Outbound', context=context)
+        partner = self.pool.get('res.partner').browse(cr, uid, context.get('partner_id'), context=context)
+        return self._create_open_crm_phonecall(cr, uid, partner, crm_categ='Outbound', context=context)
 
-    def _create_open_crm_phonecall(self, cr, uid, partner_address, crm_categ, context=None):
+    def _create_open_crm_phonecall(self, cr, uid, partner, crm_categ, context=None):
         if context is None:
             context = {}
         crm_phonecall_obj = self.pool.get('crm.phonecall')
@@ -42,12 +42,10 @@ class wizard_create_crm_phonecall(osv.osv_memory):
         categ_ids = self.pool.get('crm.case.categ').search(cr, uid, [('name','=',crm_categ)], context={'lang': 'en_US'})
         case_section_ids = self.pool.get('crm.case.section').search(cr, uid, [('member_ids', 'in', uid)], context=context)
         values = {
-            'name': _('Call with') + ' ' + partner_address.name,
-            'partner_id': partner_address.partner_id and partner_address.partner_id.id or False,
-            'partner_address_id': partner_address.id,
-            'partner_phone': partner_address.phone,
-            'partner_contact': partner_address.name,
-            'partner_mobile': partner_address.mobile,
+            'name': _('Call with') + ' ' + partner.name,
+            'partner_id': partner.id or False,
+            'partner_phone': partner.phone,
+            'partner_mobile': partner.mobile,
             'user_id': uid,
             'categ_id': categ_ids and categ_ids[0] or False,
             'section_id': case_section_ids and case_section_ids[0] or False,
@@ -60,8 +58,8 @@ class wizard_create_crm_phonecall(osv.osv_memory):
         crm_phonecall_id = crm_phonecall_obj.create(cr, uid, values, context=context)
 
         return {
-            'name': partner_address.name,
-            'domain': [('partner_id', '=', partner_address.partner_id.id)],
+            'name': partner.name,
+            'domain': [('partner_id', '=', partner.id)],
             'res_model': 'crm.phonecall',
             'res_id': crm_phonecall_id,
             'view_type': 'form',
@@ -80,8 +78,8 @@ class wizard_open_calling_partner(osv.osv_memory):
 
     def create_incoming_phonecall(self, cr, uid, ids, crm_categ, context=None):
         '''Started by button on 'open calling partner wizard'''
-        partner_address = self.browse(cr, uid, ids[0], context=context).partner_address_id
-        action = self.pool.get('wizard.create.crm.phonecall')._create_open_crm_phonecall(cr, uid, partner_address, crm_categ='Inbound', context=context)
+        partner = self.browse(cr, uid, ids[0], context=context).partner_id
+        action = self.pool.get('wizard.create.crm.phonecall')._create_open_crm_phonecall(cr, uid, partner, crm_categ='Inbound', context=context)
         return action
 
 wizard_open_calling_partner()

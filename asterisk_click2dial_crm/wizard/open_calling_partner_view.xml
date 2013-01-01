@@ -25,6 +25,14 @@
     </field>
 </record>
 
+<!-- Move "Open calling partner" menu entry to "Phone calls" menu -->
+
+<delete model="ir.ui.menu" id="asterisk_click2dial.menu_open_calling_partner_sales" />
+
+<menuitem id="menu_open_calling_partner_phone"
+          parent="crm.menu_crm_case_phone"
+          action="asterisk_click2dial.action_open_calling_partner"
+          sequence="1" />
 
 </data>
 </openerp>

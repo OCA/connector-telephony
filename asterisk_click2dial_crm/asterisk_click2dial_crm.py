@@ -26,8 +26,8 @@ from osv import osv, fields
 # Lib to translate error messages
 from tools.translate import _
 
-class res_partner_address(osv.osv):
-    _inherit = "res.partner.address"
+class res_partner(osv.osv):
+    _inherit = "res.partner"
 
     def dial(self, cr, uid, ids, phone_field='phone', context=None):
         '''
@@ -37,9 +37,9 @@ class res_partner_address(osv.osv):
         '''
         if context is None:
             context = {}
-        super(res_partner_address, self).dial(cr, uid, ids, phone_field=phone_field, context=context)
+        super(res_partner, self).dial(cr, uid, ids, phone_field=phone_field, context=context)
         user = self.pool.get('res.users').browse(cr, uid, uid, context=context)
-        context['partner_address_id'] = ids[0]
+        context['partner_id'] = ids[0]
         action_start_wizard = {
             'name': 'Create phone call in CRM',
             'type': 'ir.actions.act_window',
@@ -55,7 +55,6 @@ class res_partner_address(osv.osv):
         else:
             return True
 
-res_partner_address()
 
 
 class res_users(osv.osv):
@@ -71,6 +70,4 @@ class res_users(osv.osv):
     _defaults = {
         'context_propose_creation_crm_call': True,
         }
-
-res_users()
 
