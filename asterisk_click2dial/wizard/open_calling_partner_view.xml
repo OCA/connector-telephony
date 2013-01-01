@@ -16,34 +16,30 @@
     <field name="arch" type="xml">
         <form string="Open calling partner">
             <field name="calling_number" colspan="4"/>
-            <field name="partner_address_id" attrs="{'invisible':[('partner_address_id','=',False)]}"/>
-            <field name="partner_id" attrs="{'invisible':[('partner_address_id','=',False)]}" /> <!-- I want it visible when partner_address_id != False and partner_id = False, so that the user can see that this partner_address doesn't have a partner -->
+            <field name="partner_id" attrs="{'invisible':[('partner_id','=',False)]}"/>
+            <field name="parent_partner_id" attrs="{'invisible':[('partner_id','=',False)]}" /> <!-- I want it visible when partner_id != False and partner_id = False, so that the user can see that this partner doesn't have a parent partner -->
             <newline />
-            <group colspan="4" attrs="{'invisible':[('partner_id','=',False)]}">
+            <group colspan="4" col="5" attrs="{'invisible':[('partner_id','=',False)]}">
                 <button name="open_partner" icon="gtk-go-forward" string="Partner form" type="object" />
+                <button name="open_parent_partner" icon="gtk-go-forward" string="Parent Partner form" type="object" attrs="{'invisible':[('parent_partner_id','=',False)]}"/>
                 <button name="open_sale_orders" icon="gtk-go-forward" string="Related sale orders" type="object" />
                 <button name="open_invoices" icon="gtk-go-forward" string="Related invoices" type="object" />
                 <button special="cancel" icon="gtk-cancel" string="Cancel" />
             </group>
-            <!-- I display the button "Contact form" when the partner address exists but not the partner -->
-            <group colspan="4" attrs="{'invisible':['|', '&amp;', ('partner_address_id','!=',False), ('partner_id','!=',False), ('partner_address_id','=',False)]}">
-                <button name="open_partner_address" icon="gtk-go-forward" string="Contact form" type="object" colspan="2"/>
-                <button special="cancel" icon="gtk-cancel" string="Cancel" colspan="2"/>
-            </group>
 
-            <group attrs="{'invisible':[('partner_address_id','!=',False)]}" colspan="4" col="8">
-                <label string="No partner contact found in OpenERP with this number" colspan="8" />
-                <separator string="Create a new contact" colspan="8" />
-                <button name="create_partner_address_phone" icon="gtk-new" string="with calling number as phone" type="object" colspan="4"/>
-                <button name="create_partner_address_mobile" icon="gtk-new" string="with calling number as mobile" type="object" colspan="4"/>
+            <group attrs="{'invisible':[('partner_id','!=',False)]}" colspan="4" col="8">
+                <label string="No partner found in OpenERP with this number" colspan="8" />
+                <separator string="Create a new partner" colspan="8" />
+                <button name="create_partner_phone" icon="gtk-new" string="with calling number as phone" type="object" colspan="4"/>
+                <button name="create_partner_mobile" icon="gtk-new" string="with calling number as mobile" type="object" colspan="4"/>
                 <newline />
 
-                <separator string="Update an existing contact" colspan="8" />
-                <field name="to_update_partner_address_id" colspan="8" on_change="onchange_to_update_partner_address(to_update_partner_address_id)"/>
+                <separator string="Update an existing partner" colspan="8" />
+                <field name="to_update_partner_id" colspan="8" on_change="onchange_to_update_partner(to_update_partner_id)"/>
                 <field name="current_phone" colspan="6"/>
-                <button name="update_partner_address_phone" icon="gtk-convert" string="Update phone" type="object" colspan="2"/>
+                <button name="update_partner_phone" icon="gtk-convert" string="Update phone" type="object" colspan="2"/>
                 <field name="current_mobile" colspan="6"/>
-                <button name="update_partner_address_mobile" icon="gtk-convert" string="Update mobile" type="object" colspan="2"/>
+                <button name="update_partner_mobile" icon="gtk-convert" string="Update mobile" type="object" colspan="2"/>
                 <newline />
 
                 <button special="cancel" icon="gtk-cancel" string="Cancel" colspan="8" />
@@ -62,7 +58,7 @@
     <field name="target">new</field>
 </record>
 
-<menuitem id="menu_open_calling_partner_sales" parent="base.menu_address_book" action="action_open_calling_partner" sequence="50" />
+<menuitem id="menu_open_calling_partner_sales" parent="base.menu_sales" action="action_open_calling_partner" sequence="50" />
 
 </data>
 </openerp>

@@ -21,11 +21,13 @@
         </record>
         <record id="base.user_root" model="res.users">
             <field name="internal_number">11</field>
+            <field name="resource">11</field>
             <field name="callerid">Administrator &lt;0141981242&gt;</field>
             <field name="asterisk_server_id" ref="demo_ast_server"/>
         </record>
         <record id="base.user_demo" model="res.users">
             <field name="internal_number">12</field>
+            <field name="resource">12</field>
             <field name="callerid">Demo user &lt;0141984212&gt;</field>
             <field name="asterisk_server_id" ref="demo_ast_server"/>
         </record>

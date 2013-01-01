@@ -36,8 +36,8 @@
 
 <!-- Only add the minimum rights to the "Asterisk CallerID" group -->
 <record id="ir_model_access_asterisk_cid" model="ir.model.access">
-    <field name="model_id" ref="base.model_res_partner_address"/>
-    <field name="name" eval="&quot;&quot;&quot;res.partner.address_read&quot;&quot;&quot;"/>
+    <field name="model_id" ref="base.model_res_partner"/>
+    <field name="name" eval="&quot;&quot;&quot;res.partner_read&quot;&quot;&quot;"/>
     <field name="group_id" ref="asterisk_click2dial.group_asterisk_cid"/>
     <field name="perm_read" eval="1"/>
     <field name="perm_write" eval="0"/>
