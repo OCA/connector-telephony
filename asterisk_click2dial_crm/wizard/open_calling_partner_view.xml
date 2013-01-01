@@ -15,13 +15,9 @@
     <field name="inherit_id" ref="asterisk_click2dial.view_open_calling_partner"/>
     <field name="type">form</field>
     <field name="arch" type="xml">
-        <button name="open_invoices" position="after">
-            <button name="create_incoming_phonecall" icon="gtk-new" string="Create call in CRM" type="object" />
-        </button>
-        <!-- We enlarge the small original 'Cancel' button -->
-        <xpath expr="/form/group/button[@name='open_partner']/../button[@special='cancel']" position="attributes">
-            <attribute name="colspan">4</attribute>
-        </xpath>
+        <group name="partner_found" position="inside">
+            <button name="create_incoming_phonecall" string="Create Call in CRM" type="object" icon="gtk-new" />
+        </group>
     </field>
 </record>
 
