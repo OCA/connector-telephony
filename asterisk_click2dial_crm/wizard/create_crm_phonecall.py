@@ -41,27 +41,18 @@ class wizard_create_crm_phonecall(osv.osv_memory):
 
         categ_ids = self.pool.get('crm.case.categ').search(cr, uid, [('name','=',crm_categ)], context={'lang': 'en_US'})
         case_section_ids = self.pool.get('crm.case.section').search(cr, uid, [('member_ids', 'in', uid)], context=context)
-        values = {
-            'name': _('Call with') + ' ' + partner.name,
-            'partner_id': partner.id or False,
-            'partner_phone': partner.phone,
-            'partner_mobile': partner.mobile,
-            'user_id': uid,
-            'categ_id': categ_ids and categ_ids[0] or False,
-            'section_id': case_section_ids and case_section_ids[0] or False,
-            # As we now ask the user if he wants to create a phone call in CRM,
-            # we suppose that he will decide to create one only if the call
-            # has succeeded, so we create it directly in 'Held' (done) state.
-            # Otherwise, it would have been created in 'Todo' (open) state.
-            'state': 'done',
-        }
-        crm_phonecall_id = crm_phonecall_obj.create(cr, uid, values, context=context)
+        context.update({
+            'default_partner_id': partner.id or False,
+            'default_partner_phone': partner.phone,
+            'default_partner_mobile': partner.mobile,
+            'default_categ_id': categ_ids and categ_ids[0] or False,
+            'default_section_id': case_section_ids and case_section_ids[0] or False,
+        })
 
         return {
             'name': partner.name,
             'domain': [('partner_id', '=', partner.id)],
             'res_model': 'crm.phonecall',
-            'res_id': crm_phonecall_id,
             'view_type': 'form',
             'view_mode': 'form,tree',
             'type': 'ir.actions.act_window',
