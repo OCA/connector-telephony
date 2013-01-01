@@ -299,8 +299,6 @@ class asterisk_server(osv.osv):
         return calling_party_number
 
 
-asterisk_server()
-
 
 # Parameters specific for each user
 class res_users(osv.osv):
@@ -354,44 +352,43 @@ class res_users(osv.osv):
         (_check_validity, "Error message in raise", ['resource', 'internal_number', 'callerid']),
     ]
 
-res_users()
 
 
-class res_partner_address(osv.osv):
-    _inherit = "res.partner.address"
+class res_partner(osv.osv):
+    _inherit = "res.partner"
 
 
     def _format_phonenumber_to_e164(self, cr, uid, ids, name, arg, context=None):
         result = {}
-        for addr in self.read(cr, uid, ids, ['phone', 'mobile', 'fax'], context=context):
-            result[addr['id']] = {}
+        for partner in self.read(cr, uid, ids, ['phone', 'mobile', 'fax'], context=context):
+            result[partner['id']] = {}
             for fromfield, tofield in [('phone', 'phone_e164'), ('mobile', 'mobile_e164'), ('fax', 'fax_e164')]:
-                if not addr.get(fromfield):
+                if not partner.get(fromfield):
                     res = False
                 else:
                     try:
-                        res = phonenumbers.format_number(phonenumbers.parse(addr.get(fromfield), None), phonenumbers.PhoneNumberFormat.E164)
+                        res = phonenumbers.format_number(phonenumbers.parse(partner.get(fromfield), None), phonenumbers.PhoneNumberFormat.E164)
                     except Exception, e:
-                        _logger.error("Cannot reformat the phone number '%s' to E.164 format. Error message: %s" % (addr.get(fromfield), e))
+                        _logger.error("Cannot reformat the phone number '%s' to E.164 format. Error message: %s" % (partner.get(fromfield), e))
                         _logger.error("You should fix this number and run the wizard 'Reformat all phone numbers' from the menu Settings > Configuration > Asterisk")
                     # If I raise an exception here, it won't be possible to install
                     # the module on a DB with bad phone numbers
-                        #raise osv.except_osv(_('Error :'), _("Cannot reformat the phone number '%s' to E.164 format. Error message: %s" % (addr.get(fromfield), e)))
+                        #raise osv.except_osv(_('Error :'), _("Cannot reformat the phone number '%s' to E.164 format. Error message: %s" % (partner.get(fromfield), e)))
                         res = False
-                result[addr['id']][tofield] = res
+                result[partner['id']][tofield] = res
         #print "RESULT _format_phonenumber_to_e164", result
         return result
 
 
     _columns = {
         'phone_e164': fields.function(_format_phonenumber_to_e164, type='char', size=64, string='Phone in E.164 format', readonly=True, multi="e164", store={
-            'res.partner.address': (lambda self, cr, uid, ids, c={}: ids, ['phone'], 10),
+            'res.partner': (lambda self, cr, uid, ids, c={}: ids, ['phone'], 10),
             }),
         'mobile_e164': fields.function(_format_phonenumber_to_e164, type='char', size=64, string='Mobile in E.164 format', readonly=True, multi="e164", store={
-            'res.partner.address': (lambda self, cr, uid, ids, c={}: ids, ['mobile'], 10),
+            'res.partner': (lambda self, cr, uid, ids, c={}: ids, ['mobile'], 10),
             }),
         'fax_e164': fields.function(_format_phonenumber_to_e164, type='char', size=64, string='Fax in E.164 format', readonly=True, multi="e164", store={
-            'res.partner.address': (lambda self, cr, uid, ids, c={}: ids, ['fax'], 10),
+            'res.partner': (lambda self, cr, uid, ids, c={}: ids, ['fax'], 10),
             }),
         }
 
@@ -421,12 +418,12 @@ class res_partner_address(osv.osv):
 
     def create(self, cr, uid, vals, context=None):
         vals_reformated = self._reformat_phonenumbers(cr, uid, vals, context=context)
-        return super(res_partner_address, self).create(cr, uid, vals_reformated, context=context)
+        return super(res_partner, self).create(cr, uid, vals_reformated, context=context)
 
 
     def write(self, cr, uid, ids, vals, context=None):
         vals_reformated = self._reformat_phonenumbers(cr, uid, vals, context=context)
-        return super(res_partner_address, self).write(cr, uid, ids, vals_reformated, context=context)
+        return super(res_partner, self).write(cr, uid, ids, vals_reformated, context=context)
 
 
     def dial(self, cr, uid, ids, phone_field=['phone', 'phone_e164'], context=None):
@@ -444,13 +441,13 @@ class res_partner_address(osv.osv):
 
     def action_dial_phone(self, cr, uid, ids, context=None):
         '''Function called by the button 'Dial' next to the 'phone' field
-        in the partner address view'''
+        in the partner view'''
         return self.dial(cr, uid, ids, phone_field=['phone', 'phone_e164'], context=context)
 
 
     def action_dial_mobile(self, cr, uid, ids, context=None):
         '''Function called by the button 'Dial' next to the 'mobile' field
-        in the partner address view'''
+        in the partner view'''
         return self.dial(cr, uid, ids, phone_field=['mobile', 'mobile_e164'], context=context)
 
 
@@ -484,16 +481,14 @@ class res_partner_address(osv.osv):
         res_ids = self.search(cr, uid, ['|', ('phone_e164', 'ilike', pg_seach_number), ('mobile_e164', 'ilike', pg_seach_number)], context=context)
         # TODO : use is_number_match() of the phonenumber lib ?
         if len(res_ids) > 1:
-            _logger.warning(u"There are several partners addresses (IDS = %s) with the same phone number %s" % (str(res_ids), number))
+            _logger.warning(u"There are several partners (IDS = %s) with the same phone number %s" % (str(res_ids), number))
         if res_ids:
-            entry = self.read(cr, uid, res_ids[0], ['name', 'partner_id'], context=context)
+            entry = self.read(cr, uid, res_ids[0], ['name', 'parent_id'], context=context)
             _logger.debug(u"Answer get_partner_from_phone_number with name = %s" % entry['name'])
-            return (entry['id'], entry['partner_id'] and entry['partner_id'][0] or False, entry['name'])
+            return (entry['id'], entry['parent_id'] and entry['parent_id'][0] or False, entry['name'])
         else:
             _logger.debug(u"No match for phone number %s" % number)
             return False
-
-res_partner_address()
 
 
 # This module supports multi-company
@@ -504,4 +499,3 @@ class res_company(osv.osv):
         'asterisk_server_ids': fields.one2many('asterisk.server', 'company_id', 'Asterisk servers', help="List of Asterisk servers.")
     }
 
-res_company()
