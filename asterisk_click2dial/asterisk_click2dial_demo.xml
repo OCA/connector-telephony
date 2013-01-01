@@ -31,6 +31,9 @@
             <field name="callerid">Demo user &lt;0141984212&gt;</field>
             <field name="asterisk_server_id" ref="demo_ast_server"/>
         </record>
+        <record id="base.main_address" model="res.partner.address">
+            <field name="country_id" ref="base.fr"/>
+        </record>
     </data>
 </openerp>
 
