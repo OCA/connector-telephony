@@ -4,7 +4,7 @@
  CallerID name lookup in OpenERP for Asterisk IPBX
 
  When executed from the dialplan on an incoming phone call, it will lookup in
- OpenERP's partner addresses, and, if it finds the phone number, it will get the
+ OpenERP's partners, and, if it finds the phone number, it will get the
  corresponding name of the person and use this name as CallerID name for the incoming call.
 
  Requires the "asterisk_click2dial" module 
@@ -34,7 +34,7 @@
 
  It's probably a good idea to create a user in OpenERP dedicated to this task.
  This user only needs to be part of the group "Asterisk CallerID", which has
- read access on the 'res.partner.address' object, nothing more.
+ read access on the 'res.partner' object, nothing more.
 
  Note that this script can be used without OpenERP, with just the geolocalisation
  feature : for that, don't use option --server ; only use --geoloc
@@ -64,7 +64,7 @@ import sys
 from optparse import OptionParser
 
 
-# CID Name that will be displayed if there is no match in res.partner.address
+# CID Name that will be displayed if there is no match in res.partner
 # and no geolocalisation
 default_cid_name = "Not in OpenERP"
 
@@ -201,7 +201,7 @@ def main(options, arguments):
         sock = xmlrpclib.ServerProxy('%s://%s:%s/xmlrpc/object' % (protocol, options.server, str(options.port)))
 
         try:
-            res = sock.execute(options.database, options.user, options.password, 'res.partner.address', 'get_name_from_phone_number', query_number)
+            res = sock.execute(options.database, options.user, options.password, 'res.partner', 'get_name_from_phone_number', query_number)
             stdout_write('VERBOSE "End of XML-RPC request on OpenERP"\n')
             if not res:
                 stdout_write('VERBOSE "Phone number not found in OpenERP"\n')
