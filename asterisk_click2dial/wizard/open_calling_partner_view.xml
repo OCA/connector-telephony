@@ -14,20 +14,19 @@
     <field name="model">wizard.open.calling.partner</field>
     <field name="type">form</field>
     <field name="arch" type="xml">
-        <form string="Open calling partner">
-            <field name="calling_number" colspan="4"/>
-            <field name="partner_id" attrs="{'invisible':[('partner_id','=',False)]}"/>
-            <field name="parent_partner_id" attrs="{'invisible':[('partner_id','=',False)]}" /> <!-- I want it visible when partner_id != False and partner_id = False, so that the user can see that this partner doesn't have a parent partner -->
-            <newline />
-            <group colspan="4" col="5" attrs="{'invisible':[('partner_id','=',False)]}">
-                <button name="open_partner" icon="gtk-go-forward" string="Partner form" type="object" />
-                <button name="open_parent_partner" icon="gtk-go-forward" string="Parent Partner form" type="object" attrs="{'invisible':[('parent_partner_id','=',False)]}"/>
-                <button name="open_sale_orders" icon="gtk-go-forward" string="Related sale orders" type="object" />
-                <button name="open_invoices" icon="gtk-go-forward" string="Related invoices" type="object" />
-                <button special="cancel" icon="gtk-cancel" string="Cancel" />
+        <form string="Open calling partner" version="7.0">
+            <group name="display_result">
+                <field name="calling_number"/>
+                <field name="partner_id" attrs="{'invisible':[('partner_id','=',False)]}"/>
+                <field name="parent_partner_id" attrs="{'invisible':[('partner_id','=',False)]}" /> <!-- I want it visible when partner_id != False and partner_id = False, so that the user can see that this partner doesn't have a parent partner -->
             </group>
-
-            <group attrs="{'invisible':[('partner_id','!=',False)]}" colspan="4" col="8">
+            <group attrs="{'invisible':[('partner_id','=',False)]}" name="partner_found">
+                <button name="open_partner" icon="gtk-go-forward" string="Open Partner form" type="object" />
+                <button name="open_parent_partner" icon="gtk-go-forward" string="Open Parent Partner form" type="object" attrs="{'invisible':[('parent_partner_id','=',False)]}"/>
+                <button name="open_sale_orders" icon="gtk-go-forward" string="Open Related Sale Orders" type="object" />
+                <button name="open_invoices" icon="gtk-go-forward" string="Open Related Invoices" type="object" />
+            </group>
+            <group attrs="{'invisible':[('partner_id','!=',False)]}" name="no_partner_found" colspan="4" col="8">
                 <label string="No partner found in OpenERP with this number" colspan="8" />
                 <separator string="Create a new partner" colspan="8" />
                 <button name="create_partner_phone" icon="gtk-new" string="with calling number as phone" type="object" colspan="4"/>
@@ -40,11 +39,10 @@
                 <button name="update_partner_phone" icon="gtk-convert" string="Update phone" type="object" colspan="2"/>
                 <field name="current_mobile" colspan="6"/>
                 <button name="update_partner_mobile" icon="gtk-convert" string="Update mobile" type="object" colspan="2"/>
-                <newline />
-
-                <button special="cancel" icon="gtk-cancel" string="Cancel" colspan="8" />
             </group>
-            <!-- I repeat the cancel button for layout reasons -->
+            <footer>
+                <button special="cancel" string="Cancel" class="oe_link"/>
+            </footer>
         </form>
     </field>
 </record>
