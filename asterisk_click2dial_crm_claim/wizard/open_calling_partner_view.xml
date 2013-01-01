@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Copyright (C) 2012 Akretion (http://www.akretion.com)
+  @author Alexis de Lattre <alexis.delattre@akretion.com>
+  The licence is in the file __openerp__.py
+-->
+
+<openerp>
+<data>
+
+<!-- Add button on the "Open Calling partner" wizard -->
+<record id="add_open_crm_claims_button" model="ir.ui.view">
+    <field name="name">asterisk_click2dial_crm_claim.add_open_crm_claims_button</field>
+    <field name="model">wizard.open.calling.partner</field>
+    <field name="inherit_id" ref="asterisk_click2dial.view_open_calling_partner"/>
+    <field name="type">form</field>
+    <field name="arch" type="xml">
+        <group name="partner_found" position="inside">
+            <button name="open_crm_claims" string="Open Related CRM Claims" type="object" icon="gtk-go-forward" />
+        </group>
+    </field>
+</record>
+
+</data>
+</openerp>
