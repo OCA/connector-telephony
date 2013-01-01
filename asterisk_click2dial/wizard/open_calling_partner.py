@@ -20,7 +20,6 @@
 ##############################################################################
 
 from osv import osv, fields
-# Lib required to open a socket (needed to communicate with Asterisk server)
 import logging
 # Lib to translate error messages
 from tools.translate import _
