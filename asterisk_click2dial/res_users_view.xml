@@ -15,20 +15,22 @@
     <field name="model">res.users</field>
     <field name="inherit_id" ref="base.view_users_form"/>
     <field name="arch" type="xml">
-        <page string="User" position="after">
-            <page string="Telephony">
-                <separator string="Standard parameters" colspan="4"/>
-                <field name="asterisk_chan_type"/>
-                <field name="resource"/>
-                <field name="internal_number"/>
-                <field name="callerid"/>
-                <field name="asterisk_server_id"/>
-                <separator string="Optional parameters - for experts only, can be left empty" colspan="4"/>
-                <field name="dial_suffix"/>
-                <field name="alert_info"/>
-                <field name="variable"/>
+        <notebook>
+            <page string="Telephony" position="inside">
+                <group name="standard_params" string="Standard parameters">
+                    <field name="asterisk_chan_type"/>
+                    <field name="resource"/>
+                    <field name="internal_number"/>
+                    <field name="callerid"/>
+                    <field name="asterisk_server_id"/>
+                </group>
+                <group name="optional_params" string="Optional parameters - for experts only, can be left empty">
+                    <field name="dial_suffix"/>
+                    <field name="alert_info"/>
+                    <field name="variable"/>
+                </group>
             </page>
-        </page>
+        </notebook>
     </field>
 </record>
 
