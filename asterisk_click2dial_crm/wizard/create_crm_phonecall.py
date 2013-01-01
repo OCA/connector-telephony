@@ -41,29 +41,20 @@ class wizard_create_crm_phonecall(osv.osv_memory):
 
         categ_ids = self.pool.get('crm.case.categ').search(cr, uid, [('name','=',crm_categ)], context={'lang': 'en_US'})
         case_section_ids = self.pool.get('crm.case.section').search(cr, uid, [('member_ids', 'in', uid)], context=context)
-        values = {
-            'name': _('Call with') + ' ' + partner_address.name,
-            'partner_id': partner_address.partner_id and partner_address.partner_id.id or False,
-            'partner_address_id': partner_address.id,
-            'partner_phone': partner_address.phone,
-            'partner_contact': partner_address.name,
-            'partner_mobile': partner_address.mobile,
-            'user_id': uid,
-            'categ_id': categ_ids and categ_ids[0] or False,
-            'section_id': case_section_ids and case_section_ids[0] or False,
-            # As we now ask the user if he wants to create a phone call in CRM,
-            # we suppose that he will decide to create one only if the call
-            # has succeeded, so we create it directly in 'Held' (done) state.
-            # Otherwise, it would have been created in 'Todo' (open) state.
-            'state': 'done',
-        }
-        crm_phonecall_id = crm_phonecall_obj.create(cr, uid, values, context=context)
+        context.update({
+            'default_partner_id': partner_address.partner_id and partner_address.partner_id.id or False,
+            'default_partner_address_id': partner_address.id,
+            'default_partner_contact': partner_address.name,
+            'default_partner_phone': partner_address.phone,
+            'default_partner_mobile': partner_address.mobile,
+            'default_categ_id': categ_ids and categ_ids[0] or False,
+            'default_section_id': case_section_ids and case_section_ids[0] or False,
+        })
 
         return {
             'name': partner_address.name,
             'domain': [('partner_id', '=', partner_address.partner_id.id)],
             'res_model': 'crm.phonecall',
-            'res_id': crm_phonecall_id,
             'view_type': 'form',
             'view_mode': 'form,tree',
             'type': 'ir.actions.act_window',

@@ -152,7 +152,7 @@ class wizard_open_calling_partner(osv.osv_memory):
         # Convert the number to the international format
         number_to_write = self.pool.get('asterisk.server')._convert_number_to_international_format(cr, uid, calling_number, ast_server, context=context)
 
-        new_partner_address_id = self.pool.get('res.partner.address').create(cr, uid, {phone_type: number_to_write}, context=context)
+        context['default_' + phone_type] = number_to_write
         action = {
             'name': 'Create new contact',
             'view_type': 'form',
@@ -161,7 +161,7 @@ class wizard_open_calling_partner(osv.osv_memory):
             'type': 'ir.actions.act_window',
             'nodestroy': False,
             'target': 'current',
-            'res_id': new_partner_address_id,
+            'context': context,
         }
         return action
 
