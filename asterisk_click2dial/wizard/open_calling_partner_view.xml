@@ -12,7 +12,6 @@
 <record id="view_open_calling_partner" model="ir.ui.view">
     <field name="name">view_open_calling_partner</field>
     <field name="model">wizard.open.calling.partner</field>
-    <field name="type">form</field>
     <field name="arch" type="xml">
         <form string="Open calling partner" version="7.0">
             <group name="display_result">
