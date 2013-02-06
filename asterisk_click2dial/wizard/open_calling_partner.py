@@ -210,4 +210,3 @@ class wizard_open_calling_partner(osv.osv_memory):
             res['value'].update({'current_phone': False, 'current_mobile': False})
         return res
 
-wizard_open_calling_partner()

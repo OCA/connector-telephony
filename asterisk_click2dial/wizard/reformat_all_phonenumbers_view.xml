@@ -11,7 +11,6 @@
 <record id="reformat_all_phonenumbers_form" model="ir.ui.view">
     <field name="name">reformat_all_phonenumbers.form</field>
     <field name="model">reformat.all.phonenumbers</field>
-    <field name="type">form</field>
     <field name="arch" type="xml">
         <form string="Reformat all phone numbers">
             <label string="This wizard reformats the phone, mobile and fax numbers of all partner contacts in standard international format e.g. +33141981242" colspan="4"/>
