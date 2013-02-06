@@ -25,7 +25,7 @@
     'version': '0.4',
     'category': 'Extra Tools',
     'license': 'AGPL-3',
-    'description': """This module adds 3 functionnalities :
+    'description': """This module adds 3 functionalities :
 
 1) It adds a 'dial' button in the partner form view so that users can directly dial a phone number through Asterisk. This feature is usually known as 'click2dial'. Here is how it works :
 . In OpenERP, the user clicks on the 'dial' button next to a phone number field in the partner view.

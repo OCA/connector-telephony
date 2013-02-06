@@ -13,7 +13,6 @@
     <field name="name">asterisk_click2dial_crm.open_calling_partner.view</field>
     <field name="model">wizard.open.calling.partner</field>
     <field name="inherit_id" ref="asterisk_click2dial.view_open_calling_partner"/>
-    <field name="type">form</field>
     <field name="arch" type="xml">
         <group name="partner_found" position="inside">
             <button name="create_incoming_phonecall" string="Create Call in CRM" type="object" icon="gtk-new" />

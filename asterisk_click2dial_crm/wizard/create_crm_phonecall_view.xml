@@ -12,7 +12,6 @@
 <record id="create_crm_phonecall_view" model="ir.ui.view">
     <field name="name">create_crm_phonecall.view</field>
     <field name="model">wizard.create.crm.phonecall</field>
-    <field name="type">form</field>
     <field name="arch" type="xml">
         <form string="CRM phone call" version="7.0">
             <label string="Create a phone call in the CRM ?"/>
