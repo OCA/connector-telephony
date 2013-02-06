@@ -226,7 +226,7 @@ class asterisk_server(osv.osv):
         return (user, ast_server, ast_manager)
 
     def _dial_with_asterisk(self, cr, uid, erp_number, context=None):
-        print "_dial_with_asterisk erp_number=", erp_number
+        #print "_dial_with_asterisk erp_number=", erp_number
         if not erp_number:
             raise osv.except_osv(_('Error :'), "Hara kiri : you must call the function with erp_number")
 
