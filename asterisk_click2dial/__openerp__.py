@@ -25,6 +25,7 @@
     'version': '0.4',
     'category': 'Extra Tools',
     'license': 'AGPL-3',
+    'summary': 'Asterisk-OpenERP connector',
     'description': """This module adds 3 functionalities :
 
 1) It adds a 'dial' button in the partner form view so that users can directly dial a phone number through Asterisk. This feature is usually known as 'click2dial'. Here is how it works :
@@ -50,8 +51,7 @@ A detailed documentation for this module is available on the Akretion Web site :
     'author': 'Akretion',
     'website': 'http://www.akretion.com/',
     'depends': ['base'],
-    'init_xml': [],
-    'update_xml': [
+    'data': [
         'asterisk_server_view.xml',
         'res_users_view.xml',
         'res_partner_view.xml',
@@ -59,11 +59,12 @@ A detailed documentation for this module is available on the Akretion Web site :
         'wizard/reformat_all_phonenumbers_view.xml',
         'security/asterisk_server_security.xml',
         ],
-    'demo_xml': ['asterisk_click2dial_demo.xml'],
+    'demo': ['asterisk_click2dial_demo.xml'],
     'images': [
         'images/sshot-click2dial.jpg',
         'images/sshot-open_calling_party.jpg',
         ],
+    'application': True,
     'installable': True,
     'active': False,
 }
