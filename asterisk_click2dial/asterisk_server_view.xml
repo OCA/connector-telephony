@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
   Asterisk Click2dial module for OpenERP
-  Copyright (C) 2010-2012 Alexis de Lattre <alexis@via.ecp.fr>
+  Copyright (C) 2010-2013 Alexis de Lattre <alexis@via.ecp.fr>
   The licence is in the file __openerp__.py
 -->
 
@@ -22,28 +22,48 @@
     </field>
 </record>
 
+<!-- Search view for asterisk.server -->
+<record id="view_asterisk_server_search" model="ir.ui.view">
+    <field name="name">asterisk.server.search</field>
+    <field name="model">asterisk.server</field>
+    <field name="arch" type="xml">
+        <search string="Asterisk Server Search">
+            <field name="name" />
+            <field name="ip_address" />
+        </search>
+    </field>
+</record>
+
 <!-- Form view for asterisk.server -->
 <record id="view_asterisk_server_form" model="ir.ui.view">
     <field name="name">asterisk.server.form</field>
     <field name="model">asterisk.server</field>
     <field name="arch" type="xml">
-        <form string="Asterisk servers">
-            <field name="company_id" select="1" invisible="not context.get('asterisk_server_main_view', False)" />
-            <newline />
-            <field name="name" select="1" />
-            <field name="active" />
-            <field name="ip_address" select="1" />
-            <field name="port" />
-            <field name="login" />
-            <field name="password" password="True" />
-            <field name="context" />
-            <field name="extension_priority" />
-            <field name="out_prefix" />
-            <field name="national_prefix" />
-            <field name="international_prefix" />
-            <field name="country_prefix" select="1" />
-            <field name="alert_info" />
-            <field name="wait_time" />
+        <form string="Asterisk Servers" version="7.0">
+            <sheet>
+                <div class="oe_title">
+                    <label for="name" string="Server Name" class="oe_edit_only"/>
+                    <h1>
+                        <field name="name"/>
+                    </h1>
+                </div>
+                <group>
+                    <field name="company_id" invisible="not context.get('asterisk_server_main_view', False)" />
+                    <field name="active" />
+                    <field name="ip_address" />
+                    <field name="port" />
+                    <field name="login" />
+                    <field name="password" password="True" />
+                    <field name="context" />
+                    <field name="extension_priority" />
+                    <field name="out_prefix" />
+                    <field name="national_prefix" />
+                    <field name="international_prefix" />
+                    <field name="country_prefix" />
+                    <field name="alert_info" />
+                    <field name="wait_time" />
+                </group>
+            </sheet>
         </form>
     </field>
 </record>
