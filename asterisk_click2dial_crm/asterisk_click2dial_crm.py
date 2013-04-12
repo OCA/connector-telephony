@@ -22,9 +22,9 @@
 #
 ##############################################################################
 
-from osv import osv, fields
+from openerp.osv import osv, fields
 # Lib to translate error messages
-from tools.translate import _
+from openerp.tools.translate import _
 
 class res_partner(osv.osv):
     _inherit = "res.partner"
@@ -38,7 +38,7 @@ class res_partner(osv.osv):
         if context is None:
             context = {}
         super(res_partner, self).dial(cr, uid, ids, phone_field=phone_field, context=context)
-        user = self.pool.get('res.users').browse(cr, uid, uid, context=context)
+        user = self.pool['res.users'].browse(cr, uid, uid, context=context)
         context['partner_id'] = ids[0]
         action_start_wizard = {
             'name': 'Create phone call in CRM',

@@ -22,25 +22,25 @@
 #
 ##############################################################################
 
-from osv import osv, fields
+from openerp.osv import osv, fields
 # Lib to translate error messages
-from tools.translate import _
+from openerp.tools.translate import _
 
 
 class wizard_create_crm_phonecall(osv.osv_memory):
     _name = "wizard.create.crm.phonecall"
 
     def button_create_outgoing_phonecall(self, cr, uid, ids, context=None):
-        partner = self.pool.get('res.partner').browse(cr, uid, context.get('partner_id'), context=context)
+        partner = self.pool['res.partner'].browse(cr, uid, context.get('partner_id'), context=context)
         return self._create_open_crm_phonecall(cr, uid, partner, crm_categ='Outbound', context=context)
 
     def _create_open_crm_phonecall(self, cr, uid, partner, crm_categ, context=None):
         if context is None:
             context = {}
-        crm_phonecall_obj = self.pool.get('crm.phonecall')
+        crm_phonecall_obj = self.pool['crm.phonecall']
 
-        categ_ids = self.pool.get('crm.case.categ').search(cr, uid, [('name','=',crm_categ)], context={'lang': 'en_US'})
-        case_section_ids = self.pool.get('crm.case.section').search(cr, uid, [('member_ids', 'in', uid)], context=context)
+        categ_ids = self.pool['crm.case.categ'].search(cr, uid, [('name','=',crm_categ)], context={'lang': 'en_US'})
+        case_section_ids = self.pool['crm.case.section'].search(cr, uid, [('member_ids', 'in', uid)], context=context)
         context.update({
             'default_partner_id': partner.id or False,
             'default_partner_phone': partner.phone,
@@ -70,7 +70,7 @@ class wizard_open_calling_partner(osv.osv_memory):
     def create_incoming_phonecall(self, cr, uid, ids, crm_categ, context=None):
         '''Started by button on 'open calling partner wizard'''
         partner = self.browse(cr, uid, ids[0], context=context).partner_id
-        action = self.pool.get('wizard.create.crm.phonecall')._create_open_crm_phonecall(cr, uid, partner, crm_categ='Inbound', context=context)
+        action = self.pool['wizard.create.crm.phonecall']._create_open_crm_phonecall(cr, uid, partner, crm_categ='Inbound', context=context)
         return action
 
 wizard_open_calling_partner()

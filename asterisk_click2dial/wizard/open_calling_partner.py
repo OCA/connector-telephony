@@ -19,10 +19,10 @@
 #
 ##############################################################################
 
-from osv import osv, fields
+from openerp.osv import osv, fields
 import logging
 # Lib to translate error messages
-from tools.translate import _
+from openerp.tools.translate import _
 
 _logger = logging.getLogger(__name__)
 
@@ -48,18 +48,12 @@ class wizard_open_calling_partner(osv.osv_memory):
         '''Thanks to the default_get method, we are able to query Asterisk and
         get the corresponding partner when we launch the wizard'''
         res = {}
-        calling_number = self.pool.get('asterisk.server')._get_calling_number(cr, uid, context=context)
+        calling_number = self.pool['asterisk.server']._get_calling_number(cr, uid, context=context)
         #To test the code without Asterisk server
         #calling_number = "0141981242"
         if calling_number:
             res['calling_number'] = calling_number
-            # We match only on the end of the phone number
-            # TODO : make this parameter configurable
-            if len(calling_number) >= 9:
-                number_to_search = calling_number[-9:len(calling_number)]
-            else:
-                number_to_search = calling_number
-            partner = self.pool.get('res.partner').get_partner_from_phone_number(cr, uid, number_to_search, context=context)
+            partner = self.pool['res.partner'].get_partner_from_phone_number(cr, uid, calling_number, context=context)
             if partner:
                 res['partner_id'] = partner[0]
                 res['parent_partner_id'] = partner[1]
@@ -80,7 +74,7 @@ class wizard_open_calling_partner(osv.osv_memory):
         # This module only depends on "base"
         # and I don't want to add a dependancy on "sale" or "account"
         # So I just check here that the model exists, to avoid a crash
-        if not self.pool.get('ir.model').search(cr, uid, [('model', '=', oerp_object._name)], context=context):
+        if not self.pool['ir.model'].search(cr, uid, [('model', '=', oerp_object._name)], context=context):
             raise osv.except_osv(_('Error :'), _("The object '%s' is not found in your OpenERP database, probably because the related module is not installed." % oerp_object._description))
 
         partner = self.read(cr, uid, ids[0], ['partner_id', 'parent_partner_id'], context=context)
@@ -115,7 +109,7 @@ class wizard_open_calling_partner(osv.osv_memory):
         record_to_open = self.read(cr, uid, ids[0], [field], context=context)[field]
         if record_to_open:
             return {
-                'name': self.pool.get('res.partner')._description,
+                'name': self.pool['res.partner']._description,
                 'view_type': 'form',
                 'view_mode': 'form,tree',
                 'res_model': 'res.partner',
@@ -142,10 +136,9 @@ class wizard_open_calling_partner(osv.osv_memory):
     def create_partner(self, cr, uid, ids, phone_type='phone', context=None):
         '''Function called by the related button of the wizard'''
         calling_number = self.read(cr, uid, ids[0], ['calling_number'], context=context)['calling_number']
-        user = self.pool.get('res.users').browse(cr, uid, uid, context=context)
-        ast_server = self.pool.get('asterisk.server')._get_asterisk_server_from_user(cr, uid, user, context=context)
+        ast_server = self.pool['asterisk.server']._get_asterisk_server_from_user(cr, uid, context=context)
         # Convert the number to the international format
-        number_to_write = self.pool.get('asterisk.server')._convert_number_to_international_format(cr, uid, calling_number, ast_server, context=context)
+        number_to_write = self.pool['asterisk.server']._convert_number_to_international_format(cr, uid, calling_number, ast_server, context=context)
 
         context['default_' + phone_type] = number_to_write
 
@@ -174,10 +167,9 @@ class wizard_open_calling_partner(osv.osv_memory):
         cur_wizard = self.browse(cr, uid, ids[0], context=context)
         if not cur_wizard.to_update_partner_id:
             raise osv.except_osv(_('Error :'), _("Select the partner to update."))
-        user = self.pool.get('res.users').browse(cr, uid, uid, context=context)
-        ast_server = self.pool.get('asterisk.server')._get_asterisk_server_from_user(cr, uid, user, context=context)
-        number_to_write = self.pool.get('asterisk.server')._convert_number_to_international_format(cr, uid, cur_wizard.calling_number, ast_server, context=context)
-        self.pool.get('res.partner').write(cr, uid, cur_wizard.to_update_partner_id.id, {phone_type: number_to_write}, context=context)
+        ast_server = self.pool['asterisk.server']._get_asterisk_server_from_user(cr, uid, context=context)
+        number_to_write = self.pool['asterisk.server']._convert_number_to_international_format(cr, uid, cur_wizard.calling_number, ast_server, context=context)
+        self.pool['res.partner'].write(cr, uid, cur_wizard.to_update_partner_id.id, {phone_type: number_to_write}, context=context)
         action = {
             'name': 'Partner: ' + cur_wizard.to_update_partner_id.name,
             'view_type': 'form',
@@ -203,7 +195,7 @@ class wizard_open_calling_partner(osv.osv_memory):
         res = {}
         res['value'] = {}
         if to_update_partner_id:
-            to_update_partner = self.pool.get('res.partner').browse(cr, uid, to_update_partner_id, context=context)
+            to_update_partner = self.pool['res.partner'].browse(cr, uid, to_update_partner_id, context=context)
             res['value'].update({'current_phone': to_update_partner.phone,
                 'current_mobile': to_update_partner.mobile})
         else:

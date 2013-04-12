@@ -20,7 +20,7 @@
 #
 ##############################################################################
 
-from osv import osv, fields
+from openerp.osv import osv, fields
 
 class wizard_open_calling_partner(osv.osv_memory):
     _inherit = "wizard.open.calling.partner"
