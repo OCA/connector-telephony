@@ -62,6 +62,7 @@
                     <field name="country_prefix" />
                     <field name="alert_info" />
                     <field name="wait_time" />
+                    <field name="number_of_digits_to_match_from_end" />
                 </group>
             </sheet>
         </form>
