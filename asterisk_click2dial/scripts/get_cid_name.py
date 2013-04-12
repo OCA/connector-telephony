@@ -119,13 +119,6 @@ def geolocate_phone_number(number, my_country_code, lang):
             res = country
     return res
 
-def reformat_phone_number_before_query_openerp(number):
-    '''We match only on the end of the phone number'''
-    if len(number) >= 9:
-        return number[-9:len(number)] # Take 9 last numbers
-    else:
-        return number
-
 def convert_to_ascii(my_unicode):
     '''Convert to ascii, with clever management of accents (é -> e, è -> e)'''
     import unicodedata
@@ -189,8 +182,6 @@ def main(options, arguments):
 
     res = False
     if options.server: # Yes, this script can be used without "-s openerp_server" !
-        query_number = reformat_phone_number_before_query_openerp(input_cid_number)
-        stderr_write("phone number sent to OpenERP = %s\n" % query_number)
         if options.ssl:
             stdout_write('VERBOSE "Starting XML-RPC secure request on OpenERP %s:%s"\n' % (options.server, str(options.port)))
             protocol = 'https'
@@ -201,7 +192,7 @@ def main(options, arguments):
         sock = xmlrpclib.ServerProxy('%s://%s:%s/xmlrpc/object' % (protocol, options.server, str(options.port)))
 
         try:
-            res = sock.execute(options.database, options.user, options.password, 'res.partner', 'get_name_from_phone_number', query_number)
+            res = sock.execute(options.database, options.user, options.password, 'res.partner', 'get_name_from_phone_number', input_cid_number)
             stdout_write('VERBOSE "End of XML-RPC request on OpenERP"\n')
             if not res:
                 stdout_write('VERBOSE "Phone number not found in OpenERP"\n')
