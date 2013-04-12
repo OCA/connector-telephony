@@ -19,9 +19,9 @@
 #
 ##############################################################################
 
-from osv import osv, fields
+from openerp.osv import osv, fields
 import logging
-from tools.translate import _
+from openerp.tools.translate import _
 
 _logger = logging.getLogger(__name__)
 
@@ -35,7 +35,7 @@ class reformat_all_phonenumbers(osv.osv_memory):
 
 
     def run_reformat_all_phonenumbers(self, cr, uid, ids, context=None):
-        partner_obj = self.pool.get('res.partner')
+        partner_obj = self.pool['res.partner']
         phonefields = ['phone', 'fax', 'mobile']
         _logger.info('Starting to reformat all the phone numbers')
         all_partner_ids = partner_obj.search(cr, uid, ['|', ('active', '=', True), ('active', '=', False)], context=context)
