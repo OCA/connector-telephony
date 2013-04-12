@@ -19,11 +19,11 @@
 #
 ##############################################################################
 
-from osv import osv, fields
+from openerp.osv import osv, fields
 # Lib required to print logs
 import logging
 # Lib to translate error messages
-from tools.translate import _
+from openerp.tools.translate import _
 # Lib for phone number reformating -> pip install phonenumbers
 import phonenumbers
 # Lib py-asterisk from http://code.google.com/p/py-asterisk/
@@ -52,6 +52,7 @@ class asterisk_server(osv.osv):
         'wait_time': fields.integer('Wait time (sec)', required=True, help="Amount of time (in seconds) Asterisk will try to reach the user's phone before hanging up."),
         'extension_priority': fields.integer('Extension priority', required=True, help="Priority of the extension in the Asterisk dialplan. Refer to /etc/asterisk/extensions.conf on your Asterisk server."),
         'alert_info': fields.char('Alert-Info SIP header', size=255, help="Set Alert-Info header in SIP request to user's IP Phone for the click2dial feature. If empty, the Alert-Info header will not be added. You can use it to have a special ring tone for click2dial (a silent one !) or to activate auto-answer for example."),
+        'number_of_digits_to_match_from_end': fields.integer('Number of digits to match from end', help='In several situations, the Asterisk-OpenERP connector will have to find a Partner in OpenERP from a phone number presented by the calling party. As the phone numbers presented by your phone operator may not always be displayed in a standard format, the best method to find the related Partner in OpenERP is to try to match the end of the phone numbers of the Partners in OpenERP with the N last digits of the phone number presented by the calling party. N is the value you should enter in this field.'),
         'company_id': fields.many2one('res.company', 'Company', help="Company who uses the Asterisk server."),
     }
 
@@ -63,6 +64,7 @@ class asterisk_server(osv.osv):
         'international_prefix': '00',
         'extension_priority': 1,
         'wait_time': 15,
+        'number_of_digits_to_match_from_end': 9,
     }
 
     def _check_validity(self, cr, uid, ids):
@@ -84,7 +86,9 @@ class asterisk_server(osv.osv):
             if server.extension_priority < 1:
                 raise osv.except_osv(_('Error :'), _("The 'extension priority' must be a positive value for the Asterisk server '%s'" % server.name))
             if server.port > 65535 or server.port < 1:
-                raise osv.except_osv(_('Error :'), _("You should set a TCP port between 1 and 65535 for the Asterik server '%s'" % server.name))
+                raise osv.except_osv(_('Error :'), _("You should set a TCP port between 1 and 65535 for the Asterisk server '%s'" % server.name))
+            if server.number_of_digits_to_match_from_end > 20 or server.number_of_digits_to_match_from_end < 1:
+                raise osv.except_osv(_('Error :'), _("You should set a 'Number of digits to match from end' between 1 and 20 for the Asterisk server '%s'" % server.name))
             for check_string in [dialplan_context, alert_info, login, password]:
                 if check_string[1]:
                     try:
@@ -95,7 +99,7 @@ class asterisk_server(osv.osv):
 
 
     _constraints = [
-        (_check_validity, "Error message in raise", ['out_prefix', 'country_prefix', 'national_prefix', 'international_prefix', 'wait_time', 'extension_priority', 'port', 'context', 'alert_info', 'login', 'password']),
+        (_check_validity, "Error message in raise", ['out_prefix', 'country_prefix', 'national_prefix', 'international_prefix', 'wait_time', 'extension_priority', 'port', 'context', 'alert_info', 'login', 'password', 'number_of_digits_to_match_from_end']),
     ]
 
 
@@ -175,9 +179,10 @@ class asterisk_server(osv.osv):
         return number
 
 
-    def _get_asterisk_server_from_user(self, cr, uid, user, context=None):
+    def _get_asterisk_server_from_user(self, cr, uid, context=None):
         '''Returns an asterisk.server browse object'''
         # We check if the user has an Asterisk server configured
+        user = self.pool['res.users'].browse(cr, uid, uid, context=context)
         if user.asterisk_server_id.id:
             ast_server = user.asterisk_server_id
         else:
@@ -196,12 +201,12 @@ class asterisk_server(osv.osv):
         Returns an instance of the Asterisk Manager
 
         '''
-        user = self.pool.get('res.users').browse(cr, uid, uid, context=context)
+        user = self.pool['res.users'].browse(cr, uid, uid, context=context)
 
         # Note : if I write 'Error' without ' :', it won't get translated...
         # I don't understand why !
 
-        ast_server = self._get_asterisk_server_from_user(cr, uid, user, context=context)
+        ast_server = self._get_asterisk_server_from_user(cr, uid, context=context)
         # We check if the current user has a chan type
         if not user.asterisk_chan_type:
             raise osv.except_osv(_('Error :'), _('No channel type configured for the current user.'))
@@ -219,8 +224,8 @@ class asterisk_server(osv.osv):
             ast_manager = Manager.Manager((ast_server.ip_address, ast_server.port), ast_server.login, ast_server.password)
         except Exception, e:
             _logger.error("Error in the Originate request to Asterisk server %s" % ast_server.ip_address)
-            _logger.error("Here is the detail of the error : '%s'" % unicode(e))
-            raise osv.except_osv(_('Error :'), _("Problem in the request from OpenERP to Asterisk. Here is the detail of the error: '%s'" % unicode(e)))
+            _logger.error("Here is the detail of the error : %s" % e.strerror)
+            raise osv.except_osv(_('Error :'), _("Problem in the request from OpenERP to Asterisk. Here is the detail of the error: %s." % e.strerror))
             return False
 
         return (user, ast_server, ast_manager)
@@ -396,7 +401,7 @@ class res_partner(osv.osv):
         """Reformat phone numbers in international format i.e. +33141981242"""
         phonefields = ['phone', 'fax', 'mobile']
         if any([vals.get(field) for field in phonefields]):
-            user = self.pool.get('res.users').browse(cr, uid, uid, context=context)
+            user = self.pool['res.users'].browse(cr, uid, uid, context=context)
             # country_id on res.company is a fields.function that looks at
             # company_id.partner_id.addres(default).country_id
             if user.company_id.country_id:
@@ -436,7 +441,7 @@ class res_partner(osv.osv):
             raise osv.except_osv(_('Error :'), _('There is no phone number !'))
         elif erp_number_display and not erp_number_e164:
             raise osv.except_osv(_('Error :'), _("The phone number isn't stored in the standard E.164 format. Try to run the wizard 'Reformat all phone numbers' from the menu Settings > Configuration > Asterisk."))
-        return self.pool.get('asterisk.server')._dial_with_asterisk(cr, uid, erp_number_e164, context=context)
+        return self.pool['asterisk.server']._dial_with_asterisk(cr, uid, erp_number_e164, context=context)
 
 
     def action_dial_phone(self, cr, uid, ids, context=None):
@@ -466,28 +471,37 @@ class res_partner(osv.osv):
             return False
 
 
-    def get_partner_from_phone_number(self, cr, uid, number, context=None):
+    def get_partner_from_phone_number(self, cr, uid, presented_number, context=None):
         # We check that "number" is really a number
-        _logger.debug(u"Call get_name_from_phone_number with number = %s" % number)
-        if not isinstance(number, (str, unicode)):
-            _logger.warning(u"Number should be a 'str' or 'unicode' but it is a '%s'" % type(number))
+        _logger.debug(u"Call get_name_from_phone_number with number = %s" % presented_number)
+        if not isinstance(presented_number, (str, unicode)):
+            _logger.warning(u"Number '%s' should be a 'str' or 'unicode' but it is a '%s'" % (presented_number, type(presented_number)))
             return False
-            _logger.warning(u"Number should only contain digits.")
-        if not number.isdigit():
+        if not presented_number.isdigit():
+            _logger.warning(u"Number '%s' should only contain digits." % presented_number)
             return False
 
+        ast_server = self.pool['asterisk.server']._get_asterisk_server_from_user(cr, uid, context=context)
+        nr_digits_to_match_from_end = ast_server.number_of_digits_to_match_from_end
+        if len(presented_number) >= nr_digits_to_match_from_end:
+            end_number_to_match = presented_number[-nr_digits_to_match_from_end:len(presented_number)]
+        else:
+            end_number_to_match = presented_number
+
+        _logger.debug("Will search phone and mobile numbers in res.partner ending with '%s'" % end_number_to_match)
+
         # We try to match a phone or mobile number with the same end
-        pg_seach_number = str('%' + number)
+        pg_seach_number = str('%' + end_number_to_match)
         res_ids = self.search(cr, uid, ['|', ('phone_e164', 'ilike', pg_seach_number), ('mobile_e164', 'ilike', pg_seach_number)], context=context)
         # TODO : use is_number_match() of the phonenumber lib ?
         if len(res_ids) > 1:
-            _logger.warning(u"There are several partners (IDS = %s) with the same phone number %s" % (str(res_ids), number))
+            _logger.warning(u"There are several partners (IDS = %s) with a phone number ending with '%s'" % (str(res_ids), end_number_to_match))
         if res_ids:
             entry = self.read(cr, uid, res_ids[0], ['name', 'parent_id'], context=context)
             _logger.debug(u"Answer get_partner_from_phone_number with name = %s" % entry['name'])
             return (entry['id'], entry['parent_id'] and entry['parent_id'][0] or False, entry['name'])
         else:
-            _logger.debug(u"No match for phone number %s" % number)
+            _logger.debug(u"No match for end of phone number '%s'" % end_number_to_match)
             return False
 
 
