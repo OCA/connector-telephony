@@ -42,7 +42,7 @@
 
 __author__ = "Alexis de Lattre <alexis.delattre@akretion.com>"
 __date__ = "December 2010"
-__version__ = "0.2"
+__version__ = "0.3"
 
 #  Copyright (C) 2010-2012 Alexis de Lattre <alexis.delattre@akretion.com>
 #
