@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
   Asterisk Click2dial module for OpenERP
-  Copyright (C) 2010-2012 Alexis de Lattre <alexis@via.ecp.fr>
+  Copyright (C) 2010-2013 Alexis de Lattre <alexis@via.ecp.fr>
   The licence is in the file __openerp__.py
 
   Inherit partner views to add 'Dial' button next to 'phone'
