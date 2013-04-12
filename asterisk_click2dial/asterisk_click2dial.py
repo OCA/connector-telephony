@@ -56,12 +56,21 @@ class asterisk_server(osv.osv):
         'company_id': fields.many2one('res.company', 'Company', help="Company who uses the Asterisk server."),
     }
 
+    def _get_prefix_from_country(self, cr, uid, context=None):
+        user = self.pool['res.users'].browse(cr, uid, uid, context=context)
+        country_code = user.company_id and user.company_id.partner_id and user.company_id.partner_id.country_id and user.company_id.partner_id.country_id.code or False
+        default_country_prefix = False
+        if country_code:
+            default_country_prefix = phonenumbers.country_code_for_region(country_code)
+        return default_country_prefix
+
     _defaults = {
         'active': True,
         'port': 5038,  # Default AMI port
         'out_prefix': '0',
         'national_prefix': '0',
         'international_prefix': '00',
+        'country_prefix': _get_prefix_from_country,
         'extension_priority': 1,
         'wait_time': 15,
         'number_of_digits_to_match_from_end': 9,
@@ -139,7 +148,7 @@ class asterisk_server(osv.osv):
         # International format
         if tmp_number[0] != '+':
             raise # This should never happen
-            # Remove the starting '+' of the number
+        # Remove the starting '+' of the number
         tmp_number = tmp_number.replace('+','')
         _logger.debug('Number after removal of special char = %s' % tmp_number)
 
@@ -166,6 +175,9 @@ class asterisk_server(osv.osv):
         return tmp_number
 
 
+    # TODO : one day, we will use phonenumbers.format_out_of_country_calling_number() ?
+    # if yes, then we can trash the fields international_prefix, national_prefix
+    # country_prefix and this kind of code
     def _convert_number_to_international_format(self, cr, uid, number, ast_server, context=None):
         '''Convert the number presented by the phone network to a number
         in international format e.g. +33141981242'''
