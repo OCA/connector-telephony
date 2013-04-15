@@ -332,7 +332,6 @@ class res_users(osv.osv):
         # But it cannot, cf http://lists.digium.com/pipermail/asterisk-users/2012-January/269787.html
         'asterisk_chan_type': fields.selection([
             ('SIP', 'SIP'),
-            ('Local', 'Local'),
             ('IAX2', 'IAX2'),
             ('DAHDI', 'DAHDI'),
             ('Zap', 'Zap'),
