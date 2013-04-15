@@ -1,10 +1,11 @@
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
-#    OpenERP, Open Source Management Solution
+#    Asterisk click2dial CRM module for OpenERP
 #    Copyright (c) 2011 Zikzakmedia S.L. (http://zikzakmedia.com) All Rights Reserved.
-#                       Jesús Martín <jmartin@zikzakmedia.com>
-#    $Id$
+#    Copyright (c) 2012 Akretion (http://www.akretion.com)
+#    @author: Jesús Martín <jmartin@zikzakmedia.com>
+#    @author: Alexis de Lattre <alexis.delattre@akretion.com>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as published by
@@ -21,5 +22,5 @@
 #
 ##############################################################################
 
-import res_partner_address
-
+import asterisk_click2dial_crm
+import wizard

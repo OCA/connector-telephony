@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    Asterisk Click2Dial module for OpenERP
-#    Copyright (C) 2010-2012 Alexis de Lattre <alexis@via.ecp.fr>
+#    Copyright (C) 2012-2013 Alexis de Lattre <alexis@via.ecp.fr>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -19,5 +19,5 @@
 #
 ##############################################################################
 
-import asterisk_click2dial
-import wizard
+import reformat_all_phonenumbers
+import open_calling_partner

@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: OpenERP Server 5.0.14\n"
-"Report-Msgid-Bugs-To: support@openerp.com\n"
-"POT-Creation-Date: 2010-09-10 20:38:35+0000\n"
-"PO-Revision-Date: 2010-09-10 20:38:35+0000\n"
+"Project-Id-Version: OpenERP Server 6.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-05-28 19:58+0000\n"
+"PO-Revision-Date: 2012-05-28 19:58+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,385 +16,553 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: asterisk_click2dial
-#: constraint:asterisk.server:0
-msgid "The 'extension priority' must be a positive value"
-msgstr ""
-
-#. module: asterisk_click2dial
-#: field:asterisk.server,password:0
-msgid "AMI password"
-msgstr ""
+#: view:res.partner:0
+#: view:res.partner.address:0
+msgid "Dial"
+msgstr "Appeler"
 
 #. module: asterisk_click2dial
 #: selection:res.users,asterisk_chan_type:0
 msgid "SIP"
-msgstr ""
-
-#. module: asterisk_click2dial
-#: field:asterisk.server,international_prefix:0
-msgid "International prefix"
-msgstr ""
+msgstr "SIP"
 
 #. module: asterisk_click2dial
 #: help:asterisk.server,ip_address:0
-msgid "IPv4 address or DNS name of the Asterisk server."
-msgstr ""
+msgid "IP address or DNS name of the Asterisk server."
+msgstr "Adresse IP ou DNS du serveur Asterisk."
 
 #. module: asterisk_click2dial
-#: selection:res.users,asterisk_chan_type:0
-msgid "mISDN"
-msgstr ""
-
-#. module: asterisk_click2dial
-#: constraint:ir.model:0
-msgid "The Object name must start with x_ and not contain any special character !"
-msgstr ""
-
-#. module: asterisk_click2dial
-#: view:res.partner:0
-#: view:res.partner.address:0
-msgid "Dial"
-msgstr ""
-
-#. module: asterisk_click2dial
-#: constraint:asterisk.server:0
-msgid "Only use digits for the 'country prefix'"
-msgstr ""
-
-#. module: asterisk_click2dial
-#: field:res.users,asterisk_server_id:0
-msgid "Asterisk server"
-msgstr ""
-
-#. module: asterisk_click2dial
-#: help:res.users,asterisk_server_id:0
-msgid "Asterisk server on which the user's phone is connected."
-msgstr ""
-
-#. module: asterisk_click2dial
-#: model:ir.actions.act_window,name:asterisk_click2dial.action_asterisk_server
-#: model:ir.model,name:asterisk_click2dial.model_asterisk_server
-msgid "Asterisk Servers"
-msgstr ""
-
-#. module: asterisk_click2dial
-#: constraint:ir.actions.act_window:0
-msgid "Invalid model name in the action definition."
-msgstr ""
-
-#. module: asterisk_click2dial
-#: selection:res.users,asterisk_chan_type:0
-msgid "DAHDI"
-msgstr ""
-
-#. module: asterisk_click2dial
-#: help:asterisk.server,extension_priority:0
-msgid "Priority of the extension in the Asterisk dialplan. Refer to /etc/asterisk/extensions.conf on your Asterisk server."
-msgstr ""
+#: field:wizard.open.calling.partner,current_phone:0
+msgid "Current phone"
+msgstr "Current phone"
 
 #. module: asterisk_click2dial
 #: field:res.users,callerid:0
 msgid "Caller ID"
-msgstr ""
-
-#. module: asterisk_click2dial
-#: model:ir.module.module,description:asterisk_click2dial.module_meta_information
-msgid "The module adds dial button in partner address\n"
-"so that you can directly dial a phone number through Asterisk.\n"
-"Documentation is available on the Arkretion Web site http://[TODO]"
-msgstr ""
-
-#. module: asterisk_click2dial
-#: help:asterisk.server,name:0
-msgid "Asterisk server name."
-msgstr ""
-
-#. module: asterisk_click2dial
-#: view:res.partner:0
-#: view:res.partner.address:0
-msgid "Mobile : "
-msgstr ""
-
-#. module: asterisk_click2dial
-#: field:asterisk.server,login:0
-msgid "AMI login"
-msgstr ""
-
-#. module: asterisk_click2dial
-#: view:res.company:0
-msgid "Asterisk servers for click2dial"
-msgstr ""
+msgstr "Identification de l'appelant"
 
 #. module: asterisk_click2dial
 #: field:asterisk.server,wait_time:0
 msgid "Wait time (sec)"
-msgstr ""
+msgstr "Temps d'attente (sec)"
 
 #. module: asterisk_click2dial
 #: field:asterisk.server,context:0
 msgid "Dialplan context"
-msgstr ""
-
-#. module: asterisk_click2dial
-#: field:asterisk.server,extension_priority:0
-msgid "Extension priority"
-msgstr ""
+msgstr "Contexte du dialplan"
 
 #. module: asterisk_click2dial
 #: field:asterisk.server,company_id:0
 msgid "Company"
-msgstr ""
-
-#. module: asterisk_click2dial
-#: help:asterisk.server,country_prefix:0
-msgid "Phone prefix of the country where the Asterisk server is located. For e.g. the phone prefix for France is '33'. If the phone number to dial starts with the 'My country prefix', OpenERP will remove the country prefix from the phone number and add the 'out prefix' followed by the 'national prefix'. If the phone number to dial doesn't start with the 'My country prefix', OpenERP will add the 'out prefix' followed by the 'international prefix'."
-msgstr ""
+msgstr "Société"
 
 #. module: asterisk_click2dial
 #: help:asterisk.server,out_prefix:0
 msgid "Prefix to dial to place outgoing calls. If you don't use a prefix to place outgoing calls, leave empty."
-msgstr ""
+msgstr "Préfixe à composer pour appeler vers l'extérieur. Si vous n'avez pas à composer un préfixe pour appeler vers l'extérieur, laissez vide."
 
 #. module: asterisk_click2dial
-#: selection:res.users,asterisk_chan_type:0
-msgid "Zap"
-msgstr ""
+#: code:addons/asterisk_click2dial/asterisk_click2dial.py:111
+#, python-format
+msgid "The phone number is not written in valid international format. Example of valid international format : +33 1 41 98 12 42"
+msgstr "Le numéro de téléphone n'est pas dans un format international valide. Exemple de numéro de téléphone dans un format international valide : +33 1 41 98 12 42"
 
 #. module: asterisk_click2dial
-#: help:asterisk.server,context:0
-msgid "Asterisk dialplan context from which the calls will be made. Refer to /etc/asterisk/extensions.conf on your Asterisk server."
-msgstr ""
-
-#. module: asterisk_click2dial
-#: help:res.users,callerid:0
-msgid "Caller ID used for the calls initiated by this user."
-msgstr ""
-
-#. module: asterisk_click2dial
-#: selection:res.users,asterisk_chan_type:0
-msgid "IAX2"
-msgstr ""
-
-#. module: asterisk_click2dial
-#: view:res.company:0
-msgid "IPBX"
-msgstr ""
-
-#. module: asterisk_click2dial
-#: model:ir.module.module,shortdesc:asterisk_click2dial.module_meta_information
-msgid "Asterisk Click2dial"
-msgstr ""
-
-#. module: asterisk_click2dial
-#: help:res.company,asterisk_server_ids:0
-msgid "List of Asterisk servers."
-msgstr ""
-
-#. module: asterisk_click2dial
-#: selection:res.users,asterisk_chan_type:0
-msgid "MGCP"
-msgstr ""
-
-#. module: asterisk_click2dial
-#: selection:res.users,asterisk_chan_type:0
-msgid "Skinny"
-msgstr ""
-
-#. module: asterisk_click2dial
-#: constraint:ir.ui.view:0
-msgid "Invalid XML for View Architecture!"
-msgstr ""
-
-#. module: asterisk_click2dial
-#: help:res.users,internal_number:0
-msgid "User's internal phone number."
-msgstr ""
-
-#. module: asterisk_click2dial
-#: help:asterisk.server,national_prefix:0
-msgid "Prefix for national phone calls (don't include the 'out prefix'). For e.g., in France, the phone numbers look like '01 41 98 12 42' : the National prefix is '0'."
-msgstr ""
-
-#. module: asterisk_click2dial
-#: help:asterisk.server,port:0
-msgid "TCP port on which the Asterisk Manager Interface listens. Defined in /etc/asterisk/manager.conf on Asterisk."
-msgstr ""
-
-#. module: asterisk_click2dial
-#: help:asterisk.server,international_prefix:0
-msgid "Prefix to add to make international phone calls (don't include the 'out prefix'). For e.g., in France, the International prefix is '00'."
-msgstr ""
-
-#. module: asterisk_click2dial
-#: field:res.users,internal_number:0
-msgid "Internal number"
-msgstr ""
-
-#. module: asterisk_click2dial
-#: field:res.users,asterisk_chan_type:0
-msgid "Asterisk channel type"
-msgstr ""
-
-#. module: asterisk_click2dial
-#: field:asterisk.server,out_prefix:0
-msgid "Out prefix"
-msgstr ""
-
-#. module: asterisk_click2dial
-#: constraint:asterisk.server:0
-msgid "TCP ports range from 1 to 65535"
-msgstr ""
-
-#. module: asterisk_click2dial
-#: view:res.partner:0
-#: view:res.partner.address:0
-msgid "Phone : "
-msgstr ""
-
-#. module: asterisk_click2dial
-#: help:asterisk.server,company_id:0
-msgid "Company who uses the Asterisk server."
-msgstr ""
-
-#. module: asterisk_click2dial
-#: constraint:asterisk.server:0
-msgid "Only use digits for the 'out prefix' or leave empty"
-msgstr ""
-
-#. module: asterisk_click2dial
-#: field:asterisk.server,ip_address:0
-msgid "Asterisk IP addr. or DNS"
-msgstr ""
-
-#. module: asterisk_click2dial
-#: help:asterisk.server,password:0
-msgid "Password that Asterisk will use to communicate with the Asterisk Manager Interface. Refer to /etc/asterisk/manager.conf on your Asterisk server."
-msgstr ""
-
-#. module: asterisk_click2dial
-#: constraint:asterisk.server:0
-msgid "Only use digits for 'international prefix'"
-msgstr ""
-
-#. module: asterisk_click2dial
-#: selection:res.users,asterisk_chan_type:0
-msgid "H323"
-msgstr ""
+#: code:addons/asterisk_click2dial/asterisk_click2dial.py:113
+#, python-format
+msgid "The phone number is not written in valid format."
+msgstr "Le numéro de téléphone n'est pas dans un format valide."
 
 #. module: asterisk_click2dial
 #: field:asterisk.server,national_prefix:0
 msgid "National prefix"
-msgstr ""
+msgstr "Préfixe national"
+
+#. module: asterisk_click2dial
+#: help:asterisk.server,national_format_allowed:0
+msgid "Do we allow to use click2dial on phone numbers written in national format, e.g. 01 41 98 12 42, or only in the international format, e.g. +33 1 41 98 12 42 ?"
+msgstr "Do we allow to use click2dial on phone numbers written in national format, e.g. 01 41 98 12 42, or only in the international format, e.g. +33 1 41 98 12 42 ?"
+
+#. module: asterisk_click2dial
+#: field:asterisk.server,out_prefix:0
+msgid "Out prefix"
+msgstr "Préfixe pour l'extérieur"
+
+#. module: asterisk_click2dial
+#: help:asterisk.server,port:0
+msgid "TCP port on which the Asterisk Manager Interface listens. Defined in /etc/asterisk/manager.conf on Asterisk."
+msgstr "Port TCP sur lequel écoute l'interface du Manager Asterisk. Cf /etc/asterisk/manager.conf sur le serveur Asterisk."
+
+#. module: asterisk_click2dial
+#: view:wizard.open.calling.partner:0
+msgid "Update an existing contact"
+msgstr "Update an existing contact"
+
+#. module: asterisk_click2dial
+#: field:res.users,internal_number:0
+msgid "Internal number"
+msgstr "Numéro interne"
+
+#. module: asterisk_click2dial
+#: field:res.users,asterisk_chan_type:0
+msgid "Asterisk channel type"
+msgstr "Type de canal Asterisk"
+
+#. module: asterisk_click2dial
+#: constraint:asterisk.server:0
+#: constraint:res.users:0
+msgid "Error message in raise"
+msgstr "Error message in raise"
+
+#. module: asterisk_click2dial
+#: help:asterisk.server,national_prefix:0
+msgid "Prefix for national phone calls (don't include the 'out prefix'). For e.g., in France, the phone numbers look like '01 41 98 12 42' : the National prefix is '0'."
+msgstr "Préfixe pour les appels nationaux (ne pas inclure le préfixe pour l'extérieur). Par exemple, en France, les numéros de téléphone sont du type '01 41 98 12 42' ; le préfixe national est '0'."
+
+#. module: asterisk_click2dial
+#: view:wizard.open.calling.partner:0
+msgid "Create a new contact"
+msgstr "Create a new contact"
+
+#. module: asterisk_click2dial
+#: help:asterisk.server,password:0
+msgid "Password that Asterisk will use to communicate with the Asterisk Manager Interface. Refer to /etc/asterisk/manager.conf on your Asterisk server."
+msgstr "Password that Asterisk will use to communicate with the Asterisk Manager Interface. Refer to /etc/asterisk/manager.conf on your Asterisk server."
+
+#. module: asterisk_click2dial
+#: field:wizard.open.calling.partner,calling_number:0
+msgid "Calling number"
+msgstr "Numéro appelant"
+
+#. module: asterisk_click2dial
+#: field:res.users,alert_info:0
+msgid "User-specific Alert-Info SIP header"
+msgstr "En-tête SIP Alert-Info spécifique à l'utilisateur"
+
+#. module: asterisk_click2dial
+#: help:asterisk.server,active:0
+msgid "The active field allows you to hide the Asterisk server without deleting it."
+msgstr "The active field allows you to hide the Asterisk server without deleting it."
+
+#. module: asterisk_click2dial
+#: view:res.users:0
+msgid "Telephony"
+msgstr "Téléphonie"
+
+#. module: asterisk_click2dial
+#: view:asterisk.server:0
+#: model:ir.actions.act_window,name:asterisk_click2dial.action_asterisk_server
+#: model:ir.ui.menu,name:asterisk_click2dial.act_menu_ast_server
+#: field:res.company,asterisk_server_ids:0
+msgid "Asterisk servers"
+msgstr "Serveurs Asterisk"
+
+#. module: asterisk_click2dial
+#: help:wizard.open.calling.partner,partner_id:0
+msgid "Partner related to the calling number"
+msgstr "Partenaire associé au numéro appelant"
+
+#. module: asterisk_click2dial
+#: field:wizard.open.calling.partner,partner_id:0
+msgid "Partner"
+msgstr "Partenaire"
+
+#. module: asterisk_click2dial
+#: field:asterisk.server,alert_info:0
+msgid "Alert-Info SIP header"
+msgstr "En-tête SIP Alert-Info SIP"
+
+#. module: asterisk_click2dial
+#: selection:res.users,asterisk_chan_type:0
+msgid "mISDN"
+msgstr "mISDN"
+
+#. module: asterisk_click2dial
+#: model:ir.model,name:asterisk_click2dial.model_res_company
+msgid "Companies"
+msgstr "Sociétés"
+
+#. module: asterisk_click2dial
+#: help:wizard.open.calling.partner,partner_address_id:0
+msgid "Partner contact related to the calling number"
+msgstr "Partner contact related to the calling number"
+
+#. module: asterisk_click2dial
+#: constraint:res.company:0
+msgid "Error! You can not create recursive companies."
+msgstr "Erreur ! Vous ne pouvez pas créer de sociétés récursives"
+
+#. module: asterisk_click2dial
+#: code:addons/asterisk_click2dial/asterisk_click2dial.py:275
+#, python-format
+msgid "No callerID configured for the current user"
+msgstr "No callerID configured for the current user"
+
+#. module: asterisk_click2dial
+#: field:asterisk.server,national_format_allowed:0
+msgid "National format allowed ?"
+msgstr "Format national autorisé ?"
+
+#. module: asterisk_click2dial
+#: code:addons/asterisk_click2dial/asterisk_click2dial.py:511
+#, python-format
+msgid "Could not get the calling number from Asterisk. Check your setup and look at the OpenERP debug logs."
+msgstr "Could not get the calling number from Asterisk. Check your setup and look at the OpenERP debug logs."
+
+#. module: asterisk_click2dial
+#: help:asterisk.server,name:0
+msgid "Asterisk server name."
+msgstr "Nom du serveur Asterisk."
 
 #. module: asterisk_click2dial
 #: field:asterisk.server,country_prefix:0
 msgid "My country prefix"
-msgstr ""
+msgstr "Préfixe du pays"
 
 #. module: asterisk_click2dial
-#: view:asterisk.server:0
-#: field:res.company,asterisk_server_ids:0
-msgid "Asterisk servers"
-msgstr ""
+#: selection:res.users,asterisk_chan_type:0
+msgid "IAX2"
+msgstr "IAX2"
 
 #. module: asterisk_click2dial
-#: help:asterisk.server,login:0
-msgid "Login that OpenERP will use to communicate with the Asterisk Manager Interface. Refer to /etc/asterisk/manager.conf on your Asterisk server."
-msgstr ""
+#: code:addons/asterisk_click2dial/asterisk_click2dial.py:80
+#: code:addons/asterisk_click2dial/asterisk_click2dial.py:82
+#: code:addons/asterisk_click2dial/asterisk_click2dial.py:84
+#: code:addons/asterisk_click2dial/asterisk_click2dial.py:86
+#: code:addons/asterisk_click2dial/asterisk_click2dial.py:92
+#: code:addons/asterisk_click2dial/asterisk_click2dial.py:195
+#: code:addons/asterisk_click2dial/asterisk_click2dial.py:229
+#: code:addons/asterisk_click2dial/asterisk_click2dial.py:233
+#: code:addons/asterisk_click2dial/asterisk_click2dial.py:244
+#: code:addons/asterisk_click2dial/asterisk_click2dial.py:264
+#: code:addons/asterisk_click2dial/asterisk_click2dial.py:270
+#: code:addons/asterisk_click2dial/asterisk_click2dial.py:275
+#: code:addons/asterisk_click2dial/asterisk_click2dial.py:301
+#: code:addons/asterisk_click2dial/asterisk_click2dial.py:311
+#: code:addons/asterisk_click2dial/asterisk_click2dial.py:339
+#: code:addons/asterisk_click2dial/asterisk_click2dial.py:395
+#: code:addons/asterisk_click2dial/asterisk_click2dial.py:414
+#: code:addons/asterisk_click2dial/asterisk_click2dial.py:511
+#: code:addons/asterisk_click2dial/asterisk_click2dial.py:522
+#: code:addons/asterisk_click2dial/asterisk_click2dial.py:614
+#, python-format
+msgid "Error :"
+msgstr "Erreur :"
 
 #. module: asterisk_click2dial
-#: field:asterisk.server,name:0
-msgid "Asterisk server name"
-msgstr ""
+#: help:res.users,internal_number:0
+msgid "User's internal phone number."
+msgstr "Numéro de téléphone interne de l'utilisateur."
 
 #. module: asterisk_click2dial
-#: help:asterisk.server,wait_time:0
-msgid "Amount of time (in seconds) Asterisk will try to reach the user's phone before hanging up."
-msgstr ""
+#: model:ir.actions.act_window,name:asterisk_click2dial.action_open_calling_partner
+#: model:ir.ui.menu,name:asterisk_click2dial.menu_open_calling_partner_sales
+#: view:wizard.open.calling.partner:0
+msgid "Open calling partner"
+msgstr "Ouvrir le partenaire appelant"
+
+#. module: asterisk_click2dial
+#: code:addons/asterisk_click2dial/asterisk_click2dial.py:414
+#, python-format
+msgid "There is no phone number !"
+msgstr "Il n'y a pas de numéro de téléphone !"
+
+#. module: asterisk_click2dial
+#: model:ir.model,name:asterisk_click2dial.model_wizard_open_calling_partner
+msgid "wizard.open.calling.partner"
+msgstr "wizard.open.calling.partner"
+
+#. module: asterisk_click2dial
+#: help:asterisk.server,international_prefix:0
+msgid "Prefix to add to make international phone calls (don't include the 'out prefix'). For e.g., in France, the International prefix is '00'."
+msgstr "Préfixe à ajouter pour passer des appels vers l'étranger (ne pas inclure le préfixe pour l'extérieur). Par exemple, en France, le préfixe pour l'international est '00'."
 
 #. module: asterisk_click2dial
 #: help:res.users,asterisk_chan_type:0
 msgid "Asterisk channel type, as used in the Asterisk dialplan. If the user has a regular IP phone, the channel type is 'SIP'."
-msgstr ""
+msgstr "Type de canal Asterisk, tel qu'utilisé dans le dialplan d'Asterisk. Si l'utilisateur a un téléphone IP classique, le type de canal est 'SIP'."
 
 #. module: asterisk_click2dial
-#: constraint:asterisk.server:0
-msgid "Only use digits for the 'national prefix' or leave empty"
-msgstr ""
+#: help:asterisk.server,company_id:0
+msgid "Company who uses the Asterisk server."
+msgstr "Société qui utilise le serveur Asterisk."
+
+#. module: asterisk_click2dial
+#: help:wizard.open.calling.partner,calling_number:0
+msgid "Phone number of calling party that has been obtained from Asterisk."
+msgstr "Phone number of calling party that has been obtained from Asterisk."
+
+#. module: asterisk_click2dial
+#: view:wizard.open.calling.partner:0
+msgid "Contact form"
+msgstr "Contact form"
+
+#. module: asterisk_click2dial
+#: field:wizard.open.calling.partner,current_mobile:0
+msgid "Current mobile"
+msgstr "Current mobile"
+
+#. module: asterisk_click2dial
+#: help:asterisk.server,wait_time:0
+msgid "Amount of time (in seconds) Asterisk will try to reach the user's phone before hanging up."
+msgstr "Temps (en secondes) pendant lequel Asterisk essayera de joindre le téléphone de l'utilisateur avant d'abandonner."
+
+#. module: asterisk_click2dial
+#: model:ir.model,name:asterisk_click2dial.model_res_partner_address
+msgid "Partner Addresses"
+msgstr "Carnet d'adresses"
+
+#. module: asterisk_click2dial
+#: selection:res.users,asterisk_chan_type:0
+msgid "Zap"
+msgstr "Zap"
+
+#. module: asterisk_click2dial
+#: code:addons/asterisk_click2dial/asterisk_click2dial.py:229
+#, python-format
+msgid "No channel type configured for the current user."
+msgstr "Aucun type de canal n'est configuré pour le présent utilisateur."
+
+#. module: asterisk_click2dial
+#: field:asterisk.server,international_prefix:0
+msgid "International prefix"
+msgstr "Préfixe international"
+
+#. module: asterisk_click2dial
+#: constraint:res.users:0
+msgid "The chosen company is not in the allowed companies for this user"
+msgstr "La société choisie n'est pas autorisée pour cet utilisateur."
+
+#. module: asterisk_click2dial
+#: view:wizard.open.calling.partner:0
+msgid "Update mobile"
+msgstr "Update mobile"
+
+#. module: asterisk_click2dial
+#: field:asterisk.server,extension_priority:0
+msgid "Extension priority"
+msgstr "Priorité de l'extension"
+
+#. module: asterisk_click2dial
+#: model:res.groups,name:asterisk_click2dial.group_asterisk_cid
+msgid "Asterisk CallerID"
+msgstr "Asterisk CallerID"
+
+#. module: asterisk_click2dial
+#: code:addons/asterisk_click2dial/asterisk_click2dial.py:339
+#, python-format
+msgid "The connection from OpenERP to the Asterisk server failed. Please check the configuration on OpenERP and on Asterisk."
+msgstr "La connexion depuis OpenERP vers le serveur Asterisk a échoué. Vérifiez la configuration côté OpenERP et côté Asterisk."
+
+#. module: asterisk_click2dial
+#: help:asterisk.server,context:0
+msgid "Asterisk dialplan context from which the calls will be made. Refer to /etc/asterisk/extensions.conf on your Asterisk server."
+msgstr "Contexte du dialplan d'Asterisk depuis lequel les appels seront initiés. Cf /etc/asterisk/extensions.conf sur le serveur Asterisk."
+
+#. module: asterisk_click2dial
+#: help:asterisk.server,extension_priority:0
+msgid "Priority of the extension in the Asterisk dialplan. Refer to /etc/asterisk/extensions.conf on your Asterisk server."
+msgstr "Priorité de l'extension dans le dialplan d'Asterisk. Cf /etc/asterisk/extensions.conf sur le serveur Asterisk."
+
+#. module: asterisk_click2dial
+#: view:res.users:0
+msgid "User"
+msgstr "Utilisateur"
+
+#. module: asterisk_click2dial
+#: field:asterisk.server,active:0
+msgid "Active"
+msgstr "Actif"
+
+#. module: asterisk_click2dial
+#: selection:res.users,asterisk_chan_type:0
+msgid "MGCP"
+msgstr "MGCP"
+
+#. module: asterisk_click2dial
+#: field:wizard.open.calling.partner,to_update_partner_address_id:0
+msgid "Contact to update"
+msgstr "Contact to update"
+
+#. module: asterisk_click2dial
+#: view:wizard.open.calling.partner:0
+msgid "Related sale orders"
+msgstr "Bons de commande associés"
+
+#. module: asterisk_click2dial
+#: help:res.users,variable:0
+msgid "Set a user-specific 'Variable' field in the Asterisk Manager Interface 'originate' request for the click2dial feature. If you want to have several variable headers, separate them with '|'."
+msgstr "Set a user-specific 'Variable' field in the Asterisk Manager Interface 'originate' request for the click2dial feature. If you want to have several variable headers, separate them with '|'."
+
+#. module: asterisk_click2dial
+#: selection:res.users,asterisk_chan_type:0
+msgid "Skinny"
+msgstr "Skinny"
+
+#. module: asterisk_click2dial
+#: help:res.users,alert_info:0
+msgid "Set a user-specific Alert-Info header in SIP request to user's IP Phone for the click2dial feature. If empty, the Alert-Info header will not be added. You can use it to have a special ring tone for click2dial (a silent one !) or to activate auto-answer for example. If you want to have several variable headers, separate them with '|'."
+msgstr "Set a user-specific Alert-Info header in SIP request to user's IP Phone for the click2dial feature. If empty, the Alert-Info header will not be added. You can use it to have a special ring tone for click2dial (a silent one !) or to activate auto-answer for example. If you want to have several variable headers, separate them with '|'."
+
+#. module: asterisk_click2dial
+#: view:wizard.open.calling.partner:0
+msgid "with calling number as mobile"
+msgstr "with calling number as mobile"
+
+#. module: asterisk_click2dial
+#: field:wizard.open.calling.partner,partner_address_id:0
+msgid "Contact name"
+msgstr "Contact name"
+
+#. module: asterisk_click2dial
+#: sql_constraint:res.users:0
+msgid "You can not have two users with the same login !"
+msgstr "VOus ne pouvez pas avoir deux utilsiateurs avec le même login !"
+
+#. module: asterisk_click2dial
+#: field:asterisk.server,ip_address:0
+msgid "Asterisk IP addr. or DNS"
+msgstr "Adr. IP ou DNS d'Asterisk"
+
+#. module: asterisk_click2dial
+#: help:res.company,asterisk_server_ids:0
+msgid "List of Asterisk servers."
+msgstr "Liste des serveurs Asterisk."
+
+#. module: asterisk_click2dial
+#: help:asterisk.server,login:0
+msgid "Login that OpenERP will use to communicate with the Asterisk Manager Interface. Refer to /etc/asterisk/manager.conf on your Asterisk server."
+msgstr "Nom d'utilisateur qu'OpenERP utilisera pour communiquer avec l'interface du Manager d'Asterisk. Cf /etc/asterisk/manager.conf sur le serveur Asterisk."
+
+#. module: asterisk_click2dial
+#: field:asterisk.server,name:0
+msgid "Asterisk server name"
+msgstr "Nom du serveur Asterisk"
+
+#. module: asterisk_click2dial
+#: code:addons/asterisk_click2dial/asterisk_click2dial.py:233
+#, python-format
+msgid "No internal phone number configured for the current user"
+msgstr "Aucun numéro de téléphone interne n'est configuré pour le présent utilisateur."
+
+#. module: asterisk_click2dial
+#: view:wizard.open.calling.partner:0
+msgid "Cancel"
+msgstr "Annuler"
+
+#. module: asterisk_click2dial
+#: model:ir.model,name:asterisk_click2dial.model_res_users
+msgid "res.users"
+msgstr "res.users"
+
+#. module: asterisk_click2dial
+#: code:addons/asterisk_click2dial/asterisk_click2dial.py:112
+#, python-format
+msgid "The phone number is not written in valid national format."
+msgstr "Le numéro de téléphone n'est pas dans un format national valide."
+
+#. module: asterisk_click2dial
+#: field:asterisk.server,password:0
+msgid "AMI password"
+msgstr "Mot de passe AMI"
+
+#. module: asterisk_click2dial
+#: view:wizard.open.calling.partner:0
+msgid "Partner form"
+msgstr "Fiche partenaire"
+
+#. module: asterisk_click2dial
+#: help:res.users,asterisk_server_id:0
+msgid "Asterisk server on which the user's phone is connected. If you leave this field empty, it will use the first Asterisk server of the user's company."
+msgstr "Asterisk server on which the user's phone is connected. If you leave this field empty, it will use the first Asterisk server of the user's company."
+
+#. module: asterisk_click2dial
+#: field:res.users,asterisk_server_id:0
+msgid "Asterisk server"
+msgstr "Serveur Asterisk"
+
+#. module: asterisk_click2dial
+#: model:ir.model,name:asterisk_click2dial.model_asterisk_server
+msgid "Asterisk Servers"
+msgstr "Serveurs Asterisk"
+
+#. module: asterisk_click2dial
+#: selection:res.users,asterisk_chan_type:0
+msgid "DAHDI"
+msgstr "DAHDI"
+
+#. module: asterisk_click2dial
+#: field:asterisk.server,login:0
+msgid "AMI login"
+msgstr "Nom d'utilisateur AMI"
+
+#. module: asterisk_click2dial
+#: code:addons/asterisk_click2dial/asterisk_click2dial.py:195
+#, python-format
+msgid "No Asterisk server configured for the company '%s'."
+msgstr "Aucun serveur Asterisk n'est associé à la société '%s'."
+
+#. module: asterisk_click2dial
+#: help:wizard.open.calling.partner,to_update_partner_address_id:0
+msgid "Partner contact on which the phone or mobile number will be written"
+msgstr "Partner contact on which the phone or mobile number will be written"
+
+#. module: asterisk_click2dial
+#: help:asterisk.server,country_prefix:0
+msgid "Phone prefix of the country where the Asterisk server is located. For e.g. the phone prefix for France is '33'. If the phone number to dial starts with the 'My country prefix', OpenERP will remove the country prefix from the phone number and add the 'out prefix' followed by the 'national prefix'. If the phone number to dial doesn't start with the 'My country prefix', OpenERP will add the 'out prefix' followed by the 'international prefix'."
+msgstr "Préfixe téléphonique du pays dans lequel est situé le serveur Asterisk. Par exemple, le préfixe téléphonique de la France est '33'. Si le numéro de téléphone à appeler commence par le préfixe du pays, OpenERP supprimera ce préfixe du numéro de téléphone à composer et ajoutera le préfixe pour l'extérieur suivi par le préfixe national. Si le numéro de téléphone à appeler ne commence pas par le préfixe du pays, OpenERP ajoutera le préfixe pour l'extérieur suivi par le préfixe international."
+
+#. module: asterisk_click2dial
+#: help:res.users,callerid:0
+msgid "Caller ID used for the calls initiated by this user."
+msgstr "'Caller ID' des appels passés par l'utilisateur."
+
+#. module: asterisk_click2dial
+#: view:res.company:0
+msgid "IPBX"
+msgstr "IPBX"
+
+#. module: asterisk_click2dial
+#: view:wizard.open.calling.partner:0
+msgid "with calling number as phone"
+msgstr "with calling number as phone"
+
+#. module: asterisk_click2dial
+#: sql_constraint:res.company:0
+msgid "The company name must be unique !"
+msgstr "Le nom de la société doit être unique !"
+
+#. module: asterisk_click2dial
+#: view:wizard.open.calling.partner:0
+msgid "Update phone"
+msgstr "Update phone"
+
+#. module: asterisk_click2dial
+#: help:asterisk.server,alert_info:0
+msgid "Set Alert-Info header in SIP request to user's IP Phone for the click2dial feature. If empty, the Alert-Info header will not be added. You can use it to have a special ring tone for click2dial (a silent one !) or to activate auto-answer for example. If you want to have several variable headers, separate them with '|'."
+msgstr "Set Alert-Info header in SIP request to user's IP Phone for the click2dial feature. If empty, the Alert-Info header will not be added. You can use it to have a special ring tone for click2dial (a silent one !) or to activate auto-answer for example. If you want to have several variable headers, separate them with '|'."
+
+#. module: asterisk_click2dial
+#: view:wizard.open.calling.partner:0
+msgid "Related invoices"
+msgstr "Factures associées"
+
+#. module: asterisk_click2dial
+#: selection:res.users,asterisk_chan_type:0
+msgid "H323"
+msgstr "H323"
+
+#. module: asterisk_click2dial
+#: field:res.users,variable:0
+msgid "User-specific Variable"
+msgstr "Variable spécifique à l'utilisateur"
 
 #. module: asterisk_click2dial
 #: field:asterisk.server,port:0
 msgid "Port"
-msgstr ""
+msgstr "Port"
 
 #. module: asterisk_click2dial
-#: constraint:asterisk.server:0
-msgid "You should enter a 'Wait time' value between 1 and 120 seconds"
+#: view:wizard.open.calling.partner:0
+msgid "No partner contact found in OpenERP with this number"
 msgstr ""
-
-#. module: asterisk_click2dial
-#: code:addons/asterisk_click2dial/asterisk_click2dial.py:0
-#, python-format
-msgid "Can't resolve the DNS of the Asterisk server : "
-msgstr ""
-
-#. module: asterisk_click2dial
-#: code:addons/asterisk_click2dial/asterisk_click2dial.py:0
-#, python-format
-msgid "Invalid phone number"
-msgstr ""
-
-#. module: asterisk_click2dial
-#: code:addons/asterisk_click2dial/asterisk_click2dial.py:0
-#, python-format
-msgid "The phone number is not written in valid international format. Example of valid international format : +33 1 41 98 12 42"
-msgstr ""
-
-#. module: asterisk_click2dial
-#: code:addons/asterisk_click2dial/asterisk_click2dial.py:0
-#, python-format
-msgid "The phone number is not written in valid national format."
-msgstr ""
-
-#. module: asterisk_click2dial
-#: code:addons/asterisk_click2dial/asterisk_click2dial.py:0
-#, python-format
-msgid "The phone number is not written in valid format."
-msgstr ""
-
-#. module: asterisk_click2dial
-#: code:addons/asterisk_click2dial/asterisk_click2dial.py:0
-#, python-format
-msgid "Error :"
-msgstr ""
-
-#. module: asterisk_click2dial
-#: code:addons/asterisk_click2dial/asterisk_click2dial.py:0
-#, python-format
-msgid "There is no phone number !"
-msgstr ""
-
-#. module: asterisk_click2dial
-#: code:addons/asterisk_click2dial/asterisk_click2dial.py:0
-#, python-format
-msgid "No Asterisk server configured for the current user."
-msgstr ""
-
-#. module: asterisk_click2dial
-#: code:addons/asterisk_click2dial/asterisk_click2dial.py:0
-#, python-format
-msgid "No channel type configured for the current user."
-msgstr ""
-
-#. module: asterisk_click2dial
-#: code:addons/asterisk_click2dial/asterisk_click2dial.py:0
-#, python-format
-msgid "No internal phone number configured for the current user"
-msgstr ""
-
-#. module: asterisk_click2dial
-#: code:addons/asterisk_click2dial/asterisk_click2dial.py:0
-#, python-format
-msgid "The connection from OpenERP to the Asterisk server failed. Please check the configuration on OpenERP and on Asterisk."
-msgstr ""
-

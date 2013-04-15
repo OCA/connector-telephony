@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
   Asterisk Click2dial module for OpenERP
-  Copyright (C) 2010-2012 Alexis de Lattre <alexis@via.ecp.fr>
+  Copyright (C) 2010-2013 Alexis de Lattre <alexis@via.ecp.fr>
   The licence is in the file __terp__.py
 -->
 
@@ -32,10 +32,10 @@
             <field name="company_id" select="1" invisible="not context.get('asterisk_server_main_view', False)" />
             <newline />
             <field name="name" select="1" />
-            <field name="active" select="2" />
+            <field name="active" />
             <field name="ip_address" select="1" />
-            <field name="port" select="2" />
-            <field name="login" select="2" />
+            <field name="port" />
+            <field name="login" />
             <field name="password" password="True" />
             <field name="context" />
             <field name="extension_priority" />
@@ -43,9 +43,9 @@
             <field name="national_prefix" />
             <field name="international_prefix" />
             <field name="country_prefix" select="1" />
-            <field name="national_format_allowed" />
             <field name="alert_info" />
             <field name="wait_time" />
+            <field name="number_of_digits_to_match_from_end" />
         </form>
     </field>
 </record>
@@ -75,8 +75,9 @@
     <field name="context">{'asterisk_server_main_view': True}</field>
 </record>
 
-<!-- Menu entry under Administration > Configuration -->
-<menuitem action="action_asterisk_server" id="act_menu_ast_server" parent="base.menu_config" />
+<!-- Menu entry under Settings > Configuration -->
+<menuitem id="menu_asterisk_servers" name="Asterisk" parent="base.menu_config" groups="base.group_extended"/>
+<menuitem action="action_asterisk_server" id="act_menu_ast_server" parent="menu_asterisk_servers" sequence="50"/>
 
 
 </data>

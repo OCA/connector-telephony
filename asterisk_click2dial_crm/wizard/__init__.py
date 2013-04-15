@@ -1,10 +1,9 @@
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
-#    OpenERP, Open Source Management Solution
-#    Copyright (c) 2011 Zikzakmedia S.L. (http://zikzakmedia.com) All Rights Reserved.
-#                       Jesús Martín <jmartin@zikzakmedia.com>
-#    $Id$
+#    Asterisk click2dial CRM module for OpenERP
+#    Copyright (c) 2012 Akretion (http://www.akretion.com/)
+#    @author: Alexis de Lattre <alexis.delattre@akretion.com>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as published by
@@ -21,24 +20,4 @@
 #
 ##############################################################################
 
-{
-    'name': 'Asterisk Click2dial CRM',
-    "version": "0.1",
-    "author": "Zikzakmedia SL",
-    "website": "http://www.zikzakmedia.com",
-    "license" : "AGPL-3",
-    'category': 'Generic Modules/Others',
-    "description": """
-    Create a outbound phone call when the user makes a call phone by clicking
-    the click2dial button of the partner address view, and opens it in a new tab.
-    """,
-    "depends": [
-        'asterisk_click2dial',
-        'crm',
-    ],
-    "init_xml" : [ ],
-    "demo_xml" : [ ],
-    "update_xml" : [
-    ],
-    "installable": True,
-}
+import create_crm_phonecall
