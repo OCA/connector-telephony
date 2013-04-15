@@ -224,8 +224,8 @@ class asterisk_server(osv.osv):
             ast_manager = Manager.Manager((ast_server.ip_address, ast_server.port), ast_server.login, ast_server.password)
         except Exception, e:
             logger.notifyChannel('click2dial', netsvc.LOG_ERROR, "Error in the Originate request to Asterisk server %s" % ast_server.ip_address)
-            logger.notifyChannel('click2dial', netsvc.LOG_ERROR, "Here is the detail of the error : '%s'" % e.strerror)
-            raise osv.except_osv(_('Error :'), _("Problem in the request from OpenERP to Asterisk. Here is the detail of the error: '%s'" % e.strerror))
+            logger.notifyChannel('click2dial', netsvc.LOG_ERROR, "Here is the detail of the error : '%s'" % unicode(e))
+            raise osv.except_osv(_('Error :'), _("Problem in the request from OpenERP to Asterisk. Here is the detail of the error: '%s'" % unicode(e)))
             return False
 
         return (user, ast_server, ast_manager)
@@ -263,8 +263,8 @@ class asterisk_server(osv.osv):
                 variable = variable)
         except Exception, e:
             logger.notifyChannel('click2dial', netsvc.LOG_ERROR, "Error in the Originate request to Asterisk server %s" % ast_server.ip_address)
-            logger.notifyChannel('click2dial', netsvc.LOG_ERROR, "Here is the detail of the error : '%s'" % e.strerror)
-            raise osv.except_osv(_('Error :'), _("Click to dial with Asterisk failed.\nHere is the error: '%s'" % e.strerror))
+            logger.notifyChannel('click2dial', netsvc.LOG_ERROR, "Here is the detail of the error : '%s'" % unicode(e))
+            raise osv.except_osv(_('Error :'), _("Click to dial with Asterisk failed.\nHere is the error: '%s'" % unicode(e)))
 
         finally:
             ast_manager.Logoff()
@@ -292,8 +292,8 @@ class asterisk_server(osv.osv):
                     break
         except Exception, e:
             logger.notifyChannel('click2dial', netsvc.LOG_ERROR, "Error in the Status request to Asterisk server %s" % ast_server.ip_address)
-            logger.notifyChannel('click2dial', netsvc.LOG_ERROR, "Here is the detail of the error : '%s'" % e.strerror)
-            raise osv.except_osv(_('Error :'), _("Can't get calling number from  Asterisk.\nHere is the error: '%s'" % e.strerror))
+            logger.notifyChannel('click2dial', netsvc.LOG_ERROR, "Here is the detail of the error : '%s'" % unicode(e))
+            raise osv.except_osv(_('Error :'), _("Can't get calling number from  Asterisk.\nHere is the error: '%s'" % unicode(e)))
 
         finally:
             ast_manager.Logoff()
