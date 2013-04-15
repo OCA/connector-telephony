@@ -48,9 +48,9 @@ class wizard_open_calling_partner(osv.osv_memory):
         '''Thanks to the default_get method, we are able to query Asterisk and
         get the corresponding partner when we launch the wizard'''
         res = {}
-        #calling_number = self.pool.get('asterisk.server')._get_calling_number(cr, uid, context=context)
+        calling_number = self.pool.get('asterisk.server')._get_calling_number(cr, uid, context=context)
         #To test the code without Asterisk server
-        calling_number = "0141981242"
+        #calling_number = "0141981242"
         if calling_number:
             res['calling_number'] = calling_number
             partner = self.pool.get('res.partner.address').get_partner_from_phone_number(cr, uid, calling_number, context=context)
