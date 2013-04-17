@@ -37,8 +37,6 @@ class wizard_create_crm_phonecall(osv.osv_memory):
     def _create_open_crm_phonecall(self, cr, uid, partner_address, crm_categ, context=None):
         if context is None:
             context = {}
-        crm_phonecall_obj = self.pool.get('crm.phonecall')
-
         categ_ids = self.pool.get('crm.case.categ').search(cr, uid, [('name','=',crm_categ)], context={'lang': 'en_US'})
         case_section_ids = self.pool.get('crm.case.section').search(cr, uid, [('member_ids', 'in', uid)], context=context)
         context.update({

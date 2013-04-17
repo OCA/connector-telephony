@@ -475,8 +475,8 @@ class res_partner_address(osv.osv):
         if not isinstance(number, (str, unicode)):
             _logger.warning(u"Number should be a 'str' or 'unicode' but it is a '%s'" % type(number))
             return False
-            _logger.warning(u"Number should only contain digits.")
         if not number.isdigit():
+            _logger.warning(u"Number should only contain digits.")
             return False
 
         # We try to match a phone or mobile number with the same end
