@@ -1,4 +1,6 @@
 #! /bin/sh
+# -*- encoding: utf-8 -*-
+#
 # Written by Alexis de Lattre <alexis.delattre@akretion.com>
 
 # Example of wrapper for get_cid_name.py which makes sure that the
