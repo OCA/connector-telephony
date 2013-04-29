@@ -206,4 +206,13 @@ class wizard_open_calling_partner(osv.osv_memory):
             res['value'].update({'current_phone': False, 'current_mobile': False})
         return res
 
+    def create_incoming_phonecall(self, cr, uid, ids, crm_categ, context=None):
+        '''Started by button on 'open calling partner wizard'''
+        # HACK for OpenERP v5 : code moved from asterisk_click2dial_crm to
+        # asterisk_click2dial because we can't inherit a wizard
+        partner_address = self.browse(cr, uid, ids[0], context=context).partner_address_id
+        action = self.pool.get('wizard.create.crm.phonecall')._create_open_crm_phonecall(cr, uid, partner_address, crm_categ='Inbound', context=context)
+        return action
+
+
 wizard_open_calling_partner()

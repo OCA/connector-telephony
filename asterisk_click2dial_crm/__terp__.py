@@ -51,7 +51,7 @@
     """,
     "depends": [
         'asterisk_click2dial',
-        'crm',
+        'crm_configuration',
     ],
     "init_xml": [],
     "demo_xml": [],
@@ -59,6 +59,7 @@
         'wizard/open_calling_partner_view.xml',
         'wizard/create_crm_phonecall_view.xml',
         'res_users_view.xml',
+        'res_partner_view.xml',
     ],
     "installable": True,
 }

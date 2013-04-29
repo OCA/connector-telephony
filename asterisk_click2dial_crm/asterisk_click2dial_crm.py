@@ -26,37 +26,6 @@ from osv import osv, fields
 # Lib to translate error messages
 from tools.translate import _
 
-class res_partner_address(osv.osv):
-    _inherit = "res.partner.address"
-
-    def dial(self, cr, uid, ids, phone_field='phone', context=None):
-        '''
-        This method open the phone call history when the phone click2dial
-        button of asterisk_click2dial module is pressed
-        :return the phone call history view of the partner
-        '''
-        if context is None:
-            context = {}
-        super(res_partner_address, self).dial(cr, uid, ids, phone_field=phone_field, context=context)
-        user = self.pool.get('res.users').browse(cr, uid, uid, context=context)
-        context['partner_address_id'] = ids[0]
-        action_start_wizard = {
-            'name': 'Create phone call in CRM',
-            'type': 'ir.actions.act_window',
-            'res_model': 'wizard.create.crm.phonecall',
-            'view_type': 'form',
-            'view_mode': 'form',
-            'nodestroy': True,
-            'target': 'new',
-            'context': context,
-            }
-        if user.context_propose_creation_crm_call:
-            return action_start_wizard
-        else:
-            return True
-
-res_partner_address()
-
 
 class res_users(osv.osv):
     _inherit = "res.users"

@@ -15,6 +15,7 @@
     <field name="type">form</field>
     <field name="arch" type="xml">
         <form string="CRM phone call">
+            <field name="name" invisible="True"/>
             <label string="Create a phone call in the CRM ?" colspan="2"/>
             <newline />
             <button name="button_create_outgoing_phonecall" icon="gtk-new" string="Yes" type="object"/>

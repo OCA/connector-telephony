@@ -15,16 +15,17 @@
     <field name="inherit_id" ref="asterisk_click2dial.view_open_calling_partner"/>
     <field name="type">form</field>
     <field name="arch" type="xml">
-        <button name="open_invoices" position="after">
-            <button name="create_incoming_phonecall" icon="gtk-new" string="Create call in CRM" type="object" />
-        </button>
-        <!-- We enlarge the small original 'Cancel' button -->
-        <xpath expr="/form/group/button[@name='open_partner']/../button[@special='cancel']" position="attributes">
-            <attribute name="colspan">4</attribute>
-        </xpath>
+        <data>
+            <button name="open_invoices" position="after">
+                <button name="create_incoming_phonecall" icon="gtk-new" string="Create call in CRM" type="object" />
+                <newline/>
+                <button special="cancel" icon="gtk-cancel" string="Cancel" name="cancel2" colspan="4"/>
+            </button>
+            <button name="cancel1" position="replace">
+            </button>
+        </data>
     </field>
 </record>
-
 
 </data>
 </openerp>

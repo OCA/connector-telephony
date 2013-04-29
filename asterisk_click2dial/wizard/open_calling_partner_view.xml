@@ -25,7 +25,7 @@
                 <button name="open_partner" icon="gtk-go-forward" string="Partner form" type="object" />
                 <button name="open_sale_orders" icon="gtk-go-forward" string="Related sale orders" type="object" />
                 <button name="open_invoices" icon="gtk-go-forward" string="Related invoices" type="object" />
-                <button special="cancel" icon="gtk-cancel" string="Cancel" />
+                <button special="cancel" icon="gtk-cancel" string="Cancel" name="cancel1"/>
                 <newline />
                 <!-- TODO : try to reimplement the scenario where the partner_address exist but not the partner ; cf the 6.1 branch -->
             </group>
