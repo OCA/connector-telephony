@@ -1,48 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
   Asterisk Click2dial module for OpenERP
-  Copyright (C) 2010-2012 Alexis de Lattre <alexis@via.ecp.fr>
+  Copyright (C) 2010-2013 Alexis de Lattre <alexis@via.ecp.fr>
   The licence is in the file __openerp__.py
 -->
 
 <openerp>
 <data noupdate="1">
 
-<!-- Default access rules for the new asterisk.server object -->
-<record id="ir_model_access_asterisk_server_user" model="ir.model.access">
-    <field name="model_id" ref="asterisk_click2dial.model_asterisk_server"/>
-    <field name="name" eval="&quot;&quot;&quot;asterisk.server_user&quot;&quot;&quot;" />
-    <field name="group_id" ref="base.group_user"/>
-    <field name="perm_read" eval="1"/>
-    <field name="perm_write" eval="0"/>
-    <field name="perm_unlink" eval="0"/>
-    <field name="perm_create" eval="0"/>
-</record>
-
-<record id="ir_model_access_asterisk_server_system" model="ir.model.access">
-    <field name="model_id" ref="asterisk_click2dial.model_asterisk_server"/>
-    <field name="name" eval="&quot;&quot;&quot;asterisk.server_system&quot;&quot;&quot;"/>
-    <field name="group_id" ref="base.group_system"/>
-    <field name="perm_read" eval="1"/>
-    <field name="perm_write" eval="1"/>
-    <field name="perm_unlink" eval="1"/>
-    <field name="perm_create" eval="1"/>
-</record>
-
 <!-- New group dedicated to the "Get CallerID name from OpenERP" feature -->
 <record id="group_asterisk_cid" model="res.groups">
     <field name="name">Asterisk CallerID</field>
-</record>
-
-<!-- Only add the minimum rights to the "Asterisk CallerID" group -->
-<record id="ir_model_access_asterisk_cid" model="ir.model.access">
-    <field name="model_id" ref="base.model_res_partner"/>
-    <field name="name" eval="&quot;&quot;&quot;res.partner_read&quot;&quot;&quot;"/>
-    <field name="group_id" ref="asterisk_click2dial.group_asterisk_cid"/>
-    <field name="perm_read" eval="1"/>
-    <field name="perm_write" eval="0"/>
-    <field name="perm_unlink" eval="0"/>
-    <field name="perm_create" eval="0"/>
 </record>
 
 </data>
