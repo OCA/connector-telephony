@@ -50,13 +50,13 @@
                 <button name="action_dial_mobile" string="Dial" type="object" attrs="{'invisible':[('mobile','=',False)]}"/>
             </group>
         </xpath>
-        <xpath expr="//form[@string='Contact']/div/group/field[@name='phone']" position="replace">
+        <xpath expr="//form[@string='Contact']/sheet/group/field[@name='phone']" position="replace">
             <group colspan="2" col="8">
                 <field name="phone" colspan="7" />
                 <button name="action_dial_phone" string="Dial" type="object" attrs="{'invisible':[('phone','=',False)]}"/>
             </group>
         </xpath>
-        <xpath expr="//form[@string='Contact']/div/group/field[@name='mobile']" position="replace">
+        <xpath expr="//form[@string='Contact']/sheet/group/field[@name='mobile']" position="replace">
             <group colspan="2" col="8">
                 <field name="mobile" colspan="7" />
                 <button name="action_dial_mobile" string="Dial" type="object" attrs="{'invisible':[('mobile','=',False)]}"/>
