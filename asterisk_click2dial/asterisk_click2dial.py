@@ -299,7 +299,7 @@ class asterisk_server(osv.osv):
                     _logger.debug("Found a matching Event in 'Ring' state")
                     calling_party_number = chan.get('CallerIDNum')
                     break
-                if chan.get('ChannelState') == '6' and sip_account in chan.get('BridgedChannel'): # 6 = Up
+                if chan.get('ChannelState') == '6' and sip_account in chan.get('BridgedChannel', ''): # 6 = Up
                     _logger.debug("Found a matching Event in 'Up' state")
                     calling_party_number = chan.get('CallerIDNum')
                     break
