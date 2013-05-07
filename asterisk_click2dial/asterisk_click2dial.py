@@ -303,6 +303,11 @@ class asterisk_server(osv.osv):
                     _logger.debug("Found a matching Event in 'Up' state")
                     calling_party_number = chan.get('CallerIDNum')
                     break
+                # Compatibility with Asterisk 1.4
+                if chan.get('State') == 'Up' and sip_account in chan.get('Link', ''):
+                    _logger.debug("Found a matching Event in 'Up' state")
+                    calling_party_number = chan.get('CallerIDNum')
+                    break
         except Exception, e:
             _logger.error("Error in the Status request to Asterisk server %s" % ast_server.ip_address)
             _logger.error("Here is the detail of the error : '%s'" % unicode(e))
