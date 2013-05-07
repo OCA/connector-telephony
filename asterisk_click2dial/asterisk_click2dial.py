@@ -290,6 +290,11 @@ class asterisk_server(osv.osv):
                     logger.notifyChannel('click2dial', netsvc.LOG_DEBUG, "Found a matching Event in 'Up' state")
                     calling_party_number = chan.get('CallerIDNum')
                     break
+                # Compatibility with Asterisk 1.4
+                if chan.get('State') == 'Up' and sip_account in chan.get('Link', ''):
+                    logger.notifyChannel('click2dial', netsvc.LOG_DEBUG, "Found a matching Event in 'Up' state")
+                    calling_party_number = chan.get('CallerIDNum')
+                    break
         except Exception, e:
             logger.notifyChannel('click2dial', netsvc.LOG_ERROR, "Error in the Status request to Asterisk server %s" % ast_server.ip_address)
             logger.notifyChannel('click2dial', netsvc.LOG_ERROR, "Here is the detail of the error : '%s'" % unicode(e))
