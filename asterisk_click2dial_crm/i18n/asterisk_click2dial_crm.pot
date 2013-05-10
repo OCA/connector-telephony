@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: OpenERP Server 6.1\n"
+"Project-Id-Version: OpenERP Server 7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-06-02 23:46+0000\n"
-"PO-Revision-Date: 2012-06-02 23:46+0000\n"
+"POT-Creation-Date: 2013-05-09 18:57+0000\n"
+"PO-Revision-Date: 2013-05-09 18:57+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,19 +16,8 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: asterisk_click2dial_crm
-#: model:ir.actions.act_window,name:asterisk_click2dial_crm.action_create_crm_phonecall
-msgid "Create CRM phonecall"
-msgstr ""
-
-#. module: asterisk_click2dial_crm
-#: code:addons/asterisk_click2dial_crm/wizard/create_crm_phonecall.py:45
-#, python-format
-msgid "Call with"
-msgstr ""
-
-#. module: asterisk_click2dial_crm
-#: view:wizard.open.calling.partner:0
-msgid "Create call in CRM"
+#: view:crm.lead:0
+msgid "Dial"
 msgstr ""
 
 #. module: asterisk_click2dial_crm
@@ -42,18 +31,18 @@ msgid "No"
 msgstr ""
 
 #. module: asterisk_click2dial_crm
-#: model:ir.model,name:asterisk_click2dial_crm.model_wizard_open_calling_partner
-msgid "wizard.open.calling.partner"
-msgstr ""
-
-#. module: asterisk_click2dial_crm
 #: model:ir.model,name:asterisk_click2dial_crm.model_wizard_create_crm_phonecall
 msgid "wizard.create.crm.phonecall"
 msgstr ""
 
 #. module: asterisk_click2dial_crm
-#: field:res.users,context_propose_creation_crm_call:0
-msgid "Propose to create a call in CRM after a click2dial"
+#: field:crm.lead,phone_e164:0
+msgid "Phone in E.164 format"
+msgstr ""
+
+#. module: asterisk_click2dial_crm
+#: model:ir.model,name:asterisk_click2dial_crm.model_crm_lead
+msgid "Lead/Opportunity"
 msgstr ""
 
 #. module: asterisk_click2dial_crm
@@ -62,17 +51,86 @@ msgid "Create a phone call in the CRM ?"
 msgstr ""
 
 #. module: asterisk_click2dial_crm
+#: code:addons/asterisk_click2dial_crm/asterisk_click2dial_crm.py:166
+#, python-format
+msgid "The phone number isn't stored in the standard E.164 format. Try to run the wizard 'Reformat all phone numbers' from the menu Settings > Configuration > Asterisk."
+msgstr ""
+
+#. module: asterisk_click2dial_crm
+#: code:addons/asterisk_click2dial_crm/asterisk_click2dial_crm.py:134
+#, python-format
+msgid "You should set a country on the company '%s'"
+msgstr ""
+
+#. module: asterisk_click2dial_crm
 #: model:ir.model,name:asterisk_click2dial_crm.model_res_users
-msgid "res.users"
+msgid "Users"
+msgstr ""
+
+#. module: asterisk_click2dial_crm
+#: field:crm.lead,fax_e164:0
+msgid "Fax in E.164 format"
+msgstr ""
+
+#. module: asterisk_click2dial_crm
+#: code:addons/asterisk_click2dial_crm/asterisk_click2dial_crm.py:141
+#, python-format
+msgid "Cannot reformat the phone number '%s' to international format. Error message: %s"
+msgstr ""
+
+#. module: asterisk_click2dial_crm
+#: field:res.users,context_propose_creation_crm_call:0
+msgid "Propose to create a call in CRM after a click2dial"
+msgstr ""
+
+#. module: asterisk_click2dial_crm
+#: code:addons/asterisk_click2dial_crm/asterisk_click2dial_crm.py:134
+#: code:addons/asterisk_click2dial_crm/asterisk_click2dial_crm.py:141
+#: code:addons/asterisk_click2dial_crm/asterisk_click2dial_crm.py:164
+#: code:addons/asterisk_click2dial_crm/asterisk_click2dial_crm.py:166
+#, python-format
+msgid "Error :"
+msgstr ""
+
+#. module: asterisk_click2dial_crm
+#: model:ir.actions.act_window,name:asterisk_click2dial_crm.action_create_crm_phonecall
+msgid "Create CRM phonecall"
+msgstr ""
+
+#. module: asterisk_click2dial_crm
+#: view:wizard.open.calling.partner:0
+msgid "Create Call in CRM"
+msgstr ""
+
+#. module: asterisk_click2dial_crm
+#: model:ir.model,name:asterisk_click2dial_crm.model_wizard_open_calling_partner
+#: model:ir.ui.menu,name:asterisk_click2dial_crm.menu_open_calling_partner_phone
+msgid "Open calling partner"
+msgstr ""
+
+#. module: asterisk_click2dial_crm
+#: field:crm.lead,mobile_e164:0
+msgid "Mobile in E.164 format"
+msgstr ""
+
+#. module: asterisk_click2dial_crm
+#: view:res.users:0
+msgid "Telephony preferences"
+msgstr ""
+
+#. module: asterisk_click2dial_crm
+#: code:addons/asterisk_click2dial_crm/asterisk_click2dial_crm.py:164
+#, python-format
+msgid "There is no phone number !"
+msgstr ""
+
+#. module: asterisk_click2dial_crm
+#: model:ir.model,name:asterisk_click2dial_crm.model_res_partner
+msgid "Partner"
 msgstr ""
 
 #. module: asterisk_click2dial_crm
 #: view:wizard.create.crm.phonecall:0
 msgid "Yes"
-msgstr ""
-
-#. module: asterisk_click2dial_crm
-#: model:ir.model,name:asterisk_click2dial_crm.model_res_partner_address
-msgid "Partner Addresses"
 msgstr ""
 
