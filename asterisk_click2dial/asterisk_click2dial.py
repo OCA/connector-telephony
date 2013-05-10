@@ -273,7 +273,8 @@ class asterisk_server(osv.osv):
                 priority = str(ast_server.extension_priority),
                 timeout = str(ast_server.wait_time*1000),
                 caller_id = user.callerid,
-                variable = variable)
+                account = user.cdraccount,
+		variable = variable)
         except Exception, e:
             _logger.error("Error in the Originate request to Asterisk server %s" % ast_server.ip_address)
             _logger.error("Here is the detail of the error : '%s'" % unicode(e))
@@ -335,7 +336,9 @@ class res_users(osv.osv):
             help="Caller ID used for the calls initiated by this user."),
         # You'd probably think : Asterisk should reuse the callerID of sip.conf !
         # But it cannot, cf http://lists.digium.com/pipermail/asterisk-users/2012-January/269787.html
-        'asterisk_chan_type': fields.selection([
+        'cdraccount': fields.char('CDR Account', size=50,
+            help="CDR Account used for billing this user."),
+	'asterisk_chan_type': fields.selection([
             ('SIP', 'SIP'),
             ('IAX2', 'IAX2'),
             ('DAHDI', 'DAHDI'),
