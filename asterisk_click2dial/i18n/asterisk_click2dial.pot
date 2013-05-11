@@ -42,6 +42,11 @@ msgid "Caller ID"
 msgstr "Identification de l'appelant"
 
 #. module: asterisk_click2dial
+#: field:res.users,cdraccount:0
+msgid "CDR Account"
+msgstr ""
+
+#. module: asterisk_click2dial
 #: field:asterisk.server,wait_time:0
 msgid "Wait time (sec)"
 msgstr "Temps d'attente (sec)"
@@ -253,6 +258,11 @@ msgstr "Erreur :"
 #: help:res.users,internal_number:0
 msgid "User's internal phone number."
 msgstr "Numéro de téléphone interne de l'utilisateur."
+
+#. module: asterisk_click2dial
+#: help:res.users,cdraccount:0
+msgid "Call Detail Record (CDR) account used for billing this user."
+msgstr ""
 
 #. module: asterisk_click2dial
 #: model:ir.actions.act_window,name:asterisk_click2dial.action_open_calling_partner

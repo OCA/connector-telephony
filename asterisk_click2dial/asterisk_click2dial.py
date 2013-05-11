@@ -74,6 +74,7 @@ class asterisk_server(osv.osv):
         'extension_priority': 1,
         'wait_time': 15,
         'number_of_digits_to_match_from_end': 9,
+        'company_id': lambda self, cr, uid, context: self.pool.get('res.company')._company_default_get(cr, uid, 'asterisk.server', context=context),
     }
 
     def _check_validity(self, cr, uid, ids):
@@ -273,6 +274,7 @@ class asterisk_server(osv.osv):
                 priority = str(ast_server.extension_priority),
                 timeout = str(ast_server.wait_time*1000),
                 caller_id = user.callerid,
+                account = user.cdraccount,
                 variable = variable)
         except Exception, e:
             _logger.error("Error in the Originate request to Asterisk server %s" % ast_server.ip_address)
@@ -335,6 +337,8 @@ class res_users(osv.osv):
             help="Caller ID used for the calls initiated by this user."),
         # You'd probably think : Asterisk should reuse the callerID of sip.conf !
         # But it cannot, cf http://lists.digium.com/pipermail/asterisk-users/2012-January/269787.html
+        'cdraccount': fields.char('CDR Account', size=50,
+            help="Call Detail Record (CDR) account used for billing this user."),
         'asterisk_chan_type': fields.selection([
             ('SIP', 'SIP'),
             ('IAX2', 'IAX2'),
@@ -379,43 +383,45 @@ class res_partner(osv.osv):
     _inherit = "res.partner"
 
 
-    def _format_phonenumber_to_e164(self, cr, uid, ids, name, arg, context=None):
+    def generic_phonenumber_to_e164(self, cr, uid, ids, object, field_from_to_seq, context=None):
         result = {}
-        for partner in self.read(cr, uid, ids, ['phone', 'mobile', 'fax'], context=context):
-            result[partner['id']] = {}
-            for fromfield, tofield in [('phone', 'phone_e164'), ('mobile', 'mobile_e164'), ('fax', 'fax_e164')]:
-                if not partner.get(fromfield):
+        from_field_seq = [item[0] for item in field_from_to_seq]
+        for record in object.read(cr, uid, ids, from_field_seq, context=context):
+            result[record['id']] = {}
+            for fromfield, tofield in field_from_to_seq:
+                if not record.get(fromfield):
                     res = False
                 else:
                     try:
-                        res = phonenumbers.format_number(phonenumbers.parse(partner.get(fromfield), None), phonenumbers.PhoneNumberFormat.E164)
+                        res = phonenumbers.format_number(phonenumbers.parse(record.get(fromfield), None), phonenumbers.PhoneNumberFormat.E164)
                     except Exception, e:
-                        _logger.error("Cannot reformat the phone number '%s' to E.164 format. Error message: %s" % (partner.get(fromfield), e))
+                        _logger.error("Cannot reformat the phone number '%s' to E.164 format. Error message: %s" % (record.get(fromfield), e))
                         _logger.error("You should fix this number and run the wizard 'Reformat all phone numbers' from the menu Settings > Configuration > Asterisk")
                     # If I raise an exception here, it won't be possible to install
                     # the module on a DB with bad phone numbers
-                        #raise osv.except_osv(_('Error :'), _("Cannot reformat the phone number '%s' to E.164 format. Error message: %s" % (partner.get(fromfield), e)))
+                        #raise osv.except_osv(_('Error :'), _("Cannot reformat the phone number '%s' to E.164 format. Error message: %s" % (record.get(fromfield), e)))
                         res = False
-                result[partner['id']][tofield] = res
-        #print "RESULT _format_phonenumber_to_e164", result
+                result[record['id']][tofield] = res
+        print "RESULT generic_phonenumber_to_e164", result
         return result
 
+    def format_phonenumber_to_e164(self, cr, uid, ids, name, arg, context=None):
+        return self.generic_phonenumber_to_e164(cr, uid, ids, self, [('phone', 'phone_e164'), ('mobile', 'mobile_e164'), ('fax', 'fax_e164')], context=context)
 
     _columns = {
-        'phone_e164': fields.function(_format_phonenumber_to_e164, type='char', size=64, string='Phone in E.164 format', readonly=True, multi="e164", store={
+        'phone_e164': fields.function(format_phonenumber_to_e164, type='char', size=64, string='Phone in E.164 format', readonly=True, multi="e164", store={
             'res.partner': (lambda self, cr, uid, ids, c={}: ids, ['phone'], 10),
             }),
-        'mobile_e164': fields.function(_format_phonenumber_to_e164, type='char', size=64, string='Mobile in E.164 format', readonly=True, multi="e164", store={
+        'mobile_e164': fields.function(format_phonenumber_to_e164, type='char', size=64, string='Mobile in E.164 format', readonly=True, multi="e164", store={
             'res.partner': (lambda self, cr, uid, ids, c={}: ids, ['mobile'], 10),
             }),
-        'fax_e164': fields.function(_format_phonenumber_to_e164, type='char', size=64, string='Fax in E.164 format', readonly=True, multi="e164", store={
+        'fax_e164': fields.function(format_phonenumber_to_e164, type='char', size=64, string='Fax in E.164 format', readonly=True, multi="e164", store={
             'res.partner': (lambda self, cr, uid, ids, c={}: ids, ['fax'], 10),
             }),
         }
 
-    def _reformat_phonenumbers(self, cr, uid, vals, context=None):
+    def _generic_reformat_phonenumbers(self, cr, uid, vals, phonefields=['phone', 'fax', 'mobile'], context=None):
         """Reformat phone numbers in international format i.e. +33141981242"""
-        phonefields = ['phone', 'fax', 'mobile']
         if any([vals.get(field) for field in phonefields]):
             user = self.pool['res.users'].browse(cr, uid, uid, context=context)
             # country_id on res.company is a fields.function that looks at
@@ -438,18 +444,24 @@ class res_partner(osv.osv):
 
 
     def create(self, cr, uid, vals, context=None):
-        vals_reformated = self._reformat_phonenumbers(cr, uid, vals, context=context)
+        vals_reformated = self._generic_reformat_phonenumbers(cr, uid, vals, context=context)
         return super(res_partner, self).create(cr, uid, vals_reformated, context=context)
 
 
     def write(self, cr, uid, ids, vals, context=None):
-        vals_reformated = self._reformat_phonenumbers(cr, uid, vals, context=context)
+        vals_reformated = self._generic_reformat_phonenumbers(cr, uid, vals, context=context)
         return super(res_partner, self).write(cr, uid, ids, vals_reformated, context=context)
 
 
-    def dial(self, cr, uid, ids, phone_field=['phone', 'phone_e164'], context=None):
+    def generic_dial(self, cr, uid, ids, object, context=None):
         '''Read the number to dial and call _connect_to_asterisk the right way'''
-        erp_number_read = self.read(cr, uid, ids[0], phone_field, context=context)
+        if context is None:
+            context = {}
+        if not isinstance(context.get('field2dial'), list):
+            raise osv.except_osv(_('Error :'), "The function action_dial must be called with a 'field2dial' key in the context containing a list ['<phone_field_displayed>', '<phone_field_e164>'].")
+        else:
+            phone_field = context.get('field2dial')
+        erp_number_read = object.read(cr, uid, ids[0], phone_field, context=context)
         erp_number_e164 = erp_number_read[phone_field[1]]
         erp_number_display = erp_number_read[phone_field[0]]
         # Check if the number to dial is not empty
@@ -460,16 +472,9 @@ class res_partner(osv.osv):
         return self.pool['asterisk.server']._dial_with_asterisk(cr, uid, erp_number_e164, context=context)
 
 
-    def action_dial_phone(self, cr, uid, ids, context=None):
-        '''Function called by the button 'Dial' next to the 'phone' field
-        in the partner view'''
-        return self.dial(cr, uid, ids, phone_field=['phone', 'phone_e164'], context=context)
-
-
-    def action_dial_mobile(self, cr, uid, ids, context=None):
-        '''Function called by the button 'Dial' next to the 'mobile' field
-        in the partner view'''
-        return self.dial(cr, uid, ids, phone_field=['mobile', 'mobile_e164'], context=context)
+    def action_dial(self, cr, uid, ids, context=None):
+        '''Function called by the button 'Dial' '''
+        return self.generic_dial(cr, uid, ids, self, context=context)
 
 
     def get_name_from_phone_number(self, cr, uid, number, context=None):

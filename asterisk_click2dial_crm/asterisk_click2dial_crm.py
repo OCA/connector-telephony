@@ -2,8 +2,9 @@
 ##############################################################################
 #
 #    Asterisk click2dial CRM module for OpenERP
-#    Copyright (c) 2011 Zikzakmedia S.L. (http://zikzakmedia.com) All Rights Reserved.
+#    Copyright (c) 2011 Zikzakmedia S.L. (http://zikzakmedia.com)
 #    Copyright (c) 2012-2013 Akretion (http://www.akretion.com)
+#    Copyright (C) 2013 Invitu <contact@invitu.com>
 #    @author: Jesús Martín <jmartin@zikzakmedia.com>
 #    @author: Alexis de Lattre <alexis.delattre@akretion.com>
 #
@@ -23,8 +24,19 @@
 ##############################################################################
 
 from openerp.osv import osv, fields
+# Lib required to print logs
+import logging
 # Lib to translate error messages
 from openerp.tools.translate import _
+# Lib for phone number reformating -> pip install phonenumbers
+import phonenumbers
+# Lib py-asterisk from http://code.google.com/p/py-asterisk/
+# We need a version which has this commit : http://code.google.com/p/py-asterisk/source/detail?r=8d0e1c941cce727c702582f3c9fcd49beb4eeaa4
+# so a version after Nov 20th, 2012
+from Asterisk import Manager
+
+_logger = logging.getLogger(__name__)
+
 
 class res_partner(osv.osv):
     _inherit = "res.partner"
@@ -70,4 +82,39 @@ class res_users(osv.osv):
     _defaults = {
         'context_propose_creation_crm_call': True,
         }
+
+class crm_lead(osv.osv):
+    _inherit = "crm.lead"
+
+
+    def format_phonenumber_to_e164(self, cr, uid, ids, name, arg, context=None):
+        return self.pool['res.partner'].generic_phonenumber_to_e164(cr, uid, ids, self, [('phone', 'phone_e164'), ('mobile', 'mobile_e164'), ('fax', 'fax_e164')], context=context)
+
+
+    _columns = {
+        'phone_e164': fields.function(format_phonenumber_to_e164, type='char', size=64, string='Phone in E.164 format', readonly=True, multi="e164lead", store={
+            'crm.lead': (lambda self, cr, uid, ids, c={}: ids, ['phone'], 10),
+            }),
+        'mobile_e164': fields.function(format_phonenumber_to_e164, type='char', size=64, string='Mobile in E.164 format', readonly=True, multi="e164lead", store={
+            'crm.lead': (lambda self, cr, uid, ids, c={}: ids, ['mobile'], 10),
+            }),
+        'fax_e164': fields.function(format_phonenumber_to_e164, type='char', size=64, string='Fax in E.164 format', readonly=True, multi="e164lead", store={
+            'crm.lead': (lambda self, cr, uid, ids, c={}: ids, ['fax'], 10),
+            }),
+        }
+
+
+    def create(self, cr, uid, vals, context=None):
+        vals_reformated = self.pool['res.partner']._generic_reformat_phonenumbers(cr, uid, vals, context=context)
+        return super(crm_lead, self).create(cr, uid, vals_reformated, context=context)
+
+
+    def write(self, cr, uid, ids, vals, context=None):
+        vals_reformated = self.pool['res.partner']._generic_reformat_phonenumbers(cr, uid, vals, context=context)
+        return super(crm_lead, self).write(cr, uid, ids, vals_reformated, context=context)
+
+
+    def action_dial(self, cr, uid, ids, context=None):
+        '''Function called by the button 'Dial' in the lead view'''
+        return self.pool['res.partner'].generic_dial(cr, uid, ids, self, context=context)
 

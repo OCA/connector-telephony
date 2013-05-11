@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    Asterisk click2dial CRM module for OpenERP
-#    Copyright (c) 2011 Zikzakmedia S.L. (http://zikzakmedia.com) All Rights Reserved.
+#    Copyright (c) 2011 Zikzakmedia S.L. (http://zikzakmedia.com)
 #    Copyright (c) 2012-2013 Akretion (http://www.akretion.com)
 #    @author: Jesús Martín <jmartin@zikzakmedia.com>
 #    @author: Alexis de Lattre <alexis.delattre@akretion.com>

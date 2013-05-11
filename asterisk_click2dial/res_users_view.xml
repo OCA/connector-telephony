@@ -25,6 +25,7 @@
                     <field name="asterisk_server_id"/>
                 </group>
                 <group name="optional_params" string="Optional parameters - for experts only, can be left empty">
+                    <field name="cdraccount"/>
                     <field name="dial_suffix"/>
                     <field name="alert_info"/>
                     <field name="variable"/>
