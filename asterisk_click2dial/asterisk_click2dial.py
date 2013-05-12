@@ -19,7 +19,7 @@
 #
 ##############################################################################
 
-from openerp.osv import osv, fields
+from openerp.osv import osv, fields, orm
 # Lib required to print logs
 import logging
 # Lib to translate error messages
@@ -378,15 +378,32 @@ class res_users(osv.osv):
     ]
 
 
+class asterisk_common(orm.AbstractModel):
+    _name = 'asterisk.common'
 
-class res_partner(osv.osv):
-    _inherit = "res.partner"
+    def action_dial(self, cr, uid, ids, context=None):
+        '''Read the number to dial and call _connect_to_asterisk the right way'''
+        if context is None:
+            context = {}
+        if not isinstance(context.get('field2dial'), list):
+            raise osv.except_osv(_('Error :'), "The function action_dial must be called with a 'field2dial' key in the context containing a list ['<phone_field_displayed>', '<phone_field_e164>'].")
+        else:
+            phone_field = context.get('field2dial')
+        erp_number_read = self.read(cr, uid, ids[0], phone_field, context=context)
+        erp_number_e164 = erp_number_read[phone_field[1]]
+        erp_number_display = erp_number_read[phone_field[0]]
+        # Check if the number to dial is not empty
+        if not erp_number_display:
+            raise osv.except_osv(_('Error :'), _('There is no phone number !'))
+        elif erp_number_display and not erp_number_e164:
+            raise osv.except_osv(_('Error :'), _("The phone number isn't stored in the standard E.164 format. Try to run the wizard 'Reformat all phone numbers' from the menu Settings > Configuration > Asterisk."))
+        return self.pool['asterisk.server']._dial_with_asterisk(cr, uid, erp_number_e164, context=context)
 
 
-    def generic_phonenumber_to_e164(self, cr, uid, ids, object, field_from_to_seq, context=None):
+    def generic_phonenumber_to_e164(self, cr, uid, ids, field_from_to_seq, context=None):
         result = {}
         from_field_seq = [item[0] for item in field_from_to_seq]
-        for record in object.read(cr, uid, ids, from_field_seq, context=context):
+        for record in self.read(cr, uid, ids, from_field_seq, context=context):
             result[record['id']] = {}
             for fromfield, tofield in field_from_to_seq:
                 if not record.get(fromfield):
@@ -402,11 +419,17 @@ class res_partner(osv.osv):
                         #raise osv.except_osv(_('Error :'), _("Cannot reformat the phone number '%s' to E.164 format. Error message: %s" % (record.get(fromfield), e)))
                         res = False
                 result[record['id']][tofield] = res
-        print "RESULT generic_phonenumber_to_e164", result
+        #print "RESULT generic_phonenumber_to_e164", result
         return result
 
+
+class res_partner(osv.osv):
+    _name = 'res.partner'
+    _inherit = ['res.partner', 'asterisk.common']
+
+
     def format_phonenumber_to_e164(self, cr, uid, ids, name, arg, context=None):
-        return self.generic_phonenumber_to_e164(cr, uid, ids, self, [('phone', 'phone_e164'), ('mobile', 'mobile_e164'), ('fax', 'fax_e164')], context=context)
+        return self.generic_phonenumber_to_e164(cr, uid, ids, [('phone', 'phone_e164'), ('mobile', 'mobile_e164'), ('fax', 'fax_e164')], context=context)
 
     _columns = {
         'phone_e164': fields.function(format_phonenumber_to_e164, type='char', size=64, string='Phone in E.164 format', readonly=True, multi="e164", store={
@@ -451,30 +474,6 @@ class res_partner(osv.osv):
     def write(self, cr, uid, ids, vals, context=None):
         vals_reformated = self._generic_reformat_phonenumbers(cr, uid, vals, context=context)
         return super(res_partner, self).write(cr, uid, ids, vals_reformated, context=context)
-
-
-    def generic_dial(self, cr, uid, ids, object, context=None):
-        '''Read the number to dial and call _connect_to_asterisk the right way'''
-        if context is None:
-            context = {}
-        if not isinstance(context.get('field2dial'), list):
-            raise osv.except_osv(_('Error :'), "The function action_dial must be called with a 'field2dial' key in the context containing a list ['<phone_field_displayed>', '<phone_field_e164>'].")
-        else:
-            phone_field = context.get('field2dial')
-        erp_number_read = object.read(cr, uid, ids[0], phone_field, context=context)
-        erp_number_e164 = erp_number_read[phone_field[1]]
-        erp_number_display = erp_number_read[phone_field[0]]
-        # Check if the number to dial is not empty
-        if not erp_number_display:
-            raise osv.except_osv(_('Error :'), _('There is no phone number !'))
-        elif erp_number_display and not erp_number_e164:
-            raise osv.except_osv(_('Error :'), _("The phone number isn't stored in the standard E.164 format. Try to run the wizard 'Reformat all phone numbers' from the menu Settings > Configuration > Asterisk."))
-        return self.pool['asterisk.server']._dial_with_asterisk(cr, uid, erp_number_e164, context=context)
-
-
-    def action_dial(self, cr, uid, ids, context=None):
-        '''Function called by the button 'Dial' '''
-        return self.generic_dial(cr, uid, ids, self, context=context)
 
 
     def get_name_from_phone_number(self, cr, uid, number, context=None):

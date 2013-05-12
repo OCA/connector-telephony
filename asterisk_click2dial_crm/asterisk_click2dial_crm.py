@@ -84,11 +84,12 @@ class res_users(osv.osv):
         }
 
 class crm_lead(osv.osv):
-    _inherit = "crm.lead"
+    _name = 'crm.lead'
+    _inherit = ['crm.lead', 'asterisk.common']
 
 
     def format_phonenumber_to_e164(self, cr, uid, ids, name, arg, context=None):
-        return self.pool['res.partner'].generic_phonenumber_to_e164(cr, uid, ids, self, [('phone', 'phone_e164'), ('mobile', 'mobile_e164'), ('fax', 'fax_e164')], context=context)
+        return self.generic_phonenumber_to_e164(cr, uid, ids, [('phone', 'phone_e164'), ('mobile', 'mobile_e164'), ('fax', 'fax_e164')], context=context)
 
 
     _columns = {
@@ -112,9 +113,4 @@ class crm_lead(osv.osv):
     def write(self, cr, uid, ids, vals, context=None):
         vals_reformated = self.pool['res.partner']._generic_reformat_phonenumbers(cr, uid, vals, context=context)
         return super(crm_lead, self).write(cr, uid, ids, vals_reformated, context=context)
-
-
-    def action_dial(self, cr, uid, ids, context=None):
-        '''Function called by the button 'Dial' in the lead view'''
-        return self.pool['res.partner'].generic_dial(cr, uid, ids, self, context=context)
 
