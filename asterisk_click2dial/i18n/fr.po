@@ -110,8 +110,8 @@ msgstr "Numéro interne"
 
 #. module: asterisk_click2dial
 #: help:res.users,cdraccount:0
-msgid "CDR Account used for billing this user."
-msgstr "Compte CDR utilisé pour facturer cet utilisateur."
+msgid "Call Detail Record (CDR) account used for billing this user."
+msgstr "Compte CDR utilisé pour facturer cet utilisateur (CDR = Journal d'appel détaillé)."
 
 #. module: asterisk_click2dial
 #: field:res.users,asterisk_chan_type:0

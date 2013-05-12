@@ -261,7 +261,7 @@ msgstr "Numéro de téléphone interne de l'utilisateur."
 
 #. module: asterisk_click2dial
 #: help:res.users,cdraccount:0
-msgid "CDR Account used for billing this user."
+msgid "Call Detail Record (CDR) account used for billing this user."
 msgstr ""
 
 #. module: asterisk_click2dial
