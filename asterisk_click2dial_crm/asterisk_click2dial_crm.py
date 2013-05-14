@@ -39,9 +39,10 @@ _logger = logging.getLogger(__name__)
 
 
 class res_partner(osv.osv):
-    _inherit = "res.partner"
+    _name = 'res.partner'
+    _inherit = ['res.partner', 'asterisk.common']
 
-    def dial(self, cr, uid, ids, phone_field='phone', context=None):
+    def action_dial(self, cr, uid, ids, context=None):
         '''
         This method open the phone call history when the phone click2dial
         button of asterisk_click2dial module is pressed
@@ -49,7 +50,7 @@ class res_partner(osv.osv):
         '''
         if context is None:
             context = {}
-        super(res_partner, self).dial(cr, uid, ids, phone_field=phone_field, context=context)
+        super(res_partner, self).action_dial(cr, uid, ids, context=context)
         user = self.pool['res.users'].browse(cr, uid, uid, context=context)
         context['partner_id'] = ids[0]
         action_start_wizard = {
