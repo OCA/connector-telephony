@@ -107,11 +107,11 @@ class crm_lead(osv.osv):
 
 
     def create(self, cr, uid, vals, context=None):
-        vals_reformated = self.pool['res.partner']._generic_reformat_phonenumbers(cr, uid, vals, context=context)
+        vals_reformated = self.generic_reformat_phonenumbers(cr, uid, vals, context=context)
         return super(crm_lead, self).create(cr, uid, vals_reformated, context=context)
 
 
     def write(self, cr, uid, ids, vals, context=None):
-        vals_reformated = self.pool['res.partner']._generic_reformat_phonenumbers(cr, uid, vals, context=context)
+        vals_reformated = self.generic_reformat_phonenumbers(cr, uid, vals, context=context)
         return super(crm_lead, self).write(cr, uid, ids, vals_reformated, context=context)
 
