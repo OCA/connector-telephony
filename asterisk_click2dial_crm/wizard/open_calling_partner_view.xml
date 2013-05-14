@@ -19,7 +19,7 @@
             <button name="open_invoices" position="after">
                 <button name="create_incoming_phonecall" icon="gtk-new" string="Create call in CRM" type="object" />
                 <newline/>
-                <button special="cancel" icon="gtk-cancel" string="Cancel" name="cancel2" colspan="4"/>
+                <button special="cancel" icon="gtk-cancel" string="Cancel" colspan="4"/>
             </button>
             <button name="cancel1" position="replace">
             </button>
