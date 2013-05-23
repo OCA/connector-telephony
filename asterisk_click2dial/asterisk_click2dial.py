@@ -422,7 +422,7 @@ class asterisk_common(orm.AbstractModel):
         #print "RESULT generic_phonenumber_to_e164", result
         return result
 
-    def generic_reformat_phonenumbers(self, cr, uid, vals, phonefields=['phone', 'fax', 'mobile'], context=None):
+    def generic_reformat_phonenumbers(self, cr, uid, vals, phonefields=['phone', 'partner_phone', 'fax', 'mobile'], context=None):
         """Reformat phone numbers in international format i.e. +33141981242"""
         if any([vals.get(field) for field in phonefields]):
             user = self.pool['res.users'].browse(cr, uid, uid, context=context)

@@ -21,3 +21,4 @@
 ##############################################################################
 
 import wizard
+import asterisk_click2dial_crm_claim

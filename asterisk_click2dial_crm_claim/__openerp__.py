@@ -3,6 +3,7 @@
 #
 #    Asterisk click2dial CRM Claim module for OpenERP
 #    Copyright (c) 2012-2013 Akretion (http://www.akretion.com)
+#    Copyright (C) 2013 Invitu <contact@invitu.com>
 #    @author Alexis de Lattre <alexis.delattre@akretion.com>
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -40,6 +41,7 @@
     "demo_xml": [],
     "update_xml": [
         'wizard/open_calling_partner_view.xml',
+        'crm_claim_view.xml',
     ],
     "installable": True,
 }

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Asterisk Click2dial module for OpenERP
+  Copyright (C) 2010-2013 Alexis de Lattre <alexis@via.ecp.fr>
+  Copyright (C) 2010-2013 Invitu <contact@invitu.com>
+  The licence is in the file __openerp__.py
+
+  Inherit crm_claim views to add 'Dial' button next to 'phone'
+  field
+-->
+
+<openerp>
+<data>
+
+<record id="asterisk_crm_claim_form_dial" model="ir.ui.view">
+    <field name="name">asterisk.crm_claim.form.dial</field>
+    <field name="model">crm.claim</field>
+    <field name="inherit_id" ref="crm_claim.crm_case_claims_form_view"/>
+    <field name="arch" type="xml">
+        <xpath expr="//group/notebook/page[@string='Claim Description']/group/field[@name='partner_phone']" position="replace">
+            <group colspan="2" col="8">
+                <field name="partner_phone" colspan="7" />
+                <button name="action_dial" context="{'field2dial': ['partner_phone', 'partner_phone_e164']}" string="Dial" type="object" attrs="{'invisible':[('partner_phone','=',False)]}"/>
+            </group>
+        </xpath>
+    </field>
+</record>
+
+</data>
+</openerp>
