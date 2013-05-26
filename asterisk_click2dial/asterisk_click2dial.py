@@ -422,28 +422,7 @@ class asterisk_common(orm.AbstractModel):
         #print "RESULT generic_phonenumber_to_e164", result
         return result
 
-
-class res_partner(osv.osv):
-    _name = 'res.partner'
-    _inherit = ['res.partner', 'asterisk.common']
-
-
-    def format_phonenumber_to_e164(self, cr, uid, ids, name, arg, context=None):
-        return self.generic_phonenumber_to_e164(cr, uid, ids, [('phone', 'phone_e164'), ('mobile', 'mobile_e164'), ('fax', 'fax_e164')], context=context)
-
-    _columns = {
-        'phone_e164': fields.function(format_phonenumber_to_e164, type='char', size=64, string='Phone in E.164 format', readonly=True, multi="e164", store={
-            'res.partner': (lambda self, cr, uid, ids, c={}: ids, ['phone'], 10),
-            }),
-        'mobile_e164': fields.function(format_phonenumber_to_e164, type='char', size=64, string='Mobile in E.164 format', readonly=True, multi="e164", store={
-            'res.partner': (lambda self, cr, uid, ids, c={}: ids, ['mobile'], 10),
-            }),
-        'fax_e164': fields.function(format_phonenumber_to_e164, type='char', size=64, string='Fax in E.164 format', readonly=True, multi="e164", store={
-            'res.partner': (lambda self, cr, uid, ids, c={}: ids, ['fax'], 10),
-            }),
-        }
-
-    def _generic_reformat_phonenumbers(self, cr, uid, vals, phonefields=['phone', 'fax', 'mobile'], context=None):
+    def _generic_reformat_phonenumbers(self, cr, uid, vals, phonefields=['phone', 'partner_phone', 'fax', 'mobile'], context=None):
         """Reformat phone numbers in international format i.e. +33141981242"""
         if any([vals.get(field) for field in phonefields]):
             user = self.pool['res.users'].browse(cr, uid, uid, context=context)
@@ -464,6 +443,28 @@ class res_partner(osv.osv):
                     #print "res_parse=", res_parse
                     vals[field] = phonenumbers.format_number(res_parse, phonenumbers.PhoneNumberFormat.INTERNATIONAL)
         return vals
+
+
+
+class res_partner(osv.osv):
+    _name = 'res.partner'
+    _inherit = ['res.partner', 'asterisk.common']
+
+
+    def format_phonenumber_to_e164(self, cr, uid, ids, name, arg, context=None):
+        return self.generic_phonenumber_to_e164(cr, uid, ids, [('phone', 'phone_e164'), ('mobile', 'mobile_e164'), ('fax', 'fax_e164')], context=context)
+
+    _columns = {
+        'phone_e164': fields.function(format_phonenumber_to_e164, type='char', size=64, string='Phone in E.164 format', readonly=True, multi="e164", store={
+            'res.partner': (lambda self, cr, uid, ids, c={}: ids, ['phone'], 10),
+            }),
+        'mobile_e164': fields.function(format_phonenumber_to_e164, type='char', size=64, string='Mobile in E.164 format', readonly=True, multi="e164", store={
+            'res.partner': (lambda self, cr, uid, ids, c={}: ids, ['mobile'], 10),
+            }),
+        'fax_e164': fields.function(format_phonenumber_to_e164, type='char', size=64, string='Fax in E.164 format', readonly=True, multi="e164", store={
+            'res.partner': (lambda self, cr, uid, ids, c={}: ids, ['fax'], 10),
+            }),
+        }
 
 
     def create(self, cr, uid, vals, context=None):

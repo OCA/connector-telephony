@@ -42,9 +42,9 @@ class reformat_all_phonenumbers(osv.osv_memory):
         phonenumbers_not_reformatted = ''
         for partner in partner_obj.read(cr, uid, all_partner_ids, ['name'] + phonefields, context=context):
             init_partner = partner.copy()
-            # partner is _updated_ by the fonction _reformat_phonenumbers()
+            # partner is _updated_ by the fonction _generic_reformat_phonenumbers()
             try:
-                partner_obj._reformat_phonenumbers(cr, uid, partner, context=context)
+                partner_obj._generic_reformat_phonenumbers(cr, uid, partner, context=context)
             except Exception, e:
                 #raise osv.except_osv(_('Error :'), _("Problem on partner '%s'. Error message: %s" % (init_partner.get('name'), e[1])))
                 phonenumbers_not_reformatted += "Problem on partner '%s'. Error message: %s" % (init_partner.get('name'), e[1]) + "\n"

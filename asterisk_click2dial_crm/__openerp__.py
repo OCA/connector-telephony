@@ -53,9 +53,8 @@
         'asterisk_click2dial',
         'crm',
     ],
-    "init_xml": [],
-    "demo_xml": [],
-    "update_xml": [
+    "demo": [],
+    "data": [
         'wizard/open_calling_partner_view.xml',
         'wizard/create_crm_phonecall_view.xml',
         'res_users_view.xml',
