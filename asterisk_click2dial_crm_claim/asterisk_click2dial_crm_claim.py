@@ -32,7 +32,10 @@ class crm_claim(osv.osv):
 
 
     _columns = {
-        'partner_phone_e164': fields.function(format_phonenumber_to_e164, type='char', size=64, string='Phone in E.164 format', readonly=True, store={
+        # Note : even if we only have 1 field, we keep multi='..'
+        # because the generic function generic_phonenumber_to_e164() is designed
+        # to return the result as multi
+        'partner_phone_e164': fields.function(format_phonenumber_to_e164, type='char', size=64, string='Phone in E.164 format', readonly=True, multi='e164claim', store={
             'crm.claim': (lambda self, cr, uid, ids, c={}: ids, ['partner_phone'], 10),
             }),
         }
