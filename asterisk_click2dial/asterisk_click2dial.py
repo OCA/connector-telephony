@@ -349,6 +349,7 @@ class res_users(osv.osv):
             ('mISDN', 'mISDN'),
             ('H323', 'H323'),
             ('SCCP', 'SCCP'),
+            ('Local', 'Local'),
             ], 'Asterisk channel type',
             help="Asterisk channel type, as used in the Asterisk dialplan. If the user has a regular IP phone, the channel type is 'SIP'."),
         'resource': fields.char('Resource name', size=64,
