@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Copyright (C) 2013 Invitu (http://www.invitu.com)
+  The licence is in the file __openerp__.py
+-->
+
+<openerp>
+<data>
+
+<!-- Add button on the "Open Calling partner" wizard -->
+<record id="add_open_registrations_button" model="ir.ui.view">
+    <field name="name">asterisk_click2dial_registration.add_open_registrations_button</field>
+    <field name="model">wizard.open.calling.partner</field>
+    <field name="inherit_id" ref="asterisk_click2dial.view_open_calling_partner"/>
+    <field name="arch" type="xml">
+        <group name="partner_found" position="inside">
+            <button name="open_registrations" string="Open Related Registrations" type="object" icon="gtk-go-forward" />
+        </group>
+    </field>
+</record>
+
+</data>
+</openerp>
