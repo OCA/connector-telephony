@@ -1,0 +1,403 @@
+# German translation for openerp-smsclient
+# Copyright (c) 2012 Rosetta Contributors and Canonical Ltd 2012
+# This file is distributed under the same license as the openerp-smsclient package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2012.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: openerp-smsclient\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2011-09-10 10:24+0000\n"
+"PO-Revision-Date: 2012-01-01 14:14+0000\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: German <de@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2012-01-02 05:19+0000\n"
+"X-Generator: Launchpad (build 14560)\n"
+
+#. module: smsclient
+#: selection:sms.smsclient,method:0
+msgid "SMPP Method"
+msgstr ""
+
+#. module: smsclient
+#: field:sms.smsclient,property_ids:0
+msgid "Parameters"
+msgstr ""
+
+#. module: smsclient
+#: field:sms.smsclient,url:0
+msgid "Gateway URL"
+msgstr ""
+
+#. module: smsclient
+#: field:sms.smsclient.history,sms:0
+msgid "SMS"
+msgstr ""
+
+#. module: smsclient
+#: field:ir.actions.server,sms_server:0
+msgid "SMS Server"
+msgstr ""
+
+#. module: smsclient
+#: field:sms.smsclient.queue,msg:0
+msgid "SMS Text"
+msgstr ""
+
+#. module: smsclient
+#: code:addons/smsclient/wizard/verifycode.py:43
+#, python-format
+msgid "Gateway already verified!"
+msgstr ""
+
+#. module: smsclient
+#: field:sms.smsclient.queue,name:0
+msgid "SMS Request"
+msgstr ""
+
+#. module: smsclient
+#: wizard_view:sms.smsclient.code.send,init:0
+#: wizard_button:sms.smsclient.code.send,init,send:0
+msgid "Send Code"
+msgstr ""
+
+#. module: smsclient
+#: field:sms.smsclient.parms,value:0
+msgid "Property value"
+msgstr ""
+
+#. module: smsclient
+#: selection:sms.smsclient.parms,type:0
+#: view:sms.smsclient.queue:0
+msgid "SMS Message"
+msgstr ""
+
+#. module: smsclient
+#: selection:sms.smsclient,state:0
+msgid "Not Verified"
+msgstr ""
+
+#. module: smsclient
+#: help:sms.smsclient.parms,type:0
+msgid "If parameter concern a value to substitute, indicate it"
+msgstr ""
+
+#. module: smsclient
+#: selection:sms.smsclient.queue,state:0
+msgid "Sent"
+msgstr ""
+
+#. module: smsclient
+#: help:sms.smsclient.code.verify,init,code:0
+msgid "Enter the verification code that you get in your verification sms"
+msgstr ""
+
+#. module: smsclient
+#: model:ir.model,name:smsclient.model_sms_smsclient
+msgid "SMS Client"
+msgstr ""
+
+#. module: smsclient
+#: model:ir.actions.wizard,name:smsclient.sms_smsclient_send_code
+msgid "Send Verification Code"
+msgstr ""
+
+#. module: smsclient
+#: field:sms.smsclient.history,name:0
+msgid "Description"
+msgstr ""
+
+#. module: smsclient
+#: view:sms.smsclient:0
+msgid "Permission"
+msgstr ""
+
+#. module: smsclient
+#: help:sms.smsclient.parms,value:0
+msgid "Value associate on the property for the URL"
+msgstr ""
+
+#. module: smsclient
+#: field:sms.smsclient,code:0
+#: wizard_field:sms.smsclient.code.verify,init,code:0
+msgid "Verification Code"
+msgstr ""
+
+#. module: smsclient
+#: code:addons/smsclient/wizard/sendcode.py:54
+#, python-format
+msgid "Verification Failed. Please check the Server Configuration!"
+msgstr ""
+
+#. module: smsclient
+#: code:addons/smsclient/smsclient.py:72
+#, python-format
+msgid "This method is not implemented (%s)"
+msgstr ""
+
+#. module: smsclient
+#: help:sms.smsclient.code.send,init,smsto:0
+msgid ""
+"Enter the Mobile No on which you want to receive the Verification Code"
+msgstr ""
+
+#. module: smsclient
+#: code:addons/smsclient/smsclient.py:114
+#, python-format
+msgid "SMS Sent"
+msgstr ""
+
+#. module: smsclient
+#: selection:sms.smsclient.parms,type:0
+msgid "Recipient No"
+msgstr ""
+
+#. module: smsclient
+#: field:sms.smsclient.history,date_create:0
+#: field:sms.smsclient.queue,date_create:0
+msgid "Date"
+msgstr ""
+
+#. module: smsclient
+#: selection:sms.smsclient,state:0
+msgid "Waiting for Verification"
+msgstr ""
+
+#. module: smsclient
+#: model:ir.model,name:smsclient.model_sms_smsclient_parms
+msgid "SMS Client Properties"
+msgstr ""
+
+#. module: smsclient
+#: selection:sms.smsclient.parms,type:0
+msgid "Password"
+msgstr ""
+
+#. module: smsclient
+#: field:sms.smsclient,users_id:0
+msgid "Users Allowed"
+msgstr ""
+
+#. module: smsclient
+#: help:sms.smsclient.parms,name:0
+msgid "Name of the property whom appear on the URL"
+msgstr ""
+
+#. module: smsclient
+#: selection:sms.smsclient.parms,type:0
+msgid "User"
+msgstr ""
+
+#. module: smsclient
+#: field:sms.smsclient.history,user_id:0
+msgid "Username"
+msgstr ""
+
+#. module: smsclient
+#: model:ir.actions.act_window,name:smsclient.act_sms_gateway_2_sms_queue
+#: model:ir.actions.act_window,name:smsclient.action_sms_smsclient_queue_tree
+#: model:ir.ui.menu,name:smsclient.menu_smsclient_administration_sms_server_queue
+#: view:sms.smsclient.queue:0
+msgid "Message Queue"
+msgstr ""
+
+#. module: smsclient
+#: view:sms.smsclient.history:0
+#: view:sms.smsclient.queue:0
+msgid "Gateway History"
+msgstr ""
+
+#. module: smsclient
+#: model:ir.model,name:smsclient.model_ir_actions_server
+msgid "ir.actions.server"
+msgstr ""
+
+#. module: smsclient
+#: help:ir.actions.server,sms_server:0
+msgid "Select the SMS Gateway configuration to use with this action"
+msgstr ""
+
+#. module: smsclient
+#: help:sms.smsclient,body:0
+msgid ""
+"The message text that will be send along with the email which is send "
+"through this server"
+msgstr ""
+
+#. module: smsclient
+#: wizard_button:sms.smsclient.code.send,init,end:0
+#: wizard_button:sms.smsclient.code.verify,init,end:0
+msgid "Cancel"
+msgstr ""
+
+#. module: smsclient
+#: view:sms.smsclient:0
+msgid "Access Permission"
+msgstr ""
+
+#. module: smsclient
+#: help:sms.smsclient,url:0
+msgid "Base url for message"
+msgstr ""
+
+#. module: smsclient
+#: wizard_field:sms.smsclient.code.send,init,smsto:0
+#: field:sms.smsclient.history,to:0
+#: field:sms.smsclient.queue,mobile:0
+msgid "Mobile No"
+msgstr ""
+
+#. module: smsclient
+#: code:addons/smsclient/smsclient.py:72
+#: code:addons/smsclient/wizard/sendcode.py:54
+#: code:addons/smsclient/wizard/verifycode.py:43
+#: code:addons/smsclient/wizard/verifycode.py:48
+#: selection:sms.smsclient.queue,state:0
+#, python-format
+msgid "Error"
+msgstr ""
+
+#. module: smsclient
+#: model:ir.actions.act_window,name:smsclient.act_sms_gateway_2_sms_history
+msgid "SMS History"
+msgstr ""
+
+#. module: smsclient
+#: code:addons/smsclient/wizard/verifycode.py:48
+#, python-format
+msgid "Verification failed. Invalid Verification Code!"
+msgstr ""
+
+#. module: smsclient
+#: selection:sms.smsclient.queue,state:0
+msgid "Queued"
+msgstr ""
+
+#. module: smsclient
+#: model:ir.ui.menu,name:smsclient.menu_smsclient_administration_sms_server
+msgid "Gateway List"
+msgstr ""
+
+#. module: smsclient
+#: field:sms.smsclient,history_line:0
+msgid "History"
+msgstr ""
+
+#. module: smsclient
+#: field:sms.smsclient,method:0
+#: field:sms.smsclient.parms,type:0
+msgid "API Method"
+msgstr ""
+
+#. module: smsclient
+#: field:sms.smsclient,state:0
+msgid "Gateway Status"
+msgstr ""
+
+#. module: smsclient
+#: code:addons/smsclient/smsclient.py:69
+#, python-format
+msgid "Permission Error!"
+msgstr ""
+
+#. module: smsclient
+#: wizard_view:sms.smsclient.code.verify,init:0
+#: wizard_button:sms.smsclient.code.verify,init,check:0
+msgid "Verify Code"
+msgstr ""
+
+#. module: smsclient
+#: selection:sms.smsclient.parms,type:0
+msgid "Sender Name"
+msgstr ""
+
+#. module: smsclient
+#: view:sms.smsclient:0
+msgid "Gateway Parameters"
+msgstr ""
+
+#. module: smsclient
+#: selection:sms.smsclient.queue,state:0
+msgid "Waiting"
+msgstr ""
+
+#. module: smsclient
+#: view:sms.smsclient:0
+msgid "General"
+msgstr ""
+
+#. module: smsclient
+#: selection:sms.smsclient,method:0
+msgid "HTTP Method"
+msgstr ""
+
+#. module: smsclient
+#: model:ir.actions.wizard,name:smsclient.sms_smsclient_verify_code
+msgid "Verify SMS Gateway"
+msgstr ""
+
+#. module: smsclient
+#: model:ir.model,name:smsclient.model_sms_smsclient_history
+msgid "SMS Client History"
+msgstr ""
+
+#. module: smsclient
+#: model:ir.model,name:smsclient.model_sms_smsclient_queue
+msgid "SMS Queue"
+msgstr ""
+
+#. module: smsclient
+#: code:addons/smsclient/smsclient.py:69
+#, python-format
+msgid "You have no permission to access %s "
+msgstr ""
+
+#. module: smsclient
+#: model:ir.actions.act_window,name:smsclient.action_sms_smsclient_history_tree
+#: model:ir.ui.menu,name:smsclient.menu_smsclient_administration_sms_server_history
+msgid "SMS Gateway History"
+msgstr ""
+
+#. module: smsclient
+#: selection:sms.smsclient,state:0
+msgid "Verified"
+msgstr ""
+
+#. module: smsclient
+#: field:sms.smsclient,name:0
+msgid "Gateway Name"
+msgstr ""
+
+#. module: smsclient
+#: view:sms.smsclient.queue:0
+#: field:sms.smsclient.queue,error:0
+msgid "Last Error"
+msgstr ""
+
+#. module: smsclient
+#: field:sms.smsclient,body:0
+msgid "Message"
+msgstr ""
+
+#. module: smsclient
+#: field:sms.smsclient.queue,state:0
+msgid "Message Status"
+msgstr ""
+
+#. module: smsclient
+#: field:sms.smsclient.parms,name:0
+msgid "Property name"
+msgstr ""
+
+#. module: smsclient
+#: model:ir.actions.act_window,name:smsclient.action_sms_smsclient_tree
+#: model:ir.ui.menu,name:smsclient.menu_smsclient_administration_server
+#: view:sms.smsclient:0
+#: field:sms.smsclient.history,gateway_id:0
+#: field:sms.smsclient.parms,gateway_id:0
+#: field:sms.smsclient.queue,gateway_id:0
+msgid "SMS Gateway"
+msgstr ""
