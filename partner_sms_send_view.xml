@@ -11,7 +11,7 @@
             <field name="arch" type="xml">
               <form string="SMS - Gateway: clickatell" version="7.0">
                     <group string="Gateway">
-                        <field name="gateway"/>
+                        <field name="gateway" on_change="onchange_gateway(gateway,context)"/>
                     </group>
                     <group string="Bulk SMS send" colspan="4">
                      	<group>
@@ -23,15 +23,32 @@
 						    <field name="password" invisible="1"/>
 						</group>
 					</group>
-                    <group string="Message" colspan="4">
-				    	<field name="text" colspan="4" nolabel="1"/>
-                   	</group>
+					<notebook>
+	                    <page string="Message">
+					    	<field name="text" colspan="4" nolabel="1"/>
+	                   	</page>
+	                   	<page string="Additional option">
+   		                	<group>	  	 	
+	           		          	<group>
+	   		          	        	<field name="validity"/>
+	   		          	        	<field name="classes"/>
+	   		          	        	<field name="deferred"/>
+	   		          	        	<field name="nostop"/>
+	           		          	</group>
+	   		          	        <group>
+		                   			<field name="priority"/>
+		                   			<field name="coding"/>
+		                   			<field name="tag"/>
+								</group>
+							</group>
+						</page>
+					</notebook>
                     <footer>
                         <button name="sms_send" string="Send SMS" type="object" class="oe_highlight"/>
                         or
                         <button special="cancel" string="Cancel" class="oe_link"/>
                     </footer>
-             </form>
+             	</form>
             </field>
         </record>
 

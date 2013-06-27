@@ -53,6 +53,24 @@ class partner_sms_send(orm.Model):
         gateway_id = sms_obj.search(cr, uid, [], limit=1)[0]
         return gateway_id
     
+    
+    def onchange_gateway(self,cr,uid,ids,gateway_id,context = None):
+        if context is None:
+            context = {}
+        sms_obj = self.pool.get('sms.smsclient')
+        gateway = sms_obj.browse(cr,uid,gateway_id,context=context)
+        return {
+                'value': {
+                    'validity': gateway.validity, 
+                    'classes': gateway.classes,
+                    'deferred': gateway.deferred,
+                    'priority': gateway.priority,
+                    'coding': gateway.coding,
+                    'tag': gateway.tag,
+                    'nostop': gateway.nostop,
+                        }
+                }
+        
     _columns = {
         'mobile_to': fields.char('To', size=256, required=True),
         'app_id': fields.char('API ID', size=256),
@@ -60,23 +78,38 @@ class partner_sms_send(orm.Model):
         'password': fields.char('Password', size=256),
         'text': fields.text('SMS Message',required=True),
         'gateway': fields.many2one('sms.smsclient','SMS Gateway',required = True),
+        'validity': fields.integer('Validity',help='the maximum time -in minute(s)- before the message is dropped'),
+        'classes': fields.selection([('0','0'),('1','1'),('2','2'),('3','3')],'Class',help='the sms class: flash(0),phone display(1),SIM(2),toolkit(3)'),
+        'deferred': fields.integer('Deferred',help='the time -in minute(s)- to wait before sending the message'),
+        'priority': fields.selection([('0','0'),('1','1'),('2','2'),('3','3')],'Priority',help='the priority of the message '),
+        'coding': fields.selection([('1','1'),('2','2')],'Coding',help='the sms coding: 1 for 7 bit or 2 for unicode'),
+        'tag': fields.char('Tag', size=256,help='an optional tag'),
+        'nostop': fields.selection([('0','0'),('1','1')],'NoStop',help='do not display STOP clause in the message, this requires that this is not an advertising message'),
     }
     
     _defaults = {
         'mobile_to': _default_get_mobile,
-        'gateway': _default_get_gateway,
+        'gateway': _default_get_gateway,        
     }
     
     def sms_send(self, cr, uid, ids, context):
         client_obj = self.pool.get('sms.smsclient')
+        datas = {}
         for data in self.browse(cr, uid, ids, context) :
             if not data.gateway:
                 raise osv.except_osv(_('Error'), _('No Gateway Found'))
             else:
-                gateway_id = data.gateway.id
-                to = data.mobile_to
-                text = data.text
-                client_obj.send_message(cr, uid, gateway_id, to, text)
+                datas['gateway'] = data.gateway.id
+                datas['to'] = data.mobile_to
+                datas['text'] = data.text
+                datas['validity'] = data.validity
+                datas['classes'] = data.classes
+                datas['deferred'] = data.deferred
+                datas['priority'] = data.priority
+                datas['coding'] = data.coding
+                datas['tag'] = data.tag
+                datas['nostop'] = data.nostop
+                client_obj.send_message(cr, uid, datas)
         return {}
      
 
@@ -101,11 +134,24 @@ class SMSClient(orm.Model):
         'users_id': fields.many2many('res.users', 'res_smsserver_group_rel', 'sid', 'uid', 'Users Allowed'),
         'code': fields.char('Verification Code', size=256),
         'body': fields.text('Message', help="The message text that will be send along with the email which is send through this server"),
+        'validity': fields.integer('Validity',help='the maximum time -in minute(s)- before the message is dropped'),
+        'classes': fields.selection([('0','0'),('1','1'),('2','2'),('3','3')],'Class',help='the sms class: flash(0),phone display(1),SIM(2),toolkit(3)'),
+        'deferred': fields.integer('Deferred',help='the time -in minute(s)- to wait before sending the message'),
+        'priority': fields.selection([('0','0'),('1','1'),('2','2'),('3','3')],'Priority',help='the priority of the message '),
+        'coding': fields.selection([('1','1'),('2','2')],'Coding',help='the sms coding: 1 for 7 bit or 2 for unicode'),
+        'tag': fields.char('Tag', size=256,help='an optional tag'),
+        'nostop': fields.selection([('0','0'),('1','1')],'NoStop',help='do not display STOP clause in the message, this requires that this is not an advertising message'),
     }
 
     _defaults = {
         'state': lambda *a: 'new',
         'method': lambda *a: 'http',
+        'validity': 10,
+        'classes': '1',
+        'deferred': 0, 
+        'priority': '3',
+        'coding': '1',
+        'nostop': '1',
     }
 
     def check_permissions(self, cr, uid, id):
@@ -115,10 +161,12 @@ class SMSClient(orm.Model):
             return False
         return True
 
-    def send_message(self, cr, uid, gateway, to, text):
-        gate = self.browse(cr, uid, gateway)
+    def send_message(self, cr, uid, datas):
+        print datas
+        gateway_id = datas['gateway']
+        gate = self.browse(cr, uid, gateway_id)
 
-        if not self.check_permissions(cr, uid, gateway):
+        if not self.check_permissions(cr, uid, gateway_id):
             raise osv.except_osv(_('Permission Error!'), _('You have no permission to access %s ') % (gate.name,))
 
         if gate.method != 'http':
@@ -126,23 +174,31 @@ class SMSClient(orm.Model):
 
         url = gate.url
         prms = {}
-#         for p in gate.property_ids:
-#             if p.type == 'to':
-#                 prms[p.name] = to
-#             elif p.type == 'sms':
-#                 prms[p.name] = text
-#             else:
-#                 prms[p.name] = p.value
+        for p in gate.property_ids:
+            if p.type == 'to':
+                prms[p.name] = to
+            elif p.type == 'sms':
+                prms[p.name] = text
+            else:
+                prms[p.name] = p.value
 
         params = urllib.urlencode(prms)
         req = url + "?" + params
         queue = self.pool.get('sms.smsclient.queue')
         queue.create(cr, uid, {
                     'name': req,
-                    'gateway_id': gateway,
+                    'gateway_id': gateway_id,
                     'state': 'draft',
-                    'mobile': to,
-                    'msg': text
+                    'mobile': datas['to'],
+                    'msg': datas['text'],
+                    'validity': datas['validity'], 
+                    'classes': datas['classes'], 
+                    'deffered': datas['deferred'], 
+                    'priorirty': datas['priority'], 
+                    'coding': datas['coding'], 
+                    'tag': datas['tag'], 
+                    'nostop': datas['nostop'], 
+                    
                 })
         return True
 
@@ -151,7 +207,6 @@ class SMSClient(orm.Model):
             context = {}
         queue = self.pool.get('sms.smsclient.queue')
         history = self.pool.get('sms.smsclient.history')
-
         sids = queue.search(cr, uid, [('state', '!=', 'send'), ('state', '!=', 'sending')], limit=30, context=context)
         queue.write(cr, uid, sids, {'state': 'sending'})
         error = []
@@ -174,7 +229,8 @@ class SMSClient(orm.Model):
                     sender = p.value
                 elif p.type == 'sms':
                     account = p.value
-#             print result
+            soap = WSDL.Proxy(sms.gateway_id.url)
+            result = soap.telephonySmsUserSend(str(login), str(pwd), str(account), str(sender), str(sms.mobile), str(sms.msg), int(sms.validity), int(sms.classes), int(sms.deferred), int(sms.priority), int(sms.coding), int(sms.nostop))
             ### End of the new process ###
             history.create(cr, uid, {
                         'name': _('SMS Sent'),
@@ -184,14 +240,8 @@ class SMSClient(orm.Model):
                     }, context=context)
             sent.append(sms.id)
              ## Send Function ##
-            soap = WSDL.Proxy('https://www.ovh.com/soapi/soapi-re-1.59.wsdl')
-            result = soap.telephonySmsUserSend(str(login), str(pwd), str(account), str(sender), str(sms.mobile), str(sms.msg), '', '', '', '', '', 1)
-            
         queue.write(cr, uid, sent, {'state': 'send'})
         queue.write(cr, uid, error, {'state': 'error', 'error': 'Size of SMS should not be more then 160 char'})
-        
-        
-           
         return True
 
 
@@ -213,6 +263,14 @@ class SMSQueue(orm.Model):
         ], 'Message Status', select=True, readonly=True),
         'error': fields.text('Last Error', size=256, readonly=True, states={'draft': [('readonly', False)]}),
         'date_create': fields.datetime('Date', readonly=True),
+        'validity': fields.integer('Validity',help='the maximum time -in minute(s)- before the message is dropped'),
+        'classes': fields.selection([('0','0'),('1','1'),('2','2'),('3','3')],'Class',help='the sms class: flash(0),phone display(1),SIM(2),toolkit(3)'),
+        'deferred': fields.integer('Deferred',help='the time -in minute(s)- to wait before sending the message'),
+        'priority': fields.selection([('0','0'),('1','1'),('2','2'),('3','3')],'Priority',help='the priority of the message '),
+        'coding': fields.selection([('1','1'),('2','2')],'Coding',help='the sms coding: 1 for 7 bit or 2 for unicode'),
+        'tag': fields.char('Tag', size=256,help='an optional tag'),
+        'nostop': fields.selection([('0','0'),('1','1')],'NoStop',help='do not display STOP clause in the message, this requires that this is not an advertising message'),
+        
     }
 
     _defaults = {

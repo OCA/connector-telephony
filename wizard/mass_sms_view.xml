@@ -6,12 +6,31 @@
             <field name="model">part.sms</field>
             <field name="arch" type="xml">
             	<form string="SMS Gateway - Sens SMS" version="7.0">
-	                <group string="Gateway and Message Text" colspan="4">
-	        			<field name="gateway"/>
-	        			<field name="text" colspan="4"/>
+	                <group string="Gateway" colspan="4">
+	        			<field name="gateway" on_change="onchange_gateway_mass(gateway,context)"/>
 					</group>
+					<notebook>
+	                    <page string="Message">
+					    	<field name="text" colspan="4" nolabel="1"/>
+	                   	</page>
+	                   	<page string="Additional option">
+   		                	<group>	  	 	
+	           		          	<group>
+	   		          	        	<field name="validity"/>
+	   		          	        	<field name="classes"/>
+	   		          	        	<field name="deferred"/>
+	   		          	        	<field name="nostop"/>
+	           		          	</group>
+	   		          	        <group>
+		                   			<field name="priority"/>
+		                   			<field name="coding"/>
+		                   			<field name="tag"/>
+								</group>
+							</group>
+						</page>
+					</notebook>
 		            <footer>
-		                <button string="Send Mass Sms" name="sms_mass_send" type="object" class="oe_highlight"/>
+		                <button string="Send Mass SMS" name="sms_mass_send" type="object" class="oe_highlight"/>
 		                or
 		                <button string="Cancel" class="oe_link" special="cancel"/>
 		            </footer>
