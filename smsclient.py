@@ -174,13 +174,13 @@ class SMSClient(orm.Model):
 
         url = gate.url
         prms = {}
-        for p in gate.property_ids:
-            if p.type == 'to':
-                prms[p.name] = to
-            elif p.type == 'sms':
-                prms[p.name] = text
-            else:
-                prms[p.name] = p.value
+#         for p in gate.property_ids:
+#             if p.type == 'to':
+#                 prms[p.name] = to
+#             elif p.type == 'sms':
+#                 prms[p.name] = text
+#             else:
+#                 prms[p.name] = p.value
 
         params = urllib.urlencode(prms)
         req = url + "?" + params
