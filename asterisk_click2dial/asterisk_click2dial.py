@@ -210,7 +210,7 @@ class asterisk_server(osv.osv):
 
     def _connect_to_asterisk(self, cr, uid, context=None):
         '''
-        Open the connection to the asterisk manager
+        Open the connection to the Asterisk Manager
         Returns an instance of the Asterisk Manager
 
         '''
@@ -386,18 +386,15 @@ class asterisk_common(orm.AbstractModel):
         '''Read the number to dial and call _connect_to_asterisk the right way'''
         if context is None:
             context = {}
-        if not isinstance(context.get('field2dial'), list):
-            raise osv.except_osv(_('Error :'), "The function action_dial must be called with a 'field2dial' key in the context containing a list ['<phone_field_displayed>', '<phone_field_e164>'].")
+        if not isinstance(context.get('field2dial'), (unicode, str)):
+            raise osv.except_osv(_('Error :'), "The function action_dial must be called with a 'field2dial' key in the context containing a string '<phone_field>'.")
         else:
             phone_field = context.get('field2dial')
-        erp_number_read = self.read(cr, uid, ids[0], phone_field, context=context)
-        erp_number_e164 = erp_number_read[phone_field[1]]
-        erp_number_display = erp_number_read[phone_field[0]]
+        erp_number_read = self.read(cr, uid, ids[0], [phone_field], context=context)
+        erp_number_e164 = erp_number_read[phone_field]
         # Check if the number to dial is not empty
-        if not erp_number_display:
+        if not erp_number_e164:
             raise osv.except_osv(_('Error :'), _('There is no phone number !'))
-        elif erp_number_display and not erp_number_e164:
-            raise osv.except_osv(_('Error :'), _("The phone number isn't stored in the standard E.164 format. Try to run the wizard 'Reformat all phone numbers' from the menu Settings > Technical > Asterisk."))
         return self.pool['asterisk.server']._dial_with_asterisk(cr, uid, erp_number_e164, context=context)
 
 
@@ -424,7 +421,7 @@ class asterisk_common(orm.AbstractModel):
         return result
 
     def _generic_reformat_phonenumbers(self, cr, uid, vals, phonefields=['phone', 'partner_phone', 'fax', 'mobile'], context=None):
-        """Reformat phone numbers in international format i.e. +33141981242"""
+        """Reformat phone numbers in E.164 format i.e. +33141981242"""
         if any([vals.get(field) for field in phonefields]):
             user = self.pool['res.users'].browse(cr, uid, uid, context=context)
             # country_id on res.company is a fields.function that looks at
@@ -442,7 +439,7 @@ class asterisk_common(orm.AbstractModel):
                     except Exception, e:
                         raise osv.except_osv(_('Error :'), _("Cannot reformat the phone number '%s' to international format. Error message: %s" % (vals.get(field), e)))
                     #print "res_parse=", res_parse
-                    vals[field] = phonenumbers.format_number(res_parse, phonenumbers.PhoneNumberFormat.INTERNATIONAL)
+                    vals[field] = phonenumbers.format_number(res_parse, phonenumbers.PhoneNumberFormat.E164)
         return vals
 
 
@@ -450,22 +447,6 @@ class asterisk_common(orm.AbstractModel):
 class res_partner(osv.osv):
     _name = 'res.partner'
     _inherit = ['res.partner', 'asterisk.common']
-
-
-    def format_phonenumber_to_e164(self, cr, uid, ids, name, arg, context=None):
-        return self.generic_phonenumber_to_e164(cr, uid, ids, [('phone', 'phone_e164'), ('mobile', 'mobile_e164'), ('fax', 'fax_e164')], context=context)
-
-    _columns = {
-        'phone_e164': fields.function(format_phonenumber_to_e164, type='char', size=64, string='Phone in E.164 format', readonly=True, multi="e164", store={
-            'res.partner': (lambda self, cr, uid, ids, c={}: ids, ['phone'], 10),
-            }),
-        'mobile_e164': fields.function(format_phonenumber_to_e164, type='char', size=64, string='Mobile in E.164 format', readonly=True, multi="e164", store={
-            'res.partner': (lambda self, cr, uid, ids, c={}: ids, ['mobile'], 10),
-            }),
-        'fax_e164': fields.function(format_phonenumber_to_e164, type='char', size=64, string='Fax in E.164 format', readonly=True, multi="e164", store={
-            'res.partner': (lambda self, cr, uid, ids, c={}: ids, ['fax'], 10),
-            }),
-        }
 
 
     def create(self, cr, uid, vals, context=None):
@@ -514,7 +495,7 @@ class res_partner(osv.osv):
 
         # We try to match a phone or mobile number with the same end
         pg_seach_number = str('%' + end_number_to_match)
-        res_ids = self.search(cr, uid, ['|', ('phone_e164', 'ilike', pg_seach_number), ('mobile_e164', 'ilike', pg_seach_number)], context=context)
+        res_ids = self.search(cr, uid, ['|', ('phone', 'ilike', pg_seach_number), ('mobile', 'ilike', pg_seach_number)], context=context)
         # TODO : use is_number_match() of the phonenumber lib ?
         if len(res_ids) > 1:
             _logger.warning(u"There are several partners (IDS = %s) with a phone number ending with '%s'" % (str(res_ids), end_number_to_match))

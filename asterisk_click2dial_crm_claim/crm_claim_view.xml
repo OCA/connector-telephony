@@ -19,7 +19,7 @@
         <field name="partner_phone" position="replace">
             <group colspan="2" col="3">
                 <field name="partner_phone" colspan="2" />
-                <button name="action_dial" context="{'field2dial': ['partner_phone', 'partner_phone_e164']}" string="Dial" type="object" attrs="{'invisible':[('partner_phone','=',False)]}"/>
+                <button name="action_dial" context="{'field2dial': 'partner_phone'}" string="Dial" type="object" attrs="{'invisible':[('partner_phone','=',False)]}"/>
             </group>
         </field>
     </field>

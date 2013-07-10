@@ -27,20 +27,6 @@ class event_registration(osv.osv):
     _inherit = ['event.registration', 'asterisk.common']
 
 
-    def format_phonenumber_to_e164(self, cr, uid, ids, name, arg, context=None):
-        return self.generic_phonenumber_to_e164(cr, uid, ids, [('phone', 'phone_e164')], context=context)
-
-
-    _columns = {
-        # Note : even if we only have 1 field, we keep multi='..'
-        # because the generic function generic_phonenumber_to_e164() is designed
-        # to return the result as multi
-        'phone_e164': fields.function(format_phonenumber_to_e164, type='char', size=64, string='Phone in E.164 format', readonly=True, multi='e164registration', store={
-            'event.registration': (lambda self, cr, uid, ids, c={}: ids, ['phone'], 10),
-            }),
-        }
-
-
     def create(self, cr, uid, vals, context=None):
         vals_reformated = self._generic_reformat_phonenumbers(cr, uid, vals, context=context)
         return super(event_registration, self).create(cr, uid, vals_reformated, context=context)

@@ -59,6 +59,7 @@
         'wizard/create_crm_phonecall_view.xml',
         'res_users_view.xml',
         'crm_lead_view.xml',
+        'crm_phonecall_view.xml',
     ],
     "installable": True,
     "application": True,

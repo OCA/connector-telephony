@@ -19,14 +19,14 @@
     <field name="arch" type="xml">
         <xpath expr="//group/group/field[@name='phone']" position="replace">
             <group colspan="2" col="8">
-                <field name="phone" colspan="7" />
-                <button name="action_dial" context="{'field2dial': ['phone', 'phone_e164']}" string="Dial" type="object" attrs="{'invisible':[('phone','=',False)]}"/>
+                <field name="phone" widget="phone" colspan="7" />
+                <button name="action_dial" context="{'field2dial': 'phone'}" string="Dial" type="object" attrs="{'invisible':[('phone','=',False)]}"/>
             </group>
         </xpath>
         <xpath expr="//group/group/field[@name='mobile']" position="replace">
             <group colspan="2" col="8">
-                <field name="mobile" colspan="7" />
-                <button name="action_dial" context="{'field2dial': ['mobile', 'mobile_e164']}" string="Dial" type="object" attrs="{'invisible':[('mobile','=',False)]}"/>
+                <field name="mobile" widget="phone" colspan="7" />
+                <button name="action_dial" context="{'field2dial': 'mobile'}" string="Dial" type="object" attrs="{'invisible':[('mobile','=',False)]}"/>
             </group>
         </xpath>
     </field>
@@ -40,14 +40,14 @@
     <field name="arch" type="xml">
         <xpath expr="//group/group/field[@name='phone']" position="replace">
             <group colspan="2" col="8">
-                <field name="phone" colspan="7" />
-                <button name="action_dial" context="{'field2dial': ['phone', 'phone_e164']}" string="Dial" type="object" attrs="{'invisible':[('phone','=',False)]}"/>
+                <field name="phone" widget="phone" colspan="7" />
+                <button name="action_dial" context="{'field2dial': 'phone'}" string="Dial" type="object" attrs="{'invisible':[('phone','=',False)]}"/>
             </group>
         </xpath>
         <xpath expr="//group/group/field[@name='mobile']" position="replace">
             <group colspan="2" col="8">
-                <field name="mobile" colspan="7" />
-                <button name="action_dial" context="{'field2dial': ['mobile', 'mobile_e164']}" string="Dial" type="object" attrs="{'invisible':[('mobile','=',False)]}"/>
+                <field name="mobile" widget="phone" colspan="7" />
+                <button name="action_dial" context="{'field2dial': 'mobile'}" string="Dial" type="object" attrs="{'invisible':[('mobile','=',False)]}"/>
             </group>
         </xpath>
     </field>

@@ -89,23 +89,6 @@ class crm_lead(osv.osv):
     _inherit = ['crm.lead', 'asterisk.common']
 
 
-    def format_phonenumber_to_e164(self, cr, uid, ids, name, arg, context=None):
-        return self.generic_phonenumber_to_e164(cr, uid, ids, [('phone', 'phone_e164'), ('mobile', 'mobile_e164'), ('fax', 'fax_e164')], context=context)
-
-
-    _columns = {
-        'phone_e164': fields.function(format_phonenumber_to_e164, type='char', size=64, string='Phone in E.164 format', readonly=True, multi="e164lead", store={
-            'crm.lead': (lambda self, cr, uid, ids, c={}: ids, ['phone'], 10),
-            }),
-        'mobile_e164': fields.function(format_phonenumber_to_e164, type='char', size=64, string='Mobile in E.164 format', readonly=True, multi="e164lead", store={
-            'crm.lead': (lambda self, cr, uid, ids, c={}: ids, ['mobile'], 10),
-            }),
-        'fax_e164': fields.function(format_phonenumber_to_e164, type='char', size=64, string='Fax in E.164 format', readonly=True, multi="e164lead", store={
-            'crm.lead': (lambda self, cr, uid, ids, c={}: ids, ['fax'], 10),
-            }),
-        }
-
-
     def create(self, cr, uid, vals, context=None):
         vals_reformated = self._generic_reformat_phonenumbers(cr, uid, vals, context=context)
         return super(crm_lead, self).create(cr, uid, vals_reformated, context=context)
