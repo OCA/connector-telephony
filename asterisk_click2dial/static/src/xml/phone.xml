@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Base phone module for OpenERP
+    Copyright (C) 2013 Alexis de Lattre <alexis@via.ecp.fr>
+    The licence is in the file __openerp__.py
+-->
+
+<templates id="template" xml:space="preserve">
+<t t-name="FieldPhone">
+    <span class="oe_form_field oe_form_field_email" t-att-style="widget.node.attrs.style">
+        <a t-if="widget.get('effective_readonly')" href="#" class="oe_form_uri" target="_blank"/>
+        <t t-if="!widget.get('effective_readonly')">
+            <div>
+                <input type="text"
+                    t-att-id="widget.id_for_label"
+                    t-att-tabindex="widget.node.attrs.tabindex"
+                    t-att-autofocus="widget.node.attrs.autofocus"
+                    t-att-placeholder="widget.node.attrs.placeholder"
+                    t-att-maxlength="widget.field.size"
+                />
+            </div>
+        </t>
+    </span>
+</t>
+</templates>

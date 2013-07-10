@@ -60,6 +60,11 @@ A detailed documentation for this module is available on the Akretion Web site :
         'security/asterisk_server_security.xml',
         'security/ir.model.access.csv',
         ],
+    'js': [
+        'static/src/js/*.js',
+        'static/lib/js/*.js',
+        ],
+    'qweb': ['static/src/xml/*.xml'],
     'demo': ['asterisk_click2dial_demo.xml'],
     'images': [
         'images/sshot-click2dial.jpg',
