@@ -495,7 +495,7 @@ class res_partner(osv.osv):
 
         # We try to match a phone or mobile number with the same end
         pg_seach_number = str('%' + end_number_to_match)
-        res_ids = self.search(cr, uid, ['|', ('phone', 'ilike', pg_seach_number), ('mobile', 'ilike', pg_seach_number)], context=context)
+        res_ids = self.search(cr, uid, ['|', ('phone', 'like', pg_seach_number), ('mobile', 'like', pg_seach_number)], context=context)
         # TODO : use is_number_match() of the phonenumber lib ?
         if len(res_ids) > 1:
             _logger.warning(u"There are several partners (IDS = %s) with a phone number ending with '%s'" % (str(res_ids), end_number_to_match))
