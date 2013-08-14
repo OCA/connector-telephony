@@ -26,10 +26,13 @@
     "version": "1.0",
     "depends": ["base"],
     "author": "Julius Network Solutions,SYLEAM,OpenERP SA",
-    "description": """SMS Client module that provides:
-    Sending SMS
-    Use Multiple Gateways
-    To validate Gateway, code is send to a mobile phone, when received enter it to confirm SMS account
+    'images': ['images/sms.jpeg', 'images/gateway.jpeg', 'images/gateway_access.jpeg','images/client.jpeg','images/send_sms.jpeg'],
+    "description": """
+SMS Client module that provides:
+-------------
+*Sending SMS.
+*Use Multiple Gateways
+*To validate Gateway, code is send to a mobile phone, when received enter it to confirm SMS account
     """,
     "website": "http://julius.fr",
     "category": "Tools",
