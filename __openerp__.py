@@ -28,13 +28,22 @@
     "author": "Julius Network Solutions,SYLEAM,OpenERP SA",
     'images': ['images/sms.jpeg', 'images/gateway.jpeg', 'images/gateway_access.jpeg','images/client.jpeg','images/send_sms.jpeg'],
     "description": """
-SMS Client module that provides:
+SMS Client module provides:
 -------------
-*Sending SMS.
+Sending SMSs very easily, individually or collectively.
+
+*Generalities
+
+OpenERP does not directly generate the SMS you will have to subscribe to an operator with a web interface (Type OVH) or via a URL generation.
+In the case of OVH you must also install the library "Soap".
 
 *Use Multiple Gateways.
 
-*To validate Gateway, code is send to a mobile phone, when received enter it to confirm SMS account.
+The Gateway configuration is performed directly in the configuration menu. For each gateway, you have to fill in the information for your operator.
+
+To validate Gateway, code is send to a mobile phone, when received enter it to confirm SMS account.
+
+
     """,
     "website": "http://julius.fr",
     "category": "Tools",
