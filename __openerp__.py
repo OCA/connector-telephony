@@ -31,8 +31,10 @@
 SMS Client module that provides:
 -------------
 *Sending SMS.
-*Use Multiple Gateways
-*To validate Gateway, code is send to a mobile phone, when received enter it to confirm SMS account
+
+*Use Multiple Gateways.
+
+*To validate Gateway, code is send to a mobile phone, when received enter it to confirm SMS account.
     """,
     "website": "http://julius.fr",
     "category": "Tools",
