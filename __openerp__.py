@@ -52,7 +52,7 @@ To validate Gateway, code is send to a mobile phone, when received enter it to c
         "security/ir.model.access.csv",
         "smsclient_view.xml",
         "serveraction_view.xml",
-        "smsclient_wizard.xml",
+#        "smsclient_wizard.xml",
         "smsclient_data.xml",
         "wizard/mass_sms_view.xml",
         "partner_sms_send_view.xml",

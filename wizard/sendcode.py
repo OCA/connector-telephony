@@ -29,24 +29,22 @@ class sendcode(orm.TransientModel):
         sms_pool = pooler.get_pool(cr.dbname).get('sms.smsclient')
         gate = sms_pool.browse(cr, uid, data['id'])
         msg = key[0:6]
-        sms_pool.send_message(cr, uid, data['id'], data['form']['smsto'], msg)
+        sms_pool._send_message(cr, uid, data['id'], data['form']['smsto'], msg)
         if not gate.state in('new', 'waiting'):
             raise osv.except_osv(_('Error'), _('Verification Failed. Please check the Server Configuration!'))
 
         pooler.get_pool(cr.dbname).get('sms.smsclient').write(cr, uid, [data['id']], {'state': 'waiting', 'code': msg})
         return {}
 
-    states = {
-        'init': {
-            'actions': [],
-            'result': {'type': 'form', 'arch': form, 'fields': fields, 'state': [('end', 'Cancel'), ('send', 'Send Code')]}
-        },
-        'send': {
-            'actions': [send_code],
-            'result': {'type': 'state', 'state': 'end'}
-        }
-    }
-
-
+#    states = {
+#        'init': {
+#            'actions': [],
+#            'result': {'type': 'form', 'arch': form, 'fields': fields, 'state': [('end', 'Cancel'), ('send', 'Send Code')]}
+#        },
+#        'send': {
+#            'actions': [send_code],
+#            'result': {'type': 'state', 'state': 'end'}
+#        }
+#    }
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

@@ -13,7 +13,6 @@
         <record model="ir.ui.view" id="sms_smsclient_form">
             <field name="name">sms.smsclient.form</field>
             <field name="model">sms.smsclient</field>
-            <field name="type">form</field>
             <field name="priority" eval="8"/>
             <field name="arch" type="xml">
                 <form string="SMS Gateway">
@@ -65,7 +64,6 @@
         <record model="ir.ui.view" id="sms_smsclient_tree">
             <field name="name">sms.smsclient.tree</field>
             <field name="model">sms.smsclient</field>
-            <field name="type">tree</field>
             <field name="priority" eval="8"/>
             <field name="arch" type="xml">
                 <tree string="SMS Gateways">
@@ -93,7 +91,6 @@
         <record model="ir.ui.view" id="sms_smsclient_history_tree">
             <field name="name">sms.smsclient.history.tree</field>
             <field name="model">sms.smsclient.history</field>
-            <field name="type">tree</field>
             <field name="arch" type="xml">
                 <tree string="Gateway History">
                     <field name="date_create"/>
@@ -109,7 +106,6 @@
         <record model="ir.ui.view" id="sms_smsclient_history_form">
             <field name="name">sms.smsclient.history.form</field>
             <field name="model">sms.smsclient.history</field>
-            <field name="type">form</field>
             <field name="arch" type="xml">
                 <form string="Gateway History">
                     <field name="gateway_id" select="1"/>
@@ -140,7 +136,6 @@
         <record model="ir.ui.view" id="sms_smsclient_message_queue_tree">
             <field name="name">sms.smsclient.queue.tree</field>
             <field name="model">sms.smsclient.queue</field>
-            <field name="type">tree</field>
             <field name="arch" type="xml">
                 <tree string="Message Queue">
                     <field name="date_create"/>
@@ -155,7 +150,6 @@
         <record model="ir.ui.view" id="sms_smsclient_message_queue_form">
             <field name="name">sms.smsclient.history.form</field>
             <field name="model">sms.smsclient.queue</field>
-            <field name="type">form</field>
             <field name="arch" type="xml">
                 <form string="Gateway History">
                     <field name="date_create" select="1"/>
