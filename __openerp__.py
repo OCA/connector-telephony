@@ -35,7 +35,7 @@ Sending SMSs very easily, individually or collectively.
 *Generalities
 
 OpenERP does not directly generate the SMS you will have to subscribe to an operator with a web interface (Type OVH) or via a URL generation.
-In the case of OVH you must also install the library "Soap".
+You must also install the library "Soap".
 
 *Use Multiple Gateways.
 
