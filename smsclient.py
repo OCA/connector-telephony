@@ -224,21 +224,21 @@ class SMSClient(orm.Model):
         if gateway:
             if not self._check_permissions(cr, uid, gateway.id, context=context):
                 raise orm.except_orm(_('Permission Error!'), _('You have no permission to access %s ') % (gateway.name,))
-        
-            if gateway.method != 'http':
-                raise orm.except_orm(_('Error'), _('This method is not implemented (%s)') % (gateway.name,))
-        
             url = gateway.url
-#            prms = {}
-#           for p in gate.property_ids:
-#                if p.type == 'to':
-#                    prms[p.name] = to
-#                elif p.type == 'sms':
-#                    prms[p.name] = text
-#                else:
-#                    prms[p.name] = p.value
-#            params = urllib.urlencode(prms)
-            name = url + "?" #+ params
+            name = url
+            if gateway.method == 'http':
+                prms = {}
+                for p in data.gateway.property_ids:
+                     if p.type == 'user':
+                         prms[p.name] = p.value
+                     elif p.type == 'password':
+                         prms[p.name] = p.value
+                     elif p.type == 'to':
+                         prms[p.name] = data.mobile_to
+                     elif p.type == 'sms':
+                         prms[p.name] = data.text
+                params = urllib.urlencode(prms)
+                name = url + "?" + params
             queue_obj = self.pool.get('sms.smsclient.queue')
             vals = self._prepare_smsclient_queue(cr, uid, data, name, context=context)
             queue_obj.create(cr, uid, vals, context=context)
@@ -258,37 +258,45 @@ class SMSClient(orm.Model):
         sent_ids = []
         for sms in queue_obj.browse(cr, uid, sids, context=context):
 #             f = urllib.urlopen(sms.name)
+            print sms
             if len(sms.msg) > 160:
                 error_ids.append(sms.id)
                 continue
+            if sms.gateway_id.method == 'http':
+                print 'http mode'
+                try:
+                    print sms.name
+                    urllib.urlopen(sms.name)
+                except Exception, e:
+                    raise orm.except_orm('Error', e)
             ### New Send Process OVH Dedicated ###
             ## Parameter Fetch ##
-            for p in sms.gateway_id.property_ids:
-                if p.type == 'user':
-                    login = p.value
-                elif p.type == 'password':
-                    pwd = p.value
-                elif p.type == 'sender':
-                    sender = p.value
-                elif p.type == 'sms':
-                    account = p.value
-            try:
-                soap = WSDL.Proxy(sms.gateway_id.url)
-                result = soap.telephonySmsUserSend(str(login), str(pwd),
-                    str(account), str(sender), str(sms.mobile), str(sms.msg),
-                    int(sms.validity), int(sms.classes), int(sms.deferred),
-                    int(sms.priority), int(sms.coding), int(sms.nostop))
-                ### End of the new process ###
-                history_obj.create(cr, uid, {
-                                        'name': _('SMS Sent'),
-                                        'gateway_id': sms.gateway_id.id,
-                                        'sms': sms.msg,
-                                        'to': sms.mobile,
-                                    }, context=context)
-                sent_ids.append(sms.id)
-                 ## Send Function ##
-            except Exception, e:
-                raise orm.except_orm('Error', e)
+            if sms.gateway_id.method == 'smpp':
+                for p in sms.gateway_id.property_ids:
+                    if p.type == 'user':
+                        login = p.value
+                    elif p.type == 'password':
+                        pwd = p.value
+                    elif p.type == 'sender':
+                        sender = p.value
+                    elif p.type == 'sms':
+                        account = p.value
+                try:
+                    soap = WSDL.Proxy(sms.gateway_id.url)
+                    result = soap.telephonySmsUserSend(str(login), str(pwd),
+                        str(account), str(sender), str(sms.mobile), str(sms.msg),
+                        int(sms.validity), int(sms.classes), int(sms.deferred),
+                        int(sms.priority), int(sms.coding), int(sms.nostop))
+                    ### End of the new process ###
+                except Exception, e:
+                    raise orm.except_orm('Error', e)
+            history_obj.create(cr, uid, {
+                            'name': _('SMS Sent'),
+                            'gateway_id': sms.gateway_id.id,
+                            'sms': sms.msg,
+                            'to': sms.mobile,
+                        }, context=context)
+            sent_ids.append(sms.id)
         queue_obj.write(cr, uid, sent_ids, {'state': 'send'}, context=context)
         queue_obj.write(cr, uid, error_ids, {
                                         'state': 'error',
@@ -363,9 +371,9 @@ class Properties(orm.Model):
 
     _columns = {
         'name': fields.char('Property name', size=256,
-            required=True, help='Name of the property whom appear on the URL'),
+             help='Name of the property whom appear on the URL'),
         'value': fields.char('Property value', size=256,
-            required=True, help='Value associate on the property for the URL'),
+             help='Value associate on the property for the URL'),
         'gateway_id': fields.many2one('sms.smsclient', 'SMS Gateway'),
         'type': fields.selection([
                 ('user', 'User'),
