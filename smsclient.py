@@ -257,15 +257,11 @@ class SMSClient(orm.Model):
         error_ids = []
         sent_ids = []
         for sms in queue_obj.browse(cr, uid, sids, context=context):
-#             f = urllib.urlopen(sms.name)
-            print sms
             if len(sms.msg) > 160:
                 error_ids.append(sms.id)
                 continue
             if sms.gateway_id.method == 'http':
-                print 'http mode'
                 try:
-                    print sms.name
                     urllib.urlopen(sms.name)
                 except Exception, e:
                     raise orm.except_orm('Error', e)

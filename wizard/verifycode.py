@@ -20,8 +20,8 @@
 
 import wizard
 import pooler
-from osv import osv
-from tools.translate import _
+from openerp.osv import fields, orm
+from openerp.tools.translate import _
 
 form = '''<?xml version="1.0"?>
 <form string="Verify Code">
@@ -34,7 +34,7 @@ fields = {
 }
 
 
-class verifycode(osv.osv_memory):
+class verifycode(orm.TransientModel):
     _name = 'sms.smsclient.code.verify'
     
     def checkcode(self, cr, uid, data, context):
@@ -60,6 +60,5 @@ class verifycode(osv.osv_memory):
         }
     }
 
-verifycode()
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
