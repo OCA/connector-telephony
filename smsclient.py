@@ -31,7 +31,8 @@ _logger = logging.getLogger(__name__)
 try:
     from SOAPpy import WSDL
 except :
-    _logger.warning("ERROR IMPORTING SOAPpy, if not installed, please install it")
+    _logger.warning("ERROR IMPORTING SOAPpy, if not installed, please install it:"
+    " e.g.: apt-get install python-soappy")
 
 class partner_sms_send(orm.Model):
     _name = "partner.sms.send"
