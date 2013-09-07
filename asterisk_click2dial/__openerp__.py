@@ -51,6 +51,7 @@ A detailed documentation for this module is available on the Akretion Web site :
     'author': 'Akretion',
     'website': 'http://www.akretion.com/',
     'depends': ['base'],
+    'external_dependencies': {'python': ['phonenumbers', 'Asterisk']},
     'data': [
         'asterisk_server_view.xml',
         'res_users_view.xml',
