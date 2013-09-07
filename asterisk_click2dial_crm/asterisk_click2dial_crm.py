@@ -24,18 +24,8 @@
 ##############################################################################
 
 from openerp.osv import osv, fields
-# Lib required to print logs
-import logging
 # Lib to translate error messages
 from openerp.tools.translate import _
-# Lib for phone number reformating -> pip install phonenumbers
-import phonenumbers
-# Lib py-asterisk from http://code.google.com/p/py-asterisk/
-# We need a version which has this commit : http://code.google.com/p/py-asterisk/source/detail?r=8d0e1c941cce727c702582f3c9fcd49beb4eeaa4
-# so a version after Nov 20th, 2012
-from Asterisk import Manager
-
-_logger = logging.getLogger(__name__)
 
 
 class res_partner(osv.osv):
