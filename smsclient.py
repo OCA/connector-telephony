@@ -238,6 +238,8 @@ class SMSClient(orm.Model):
                          prms[p.name] = data.mobile_to
                      elif p.type == 'sms':
                          prms[p.name] = data.text
+                     elif p.type == 'extra':
+                         prms[p.name] = p.value
                 params = urllib.urlencode(prms)
                 name = url + "?" + params
             queue_obj = self.pool.get('sms.smsclient.queue')
@@ -377,7 +379,8 @@ class Properties(orm.Model):
                 ('password', 'Password'),
                 ('sender', 'Sender Name'),
                 ('to', 'Recipient No'),
-                ('sms', 'SMS Message')
+                ('sms', 'SMS Message'),
+                ('extra', 'Extra Info')
             ], 'API Method', select=True,
             help='If parameter concern a value to substitute, indicate it'),
     }
