@@ -19,15 +19,42 @@ openerp.asterisk_click2dial = function (instance) {
             } else {
                 var formatted_number = formatInternational('', this.get('value'))
                 this.$el.find('a')
-                    .attr('href', 'callto:' + this.get('value'))
+                    .attr('href', 'tel:' + this.get('value'))
                     .text(formatted_number || '');
             }
         },
         on_button_clicked: function() {
-            location.href = 'callto:' + this.get('value');
+            location.href = 'tel:' + this.get('value');
         }
     });
 
     instance.web.form.widgets.add('phone', 'instance.asterisk_click2dial.FieldPhone');
+
+    instance.asterisk_click2dial.FieldFax = instance.web.form.FieldChar.extend({
+        template: 'FieldFax',
+        initialize_content: function() {
+            this._super();
+            var $button = this.$el.find('button');
+            $button.click(this.on_button_clicked);
+            this.setupFocus($button);
+        },
+        render_value: function() {
+            if (!this.get("effective_readonly")) {
+                this._super();
+            } else {
+                var formatted_number = formatInternational('', this.get('value'))
+                this.$el.find('a')
+                    .attr('href', 'fax:' + this.get('value'))
+                    .text(formatted_number || '');
+            }
+        },
+        on_button_clicked: function() {
+            location.href = 'fax:' + this.get('value');
+        }
+    });
+
+    instance.web.form.widgets.add('fax', 'instance.asterisk_click2dial.FieldFax');
+
+
 
         }
