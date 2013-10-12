@@ -19,11 +19,9 @@
 #
 ##############################################################################
 
-from openerp.osv import osv, fields, orm
-# Lib required to print logs
-import logging
-# Lib to translate error messages
+from openerp.osv import fields, orm
 from openerp.tools.translate import _
+import logging
 # Lib for phone number reformating -> pip install phonenumbers
 import phonenumbers
 # Lib py-asterisk from http://code.google.com/p/py-asterisk/
@@ -33,7 +31,7 @@ from Asterisk import Manager
 
 _logger = logging.getLogger(__name__)
 
-class asterisk_server(osv.osv):
+class asterisk_server(orm.Model):
     '''Asterisk server object, to store all the parameters of the Asterisk IPBXs'''
     _name = "asterisk.server"
     _description = "Asterisk Servers"
@@ -90,21 +88,21 @@ class asterisk_server(osv.osv):
 
             for digit_prefix in [country_prefix, international_prefix, out_prefix, national_prefix]:
                 if digit_prefix[1] and not digit_prefix[1].isdigit():
-                    raise osv.except_osv(_('Error :'), _("Only use digits for the '%s' on the Asterisk server '%s'" % (digit_prefix[0], server.name)))
+                    raise orm.except_orm(_('Error :'), _("Only use digits for the '%s' on the Asterisk server '%s'" % (digit_prefix[0], server.name)))
             if server.wait_time < 1 or server.wait_time > 120:
-                raise osv.except_osv(_('Error :'), _("You should set a 'Wait time' value between 1 and 120 seconds for the Asterisk server '%s'" % server.name))
+                raise orm.except_orm(_('Error :'), _("You should set a 'Wait time' value between 1 and 120 seconds for the Asterisk server '%s'" % server.name))
             if server.extension_priority < 1:
-                raise osv.except_osv(_('Error :'), _("The 'extension priority' must be a positive value for the Asterisk server '%s'" % server.name))
+                raise orm.except_orm(_('Error :'), _("The 'extension priority' must be a positive value for the Asterisk server '%s'" % server.name))
             if server.port > 65535 or server.port < 1:
-                raise osv.except_osv(_('Error :'), _("You should set a TCP port between 1 and 65535 for the Asterisk server '%s'" % server.name))
+                raise orm.except_orm(_('Error :'), _("You should set a TCP port between 1 and 65535 for the Asterisk server '%s'" % server.name))
             if server.number_of_digits_to_match_from_end > 20 or server.number_of_digits_to_match_from_end < 1:
-                raise osv.except_osv(_('Error :'), _("You should set a 'Number of digits to match from end' between 1 and 20 for the Asterisk server '%s'" % server.name))
+                raise orm.except_orm(_('Error :'), _("You should set a 'Number of digits to match from end' between 1 and 20 for the Asterisk server '%s'" % server.name))
             for check_string in [dialplan_context, alert_info, login, password]:
                 if check_string[1]:
                     try:
                         string = check_string[1].encode('ascii')
                     except UnicodeEncodeError:
-                        raise osv.except_osv(_('Error :'), _("The '%s' should only have ASCII caracters for the Asterisk server '%s'" % (check_string[0], server.name)))
+                        raise orm.except_orm(_('Error :'), _("The '%s' should only have ASCII caracters for the Asterisk server '%s'" % (check_string[0], server.name)))
         return True
 
 
@@ -133,7 +131,7 @@ class asterisk_server(osv.osv):
 
         # Check if empty
         if not tmp_number:
-            raise osv.except_osv(error_title_msg, invalid_format_msg)
+            raise orm.except_orm(error_title_msg, invalid_format_msg)
 
         # Before starting to use prefix, we convert empty prefix whose value
         # is False to an empty string
@@ -155,7 +153,7 @@ class asterisk_server(osv.osv):
 
         # At this stage, 'tmp_number' should only contain digits
         if not tmp_number.isdigit():
-            raise osv.except_osv(error_title_msg, invalid_format_msg)
+            raise orm.except_orm(error_title_msg, invalid_format_msg)
 
         _logger.debug('Country prefix = %s' % country_prefix)
         if country_prefix == tmp_number[0:len(country_prefix)]:
@@ -202,7 +200,7 @@ class asterisk_server(osv.osv):
             asterisk_server_ids = self.search(cr, uid, [('company_id', '=', user.company_id.id)], context=context)
         # If no asterisk server is configured on the user, we take the first one
             if not asterisk_server_ids:
-                raise osv.except_osv(_('Error :'), _("No Asterisk server configured for the company '%s'.") % user.company_id.name)
+                raise orm.except_orm(_('Error :'), _("No Asterisk server configured for the company '%s'.") % user.company_id.name)
             else:
                 ast_server = self.browse(cr, uid, asterisk_server_ids[0], context=context)
         return ast_server
@@ -222,11 +220,11 @@ class asterisk_server(osv.osv):
         ast_server = self._get_asterisk_server_from_user(cr, uid, context=context)
         # We check if the current user has a chan type
         if not user.asterisk_chan_type:
-            raise osv.except_osv(_('Error :'), _('No channel type configured for the current user.'))
+            raise orm.except_orm(_('Error :'), _('No channel type configured for the current user.'))
 
         # We check if the current user has an internal number
         if not user.resource:
-            raise osv.except_osv(_('Error :'), _('No resource name configured for the current user'))
+            raise orm.except_orm(_('Error :'), _('No resource name configured for the current user'))
 
 
         _logger.debug("User's phone : %s/%s" % (user.asterisk_chan_type, user.resource))
@@ -238,7 +236,7 @@ class asterisk_server(osv.osv):
         except Exception, e:
             _logger.error("Error in the Originate request to Asterisk server %s" % ast_server.ip_address)
             _logger.error("Here is the detail of the error : %s" % e.strerror)
-            raise osv.except_osv(_('Error :'), _("Problem in the request from OpenERP to Asterisk. Here is the detail of the error: %s." % e.strerror))
+            raise orm.except_orm(_('Error :'), _("Problem in the request from OpenERP to Asterisk. Here is the detail of the error: %s." % e.strerror))
             return False
 
         return (user, ast_server, ast_manager)
@@ -246,14 +244,14 @@ class asterisk_server(osv.osv):
     def _dial_with_asterisk(self, cr, uid, erp_number, context=None):
         #print "_dial_with_asterisk erp_number=", erp_number
         if not erp_number:
-            raise osv.except_osv(_('Error :'), "Hara kiri : you must call the function with erp_number")
+            raise orm.except_orm(_('Error :'), "Hara kiri : you must call the function with erp_number")
 
         user, ast_server, ast_manager = self._connect_to_asterisk(cr, uid, context=context)
         ast_number = self._reformat_number(cr, uid, erp_number, ast_server, context=context)
 
         # The user should have a CallerID
         if not user.callerid:
-            raise osv.except_osv(_('Error :'), _('No callerID configured for the current user'))
+            raise orm.except_orm(_('Error :'), _('No callerID configured for the current user'))
 
         variable = []
         if user.asterisk_chan_type == 'SIP':
@@ -279,7 +277,7 @@ class asterisk_server(osv.osv):
         except Exception, e:
             _logger.error("Error in the Originate request to Asterisk server %s" % ast_server.ip_address)
             _logger.error("Here is the detail of the error : '%s'" % unicode(e))
-            raise osv.except_osv(_('Error :'), _("Click to dial with Asterisk failed.\nHere is the error: '%s'" % unicode(e)))
+            raise orm.except_orm(_('Error :'), _("Click to dial with Asterisk failed.\nHere is the error: '%s'" % unicode(e)))
 
         finally:
             ast_manager.Logoff()
@@ -313,7 +311,7 @@ class asterisk_server(osv.osv):
         except Exception, e:
             _logger.error("Error in the Status request to Asterisk server %s" % ast_server.ip_address)
             _logger.error("Here is the detail of the error : '%s'" % unicode(e))
-            raise osv.except_osv(_('Error :'), _("Can't get calling number from  Asterisk.\nHere is the error: '%s'" % unicode(e)))
+            raise orm.except_orm(_('Error :'), _("Can't get calling number from  Asterisk.\nHere is the error: '%s'" % unicode(e)))
 
         finally:
             ast_manager.Logoff()
@@ -325,7 +323,7 @@ class asterisk_server(osv.osv):
 
 
 # Parameters specific for each user
-class res_users(osv.osv):
+class res_users(orm.Model):
     _inherit = "res.users"
 
     _columns = {
@@ -371,7 +369,7 @@ class res_users(osv.osv):
                     try:
                         plom = check_string[1].encode('ascii')
                     except UnicodeEncodeError:
-                        raise osv.except_osv(_('Error :'), _("The '%s' for the user '%s' should only have ASCII caracters" % (check_string[0], user.name)))
+                        raise orm.except_orm(_('Error :'), _("The '%s' for the user '%s' should only have ASCII caracters" % (check_string[0], user.name)))
         return True
 
     _constraints = [
@@ -387,14 +385,14 @@ class asterisk_common(orm.AbstractModel):
         if context is None:
             context = {}
         if not isinstance(context.get('field2dial'), (unicode, str)):
-            raise osv.except_osv(_('Error :'), "The function action_dial must be called with a 'field2dial' key in the context containing a string '<phone_field>'.")
+            raise orm.except_orm(_('Error :'), "The function action_dial must be called with a 'field2dial' key in the context containing a string '<phone_field>'.")
         else:
             phone_field = context.get('field2dial')
         erp_number_read = self.read(cr, uid, ids[0], [phone_field], context=context)
         erp_number_e164 = erp_number_read[phone_field]
         # Check if the number to dial is not empty
         if not erp_number_e164:
-            raise osv.except_osv(_('Error :'), _('There is no phone number !'))
+            raise orm.except_orm(_('Error :'), _('There is no phone number !'))
         return self.pool['asterisk.server']._dial_with_asterisk(cr, uid, erp_number_e164, context=context)
 
 
@@ -414,7 +412,7 @@ class asterisk_common(orm.AbstractModel):
                         _logger.error("You should fix this number and run the wizard 'Reformat all phone numbers' from the menu Settings > Configuration > Asterisk")
                     # If I raise an exception here, it won't be possible to install
                     # the module on a DB with bad phone numbers
-                        #raise osv.except_osv(_('Error :'), _("Cannot reformat the phone number '%s' to E.164 format. Error message: %s" % (record.get(fromfield), e)))
+                        #raise orm.except_orm(_('Error :'), _("Cannot reformat the phone number '%s' to E.164 format. Error message: %s" % (record.get(fromfield), e)))
                         res = False
                 result[record['id']][tofield] = res
         #print "RESULT generic_phonenumber_to_e164", result
@@ -430,21 +428,24 @@ class asterisk_common(orm.AbstractModel):
                 user_countrycode = user.company_id.country_id.code
             else:
                 # We need to raise an exception here because, if we pass None as second arg of phonenumbers.parse(), it will raise an exception when you try to enter a phone number in national format... so it's better to raise the exception here
-                raise osv.except_osv(_('Error :'), _("You should set a country on the company '%s'" % user.company_id.name))
+                raise orm.except_orm(_('Error :'), _("You should set a country on the company '%s'" % user.company_id.name))
             #print "user_countrycode=", user_countrycode
             for field in phonefields:
                 if vals.get(field):
+                    init_value = vals.get(field)
                     try:
                         res_parse = phonenumbers.parse(vals.get(field), user_countrycode)
                     except Exception, e:
-                        raise osv.except_osv(_('Error :'), _("Cannot reformat the phone number '%s' to international format. Error message: %s" % (vals.get(field), e)))
+                        raise orm.except_orm(_('Error :'), _("Cannot reformat the phone number '%s' to international format. Error message: %s" % (vals.get(field), e)))
                     #print "res_parse=", res_parse
                     vals[field] = phonenumbers.format_number(res_parse, phonenumbers.PhoneNumberFormat.E164)
+                    if init_value != vals[field]:
+                        _logger.info("%s initial value: '%s' updated value: '%s'" % (field, init_value, vals[field]))
         return vals
 
 
 
-class res_partner(osv.osv):
+class res_partner(orm.Model):
     _name = 'res.partner'
     _inherit = ['res.partner', 'asterisk.common']
 
@@ -509,7 +510,7 @@ class res_partner(osv.osv):
 
 
 # This module supports multi-company
-class res_company(osv.osv):
+class res_company(orm.Model):
     _inherit = "res.company"
 
     _columns = {
