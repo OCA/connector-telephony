@@ -50,6 +50,9 @@
                 <button name="action_dial" context="{'field2dial': 'mobile'}" string="Dial" type="object" attrs="{'invisible':[('mobile','=',False)]}"/>
             </group>
         </xpath>
+        <xpath expr="//group/group/field[@name='fax']" position="attributes">
+            <attribute name="widget">fax</attribute>
+        </xpath>
         <xpath expr="//form[@string='Contact']/sheet/group/field[@name='phone']" position="replace">
             <group colspan="2" col="8">
                 <field name="phone" widget="phone" colspan="7" />

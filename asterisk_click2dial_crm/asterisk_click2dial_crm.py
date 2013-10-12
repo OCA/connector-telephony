@@ -23,12 +23,11 @@
 #
 ##############################################################################
 
-from openerp.osv import osv, fields
-# Lib to translate error messages
+from openerp.osv import orm, fields
 from openerp.tools.translate import _
 
 
-class res_partner(osv.osv):
+class res_partner(orm.Model):
     _name = 'res.partner'
     _inherit = ['res.partner', 'asterisk.common']
 
@@ -60,7 +59,7 @@ class res_partner(osv.osv):
 
 
 
-class res_users(osv.osv):
+class res_users(orm.Model):
     _inherit = "res.users"
 
     _columns = {
@@ -74,7 +73,7 @@ class res_users(osv.osv):
         'context_propose_creation_crm_call': True,
         }
 
-class crm_lead(osv.osv):
+class crm_lead(orm.Model):
     _name = 'crm.lead'
     _inherit = ['crm.lead', 'asterisk.common']
 

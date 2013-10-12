@@ -20,4 +20,5 @@
 #
 ##############################################################################
 
-import open_calling_partner
+from . import open_calling_partner
+from . import reformat_all_phonenumbers

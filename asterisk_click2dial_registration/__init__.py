@@ -19,5 +19,5 @@
 #
 ##############################################################################
 
-import wizard
-import asterisk_click2dial_registration
+from . import wizard
+from . import asterisk_click2dial_registration

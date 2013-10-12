@@ -19,10 +19,10 @@
 #
 ##############################################################################
 
-from openerp.osv import osv, fields
+from openerp.osv import orm, fields
 
 
-class event_registration(osv.osv):
+class event_registration(orm.Model):
     _name = 'event.registration'
     _inherit = ['event.registration', 'asterisk.common']
 

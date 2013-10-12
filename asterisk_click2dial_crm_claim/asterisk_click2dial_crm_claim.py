@@ -19,10 +19,10 @@
 #
 ##############################################################################
 
-from openerp.osv import osv, fields
+from openerp.osv import orm, fields
 
 
-class crm_claim(osv.osv):
+class crm_claim(orm.Model):
     _name = 'crm.claim'
     _inherit = ['crm.claim', 'asterisk.common']
 

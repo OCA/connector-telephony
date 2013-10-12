@@ -19,9 +19,9 @@
 #
 ##############################################################################
 
-from openerp.osv import osv
+from openerp.osv import orm
 
-class wizard_open_calling_partner(osv.osv_memory):
+class wizard_open_calling_partner(orm.TransientModel):
     _inherit = "wizard.open.calling.partner"
 
     def open_registrations(self, cr, uid, ids, context=None):

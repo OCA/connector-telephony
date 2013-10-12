@@ -13,22 +13,25 @@
 <data>
 
 <record id="asterisk_crm_lead_simplified_form_dial" model="ir.ui.view">
-    <field name="name">asterisk.crm_lead.simplified.form.dial</field>
+    <field name="name">asterisk.crm_lead.form.dial</field>
     <field name="model">crm.lead</field>
     <field name="inherit_id" ref="crm.crm_case_form_view_leads"/>
     <field name="arch" type="xml">
-        <xpath expr="//group/group/field[@name='phone']" position="replace">
+        <field name="phone" position="replace">
             <group colspan="2" col="8">
                 <field name="phone" widget="phone" colspan="7" />
                 <button name="action_dial" context="{'field2dial': 'phone'}" string="Dial" type="object" attrs="{'invisible':[('phone','=',False)]}"/>
             </group>
-        </xpath>
-        <xpath expr="//group/group/field[@name='mobile']" position="replace">
+        </field>
+        <field name="mobile" position="replace">
             <group colspan="2" col="8">
                 <field name="mobile" widget="phone" colspan="7" />
                 <button name="action_dial" context="{'field2dial': 'mobile'}" string="Dial" type="object" attrs="{'invisible':[('mobile','=',False)]}"/>
             </group>
-        </xpath>
+        </field>
+        <field name="fax" position="attributes">
+            <attribute name="widget">fax</attribute>
+        </field>
     </field>
 </record>
 
@@ -38,18 +41,21 @@
     <field name="model">crm.lead</field>
     <field name="inherit_id" ref="crm.crm_case_form_view_oppor"/>
     <field name="arch" type="xml">
-        <xpath expr="//group/group/field[@name='phone']" position="replace">
+        <field name="phone" position="replace">
             <group colspan="2" col="8">
                 <field name="phone" widget="phone" colspan="7" />
                 <button name="action_dial" context="{'field2dial': 'phone'}" string="Dial" type="object" attrs="{'invisible':[('phone','=',False)]}"/>
             </group>
-        </xpath>
-        <xpath expr="//group/group/field[@name='mobile']" position="replace">
+        </field>
+        <field name="mobile" position="replace">
             <group colspan="2" col="8">
                 <field name="mobile" widget="phone" colspan="7" />
                 <button name="action_dial" context="{'field2dial': 'mobile'}" string="Dial" type="object" attrs="{'invisible':[('mobile','=',False)]}"/>
             </group>
-        </xpath>
+        </field>
+        <field name="fax" position="attributes">
+            <attribute name="widget">fax</attribute>
+        </field>
     </field>
 </record>
 

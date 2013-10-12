@@ -2,9 +2,7 @@
 ##############################################################################
 #
 #    Asterisk click2dial CRM module for OpenERP
-#    Copyright (c) 2011 Zikzakmedia S.L. (http://zikzakmedia.com)
-#    Copyright (c) 2012-2013 Akretion (http://www.akretion.com)
-#    @author: Jesús Martín <jmartin@zikzakmedia.com>
+#    Copyright (c) 2013 Akretion (http://www.akretion.com)
 #    @author: Alexis de Lattre <alexis.delattre@akretion.com>
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -22,5 +20,17 @@
 #
 ##############################################################################
 
-from . import asterisk_click2dial_crm
-from . import wizard
+from openerp.osv import orm
+
+
+class reformat_all_phonenumbers(orm.TransientModel):
+    _inherit = "reformat.all.phonenumbers"
+
+    def _extend_reformat_phonenumbers(self, cr, uid, context=None):
+        res = super(reformat_all_phonenumbers, self)._extend_reformat_phonenumbers(cr, uid, context=context)
+        res[self.pool['crm.lead']] = {
+            'allids': self.pool['crm.lead'].search(cr, uid, [], context=context),
+            'phonefields': ['phone', 'fax', 'mobile'],
+            'namefield': 'partner_name',
+            }
+        return res
