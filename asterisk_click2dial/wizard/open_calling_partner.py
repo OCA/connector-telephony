@@ -19,15 +19,14 @@
 #
 ##############################################################################
 
-from openerp.osv import osv, fields
-import logging
-# Lib to translate error messages
+from openerp.osv import orm, fields
 from openerp.tools.translate import _
+import logging
 
 _logger = logging.getLogger(__name__)
 
 
-class wizard_open_calling_partner(osv.osv_memory):
+class wizard_open_calling_partner(orm.TransientModel):
     _name = "wizard.open.calling.partner"
     _description = "Open calling partner"
 
@@ -63,7 +62,7 @@ class wizard_open_calling_partner(osv.osv_memory):
             res['to_update_partner_id'] = False
         else:
             _logger.debug("Could not get the calling number from Asterisk.")
-            raise osv.except_osv(_('Error :'), _("Could not get the calling number from Asterisk. Is your phone ringing or are you currently on the phone ? If yes, check your setup and look at the OpenERP debug logs."))
+            raise orm.except_orm(_('Error :'), _("Could not get the calling number from Asterisk. Is your phone ringing or are you currently on the phone ? If yes, check your setup and look at the OpenERP debug logs."))
 
         return res
 
@@ -75,7 +74,7 @@ class wizard_open_calling_partner(osv.osv_memory):
         # and I don't want to add a dependancy on "sale" or "account"
         # So I just check here that the model exists, to avoid a crash
         if not self.pool['ir.model'].search(cr, uid, [('model', '=', oerp_object._name)], context=context):
-            raise osv.except_osv(_('Error :'), _("The object '%s' is not found in your OpenERP database, probably because the related module is not installed." % oerp_object._description))
+            raise orm.except_orm(_('Error :'), _("The object '%s' is not found in your OpenERP database, probably because the related module is not installed." % oerp_object._description))
 
         partner = self.read(cr, uid, ids[0], ['partner_id', 'parent_partner_id'], context=context)
         partner_id_to_filter = partner['parent_partner_id'] and partner['parent_partner_id'][0] or (partner['partner_id'] and partner['partner_id'][0] or False)
@@ -166,7 +165,7 @@ class wizard_open_calling_partner(osv.osv_memory):
     def update_partner(self, cr, uid, ids, phone_type='mobile', context=None):
         cur_wizard = self.browse(cr, uid, ids[0], context=context)
         if not cur_wizard.to_update_partner_id:
-            raise osv.except_osv(_('Error :'), _("Select the partner to update."))
+            raise orm.except_orm(_('Error :'), _("Select the partner to update."))
         ast_server = self.pool['asterisk.server']._get_asterisk_server_from_user(cr, uid, context=context)
         number_to_write = self.pool['asterisk.server']._convert_number_to_international_format(cr, uid, cur_wizard.calling_number, ast_server, context=context)
         self.pool['res.partner'].write(cr, uid, cur_wizard.to_update_partner_id.id, {phone_type: number_to_write}, context=context)

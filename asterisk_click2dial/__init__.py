@@ -19,5 +19,5 @@
 #
 ##############################################################################
 
-import asterisk_click2dial
-import wizard
+from . import asterisk_click2dial
+from . import wizard
