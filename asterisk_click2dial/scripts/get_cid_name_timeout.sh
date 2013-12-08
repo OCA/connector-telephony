@@ -21,8 +21,8 @@
 # don't put a 1 sec timeout !
 
 # To test this script manually (i.e. outside of Asterisk), run :
-# echo "agi_callerid:0141981242"|get_cid_name_timeout.sh
-# where 0141981242 is a phone number that could be presented by the calling party
+# echo "agi_callerid:0141401242"|get_cid_name_timeout.sh
+# where 0141401242 is a phone number that could be presented by the calling party
 
 PATH=/usr/local/sbin:/usr/local/bin:/var/lib/asterisk/agi-bin:/sbin:/bin:/usr/sbin:/usr/bin
 
