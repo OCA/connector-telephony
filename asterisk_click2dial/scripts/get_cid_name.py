@@ -103,7 +103,7 @@ def geolocate_phone_number(number, my_country_code, lang):
     import phonenumbers.geocoder
     res = ''
     phonenum = phonenumbers.parse(number, my_country_code.upper())
-    city = phonenumbers.geocoder._area_description_for_number(phonenum, lang.lower())
+    city = phonenumbers.geocoder.description_for_number(phonenum, lang.lower())
     #country = phonenumbers.country_name_for_number(phonenum, lang.lower())
     country_code = phonenumbers.region_code_for_number(phonenum)
     if country_code == my_country_code.upper():
