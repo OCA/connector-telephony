@@ -281,11 +281,13 @@ class SMSClient(orm.Model):
                     elif p.type == 'sms':
                         account = p.value
                 try:
+                    print sms.gateway_id.url
                     soap = WSDL.Proxy(sms.gateway_id.url)
                     result = soap.telephonySmsUserSend(str(login), str(pwd),
                         str(account), str(sender), str(sms.mobile), str(sms.msg),
                         int(sms.validity), int(sms.classes), int(sms.deferred),
                         int(sms.priority), int(sms.coding), int(sms.nostop))
+                    print result
                     ### End of the new process ###
                 except Exception, e:
                     raise orm.except_orm('Error', e)
