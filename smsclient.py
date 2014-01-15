@@ -105,11 +105,7 @@ class partner_sms_send(orm.Model):
                 ('2', 'Unicode')
             ], 'Coding', help='The SMS coding: 1 for 7 bit or 2 for unicode'),
         'tag': fields.char('Tag', size=256, help='an optional tag'),
-        'nostop': fields.selection([
-                ('0', '0'),
-                ('1', '1')
-            ], 'NoStop',
-            help='Do not display STOP clause in the message, this requires that this is not an advertising message'),
+        'nostop': fields.boolean('NoStop', help='Do not display STOP clause in the message, this requires that this is not an advertising message'),
     }
 
     _defaults = {
@@ -354,11 +350,7 @@ class SMSQueue(orm.Model):
             ], 'Coding', help='The sms coding: 1 for 7 bit or 2 for unicode'),
         'tag': fields.char('Tag', size=256,
             help='An optional tag'),
-        'nostop': fields.selection([
-                ('0', '0'),
-                ('1', '1')
-            ], 'NoStop',
-            help='Do not display STOP clause in the message, this requires that this is not an advertising message'),
+        'nostop': fields.boolean('NoStop', help='Do not display STOP clause in the message, this requires that this is not an advertising message'),
         
     }
     _defaults = {
