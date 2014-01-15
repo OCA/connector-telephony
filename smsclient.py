@@ -177,11 +177,8 @@ class SMSClient(orm.Model):
                 ('2', 'Unicode')
             ],'Coding', help='The SMS coding: 1 for 7 bit or 2 for unicode'),
         'tag': fields.char('Tag', size=256, help='an optional tag'),
-        'nostop': fields.selection([
-                ('0', '0'),
-                ('1', '1')
-            ], 'NoStop',
-            help='Do not display STOP clause in the message, this requires that this is not an advertising message'),
+        'nostop': fields.boolean('NoStop', help='Do not display STOP clause in the message, this requires that this is not an advertising message'),
+        'char_limit' : fields.boolean('Character Limit'),
     }
 
     _defaults = {
@@ -192,7 +189,8 @@ class SMSClient(orm.Model):
         'deferred': 0, 
         'priority': '3',
         'coding': '1',
-        'nostop': '1',
+        'nostop': True,
+        'char_limit' : True, 
     }
 
     def _check_permissions(self, cr, uid, id, context=None):
@@ -260,9 +258,10 @@ class SMSClient(orm.Model):
         error_ids = []
         sent_ids = []
         for sms in queue_obj.browse(cr, uid, sids, context=context):
-            if len(sms.msg) > 160:
-                error_ids.append(sms.id)
-                continue
+            if sms.gateway_id.char_limit:
+                if len(sms.msg) > 160:
+                    error_ids.append(sms.id)
+                    continue
             if sms.gateway_id.method == 'http':
                 try:
                     urllib.urlopen(sms.name)
@@ -282,11 +281,12 @@ class SMSClient(orm.Model):
                         account = p.value
                 try:
                     print sms.gateway_id.url
+                    print int(sms.validity)
                     soap = WSDL.Proxy(sms.gateway_id.url)
                     result = soap.telephonySmsUserSend(str(login), str(pwd),
                         str(account), str(sender), str(sms.mobile), str(sms.msg),
                         int(sms.validity), int(sms.classes), int(sms.deferred),
-                        int(sms.priority), int(sms.coding), int(sms.nostop))
+                        int(sms.priority), int(sms.coding),str(sms.gateway_id.tag), int(sms.gateway_id.nostop))
                     print result
                     ### End of the new process ###
                 except Exception, e:

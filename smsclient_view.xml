@@ -53,6 +53,7 @@
 		                   			<field name="priority"/>
 		                   			<field name="coding"/>
 		                   			<field name="tag"/>
+		                   			<field name="char_limit"/>
 								</group>
 							</group>
 						</page>
