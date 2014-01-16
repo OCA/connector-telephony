@@ -202,7 +202,7 @@ class SMSClient(orm.Model):
             'gateway_id': data.gateway.id,
             'state': 'draft',
             'mobile': data.mobile_to,
-            'msg': data.text,
+            'msg': data.text.encode('utf-8'),
             'validity': data.validity, 
             'classes': data.classes, 
             'deffered': data.deferred, 
@@ -231,7 +231,7 @@ class SMSClient(orm.Model):
                      elif p.type == 'to':
                          prms[p.name] = data.mobile_to
                      elif p.type == 'sms':
-                         prms[p.name] = data.text
+                         prms[p.name] = data.text.encode('utf-8')
                      elif p.type == 'extra':
                          prms[p.name] = p.value
                 params = urllib.urlencode(prms)
