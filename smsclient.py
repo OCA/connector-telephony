@@ -280,7 +280,7 @@ class SMSClient(orm.Model):
                     print int(sms.validity)
                     soap = WSDL.Proxy(sms.gateway_id.url)
                     result = soap.telephonySmsUserSend(str(login), str(pwd),
-                        str(account), str(sender), str(sms.mobile), unicode(sms.msg,"utf-8"),
+                        str(account), str(sender), str(sms.mobile), sms.msg,
                         int(sms.validity), int(sms.classes), int(sms.deferred),
                         int(sms.priority), int(sms.coding),str(sms.gateway_id.tag), int(sms.gateway_id.nostop))
                     print result
