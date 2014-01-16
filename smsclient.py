@@ -23,6 +23,7 @@
 
 import time
 import urllib
+import unicodedata
 from openerp.osv import fields, orm
 from openerp.tools.translate import _
 
@@ -202,7 +203,7 @@ class SMSClient(orm.Model):
             'gateway_id': data.gateway.id,
             'state': 'draft',
             'mobile': data.mobile_to,
-            'msg': data.text.encode('utf-8'),
+            'msg': data.text,
             'validity': data.validity, 
             'classes': data.classes, 
             'deffered': data.deferred, 
@@ -231,7 +232,7 @@ class SMSClient(orm.Model):
                      elif p.type == 'to':
                          prms[p.name] = data.mobile_to
                      elif p.type == 'sms':
-                         prms[p.name] = data.text.encode('utf-8')
+                         prms[p.name] = data.text
                      elif p.type == 'extra':
                          prms[p.name] = p.value
                 params = urllib.urlencode(prms)
@@ -280,7 +281,7 @@ class SMSClient(orm.Model):
                     print int(sms.validity)
                     soap = WSDL.Proxy(sms.gateway_id.url)
                     result = soap.telephonySmsUserSend(str(login), str(pwd),
-                        str(account), str(sender), str(sms.mobile), str(sms.msg.encode('utf-8')),
+                        str(account), str(sender), str(sms.mobile), unicode(str(sms.msg),"utf-8"),
                         int(sms.validity), int(sms.classes), int(sms.deferred),
                         int(sms.priority), int(sms.coding),str(sms.gateway_id.tag), int(sms.gateway_id.nostop))
                     print result
