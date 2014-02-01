@@ -35,5 +35,19 @@
     </field>
 </record>
 
+<record id="view_users_form_simple_modif" model="ir.ui.view">
+    <field name="name">asterisk.preferences.view</field>
+    <field name="model">res.users</field>
+    <field name="inherit_id" ref="base.view_users_form_simple_modif" />
+    <field name="arch" type="xml">
+        <group string="Email Preferences" position="after">
+            <group name="telephony">
+            <!-- Empty group, that is used by other Asterisk modules -->
+            </group>
+        </group>
+    </field>
+</record>
+
+
 </data>
 </openerp>
