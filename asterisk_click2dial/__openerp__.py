@@ -46,6 +46,7 @@ phone number is present in the partners of OpenERP. Here is how it works :
 . When the user clicks on the "Open calling partner" button, OpenERP sends a query to the Asterisk Manager Interface to get a list of the current phone calls
 . If it finds a phone call involving the user's phone, it gets the phone number of the calling party
 . It searches the phone number of the calling party in the Partners of OpenERP. If a record matches, it shows the name of the related Partner and proposes to open it, or open its related sale orders or invoices. If no record matches, it proposes to create a new Contact with the presented phone number as 'Phone' or 'Mobile' number or update an existing Contact.
+It is possible to get a pop-up of the partner corresponding to the calling party without any action from the user via the module *asterisk_popup*.
 
 A detailed documentation for this module is available on the Akretion Web site : http://www.akretion.com/en/products-and-services/openerp-asterisk-voip-connector """,
     'author': 'Akretion',
