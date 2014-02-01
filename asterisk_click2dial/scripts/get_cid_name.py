@@ -69,18 +69,19 @@ from optparse import OptionParser
 default_cid_name = "Not in OpenERP"
 
 # Define command line options
-option_server = {'names': ('-s', '--server'), 'dest': 'server', 'type': 'string', 'help': 'DNS or IP address of the OpenERP server. Default = none (will not try to connect to OpenERP)', 'action': 'store', 'default': False}
-option_port = {'names': ('-p', '--port'), 'dest': 'port', 'type': 'int', 'help': "Port of OpenERP's XML-RPC interface. Default = 8069", 'action': 'store', 'default': 8069}
-option_ssl = {'names': ('-e', '--ssl'), 'dest': 'ssl', 'help': "Use XML-RPC secure i.e. with SSL instead of clear XML-RPC. Default = no, use clear XML-RPC", 'action': 'store_true', 'default': False}
-option_database = {'names': ('-d', '--database'), 'dest': 'database', 'type': 'string', 'help': "OpenERP database name. Default = 'openerp'", 'action': 'store', 'default': 'openerp'}
-option_user = {'names': ('-u', '--user-id'), 'dest': 'user', 'type': 'int', 'help': "OpenERP user ID to use when connecting to OpenERP. Default = 2", 'action': 'store', 'default': 2}
-option_password = {'names': ('-w', '--password'), 'dest': 'password', 'type': 'string', 'help': "Password of the OpenERP user. Default = 'demo'", 'action': 'store', 'default': 'demo'}
-option_ascii = {'names': ('-a', '--ascii'), 'dest': 'ascii', 'help': "Convert name from UTF-8 to ASCII. Default = no, keep UTF-8", 'action': 'store_true', 'default': False}
-option_geoloc = {'names': ('-g', '--geoloc'), 'dest': 'geoloc', 'help': "Try to geolocate phone numbers unknown to OpenERP. This features requires the 'phonenumbers' Python lib. To install it, run 'sudo pip install phonenumbers' Default = no", 'action': 'store_true', 'default': False}
-option_geoloc_lang = {'names': ('-l', '--geoloc-lang'), 'dest': 'lang', 'help': "Language in which the name of the country and city name will be displayed by the geolocalisation database. Use the 2 letters ISO code of the language. Default = 'en'", 'action': 'store', 'default': "en"}
-option_geoloc_country = {'names': ('-c', '--geoloc-country'), 'dest': 'country', 'help': "2 letters ISO code for your country e.g. 'FR' for France. This will be used by the geolocalisation system to parse the phone number of the calling party. Default = 'FR'", 'action': 'store', 'default': "FR"}
-
-options = [option_server, option_port, option_ssl, option_database, option_user, option_password, option_ascii, option_geoloc, option_geoloc_lang, option_geoloc_country]
+options = [
+    {'names': ('-s', '--server'), 'dest': 'server', 'type': 'string', 'help': 'DNS or IP address of the OpenERP server. Default = none (will not try to connect to OpenERP)', 'action': 'store', 'default': False},
+    {'names': ('-p', '--port'), 'dest': 'port', 'type': 'int', 'help': "Port of OpenERP's XML-RPC interface. Default = 8069", 'action': 'store', 'default': 8069},
+    {'names': ('-e', '--ssl'), 'dest': 'ssl', 'help': "Use XML-RPC secure i.e. with SSL instead of clear XML-RPC. Default = no, use clear XML-RPC", 'action': 'store_true', 'default': False},
+    {'names': ('-d', '--database'), 'dest': 'database', 'type': 'string', 'help': "OpenERP database name. Default = 'openerp'", 'action': 'store', 'default': 'openerp'},
+    {'names': ('-u', '--user-id'), 'dest': 'user', 'type': 'int', 'help': "OpenERP user ID to use when connecting to OpenERP. Default = 2", 'action': 'store', 'default': 2},
+    {'names': ('-w', '--password'), 'dest': 'password', 'type': 'string', 'help': "Password of the OpenERP user. Default = 'demo'", 'action': 'store', 'default': 'demo'},
+    {'names': ('-a', '--ascii'), 'dest': 'ascii', 'help': "Convert name from UTF-8 to ASCII. Default = no, keep UTF-8", 'action': 'store_true', 'default': False},
+    {'names': ('-n', '--notify'), 'dest': 'notify', 'help': "Notify OpenERP users via a pop-up (requires the OpenERP module 'asterisk_popup'). If you use this option, you must pass the logins of the OpenERP users to notify as argument to the script. Default = no", 'action': 'store_true', 'default': False},
+    {'names': ('-g', '--geoloc'), 'dest': 'geoloc', 'help': "Try to geolocate phone numbers unknown to OpenERP. This features requires the 'phonenumbers' Python lib. To install it, run 'sudo pip install phonenumbers' Default = no", 'action': 'store_true', 'default': False},
+    {'names': ('-l', '--geoloc-lang'), 'dest': 'lang', 'help': "Language in which the name of the country and city name will be displayed by the geolocalisation database. Use the 2 letters ISO code of the language. Default = 'en'", 'action': 'store', 'default': "en"},
+    {'names': ('-c', '--geoloc-country'), 'dest': 'country', 'help': "2 letters ISO code for your country e.g. 'FR' for France. This will be used by the geolocalisation system to parse the phone number of the calling party. Default = 'FR'", 'action': 'store', 'default': "FR"},
+]
 
 def stdout_write(string):
     '''Wrapper on sys.stdout.write'''
@@ -189,10 +190,23 @@ def main(options, arguments):
             stdout_write('VERBOSE "Starting clear XML-RPC request on OpenERP %s:%s"\n' % (options.server, str(options.port)))
             protocol = 'http'
 
-        sock = xmlrpclib.ServerProxy('%s://%s:%s/xmlrpc/object' % (protocol, options.server, str(options.port)))
+        sock = xmlrpclib.ServerProxy(
+            '%s://%s:%s/xmlrpc/object'
+            % (protocol, options.server, str(options.port)))
 
         try:
-            res = sock.execute(options.database, options.user, options.password, 'res.partner', 'get_name_from_phone_number', input_cid_number)
+            if options.notify and arguments:
+                res = sock.execute(
+                    options.database, options.user, options.password,
+                    'res.partner', 'incall_notify_by_login',
+                    input_cid_number, arguments)
+                stdout_write('VERBOSE "Calling incall_notify_by_login"\n')
+            else:
+                res = sock.execute(
+                    options.database, options.user, options.password,
+                    'res.partner', 'get_name_from_phone_number',
+                    input_cid_number)
+                stdout_write('VERBOSE "Calling get_name_from_phone_number"\n')
             stdout_write('VERBOSE "End of XML-RPC request on OpenERP"\n')
             if not res:
                 stdout_write('VERBOSE "Phone number not found in OpenERP"\n')
@@ -225,7 +239,10 @@ def main(options, arguments):
     return True
 
 if __name__ == '__main__':
-    parser = OptionParser()
+    usage = "Usage: get_cid_name.py [options] login1 login2 login3 ..."
+    epilog = "Script written by Alexis de Lattre. Published under the GNU AGPL licence."
+    description = "This is an AGI script that sends a query to OpenERP. It can also be used without OpenERP as to geolocate phone numbers of incoming calls."
+    parser = OptionParser(usage=usage, epilog=epilog, description=description)
     for option in options:
         param = option['names']
         del option['names']

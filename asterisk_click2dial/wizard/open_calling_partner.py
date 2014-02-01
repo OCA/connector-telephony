@@ -47,22 +47,32 @@ class wizard_open_calling_partner(orm.TransientModel):
         '''Thanks to the default_get method, we are able to query Asterisk and
         get the corresponding partner when we launch the wizard'''
         res = {}
-        calling_number = self.pool['asterisk.server']._get_calling_number(cr, uid, context=context)
-        #To test the code without Asterisk server
-        #calling_number = "0141981242"
-        if calling_number:
-            res['calling_number'] = calling_number
-            partner = self.pool['res.partner'].get_partner_from_phone_number(cr, uid, calling_number, context=context)
-            if partner:
-                res['partner_id'] = partner[0]
-                res['parent_partner_id'] = partner[1]
-            else:
-                res['partner_id'] = False
-                res['parent_partner_id'] = False
+        if context is None:
+            context = {}
+        if 'incall_number_popup' in context:
+            # That's when we come from incall_notify_by_user_ids()
+            # of the module asterisk_popup()
+            res['partner_id'] = False
+            res['parent_partner_id'] = False
             res['to_update_partner_id'] = False
+            res['calling_number'] = context.get('incall_number_popup')
         else:
-            _logger.debug("Could not get the calling number from Asterisk.")
-            raise orm.except_orm(_('Error :'), _("Could not get the calling number from Asterisk. Is your phone ringing or are you currently on the phone ? If yes, check your setup and look at the OpenERP debug logs."))
+            calling_number = self.pool['asterisk.server']._get_calling_number(cr, uid, context=context)
+            #To test the code without Asterisk server
+            #calling_number = "0141981246"
+            if calling_number:
+                res['calling_number'] = calling_number
+                partner = self.pool['res.partner'].get_partner_from_phone_number(cr, uid, calling_number, context=context)
+                if partner:
+                    res['partner_id'] = partner[0]
+                    res['parent_partner_id'] = partner[1]
+                else:
+                    res['partner_id'] = False
+                    res['parent_partner_id'] = False
+                res['to_update_partner_id'] = False
+            else:
+                _logger.debug("Could not get the calling number from Asterisk.")
+                raise orm.except_orm(_('Error :'), _("Could not get the calling number from Asterisk. Is your phone ringing or are you currently on the phone ? If yes, check your setup and look at the OpenERP debug logs."))
 
         return res
 
