@@ -377,8 +377,8 @@ class res_users(orm.Model):
     ]
 
 
-class asterisk_common(orm.AbstractModel):
-    _name = 'asterisk.common'
+class phone_common(orm.AbstractModel):
+    _inherit = 'phone.common'
 
     def action_dial(self, cr, uid, ids, context=None):
         '''Read the number to dial and call _connect_to_asterisk the right way'''
@@ -396,69 +396,9 @@ class asterisk_common(orm.AbstractModel):
         return self.pool['asterisk.server']._dial_with_asterisk(cr, uid, erp_number_e164, context=context)
 
 
-    def generic_phonenumber_to_e164(self, cr, uid, ids, field_from_to_seq, context=None):
-        result = {}
-        from_field_seq = [item[0] for item in field_from_to_seq]
-        for record in self.read(cr, uid, ids, from_field_seq, context=context):
-            result[record['id']] = {}
-            for fromfield, tofield in field_from_to_seq:
-                if not record.get(fromfield):
-                    res = False
-                else:
-                    try:
-                        res = phonenumbers.format_number(phonenumbers.parse(record.get(fromfield), None), phonenumbers.PhoneNumberFormat.E164)
-                    except Exception, e:
-                        _logger.error("Cannot reformat the phone number '%s' to E.164 format. Error message: %s" % (record.get(fromfield), e))
-                        _logger.error("You should fix this number and run the wizard 'Reformat all phone numbers' from the menu Settings > Configuration > Asterisk")
-                    # If I raise an exception here, it won't be possible to install
-                    # the module on a DB with bad phone numbers
-                        #raise orm.except_orm(_('Error :'), _("Cannot reformat the phone number '%s' to E.164 format. Error message: %s" % (record.get(fromfield), e)))
-                        res = False
-                result[record['id']][tofield] = res
-        #print "RESULT generic_phonenumber_to_e164", result
-        return result
-
-    def _generic_reformat_phonenumbers(self, cr, uid, vals, phonefields=['phone', 'partner_phone', 'fax', 'mobile'], context=None):
-        """Reformat phone numbers in E.164 format i.e. +33141981242"""
-        if any([vals.get(field) for field in phonefields]):
-            user = self.pool['res.users'].browse(cr, uid, uid, context=context)
-            # country_id on res.company is a fields.function that looks at
-            # company_id.partner_id.addres(default).country_id
-            if user.company_id.country_id:
-                user_countrycode = user.company_id.country_id.code
-            else:
-                # We need to raise an exception here because, if we pass None as second arg of phonenumbers.parse(), it will raise an exception when you try to enter a phone number in national format... so it's better to raise the exception here
-                raise orm.except_orm(_('Error :'), _("You should set a country on the company '%s'" % user.company_id.name))
-            #print "user_countrycode=", user_countrycode
-            for field in phonefields:
-                if vals.get(field):
-                    init_value = vals.get(field)
-                    try:
-                        res_parse = phonenumbers.parse(vals.get(field), user_countrycode)
-                    except Exception, e:
-                        raise orm.except_orm(_('Error :'), _("Cannot reformat the phone number '%s' to international format. Error message: %s" % (vals.get(field), e)))
-                    #print "res_parse=", res_parse
-                    vals[field] = phonenumbers.format_number(res_parse, phonenumbers.PhoneNumberFormat.E164)
-                    if init_value != vals[field]:
-                        _logger.info("%s initial value: '%s' updated value: '%s'" % (field, init_value, vals[field]))
-        return vals
-
-
-
 class res_partner(orm.Model):
     _name = 'res.partner'
-    _inherit = ['res.partner', 'asterisk.common']
-
-
-    def create(self, cr, uid, vals, context=None):
-        vals_reformated = self._generic_reformat_phonenumbers(cr, uid, vals, context=context)
-        return super(res_partner, self).create(cr, uid, vals_reformated, context=context)
-
-
-    def write(self, cr, uid, ids, vals, context=None):
-        vals_reformated = self._generic_reformat_phonenumbers(cr, uid, vals, context=context)
-        return super(res_partner, self).write(cr, uid, ids, vals_reformated, context=context)
-
+    _inherit = ['res.partner', 'phone.common']
 
     def get_name_from_phone_number(self, cr, uid, number, context=None):
         '''Function to get name from phone number. Usefull for use from Asterisk
