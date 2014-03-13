@@ -15,7 +15,7 @@
     <field name="name">asterisk.res.partner.simplified.form.dial</field>
     <field name="model">res.partner</field>
     <field name="priority">15</field>
-    <field name="inherit_id" ref="base.view_partner_simple_form"/>
+    <field name="inherit_id" ref="base_phone.view_partner_simple_form"/>
     <field name="arch" type="xml">
         <field name="phone" position="replace">
             <group colspan="2" col="8">
@@ -36,7 +36,7 @@
     <field name="name">asterisk.res.partner.form.dial</field>
     <field name="model">res.partner</field>
     <field name="priority">15</field>
-    <field name="inherit_id" ref="base.view_partner_form"/>
+    <field name="inherit_id" ref="base_phone.view_partner_form"/>
     <field name="arch" type="xml">
         <xpath expr="//group/group/field[@name='phone']" position="replace">
             <group colspan="2" col="8">
