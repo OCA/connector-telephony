@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    Asterisk Click2dial module for OpenERP
-#    Copyright (C) 2010-2013 Alexis de Lattre <alexis@via.ecp.fr>
+#    Copyright (C) 2010-2014 Alexis de Lattre <alexis@via.ecp.fr>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -51,22 +51,16 @@ It is possible to get a pop-up of the partner corresponding to the calling party
 A detailed documentation for this module is available on the Akretion Web site : http://www.akretion.com/en/products-and-services/openerp-asterisk-voip-connector """,
     'author': 'Akretion',
     'website': 'http://www.akretion.com/',
-    'depends': ['base'],
+    'depends': ['base_phone'],
     'external_dependencies': {'python': ['phonenumbers', 'Asterisk']},
     'data': [
         'asterisk_server_view.xml',
         'res_users_view.xml',
         'res_partner_view.xml',
         'wizard/open_calling_partner_view.xml',
-        'wizard/reformat_all_phonenumbers_view.xml',
         'security/asterisk_server_security.xml',
         'security/ir.model.access.csv',
         ],
-    'js': [
-        'static/src/js/*.js',
-        'static/lib/js/*.js',
-        ],
-    'qweb': ['static/src/xml/*.xml'],
     'demo': ['asterisk_click2dial_demo.xml'],
     'images': [
         'images/sshot-click2dial.jpg',
@@ -76,4 +70,3 @@ A detailed documentation for this module is available on the Akretion Web site :
     'installable': True,
     'active': False,
 }
-
