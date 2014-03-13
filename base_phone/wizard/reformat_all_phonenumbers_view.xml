@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  Asterisk Click2dial module for OpenERP
+  Base Phone module for OpenERP
   Copyright (C) 2012-2013 Alexis de Lattre <alexis@via.ecp.fr>
   The licence is in the file __openerp__.py
 -->
@@ -30,15 +30,17 @@
 </record>
 
 <record id="reformat_all_phonenumbers_action" model="ir.actions.act_window">
-    <field name="name">Reformat all phone numbers</field>
+    <field name="name">Reformat Phone Numbers</field>
     <field name="res_model">reformat.all.phonenumbers</field>
     <field name="view_type">form</field>
     <field name="view_mode">form</field>
     <field name="target">new</field>
 </record>
 
-<!-- Menu entry under Settings > Configuration -->
-<menuitem id="reformat_all_phonenumbers_menu" action="reformat_all_phonenumbers_action" parent="menu_asterisk_servers" sequence="100"/>
+<!-- Menu entry under Settings > Technical -->
+<menuitem id="menu_config_phone" name="Phone" parent="base.menu_custom"/>
+
+<menuitem id="reformat_all_phonenumbers_menu" action="reformat_all_phonenumbers_action" parent="menu_config_phone" sequence="100"/>
 
 
 </data>

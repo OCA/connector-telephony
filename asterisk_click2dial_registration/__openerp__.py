@@ -5,8 +5,8 @@
 #    Copyright (C) 2013 Invitu <contact@invitu.com>
 #
 #    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as published by
-#    the Free Software Foundation, either version 3 of the License, or
+#    it under the terms of the GNU Affero General Public License as published
+#    by the Free Software Foundation, either version 3 of the License, or
 #    (at your option) any later version.
 #
 #    This program is distributed in the hope that it will be useful,
@@ -24,8 +24,8 @@
     "version": "0.1",
     "author": "INVITU",
     "website": "http://www.invitu.com",
-    "license" : "AGPL-3",
-    "category": "",
+    "license": "AGPL-3",
+    "category": "Extra Tools",
     "description": """
     This module adds a button "Open Registrations" on the "Open calling partner" wizard and a "Dial" button on the Registration form.
 

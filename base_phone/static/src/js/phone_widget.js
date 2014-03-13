@@ -1,11 +1,11 @@
 // Base phone module for OpenERP
-// Copyright (C) 2013 Alexis de Lattre <alexis@via.ecp.fr>
+// Copyright (C) 2013-2014 Alexis de Lattre <alexis@via.ecp.fr>
 // The licence is in the file __openerp__.py
 
-openerp.asterisk_click2dial = function (instance) {
+openerp.base_phone = function (instance) {
 
 
-    instance.asterisk_click2dial.FieldPhone = instance.web.form.FieldChar.extend({
+    instance.base_phone.FieldPhone = instance.web.form.FieldChar.extend({
         template: 'FieldPhone',
         initialize_content: function() {
             this._super();
@@ -28,9 +28,9 @@ openerp.asterisk_click2dial = function (instance) {
         }
     });
 
-    instance.web.form.widgets.add('phone', 'instance.asterisk_click2dial.FieldPhone');
+    instance.web.form.widgets.add('phone', 'instance.base_phone.FieldPhone');
 
-    instance.asterisk_click2dial.FieldFax = instance.web.form.FieldChar.extend({
+    instance.base_phone.FieldFax = instance.web.form.FieldChar.extend({
         template: 'FieldFax',
         initialize_content: function() {
             this._super();
@@ -53,8 +53,6 @@ openerp.asterisk_click2dial = function (instance) {
         }
     });
 
-    instance.web.form.widgets.add('fax', 'instance.asterisk_click2dial.FieldFax');
+    instance.web.form.widgets.add('fax', 'instance.base_phone.FieldFax');
 
-
-
-        }
+}

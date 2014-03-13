@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    Asterisk Click2dial CRM Claim module for OpenERP
-#    Copyright (C) 2012-2013 Akretion (http://www.akretion.com/)
+#    Copyright (C) 2012-2014 Akretion (http://www.akretion.com/)
 #    @author Alexis de Lattre <alexis.delattre@akretion.com>
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -20,11 +20,13 @@
 #
 ##############################################################################
 
-from openerp.osv import orm, fields
+from openerp.osv import orm
+
 
 class wizard_open_calling_partner(orm.TransientModel):
     _inherit = "wizard.open.calling.partner"
 
     def open_crm_claims(self, cr, uid, ids, context=None):
         '''Function called by the related button of the wizard'''
-        return self.open_filtered_object(cr, uid, ids, self.pool.get('crm.claim'), context=context)
+        return self.open_filtered_object(
+            cr, uid, ids, self.pool.get('crm.claim'), context=context)

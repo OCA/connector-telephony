@@ -1,8 +1,8 @@
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    Asterisk Click2dial Registration module for OpenERP
-#    Copyright (C) 2013 Invitu (http://www.invitu.com/)
+#    Base Module module for OpenERP
+#    Copyright (C) 2014 Alexis de Lattre <alexis@via.ecp.fr>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -19,13 +19,5 @@
 #
 ##############################################################################
 
-from openerp.osv import orm
-
-
-class wizard_open_calling_partner(orm.TransientModel):
-    _inherit = "wizard.open.calling.partner"
-
-    def open_registrations(self, cr, uid, ids, context=None):
-        '''Function called by the related button of the wizard'''
-        return self.open_filtered_object(
-            cr, uid, ids, self.pool.get('event.registration'), context=context)
+from . import base_phone
+from . import wizard

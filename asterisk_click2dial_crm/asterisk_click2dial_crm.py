@@ -3,14 +3,14 @@
 #
 #    Asterisk click2dial CRM module for OpenERP
 #    Copyright (c) 2011 Zikzakmedia S.L. (http://zikzakmedia.com)
-#    Copyright (c) 2012-2013 Akretion (http://www.akretion.com)
+#    Copyright (c) 2012-2014 Akretion (http://www.akretion.com)
 #    Copyright (C) 2013 Invitu <contact@invitu.com>
 #    @author: Jesús Martín <jmartin@zikzakmedia.com>
 #    @author: Alexis de Lattre <alexis.delattre@akretion.com>
 #
 #    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as published by
-#    the Free Software Foundation, either version 3 of the License, or
+#    it under the terms of the GNU Affero General Public License as published
+#    by the Free Software Foundation, either version 3 of the License, or
 #    (at your option) any later version.
 #
 #    This program is distributed in the hope that it will be useful,
@@ -24,12 +24,11 @@
 ##############################################################################
 
 from openerp.osv import orm, fields
-from openerp.tools.translate import _
 
 
 class res_partner(orm.Model):
     _name = 'res.partner'
-    _inherit = ['res.partner', 'asterisk.common']
+    _inherit = ['res.partner', 'phone.common']
 
     def action_dial(self, cr, uid, ids, context=None):
         '''
@@ -58,7 +57,6 @@ class res_partner(orm.Model):
             return True
 
 
-
 class res_users(orm.Model):
     _inherit = "res.users"
 
@@ -66,24 +64,27 @@ class res_users(orm.Model):
         # Field name starts with 'context_' to allow modification by the user
         # in his preferences, cf server-61/openerp/addons/base/res/res_users.py
         # line 377 in "def write" of "class users"
-        'context_propose_creation_crm_call': fields.boolean('Propose to create a call in CRM after a click2dial'),
+        'context_propose_creation_crm_call': fields.boolean(
+            'Propose to create a call in CRM after a click2dial'),
         }
 
     _defaults = {
         'context_propose_creation_crm_call': True,
         }
 
+
 class crm_lead(orm.Model):
     _name = 'crm.lead'
-    _inherit = ['crm.lead', 'asterisk.common']
-
+    _inherit = ['crm.lead', 'phone.common']
 
     def create(self, cr, uid, vals, context=None):
-        vals_reformated = self._generic_reformat_phonenumbers(cr, uid, vals, context=context)
-        return super(crm_lead, self).create(cr, uid, vals_reformated, context=context)
-
+        vals_reformated = self._generic_reformat_phonenumbers(
+            cr, uid, vals, context=context)
+        return super(crm_lead, self).create(
+            cr, uid, vals_reformated, context=context)
 
     def write(self, cr, uid, ids, vals, context=None):
-        vals_reformated = self._generic_reformat_phonenumbers(cr, uid, vals, context=context)
-        return super(crm_lead, self).write(cr, uid, ids, vals_reformated, context=context)
-
+        vals_reformated = self._generic_reformat_phonenumbers(
+            cr, uid, vals, context=context)
+        return super(crm_lead, self).write(
+            cr, uid, ids, vals_reformated, context=context)
