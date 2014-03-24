@@ -38,7 +38,7 @@
 </record>
 
 <!-- Menu entry under Settings > Technical -->
-<menuitem id="menu_config_phone" name="Phone" parent="base.menu_custom"/>
+<menuitem id="menu_config_phone" name="Telephony" parent="base.menu_custom"/>
 
 <menuitem id="reformat_all_phonenumbers_menu" action="reformat_all_phonenumbers_action" parent="menu_config_phone" sequence="100"/>
 
