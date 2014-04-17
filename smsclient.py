@@ -282,8 +282,6 @@ class SMSClient(orm.Model):
                         message = str(sms.msg).decode('iso-8859-1').encode('utf8')
                     if sms.coding == '1':
                         message = str(sms.msg)
-                    print message
-                    print type(message)
                     result = soap.telephonySmsUserSend(str(login), str(pwd),
                         str(account), str(sender), str(sms.mobile), message,
                         int(sms.validity), int(sms.classes), int(sms.deferred),
