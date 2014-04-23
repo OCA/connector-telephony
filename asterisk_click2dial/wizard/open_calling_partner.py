@@ -77,7 +77,8 @@ class wizard_open_calling_partner(orm.TransientModel):
         return res
 
 
-    def open_filtered_object(self, cr, uid, ids, oerp_object, context=None):
+    def open_filtered_object(
+            self, cr, uid, ids, oerp_object, try_parent=True, context=None):
         '''Returns the action that opens the list view of the 'oerp_object'
         given as argument filtered on the partner'''
         # This module only depends on "base"
@@ -87,7 +88,13 @@ class wizard_open_calling_partner(orm.TransientModel):
             raise orm.except_orm(_('Error :'), _("The object '%s' is not found in your OpenERP database, probably because the related module is not installed." % oerp_object._description))
 
         partner = self.read(cr, uid, ids[0], ['partner_id', 'parent_partner_id'], context=context)
-        partner_id_to_filter = partner['parent_partner_id'] and partner['parent_partner_id'][0] or (partner['partner_id'] and partner['partner_id'][0] or False)
+        if try_parent:
+            partner_id_to_filter = (
+                partner['parent_partner_id']
+                and partner['parent_partner_id'][0]
+                or (partner['partner_id'] and partner['partner_id'][0] or False))
+        else:
+            partner_id_to_filter = partner['partner_id'] and partner['partner_id'][0] or False
         if partner_id_to_filter:
             action = {
                 'name': oerp_object._description,
@@ -97,7 +104,7 @@ class wizard_open_calling_partner(orm.TransientModel):
                 'type': 'ir.actions.act_window',
                 'nodestroy': False, # close the pop-up wizard after action
                 'target': 'current',
-                'domain': [('partner_id', '=', partner_id_to_filter)],
+                'context': {'search_default_partner_id': partner_id_to_filter},
                 }
             return action
         else:
