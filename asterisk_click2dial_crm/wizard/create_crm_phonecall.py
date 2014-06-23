@@ -55,7 +55,6 @@ class wizard_create_crm_phonecall(orm.TransientModel):
             'name': partner.name,
             'domain': [('partner_id', '=', partner.id)],
             'res_model': 'crm.phonecall',
-            'view_type': 'form',
             'view_mode': 'form,tree',
             'type': 'ir.actions.act_window',
             'nodestroy': False,  # close the pop-up wizard after action
@@ -71,6 +70,6 @@ class wizard_open_calling_partner(orm.TransientModel):
         '''Started by button on 'open calling partner wizard'''
         partner = self.browse(cr, uid, ids[0], context=context).partner_id
         action = self.pool['wizard.create.crm.phonecall'].\
-            create_open_crm_phonecall(
+            _create_open_crm_phonecall(
                 cr, uid, partner, crm_categ='Inbound', context=context)
         return action

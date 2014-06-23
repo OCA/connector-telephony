@@ -35,7 +35,6 @@ class res_partner(orm.Model):
                 'name': 'Partner',
                 'type': 'ir.actions.act_window',
                 'res_model': 'res.partner',
-                'view_type': 'form',
                 'view_mode': 'form,tree,kanban',
                 'views': [[False, 'form']],  # Beurk, but needed
                 'target': 'new',
@@ -46,7 +45,6 @@ class res_partner(orm.Model):
                 'name': 'No Partner Found',
                 'type': 'ir.actions.act_window',
                 'res_model': 'wizard.open.calling.partner',
-                'view_type': 'form',
                 'view_mode': 'form',
                 'views': [[False, 'form']],  # Beurk, but needed
                 'target': 'new',
