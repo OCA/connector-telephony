@@ -49,6 +49,7 @@ Please contact Alexis de Lattre from Akretion <alexis.delattre@akretion.com> for
         'static/lib/js/*.js',
         ],
     'qweb': ['static/src/xml/*.xml'],
+    'demo': ['base_phone_demo.xml'],
     'images': [],
     'installable': True,
     'active': False,
