@@ -80,7 +80,6 @@ class phone_common(orm.AbstractModel):
                     _('Error :'),
                     _("You should set a country on the company '%s'")
                     % user.company_id.name)
-            #print "user_countrycode=", user_countrycode
             for field in phonefields:
                 if vals.get(field):
                     init_value = vals.get(field)
@@ -93,7 +92,6 @@ class phone_common(orm.AbstractModel):
                             _("Cannot reformat the phone number '%s' to "
                                 "international format. Error message: %s")
                             % (vals.get(field), e))
-                    #print "res_parse=", res_parse
                     vals[field] = phonenumbers.format_number(
                         res_parse, phonenumbers.PhoneNumberFormat.E164)
                     if init_value != vals[field]:
