@@ -22,7 +22,7 @@
 from openerp.osv import orm, fields
 import logging
 
-_logger = logging.getLogger(__name__)
+logger = logging.getLogger(__name__)
 
 
 class reformat_all_phonenumbers(orm.TransientModel):
@@ -34,33 +34,33 @@ class reformat_all_phonenumbers(orm.TransientModel):
             "Phone numbers that couldn't be reformatted"),
         }
 
-    def _extend_reformat_phonenumbers(self, cr, uid, context=None):
-        '''This function is designed to be inherited
-        to extend the functionnality to objects other than res.partner'''
-        res = {
-            self.pool['res.partner']: {
-                'allids': self.pool['res.partner'].search(
-                    cr, uid, [
-                        '|',
-                        ('active', '=', True),
-                        ('active', '=', False)
-                        ], context=context),
-                'phonefields': ['phone', 'fax', 'mobile'],
-                'namefield': 'name',
-                }
-        }
-        return res
-
     def run_reformat_all_phonenumbers(self, cr, uid, ids, context=None):
-        _logger.info('Starting to reformat all the phone numbers')
+        logger.info('Starting to reformat all the phone numbers')
         phonenumbers_not_reformatted = ''
-        toreformat_dict = self._extend_reformat_phonenumbers(
+        toreformat_dict = self.pool['phone.common']._get_phone_fields(
             cr, uid, context=context)
-        for obj, prop in toreformat_dict.items():
+        for objname, prop in toreformat_dict.iteritems():
+            fields = []
+            obj = self.pool[objname]
+            if prop.get('phonefields'):
+                fields += prop['phonefields']
+            if prop.get('faxfields'):
+                fields += prop['faxfields']
+            logger.info(
+                'Starting to reformat phone numbers on object %s '
+                '(fields = %s)' % (objname, fields))
+            # search if this object has an 'active' field
+            if obj._columns.get('active') or objname == 'hr.employee':
+                # hr.employee inherits from 'resource.resource' and
+                # 'resource.resource' has an active field
+                # As I don't know how to detect such cases, I hardcode it here
+                # If you know a better solution, please tell me
+                domain = ['|', ('active', '=', True), ('active', '=', False)]
+            else:
+                domain = []
+            all_ids = obj.search(cr, uid, domain, context=context)
             for entry in obj.read(
-                    cr, uid, prop['allids'],
-                    [prop['namefield']] + prop['phonefields'],
-                    context=context):
+                    cr, uid, all_ids, fields, context=context):
                 init_entry = entry.copy()
                 # entry is _updated_ by the fonction
                 # _generic_reformat_phonenumbers()
@@ -68,22 +68,23 @@ class reformat_all_phonenumbers(orm.TransientModel):
                     obj._generic_reformat_phonenumbers(
                         cr, uid, entry, context=context)
                 except Exception, e:
+                    name = obj.name_get(
+                        cr, uid, [init_entry['id']], context=context)[0][1]
                     phonenumbers_not_reformatted += \
                         "Problem on %s '%s'. Error message: %s\n" % (
                             obj._description,
-                            init_entry.get(prop['namefield']), e[1])
-                    _logger.warning(
+                            name, e[1])
+                    logger.warning(
                         "Problem on %s '%s'. Error message: %s" % (
                             obj._description,
-                            init_entry.get(prop['namefield']), e[1]))
+                            name, e[1]))
                     continue
                 if any(
                         [init_entry.get(field)
                             != entry.get(field) for field
-                            in prop['phonefields']]):
+                            in fields]):
                     entry.pop('id')
-                    entry.pop(prop['namefield'])
-                    _logger.info(
+                    logger.info(
                         '[%s] Reformating phone number: FROM %s TO %s' % (
                             obj._description, unicode(init_entry),
                             unicode(entry)))
@@ -96,5 +97,5 @@ class reformat_all_phonenumbers(orm.TransientModel):
             cr, uid, ids[0],
             {'phonenumbers_not_reformatted': phonenumbers_not_reformatted},
             context=context)
-        _logger.info('End of the phone number reformatting wizard')
+        logger.info('End of the phone number reformatting wizard')
         return True
