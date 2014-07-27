@@ -23,7 +23,7 @@
 {
     'name': 'Asterisk Click2dial',
     'version': '0.4',
-    'category': 'Extra Tools',
+    'category': 'Phone',
     'license': 'AGPL-3',
     'summary': 'Asterisk-OpenERP connector',
     'description': """This module adds 3 functionalities :
@@ -58,7 +58,6 @@ A detailed documentation for this module is available on the Akretion Web site :
         'res_users_view.xml',
         'res_partner_view.xml',
         'wizard/open_calling_partner_view.xml',
-        'security/asterisk_server_security.xml',
         'security/ir.model.access.csv',
         ],
     'demo': ['asterisk_click2dial_demo.xml'],

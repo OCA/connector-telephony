@@ -10,44 +10,31 @@
 <openerp>
 <data>
 
-<record id="asterisk_res_users_internal_number" model="ir.ui.view">
-    <field name="name">asterisk.res.users.telephony_tab</field>
+<record id="view_users_form" model="ir.ui.view">
+    <field name="name">asterisk_click2dial.res.users.form</field>
     <field name="model">res.users</field>
-    <field name="inherit_id" ref="base.view_users_form"/>
+    <field name="inherit_id" ref="base_phone.view_users_form"/>
     <field name="arch" type="xml">
-        <notebook>
-            <page string="Telephony" position="inside">
-                <group name="standard_params" string="Standard parameters">
-                    <field name="asterisk_chan_type"/>
-                    <field name="resource"/>
-                    <field name="internal_number"/>
-                    <field name="callerid"/>
-                    <field name="asterisk_server_id"/>
-                </group>
-                <group name="optional_params" string="Optional parameters - for experts only, can be left empty">
-                    <field name="cdraccount"/>
-                    <field name="dial_suffix"/>
-                    <field name="alert_info"/>
-                    <field name="variable"/>
-                </group>
-            </page>
-        </notebook>
-    </field>
-</record>
-
-<record id="view_users_form_simple_modif" model="ir.ui.view">
-    <field name="name">asterisk.preferences.view</field>
-    <field name="model">res.users</field>
-    <field name="inherit_id" ref="base.view_users_form_simple_modif" />
-    <field name="arch" type="xml">
-        <group string="Email Preferences" position="after">
-            <group name="telephony">
-            <!-- Empty group, that is used by other Asterisk modules -->
+        <page name="phone" position="attributes">
+            <attribute name="invisible">0</attribute>
+        </page>
+        <group name="phone-preferences" position="after">
+            <group name="asterisk-standard" string="Standard Asterisk Parameters">
+                <field name="asterisk_chan_type"/>
+                <field name="resource"/>
+                <field name="internal_number"/>
+                <field name="callerid"/>
+                <field name="asterisk_server_id"/>
+            </group>
+            <group name="asterisk-optional" string="Optional Asterisk Parameters - for experts only, can be left empty">
+                <field name="cdraccount"/>
+                <field name="dial_suffix"/>
+                <field name="alert_info"/>
+                <field name="variable"/>
             </group>
         </group>
     </field>
 </record>
-
 
 </data>
 </openerp>

@@ -57,22 +57,29 @@ class wizard_open_calling_partner(orm.TransientModel):
             res['to_update_partner_id'] = False
             res['calling_number'] = context.get('incall_number_popup')
         else:
-            calling_number = self.pool['asterisk.server']._get_calling_number(cr, uid, context=context)
+            calling_number = self.pool['asterisk.server']._get_calling_number(
+                cr, uid, context=context)
             #To test the code without Asterisk server
             #calling_number = "0141981246"
             if calling_number:
                 res['calling_number'] = calling_number
-                partner = self.pool['res.partner'].get_partner_from_phone_number(cr, uid, calling_number, context=context)
-                if partner:
-                    res['partner_id'] = partner[0]
-                    res['parent_partner_id'] = partner[1]
+                record = self.pool['phone.common'].get_record_from_phone_number(
+                    cr, uid, calling_number, context=context)
+                if record and record[0] == 'res.partner':
+                    res['partner_id'] = record[1]
+                    partner = self.pool['res.partner'].browse(
+                        cr, uid, record[1], context=context)
+                    res['parent_partner_id'] = \
+                        partner.parent_id and partner.parent_id.id or False
                 else:
                     res['partner_id'] = False
                     res['parent_partner_id'] = False
                 res['to_update_partner_id'] = False
             else:
                 _logger.debug("Could not get the calling number from Asterisk.")
-                raise orm.except_orm(_('Error :'), _("Could not get the calling number from Asterisk. Is your phone ringing or are you currently on the phone ? If yes, check your setup and look at the OpenERP debug logs."))
+                raise orm.except_orm(
+                    _('Error :'),
+                    _("Could not get the calling number from Asterisk. Is your phone ringing or are you currently on the phone ? If yes, check your setup and look at the OpenERP debug logs."))
 
         return res
 
@@ -98,8 +105,7 @@ class wizard_open_calling_partner(orm.TransientModel):
         if partner_id_to_filter:
             action = {
                 'name': oerp_object._description,
-                'view_type': 'form',
-                'view_mode': 'tree,form',
+                'view_mode': 'tree,form,kanban',
                 'res_model': oerp_object._name,
                 'type': 'ir.actions.act_window',
                 'nodestroy': False, # close the pop-up wizard after action
@@ -126,8 +132,7 @@ class wizard_open_calling_partner(orm.TransientModel):
         if record_to_open:
             return {
                 'name': self.pool['res.partner']._description,
-                'view_type': 'form',
-                'view_mode': 'form,tree',
+                'view_mode': 'form,tree,kanban',
                 'res_model': 'res.partner',
                 'type': 'ir.actions.act_window',
                 'nodestroy': False, # close the pop-up wizard after action
@@ -160,8 +165,7 @@ class wizard_open_calling_partner(orm.TransientModel):
 
         action = {
             'name': 'Create new partner',
-            'view_type': 'form',
-            'view_mode': 'form,tree',
+            'view_mode': 'form,tree,kanban',
             'res_model': 'res.partner',
             'type': 'ir.actions.act_window',
             'nodestroy': False,
@@ -188,8 +192,7 @@ class wizard_open_calling_partner(orm.TransientModel):
         self.pool['res.partner'].write(cr, uid, cur_wizard.to_update_partner_id.id, {phone_type: number_to_write}, context=context)
         action = {
             'name': 'Partner: ' + cur_wizard.to_update_partner_id.name,
-            'view_type': 'form',
-            'view_mode': 'form,tree',
+            'view_mode': 'form,tree,kanban',
             'res_model': 'res.partner',
             'type': 'ir.actions.act_window',
             'nodestroy': False,
