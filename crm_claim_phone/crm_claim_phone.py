@@ -1,8 +1,8 @@
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
-#    Asterisk click2dial CRM module for OpenERP
-#    Copyright (c) 2013-2014 Akretion (http://www.akretion.com)
+#    CRM Claim Phone module for Odoo/OpenERP
+#    Copyright (c) 2012-2014 Akretion (http://www.akretion.com)
 #    @author: Alexis de Lattre <alexis.delattre@akretion.com>
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -23,17 +23,30 @@
 from openerp.osv import orm
 
 
-class reformat_all_phonenumbers(orm.TransientModel):
-    _inherit = "reformat.all.phonenumbers"
+class crm_claim(orm.Model):
+    _name = 'crm.claim'
+    _inherit = ['crm.claim', 'phone.common']
 
-    def _extend_reformat_phonenumbers(self, cr, uid, context=None):
-        res = super(
-            reformat_all_phonenumbers, self)._extend_reformat_phonenumbers(
+    def create(self, cr, uid, vals, context=None):
+        vals_reformated = self._generic_reformat_phonenumbers(
+            cr, uid, vals, context=context)
+        return super(crm_claim, self).create(
+            cr, uid, vals_reformated, context=context)
+
+    def write(self, cr, uid, ids, vals, context=None):
+        vals_reformated = self._generic_reformat_phonenumbers(
+            cr, uid, vals, context=context)
+        return super(crm_claim, self).write(
+            cr, uid, ids, vals_reformated, context=context)
+
+
+class phone_common(orm.AbstractModel):
+    _inherit = 'phone.common'
+
+    def _get_phone_fields(self, cr, uid, context=None):
+        res = super(phone_common, self)._get_phone_fields(
             cr, uid, context=context)
-        res[self.pool['crm.lead']] = {
-            'allids': self.pool['crm.lead'].search(
-                cr, uid, [], context=context),
-            'phonefields': ['phone', 'fax', 'mobile'],
-            'namefield': 'partner_name',
+        res['crm.claim'] = {
+            'phonefields': ['partner_phone'],
             }
         return res

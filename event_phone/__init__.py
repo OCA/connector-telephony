@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    Asterisk Click2Dial Registration module for OpenERP
-#    Copyright (C) 2013 Invitu (http://www.invitu.com/)
+#    Event Phone module for Odoo/OpenERP
+#    Copyright (C) 2014 Alexis de Lattre <alexis@via.ecp.fr>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -19,5 +19,4 @@
 #
 ##############################################################################
 
-from . import wizard
-from . import asterisk_click2dial_registration
+from . import event_phone

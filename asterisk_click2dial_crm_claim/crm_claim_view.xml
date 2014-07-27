@@ -14,11 +14,11 @@
 <record id="asterisk_crm_claim_form_dial" model="ir.ui.view">
     <field name="name">asterisk.crm_claim.form.dial</field>
     <field name="model">crm.claim</field>
-    <field name="inherit_id" ref="crm_claim.crm_case_claims_form_view"/>
+    <field name="inherit_id" ref="crm_claim_phone.crm_case_claims_form_view"/>
     <field name="arch" type="xml">
         <field name="partner_phone" position="replace">
             <group colspan="2" col="3">
-                <field name="partner_phone" colspan="2" />
+                <field name="partner_phone" colspan="2" widget="phone"/>
                 <button name="action_dial" context="{'field2dial': 'partner_phone'}" string="Dial" type="object" attrs="{'invisible':[('partner_phone','=',False)]}"/>
             </group>
         </field>

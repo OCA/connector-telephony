@@ -1,7 +1,7 @@
-# -*- coding: utf-8 -*-
+# -*- encoding: utf-8 -*-
 ##############################################################################
 #
-#    Base Phone module for OpenERP
+#    HR Phone module for OpenERP
 #    Copyright (C) 2014 Alexis de Lattre <alexis@via.ecp.fr>
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -19,6 +19,31 @@
 #
 ##############################################################################
 
-from . import base_phone
-from . import wizard
-from . import report_sxw_format
+
+{
+    'name': 'HR Phone',
+    'version': '0.1',
+    'category': 'Phone',
+    'license': 'AGPL-3',
+    'summary': 'Validate phone numbers in HR',
+    'description': """
+HR Phone
+========
+
+This module validate phone numbers in the HR module, just like the *base_phone* module valide phone numbers in the Partner form. Please refer to the description of the *base_phone* module for more information.
+
+This module is independant from the Asterisk connector.
+
+Please contact Alexis de Lattre from Akretion <alexis.delattre@akretion.com> for any help or question about this module.
+""",
+    'author': 'Akretion',
+    'website': 'http://www.akretion.com/',
+    'depends': ['base_phone', 'hr'],
+    'data': [
+        'security/ir.model.access.csv',
+        'hr_view.xml',
+        ],
+    'images': [],
+    'installable': True,
+    'active': False,
+}

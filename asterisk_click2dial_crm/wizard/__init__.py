@@ -21,4 +21,3 @@
 ##############################################################################
 
 from . import create_crm_phonecall
-from . import reformat_all_phonenumbers

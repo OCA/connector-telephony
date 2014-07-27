@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    Asterisk Pop-up module for OpenERP
+#    CRM Claim Phone module for Odoo/OpenERP
 #    Copyright (C) 2014 Alexis de Lattre <alexis@via.ecp.fr>
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -19,4 +19,4 @@
 #
 ##############################################################################
 
-from . import popup
+from . import crm_claim_phone

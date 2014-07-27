@@ -27,7 +27,6 @@
 <record id="action_create_crm_phonecall" model="ir.actions.act_window">
     <field name="name">Create CRM phonecall</field>
     <field name="res_model">wizard.create.crm.phonecall</field>
-    <field name="view_type">form</field>
     <field name="view_mode">form</field>
     <field name="target">new</field>
 </record>

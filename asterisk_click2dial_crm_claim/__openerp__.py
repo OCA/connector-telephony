@@ -27,7 +27,7 @@
     "author": "Akretion",
     "website": "http://www.akretion.com",
     "license" : "AGPL-3",
-    "category": "Customer Relationship Management",
+    "category": "Phone",
     "description": """
     This module adds a button "Open Related CRM Claims" on the "Open calling partner" wizard and a "Dial" button on the CRM Claim form.
 
@@ -35,7 +35,7 @@
     """,
     "depends": [
         'asterisk_click2dial',
-        'crm_claim',
+        'crm_claim_phone',
     ],
     "demo": [],
     "data": [

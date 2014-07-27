@@ -28,7 +28,7 @@
     "author": "Zikzakmedia SL, Akretion",
     "website": "http://www.zikzakmedia.com",
     "license": "AGPL-3",
-    "category": "Customer Relationship Management",
+    "category": "Phone",
     "description": """
 Asterisk Click2dial CRM
 =======================
@@ -47,7 +47,7 @@ A detailed documentation for the OpenERP-Asterisk connector is available on the 
 """,
     "depends": [
         'asterisk_click2dial',
-        'crm',
+        'crm_phone',
     ],
     "demo": [],
     "data": [
@@ -55,7 +55,6 @@ A detailed documentation for the OpenERP-Asterisk connector is available on the 
         'wizard/create_crm_phonecall_view.xml',
         'res_users_view.xml',
         'crm_lead_view.xml',
-        'crm_phonecall_view.xml',
     ],
     "installable": True,
     "application": True,

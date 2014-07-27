@@ -25,7 +25,7 @@
     "author": "INVITU",
     "website": "http://www.invitu.com",
     "license": "AGPL-3",
-    "category": "Extra Tools",
+    "category": "Phone",
     "description": """
     This module adds a button "Open Registrations" on the "Open calling partner" wizard and a "Dial" button on the Registration form.
 
@@ -33,7 +33,7 @@
     """,
     "depends": [
         'asterisk_click2dial',
-        'event',
+        'event_phone',
     ],
     "demo": [],
     "data": [

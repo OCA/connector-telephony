@@ -71,20 +71,3 @@ class res_users(orm.Model):
     _defaults = {
         'context_propose_creation_crm_call': True,
         }
-
-
-class crm_lead(orm.Model):
-    _name = 'crm.lead'
-    _inherit = ['crm.lead', 'phone.common']
-
-    def create(self, cr, uid, vals, context=None):
-        vals_reformated = self._generic_reformat_phonenumbers(
-            cr, uid, vals, context=context)
-        return super(crm_lead, self).create(
-            cr, uid, vals_reformated, context=context)
-
-    def write(self, cr, uid, ids, vals, context=None):
-        vals_reformated = self._generic_reformat_phonenumbers(
-            cr, uid, vals, context=context)
-        return super(crm_lead, self).write(
-            cr, uid, ids, vals_reformated, context=context)

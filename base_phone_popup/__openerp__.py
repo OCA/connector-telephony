@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
-#    Asterisk Pop-up module for OpenERP
+#    Base Phone Pop-up module for Odoo/OpenERP
 #    Copyright (C) 2014 Alexis de Lattre <alexis@via.ecp.fr>
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -21,16 +21,16 @@
 
 
 {
-    'name': 'Asterisk Pop-up',
+    'name': 'Base Phone Pop-up',
     'version': '0.4',
-    'category': 'Extra Tools',
+    'category': 'Phone',
     'license': 'AGPL-3',
-    'summary': 'Pop-up the Partner to the User on Incoming Calls',
+    'summary': 'Pop-up the related form view to the user on incoming calls',
     'description': """
-Asterisk-OpenERP Connector: Display Pop-up to User on Incoming Calls
-====================================================================
+Base Phone Pop-up
+=================
 
-When the user receives a phone call, OpenERP can automatically open the corresponding partner in a pop-up without any action from the user.
+When the user receives a phone call, OpenERP can automatically open the corresponding partner/lead/employee/... in a pop-up without any action from the user.
 
 The module *web_action_request* can be downloaded with Mercurial:
 
@@ -47,11 +47,10 @@ Warning : proxying WebSockets is only supported since Nginx 1.3.13 ; the feature
 TODO : document this new feature on the Akretion Web site : http://www.akretion.com/en/products-and-services/openerp-asterisk-voip-connector """,
     'author': 'Akretion',
     'website': 'http://www.akretion.com/',
-    'depends': ['asterisk_click2dial', 'web_action_request'],
+    'depends': ['base_phone', 'web_action_request'],
     'data': [
         'res_users_view.xml',
         ],
-    'demo': [],
     'images': [],
     'active': False,
 }

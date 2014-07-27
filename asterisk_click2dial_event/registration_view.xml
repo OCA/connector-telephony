@@ -11,10 +11,10 @@
 <openerp>
 <data>
 
-<record id="asterisk_event_registration_form_dial" model="ir.ui.view">
+<record id="view_event_registration_form" model="ir.ui.view">
     <field name="name">asterisk.event.registration.form.dial</field>
     <field name="model">event.registration</field>
-    <field name="inherit_id" ref="event.view_event_registration_form"/>
+    <field name="inherit_id" ref="event_phone.view_event_registration_form"/>
     <field name="arch" type="xml">
         <field name="phone" position="replace">
             <group colspan="2" col="3">
@@ -25,24 +25,16 @@
     </field>
 </record>
 
-<record id="asterisk_event_form_registration_tree_dial" model="ir.ui.view">
+<record id="view_event_form" model="ir.ui.view">
     <field name="name">asterisk.event.form.registration.tree.dial</field>
     <field name="model">event.event</field>
-    <field name="inherit_id" ref="event.view_event_form"/>
+    <field name="inherit_id" ref="event_phone.view_event_form"/>
     <field name="arch" type="xml">
         <xpath expr="//field[@name='registration_ids']/tree/field[@name='phone']" position="replace">
-            <field name="phone" widget="phone" colspan="2" />
+            <field name="phone" colspan="2" />
             <button name="action_dial" context="{'field2dial': 'phone'}" string="Dial" type="object" icon="terp-call-start" attrs="{'invisible':[('phone','=',False)]}"/>
         </xpath>
-    </field>
-</record>
-
-<record id="asterisk_event_form_registration_form_dial" model="ir.ui.view">
-    <field name="name">asterisk.event.form.registration.form.dial</field>
-    <field name="model">event.event</field>
-    <field name="inherit_id" ref="event.view_event_form"/>
-    <field name="arch" type="xml">
-        <xpath expr="//field[@name='registration_ids']/form/group/field[@name='phone']" position="replace">
+        <xpath expr="//field[@name='registration_ids']/form//field[@name='phone']" position="replace">
             <group colspan="2" col="3">
                 <field name="phone" widget="phone" colspan="2" />
                 <button name="action_dial" context="{'field2dial': 'phone'}" string="Dial" type="object" attrs="{'invisible':[('phone','=',False)]}"/>

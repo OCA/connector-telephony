@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    Asterisk Pop-up module for OpenERP
+#    Base Phone Pop-up module for Odoo/OpenERP
 #    Copyright (C) 2014 Alexis de Lattre <alexis@via.ecp.fr>
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -22,40 +22,33 @@
 from openerp.osv import orm, fields
 import logging
 
+
 logger = logging.getLogger(__name__)
 
 
-class res_partner(orm.Model):
-    _inherit = 'res.partner'
+class phone_common(orm.AbstractModel):
+    _inherit = 'phone.common'
 
     def _prepare_incall_pop_action(
-            self, cr, uid, partner_res, number, context=None):
-        if partner_res:
+            self, cr, uid, record_res, number, context=None):
+        action = False
+        if record_res:
+            obj = self.pool[record_res[0]]
             action = {
-                'name': 'Partner',
+                'name': obj._description,
                 'type': 'ir.actions.act_window',
-                'res_model': 'res.partner',
-                'view_mode': 'form,tree,kanban',
+                'res_model': record_res[0],
+                'view_mode': 'form,tree',
                 'views': [[False, 'form']],  # Beurk, but needed
                 'target': 'new',
-                'res_id': partner_res[0],
-                }
-        else:
-            action = {
-                'name': 'No Partner Found',
-                'type': 'ir.actions.act_window',
-                'res_model': 'wizard.open.calling.partner',
-                'view_mode': 'form',
-                'views': [[False, 'form']],  # Beurk, but needed
-                'target': 'new',
-                'context': {'incall_number_popup': number}
+                'res_id': record_res[1],
                 }
         return action
 
     def incall_notify_by_login(
             self, cr, uid, number, login_list, context=None):
         assert isinstance(login_list, list), 'login_list must be a list'
-        res = self.get_partner_from_phone_number(
+        res = self.get_record_from_phone_number(
             cr, uid, number, context=context)
         user_ids = self.pool['res.users'].search(
             cr, uid, [('login', 'in', login_list)], context=context)
@@ -74,7 +67,11 @@ class res_partner(orm.Model):
                     logger.debug(
                         'This action has been sent to user ID %d: %s'
                         % (user['id'], action))
-        return res
+        if res:
+            callerid = res[2]
+        else:
+            callerid = False
+        return callerid
 
 
 class res_users(orm.Model):

@@ -29,4 +29,4 @@ class wizard_open_calling_partner(orm.TransientModel):
     def open_crm_claims(self, cr, uid, ids, context=None):
         '''Function called by the related button of the wizard'''
         return self.open_filtered_object(
-            cr, uid, ids, self.pool.get('crm.claim'), context=context)
+            cr, uid, ids, self.pool['crm.claim'], context=context)

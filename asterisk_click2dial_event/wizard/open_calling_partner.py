@@ -28,4 +28,4 @@ class wizard_open_calling_partner(orm.TransientModel):
     def open_registrations(self, cr, uid, ids, context=None):
         '''Function called by the related button of the wizard'''
         return self.open_filtered_object(
-            cr, uid, ids, self.pool.get('event.registration'), context=context)
+            cr, uid, ids, self.pool['event.registration'], context=context)

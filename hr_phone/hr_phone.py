@@ -1,8 +1,9 @@
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
-#    Asterisk click2dial CRM Claim module for OpenERP
-#    Copyright (C) 2013 Invitu <contact@invitu.com>
+#    HR phone module for Odoo/OpenERP
+#    Copyright (c) 2012-2014 Akretion (http://www.akretion.com)
+#    @author: Alexis de Lattre <alexis.delattre@akretion.com>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as published
@@ -19,41 +20,34 @@
 #
 ##############################################################################
 
-from openerp.osv import orm, fields
+from openerp.osv import orm
 
 
-class crm_claim(orm.Model):
-    _name = 'crm.claim'
-    _inherit = ['crm.claim', 'phone.common']
-
-    def format_phonenumber_to_e164(
-            self, cr, uid, ids, name, arg, context=None):
-        return self.generic_phonenumber_to_e164(
-            cr, uid, ids, [('partner_phone', 'partner_phone_e164')],
-            context=context)
-
-    _columns = {
-        # Note : even if we only have 1 field, we keep multi='..'
-        # because the generic function generic_phonenumber_to_e164() is
-        # designed to return the result as multi
-        'partner_phone_e164': fields.function(
-            format_phonenumber_to_e164, type='char', size=64,
-            string='Phone in E.164 format', readonly=True, multi='e164claim',
-            store={
-                'crm.claim': (
-                    lambda self, cr, uid, ids, c={}: ids,
-                    ['partner_phone'], 10),
-            }),
-        }
+class hr_employee(orm.Model):
+    _name = 'hr.employee'
+    _inherit = ['hr.employee', 'phone.common']
 
     def create(self, cr, uid, vals, context=None):
         vals_reformated = self._generic_reformat_phonenumbers(
             cr, uid, vals, context=context)
-        return super(crm_claim, self).create(
+        return super(hr_employee, self).create(
             cr, uid, vals_reformated, context=context)
 
     def write(self, cr, uid, ids, vals, context=None):
         vals_reformated = self._generic_reformat_phonenumbers(
             cr, uid, vals, context=context)
-        return super(crm_claim, self).write(
+        return super(hr_employee, self).write(
             cr, uid, ids, vals_reformated, context=context)
+
+
+class phone_common(orm.AbstractModel):
+    _inherit = 'phone.common'
+
+    def _get_phone_fields(self, cr, uid, context=None):
+        res = super(phone_common, self)._get_phone_fields(
+            cr, uid, context=context)
+        res['hr.employee'] = {
+            'phonefields': ['work_phone', 'mobile_phone'],
+            'get_name_sequence': 30,
+            }
+        return res

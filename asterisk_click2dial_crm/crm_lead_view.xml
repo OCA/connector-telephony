@@ -29,9 +29,6 @@
                 <button name="action_dial" context="{'field2dial': 'mobile'}" string="Dial" type="object" attrs="{'invisible':[('mobile','=',False)]}"/>
             </group>
         </field>
-        <field name="fax" position="attributes">
-            <attribute name="widget">fax</attribute>
-        </field>
     </field>
 </record>
 
@@ -52,9 +49,6 @@
                 <field name="mobile" widget="phone" colspan="7" />
                 <button name="action_dial" context="{'field2dial': 'mobile'}" string="Dial" type="object" attrs="{'invisible':[('mobile','=',False)]}"/>
             </group>
-        </field>
-        <field name="fax" position="attributes">
-            <attribute name="widget">fax</attribute>
         </field>
     </field>
 </record>

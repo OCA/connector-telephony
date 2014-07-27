@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    Base Phone module for OpenERP
+#    CRM Phone module for Odoo/OpenERP
 #    Copyright (C) 2014 Alexis de Lattre <alexis@via.ecp.fr>
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -19,6 +19,4 @@
 #
 ##############################################################################
 
-from . import base_phone
-from . import wizard
-from . import report_sxw_format
+from . import crm_phone

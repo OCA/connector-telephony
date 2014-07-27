@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    Base Phone module for OpenERP
-#    Copyright (C) 2014 Alexis de Lattre <alexis@via.ecp.fr>
+#    Asterisk Click2Dial Registration module for OpenERP
+#    Copyright (C) 2013 Invitu (http://www.invitu.com/)
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -19,6 +19,4 @@
 #
 ##############################################################################
 
-from . import base_phone
 from . import wizard
-from . import report_sxw_format
