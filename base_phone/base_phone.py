@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
-#    Base Phone module for OpenERP
+#    Base Phone module for Odoo/OpenERP
 #    Copyright (C) 2010-2014 Alexis de Lattre <alexis@via.ecp.fr>
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -19,7 +19,7 @@
 #
 ##############################################################################
 
-from openerp.osv import orm
+from openerp.osv import orm, fields
 from openerp.tools.translate import _
 import logging
 # Lib for phone number reformating -> pip install phonenumbers
@@ -62,7 +62,10 @@ class phone_common(orm.AbstractModel):
 
     def _generic_reformat_phonenumbers(
             self, cr, uid, vals,
-            phonefields=['phone', 'partner_phone', 'fax', 'mobile'],
+            phonefields=[
+                'phone', 'partner_phone', 'work_phone', 'fax',
+                'mobile', 'partner_mobile', 'mobile_phone',
+                ],
             context=None):
         """Reformat phone numbers in E.164 format i.e. +33141981242"""
         if any([vals.get(field) for field in phonefields]):
@@ -100,6 +103,103 @@ class phone_common(orm.AbstractModel):
                             % (field, init_value, vals[field]))
         return vals
 
+    def get_name_from_phone_number(
+            self, cr, uid, presented_number, context=None):
+        '''Function to get name from phone number. Usefull for use from IPBX
+        to add CallerID name to incoming calls.'''
+        res = self.get_record_from_phone_number(
+            cr, uid, presented_number, context=context)
+        if res:
+            return res[2]
+        else:
+            return False
+
+    def get_record_from_phone_number(
+            self, cr, uid, presented_number, context=None):
+        '''If it finds something, it returns (object name, ID, record name)
+        For example : ('res.partner', 42, u'Alexis de Lattre (Akretion)')
+        '''
+        if context is None:
+            context = {}
+        ctx_phone = context.copy()
+        ctx_phone['callerid'] = True
+        _logger.debug(
+            u"Call get_name_from_phone_number with number = %s"
+            % presented_number)
+        if not isinstance(presented_number, (str, unicode)):
+            _logger.warning(
+                u"Number '%s' should be a 'str' or 'unicode' but it is a '%s'"
+                % (presented_number, type(presented_number)))
+            return False
+        if not presented_number.isdigit():
+            _logger.warning(
+                u"Number '%s' should only contain digits." % presented_number)
+
+        user = self.pool['res.users'].browse(cr, uid, uid, context=context)
+        nr_digits_to_match_from_end = \
+            user.company_id.number_of_digits_to_match_from_end
+        if len(presented_number) >= nr_digits_to_match_from_end:
+            end_number_to_match = presented_number[
+                -nr_digits_to_match_from_end:len(presented_number)]
+        else:
+            end_number_to_match = presented_number
+
+        phonefieldsdict = self._get_phone_fields(cr, uid, context=context)
+        phonefieldslist = []
+        for objname, prop in phonefieldsdict.iteritems():
+            if prop.get('get_name_sequence'):
+                phonefieldslist.append({objname: prop})
+        phonefieldslist_sorted = sorted(
+            phonefieldslist,
+            key=lambda element: element.values()[0]['get_name_sequence'])
+
+        for phonedict in phonefieldslist_sorted:
+            objname = phonedict.keys()[0]
+            prop = phonedict.values()[0]
+            phonefields = prop['phonefields']
+            obj = self.pool[objname]
+            pg_search_number = str('%' + end_number_to_match)
+            _logger.debug(
+                "Will search phone and mobile numbers in %s ending with '%s'"
+                % (objname, end_number_to_match))
+            domain = []
+            for phonefield in phonefields:
+                domain.append((phonefield, 'like', pg_search_number))
+            if len(phonefields) > 1:
+                domain = ['|'] * (len(phonefields) - 1) + domain
+            res_ids = obj.search(cr, uid, domain, context=context)
+            if len(res_ids) > 1:
+                _logger.warning(
+                    u"There are several %s (IDS = %s) with a phone number "
+                    "ending with '%s'. Taking the first one."
+                    % (objname, res_ids, end_number_to_match))
+            if res_ids:
+                name = obj.name_get(
+                    cr, uid, res_ids[0], context=ctx_phone)[0][1]
+                res = (objname, res_ids[0], name)
+                print "res=", res
+                _logger.debug(
+                    u"Answer get_record_from_phone_number: (%s, %d, %s)"
+                    % (res[0], res[1], res[2]))
+                return res
+            else:
+                _logger.debug(
+                    u"No match on %s for end of phone number '%s'"
+                    % (objname, end_number_to_match))
+        return False
+
+    def _get_phone_fields(self, cr, uid, context=None):
+        '''Returns a dict with key = object name
+        and value = list of phone fields'''
+        res = {
+            'res.partner': {
+                'phonefields': ['phone', 'mobile'],
+                'faxfields': ['fax'],
+                'get_name_sequence': 10,
+                },
+            }
+        return res
+
 
 class res_partner(orm.Model):
     _name = 'res.partner'
@@ -116,3 +216,50 @@ class res_partner(orm.Model):
             cr, uid, vals, context=context)
         return super(res_partner, self).write(
             cr, uid, ids, vals_reformated, context=context)
+
+    def name_get(self, cr, uid, ids, context=None):
+        if context is None:
+            context = {}
+        if context.get('callerid'):
+            res = []
+            if isinstance(ids, (int, long)):
+                ids = [ids]
+            for partner in self.browse(cr, uid, ids, context=context):
+                if partner.parent_id and partner.parent_id.is_company:
+                    name = u'%s (%s)' % (partner.name, partner.parent_id.name)
+                else:
+                    name = partner.name
+                res.append((partner.id, name))
+            return res
+        else:
+            return super(res_partner, self).name_get(
+                cr, uid, ids, context=context)
+
+
+class res_company(orm.Model):
+    _inherit = 'res.company'
+
+    _columns = {
+        'number_of_digits_to_match_from_end': fields.integer(
+            'Number of Digits To Match From End',
+            help="In several situations, OpenERP will have to find a "
+            "Partner/Lead/Employee/... from a phone number presented by the "
+            "calling party. As the phone numbers presented by your phone "
+            "operator may not always be displayed in a standard format, "
+            "the best method to find the related Partner/Lead/Employee/... "
+            "in OpenERP is to try to match the end of the phone number in "
+            "OpenERP with the N last digits of the phone number presented "
+            "by the calling party. N is the value you should enter in this "
+            "field."),
+        }
+
+    _defaults = {
+        'number_of_digits_to_match_from_end': 8,
+        }
+
+    _sql_constraints = [(
+        'number_of_digits_to_match_from_end_positive',
+        'CHECK (number_of_digits_to_match_from_end > 0)',
+        "The value of the field 'Number of Digits To Match From End' must "
+        "be positive."),
+        ]
