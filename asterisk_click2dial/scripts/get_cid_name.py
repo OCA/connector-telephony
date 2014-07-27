@@ -3,13 +3,15 @@
 """
  CallerID name lookup in OpenERP for Asterisk IPBX
 
- When executed from the dialplan on an incoming phone call, it will lookup in
- OpenERP's partners, and, if it finds the phone number, it will get the
- corresponding name of the person and use this name as CallerID name for the incoming call.
+ When executed from the dialplan on an incoming phone call, it will
+ lookup in OpenERP's partners and other objects with phone numbers
+ (leads, employees, etc...), and, if it finds the phone number, it will
+ get the corresponding name of the person and use this name as CallerID
+ name for the incoming call.
 
- Requires the "asterisk_click2dial" module 
+ Requires the "base_phone" module
  available from https://code.launchpad.net/openerp-asterisk-connector
- for OpenERP version >= 5.0
+ for OpenERP version >= 7.0
 
  This script is designed to be used as an AGI on an Asterisk IPBX...
  BUT I advise you to use a wrapper around this script to control the
@@ -19,7 +21,7 @@
  The simplest solution I found is to use the "timeout" shell command to
  call this script, for example :
 
- # timeout 1s get_cid_name.py <OPTIONS>
+ # timeout 2s get_cid_name.py <OPTIONS>
 
  See my sample wrapper "get_cid_name_timeout.sh"
 
@@ -41,10 +43,10 @@
 """
 
 __author__ = "Alexis de Lattre <alexis.delattre@akretion.com>"
-__date__ = "December 2010"
-__version__ = "0.3"
+__date__ = "July 2014"
+__version__ = "0.4"
 
-#  Copyright (C) 2010-2012 Alexis de Lattre <alexis.delattre@akretion.com>
+#  Copyright (C) 2010-2014 Alexis de Lattre <alexis.delattre@akretion.com>
 #
 #  This program is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Affero General Public License as
@@ -64,7 +66,7 @@ import sys
 from optparse import OptionParser
 
 
-# CID Name that will be displayed if there is no match in res.partner
+# CID Name that will be displayed if there is no match
 # and no geolocalisation
 default_cid_name = "Not in OpenERP"
 
@@ -198,13 +200,13 @@ def main(options, arguments):
             if options.notify and arguments:
                 res = sock.execute(
                     options.database, options.user, options.password,
-                    'res.partner', 'incall_notify_by_login',
+                    'phone.common', 'incall_notify_by_login',
                     input_cid_number, arguments)
                 stdout_write('VERBOSE "Calling incall_notify_by_login"\n')
             else:
                 res = sock.execute(
                     options.database, options.user, options.password,
-                    'res.partner', 'get_name_from_phone_number',
+                    'phone.common', 'get_name_from_phone_number',
                     input_cid_number)
                 stdout_write('VERBOSE "Calling get_name_from_phone_number"\n')
             stdout_write('VERBOSE "End of XML-RPC request on OpenERP"\n')
