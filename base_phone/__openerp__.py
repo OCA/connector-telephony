@@ -23,7 +23,7 @@
 {
     'name': 'Base Phone',
     'version': '0.1',
-    'category': 'Extra Tools',
+    'category': 'Phone',
     'license': 'AGPL-3',
     'summary': 'Validate phone numbers',
     'description': """
@@ -53,7 +53,11 @@ Please contact Alexis de Lattre from Akretion <alexis.delattre@akretion.com> for
     'depends': ['base'],
     'external_dependencies': {'python': ['phonenumbers']},
     'data': [
+        'security/phone_security.xml',
+        'security/ir.model.access.csv',
         'res_partner_view.xml',
+        'res_company_view.xml',
+        'res_users_view.xml',
         'wizard/reformat_all_phonenumbers_view.xml',
         ],
     'js': [
