@@ -50,7 +50,6 @@ class asterisk_server(orm.Model):
         'wait_time': fields.integer('Wait time (sec)', required=True, help="Amount of time (in seconds) Asterisk will try to reach the user's phone before hanging up."),
         'extension_priority': fields.integer('Extension priority', required=True, help="Priority of the extension in the Asterisk dialplan. Refer to /etc/asterisk/extensions.conf on your Asterisk server."),
         'alert_info': fields.char('Alert-Info SIP header', size=255, help="Set Alert-Info header in SIP request to user's IP Phone for the click2dial feature. If empty, the Alert-Info header will not be added. You can use it to have a special ring tone for click2dial (a silent one !) or to activate auto-answer for example."),
-        'number_of_digits_to_match_from_end': fields.integer('Number of digits to match from end', help='In several situations, the Asterisk-OpenERP connector will have to find a Partner in OpenERP from a phone number presented by the calling party. As the phone numbers presented by your phone operator may not always be displayed in a standard format, the best method to find the related Partner in OpenERP is to try to match the end of the phone numbers of the Partners in OpenERP with the N last digits of the phone number presented by the calling party. N is the value you should enter in this field.'),
         'company_id': fields.many2one('res.company', 'Company', help="Company who uses the Asterisk server."),
     }
 
@@ -65,13 +64,11 @@ class asterisk_server(orm.Model):
     _defaults = {
         'active': True,
         'port': 5038,  # Default AMI port
-        'out_prefix': '0',
         'national_prefix': '0',
         'international_prefix': '00',
         'country_prefix': _get_prefix_from_country,
         'extension_priority': 1,
         'wait_time': 15,
-        'number_of_digits_to_match_from_end': 9,
         'company_id': lambda self, cr, uid, context: self.pool.get('res.company')._company_default_get(cr, uid, 'asterisk.server', context=context),
     }
 
@@ -95,8 +92,6 @@ class asterisk_server(orm.Model):
                 raise orm.except_orm(_('Error :'), _("The 'extension priority' must be a positive value for the Asterisk server '%s'" % server.name))
             if server.port > 65535 or server.port < 1:
                 raise orm.except_orm(_('Error :'), _("You should set a TCP port between 1 and 65535 for the Asterisk server '%s'" % server.name))
-            if server.number_of_digits_to_match_from_end > 20 or server.number_of_digits_to_match_from_end < 1:
-                raise orm.except_orm(_('Error :'), _("You should set a 'Number of digits to match from end' between 1 and 20 for the Asterisk server '%s'" % server.name))
             for check_string in [dialplan_context, alert_info, login, password]:
                 if check_string[1]:
                     try:
@@ -107,7 +102,7 @@ class asterisk_server(orm.Model):
 
 
     _constraints = [
-        (_check_validity, "Error message in raise", ['out_prefix', 'country_prefix', 'national_prefix', 'international_prefix', 'wait_time', 'extension_priority', 'port', 'context', 'alert_info', 'login', 'password', 'number_of_digits_to_match_from_end']),
+        (_check_validity, "Error message in raise", ['out_prefix', 'country_prefix', 'national_prefix', 'international_prefix', 'wait_time', 'extension_priority', 'port', 'context', 'alert_info', 'login', 'password']),
     ]
 
 
@@ -395,65 +390,20 @@ class phone_common(orm.AbstractModel):
             raise orm.except_orm(_('Error :'), _('There is no phone number !'))
         return self.pool['asterisk.server']._dial_with_asterisk(cr, uid, erp_number_e164, context=context)
 
-
-class res_partner(orm.Model):
-    _name = 'res.partner'
-    _inherit = ['res.partner', 'phone.common']
-
-    def get_name_from_phone_number(self, cr, uid, number, context=None):
-        '''Function to get name from phone number. Usefull for use from Asterisk
-        to add CallerID name to incoming calls.
-        The "scripts/" subdirectory of this module has an AGI script that you can
-        install on your Asterisk IPBX : the script will be called from the Asterisk
-        dialplan via the AGI() function and it will use this function via an XML-RPC
-        request.
-        '''
-        res = self.get_partner_from_phone_number(cr, uid, number, context=context)
-        if res:
-            return res[2]
-        else:
-            return False
-
-
-    def get_partner_from_phone_number(self, cr, uid, presented_number, context=None):
-        # We check that "number" is really a number
-        _logger.debug(u"Call get_name_from_phone_number with number = %s" % presented_number)
-        if not isinstance(presented_number, (str, unicode)):
-            _logger.warning(u"Number '%s' should be a 'str' or 'unicode' but it is a '%s'" % (presented_number, type(presented_number)))
-            return False
-        if not presented_number.isdigit():
-            _logger.warning(u"Number '%s' should only contain digits." % presented_number)
-            return False
-
-        ast_server = self.pool['asterisk.server']._get_asterisk_server_from_user(cr, uid, context=context)
-        nr_digits_to_match_from_end = ast_server.number_of_digits_to_match_from_end
-        if len(presented_number) >= nr_digits_to_match_from_end:
-            end_number_to_match = presented_number[-nr_digits_to_match_from_end:len(presented_number)]
-        else:
-            end_number_to_match = presented_number
-
-        _logger.debug("Will search phone and mobile numbers in res.partner ending with '%s'" % end_number_to_match)
-
-        # We try to match a phone or mobile number with the same end
-        pg_seach_number = str('%' + end_number_to_match)
-        res_ids = self.search(cr, uid, ['|', ('phone', 'like', pg_seach_number), ('mobile', 'like', pg_seach_number)], context=context)
-        # TODO : use is_number_match() of the phonenumber lib ?
-        if len(res_ids) > 1:
-            _logger.warning(u"There are several partners (IDS = %s) with a phone number ending with '%s'" % (str(res_ids), end_number_to_match))
-        if res_ids:
-            entry = self.read(cr, uid, res_ids[0], ['name', 'parent_id'], context=context)
-            _logger.debug(u"Answer get_partner_from_phone_number with name = %s" % entry['name'])
-            return (entry['id'], entry['parent_id'] and entry['parent_id'][0] or False, entry['name'])
-        else:
-            _logger.debug(u"No match for end of phone number '%s'" % end_number_to_match)
-            return False
-
-
-# This module supports multi-company
-class res_company(orm.Model):
-    _inherit = "res.company"
-
-    _columns = {
-        'asterisk_server_ids': fields.one2many('asterisk.server', 'company_id', 'Asterisk servers', help="List of Asterisk servers.")
-    }
-
+    def _prepare_incall_pop_action(
+            self, cr, uid, record_res, number, context=None):
+        # Not executed because this module doesn't depend on base_phone_popup
+        # TODO move to a dedicated module asterisk_popup ?
+        action = super(phone_common, self)._prepare_incall_pop_action(
+            cr, uid, record_res, number, context=context)
+        if not action:
+            action = {
+                'name': _('No Partner Found'),
+                'type': 'ir.actions.act_window',
+                'res_model': 'wizard.open.calling.partner',
+                'view_mode': 'form',
+                'views': [[False, 'form']],  # Beurk, but needed
+                'target': 'new',
+                'context': {'incall_number_popup': number}
+            }
+        return action
