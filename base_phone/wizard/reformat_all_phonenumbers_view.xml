@@ -14,17 +14,15 @@
     <field name="arch" type="xml">
         <form string="Reformat all phone numbers" version="7.0">
             <!-- TODO : add a "state" and display fields accordingly -->
-            <group>
+            <group name="main">
                 <label string="This wizard reformats the phone, mobile and fax numbers of all partners in standard international format e.g. +33141981242" colspan="4"/>
-            </group>
-            <group>
-                <button name="run_reformat_all_phonenumbers" string="Reformat all phone numbers" type="object" class="oe_highlight"/>
-                <button special="cancel" string="Cancel" class="oe_link" />
-            </group>
-            <group>
                 <label colspan="4" string="Phone numbers that couldn't be reformatted:"/>
                 <field name="phonenumbers_not_reformatted" colspan="4" nolabel="1"/>
             </group>
+            <footer>
+                <button name="run_reformat_all_phonenumbers" string="Reformat all phone numbers" type="object" class="oe_highlight"/>
+                <button special="cancel" string="Cancel" class="oe_link" />
+            </footer>
         </form>
     </field>
 </record>
@@ -32,7 +30,6 @@
 <record id="reformat_all_phonenumbers_action" model="ir.actions.act_window">
     <field name="name">Reformat Phone Numbers</field>
     <field name="res_model">reformat.all.phonenumbers</field>
-    <field name="view_type">form</field>
     <field name="view_mode">form</field>
     <field name="target">new</field>
 </record>
