@@ -24,7 +24,9 @@
 {
     "name": "SMS Client",
     "version": "1.0",
-    "depends": ["base"],
+    "depends": ["base",
+                "email_template",
+                ],
     "author": "Julius Network Solutions,SYLEAM,OpenERP SA",
     'images': ['images/sms.jpeg', 'images/gateway.jpeg', 'images/gateway_access.jpeg','images/client.jpeg','images/send_sms.jpeg'],
     "description": """
@@ -60,6 +62,7 @@ Then, it was updated to the 7.0 version by Julius Network Solutions.
         "smsclient_data.xml",
         "wizard/mass_sms_view.xml",
         "partner_sms_send_view.xml",
+        "smstemplate_view.xml"
     ],
     "active": False,
     "installable": True,

@@ -7,7 +7,13 @@
             <field name="inherit_id" ref="base.view_server_action_form"/>
             <field name="arch" type="xml">
                 <field name="mobile" position="after">
-                    <field name="sms_server" select="1" attrs="{'required':[('state','=','sms')]}"/>
+                    <field name="sms_server" invisible="1"/>
+                	<field name="sms_template_id" domain="[('sms_template','=',True)]" attrs="{'required':[('state','=','sms')]}"/>
+                </field>
+                <field name="sms" position="attributes">
+                 	<attribute name="invisible">1</attribute> 
+					<attribute name="required">0</attribute>
+					<attribute name="attrs">{}</attribute>
                 </field>
             </field>
         </record>

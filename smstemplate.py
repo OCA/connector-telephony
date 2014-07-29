@@ -2,7 +2,6 @@
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution
-#    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>).
 #    Copyright (C) 2013 Julius Network Solutions SARL <contact@julius.fr>
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -19,10 +18,21 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
+import time
+import urllib
+from openerp.osv import fields, orm
+from openerp.tools.translate import _
 
-import smsclient
-import serveraction
-import wizard
-import smstemplate
-
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
+class email_template(orm.Model):
+    _inherit = "email.template"
+    
+    _columns = {
+        'sms_template': fields.boolean('SMS Template'),
+        'mobile_to': fields.char('To (Mobile)', size=256),
+        'gateway_id': fields.many2one('sms.smsclient', 'SMS Gateway'),
+    }
+    
+            
+        
+    
+    
