@@ -36,11 +36,12 @@
 . If the remote party answers, the user can talk to his correspondent.
 
 2) It adds the ability to show the name of the calling party on the screen of your IP phone on incoming phone calls if the presented
-phone number is present in the partners of OpenERP. Here is how it works :
-. On incoming phone calls, the Asterisk dialplan executes an AGI script "get_cid_name_timeout.sh".
-. The "get_cid_name_timeout.sh" script calls the "get_cid_name.py" script with a short timeout.
-. The "get_cid_name.py" script will make an XML-RPC request on the OpenERP server to try to find the name of the person corresponding to the phone number presented by the calling party.
+phone number is present in the partner/leads/employees/... of OpenERP. Here is how it works :
+. On incoming phone calls, the Asterisk dialplan executes an AGI script "set_name_incoming_timeout.sh".
+. The "set_name_incoming_timeout.sh" script calls the "set_name_agi.py" script with a short timeout.
+. The "set_name_agi.py" script will make an XML-RPC request on the OpenERP server to try to find the name of the person corresponding to the phone number presented by the calling party.
 . If it finds the name, it is set as the CallerID name of the call, so as to be presented on the IP phone of the user.
+It also works on outgoing calls, so as to display the name of the callee on the SIP phone of the caller. For that, you should use the script "set_name_outgoing_timeout.sh".
 
 3) It adds a button "Open calling partner" in the menu "Sales > Address book" to get the partner corresponding to the calling party in one click. Here is how it works :
 . When the user clicks on the "Open calling partner" button, OpenERP sends a query to the Asterisk Manager Interface to get a list of the current phone calls
