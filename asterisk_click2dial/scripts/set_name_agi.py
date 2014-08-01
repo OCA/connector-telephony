@@ -67,8 +67,7 @@
  "openerp-out-call" of the Outgoing Call of my Xivo server :
 
  [openerp-out-call]
- exten = s,1,NoOp(X
- same = n,AGI(/var/lib/asterisk/agi-bin/set_name_outgoing_timeout.sh)
+ exten = s,1,AGI(/var/lib/asterisk/agi-bin/set_name_outgoing_timeout.sh)
  same = n,Set(CONNECTEDLINE(name,i)=${connectedlinename})
  same = n,Set(CONNECTEDLINE(name-pres,i)=allowed)
  same = n,Set(CONNECTEDLINE(num,i)=${XIVO_DSTNUM})
