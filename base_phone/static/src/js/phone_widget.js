@@ -17,7 +17,7 @@ openerp.base_phone = function (instance) {
             if (!this.get("effective_readonly")) {
                 this._super();
             } else {
-                var formatted_number = formatInternational('', this.get('value'))
+                var formatted_number = formatInternational('', this.get('value'));
                 this.$el.find('a')
                     .attr('href', 'tel:' + this.get('value'))
                     .text(formatted_number || '');
@@ -42,7 +42,7 @@ openerp.base_phone = function (instance) {
             if (!this.get("effective_readonly")) {
                 this._super();
             } else {
-                var formatted_number = formatInternational('', this.get('value'))
+                var formatted_number = formatInternational('', this.get('value'));
                 this.$el.find('a')
                     .attr('href', 'fax:' + this.get('value'))
                     .text(formatted_number || '');
