@@ -200,7 +200,6 @@ class asterisk_server(orm.Model):
                 ast_server = self.browse(cr, uid, asterisk_server_ids[0], context=context)
         return ast_server
 
-
     def _connect_to_asterisk(self, cr, uid, context=None):
         '''
         Open the connection to the Asterisk Manager
@@ -229,12 +228,35 @@ class asterisk_server(orm.Model):
         try:
             ast_manager = Manager.Manager((ast_server.ip_address, ast_server.port), ast_server.login, ast_server.password)
         except Exception, e:
-            _logger.error("Error in the Originate request to Asterisk server %s" % ast_server.ip_address)
-            _logger.error("Here is the detail of the error : %s" % e.strerror)
-            raise orm.except_orm(_('Error :'), _("Problem in the request from OpenERP to Asterisk. Here is the detail of the error: %s." % e.strerror))
+            _logger.error("Error in the request to the Asterisk Manager Interface %s" % ast_server.ip_address)
+            _logger.error("Here is the error message: %s" % e)
+            raise orm.except_orm(_('Error :'), _("Problem in the request from OpenERP to Asterisk. Here is the error message: %s" % e))
             return False
 
         return (user, ast_server, ast_manager)
+
+    def test_ami_connection(self, cr, uid, ids, context=None):
+        assert len(ids) == 1, 'Only 1 ID'
+        ast_server = self.browse(cr, uid, ids[0], context=context)
+        try:
+            ast_manager = Manager.Manager(
+                (ast_server.ip_address, ast_server.port),
+                ast_server.login,
+                ast_server.password)
+        except Exception, e:
+            raise orm.except_orm(
+                _("Connection Test Failed!"),
+                _("Here is the error message: %s" % e))
+        finally:
+            try:
+                if ast_manager:
+                    ast_manager.Logoff()
+            except Exception:
+                pass
+        raise orm.except_orm(
+            _("Connection Test Successfull!"),
+            _("OpenERP can successfully login to the Asterisk Manager "
+                "Interface."))
 
     def _dial_with_asterisk(self, cr, uid, erp_number, context=None):
         #print "_dial_with_asterisk erp_number=", erp_number
