@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
     Base phone module for OpenERP
-    Copyright (C) 2013 Alexis de Lattre <alexis@via.ecp.fr>
+    Copyright (C) 2013-2014 Alexis de Lattre <alexis@via.ecp.fr>
     The licence is in the file __openerp__.py
 -->
 
@@ -9,7 +9,14 @@
 
 <t t-name="FieldPhone">
     <span class="oe_form_field oe_form_field_email" t-att-style="widget.node.attrs.style">
-        <a t-if="widget.get('effective_readonly')" href="#" class="oe_form_uri" target="_blank"/>
+        <t t-if="widget.get('effective_readonly')">
+            <a href="#" class="oe_form_uri"/>
+            <!--
+            You should add the following "<a .. />" in your IPBX-specific
+            module (such as asterisk_click2dial) via <t t-extend="FieldPhone">
+            <a id="click2dial" href="#" class="oe_bold"/>
+            -->
+        </t>
         <t t-if="!widget.get('effective_readonly')">
             <div>
                 <input type="text"
@@ -26,7 +33,7 @@
 
 <t t-name="FieldFax">
     <span class="oe_form_field oe_form_field_email" t-att-style="widget.node.attrs.style">
-        <a t-if="widget.get('effective_readonly')" href="#" class="oe_form_uri" target="_blank"/>
+        <a t-if="widget.get('effective_readonly')" href="#" class="oe_form_uri"/>
         <t t-if="!widget.get('effective_readonly')">
             <div>
                 <input type="text"
