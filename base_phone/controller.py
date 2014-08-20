@@ -1,8 +1,8 @@
-# -*- coding: utf-8 -*-
+# -*- encoding: utf-8 -*-
 ##############################################################################
 #
-#    Base Phone module for OpenERP
-#    Copyright (C) 2014 Alexis de Lattre <alexis@via.ecp.fr>
+#    Asterisk click2dial module for OpenERP
+#    Copyright (C) 2014 Alexis de Lattre (alexis@via.ecp.fr)
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -19,7 +19,17 @@
 #
 ##############################################################################
 
-from . import base_phone
-from . import wizard
-from . import report_sxw_format
-from . import controller
+import openerp
+
+
+class BasePhoneController(openerp.addons.web.http.Controller):
+    _cp_path = '/base_phone'
+
+    @openerp.addons.web.http.jsonrequest
+    def click2dial(self, req, phone_number, click2dial_model, click2dial_id):
+        res = req.session.model('phone.common').click2dial(
+            phone_number, {
+                'click2dial_model': click2dial_model,
+                'click2dial_id': click2dial_id,
+                })
+        return res

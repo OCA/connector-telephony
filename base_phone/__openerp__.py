@@ -50,7 +50,7 @@ Please contact Alexis de Lattre from Akretion <alexis.delattre@akretion.com> for
 """,
     'author': 'Akretion',
     'website': 'http://www.akretion.com/',
-    'depends': ['base'],
+    'depends': ['base', 'web'],
     'external_dependencies': {'python': ['phonenumbers']},
     'data': [
         'security/phone_security.xml',
