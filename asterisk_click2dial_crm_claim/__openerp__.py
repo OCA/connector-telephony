@@ -40,7 +40,6 @@
     "demo": [],
     "data": [
         'wizard/open_calling_partner_view.xml',
-        'crm_claim_view.xml',
     ],
     "installable": True,
     "application": True,

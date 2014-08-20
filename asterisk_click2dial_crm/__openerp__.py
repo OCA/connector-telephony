@@ -2,9 +2,7 @@
 ##############################################################################
 #
 #    Asterisk click2dial CRM module for OpenERP
-#    Copyright (c) 2011 Zikzakmedia S.L. (http://zikzakmedia.com)
 #    Copyright (c) 2012-2014 Akretion (http://www.akretion.com)
-#    @author: Jesús Martín <jmartin@zikzakmedia.com>
 #    @author: Alexis de Lattre <alexis.delattre@akretion.com>
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -25,8 +23,8 @@
 {
     "name": "Asterisk Click2dial CRM",
     "version": "0.1",
-    "author": "Zikzakmedia SL, Akretion",
-    "website": "http://www.zikzakmedia.com",
+    "author": "Akretion",
+    "website": "http://www.akretion.com",
     "license": "AGPL-3",
     "category": "Phone",
     "description": """
@@ -41,7 +39,7 @@ First, when you do a click2dial, OpenERP will propose you to create an outbound 
 
 Second, when you receive a phone call and run the wizard "Open calling partner", if the partner is found in OpenERP, you will see a button that proposes to create an inbound phone call in the CRM.
 
-This module has been initially developped by Zikzakmedia and has been enhanced by Akretion.
+This module has been initially developped by Zikzakmedia and has been completely re-written by Akretion.
 
 A detailed documentation for the OpenERP-Asterisk connector is available on the Akretion Web site : http://www.akretion.com/en/products-and-services/openerp-asterisk-voip-connector
 """,
@@ -54,7 +52,6 @@ A detailed documentation for the OpenERP-Asterisk connector is available on the 
         'wizard/open_calling_partner_view.xml',
         'wizard/create_crm_phonecall_view.xml',
         'res_users_view.xml',
-        'crm_lead_view.xml',
     ],
     "installable": True,
     "application": True,

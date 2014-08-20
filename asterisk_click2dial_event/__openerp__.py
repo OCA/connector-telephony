@@ -35,10 +35,8 @@
         'asterisk_click2dial',
         'event_phone',
     ],
-    "demo": [],
     "data": [
         'wizard/open_calling_partner_view.xml',
-        'registration_view.xml',
     ],
     "installable": True,
     "application": True,
