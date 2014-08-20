@@ -200,6 +200,11 @@ class phone_common(orm.AbstractModel):
             }
         return res
 
+    def click2dial(self, cr, uid, erp_number, context=None):
+        '''This function is designed to be overridden in IPBX-specific
+        modules, such as asterisk_click2dial'''
+        return True
+
 
 class res_partner(orm.Model):
     _name = 'res.partner'
