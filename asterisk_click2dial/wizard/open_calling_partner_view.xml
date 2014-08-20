@@ -47,15 +47,5 @@
 </record>
 
 
-<record id="action_open_calling_partner" model="ir.actions.act_window">
-    <field name="name">Open calling partner</field>
-    <field name="res_model">wizard.open.calling.partner</field>
-    <field name="view_type">form</field>
-    <field name="view_mode">form</field>
-    <field name="target">new</field>
-</record>
-
-<menuitem id="menu_open_calling_partner_sales" parent="base.menu_sales" action="action_open_calling_partner" sequence="50" />
-
 </data>
 </openerp>

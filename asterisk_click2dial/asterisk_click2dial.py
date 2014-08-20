@@ -258,49 +258,6 @@ class asterisk_server(orm.Model):
             _("OpenERP can successfully login to the Asterisk Manager "
                 "Interface."))
 
-    def _dial_with_asterisk(self, cr, uid, erp_number, context=None):
-        #print "_dial_with_asterisk erp_number=", erp_number
-        if not erp_number:
-            raise orm.except_orm(_('Error :'), "Hara kiri : you must call the function with erp_number")
-
-        user, ast_server, ast_manager = self._connect_to_asterisk(cr, uid, context=context)
-        ast_number = self._reformat_number(cr, uid, erp_number, ast_server, context=context)
-
-        # The user should have a CallerID
-        if not user.callerid:
-            raise orm.except_orm(_('Error :'), _('No callerID configured for the current user'))
-
-        variable = []
-        if user.asterisk_chan_type == 'SIP':
-            # We can only have one alert-info header in a SIP request
-            if user.alert_info:
-                variable.append('SIPAddHeader=Alert-Info: ' + user.alert_info)
-            elif ast_server.alert_info:
-                variable.append('SIPAddHeader=Alert-Info: ' + ast_server.alert_info)
-            if user.variable:
-                for user_variable in user.variable.split('|'):
-                    variable.append(user_variable.strip())
-
-        try:
-            ast_manager.Originate(
-                user.asterisk_chan_type + '/' + user.resource + ( ('/' + user.dial_suffix) if user.dial_suffix else ''),
-                context = ast_server.context,
-                extension = ast_number,
-                priority = str(ast_server.extension_priority),
-                timeout = str(ast_server.wait_time*1000),
-                caller_id = user.callerid,
-                account = user.cdraccount,
-                variable = variable)
-        except Exception, e:
-            _logger.error("Error in the Originate request to Asterisk server %s" % ast_server.ip_address)
-            _logger.error("Here is the detail of the error : '%s'" % unicode(e))
-            raise orm.except_orm(_('Error :'), _("Click to dial with Asterisk failed.\nHere is the error: '%s'" % unicode(e)))
-
-        finally:
-            ast_manager.Logoff()
-
-        return True
-
     def _get_calling_number(self, cr, uid, context=None):
 
         user, ast_server, ast_manager = self._connect_to_asterisk(cr, uid, context=context)
@@ -397,20 +354,50 @@ class res_users(orm.Model):
 class phone_common(orm.AbstractModel):
     _inherit = 'phone.common'
 
-    def action_dial(self, cr, uid, ids, context=None):
-        '''Read the number to dial and call _connect_to_asterisk the right way'''
-        if context is None:
-            context = {}
-        if not isinstance(context.get('field2dial'), (unicode, str)):
-            raise orm.except_orm(_('Error :'), "The function action_dial must be called with a 'field2dial' key in the context containing a string '<phone_field>'.")
-        else:
-            phone_field = context.get('field2dial')
-        erp_number_read = self.read(cr, uid, ids[0], [phone_field], context=context)
-        erp_number_e164 = erp_number_read[phone_field]
-        # Check if the number to dial is not empty
-        if not erp_number_e164:
-            raise orm.except_orm(_('Error :'), _('There is no phone number !'))
-        return self.pool['asterisk.server']._dial_with_asterisk(cr, uid, erp_number_e164, context=context)
+    def click2dial(self, cr, uid, erp_number, context=None):
+        if not erp_number:
+            orm.except_orm(
+                _('Error:'),
+                _('Missing phone number'))
+
+        user, ast_server, ast_manager = self.pool['asterisk.server']._connect_to_asterisk(cr, uid, context=context)
+        ast_number = self.pool['asterisk.server']._reformat_number(
+            cr, uid, erp_number, ast_server, context=context)
+
+        # The user should have a CallerID
+        if not user.callerid:
+            raise orm.except_orm(_('Error :'), _('No callerID configured for the current user'))
+
+        variable = []
+        if user.asterisk_chan_type == 'SIP':
+            # We can only have one alert-info header in a SIP request
+            if user.alert_info:
+                variable.append('SIPAddHeader=Alert-Info: ' + user.alert_info)
+            elif ast_server.alert_info:
+                variable.append('SIPAddHeader=Alert-Info: ' + ast_server.alert_info)
+            if user.variable:
+                for user_variable in user.variable.split('|'):
+                    variable.append(user_variable.strip())
+
+        try:
+            ast_manager.Originate(
+                user.asterisk_chan_type + '/' + user.resource + ( ('/' + user.dial_suffix) if user.dial_suffix else ''),
+                context = ast_server.context,
+                extension = ast_number,
+                priority = str(ast_server.extension_priority),
+                timeout = str(ast_server.wait_time*1000),
+                caller_id = user.callerid,
+                account = user.cdraccount,
+                variable = variable)
+        except Exception, e:
+            _logger.error("Error in the Originate request to Asterisk server %s" % ast_server.ip_address)
+            _logger.error("Here is the detail of the error : '%s'" % unicode(e))
+            raise orm.except_orm(_('Error :'), _("Click to dial with Asterisk failed.\nHere is the error: '%s'" % unicode(e)))
+
+        finally:
+            ast_manager.Logoff()
+
+        return True
 
     def _prepare_incall_pop_action(
             self, cr, uid, record_res, number, context=None):
