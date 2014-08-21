@@ -24,7 +24,7 @@ openerp.base_phone = function (instance) {
                     .attr('href', 'tel:' + phone_num)
                     .text(phone_num && formatInternational('', phone_num) || '');
                 this.$el.find('#click2dial')
-                    .text(phone_num && 'Dial' || '')
+                    .text(phone_num && _t('Dial') || '')
                     .on('click', function(ev) {
                         self.do_notify(
                             _t('Click2dial started'),
