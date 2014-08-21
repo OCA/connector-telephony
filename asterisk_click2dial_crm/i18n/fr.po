@@ -6,9 +6,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenERP Server 7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-05-09 19:00+0000\n"
-"PO-Revision-Date: 2013-05-09 19:00+0000\n"
-"Last-Translator: <>\n"
+"POT-Creation-Date: 2014-08-21 16:24+0000\n"
+"PO-Revision-Date: 2014-08-21 16:24+0000\n"
+"Last-Translator: Alexis de Lattre <alexis.delattre@akretion.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -16,29 +16,26 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: asterisk_click2dial_crm
-#: view:crm.lead:0
-msgid "Dial"
-msgstr "Appeler"
-
-#. module: asterisk_click2dial_crm
 #: view:wizard.create.crm.phonecall:0
 msgid "CRM phone call"
 msgstr "Appel dans la CRM"
 
 #. module: asterisk_click2dial_crm
+#: model:ir.actions.act_window,name:asterisk_click2dial_crm.action_create_crm_phonecall
+msgid "Create CRM phonecall"
+msgstr "Créer un appel dans la CRM"
+
+#. module: asterisk_click2dial_crm
+#: code:addons/asterisk_click2dial_crm/asterisk_click2dial_crm.py:45
+#: view:wizard.open.calling.partner:0
+#, python-format
+msgid "Create Call in CRM"
+msgstr "Créer Appel dans CRM"
+
+#. module: asterisk_click2dial_crm
 #: view:wizard.create.crm.phonecall:0
-msgid "No"
-msgstr "Non"
-
-#. module: asterisk_click2dial_crm
-#: model:ir.model,name:asterisk_click2dial_crm.model_wizard_create_crm_phonecall
-msgid "wizard.create.crm.phonecall"
-msgstr "wizard.create.crm.phonecall"
-
-#. module: asterisk_click2dial_crm
-#: field:crm.lead,phone_e164:0
-msgid "Phone in E.164 format"
-msgstr "Phone in E.164 format"
+msgid "Create a phone call in the CRM ?"
+msgstr "Créer un appel téléphonique dans la CRM ?"
 
 #. module: asterisk_click2dial_crm
 #: model:ir.model,name:asterisk_click2dial_crm.model_crm_lead
@@ -47,82 +44,13 @@ msgstr "Piste/opportunité"
 
 #. module: asterisk_click2dial_crm
 #: view:wizard.create.crm.phonecall:0
-msgid "Create a phone call in the CRM ?"
-msgstr "Créer un appel téléphonique dans la CRM ?"
-
-#. module: asterisk_click2dial_crm
-#: code:addons/asterisk_click2dial_crm/asterisk_click2dial_crm.py:166
-#, python-format
-msgid "The phone number isn't stored in the standard E.164 format. Try to run the wizard 'Reformat all phone numbers' from the menu Settings > Configuration > Asterisk."
-msgstr "The phone number isn't stored in the standard E.164 format. Try to run the wizard 'Reformat all phone numbers' from the menu Settings > Configuration > Asterisk."
-
-#. module: asterisk_click2dial_crm
-#: code:addons/asterisk_click2dial_crm/asterisk_click2dial_crm.py:134
-#, python-format
-msgid "You should set a country on the company '%s'"
-msgstr "You should set a country on the company '%s'"
-
-#. module: asterisk_click2dial_crm
-#: model:ir.model,name:asterisk_click2dial_crm.model_res_users
-msgid "Users"
-msgstr "Utilisateurs"
-
-#. module: asterisk_click2dial_crm
-#: field:crm.lead,fax_e164:0
-msgid "Fax in E.164 format"
-msgstr "Fax in E.164 format"
-
-#. module: asterisk_click2dial_crm
-#: code:addons/asterisk_click2dial_crm/asterisk_click2dial_crm.py:141
-#, python-format
-msgid "Cannot reformat the phone number '%s' to international format. Error message: %s"
-msgstr "Cannot reformat the phone number '%s' to international format. Error message: %s"
-
-#. module: asterisk_click2dial_crm
-#: field:res.users,context_propose_creation_crm_call:0
-msgid "Propose to create a call in CRM after a click2dial"
-msgstr "Propose de créer un appel dans la CRM après un click2dial"
-
-#. module: asterisk_click2dial_crm
-#: code:addons/asterisk_click2dial_crm/asterisk_click2dial_crm.py:134
-#: code:addons/asterisk_click2dial_crm/asterisk_click2dial_crm.py:141
-#: code:addons/asterisk_click2dial_crm/asterisk_click2dial_crm.py:164
-#: code:addons/asterisk_click2dial_crm/asterisk_click2dial_crm.py:166
-#, python-format
-msgid "Error :"
-msgstr "Erreur :"
-
-#. module: asterisk_click2dial_crm
-#: model:ir.actions.act_window,name:asterisk_click2dial_crm.action_create_crm_phonecall
-msgid "Create CRM phonecall"
-msgstr "Créer un appel dans la CRM"
-
-#. module: asterisk_click2dial_crm
-#: view:wizard.open.calling.partner:0
-msgid "Create Call in CRM"
-msgstr "Créer Appel dans CRM"
+msgid "No"
+msgstr "Non"
 
 #. module: asterisk_click2dial_crm
 #: model:ir.model,name:asterisk_click2dial_crm.model_wizard_open_calling_partner
-#: model:ir.ui.menu,name:asterisk_click2dial_crm.menu_open_calling_partner_phone
 msgid "Open calling partner"
 msgstr "Ouvrir le partenaire appelant"
-
-#. module: asterisk_click2dial_crm
-#: field:crm.lead,mobile_e164:0
-msgid "Mobile in E.164 format"
-msgstr "Mobile in E.164 format"
-
-#. module: asterisk_click2dial_crm
-#: view:res.users:0
-msgid "Telephony preferences"
-msgstr "Préférences Téléphonie"
-
-#. module: asterisk_click2dial_crm
-#: code:addons/asterisk_click2dial_crm/asterisk_click2dial_crm.py:164
-#, python-format
-msgid "There is no phone number !"
-msgstr "Il n'y a pas de n° de téléphone !"
 
 #. module: asterisk_click2dial_crm
 #: model:ir.model,name:asterisk_click2dial_crm.model_res_partner
@@ -130,7 +58,32 @@ msgid "Partner"
 msgstr "Partenaire"
 
 #. module: asterisk_click2dial_crm
+#: field:res.users,context_propose_creation_crm_call:0
+msgid "Propose to create a call in CRM after a click2dial"
+msgstr "Propose de créer un appel dans la CRM après un click2dial"
+
+#. module: asterisk_click2dial_crm
+#: model:ir.model,name:asterisk_click2dial_crm.model_reformat_all_phonenumbers
+msgid "Reformat all phone numbers"
+msgstr "Reformate tous les numéros de téléphone"
+
+#. module: asterisk_click2dial_crm
+#: model:ir.model,name:asterisk_click2dial_crm.model_res_users
+msgid "Users"
+msgstr "Utilisateurs"
+
+#. module: asterisk_click2dial_crm
 #: view:wizard.create.crm.phonecall:0
 msgid "Yes"
 msgstr "Oui"
+
+#. module: asterisk_click2dial_crm
+#: model:ir.model,name:asterisk_click2dial_crm.model_phone_common
+msgid "phone.common"
+msgstr "phone.common"
+
+#. module: asterisk_click2dial_crm
+#: model:ir.model,name:asterisk_click2dial_crm.model_wizard_create_crm_phonecall
+msgid "wizard.create.crm.phonecall"
+msgstr "wizard.create.crm.phonecall"
 
