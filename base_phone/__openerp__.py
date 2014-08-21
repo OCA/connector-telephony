@@ -59,14 +59,10 @@ Please contact Alexis de Lattre from Akretion <alexis.delattre@akretion.com> for
         'res_company_view.xml',
         'res_users_view.xml',
         'wizard/reformat_all_phonenumbers_view.xml',
-        ],
-    'js': [
-        'static/src/js/*.js',
-        'static/lib/js/*.js',
+        'web_phone.xml',
         ],
     'qweb': ['static/src/xml/*.xml'],
     'demo': ['base_phone_demo.xml'],
     'images': [],
     'installable': True,
-    'active': False,
 }
