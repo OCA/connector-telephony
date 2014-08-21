@@ -11,8 +11,10 @@
     <t t-name="asterisk_click2dial.OpenCallingPartner">
         <div title="Open Calling Partner"
                 class="oe_topbar_item oe_topbar_open_calling_partner">
-            <button class="oe_i">A</button>
-            <!-- oe_i is a special icon font : 'A' represents a phone -->
+            <button>Tel</button>
+            <!-- oe_i is a special icon font : 'A' represents a phone
+            BUT I didn't manage to make it work on v8... so I use
+            a horrible "Tel" button TODO : better button -->
         </div>
     </t>
 
