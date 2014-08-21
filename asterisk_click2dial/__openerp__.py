@@ -59,6 +59,7 @@ A detailed documentation for this module is available on the Akretion Web site :
         'res_users_view.xml',
         'wizard/open_calling_partner_view.xml',
         'security/ir.model.access.csv',
+        'web_asterisk_click2dial.xml',
         ],
     'demo': ['asterisk_click2dial_demo.xml'],
     'images': [
@@ -66,7 +67,6 @@ A detailed documentation for this module is available on the Akretion Web site :
         'images/sshot-open_calling_party.jpg',
         ],
     'qweb': ['static/src/xml/*.xml'],
-    'js': ['static/src/js/*.js'],
     'css': ['static/src/css/*.css'],
     'application': True,
     'installable': True,
