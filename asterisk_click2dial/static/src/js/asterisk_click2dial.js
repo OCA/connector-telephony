@@ -10,7 +10,8 @@ openerp.asterisk_click2dial = function (instance) {
         template:'asterisk_click2dial.OpenCallingPartner',
 
         start: function () {
-            this.$('button').on('click', this.on_open_calling_partner);
+            this.$('#asterisk-open-calling-partner').on(
+                'click', this.on_open_calling_partner);
             this._super();
         },
 
