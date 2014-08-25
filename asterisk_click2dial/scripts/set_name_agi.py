@@ -108,20 +108,66 @@ not_found_name = "Not in OpenERP"
 
 # Define command line options
 options = [
-    {'names': ('-s', '--server'), 'dest': 'server', 'type': 'string', 'help': 'DNS or IP address of the OpenERP server. Default = none (will not try to connect to OpenERP)', 'action': 'store', 'default': False},
-    {'names': ('-p', '--port'), 'dest': 'port', 'type': 'int', 'help': "Port of OpenERP's XML-RPC interface. Default = 8069", 'action': 'store', 'default': 8069},
-    {'names': ('-e', '--ssl'), 'dest': 'ssl', 'help': "Use XML-RPC secure i.e. with SSL instead of clear XML-RPC. Default = no, use clear XML-RPC", 'action': 'store_true', 'default': False},
-    {'names': ('-d', '--database'), 'dest': 'database', 'type': 'string', 'help': "OpenERP database name. Default = 'openerp'", 'action': 'store', 'default': 'openerp'},
-    {'names': ('-u', '--user-id'), 'dest': 'user', 'type': 'int', 'help': "OpenERP user ID to use when connecting to OpenERP. Default = 2", 'action': 'store', 'default': 2},
-    {'names': ('-w', '--password'), 'dest': 'password', 'type': 'string', 'help': "Password of the OpenERP user. Default = 'demo'", 'action': 'store', 'default': 'demo'},
-    {'names': ('-a', '--ascii'), 'dest': 'ascii', 'help': "Convert name from UTF-8 to ASCII. Default = no, keep UTF-8", 'action': 'store_true', 'default': False},
-    {'names': ('-n', '--notify'), 'dest': 'notify', 'help': "Notify OpenERP users via a pop-up (requires the OpenERP module 'base_phone_popup'). If you use this option, you must pass the logins of the OpenERP users to notify as argument to the script. Default = no", 'action': 'store_true', 'default': False},
-    {'names': ('-g', '--geoloc'), 'dest': 'geoloc', 'help': "Try to geolocate phone numbers unknown to OpenERP. This features requires the 'phonenumbers' Python lib. To install it, run 'sudo pip install phonenumbers' Default = no", 'action': 'store_true', 'default': False},
-    {'names': ('-l', '--geoloc-lang'), 'dest': 'lang', 'help': "Language in which the name of the country and city name will be displayed by the geolocalisation database. Use the 2 letters ISO code of the language. Default = 'en'", 'action': 'store', 'default': "en"},
-    {'names': ('-c', '--geoloc-country'), 'dest': 'country', 'help': "2 letters ISO code for your country e.g. 'FR' for France. This will be used by the geolocalisation system to parse the phone number of the calling party. Default = 'FR'", 'action': 'store', 'default': "FR"},
-    {'names': ('-o', '--outgoing'), 'dest': 'outgoing', 'help': "Update the Connected Line ID name on outgoing calls via a call to the Asterisk function CONNECTEDLINE(), instead of updating the Caller ID name on incoming calls. Default = no.", 'action': 'store_true', 'default': False},
-    {'names': ('-i', '--outgoing-agi-variable'), 'dest': 'outgoing_agi_var', 'help': "Enter the name of the AGI variable (without the 'agi_' prefix) from which the script will get the phone number dialed by the user on outgoing calls. For example, with Xivo, you should specify 'dnid' as the AGI variable. Default = 'extension'", 'action': 'store', 'default': "extension"},
-    {'names': ('-m', '--max-size'), 'dest': 'max_size', 'type': 'int', 'help': "If the name has more characters this maximum size, cut it to this maximum size. Default = 40", 'action': 'store', 'default': 40},
+    {'names': ('-s', '--server'), 'dest': 'server', 'type': 'string',
+        'action': 'store', 'default': False,
+        'help': 'DNS or IP address of the OpenERP server. Default = none '
+        '(will not try to connect to OpenERP)'},
+    {'names': ('-p', '--port'), 'dest': 'port', 'type': 'int',
+        'action': 'store', 'default': 8069,
+        'help': "Port of OpenERP's XML-RPC interface. Default = 8069"},
+    {'names': ('-e', '--ssl'), 'dest': 'ssl',
+        'help': "Use XML-RPC secure i.e. with SSL instead of clear XML-RPC. "
+        "Default = no, use clear XML-RPC",
+        'action': 'store_true', 'default': False},
+    {'names': ('-d', '--database'), 'dest': 'database', 'type': 'string',
+        'action': 'store', 'default': 'openerp',
+        'help': "OpenERP database name. Default = 'openerp'"},
+    {'names': ('-u', '--user-id'), 'dest': 'user', 'type': 'int',
+        'action': 'store', 'default': 2,
+        'help': "OpenERP user ID to use when connecting to OpenERP. "
+        "Default = 2"},
+    {'names': ('-w', '--password'), 'dest': 'password', 'type': 'string',
+        'action': 'store', 'default': 'demo',
+        'help': "Password of the OpenERP user. Default = 'demo'"},
+    {'names': ('-a', '--ascii'), 'dest': 'ascii',
+        'action': 'store_true', 'default': False,
+        'help': "Convert name from UTF-8 to ASCII. Default = no, keep UTF-8"},
+    {'names': ('-n', '--notify'), 'dest': 'notify',
+        'action': 'store_true', 'default': False,
+        'help': "Notify OpenERP users via a pop-up (requires the OpenERP "
+        "module 'base_phone_popup'). If you use this option, you must pass "
+        "the logins of the OpenERP users to notify as argument to the "
+        "script. Default = no"},
+    {'names': ('-g', '--geoloc'), 'dest': 'geoloc',
+        'action': 'store_true', 'default': False,
+        'help': "Try to geolocate phone numbers unknown to OpenERP. This "
+        "features requires the 'phonenumbers' Python lib. To install it, "
+        "run 'sudo pip install phonenumbers' Default = no"},
+    {'names': ('-l', '--geoloc-lang'), 'dest': 'lang', 'type': 'string',
+        'action': 'store', 'default': "en",
+        'help': "Language in which the name of the country and city name "
+        "will be displayed by the geolocalisation database. Use the 2 "
+        "letters ISO code of the language. Default = 'en'"},
+    {'names': ('-c', '--geoloc-country'), 'dest': 'country', 'type': 'string',
+        'action': 'store', 'default': "FR",
+        'help': "2 letters ISO code for your country e.g. 'FR' for France. "
+        "This will be used by the geolocalisation system to parse the phone "
+        "number of the calling party. Default = 'FR'"},
+    {'names': ('-o', '--outgoing'), 'dest': 'outgoing',
+        'action': 'store_true', 'default': False,
+        'help': "Update the Connected Line ID name on outgoing calls via a "
+        "call to the Asterisk function CONNECTEDLINE(), instead of updating "
+        "the Caller ID name on incoming calls. Default = no."},
+    {'names': ('-i', '--outgoing-agi-variable'), 'dest': 'outgoing_agi_var',
+        'type': 'string', 'action': 'store', 'default': "extension",
+        'help': "Enter the name of the AGI variable (without the 'agi_' "
+        "prefix) from which the script will get the phone number dialed by "
+        "the user on outgoing calls. For example, with Xivo, you should "
+        "specify 'dnid' as the AGI variable. Default = 'extension'"},
+    {'names': ('-m', '--max-size'), 'dest': 'max_size', 'type': 'int',
+        'action': 'store', 'default': 40,
+        'help': "If the name has more characters this maximum size, cut it "
+        "to this maximum size. Default = 40"},
 ]
 
 
@@ -218,7 +264,8 @@ def main(options, arguments):
                 stdinput.get('agi_calleridname')
                 and not stdinput.get('agi_calleridname').isdigit()
                 and stdinput.get('agi_calleridname').lower()
-                not in ['asterisk', 'unknown', 'anonymous']):
+                not in ['asterisk', 'unknown', 'anonymous']
+                and not options.notify):
             stdout_write(
                 'VERBOSE "Incoming CallerID name is %s"\n'
                 % stdinput.get('agi_calleridname'))
