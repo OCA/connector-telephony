@@ -1,13 +1,13 @@
 # Translation of OpenERP Server.
 # This file contains the translation of the following modules:
-#	* asterisk_popup
+#	* base_phone_popup
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: OpenERP Server 7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-31 23:34+0000\n"
-"PO-Revision-Date: 2014-01-31 23:34+0000\n"
+"POT-Creation-Date: 2014-08-25 22:05+0000\n"
+"PO-Revision-Date: 2014-08-25 22:05+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -15,23 +15,24 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
 
-#. module: asterisk_popup
-#: model:ir.model,name:asterisk_popup.model_res_partner
-msgid "Partner"
+#. module: base_phone_popup
+#: code:addons/base_phone_popup/popup.py:49
+#, python-format
+msgid "Number Not Found"
 msgstr ""
 
-#. module: asterisk_popup
+#. module: base_phone_popup
 #: field:res.users,context_incall_popup:0
 msgid "Pop-up on Incoming Calls"
 msgstr ""
 
-#. module: asterisk_popup
-#: model:ir.model,name:asterisk_popup.model_res_users
+#. module: base_phone_popup
+#: model:ir.model,name:base_phone_popup.model_res_users
 msgid "Users"
 msgstr ""
 
-#. module: asterisk_popup
-#: view:res.users:0
-msgid "Telephony Preferences"
+#. module: base_phone_popup
+#: model:ir.model,name:base_phone_popup.model_phone_common
+msgid "phone.common"
 msgstr ""
 
