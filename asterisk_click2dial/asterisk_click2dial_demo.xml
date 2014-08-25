@@ -12,7 +12,6 @@
         <record id="demo_ast_server" model="asterisk.server">
             <field name="name">Akretion Asterisk IPBX</field>
             <field name="ip_address">asterisk.akretion.com</field>
-            <field name="country_prefix">33</field>
             <field name="login">click2dial</field>
             <field name="password">mypassword</field>
             <field name="context">from-internal</field>

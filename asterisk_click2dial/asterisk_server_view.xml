@@ -51,9 +51,6 @@
                     <field name="context" />
                     <field name="extension_priority" />
                     <field name="out_prefix" />
-                    <field name="national_prefix" />
-                    <field name="international_prefix" />
-                    <field name="country_prefix" />
                     <field name="alert_info" />
                     <field name="wait_time" />
                 </group>
@@ -72,7 +69,6 @@
             <field name="ip_address" />
             <field name="company_id"
                 groups="base.group_multi_company" />
-            <field name="country_prefix" />
         </tree>
     </field>
 </record>
