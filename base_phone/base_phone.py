@@ -80,7 +80,7 @@ class phone_common(orm.AbstractModel):
                 # exception when you try to enter a phone number in
                 # national format... so it's better to raise the exception here
                 raise orm.except_orm(
-                    _('Error :'),
+                    _('Error:'),
                     _("You should set a country on the company '%s'")
                     % user.company_id.name)
             for field in phonefields:
@@ -91,7 +91,7 @@ class phone_common(orm.AbstractModel):
                             vals.get(field), user_countrycode)
                     except Exception, e:
                         raise orm.except_orm(
-                            _('Error :'),
+                            _('Error:'),
                             _("Cannot reformat the phone number '%s' to "
                                 "international format. Error message: %s")
                             % (vals.get(field), e))
@@ -177,7 +177,6 @@ class phone_common(orm.AbstractModel):
                 name = obj.name_get(
                     cr, uid, res_ids[0], context=ctx_phone)[0][1]
                 res = (objname, res_ids[0], name)
-                print "res=", res
                 _logger.debug(
                     u"Answer get_record_from_phone_number: (%s, %d, %s)"
                     % (res[0], res[1], res[2]))
@@ -203,7 +202,7 @@ class phone_common(orm.AbstractModel):
     def click2dial(self, cr, uid, erp_number, context=None):
         '''This function is designed to be overridden in IPBX-specific
         modules, such as asterisk_click2dial'''
-        return True
+        return {'dialed_number': erp_number}
 
 
 class res_partner(orm.Model):
