@@ -4,13 +4,13 @@
     The licence is in the file __openerp__.py
 */
 
-.openerp .oe_topbar_item.oe_topbar_open_calling_partner{
+.openerp .oe_topbar_item.oe_topbar_open_caller{
     padding: 0px;
     width: 32px;
     height: 32px;
 }
 
-.openerp .oe_topbar_item.oe_topbar_open_calling_partner button{
+.openerp .oe_topbar_item.oe_topbar_open_caller button{
     position: relative;
     top: -3px;
     box-sizing: border-box;
