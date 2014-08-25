@@ -59,15 +59,3 @@ class wizard_create_crm_phonecall(orm.TransientModel):
             'target': 'current',
             'context': context,
         }
-
-
-class wizard_open_calling_partner(orm.TransientModel):
-    _inherit = "wizard.open.calling.partner"
-
-    def create_incoming_phonecall(self, cr, uid, ids, crm_categ, context=None):
-        '''Started by button on 'open calling partner wizard'''
-        partner = self.browse(cr, uid, ids[0], context=context).partner_id
-        action = self.pool['wizard.create.crm.phonecall'].\
-            _create_open_crm_phonecall(
-                cr, uid, partner, crm_categ='Inbound', context=context)
-        return action

@@ -49,7 +49,6 @@ A detailed documentation for the OpenERP-Asterisk connector is available on the 
     ],
     "demo": [],
     "data": [
-        'wizard/open_calling_partner_view.xml',
         'wizard/create_crm_phonecall_view.xml',
         'res_users_view.xml',
     ],

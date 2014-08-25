@@ -41,12 +41,11 @@ class phone_common(orm.AbstractModel):
         if (
                 context.get('click2dial_model') == 'res.partner'
                 and user.context_propose_creation_crm_call):
-            return {
-                'name': _('Create Call in CRM'),
-                'res_model': 'wizard.create.crm.phonecall',
-                }
-        else:
-            return res
+            res.update({
+                'action_name': _('Create Call in CRM'),
+                'action_model': 'wizard.create.crm.phonecall',
+                })
+        return res
 
 
 class res_users(orm.Model):
