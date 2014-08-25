@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenERP Server 7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-21 16:15+0000\n"
-"PO-Revision-Date: 2014-08-21 16:15+0000\n"
+"POT-Creation-Date: 2014-08-25 21:28+0000\n"
+"PO-Revision-Date: 2014-08-25 21:28+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -28,16 +28,21 @@ msgstr ""
 
 #. module: base_phone
 #. openerp-web
-#: code:addons/base_phone/static/src/js/phone_widget.js:30
+#: code:addons/base_phone/static/src/js/phone_widget.js:34
 #, python-format
 msgid "Click2dial started"
 msgstr ""
 
 #. module: base_phone
 #. openerp-web
-#: code:addons/base_phone/static/src/js/phone_widget.js:40
+#: code:addons/base_phone/static/src/js/phone_widget.js:46
 #, python-format
 msgid "Click2dial successfull"
+msgstr ""
+
+#. module: base_phone
+#: view:number.not.found:0
+msgid "Close"
 msgstr ""
 
 #. module: base_phone
@@ -46,10 +51,46 @@ msgid "Companies"
 msgstr ""
 
 #. module: base_phone
+#: code:addons/base_phone/wizard/number_not_found.py:85
+#, python-format
+msgid "Create New Partner"
+msgstr ""
+
+#. module: base_phone
+#: view:number.not.found:0
+msgid "Create Partner with this Number"
+msgstr ""
+
+#. module: base_phone
+#: view:number.not.found:0
+msgid "Create or Update a Partner"
+msgstr ""
+
+#. module: base_phone
+#: field:number.not.found,current_partner_mobile:0
+msgid "Current Mobile"
+msgstr ""
+
+#. module: base_phone
+#: field:number.not.found,current_partner_phone:0
+msgid "Current Phone"
+msgstr ""
+
+#. module: base_phone
 #. openerp-web
-#: code:addons/base_phone/static/src/js/phone_widget.js:27
+#: code:addons/base_phone/static/src/js/phone_widget.js:31
 #, python-format
 msgid "Dial"
+msgstr ""
+
+#. module: base_phone
+#: field:number.not.found,e164_number:0
+msgid "E.164 Number"
+msgstr ""
+
+#. module: base_phone
+#: help:number.not.found,e164_number:0
+msgid "E.164 equivalent of the calling number."
 msgstr ""
 
 #. module: base_phone
@@ -60,13 +101,56 @@ msgstr ""
 #. module: base_phone
 #: code:addons/base_phone/base_phone.py:83
 #: code:addons/base_phone/base_phone.py:94
+#: code:addons/base_phone/wizard/number_not_found.py:99
 #, python-format
-msgid "Error :"
+msgid "Error:"
+msgstr ""
+
+#. module: base_phone
+#: selection:number.not.found,number_type:0
+msgid "Fixed"
+msgstr ""
+
+#. module: base_phone
+#: field:number.not.found,number_type:0
+msgid "Fixed/Mobile"
 msgstr ""
 
 #. module: base_phone
 #: help:res.company,number_of_digits_to_match_from_end:0
 msgid "In several situations, OpenERP will have to find a Partner/Lead/Employee/... from a phone number presented by the calling party. As the phone numbers presented by your phone operator may not always be displayed in a standard format, the best method to find the related Partner/Lead/Employee/... in OpenERP is to try to match the end of the phone number in OpenERP with the N last digits of the phone number presented by the calling party. N is the value you should enter in this field."
+msgstr ""
+
+#. module: base_phone
+#: selection:number.not.found,number_type:0
+msgid "Mobile"
+msgstr ""
+
+#. module: base_phone
+#: view:number.not.found:0
+msgid "Number Not Found"
+msgstr ""
+
+#. module: base_phone
+#: view:number.not.found:0
+msgid "Number converted to international format:"
+msgstr ""
+
+#. module: base_phone
+#. openerp-web
+#: code:addons/base_phone/static/src/js/phone_widget.js:47
+#, python-format
+msgid "Number dialed:"
+msgstr ""
+
+#. module: base_phone
+#: model:ir.model,name:base_phone.model_number_not_found
+msgid "Number not found"
+msgstr ""
+
+#. module: base_phone
+#: view:number.not.found:0
+msgid "Number not found:"
 msgstr ""
 
 #. module: base_phone
@@ -77,6 +161,12 @@ msgstr ""
 #. module: base_phone
 #: model:ir.model,name:base_phone.model_res_partner
 msgid "Partner"
+msgstr ""
+
+#. module: base_phone
+#: code:addons/base_phone/wizard/number_not_found.py:105
+#, python-format
+msgid "Partner: %s"
 msgstr ""
 
 #. module: base_phone
@@ -112,6 +202,12 @@ msgid "Reformat all phone numbers"
 msgstr ""
 
 #. module: base_phone
+#: code:addons/base_phone/wizard/number_not_found.py:100
+#, python-format
+msgid "Select the Partner to Update."
+msgstr ""
+
+#. module: base_phone
 #: model:ir.ui.menu,name:base_phone.menu_config_phone
 #: view:res.users:0
 msgid "Telephony"
@@ -134,9 +230,14 @@ msgstr ""
 
 #. module: base_phone
 #. openerp-web
-#: code:addons/base_phone/static/src/js/phone_widget.js:31
+#: code:addons/base_phone/static/src/js/phone_widget.js:35
 #, python-format
 msgid "Unhook your ringing phone"
+msgstr ""
+
+#. module: base_phone
+#: view:number.not.found:0
+msgid "Update Partner with this Number"
 msgstr ""
 
 #. module: base_phone
