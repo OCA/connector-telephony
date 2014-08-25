@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    CRM Phone module for Odoo/OpenERP
+#    CRM Phone module for OpenERP
 #    Copyright (C) 2014 Alexis de Lattre <alexis@via.ecp.fr>
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -19,5 +19,4 @@
 #
 ##############################################################################
 
-from . import crm_phone
-from . import wizard
+from . import number_not_found
