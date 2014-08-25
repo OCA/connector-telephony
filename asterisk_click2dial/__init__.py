@@ -20,4 +20,4 @@
 ##############################################################################
 
 from . import asterisk_click2dial
-from . import wizard
+from . import controller

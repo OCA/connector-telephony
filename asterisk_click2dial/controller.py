@@ -1,8 +1,8 @@
-# -*- coding: utf-8 -*-
+# -*- encoding: utf-8 -*-
 ##############################################################################
 #
-#    Asterisk Click2Dial Registration module for OpenERP
-#    Copyright (C) 2013 Invitu (http://www.invitu.com/)
+#    Asterisk click2dial module for OpenERP
+#    Copyright (C) 2014 Alexis de Lattre (alexis@via.ecp.fr)
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -19,4 +19,13 @@
 #
 ##############################################################################
 
-from . import open_calling_partner
+import openerp
+
+
+class AsteriskClick2dialController(openerp.addons.web.http.Controller):
+    _cp_path = '/asterisk_click2dial'
+
+    @openerp.addons.web.http.jsonrequest
+    def get_record_from_my_channel(self, req):
+        res = req.session.model('asterisk.server').get_record_from_my_channel()
+        return res

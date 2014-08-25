@@ -7,10 +7,10 @@
 
 <template>
 
-    <!-- Add phone button in top right menu for "Open Calling Partner" -->
-    <t t-name="asterisk_click2dial.OpenCallingPartner">
-        <div title="Open Calling Partner"
-                class="oe_topbar_item oe_topbar_open_calling_partner">
+    <!-- Add phone button in top right menu for "Open Caller" -->
+    <t t-name="asterisk_click2dial.OpenCaller">
+        <div title="Open Caller"
+                class="oe_topbar_item oe_topbar_open_caller">
             <button class="oe_i">A</button>
             <!-- oe_i is a special icon font : 'A' represents a phone -->
         </div>
