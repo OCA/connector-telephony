@@ -42,6 +42,7 @@ Please contact Alexis de Lattre from Akretion <alexis.delattre@akretion.com> for
     'data': [
         'security/ir.model.access.csv',
         'crm_view.xml',
+        'wizard/number_not_found_view.xml',
         ],
     'images': [],
     'installable': True,
