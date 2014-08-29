@@ -42,5 +42,6 @@ Please contact Alexis de Lattre from Akretion <alexis.delattre@akretion.com> for
     'data': ['crm_claim_view.xml'],
     'images': [],
     'installable': True,
+    'auto_install': True,
     'active': False,
 }
