@@ -45,5 +45,6 @@ Please contact Alexis de Lattre from Akretion <alexis.delattre@akretion.com> for
         ],
     'images': [],
     'installable': True,
+    'auto_install': True,
     'active': False,
 }
