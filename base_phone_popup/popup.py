@@ -74,7 +74,7 @@ class phone_common(orm.AbstractModel):
             for user in users:
                 if user['context_incall_popup']:
                     self.pool['action.request'].notify(
-                        cr, uid, to_id=user['id'], **action)
+                        cr, user['id'], action)
                     logger.debug(
                         'This action has been sent to user ID %d: %s'
                         % (user['id'], action))
