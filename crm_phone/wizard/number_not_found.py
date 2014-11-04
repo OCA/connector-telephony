@@ -21,7 +21,6 @@
 
 from openerp.osv import orm, fields
 from openerp.tools.translate import _
-import phonenumbers
 
 
 class number_not_found(orm.TransientModel):
