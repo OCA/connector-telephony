@@ -90,6 +90,14 @@ class phone_common(orm.AbstractModel):
                         res_parse = phonenumbers.parse(
                             vals.get(field), user_countrycode)
                     except Exception, e:
+                        # I do BOTH logger and raise, because:
+                        # raise is usefull when the record is created/written
+                        #    by a user via the Web interface
+                        # logger is usefull when the record is created/written
+                        #    via the webservices
+                        _logger.error(
+                            "Cannot reformat the phone number %s to "
+                            "international format" % vals.get(field))
                         raise orm.except_orm(
                             _('Error:'),
                             _("Cannot reformat the phone number '%s' to "
@@ -164,7 +172,7 @@ class phone_common(orm.AbstractModel):
                 % (objname, end_number_to_match))
             domain = []
             for phonefield in phonefields:
-                domain.append((phonefield, 'like', pg_search_number))
+                domain.append((phonefield, '=like', pg_search_number))
             if len(phonefields) > 1:
                 domain = ['|'] * (len(phonefields) - 1) + domain
             res_ids = obj.search(cr, uid, domain, context=context)
