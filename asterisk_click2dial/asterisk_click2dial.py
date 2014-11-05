@@ -24,9 +24,13 @@ from openerp.tools.translate import _
 import logging
 # Lib for phone number reformating -> pip install phonenumbers
 import phonenumbers
-# Lib py-asterisk from http://code.google.com/p/py-asterisk/
-# -> pip install py-Asterisk
-from Asterisk import Manager
+
+try:
+    # Lib py-asterisk from http://code.google.com/p/py-asterisk/
+    # -> pip install py-Asterisk
+    from Asterisk import Manager
+except ImportError:
+    Manager = None
 
 _logger = logging.getLogger(__name__)
 
