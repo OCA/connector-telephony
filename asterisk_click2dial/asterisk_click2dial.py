@@ -237,8 +237,7 @@ class asterisk_server(orm.Model):
             raise orm.except_orm(
                 _('Error:'),
                 _("Problem in the request from OpenERP to Asterisk. "
-                    "Here is the error message: %s" % e))
-            return False
+                  "Here is the error message: %s" % e))
 
         return (user, ast_server, ast_manager)
 
@@ -260,10 +259,10 @@ class asterisk_server(orm.Model):
                     ast_manager.Logoff()
             except Exception:
                 pass
-        raise orm.except_orm(
-            _("Connection Test Successfull!"),
-            _("OpenERP can successfully login to the Asterisk Manager "
-                "Interface."))
+            raise orm.except_orm(
+                _("Connection Test Successfull!"),
+                _("OpenERP can successfully login to the Asterisk Manager "
+                  "Interface."))
 
     def _get_calling_number(self, cr, uid, context=None):
 
