@@ -15,7 +15,9 @@ install:
   - git clone https://github.com/OCA/maintainer-quality-tools.git ${HOME}/maintainer-quality-tools
   - export PATH=${HOME}/maintainer-quality-tools/travis:${PATH}
   - travis_install_nightly
-  - sudo pip install phonenumbers py-Asterisk
+  - sudo pip install phonenumbers py-Asterisk gevent_psycopg2 gevent_socketio
+  - hg clone http://bitbucket.org/anybox/web_action_request -b ${VERSION} ${HOME}/web_action_request
+  - hg clone http://bitbucket.org/anybox/web_socketio ${HOME}/web_socketio
 
 script:
   - travis_run_tests
