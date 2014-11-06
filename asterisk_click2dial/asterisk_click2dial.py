@@ -241,8 +241,7 @@ class asterisk_server(orm.Model):
             raise orm.except_orm(
                 _('Error:'),
                 _("Problem in the request from OpenERP to Asterisk. "
-                    "Here is the error message: %s" % e))
-            return False
+                  "Here is the error message: %s" % e))
 
         return (user, ast_server, ast_manager)
 
@@ -264,10 +263,10 @@ class asterisk_server(orm.Model):
                     ast_manager.Logoff()
             except Exception:
                 pass
-        raise orm.except_orm(
-            _("Connection Test Successfull!"),
-            _("OpenERP can successfully login to the Asterisk Manager "
-                "Interface."))
+            raise orm.except_orm(
+                _("Connection Test Successfull!"),
+                _("OpenERP can successfully login to the Asterisk Manager "
+                  "Interface."))
 
     def _get_calling_number(self, cr, uid, context=None):
 
@@ -322,7 +321,7 @@ class asterisk_server(orm.Model):
     def get_record_from_my_channel(self, cr, uid, context=None):
         calling_number = self.pool['asterisk.server']._get_calling_number(
             cr, uid, context=context)
-        #calling_number = "0641981246"
+        # calling_number = "0641981246"
         if calling_number:
             record = self.pool['phone.common'].get_record_from_phone_number(
                 cr, uid, calling_number, context=context)
