@@ -60,14 +60,14 @@ class phone_common(orm.AbstractModel):
                 result[record['id']][tofield] = res
         return result
 
-    def _generic_reformat_phonenumbers(
-            self, cr, uid, vals,
-            phonefields=[
+    def _generic_reformat_phonenumbers(self, cr, uid, vals, phonefields=None,
+                                       context=None):
+        """Reformat phone numbers in E.164 format i.e. +33141981242"""
+        if phonefields is None:
+            phonefields = [
                 'phone', 'partner_phone', 'work_phone', 'fax',
                 'mobile', 'partner_mobile', 'mobile_phone',
-                ],
-            context=None):
-        """Reformat phone numbers in E.164 format i.e. +33141981242"""
+            ]
         if any([vals.get(field) for field in phonefields]):
             user = self.pool['res.users'].browse(cr, uid, uid, context=context)
             # country_id on res.company is a fields.function that looks at

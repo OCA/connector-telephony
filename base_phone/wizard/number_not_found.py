@@ -55,7 +55,8 @@ class number_not_found(orm.TransientModel):
 
     def default_get(self, cr, uid, fields_list, context=None):
         res = super(number_not_found, self).default_get(
-                    cr, uid, fields_list, context=context)
+            cr, uid, fields_list, context=context
+        )
         if not res:
             res = {}
         if res.get('calling_number'):
@@ -77,7 +78,7 @@ class number_not_found(orm.TransientModel):
             context = {}
         wiz = self.browse(cr, uid, ids[0], context=context)
         parsed_num = phonenumbers.parse(wiz.e164_number, None)
-        number_type = phonenumbers.number_type(parsed_num)
+        phonenumbers.number_type(parsed_num)
 
         context['default_%s' % wiz.number_type] = wiz.e164_number
         action = {
