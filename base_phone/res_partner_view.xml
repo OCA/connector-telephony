@@ -45,6 +45,16 @@
     </field>
 </record>
 
+<record id="view_partner_tree" model="ir.ui.view">
+    <field name="name">base_phone.phone.widget.partner.tree</field>
+    <field name="model">res.partner</field>
+    <field name="inherit_id" ref="base.view_partner_tree"/>
+    <field name="arch" type="xml">
+        <field name="phone" position="attributes">
+            <attribute name="widget">phone</attribute>
+        </field>
+    </field>
+</record>
 
 </data>
 </openerp>

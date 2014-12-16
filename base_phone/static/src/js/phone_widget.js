@@ -102,4 +102,15 @@ openerp.base_phone = function (instance) {
 
     instance.web.form.widgets.add('fax', 'instance.base_phone.FieldFax');
 
+    /* ability to add widget="phone" in TREE view */
+    var _super_list_char_format_ = instance.web.list.Char.prototype._format;
+    instance.web.list.Char.prototype._format = function(row_data, options) {
+        res = _super_list_char_format_.call(this, row_data, options);
+        var value = row_data[this.id].value;
+        if (value && this.widget === 'phone') {
+            return formatInternational('', value);
+        }
+        return res;
+    };
+
 }
