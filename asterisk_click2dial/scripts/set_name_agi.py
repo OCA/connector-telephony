@@ -103,8 +103,9 @@ from optparse import OptionParser
 
 
 # Name that will be displayed if there is no match
-# and no geolocalisation
-not_found_name = "Not in OpenERP"
+# and no geolocalisation. Set it to False if you don't want
+# to have a 'not_found_name' when nothing is found
+not_found_name = "Not in Odoo"
 
 # Define command line options
 options = [
@@ -353,10 +354,11 @@ def main(options, arguments):
         res = convert_to_ascii(res)
 
     stdout_write('VERBOSE "Name = %s"\n' % res)
-    if options.outgoing:
-        stdout_write('SET VARIABLE connectedlinename "%s"\n' % res)
-    else:
-        stdout_write('SET CALLERID "%s"<%s>\n' % (res, phone_number))
+    if res:
+        if options.outgoing:
+            stdout_write('SET VARIABLE connectedlinename "%s"\n' % res)
+        else:
+            stdout_write('SET CALLERID "%s"<%s>\n' % (res, phone_number))
     return True
 
 if __name__ == '__main__':
