@@ -26,6 +26,9 @@
         <xpath expr="//field[@name='registration_ids']/form//field[@name='phone']" position="attributes">
             <attribute name="widget">phone</attribute>
         </xpath>
+        <xpath expr="////field[@name='registration_ids']/tree/field[@name='phone']" position="attributes">
+            <attribute name="widget">phone</attribute>
+        </xpath>
     </field>
 </record>
 
