@@ -39,6 +39,11 @@
 
 <menuitem id="reformat_all_phonenumbers_menu" action="reformat_all_phonenumbers_action" parent="menu_config_phone" sequence="100"/>
 
+<!-- Open the Reformat Phone Numbers wizard after the installation of the module -->
+<record id="reformat_all_phonenumbers_module_install" model="ir.actions.todo">
+    <field name="action_id" ref="reformat_all_phonenumbers_action"/>
+    <field name="type">automatic</field>
+</record>
 
 </data>
 </openerp>
