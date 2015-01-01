@@ -248,6 +248,7 @@ class asterisk_server(orm.Model):
     def test_ami_connection(self, cr, uid, ids, context=None):
         assert len(ids) == 1, 'Only 1 ID'
         ast_server = self.browse(cr, uid, ids[0], context=context)
+        ast_manager = False
         try:
             ast_manager = Manager.Manager(
                 (ast_server.ip_address, ast_server.port),
@@ -258,15 +259,12 @@ class asterisk_server(orm.Model):
                 _("Connection Test Failed!"),
                 _("Here is the error message: %s" % e))
         finally:
-            try:
-                if ast_manager:
-                    ast_manager.Logoff()
-            except Exception:
-                pass
-            raise orm.except_orm(
-                _("Connection Test Successfull!"),
-                _("OpenERP can successfully login to the Asterisk Manager "
-                  "Interface."))
+            if ast_manager:
+                ast_manager.Logoff()
+        raise orm.except_orm(
+            _("Connection Test Successfull!"),
+            _("Odoo can successfully login to the Asterisk Manager "
+                "Interface."))
 
     def _get_calling_number(self, cr, uid, context=None):
 
