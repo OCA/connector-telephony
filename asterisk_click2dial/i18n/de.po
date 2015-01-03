@@ -376,8 +376,7 @@ msgstr ""
 #. module: asterisk_click2dial
 #: view:res.users:0
 msgid "Optional Asterisk Parameters - for experts only, can be left empty"
-msgstr ""
-"Wahlweise Asterisk-Parameter - nur für Experten, können auch leer bleiben"
+msgstr "Wahlweise Asterisk-Parameter - nur für Experten, können auch leer bleiben"
 
 #. module: asterisk_click2dial
 #: field:asterisk.server,out_prefix:0
@@ -563,8 +562,7 @@ msgstr "'%s' des Anwenders '%s' sollte nur aus ASCII-Zeichen bestehen"
 #: code:addons/asterisk_click2dial/asterisk_click2dial.py:136
 #, python-format
 msgid "The '%s' should only have ASCII caracters for the Asterisk server '%s'"
-msgstr ""
-"'%s' für den Asterisk-Server '%s' sollte nur aus ASCII-Zeichen bestehen"
+msgstr "'%s' für den Asterisk-Server '%s' sollte nur aus ASCII-Zeichen bestehen"
 
 #. module: asterisk_click2dial
 #: code:addons/asterisk_click2dial/asterisk_click2dial.py:120
@@ -606,8 +604,7 @@ msgstr "Anwenderspezifische Variable"
 #. module: asterisk_click2dial
 #: help:res.users,dial_suffix:0
 msgid "User-specific dial suffix such as aa=2wb for SCCP auto answer."
-msgstr ""
-"Anwenderspezifisches Wählsuffix, wie z. B. aa=2wb zum Auto-Abheben bei SCCP."
+msgstr "Anwenderspezifisches Wählsuffix, wie z. B. aa=2wb zum Auto-Abheben bei SCCP."
 
 #. module: asterisk_click2dial
 #: model:ir.model,name:asterisk_click2dial.model_res_users
