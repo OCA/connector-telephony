@@ -61,6 +61,7 @@ class phone_common(orm.AbstractModel):
         return result
 
     def _generic_reformat_phonenumbers(self, cr, uid, vals, phonefields=None,
+                                       raise_if_parse_fails=False,
                                        context=None):
         """Reformat phone numbers in E.164 format i.e. +33141981242"""
         if phonefields is None:
@@ -89,6 +90,12 @@ class phone_common(orm.AbstractModel):
                     try:
                         res_parse = phonenumbers.parse(
                             vals.get(field), user_countrycode)
+                        vals[field] = phonenumbers.format_number(
+                            res_parse, phonenumbers.PhoneNumberFormat.E164)
+                        if init_value != vals[field]:
+                            _logger.info(
+                                "%s initial value: '%s' updated value: '%s'"
+                                % (field, init_value, vals[field]))
                     except Exception, e:
                         # I do BOTH logger and raise, because:
                         # raise is usefull when the record is created/written
@@ -96,19 +103,14 @@ class phone_common(orm.AbstractModel):
                         # logger is usefull when the record is created/written
                         #    via the webservices
                         _logger.error(
-                            "Cannot reformat the phone number %s to "
+                            "Cannot reformat the phone number '%s' to "
                             "international format" % vals.get(field))
-                        raise orm.except_orm(
-                            _('Error:'),
-                            _("Cannot reformat the phone number '%s' to "
-                                "international format. Error message: %s")
-                            % (vals.get(field), e))
-                    vals[field] = phonenumbers.format_number(
-                        res_parse, phonenumbers.PhoneNumberFormat.E164)
-                    if init_value != vals[field]:
-                        _logger.info(
-                            "%s initial value: '%s' updated value: '%s'"
-                            % (field, init_value, vals[field]))
+                        if raise_if_parse_fails:
+                           raise orm.except_orm(
+                               _('Error:'),
+                               _("Cannot reformat the phone number '%s' to "
+                                   "international format. Error message: %s")
+                               % (vals.get(field), e))
         return vals
 
     def get_name_from_phone_number(

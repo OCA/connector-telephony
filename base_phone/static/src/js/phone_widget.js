@@ -27,9 +27,15 @@ openerp.base_phone = function (instance) {
                   href = 'tel:' + phone_num;
                   href_text = formatInternational('', phone_num) || '';
                 }
-                this.$el.find('a.oe_form_uri').attr('href', href).text(href_text);
+                if (href_text) {
+                    this.$el.find('a.oe_form_uri').attr('href', href).text(href_text);
+                    this.$el.find('span.oe_form_char_content').text('');
+                } else {
+                    this.$el.find('a.oe_form_uri').attr('href', '').text('');
+                    this.$el.find('span.oe_form_char_content').text(phone_num || '');
+                }
                 var click2dial_text = '';
-                if (phone_num && !this.options.dial_button_invisible) {
+                if (href_text && !this.options.dial_button_invisible) {
                   click2dial_text = _t('Dial');
                 }
                 this.$el.find('#click2dial')
@@ -92,10 +98,19 @@ openerp.base_phone = function (instance) {
                 this._super();
             } else {
                 var fax_num = this.get('value');
+                //console.log('BASE_PHONE fax_num = %s', fax_num);
+                var href = '#';
+                var href_text = '';
                 if (fax_num) {
-                    this.$el.find('a.oe_form_uri')
-                        .attr('href', 'fax:' + fax_num)
-                        .text(formatInternational('', fax_num) || '');
+                    href = 'fax:' + fax_num;
+                    href_text = formatInternational('', fax_num) || '';
+                }
+                if (href_text) {
+                    this.$el.find('a.oe_form_uri').attr('href', href).text(href_text);
+                    this.$el.find('span.oe_form_char_content').text('');
+                } else {
+                    this.$el.find('a.oe_form_uri').attr('href', '').text('');
+                    this.$el.find('span.oe_form_char_content').text(fax_num || '');
                 }
             }
         },
