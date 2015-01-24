@@ -39,6 +39,7 @@ class reformat_all_phonenumbers(orm.TransientModel):
         phonenumbers_not_reformatted = ''
         toreformat_dict = self.pool['phone.common']._get_phone_fields(
             cr, uid, context=context)
+        ctx_raise = dict(context, raise_if_phone_parse_fails=True)
         for objname, prop in toreformat_dict.iteritems():
             fields = []
             obj = self.pool[objname]
@@ -66,7 +67,7 @@ class reformat_all_phonenumbers(orm.TransientModel):
                 # _generic_reformat_phonenumbers()
                 try:
                     obj._generic_reformat_phonenumbers(
-                        cr, uid, entry, context=context)
+                        cr, uid, entry, context=ctx_raise)
                 except Exception, e:
                     name = obj.name_get(
                         cr, uid, [init_entry['id']], context=context)[0][1]
@@ -98,4 +99,8 @@ class reformat_all_phonenumbers(orm.TransientModel):
             {'phonenumbers_not_reformatted': phonenumbers_not_reformatted},
             context=context)
         logger.info('End of the phone number reformatting wizard')
-        return True
+        action = self.pool['ir.actions.act_window'].for_xml_id(
+            cr, uid, 'base_phone', 'reformat_all_phonenumbers_action',
+            context=context)
+        action['res_id'] = ids[0]
+        return action
