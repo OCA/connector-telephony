@@ -61,9 +61,10 @@ class phone_common(orm.AbstractModel):
         return result
 
     def _generic_reformat_phonenumbers(self, cr, uid, vals, phonefields=None,
-                                       raise_if_parse_fails=False,
                                        context=None):
         """Reformat phone numbers in E.164 format i.e. +33141981242"""
+        if context is None:
+            context = {}
         if phonefields is None:
             phonefields = [
                 'phone', 'partner_phone', 'work_phone', 'fax',
@@ -105,7 +106,7 @@ class phone_common(orm.AbstractModel):
                         _logger.error(
                             "Cannot reformat the phone number '%s' to "
                             "international format" % vals.get(field))
-                        if raise_if_parse_fails:
+                        if context.get('raise_if_phone_parse_fails'):
                            raise orm.except_orm(
                                _('Error:'),
                                _("Cannot reformat the phone number '%s' to "
