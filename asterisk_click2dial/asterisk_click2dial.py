@@ -347,7 +347,8 @@ class res_users(orm.Model):
             help="Caller ID used for the calls initiated by this user."),
         # You'd probably think: Asterisk should reuse the callerID of sip.conf!
         # But it cannot, cf
-        # http://lists.digium.com/pipermail/asterisk-users/2012-January/269787.html
+        # http://lists.digium.com/pipermail/asterisk-users/
+        # 2012-January/269787.html
         'cdraccount': fields.char(
             'CDR Account', size=50,
             help="Call Detail Record (CDR) account used for billing this "
