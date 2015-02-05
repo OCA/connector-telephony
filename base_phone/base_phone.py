@@ -107,11 +107,11 @@ class phone_common(orm.AbstractModel):
                             "Cannot reformat the phone number '%s' to "
                             "international format" % vals.get(field))
                         if context.get('raise_if_phone_parse_fails'):
-                           raise orm.except_orm(
-                               _('Error:'),
-                               _("Cannot reformat the phone number '%s' to "
-                                   "international format. Error message: %s")
-                               % (vals.get(field), e))
+                            raise orm.except_orm(
+                                _('Error:'),
+                                _("Cannot reformat the phone number '%s' to "
+                                    "international format. Error message: %s")
+                                % (vals.get(field), e))
         return vals
 
     def get_name_from_phone_number(
