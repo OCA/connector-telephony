@@ -93,7 +93,7 @@ functionalities:
 A detailed documentation for this module is available on the Akretion Web site:
 http://www.akretion.com/products-and-services/openerp-asterisk-voip-connector
 """,
-    'author': 'Akretion',
+    'author': "Akretion,Odoo Community Association (OCA)",
     'website': 'http://www.akretion.com/',
     'depends': ['base_phone'],
     'external_dependencies': {'python': ['phonenumbers', 'Asterisk']},
