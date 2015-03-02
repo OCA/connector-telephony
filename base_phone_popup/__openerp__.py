@@ -52,7 +52,7 @@ feature provided by this module won't work with older versions of Nginx.
 TODO : document this new feature on the Akretion Web site :
 http://www.akretion.com/products-and-services/openerp-asterisk-voip-connector
 """,
-    'author': 'Akretion',
+    'author': "Akretion,Odoo Community Association (OCA)",
     'website': 'http://www.akretion.com/',
     'depends': ['base_phone', 'web_action_request'],
     'data': [
