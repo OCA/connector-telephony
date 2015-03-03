@@ -25,7 +25,7 @@
 {
     "name": "Asterisk Click2dial CRM",
     "version": "0.1",
-    "author": "Zikzakmedia SL, Akretion",
+    "author": "Zikzakmedia SL, Akretion,Odoo Community Association (OCA)",
     "website": "http://www.zikzakmedia.com",
     "license" : "AGPL-3",
     "category": "Customer Relationship Management",

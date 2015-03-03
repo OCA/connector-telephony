@@ -47,7 +47,7 @@ phone number is present in the partner addresses of OpenERP. Here is how it work
 . It searches the phone number of the calling party in the Partner addresses of OpenERP. If a record matches, it shows the name of the related Partner and proposes to open it, or open its related sale orders or invoices. If no record matches, it proposes to create a new Contact with the presented phone number as 'Phone' or 'Mobile' number or update an existing Contact.
 
 A detailed documentation for this module is available on the Akretion Web site : http://www.akretion.com/en/products-and-services/openerp-asterisk-voip-connector """,
-    'author': 'Akretion',
+    'author': "Akretion,Odoo Community Association (OCA)",
     'website': 'http://www.akretion.com/',
     'depends': ['base'],
     'init_xml': [],
