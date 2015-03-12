@@ -170,7 +170,7 @@ class asterisk_server(orm.Model):
         assert(country_code), 'Missing country on company'
         _logger.debug('Country code = %s' % country_code)
         to_dial_number = phonenumbers.format_out_of_country_calling_number(
-            parsed_num, country_code.upper()).replace(' ', '').replace('-', '')
+            parsed_num, country_code.upper()).replace(' ', '').replace('-', '').replace('.','').replace('(', '').replace(')','')
         # Add 'out prefix' to all numbers
         if ast_server.out_prefix:
             _logger.debug('Out prefix = %s' % ast_server.out_prefix)
