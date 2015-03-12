@@ -148,36 +148,6 @@ class asterisk_server(orm.Model):
             'context', 'alert_info', 'login', 'password']
         )]
 
-    def _reformat_number(
-            self, cr, uid, erp_number, ast_server=None, context=None):
-        '''
-        This function is dedicated to the transformation of the number
-        available in OpenERP to the number that Asterisk should dial.
-        You may have to inherit this function in another module specific
-        for your company if you are not happy with the way I reformat
-        the OpenERP numbers.
-        '''
-        assert(erp_number), 'Missing phone number'
-        _logger.debug('Number before reformat = %s' % erp_number)
-        if not ast_server:
-            ast_server = self._get_asterisk_server_from_user(
-                cr, uid, context=context)
-
-        # erp_number are supposed to be in E.164 format, so no need to
-        # give a country code here
-        parsed_num = phonenumbers.parse(erp_number, None)
-        country_code = ast_server.company_id.country_id.code
-        assert(country_code), 'Missing country on company'
-        _logger.debug('Country code = %s' % country_code)
-        to_dial_number = phonenumbers.format_out_of_country_calling_number(
-            parsed_num, country_code.upper()).replace(' ', '').replace('-', '')
-        # Add 'out prefix' to all numbers
-        if ast_server.out_prefix:
-            _logger.debug('Out prefix = %s' % ast_server.out_prefix)
-            to_dial_number = '%s%s' % (ast_server.out_prefix, to_dial_number)
-        _logger.debug('Number to be sent to Asterisk = %s' % to_dial_number)
-        return to_dial_number
-
     def _get_asterisk_server_from_user(self, cr, uid, context=None):
         '''Returns an asterisk.server browse object'''
         # We check if the user has an Asterisk server configured
@@ -429,15 +399,19 @@ class phone_common(orm.AbstractModel):
 
     def click2dial(self, cr, uid, erp_number, context=None):
         if not erp_number:
-            orm.except_orm(
+            raise orm.except_orm(
                 _('Error:'),
                 _('Missing phone number'))
 
         user, ast_server, ast_manager = \
             self.pool['asterisk.server']._connect_to_asterisk(
                 cr, uid, context=context)
-        ast_number = self.pool['asterisk.server']._reformat_number(
-            cr, uid, erp_number, ast_server, context=context)
+        ast_number = self.convert_to_dial_number(erp_number)
+        # Add 'out prefix'
+        if ast_server.out_prefix:
+            _logger.debug('Out prefix = %s' % ast_server.out_prefix)
+            ast_number = '%s%s' % (ast_server.out_prefix, ast_number)
+        _logger.debug('Number to be sent to Asterisk = %s' % ast_number)
 
         # The user should have a CallerID
         if not user.callerid:
