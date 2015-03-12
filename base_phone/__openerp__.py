@@ -35,7 +35,7 @@ which is a port of the library used in Android smartphones. For example, if
 your user is linked to a French company and you update the form view of a
 partner with a badly written French phone number such as '01-55-42-12-42',
 Odoo will automatically update the phone number to E.164 format '+33155421242'
-and display in the form view of the partner the readable equivalent
+and display in the form and tree view of the partner the readable equivalent
 '+33 1 55 42 12 42'.
 
 This module also adds *tel:* links on phone numbers and *fax:* links on fax
