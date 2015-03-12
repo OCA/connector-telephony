@@ -45,7 +45,9 @@ for any help or question about this module.
     'data': [
         'security/ir.model.access.csv',
         'crm_view.xml',
+        'res_users_view.xml',
         'wizard/number_not_found_view.xml',
+        'wizard/create_crm_phonecall_view.xml',
         ],
     'images': [],
     'installable': True,

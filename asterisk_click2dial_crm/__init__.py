@@ -21,4 +21,3 @@
 ##############################################################################
 
 from . import asterisk_click2dial_crm
-from . import wizard
