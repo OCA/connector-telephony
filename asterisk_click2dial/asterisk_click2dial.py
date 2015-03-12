@@ -22,8 +22,6 @@
 from openerp.osv import fields, orm
 from openerp.tools.translate import _
 import logging
-# Lib for phone number reformating -> pip install phonenumbers
-import phonenumbers
 
 try:
     # Lib py-asterisk from http://code.google.com/p/py-asterisk/
