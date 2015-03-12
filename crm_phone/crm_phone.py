@@ -20,23 +20,23 @@
 #
 ##############################################################################
 
-from openerp.osv import orm
+from openerp import models, fields
 
 
-class crm_lead(orm.Model):
+class CrmLead(models.Model):
     _name = 'crm.lead'
     _inherit = ['crm.lead', 'phone.common']
 
     def create(self, cr, uid, vals, context=None):
         vals_reformated = self._generic_reformat_phonenumbers(
             cr, uid, vals, context=context)
-        return super(crm_lead, self).create(
+        return super(CrmLead, self).create(
             cr, uid, vals_reformated, context=context)
 
     def write(self, cr, uid, ids, vals, context=None):
         vals_reformated = self._generic_reformat_phonenumbers(
             cr, uid, vals, context=context)
-        return super(crm_lead, self).write(
+        return super(CrmLead, self).write(
             cr, uid, ids, vals_reformated, context=context)
 
     def name_get(self, cr, uid, ids, context=None):
@@ -58,32 +58,32 @@ class crm_lead(orm.Model):
                 res.append((lead.id, name))
             return res
         else:
-            return super(crm_lead, self).name_get(
+            return super(CrmLead, self).name_get(
                 cr, uid, ids, context=context)
 
 
-class crm_phonecall(orm.Model):
+class CrmPhonecall(models.Model):
     _name = 'crm.phonecall'
     _inherit = ['crm.phonecall', 'phone.common']
 
     def create(self, cr, uid, vals, context=None):
         vals_reformated = self._generic_reformat_phonenumbers(
             cr, uid, vals, context=context)
-        return super(crm_phonecall, self).create(
+        return super(CrmPhonecall, self).create(
             cr, uid, vals_reformated, context=context)
 
     def write(self, cr, uid, ids, vals, context=None):
         vals_reformated = self._generic_reformat_phonenumbers(
             cr, uid, vals, context=context)
-        return super(crm_phonecall, self).write(
+        return super(CrmPhonecall, self).write(
             cr, uid, ids, vals_reformated, context=context)
 
 
-class phone_common(orm.AbstractModel):
+class PhoneCommon(models.AbstractModel):
     _inherit = 'phone.common'
 
     def _get_phone_fields(self, cr, uid, context=None):
-        res = super(phone_common, self)._get_phone_fields(
+        res = super(PhoneCommon, self)._get_phone_fields(
             cr, uid, context=context)
         res.update({
             'crm.lead': {
@@ -96,3 +96,14 @@ class phone_common(orm.AbstractModel):
                 },
             })
         return res
+
+
+class ResUsers(models.Model):
+    _inherit = "res.users"
+
+    # Field name starts with 'context_' to allow modification by the user
+    # in his preferences, cf server/openerp/addons/base/res/res_users.py
+    # in "def write()" of "class res_users(osv.osv)"
+    context_propose_creation_crm_call = fields.Boolean(
+        string='Propose to create a call in CRM after a click2dial',
+        default=True)
