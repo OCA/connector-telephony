@@ -19,8 +19,8 @@
 #
 ##############################################################################
 
-from openerp.osv import orm, fields
-from openerp.tools.translate import _
+from openerp import models, fields, api, _
+from openerp.exceptions import Warning
 import logging
 # Lib for phone number reformating -> pip install phonenumbers
 import phonenumbers
@@ -28,7 +28,7 @@ import phonenumbers
 _logger = logging.getLogger(__name__)
 
 
-class phone_common(orm.AbstractModel):
+class PhoneCommon(models.AbstractModel):
     _name = 'phone.common'
 
     def generic_phonenumber_to_e164(
@@ -81,8 +81,7 @@ class phone_common(orm.AbstractModel):
                 # as second arg of phonenumbers.parse(), it will raise an
                 # exception when you try to enter a phone number in
                 # national format... so it's better to raise the exception here
-                raise orm.except_orm(
-                    _('Error:'),
+                raise Warning(
                     _("You should set a country on the company '%s'")
                     % user.company_id.name)
             for field in phonefields:
@@ -107,8 +106,7 @@ class phone_common(orm.AbstractModel):
                             "Cannot reformat the phone number '%s' to "
                             "international format" % vals.get(field))
                         if context.get('raise_if_phone_parse_fails'):
-                            raise orm.except_orm(
-                                _('Error:'),
+                            raise Warning(
                                 _("Cannot reformat the phone number '%s' to "
                                     "international format. Error message: %s")
                                 % (vals.get(field), e))
@@ -215,21 +213,44 @@ class phone_common(orm.AbstractModel):
         modules, such as asterisk_click2dial'''
         return {'dialed_number': erp_number}
 
+    @api.model
+    def convert_to_dial_number(self, erp_number):
+        '''
+        This function is dedicated to the transformation of the number
+        available in Odoo to the number that can be dialed.
+        You may have to inherit this function in another module specific
+        for your company if you are not happy with the way I reformat
+        the numbers.
+        '''
+        assert(erp_number), 'Missing phone number'
+        _logger.debug('Number before reformat = %s' % erp_number)
+        # erp_number are supposed to be in E.164 format, so no need to
+        # give a country code here
+        parsed_num = phonenumbers.parse(erp_number, None)
+        country_code = self.env.user.company_id.country_id.code
+        assert(country_code), 'Missing country on company'
+        _logger.debug('Country code = %s' % country_code)
+        to_dial_number = phonenumbers.format_out_of_country_calling_number(
+            parsed_num, country_code.upper())
+        to_dial_number = str(to_dial_number).translate(None, ' -.()/')
+        _logger.debug('Number to be sent to Asterisk = %s' % to_dial_number)
+        return to_dial_number
 
-class res_partner(orm.Model):
+
+class ResPartner(models.Model):
     _name = 'res.partner'
     _inherit = ['res.partner', 'phone.common']
 
     def create(self, cr, uid, vals, context=None):
         vals_reformated = self._generic_reformat_phonenumbers(
             cr, uid, vals, context=context)
-        return super(res_partner, self).create(
+        return super(ResPartner, self).create(
             cr, uid, vals_reformated, context=context)
 
     def write(self, cr, uid, ids, vals, context=None):
         vals_reformated = self._generic_reformat_phonenumbers(
             cr, uid, vals, context=context)
-        return super(res_partner, self).write(
+        return super(ResPartner, self).write(
             cr, uid, ids, vals_reformated, context=context)
 
     def name_get(self, cr, uid, ids, context=None):
@@ -247,30 +268,25 @@ class res_partner(orm.Model):
                 res.append((partner.id, name))
             return res
         else:
-            return super(res_partner, self).name_get(
+            return super(ResPartner, self).name_get(
                 cr, uid, ids, context=context)
 
 
-class res_company(orm.Model):
+class ResCompany(models.Model):
     _inherit = 'res.company'
 
-    _columns = {
-        'number_of_digits_to_match_from_end': fields.integer(
-            'Number of Digits To Match From End',
-            help="In several situations, OpenERP will have to find a "
-            "Partner/Lead/Employee/... from a phone number presented by the "
-            "calling party. As the phone numbers presented by your phone "
-            "operator may not always be displayed in a standard format, "
-            "the best method to find the related Partner/Lead/Employee/... "
-            "in OpenERP is to try to match the end of the phone number in "
-            "OpenERP with the N last digits of the phone number presented "
-            "by the calling party. N is the value you should enter in this "
-            "field."),
-        }
-
-    _defaults = {
-        'number_of_digits_to_match_from_end': 8,
-        }
+    number_of_digits_to_match_from_end = fields.Integer(
+        string='Number of Digits To Match From End',
+        default=8,
+        help="In several situations, OpenERP will have to find a "
+        "Partner/Lead/Employee/... from a phone number presented by the "
+        "calling party. As the phone numbers presented by your phone "
+        "operator may not always be displayed in a standard format, "
+        "the best method to find the related Partner/Lead/Employee/... "
+        "in OpenERP is to try to match the end of the phone number in "
+        "OpenERP with the N last digits of the phone number presented "
+        "by the calling party. N is the value you should enter in this "
+        "field.")
 
     _sql_constraints = [(
         'number_of_digits_to_match_from_end_positive',
