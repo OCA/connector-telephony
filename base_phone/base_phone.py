@@ -77,13 +77,14 @@ class PhoneCommon(models.AbstractModel):
             if user.company_id.country_id:
                 user_countrycode = user.company_id.country_id.code
             else:
-                # We need to raise an exception here because, if we pass None
-                # as second arg of phonenumbers.parse(), it will raise an
-                # exception when you try to enter a phone number in
-                # national format... so it's better to raise the exception here
-                raise Warning(
-                    _("You should set a country on the company '%s'")
+                _logger.error(
+                    _("You should set a country on the company '%s' "
+                        "to allow the reformat of phone numbers")
                     % user.company_id.name)
+                user_countrycode = ''
+                # with country code = '', phonenumbers.parse() will work
+                # with phonenumbers formatted in E164, but will fail with
+                # phone numbers in national format
             for field in phonefields:
                 if vals.get(field):
                     init_value = vals.get(field)
