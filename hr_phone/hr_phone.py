@@ -42,16 +42,3 @@ class hr_employee(orm.Model):
             cr, uid, ids, vals, context=context)
         return super(hr_employee, self).write(
             cr, uid, ids, vals_reformated, context=context)
-
-
-class phone_common(orm.AbstractModel):
-    _inherit = 'phone.common'
-
-    def _get_phone_fields(self, cr, uid, context=None):
-        res = super(phone_common, self)._get_phone_fields(
-            cr, uid, context=context)
-        res['hr.employee'] = {
-            'phonefields': ['work_phone', 'mobile_phone'],
-            'get_name_sequence': 30,
-            }
-        return res
