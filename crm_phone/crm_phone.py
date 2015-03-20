@@ -73,7 +73,6 @@ class CrmPhonecall(models.Model):
     _country_field = None
     _partner_field = 'partner_id'
 
-
     def create(self, cr, uid, vals, context=None):
         vals_reformated = self._generic_reformat_phonenumbers(
             cr, uid, None, vals, context=context)
