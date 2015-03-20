@@ -70,18 +70,17 @@ class reformat_all_phonenumbers(models.TransientModel):
                 # _generic_reformat_phonenumbers()
                 try:
                     obj._generic_reformat_phonenumbers(
-                        cr, uid, entry, context=ctx_raise)
+                        cr, uid, [entry['id']], entry, context=ctx_raise)
                 except Exception, e:
                     name = obj.name_get(
                         cr, uid, [init_entry['id']], context=context)[0][1]
+                    err_msg = e and len(e) > 1 and e[1] or 'missing error msg'
                     phonenumbers_not_reformatted += \
                         "Problem on %s '%s'. Error message: %s\n" % (
-                            obj._description,
-                            name, e[1])
+                            obj._description, name, err_msg)
                     logger.warning(
                         "Problem on %s '%s'. Error message: %s" % (
-                            obj._description,
-                            name, e[1]))
+                            obj._description, name, err_msg))
                     continue
                 if any(
                         [init_entry.get(field)
