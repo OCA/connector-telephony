@@ -40,16 +40,12 @@ class reformat_all_phonenumbers(models.TransientModel):
     def run_reformat_all_phonenumbers(self, cr, uid, ids, context=None):
         logger.info('Starting to reformat all the phone numbers')
         phonenumbers_not_reformatted = ''
-        toreformat_dict = self.pool['phone.common']._get_phone_fields(
+        phoneobjects = self.pool['phone.common']._get_phone_fields(
             cr, uid, context=context)
         ctx_raise = dict(context, raise_if_phone_parse_fails=True)
-        for objname, prop in toreformat_dict.iteritems():
-            fields = []
+        for objname in phoneobjects:
+            fields = self.pool[objname]._phone_fields
             obj = self.pool[objname]
-            if prop.get('phonefields'):
-                fields += prop['phonefields']
-            if prop.get('faxfields'):
-                fields += prop['faxfields']
             logger.info(
                 'Starting to reformat phone numbers on object %s '
                 '(fields = %s)' % (objname, fields))
