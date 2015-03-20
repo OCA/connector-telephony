@@ -26,16 +26,20 @@ from openerp import models, fields
 class CrmLead(models.Model):
     _name = 'crm.lead'
     _inherit = ['crm.lead', 'phone.common']
+    _phone_fields = ['phone', 'mobile', 'fax']
+    _phone_name_sequence = 20
+    _country_field = 'country_id'
+    _partner_field = None
 
     def create(self, cr, uid, vals, context=None):
         vals_reformated = self._generic_reformat_phonenumbers(
-            cr, uid, vals, context=context)
+            cr, uid, None, vals, context=context)
         return super(CrmLead, self).create(
             cr, uid, vals_reformated, context=context)
 
     def write(self, cr, uid, ids, vals, context=None):
         vals_reformated = self._generic_reformat_phonenumbers(
-            cr, uid, vals, context=context)
+            cr, uid, ids, vals, context=context)
         return super(CrmLead, self).write(
             cr, uid, ids, vals_reformated, context=context)
 
@@ -65,16 +69,20 @@ class CrmLead(models.Model):
 class CrmPhonecall(models.Model):
     _name = 'crm.phonecall'
     _inherit = ['crm.phonecall', 'phone.common']
+    _phone_fields = ['partner_phone', 'partner_mobile']
+    _country_field = None
+    _partner_field = 'partner_id'
+
 
     def create(self, cr, uid, vals, context=None):
         vals_reformated = self._generic_reformat_phonenumbers(
-            cr, uid, vals, context=context)
+            cr, uid, None, vals, context=context)
         return super(CrmPhonecall, self).create(
             cr, uid, vals_reformated, context=context)
 
     def write(self, cr, uid, ids, vals, context=None):
         vals_reformated = self._generic_reformat_phonenumbers(
-            cr, uid, vals, context=context)
+            cr, uid, ids, vals, context=context)
         return super(CrmPhonecall, self).write(
             cr, uid, ids, vals_reformated, context=context)
 
