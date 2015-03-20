@@ -26,16 +26,20 @@ from openerp.osv import orm
 class event_registration(orm.Model):
     _name = 'event.registration'
     _inherit = ['event.registration', 'phone.common']
+    _phone_fields = ['phone']
+    _phone_name_sequence = 100
+    _country_field = None
+    _partner_field = 'partner_id'
 
     def create(self, cr, uid, vals, context=None):
         vals_reformated = self._generic_reformat_phonenumbers(
-            cr, uid, vals, context=context)
+            cr, uid, None, vals, context=context)
         return super(event_registration, self).create(
             cr, uid, vals_reformated, context=context)
 
     def write(self, cr, uid, ids, vals, context=None):
         vals_reformated = self._generic_reformat_phonenumbers(
-            cr, uid, vals, context=context)
+            cr, uid, ids, vals, context=context)
         return super(event_registration, self).write(
             cr, uid, ids, vals_reformated, context=context)
 
