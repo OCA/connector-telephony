@@ -35,3 +35,11 @@
   !python {model: res.partner}: |
     partner3 = self.browse(cr, uid, ref('partner3'), context=context)
     assert partner3.phone == '42', 'Invalid phone numbers should not be changed'
+-
+  Get name from phone number
+-
+  !python {model: phone.common}: |
+    name = self.get_name_from_phone_number(cr, uid, '0642774266')
+    assert name == 'Pierre Paillet', 'Wrong result for get_name_from_phone_number'
+    name2 = self.get_name_from_phone_number(cr, uid, '0041216191010')
+    assert name2 == u'Joël Grand-Guillaume (Camptocamp)', 'Wrong result for get_name_from_phone_number (partner2)'

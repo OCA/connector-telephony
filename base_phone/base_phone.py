@@ -114,26 +114,21 @@ class PhoneCommon(models.AbstractModel):
                                 % (vals.get(field), e))
         return vals
 
-    def get_name_from_phone_number(
-            self, cr, uid, presented_number, context=None):
+    @api.model
+    def get_name_from_phone_number(self, presented_number):
         '''Function to get name from phone number. Usefull for use from IPBX
         to add CallerID name to incoming calls.'''
-        res = self.get_record_from_phone_number(
-            cr, uid, presented_number, context=context)
+        res = self.get_record_from_phone_number(presented_number)
         if res:
             return res[2]
         else:
             return False
 
-    def get_record_from_phone_number(
-            self, cr, uid, presented_number, context=None):
+    @api.model
+    def get_record_from_phone_number(self, presented_number):
         '''If it finds something, it returns (object name, ID, record name)
         For example : ('res.partner', 42, u'Alexis de Lattre (Akretion)')
         '''
-        if context is None:
-            context = {}
-        ctx_phone = context.copy()
-        ctx_phone['callerid'] = True
         _logger.debug(
             u"Call get_name_from_phone_number with number = %s"
             % presented_number)
@@ -146,48 +141,47 @@ class PhoneCommon(models.AbstractModel):
             _logger.warning(
                 u"Number '%s' should only contain digits." % presented_number)
 
-        user = self.pool['res.users'].browse(cr, uid, uid, context=context)
         nr_digits_to_match_from_end = \
-            user.company_id.number_of_digits_to_match_from_end
+            self.env.user.company_id.number_of_digits_to_match_from_end
         if len(presented_number) >= nr_digits_to_match_from_end:
             end_number_to_match = presented_number[
                 -nr_digits_to_match_from_end:len(presented_number)]
         else:
             end_number_to_match = presented_number
 
-        phonefieldsdict = self._get_phone_fields(cr, uid, context=context)
-        phonefieldslist = []
-        for objname, prop in phonefieldsdict.iteritems():
-            if prop.get('get_name_sequence'):
-                phonefieldslist.append({objname: prop})
+        phoneobjects = self._get_phone_fields()
+        phonefieldslist = []  # [('res.parter', 10), ('crm.lead', 20)]
+        for objname in phoneobjects:
+            if (
+                    '_phone_name_sequence' in dir(self.env[objname]) and
+                    self.env[objname]._phone_name_sequence):
+                phonefieldslist.append(
+                    (objname, self.env[objname]._phone_name_sequence))
         phonefieldslist_sorted = sorted(
             phonefieldslist,
-            key=lambda element: element.values()[0]['get_name_sequence'])
-
-        for phonedict in phonefieldslist_sorted:
-            objname = phonedict.keys()[0]
-            prop = phonedict.values()[0]
-            phonefields = prop['phonefields']
-            obj = self.pool[objname]
+            key=lambda element: element[1])
+        _logger.debug('phonefieldslist_sorted=%s' % phonefieldslist_sorted)
+        for (objname, prio) in phonefieldslist_sorted:
+            obj = self.with_context(callerid=True).env[objname]
             pg_search_number = str('%' + end_number_to_match)
             _logger.debug(
                 "Will search phone and mobile numbers in %s ending with '%s'"
                 % (objname, end_number_to_match))
             domain = []
-            for phonefield in phonefields:
+            for phonefield in obj._phone_fields:
                 domain.append((phonefield, '=like', pg_search_number))
-            if len(phonefields) > 1:
-                domain = ['|'] * (len(phonefields) - 1) + domain
-            res_ids = obj.search(cr, uid, domain, context=context)
-            if len(res_ids) > 1:
+            if len(obj._phone_fields) > 1:
+                domain = ['|'] * (len(obj._phone_fields) - 1) + domain
+            res_obj = obj.search(domain)
+            if len(res_obj) > 1:
                 _logger.warning(
                     u"There are several %s (IDS = %s) with a phone number "
                     "ending with '%s'. Taking the first one."
-                    % (objname, res_ids, end_number_to_match))
-            if res_ids:
-                name = obj.name_get(
-                    cr, uid, res_ids[0], context=ctx_phone)[0][1]
-                res = (objname, res_ids[0], name)
+                    % (objname, res_obj.ids, end_number_to_match))
+                res_obj = res_obj[0]
+            if res_obj:
+                name = res_obj.name_get()[0][1]
+                res = (objname, res_obj.id, name)
                 _logger.debug(
                     u"Answer get_record_from_phone_number: (%s, %d, %s)"
                     % (res[0], res[1], res[2]))
@@ -198,16 +192,22 @@ class PhoneCommon(models.AbstractModel):
                     % (objname, end_number_to_match))
         return False
 
-    def _get_phone_fields(self, cr, uid, context=None):
+    @api.model
+    def _get_phone_fields(self):
         '''Returns a dict with key = object name
         and value = list of phone fields'''
-        res = {
-            'res.partner': {
-                'phonefields': ['phone', 'mobile'],
-                'faxfields': ['fax'],
-                'get_name_sequence': 10,
-                },
-            }
+        models = self.env['ir.model'].search([('osv_memory', '=', False)])
+        res = []
+        for model in models:
+            senv = False
+            try:
+                senv = self.env[model.model]
+            except:
+                continue
+            if (
+                    '_phone_fields' in dir(senv) and
+                    isinstance(senv._phone_fields, list)):
+                res.append(model.model)
         return res
 
     def click2dial(self, cr, uid, erp_number, context=None):
