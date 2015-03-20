@@ -20,6 +20,7 @@
 ##############################################################################
 
 from openerp import models, fields, api, _
+from openerp.tools.safe_eval import safe_eval
 from openerp.exceptions import Warning
 import logging
 # Lib for phone number reformating -> pip install phonenumbers
@@ -31,66 +32,65 @@ _logger = logging.getLogger(__name__)
 class PhoneCommon(models.AbstractModel):
     _name = 'phone.common'
 
-    def generic_phonenumber_to_e164(
-            self, cr, uid, ids, field_from_to_seq, context=None):
-        result = {}
-        from_field_seq = [item[0] for item in field_from_to_seq]
-        for record in self.read(cr, uid, ids, from_field_seq, context=context):
-            result[record['id']] = {}
-            for fromfield, tofield in field_from_to_seq:
-                if not record.get(fromfield):
-                    res = False
-                else:
-                    try:
-                        res = phonenumbers.format_number(
-                            phonenumbers.parse(record.get(fromfield), None),
-                            phonenumbers.PhoneNumberFormat.E164)
-                    except Exception, e:
-                        _logger.error(
-                            "Cannot reformat the phone number '%s' to E.164 "
-                            "format. Error message: %s"
-                            % (record.get(fromfield), e))
-                        _logger.error(
-                            "You should fix this number and run the wizard "
-                            "'Reformat all phone numbers' from the menu "
-                            "Settings > Configuration > Phones")
-                    # If I raise an exception here, it won't be possible to
-                    # install the module on a DB with bad phone numbers
-                        res = False
-                result[record['id']][tofield] = res
-        return result
-
-    def _generic_reformat_phonenumbers(self, cr, uid, vals, phonefields=None,
-                                       context=None):
+    def _generic_reformat_phonenumbers(
+            self, cr, uid, ids, vals, context=None):
         """Reformat phone numbers in E.164 format i.e. +33141981242"""
+        assert isinstance(self._country_field, (str, unicode, type(None))),\
+            'Wrong self._country_field'
+        assert isinstance(self._partner_field, (str, unicode, type(None))),\
+            'Wrong self._partner_field'
+        assert isinstance(self._phone_fields, list),\
+            'self._phone_fields must be a list'
         if context is None:
             context = {}
-        if phonefields is None:
-            phonefields = [
-                'phone', 'partner_phone', 'work_phone', 'fax',
-                'mobile', 'partner_mobile', 'mobile_phone',
-            ]
-        if any([vals.get(field) for field in phonefields]):
+        if ids and isinstance(ids, (int, long)):
+            ids = [ids]
+        if any([vals.get(field) for field in self._phone_fields]):
             user = self.pool['res.users'].browse(cr, uid, uid, context=context)
             # country_id on res.company is a fields.function that looks at
             # company_id.partner_id.addres(default).country_id
-            if user.company_id.country_id:
-                user_countrycode = user.company_id.country_id.code
-            else:
-                _logger.error(
-                    _("You should set a country on the company '%s' "
-                        "to allow the reformat of phone numbers")
-                    % user.company_id.name)
-                user_countrycode = ''
-                # with country code = '', phonenumbers.parse() will work
+            countrycode = None
+            if self._country_field:
+                if vals.get(self._country_field):
+                    country = self.pool['res.country'].browse(
+                        cr, uid, vals[self._country_field], context=context)
+                    countrycode = country.code
+                elif ids:
+                    rec = self.browse(cr, uid, ids[0], context=context)
+                    country = safe_eval(
+                        'rec.' + self._country_field, {'rec': rec})
+                    countrycode = country and country.code or None
+            elif self._partner_field:
+                if vals.get(self._partner_field):
+                    partner = self.pool['res.partner'].browse(
+                        cr, uid, vals[self._partner_field], context=context)
+                    countrycode = partner.country_id and\
+                        partner.country_id.code or None
+                elif ids:
+                    rec = self.browse(cr, uid, ids[0], context=context)
+                    partner = safe_eval(
+                        'rec.' + self._partner_field, {'rec': rec})
+                    if partner:
+                        countrycode = partner.country_id and\
+                            partner.country_id.code or None
+            if not countrycode:
+                if user.company_id.country_id:
+                    countrycode = user.company_id.country_id.code
+                else:
+                    _logger.error(
+                        _("You should set a country on the company '%s' "
+                            "to allow the reformat of phone numbers")
+                        % user.company_id.name)
+                    countrycode = None
+                # with country code = None, phonenumbers.parse() will work
                 # with phonenumbers formatted in E164, but will fail with
                 # phone numbers in national format
-            for field in phonefields:
+            for field in self._phone_fields:
                 if vals.get(field):
                     init_value = vals.get(field)
                     try:
                         res_parse = phonenumbers.parse(
-                            vals.get(field), user_countrycode)
+                            vals.get(field), countrycode)
                         vals[field] = phonenumbers.format_number(
                             res_parse, phonenumbers.PhoneNumberFormat.E164)
                         if init_value != vals[field]:
@@ -105,7 +105,8 @@ class PhoneCommon(models.AbstractModel):
                         #    via the webservices
                         _logger.error(
                             "Cannot reformat the phone number '%s' to "
-                            "international format" % vals.get(field))
+                            "international format with region=%s"
+                            % (vals.get(field), countrycode))
                         if context.get('raise_if_phone_parse_fails'):
                             raise Warning(
                                 _("Cannot reformat the phone number '%s' to "
@@ -241,16 +242,20 @@ class PhoneCommon(models.AbstractModel):
 class ResPartner(models.Model):
     _name = 'res.partner'
     _inherit = ['res.partner', 'phone.common']
+    _phone_fields = ['phone', 'mobile', 'fax']
+    _phone_name_sequence = 10
+    _country_field = 'country_id'
+    _partner_field = None
 
     def create(self, cr, uid, vals, context=None):
         vals_reformated = self._generic_reformat_phonenumbers(
-            cr, uid, vals, context=context)
+            cr, uid, None, vals, context=context)
         return super(ResPartner, self).create(
             cr, uid, vals_reformated, context=context)
 
     def write(self, cr, uid, ids, vals, context=None):
         vals_reformated = self._generic_reformat_phonenumbers(
-            cr, uid, vals, context=context)
+            cr, uid, ids, vals, context=context)
         return super(ResPartner, self).write(
             cr, uid, ids, vals_reformated, context=context)
 
