@@ -1,0 +1,41 @@
+-
+  Write french phone numbers in national format
+-
+  !record {model: crm.lead, id: lead1}:
+    name: Jacques Toufaux
+    mobile: 06 42 77 42 77
+    fax: (0) 1 45 44 42 43
+    country_id: base.fr
+-
+  Write swiss phone numbers in national format
+-
+  !record {model: crm.lead, id: lead2}:
+    name: Michel Content
+    country_id: base.ch
+    phone: 04 31 23 45 67
+-
+  Create a german lead
+-
+  !record {model: crm.lead, id: lead3}:
+    name: Angela Strasse
+    country_id: base.de
+-
+  Check that valid phone numbers have been converted to E.164
+-
+  !python {model: crm.lead}: |
+    lead1 = self.browse(cr, uid, ref('lead1'), context=context)
+    assert lead1.mobile == '+33642774277', 'Mobile number not written in E.164 format (lead1)'
+    assert lead1.fax == '+33145444243', 'Fax number not written in E.164 format (lead1)'
+    lead2 = self.browse(cr, uid, ref('lead2'), context=context)
+    assert lead2.phone == '+41431234567', 'Phone number not written in E.164 format (lead2)'
+    self.write(cr, uid, ref('lead3'), {'phone': '0891234567'})
+    lead3 = self.browse(cr, uid, ref('lead3'), context=context)
+    assert lead3.phone == '+49891234567', 'Phone number not written in E.164 format (lead3)'
+-
+  Get name from phone number
+-
+  !python {model: phone.common}: |
+    name = self.get_name_from_phone_number(cr, uid, '0642774277')
+    assert name == 'Jacques Toufaux', 'Wrong result for get_name_from_phone_number (lead1)'
+    name2 = self.get_name_from_phone_number(cr, uid, '0041431234567')
+    assert name2 == 'Michel Content', 'Wrong result for get_name_from_phone_number (lead2)'

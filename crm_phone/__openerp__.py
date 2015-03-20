@@ -49,6 +49,7 @@ for any help or question about this module.
         'wizard/number_not_found_view.xml',
         'wizard/create_crm_phonecall_view.xml',
         ],
+    'test': ['test/phonenum.yml'],
     'images': [],
     'installable': True,
     'auto_install': True,

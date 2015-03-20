@@ -42,16 +42,3 @@ class event_registration(orm.Model):
             cr, uid, ids, vals, context=context)
         return super(event_registration, self).write(
             cr, uid, ids, vals_reformated, context=context)
-
-
-class phone_common(orm.AbstractModel):
-    _inherit = 'phone.common'
-
-    def _get_phone_fields(self, cr, uid, context=None):
-        res = super(phone_common, self)._get_phone_fields(
-            cr, uid, context=context)
-        res['event.registration'] = {
-            'phonefields': ['phone'],
-            'get_name_sequence': 100,
-            }
-        return res

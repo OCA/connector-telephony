@@ -41,15 +41,3 @@ class crm_claim(orm.Model):
             cr, uid, ids, vals, context=context)
         return super(crm_claim, self).write(
             cr, uid, ids, vals_reformated, context=context)
-
-
-class phone_common(orm.AbstractModel):
-    _inherit = 'phone.common'
-
-    def _get_phone_fields(self, cr, uid, context=None):
-        res = super(phone_common, self)._get_phone_fields(
-            cr, uid, context=context)
-        res['crm.claim'] = {
-            'phonefields': ['partner_phone'],
-            }
-        return res
