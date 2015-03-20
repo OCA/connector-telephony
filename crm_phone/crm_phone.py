@@ -87,25 +87,6 @@ class CrmPhonecall(models.Model):
             cr, uid, ids, vals_reformated, context=context)
 
 
-class PhoneCommon(models.AbstractModel):
-    _inherit = 'phone.common'
-
-    def _get_phone_fields(self, cr, uid, context=None):
-        res = super(PhoneCommon, self)._get_phone_fields(
-            cr, uid, context=context)
-        res.update({
-            'crm.lead': {
-                'phonefields': ['phone', 'mobile'],
-                'faxfields': ['fax'],
-                'get_name_sequence': 20,
-                },
-            'crm.phonecall': {
-                'phonefields': ['partner_phone', 'partner_mobile'],
-                },
-            })
-        return res
-
-
 class ResUsers(models.Model):
     _inherit = "res.users"
 
