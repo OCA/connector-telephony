@@ -20,45 +20,26 @@
 #
 ##############################################################################
 
-from openerp.osv import orm, fields
-from openerp.tools.translate import _
+from openerp import models, api, _
 
 
-class phone_common(orm.AbstractModel):
+class PhoneCommon(models.AbstractModel):
     _inherit = 'phone.common'
 
-    def click2dial(self, cr, uid, erp_number, context=None):
+    @api.model
+    def click2dial(self, erp_number):
         '''
         Inherit the native click2dial function to trigger
         a wizard "Create Call in CRM" via the Javascript code
         of base_phone
         '''
-        if context is None:
-            context = {}
-        res = super(phone_common, self).click2dial(
-            cr, uid, erp_number, context=context)
-        user = self.pool['res.users'].browse(cr, uid, uid, context=context)
+        res = super(PhoneCommon, self).click2dial(erp_number)
         if (
-                context.get('click2dial_model') == 'res.partner'
-                and user.context_propose_creation_crm_call):
+                self.env.context.get('click2dial_model') in
+                ('res.partner', 'crm.lead') and
+                self.env.user.context_propose_creation_crm_call):
             res.update({
                 'action_name': _('Create Call in CRM'),
                 'action_model': 'wizard.create.crm.phonecall',
                 })
         return res
-
-
-class res_users(orm.Model):
-    _inherit = "res.users"
-
-    _columns = {
-        # Field name starts with 'context_' to allow modification by the user
-        # in his preferences, cf server/openerp/addons/base/res/res_users.py
-        # in "def write()" of "class res_users(osv.osv)"
-        'context_propose_creation_crm_call': fields.boolean(
-            'Propose to create a call in CRM after a click2dial'),
-        }
-
-    _defaults = {
-        'context_propose_creation_crm_call': True,
-        }

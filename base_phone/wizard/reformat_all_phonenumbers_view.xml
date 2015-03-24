@@ -12,16 +12,21 @@
     <field name="name">reformat_all_phonenumbers.form</field>
     <field name="model">reformat.all.phonenumbers</field>
     <field name="arch" type="xml">
-        <form string="Reformat all phone numbers" version="7.0">
-            <!-- TODO : add a "state" and display fields accordingly -->
+        <form string="Reformat all phone numbers">
             <group name="main">
-                <label string="This wizard reformats the phone, mobile and fax numbers of all partners in standard international format e.g. +33141981242" colspan="4"/>
-                <label colspan="4" string="Phone numbers that couldn't be reformatted:"/>
-                <field name="phonenumbers_not_reformatted" colspan="4" nolabel="1"/>
+                <label string="This wizard reformats the phone, mobile and fax numbers of all partners in standard international format e.g. +33141981242" colspan="2" states="draft"/>
+                <label colspan="2" string="Phone numbers that couldn't be reformatted:" states="done"/>
+                <field name="phonenumbers_not_reformatted" colspan="2" nolabel="1" states="done"/>
+                <field name="state" invisible="1"/>
             </group>
             <footer>
-                <button name="run_reformat_all_phonenumbers" string="Reformat all phone numbers" type="object" class="oe_highlight"/>
-                <button special="cancel" string="Cancel" class="oe_link" />
+                <button name="run_reformat_all_phonenumbers"
+                    string="Reformat all phone numbers" type="object"
+                    class="oe_highlight" states="draft"/>
+                <button name="action_next" type="object" string="Close"
+                    class="oe_highlight" states="done"/>
+                <button special="cancel" string="Cancel"
+                    class="oe_link" states="draft"/>
             </footer>
         </form>
     </field>

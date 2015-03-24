@@ -1,8 +1,8 @@
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
-#    Base Phone module for OpenERP
-#    Copyright (C) 2012-2014 Alexis de Lattre <alexis@via.ecp.fr>
+#    Base Phone module for Odoo
+#    Copyright (C) 2012-2015 Alexis de Lattre <alexis@via.ecp.fr>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -19,34 +19,33 @@
 #
 ##############################################################################
 
-from openerp.osv import orm, fields
+from openerp import models, fields
 import logging
 
 logger = logging.getLogger(__name__)
 
 
-class reformat_all_phonenumbers(orm.TransientModel):
+class reformat_all_phonenumbers(models.TransientModel):
     _name = "reformat.all.phonenumbers"
+    _inherit = "res.config.installer"
     _description = "Reformat all phone numbers"
 
-    _columns = {
-        'phonenumbers_not_reformatted': fields.text(
-            "Phone numbers that couldn't be reformatted"),
-        }
+    phonenumbers_not_reformatted = fields.Text(
+        string="Phone numbers that couldn't be reformatted")
+    state = fields.Selection([
+        ('draft', 'Draft'),
+        ('done', 'Done'),
+        ], string='State', default='draft')
 
     def run_reformat_all_phonenumbers(self, cr, uid, ids, context=None):
         logger.info('Starting to reformat all the phone numbers')
         phonenumbers_not_reformatted = ''
-        toreformat_dict = self.pool['phone.common']._get_phone_fields(
+        phoneobjects = self.pool['phone.common']._get_phone_fields(
             cr, uid, context=context)
         ctx_raise = dict(context, raise_if_phone_parse_fails=True)
-        for objname, prop in toreformat_dict.iteritems():
-            fields = []
+        for objname in phoneobjects:
+            fields = self.pool[objname]._phone_fields
             obj = self.pool[objname]
-            if prop.get('phonefields'):
-                fields += prop['phonefields']
-            if prop.get('faxfields'):
-                fields += prop['faxfields']
             logger.info(
                 'Starting to reformat phone numbers on object %s '
                 '(fields = %s)' % (objname, fields))
@@ -67,18 +66,17 @@ class reformat_all_phonenumbers(orm.TransientModel):
                 # _generic_reformat_phonenumbers()
                 try:
                     obj._generic_reformat_phonenumbers(
-                        cr, uid, entry, context=ctx_raise)
+                        cr, uid, [entry['id']], entry, context=ctx_raise)
                 except Exception, e:
                     name = obj.name_get(
                         cr, uid, [init_entry['id']], context=context)[0][1]
+                    err_msg = e and len(e) > 1 and e[1] or 'missing error msg'
                     phonenumbers_not_reformatted += \
                         "Problem on %s '%s'. Error message: %s\n" % (
-                            obj._description,
-                            name, e[1])
+                            obj._description, name, err_msg)
                     logger.warning(
                         "Problem on %s '%s'. Error message: %s" % (
-                            obj._description,
-                            name, e[1]))
+                            obj._description, name, err_msg))
                     continue
                 if any(
                         [init_entry.get(field)
@@ -95,9 +93,10 @@ class reformat_all_phonenumbers(orm.TransientModel):
             phonenumbers_not_reformatted = \
                 'All phone numbers have been reformatted successfully.'
         self.write(
-            cr, uid, ids[0],
-            {'phonenumbers_not_reformatted': phonenumbers_not_reformatted},
-            context=context)
+            cr, uid, ids[0], {
+                'phonenumbers_not_reformatted': phonenumbers_not_reformatted,
+                'state': 'done',
+                }, context=context)
         logger.info('End of the phone number reformatting wizard')
         action = self.pool['ir.actions.act_window'].for_xml_id(
             cr, uid, 'base_phone', 'reformat_all_phonenumbers_action',
