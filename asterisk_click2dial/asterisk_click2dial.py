@@ -404,7 +404,8 @@ class phone_common(orm.AbstractModel):
         user, ast_server, ast_manager = \
             self.pool['asterisk.server']._connect_to_asterisk(
                 cr, uid, context=context)
-        ast_number = self.convert_to_dial_number(erp_number)
+        ast_number = self.convert_to_dial_number(
+            cr, uid, erp_number, context=context)
         # Add 'out prefix'
         if ast_server.out_prefix:
             _logger.debug('Out prefix = %s' % ast_server.out_prefix)
