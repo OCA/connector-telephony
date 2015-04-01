@@ -20,99 +20,129 @@
 #
 ##############################################################################
 
-from openerp.osv import orm, fields
+from openerp import models, fields, api, _
 import time
 import logging
+import urllib
 
 _logger = logging.getLogger('smsclient')
 
-class ServerAction(orm.Model):
+class ServerAction(models.Model):
     """
     Possibility to specify the SMS Gateway when configure this server action
     """
     _inherit = 'ir.actions.server'
 
-    _columns = {
-        'sms_server': fields.many2one('sms.smsclient', 'SMS Server',
-            help='Select the SMS Gateway configuration to use with this action'),
-        'sms_template_id': fields.many2one('email.template', 'SMS Template',
-            help='Select the SMS Template configuration to use with this action'),
-    }
+    mobile = fields.Char('Mobile No', size=512, help="Provides fields that "
+                          "be used to fetch the mobile number, e.g. you select"
+                          " the invoice, then "
+                          "`object.invoice_address_id.mobile` is the field "
+                          "which gives the correct mobile number")
+    sms = fields.Char('SMS', size=160, translate=True)
+    sms_server = fields.Many2one('sms.smsclient', 'SMS Server',
+        help='Select the SMS Gateway configuration to use with this action')
+    sms_template_id = fields.Many2one('email.template', 'SMS Template',
+        help='Select the SMS Template configuration to use with this action')
 
-    def run(self, cr, uid, ids, context=None):
-        if context is None:
-            context = {}
+    @api.model
+    def _get_states(self):
+        """ Override me in order to add new states in the server action. Please
+        note that the added key length should not be higher than already-existing
+        ones. """
+        states = super(ServerAction, self)._get_states()
+        states.append(('sms', 'SMS'))
+        return states
+
+    @api.multi
+    def run(self):
         act_ids = []
-        for action in self.browse(cr, uid, ids, context=context):
-            obj_pool = self.pool.get(action.model_id.model)
-            obj = obj_pool.browse(cr, uid, context['active_id'], context=context)
-            email_template_obj = self.pool.get('email.template')
+        for action in self:
+            obj_pool = self.env[action.model_id.model]
+            obj = obj_pool.browse(self._context['active_id'])
+            email_template_obj = self.env['email.template']
             cxt = {
-                'context': context,
+                'context': self._context,
                 'object': obj,
                 'time': time,
-                'cr': cr,
+                'cr': self.env.cr,
                 'pool': self.pool,
-                'uid': uid
+                'uid': self.env.uid
             }
             expr = eval(str(action.condition), cxt)
             if not expr:
                 continue
             if action.state == 'sms':
                 _logger.info('Send SMS')
-                sms_pool = self.pool.get('sms.smsclient')
-                queue_obj = self.pool.get('sms.smsclient.queue')
+                sms_pool = self.env['sms.smsclient']
+                queue_obj = self.env['sms.smsclient.queue']
                 mobile = str(action.mobile)
                 to = None
-                try:
-                    cxt.update({'gateway': action.sms_server})
-                    gateway = action.sms_template_id.gateway_id
-                    if mobile:
-                        to = eval(action.mobile, cxt)
-                    else:
-                        _logger.error('Mobile number not specified !')
-                    res_id = context['active_id']
-                    template = email_template_obj.get_email_template(cr, uid, action.sms_template_id.id, res_id, context)
-                    values = {}
-                    for field in ['subject', 'body_html', 'email_from',
-                                  'email_to', 'email_recipients', 'email_cc', 'reply_to']:
-                        values[field] = email_template_obj.render_template(cr, uid, getattr(template, field),
-                                                             template.model, res_id, context=context) \
-                                                             or False
-                    vals ={
-                        'name': gateway.url,
-                        'gateway_id': gateway.id,
-                        'state': 'draft',
-                        'mobile': to,
-                        'msg': values['body_html'],
-                        'validity': gateway.validity, 
-                        'classes': gateway.classes, 
-                        'deferred': gateway.deferred, 
-                        'priority': gateway.priority, 
-                        'coding': gateway.coding,
-                        'tag': gateway.tag, 
-                        'nostop': gateway.nostop,
-                    }
-                    sms_in_q = queue_obj.search(cr, uid,[
-                        ('name','=',gateway.url),
-                        ('gateway_id','=',gateway.id),
-                        ('state','=','draft'),
-                        ('mobile','=',to),
-                        ('msg','=',values['body_html']),
-                        ('validity','=',gateway.validity), 
-                        ('classes','=',gateway.classes), 
-                        ('deferred','=',gateway.deferred), 
-                        ('priority','=',gateway.priority), 
-                        ('coding','=',gateway.coding),
-                        ('tag','=',gateway.tag), 
-                        ('nostop','=',gateway.nostop)
-                        ])
-                    print sms_in_q
-                    if not sms_in_q:
-                        queue_obj.create(cr, uid, vals, context=context)
-                        _logger.info('SMS successfully send to : %s' % (to))
-                except Exception, e:
-                    _logger.error('Failed to send SMS : %s' % repr(e))
+                # try:
+                cxt.update({'gateway': action.sms_server})
+                gateway = action.sms_template_id.gateway_id
+                if mobile:
+                    to = action.mobile
+                else:
+                    _logger.error('Mobile number not specified !')
+                res_id = self._context['active_id']
+                template = email_template_obj.get_email_template(action.sms_template_id.id, res_id)
+                values = {}
+                for field in ['subject', 'body_html', 'email_from',
+                              'email_to', 'email_cc', 'reply_to']:
+                    values[field] = email_template_obj.render_template(getattr(template, field),
+                                                         template.model, res_id) \
+                                                         or False
+
+                name = gateway.url
+                if gateway.method == 'http':
+                    prms = {}
+                    for p in gateway.property_ids:
+                        if p.type == 'user':
+                            prms[p.name] = p.value
+                        elif p.type == 'password':
+                            prms[p.name] = p.value
+                        elif p.type == 'to':
+                            prms[p.name] = to
+                        elif p.type == 'sms':
+                            prms[p.name] = values['body_html']
+                        elif p.type == 'extra':
+                            prms[p.name] = p.value
+                    params = urllib.urlencode(prms)
+                    name = gateway.url + "?" + params
+                vals ={
+                    'name': name,
+                    'gateway_id': gateway.id,
+                    'state': 'draft',
+                    'mobile': to,
+                    'msg': values['body_html'],
+                    'validity': gateway.validity,
+                    'classes': gateway.classes,
+                    'deferred': gateway.deferred,
+                    'priority': gateway.priority,
+                    'coding': gateway.coding,
+                    'tag': gateway.tag,
+                    'nostop': gateway.nostop,
+                }
+                sms_in_q = queue_obj.search([
+                    ('name','=',gateway.url),
+                    ('gateway_id','=',gateway.id),
+                    ('state','=','draft'),
+                    ('mobile','=',to),
+                    ('msg','=',values['body_html']),
+                    ('validity','=',gateway.validity),
+                    ('classes','=',gateway.classes),
+                    ('deferred','=',gateway.deferred),
+                    ('priority','=',gateway.priority),
+                    ('coding','=',gateway.coding),
+                    ('tag','=',gateway.tag),
+                    ('nostop','=',gateway.nostop)
+                    ])
+                print sms_in_q
+                if not sms_in_q:
+                    queue_obj.create(vals)
+                    _logger.info('SMS successfully send to : %s' % (to))
+                # except Exception, e:
+                    # _logger.error('Failed to send SMS : %s' % repr(e))
             else:
                 act_ids.append(action.id)
         if act_ids:

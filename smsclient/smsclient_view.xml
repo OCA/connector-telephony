@@ -153,14 +153,16 @@
             <field name="model">sms.smsclient.queue</field>
             <field name="arch" type="xml">
                 <form string="Gateway History">
-                    <field name="date_create" select="1"/>
-                    <field name="gateway_id" select="1"/>
-                    <field name="mobile" select="1"/>
-                    <field name="state" select="1"/>
-                    <separator string="SMS Message" colspan="4"/>
-                    <field name="msg" colspan="4" select="2" nolabel="1"/>
-                    <separator string="Last Error"  colspan="4"/>
-                    <field name="error" colspan="4" select="2" nolabel="1"/>
+                    <group>
+                        <field name="date_create" select="1"/>
+                        <field name="gateway_id" select="1"/>
+                        <field name="mobile" select="1"/>
+                        <field name="state" select="1"/>
+                        <separator string="SMS Message" colspan="4"/>
+                        <field name="msg" colspan="4" select="2" nolabel="1"/>
+                        <separator string="Last Error"  colspan="4"/>
+                        <field name="error" colspan="4" select="2" nolabel="1"/>
+                    </group>
                 </form>
             </field>
         </record>
