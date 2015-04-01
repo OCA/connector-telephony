@@ -3,6 +3,7 @@
 #
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2013 Julius Network Solutions SARL <contact@julius.fr>
+#    Copyright (C) 2015 Valentin Chemiere <valentin.chemiere@akretion.com>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -18,21 +19,12 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-import time
-import urllib
-from openerp.osv import fields, orm
-from openerp.tools.translate import _
+from openerp import models, fields, api
 
-class email_template(orm.Model):
+
+class email_template(models.Model):
     _inherit = "email.template"
-    
-    _columns = {
-        'sms_template': fields.boolean('SMS Template'),
-        'mobile_to': fields.char('To (Mobile)', size=256),
-        'gateway_id': fields.many2one('sms.smsclient', 'SMS Gateway'),
-    }
-    
-            
-        
-    
-    
+
+    sms_template = fields.Boolean('SMS Template')
+    mobile_to = fields.Char('To (Mobile)', size=256)
+    gateway_id = fields.Many2one('sms.smsclient', 'SMS Gateway')

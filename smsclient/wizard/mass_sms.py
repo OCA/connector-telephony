@@ -19,29 +19,29 @@
 #
 ##############################################################################
 
-from openerp.osv import fields, orm
-from openerp.tools.translate import _
+from openerp import models, fields, api, _
+from openerp.exceptions import Warning
+import re
 
-class part_sms(orm.TransientModel):
+
+class part_sms(models.TransientModel):
     _name = 'part.sms'
 
-    def _default_get_gateway(self, cr, uid, fields, context=None):
-        if context is None:
-            context = {}
+    @api.model
+    def _default_get_gateway(self):
         sms_obj = self.pool.get('sms.smsclient')
-        gateway_ids = sms_obj.search(cr, uid, [], limit=1, context=context)
+        gateway_ids = sms_obj.search([], limit=1)
         return gateway_ids and gateway_ids[0] or False
 
-    def onchange_gateway_mass(self, cr, uid, ids, gateway_id, context=None):
-        if context is None:
-            context = {}
+    @api.onchange('gateway')
+    def onchange_gateway_mass(self, gateway_id):
         if not gateway_id:
             return {}
-        sms_obj = self.pool.get('sms.smsclient')
-        gateway = sms_obj.browse(cr, uid, gateway_id, context=context)
+        sms_obj = self.env['sms.smsclient']
+        gateway = sms_obj.browse(gateway_id)
         return {
             'value': {
-                'validity': gateway.validity, 
+                'validity': gateway.validity,
                 'classes': gateway.classes,
                 'deferred': gateway.deferred,
                 'priority': gateway.priority,
@@ -51,7 +51,8 @@ class part_sms(orm.TransientModel):
             }
         }
 
-    def _merge_message(self, cr, uid, message, object, partner, context=None):
+    @api.model
+    def _merge_message(self, message, object, partner):
         def merge(match):
             exp = str(match.group()[2: -2]).strip()
             result = eval(exp, {'object': object, 'partner': partner})
@@ -62,55 +63,70 @@ class part_sms(orm.TransientModel):
         msg = com.sub(merge, message)
         return msg
 
-    def sms_mass_send(self, cr, uid, ids, context=None):
-        datas = {}
-        gateway_id = self.browse(cr, uid, ids, context)[0].gateway.id
-        client_obj = self.pool.get('sms.smsclient')
-        partner_obj = self.pool.get('res.partner')
-        active_ids = context.get('active_ids')
-        for data in self.browse(cr, uid, ids, context) :
+    @api.multi
+    def sms_mass_send(self):
+        client_obj = self.env['sms.smsclient']
+        partner_obj = self.env['res.partner']
+        active_ids = self._context.get('active_ids')
+        for data in self:
             if not data.gateway:
-                raise orm.except_orm(_('Error'), _('No Gateway Found'))
+                raise Warning(_('No Gateway Found'))
             else:
-                for partner in partner_obj.browse(cr, uid, active_ids, context=context):
+                for partner in partner_obj.browse(active_ids):
                     data.mobile_to = partner.mobile
-                    client_obj._send_message(cr, uid, data, context=context)
+                    client_obj._send_message(data)
         return True
 
-    _columns = {
-        'gateway': fields.many2one('sms.smsclient', 'SMS Gateway', required=True),
-        'text': fields.text('Text', required=True),
-        'validity': fields.integer('Validity',
-            help='The maximum time -in minute(s)- before the message is dropped'),
-        'classes': fields.selection([
-                ('0', 'Flash'),
-                ('1', 'Phone display'),
-                ('2', 'SIM'),
-                ('3', 'Toolkit'),
-            ], 'Class',
-            help='The sms class: flash(0),phone display(1),SIM(2),toolkit(3)'),
-        'deferred': fields.integer('Deferred',
-            help='The time -in minute(s)- to wait before sending the message'),
-        'priority': fields.selection([
-                ('0', '0'),
-                ('1', '1'),
-                ('2', '2'),
-                ('3', '3')
-            ], 'Priority', help='The priority of the message'),
-        'coding': fields.selection([
-                ('1', '7 bit'),
-                ('2', 'Unicode')
-            ], 'Coding', help='The sms coding: 1 for 7 bit or 2 for unicode'),
-        'tag': fields.char('Tag', size=256, help='An optional tag'),
-        'nostop': fields.selection([
-                ('0', '0'),
-                ('1', '1')
-            ], 'NoStop',
-            help='Do not display STOP clause in the message, this requires that this is not an advertising message'),
-    }
-
-    _defaults = {
-        'gateway': _default_get_gateway,        
-    }
+    gateway = fields.Many2one(
+        'sms.smsclient',
+        'SMS Gateway',
+        required=True,
+        default=_default_get_gateway
+    )
+    text = fields.Text('Text', required=True)
+    validity = fields.Integer(
+        'Validity',
+        help='The maximum time -in minute(s)- before the message is dropped'
+    )
+    classes = fields.Selection(
+        [
+            ('0', 'Flash'),
+            ('1', 'Phone display'),
+            ('2', 'SIM'),
+            ('3', 'Toolkit'),
+        ], 'Class',
+        help='The sms class: flash(0),phone display(1),SIM(2),toolkit(3)')
+    deferred = fields.Integer(
+        'Deferred',
+        help='The time -in minute(s)- to wait before sending the message'
+    )
+    priority = fields.Selection(
+        [
+            ('0', '0'),
+            ('1', '1'),
+            ('2', '2'),
+            ('3', '3')
+        ],
+        'Priority',
+        help='The priority of the message'
+    )
+    coding = fields.Selection(
+        [
+            ('1', '7 bit'),
+            ('2', 'Unicode')
+        ],
+        'Coding',
+        help='The sms coding: 1 for 7 bit or 2 for unicode'
+    )
+    tag = fields.Char('Tag', size=256, help='An optional tag')
+    nostop = fields.Selection(
+        [
+            ('0', '0'),
+            ('1', '1')
+        ],
+        'NoStop',
+        help='Do not display STOP clause in the message, this requires that'
+        ' this is not an advertising message'
+    )
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

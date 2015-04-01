@@ -7,7 +7,7 @@
             <field name="arch" type="xml">
             	<form string="SMS Gateway - Sens SMS" version="7.0">
 	                <group string="Gateway" colspan="4">
-	        			<field name="gateway" on_change="onchange_gateway_mass(gateway,context)"/>
+	        			<field name="gateway" />
 					</group>
 					<notebook>
 	                    <page string="Message">
