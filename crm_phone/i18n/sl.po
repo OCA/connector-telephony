@@ -1,0 +1,116 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#	* crm_phone
+#
+# Matjaž Mozetič <m.mozetic@matmoz.si>, 2015.
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 7.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-08-25 21:38+0000\n"
+"PO-Revision-Date: 2015-04-05 09:26+0200\n"
+"Last-Translator: Matjaž Mozetič <m.mozetic@matmoz.si>\n"
+"Language-Team: Slovenian <translate@matmoz.si>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+"Language: sl\n"
+"X-Generator: Lokalize 1.5\n"
+
+#. module: crm_phone
+#: view:number.not.found:0
+msgid "Create Lead with this Number"
+msgstr "Ustvari indic s to številko"
+
+#. module: crm_phone
+#: code:addons/crm_phone/wizard/number_not_found.py:50
+#, python-format
+msgid "Create New Lead"
+msgstr "Ustvari nov indic"
+
+#. module: crm_phone
+#: view:number.not.found:0
+msgid "Create or Update a Lead"
+msgstr "Ustvari ali posodobi indic"
+
+#. module: crm_phone
+#: field:number.not.found,current_lead_mobile:0
+msgid "Current Mobile"
+msgstr "Trenutna mobilna številka"
+
+#. module: crm_phone
+#: field:number.not.found,current_lead_phone:0
+msgid "Current Phone"
+msgstr "Trenutna telefonska številka"
+
+#. module: crm_phone
+#: code:addons/crm_phone/wizard/number_not_found.py:70
+#, python-format
+msgid "Error:"
+msgstr "Napaka:"
+
+#. module: crm_phone
+#: help:number.not.found,to_update_lead_id:0
+msgid "Lead on which the phone number will be written"
+msgstr "Indic, na katerega se bo zapisala telefonska številka"
+
+#. module: crm_phone
+#: field:number.not.found,to_update_lead_id:0
+msgid "Lead to Update"
+msgstr "Indic za posodobitev"
+
+#. module: crm_phone
+#: model:ir.model,name:crm_phone.model_crm_lead
+msgid "Lead/Opportunity"
+msgstr "Indic / priložnost"
+
+#. module: crm_phone
+#: code:addons/crm_phone/wizard/number_not_found.py:76
+#, python-format
+msgid "Lead: %s"
+msgstr "Indic: %s"
+
+#. module: crm_phone
+#: model:ir.model,name:crm_phone.model_number_not_found
+msgid "Number not found"
+msgstr "Številka ni najdena"
+
+#. module: crm_phone
+#: model:ir.model,name:crm_phone.model_crm_phonecall
+msgid "Phonecall"
+msgstr "Telefonski klic"
+
+#. module: crm_phone
+#: code:addons/crm_phone/wizard/number_not_found.py:71
+#, python-format
+msgid "Select the Lead to Update."
+msgstr "Izbira indica za posodobitev"
+
+#. module: crm_phone
+#: sql_constraint:crm.lead:0
+msgid "The probability of closing the deal should be between 0% and 100%!"
+msgstr "Verjetnost sklenitve posla mora biti med 0% in 100%!"
+
+#. module: crm_phone
+#: view:number.not.found:0
+msgid "Update Lead with this Number"
+msgstr "Posodobitev indica s to številko"
+
+#. module: crm_phone
+#: view:crm.lead:0
+msgid "fax"
+msgstr "faks"
+
+#. module: crm_phone
+#: view:crm.lead:0
+#: view:crm.phonecall:0
+msgid "phone"
+msgstr "telefon"
+
+#. module: crm_phone
+#: model:ir.model,name:crm_phone.model_phone_common
+msgid "phone.common"
+msgstr "phone.common"
+
+
