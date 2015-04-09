@@ -24,6 +24,7 @@ from osv import osv, fields
 import logging
 # Lib to translate error messages
 from tools.translate import _
+from tools import ustr
 # Lib for phone number reformating -> pip install phonenumbers
 import phonenumbers
 # Lib py-asterisk from http://code.google.com/p/py-asterisk/
@@ -188,25 +189,25 @@ class asterisk_server(osv.osv):
                     raise osv.except_osv(
                         _('Error :'),
                         _("Only use digits for the '%s' on the Asterisk "
-                          "server '%s'" % (digit_prefix[0], server.name))
+                          "server '%s'") % (digit_prefix[0], server.name)
                     )
             if server.wait_time < 1 or server.wait_time > 120:
                 raise osv.except_osv(
                     _('Error :'),
                     _("You should set a 'Wait time' value between 1 and 120 "
-                      "seconds for the Asterisk server '%s'" % server.name)
+                      "seconds for the Asterisk server '%s'") % server.name
                 )
             if server.extension_priority < 1:
                 raise osv.except_osv(
                     _('Error :'),
                     _("The 'extension priority' must be a positive value for "
-                      "the Asterisk server '%s'" % server.name)
+                      "the Asterisk server '%s'") % server.name
                 )
             if server.port > 65535 or server.port < 1:
                 raise osv.except_osv(
                     _('Error :'),
                     _("You should set a TCP port between 1 and 65535 for the "
-                      "Asterik server '%s'" % server.name)
+                      "Asterik server '%s'") % server.name
                 )
             for check_string in [
                     dialplan_context,
@@ -220,8 +221,8 @@ class asterisk_server(osv.osv):
                         raise osv.except_osv(
                             _('Error :'),
                             _("The '%s' should only have ASCII caracters for "
-                              "the Asterisk server '%s'"
-                              % (check_string[0], server.name))
+                              "the Asterisk server '%s'")
+                            % (check_string[0], server.name)
                         )
         return True
 
@@ -256,7 +257,7 @@ class asterisk_server(osv.osv):
 
         # Let's call the variable tmp_number now
         tmp_number = erp_number
-        _logger.debug('Number before reformat = %s' % tmp_number)
+        _logger.debug('Number before reformat = %s', tmp_number)
 
         # Check if empty
         if not tmp_number:
@@ -281,21 +282,21 @@ class asterisk_server(osv.osv):
             raise  # This should never happen
             # Remove the starting '+' of the number
         tmp_number = tmp_number.replace('+', '')
-        _logger.debug('Number after removal of special char = %s' % tmp_number)
+        _logger.debug('Number after removal of special char = %s', tmp_number)
 
         # At this stage, 'tmp_number' should only contain digits
         if not tmp_number.isdigit():
             raise osv.except_osv(error_title_msg, invalid_format_msg)
 
-        _logger.debug('Country prefix = %s' % country_prefix)
+        _logger.debug('Country prefix = %s', country_prefix)
         if country_prefix == tmp_number[0:len(country_prefix)]:
             # If the number is a national number,
             # remove 'my country prefix' and add 'national prefix'
             tmp_number = (national_prefix
                           + tmp_number[len(country_prefix):len(tmp_number)])
             _logger.debug(
-                'National prefix = %s - Number with national prefix = %s'
-                % (national_prefix, tmp_number)
+                'National prefix = %s - Number with national prefix = %s',
+                national_prefix, tmp_number,
             )
 
         else:
@@ -304,14 +305,14 @@ class asterisk_server(osv.osv):
             tmp_number = international_prefix + tmp_number
             _logger.debug(
                 'International prefix = %s - Number with international prefix '
-                '= %s' % (international_prefix, tmp_number)
+                '= %s', international_prefix, tmp_number,
             )
 
         # Add 'out prefix' to all numbers
         tmp_number = out_prefix + tmp_number
         _logger.debug(
-            'Out prefix = %s - Number to be sent to Asterisk = %s'
-            % (out_prefix, tmp_number)
+            'Out prefix = %s - Number to be sent to Asterisk = %s',
+            out_prefix, tmp_number,
         )
         return tmp_number
 
@@ -388,11 +389,10 @@ class asterisk_server(osv.osv):
             )
 
         _logger.debug(
-            "User's phone : %s/%s" % (user.asterisk_chan_type, user.resource)
+            "User's phone : %s/%s", user.asterisk_chan_type, user.resource,
         )
         _logger.debug(
-            "Asterisk server = %s:%d"
-            % (ast_server.ip_address, ast_server.port)
+            "Asterisk server = %s:%d", ast_server.ip_address, ast_server.port,
         )
 
         # Connect to the Asterisk Manager Interface
@@ -404,16 +404,16 @@ class asterisk_server(osv.osv):
             )
         except Exception, e:
             _logger.error(
-                "Error in the Originate request to Asterisk server %s"
-                % ast_server.ip_address
+                "Error in the Originate request to Asterisk server %s",
+                ast_server.ip_address,
             )
             _logger.error(
-                "Here is the detail of the error : '%s'" % unicode(e)
+                "Here is the detail of the error : '%s'", ustr(e)
             )
             raise osv.except_osv(
-                _('Error :'),
+                _('Error:'),
                 _("Problem in the request from OpenERP to Asterisk. Here is "
-                  "the detail of the error: '%s'" % unicode(e))
+                  "the detail of the error: '%s'") % ustr(e)
             )
 
         return (user, ast_server, ast_manager)
@@ -463,18 +463,18 @@ class asterisk_server(osv.osv):
                 timeout=str(ast_server.wait_time * 1000),
                 caller_id=user.callerid,
                 variable=variable)
-        except Exception, e:
+        except Exception as e:
             _logger.error(
-                "Error in the Originate request to Asterisk server %s"
-                % ast_server.ip_address
+                "Error in the Originate request to Asterisk server %s",
+                ast_server.ip_address,
             )
             _logger.error(
-                "Here is the detail of the error : '%s'" % unicode(e)
+                "Here is the detail of the error : '%s'" , ustr(e)
             )
             raise osv.except_osv(
                 _('Error :'),
                 _("Click to dial with Asterisk failed.\nHere is the error: "
-                  "'%s'" % unicode(e))
+                  "'%s'") % ustr(e)
             )
 
         finally:
@@ -508,16 +508,16 @@ class asterisk_server(osv.osv):
                     break
         except Exception, e:
             _logger.error(
-                "Error in the Status request to Asterisk server %s"
-                % ast_server.ip_address
+                "Error in the Status request to Asterisk server %s",
+                ast_server.ip_address,
             )
             _logger.error(
-                "Here is the detail of the error : '%s'" % unicode(e)
+                "Here is the detail of the error : '%s'", ustr(e)
             )
             raise osv.except_osv(
                 _('Error :'),
                 _("Can't get calling number from  Asterisk.\n"
-                  "Here is the error: '%s'" % unicode(e))
+                  "Here is the error: '%s'") % ustr(e)
             )
 
         finally:
@@ -627,7 +627,7 @@ class res_users(osv.osv):
                         raise osv.except_osv(
                             _('Error :'),
                             _("The '%s' for the user '%s' should only have "
-                              "ASCII caracters" % (check_string[0], user.name))
+                              "ASCII caracters") % (check_string[0], user.name)
                         )
         return True
 
@@ -667,8 +667,8 @@ class res_partner_address(osv.osv):
                     except Exception, e:
                         _logger.error(
                             "Cannot reformat the phone number '%s' to E.164 "
-                            "format. Error message: %s"
-                            % (addr.get(fromfield), e)
+                            "format. Error message: %s",
+                            addr.get(fromfield), e,
                         )
                         _logger.error(
                             "You should fix this number and run the wizard "
@@ -743,8 +743,8 @@ class res_partner_address(osv.osv):
                 # format... so it's better to raise the exception here
                 raise osv.except_osv(
                     _('Error :'),
-                    _("You should set a country on the company '%s'"
-                      % user.company_id.name)
+                    _("You should set a country on the company '%s'")
+                    % user.company_id.name
                 )
             for field in phonefields:
                 if vals.get(field):
@@ -757,8 +757,8 @@ class res_partner_address(osv.osv):
                         raise osv.except_osv(
                             _('Error :'),
                             _("Cannot reformat the phone number '%s' to "
-                              "international format. Error message: %s"
-                              % (vals.get(field), e))
+                              "international format. Error message: %s")
+                            (vals.get(field), e)
                         )
                     vals[field] = phonenumbers.format_number(
                         res_parse,
@@ -843,12 +843,12 @@ class res_partner_address(osv.osv):
     def get_partner_from_phone_number(self, cr, uid, number, context=None):
         # We check that "number" is really a number
         _logger.debug(
-            u"Call get_name_from_phone_number with number = %s" % number
+            u"Call get_name_from_phone_number with number = %s", number,
         )
         if not isinstance(number, (str, unicode)):
             _logger.warning(
-                u"Number should be a 'str' or 'unicode' but it is a '%s'"
-                % type(number)
+                u"Number should be a 'str' or 'unicode' but it is a '%s'",
+                type(number)
             )
             return False
         if not number.isdigit():
@@ -868,15 +868,15 @@ class res_partner_address(osv.osv):
         if len(res_ids) > 1:
             _logger.warning(
                 u"There are several partners addresses (IDS = %s) with the "
-                "same phone number %s" % (str(res_ids), number)
+                "same phone number %s", ustr(res_ids), number,
             )
         if res_ids:
             entry = self.read(
                 cr, uid, res_ids[0], ['name', 'partner_id'], context=context
             )
             _logger.debug(
-                u"Answer get_partner_from_phone_number with name = %s"
-                % entry['name']
+                u"Answer get_partner_from_phone_number with name = %s",
+                entry['name']
             )
             return (
                 entry['id'],
@@ -884,7 +884,7 @@ class res_partner_address(osv.osv):
                 entry['name']
             )
         else:
-            _logger.debug(u"No match for phone number %s" % number)
+            _logger.debug(u"No match for phone number %s", number)
             return False
 
 res_partner_address()

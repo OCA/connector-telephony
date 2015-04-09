@@ -20,6 +20,7 @@
 ##############################################################################
 
 from osv import osv, fields
+from tools import ustr
 import logging
 
 _logger = logging.getLogger(__name__)
@@ -58,8 +59,8 @@ class reformat_all_phonenumbers(osv.osv_memory):
                     "Error message: %s" % (init_addr.get('name'), e[1]) + "\n"
                 )
                 _logger.warning(
-                    "Problem on partner contact '%s'. Error message: %s"
-                    % (init_addr.get('name'), e[1])
+                    "Problem on partner contact '%s'. Error message: %s",
+                    init_addr.get('name'), e[1],
                 )
                 continue
             # Test if the phone numbers have been changed
@@ -68,8 +69,8 @@ class reformat_all_phonenumbers(osv.osv_memory):
                 addr.pop('id')
                 addr.pop('name')
                 _logger.info(
-                    'Reformating phone number: FROM %s TO %s'
-                    % (unicode(init_addr), unicode(addr))
+                    'Reformating phone number: FROM %s TO %s',
+                    ustr(init_addr), ustr(addr),
                 )
                 addr_obj.write(cr, uid, init_addr['id'], addr, context=context)
         if not phonenumbers_not_reformatted:
