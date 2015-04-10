@@ -51,7 +51,7 @@ class number_not_found(orm.TransientModel):
         'current_partner_mobile': fields.related(
             'to_update_partner_id', 'mobile', type='char',
             relation='res.partner', string='Current Mobile', readonly=True),
-        }
+    }
 
     def default_get(self, cr, uid, fields_list, context=None):
         res = super(number_not_found, self).default_get(
@@ -61,7 +61,10 @@ class number_not_found(orm.TransientModel):
             res = {}
         if res.get('calling_number'):
             convert = self.pool['phone.common']._generic_reformat_phonenumbers(
-                cr, uid, None, {'phone': res.get('calling_number')}, context=context)
+                cr, uid, None,
+                {'phone': res.get('calling_number')},
+                context=context
+            )
             parsed_num = phonenumbers.parse(convert.get('phone'))
             res['e164_number'] = phonenumbers.format_number(
                 parsed_num, phonenumbers.PhoneNumberFormat.INTERNATIONAL)
@@ -73,7 +76,7 @@ class number_not_found(orm.TransientModel):
         return res
 
     def create_partner(self, cr, uid, ids, context=None):
-        '''Function called by the related button of the wizard'''
+        """Function called by the related button of the wizard"""
         if context is None:
             context = {}
         wiz = self.browse(cr, uid, ids[0], context=context)
@@ -89,7 +92,7 @@ class number_not_found(orm.TransientModel):
             'nodestroy': False,
             'target': 'current',
             'context': context,
-            }
+        }
         return action
 
     def update_partner(self, cr, uid, ids, context=None):
@@ -110,7 +113,7 @@ class number_not_found(orm.TransientModel):
             'target': 'current',
             'res_id': wiz.to_update_partner_id.id,
             'context': context,
-            }
+        }
         return action
 
     def onchange_to_update_partner(
@@ -122,10 +125,10 @@ class number_not_found(orm.TransientModel):
             res['value'].update({
                 'current_partner_phone': to_update_partner.phone,
                 'current_partner_mobile': to_update_partner.mobile,
-                })
+            })
         else:
             res['value'].update({
                 'current_partner_phone': False,
                 'current_partner_mobile': False,
-                })
+            })
         return res
