@@ -60,8 +60,9 @@ class number_not_found(orm.TransientModel):
         if not res:
             res = {}
         if res.get('calling_number'):
-            convert = self.pool['phone.common']._generic_reformat_phonenumbers(
-                cr, uid, None, {'phone': res.get('calling_number')}, context=context)
+            convert = self.pool['res.partner']._generic_reformat_phonenumbers(
+                cr, uid, None, {'phone': res.get('calling_number')},
+                context=context)
             parsed_num = phonenumbers.parse(convert.get('phone'))
             res['e164_number'] = phonenumbers.format_number(
                 parsed_num, phonenumbers.PhoneNumberFormat.INTERNATIONAL)
