@@ -67,4 +67,8 @@ class TestResPartner(TransactionCase):
                             }
                     )
 
-
+    def test_undefined_numbers(self):
+        """Nothing special should happen if no phonenumber is set."""
+        for phone_field in self.res_partner_pool._phone_fields:
+            partner = self.res_partner_pool.create({'name': 't_name',})
+            self.assertEqual(partner.name, 't_name')

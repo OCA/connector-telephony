@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
-#    OpenERP, Open Source Management Solution
+# OpenERP, Open Source Management Solution
 #    This module copyright (C)  cgstudiomap <cgstudiomap@gmail.com>
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -30,28 +30,34 @@ _logger = logging.getLogger(__name__)
 class ResPartner(models.Model):
     _inherit = 'res.partner'
 
-    def _force_validation(self, phonenumber):
+    def _force_validation(self, phonenumber, fieldname):
         """Force the validation using phonenumbers of a given number
 
         :param phonenumber: string
+        :param str fieldname: name of the field the number is related to.
         :raise ValidationError: if the given number is not validated.
         """
         number = phonenumbers.parse(phonenumber, self.country_id.code)
         if not phonenumbers.is_valid_number(number):
-            error_msg = 'The number "{}" seems not valid for {}.\nPlease double check it.'.format(
-                phonenumber, self.country_id.name
-            )
-            _logger.error(error_msg)
+            error_msg = '\n'.join([
+                'The number ({}) "{}" seems not valid for {}.'.format(
+                    fieldname, phonenumber, self.country_id.name
+                ),
+                'Please double check it.'
+            ])
             raise ValidationError(error_msg)
 
     @api.constrains('phone')
     def _phone_number_validation(self):
-        self._force_validation(self.phone)
+        if self.phone:
+            self._force_validation(self.phone, 'phone')
 
     @api.constrains('fax')
     def _fax_number_validation(self):
-        self._force_validation(self.fax)
+        if self.fax:
+            self._force_validation(self.fax, 'fax')
 
     @api.constrains('mobile')
     def _mobile_number_validation(self):
-        self._force_validation(self.mobile)
+        if self.mobile:
+            self._force_validation(self.mobile, 'mobile')
