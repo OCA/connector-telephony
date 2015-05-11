@@ -26,27 +26,18 @@ from openerp.osv import orm
 class crm_claim(orm.Model):
     _name = 'crm.claim'
     _inherit = ['crm.claim', 'phone.common']
+    _phone_fields = ['partner_phone']
+    _country_field = None
+    _partner_field = 'partner_id'
 
     def create(self, cr, uid, vals, context=None):
         vals_reformated = self._generic_reformat_phonenumbers(
-            cr, uid, vals, context=context)
+            cr, uid, None, vals, context=context)
         return super(crm_claim, self).create(
             cr, uid, vals_reformated, context=context)
 
     def write(self, cr, uid, ids, vals, context=None):
         vals_reformated = self._generic_reformat_phonenumbers(
-            cr, uid, vals, context=context)
+            cr, uid, ids, vals, context=context)
         return super(crm_claim, self).write(
             cr, uid, ids, vals_reformated, context=context)
-
-
-class phone_common(orm.AbstractModel):
-    _inherit = 'phone.common'
-
-    def _get_phone_fields(self, cr, uid, context=None):
-        res = super(phone_common, self)._get_phone_fields(
-            cr, uid, context=context)
-        res['crm.claim'] = {
-            'phonefields': ['partner_phone'],
-            }
-        return res

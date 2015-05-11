@@ -20,6 +20,7 @@
 ##############################################################################
 
 from openerp.osv import orm, fields
+from openerp.tools.safe_eval import safe_eval
 from openerp.tools.translate import _
 import logging
 # Lib for phone number reformating -> pip install phonenumbers
@@ -31,76 +32,86 @@ _logger = logging.getLogger(__name__)
 class phone_common(orm.AbstractModel):
     _name = 'phone.common'
 
-    def generic_phonenumber_to_e164(
-            self, cr, uid, ids, field_from_to_seq, context=None):
-        result = {}
-        from_field_seq = [item[0] for item in field_from_to_seq]
-        for record in self.read(cr, uid, ids, from_field_seq, context=context):
-            result[record['id']] = {}
-            for fromfield, tofield in field_from_to_seq:
-                if not record.get(fromfield):
-                    res = False
-                else:
-                    try:
-                        res = phonenumbers.format_number(
-                            phonenumbers.parse(record.get(fromfield), None),
-                            phonenumbers.PhoneNumberFormat.E164)
-                    except Exception, e:
-                        _logger.error(
-                            "Cannot reformat the phone number '%s' to E.164 "
-                            "format. Error message: %s"
-                            % (record.get(fromfield), e))
-                        _logger.error(
-                            "You should fix this number and run the wizard "
-                            "'Reformat all phone numbers' from the menu "
-                            "Settings > Configuration > Phones")
-                    # If I raise an exception here, it won't be possible to
-                    # install the module on a DB with bad phone numbers
-                        res = False
-                result[record['id']][tofield] = res
-        return result
-
-    def _generic_reformat_phonenumbers(self, cr, uid, vals, phonefields=None,
-                                       context=None):
+    def _generic_reformat_phonenumbers(
+            self, cr, uid, ids, vals, context=None):
         """Reformat phone numbers in E.164 format i.e. +33141981242"""
-        if phonefields is None:
-            phonefields = [
-                'phone', 'partner_phone', 'work_phone', 'fax',
-                'mobile', 'partner_mobile', 'mobile_phone',
-            ]
-        if any([vals.get(field) for field in phonefields]):
+        assert isinstance(self._country_field, (str, unicode, type(None))),\
+            'Wrong self._country_field'
+        assert isinstance(self._partner_field, (str, unicode, type(None))),\
+            'Wrong self._partner_field'
+        assert isinstance(self._phone_fields, list),\
+            'self._phone_fields must be a list'
+        if context is None:
+            context = {}
+        if ids and isinstance(ids, (int, long)):
+            ids = [ids]
+        if any([vals.get(field) for field in self._phone_fields]):
             user = self.pool['res.users'].browse(cr, uid, uid, context=context)
             # country_id on res.company is a fields.function that looks at
             # company_id.partner_id.addres(default).country_id
-            if user.company_id.country_id:
-                user_countrycode = user.company_id.country_id.code
-            else:
-                # We need to raise an exception here because, if we pass None
-                # as second arg of phonenumbers.parse(), it will raise an
-                # exception when you try to enter a phone number in
-                # national format... so it's better to raise the exception here
-                raise orm.except_orm(
-                    _('Error:'),
-                    _("You should set a country on the company '%s'")
-                    % user.company_id.name)
-            for field in phonefields:
+            countrycode = None
+            if self._country_field:
+                if vals.get(self._country_field):
+                    country = self.pool['res.country'].browse(
+                        cr, uid, vals[self._country_field], context=context)
+                    countrycode = country.code
+                elif ids:
+                    rec = self.browse(cr, uid, ids[0], context=context)
+                    country = safe_eval(
+                        'rec.' + self._country_field, {'rec': rec})
+                    countrycode = country and country.code or None
+            elif self._partner_field:
+                if vals.get(self._partner_field):
+                    partner = self.pool['res.partner'].browse(
+                        cr, uid, vals[self._partner_field], context=context)
+                    countrycode = partner.country_id and\
+                        partner.country_id.code or None
+                elif ids:
+                    rec = self.browse(cr, uid, ids[0], context=context)
+                    partner = safe_eval(
+                        'rec.' + self._partner_field, {'rec': rec})
+                    if partner:
+                        countrycode = partner.country_id and\
+                            partner.country_id.code or None
+            if not countrycode:
+                if user.company_id.country_id:
+                    countrycode = user.company_id.country_id.code
+                else:
+                    _logger.error(
+                        _("You should set a country on the company '%s' "
+                            "to allow the reformat of phone numbers")
+                        % user.company_id.name)
+                    countrycode = None
+                # with country code = None, phonenumbers.parse() will work
+                # with phonenumbers formatted in E164, but will fail with
+                # phone numbers in national format
+            for field in self._phone_fields:
                 if vals.get(field):
                     init_value = vals.get(field)
                     try:
                         res_parse = phonenumbers.parse(
-                            vals.get(field), user_countrycode)
+                            vals.get(field), countrycode)
+                        vals[field] = phonenumbers.format_number(
+                            res_parse, phonenumbers.PhoneNumberFormat.E164)
+                        if init_value != vals[field]:
+                            _logger.info(
+                                "%s initial value: '%s' updated value: '%s'"
+                                % (field, init_value, vals[field]))
                     except Exception, e:
-                        raise orm.except_orm(
-                            _('Error:'),
-                            _("Cannot reformat the phone number '%s' to "
-                                "international format. Error message: %s")
-                            % (vals.get(field), e))
-                    vals[field] = phonenumbers.format_number(
-                        res_parse, phonenumbers.PhoneNumberFormat.E164)
-                    if init_value != vals[field]:
-                        _logger.info(
-                            "%s initial value: '%s' updated value: '%s'"
-                            % (field, init_value, vals[field]))
+                        # I do BOTH logger and raise, because:
+                        # raise is usefull when the record is created/written
+                        #    by a user via the Web interface
+                        # logger is usefull when the record is created/written
+                        #    via the webservices
+                        _logger.error(
+                            "Cannot reformat the phone number '%s' to "
+                            "international format with region=%s"
+                            % (vals.get(field), countrycode))
+                        if context.get('raise_if_phone_parse_fails'):
+                            raise Warning(
+                                _("Cannot reformat the phone number '%s' to "
+                                    "international format. Error message: %s")
+                                % (vals.get(field), e))
         return vals
 
     def get_name_from_phone_number(
@@ -144,29 +155,29 @@ class phone_common(orm.AbstractModel):
         else:
             end_number_to_match = presented_number
 
-        phonefieldsdict = self._get_phone_fields(cr, uid, context=context)
-        phonefieldslist = []
-        for objname, prop in phonefieldsdict.iteritems():
-            if prop.get('get_name_sequence'):
-                phonefieldslist.append({objname: prop})
+        phoneobjects = self._get_phone_fields(cr, uid, context=context)
+        phonefieldslist = []  # [('res.parter', 10), ('crm.lead', 20)]
+        for objname in phoneobjects:
+            if (
+                    '_phone_name_sequence' in dir(self.pool[objname]) and
+                    self.pool[objname]._phone_name_sequence):
+                phonefieldslist.append(
+                    (objname, self.pool[objname]._phone_name_sequence))
         phonefieldslist_sorted = sorted(
             phonefieldslist,
-            key=lambda element: element.values()[0]['get_name_sequence'])
-
-        for phonedict in phonefieldslist_sorted:
-            objname = phonedict.keys()[0]
-            prop = phonedict.values()[0]
-            phonefields = prop['phonefields']
+            key=lambda element: element[1])
+        _logger.debug('phonefieldslist_sorted=%s' % phonefieldslist_sorted)
+        for (objname, prio) in phonefieldslist_sorted:
             obj = self.pool[objname]
             pg_search_number = str('%' + end_number_to_match)
             _logger.debug(
                 "Will search phone and mobile numbers in %s ending with '%s'"
                 % (objname, end_number_to_match))
             domain = []
-            for phonefield in phonefields:
-                domain.append((phonefield, 'like', pg_search_number))
-            if len(phonefields) > 1:
-                domain = ['|'] * (len(phonefields) - 1) + domain
+            for phonefield in obj._phone_fields:
+                domain.append((phonefield, '=like', pg_search_number))
+            if len(obj._phone_fields) > 1:
+                domain = ['|'] * (len(obj._phone_fields) - 1) + domain
             res_ids = obj.search(cr, uid, domain, context=context)
             if len(res_ids) > 1:
                 _logger.warning(
@@ -190,13 +201,20 @@ class phone_common(orm.AbstractModel):
     def _get_phone_fields(self, cr, uid, context=None):
         '''Returns a dict with key = object name
         and value = list of phone fields'''
-        res = {
-            'res.partner': {
-                'phonefields': ['phone', 'mobile'],
-                'faxfields': ['fax'],
-                'get_name_sequence': 10,
-                },
-            }
+        model_ids = self.pool['ir.model'].search(
+            cr, uid, [], context=context)
+        res = []
+        for model in self.pool['ir.model'].browse(
+                cr, uid, model_ids, context=context):
+            senv = False
+            try:
+                senv = self.pool[model.model]
+            except:
+                continue
+            if (
+                    '_phone_fields' in dir(senv) and
+                    isinstance(senv._phone_fields, list)):
+                res.append(model.model)
         return res
 
     def click2dial(self, cr, uid, erp_number, context=None):
@@ -208,16 +226,20 @@ class phone_common(orm.AbstractModel):
 class res_partner(orm.Model):
     _name = 'res.partner'
     _inherit = ['res.partner', 'phone.common']
+    _phone_fields = ['phone', 'mobile', 'fax']
+    _phone_name_sequence = 10
+    _country_field = 'country_id'
+    _partner_field = None
 
     def create(self, cr, uid, vals, context=None):
         vals_reformated = self._generic_reformat_phonenumbers(
-            cr, uid, vals, context=context)
+            cr, uid, None, vals, context=context)
         return super(res_partner, self).create(
             cr, uid, vals_reformated, context=context)
 
     def write(self, cr, uid, ids, vals, context=None):
         vals_reformated = self._generic_reformat_phonenumbers(
-            cr, uid, vals, context=context)
+            cr, uid, ids, vals, context=context)
         return super(res_partner, self).write(
             cr, uid, ids, vals_reformated, context=context)
 

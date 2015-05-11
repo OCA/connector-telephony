@@ -47,6 +47,7 @@ for any help or question about this module.
         'crm_view.xml',
         'wizard/number_not_found_view.xml',
         ],
+    'test': ['test/phonenum.yml'],
     'images': [],
     'installable': True,
     'auto_install': True,

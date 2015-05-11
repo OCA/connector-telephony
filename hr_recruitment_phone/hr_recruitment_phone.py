@@ -26,28 +26,19 @@ from openerp.osv import orm
 class hr_applicant(orm.Model):
     _name = 'hr.applicant'
     _inherit = ['hr.applicant', 'phone.common']
+    _phone_fields = ['partner_phone', 'partner_mobile']
+    _phone_name_sequence = 50
+    _country_field = None
+    _partner_field = 'partner_id'
 
     def create(self, cr, uid, vals, context=None):
         vals_reformated = self._generic_reformat_phonenumbers(
-            cr, uid, vals, context=context)
+            cr, uid, None, vals, context=context)
         return super(hr_applicant, self).create(
             cr, uid, vals_reformated, context=context)
 
     def write(self, cr, uid, ids, vals, context=None):
         vals_reformated = self._generic_reformat_phonenumbers(
-            cr, uid, vals, context=context)
+            cr, uid, ids, vals, context=context)
         return super(hr_applicant, self).write(
             cr, uid, ids, vals_reformated, context=context)
-
-
-class phone_common(orm.AbstractModel):
-    _inherit = 'phone.common'
-
-    def _get_phone_fields(self, cr, uid, context=None):
-        res = super(phone_common, self)._get_phone_fields(
-            cr, uid, context=context)
-        res['hr.applicant'] = {
-            'phonefields': ['partner_phone', 'partner_mobile'],
-            'get_name_sequence': 50,
-            }
-        return res
