@@ -75,13 +75,12 @@ class reformat_all_phonenumbers(orm.TransientModel):
                 except Exception, e:
                     name = obj.name_get(
                         cr, uid, [init_entry['id']], context=context)[0][1]
-                    err_msg = e and len(e) > 1 and e[1] or 'missing error msg'
                     phonenumbers_not_reformatted += \
                         "Problem on %s '%s'. Error message: %s\n" % (
-                            obj._description, name, err_msg)
+                            obj._description, name, unicode(e))
                     logger.warning(
                         "Problem on %s '%s'. Error message: %s" % (
-                            obj._description, name, err_msg))
+                            obj._description, name, unicode(e)))
                     continue
                 if any(
                         [init_entry.get(field)
