@@ -22,7 +22,7 @@ install:
   - git clone https://github.com/OCA/maintainer-quality-tools.git ${HOME}/maintainer-quality-tools
   - export PATH=${HOME}/maintainer-quality-tools/travis:${PATH}
   - travis_install_nightly
-  - sudo pip install phonenumbers py-Asterisk
+  - pip install phonenumbers py-Asterisk
   - hg clone http://bitbucket.org/anybox/web_action_request -b ${VERSION} ${HOME}/web_action_request
   - hg clone http://bitbucket.org/anybox/bus_enhanced ${HOME}/bus_enhanced
 
