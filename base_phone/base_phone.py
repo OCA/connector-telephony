@@ -212,7 +212,7 @@ class PhoneCommon(models.AbstractModel):
 
     def click2dial(self, cr, uid, erp_number, context=None):
         '''This function is designed to be overridden in IPBX-specific
-        modules, such as asterisk_click2dial'''
+        modules, such as asterisk_click2dial or ovh_telephony_connector'''
         return {'dialed_number': erp_number}
 
     @api.model
@@ -235,7 +235,7 @@ class PhoneCommon(models.AbstractModel):
         to_dial_number = phonenumbers.format_out_of_country_calling_number(
             parsed_num, country_code.upper())
         to_dial_number = str(to_dial_number).translate(None, ' -.()/')
-        _logger.debug('Number to be sent to Asterisk = %s' % to_dial_number)
+        _logger.debug('Number to be sent to phone system: %s' % to_dial_number)
         return to_dial_number
 
 
