@@ -1,8 +1,8 @@
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
-#    Asterisk Click2dial module for OpenERP
-#    Copyright (C) 2010-2013 Alexis de Lattre <alexis@via.ecp.fr>
+#    CRM Phone module for Odoo
+#    Copyright (C) 2010-2015 Alexis de Lattre <alexis@via.ecp.fr>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
