@@ -1,8 +1,8 @@
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
-#    Asterisk Click2dial module for OpenERP
-#    Copyright (C) 2010-2013 Alexis de Lattre <alexis@via.ecp.fr>
+#    Base Phone module for Odoo
+#    Copyright (C) 2010-2015 Alexis de Lattre <alexis@via.ecp.fr>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -35,7 +35,8 @@ class number_not_found(orm.TransientModel):
         'calling_number': fields.char(
             'Calling Number', size=64, readonly=True,
             help="Phone number of calling party that has been obtained "
-            "from Asterisk, in the format used by Asterisk (not E.164)."),
+            "from the telephony server, in the format used by the "
+            "telephony server (not E.164)."),
         'e164_number': fields.char(
             'E.164 Number', size=64,
             help="E.164 equivalent of the calling number."),

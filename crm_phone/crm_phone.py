@@ -20,7 +20,7 @@
 #
 ##############################################################################
 
-from openerp import models, fields
+from openerp import models, fields, api, _
 
 
 class CrmLead(models.Model):
@@ -95,3 +95,20 @@ class ResUsers(models.Model):
     context_propose_creation_crm_call = fields.Boolean(
         string='Propose to create a call in CRM after a click2dial',
         default=True)
+
+
+class PhoneCommon(models.AbstractModel):
+    _inherit = 'phone.common'
+
+    @api.model
+    def click2dial(self, erp_number):
+        res = super(PhoneCommon, self).click2dial(erp_number)
+        if (
+                self.env.user.context_propose_creation_crm_call and
+                self.env.context.get('click2dial_model')
+                in ('res.partner', 'crm.lead')):
+            res.update({
+                'action_name': _('Create Call in CRM'),
+                'action_model': 'wizard.create.crm.phonecall',
+                })
+        return res

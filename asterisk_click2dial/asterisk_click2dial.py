@@ -392,10 +392,12 @@ class res_users(orm.Model):
         )]
 
 
-class phone_common(orm.AbstractModel):
+class PhoneCommon(orm.AbstractModel):
     _inherit = 'phone.common'
 
     def click2dial(self, cr, uid, erp_number, context=None):
+        res = super(PhoneCommon, self).click2dial(
+            cr, uid, erp_number, context=context)
         if not erp_number:
             raise orm.except_orm(
                 _('Error:'),
@@ -458,4 +460,5 @@ class phone_common(orm.AbstractModel):
         finally:
             ast_manager.Logoff()
 
-        return {'dialed_number': ast_number}
+        res['dialed_number'] = ast_number
+        return res
