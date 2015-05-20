@@ -10,7 +10,7 @@
 
 <!-- Add option on user form view -->
 <record id="view_users_form" model="ir.ui.view">
-    <field name="name">asterisk.crm.res.users.form</field>
+    <field name="name">crm.phone.res.users.form</field>
     <field name="model">res.users</field>
     <field name="inherit_id" ref="base_phone.view_users_form"/>
     <field name="arch" type="xml">
@@ -22,7 +22,7 @@
 </record>
 
 <record id="view_users_form_simple_modif" model="ir.ui.view">
-    <field name="name">asterisk.crm.preferences.option.view</field>
+    <field name="name">crm.phone.preferences.option.view</field>
     <field name="model">res.users</field>
     <field name="inherit_id" ref="base_phone.view_users_form_simple_modif" />
     <field name="arch" type="xml">
