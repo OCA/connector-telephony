@@ -13,7 +13,8 @@
             <a href="#" class="oe_form_uri"/><span class="oe_form_char_content"/>
             <!--
             You should add the following "<a .. />" in your IPBX-specific
-            module (such as asterisk_click2dial) via <t t-extend="FieldPhone">
+            module (such as asterisk_click2dial or ovh_telephony_connector)
+            via <t t-extend="FieldPhone">
             <a id="click2dial" href="#" class="oe_bold"/>
             -->
         </t>
