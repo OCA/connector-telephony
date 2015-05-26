@@ -1,17 +1,18 @@
 [![Build Status](https://travis-ci.org/OCA/connector-telephony.svg?branch=8.0)](https://travis-ci.org/OCA/connector-telephony)
 [![Coverage Status](https://coveralls.io/repos/OCA/connector-telephony/badge.png?branch=8.0)](https://coveralls.io/r/OCA/connector-telephony?branch=8.0)
 
-# Odoo-Asterisk connector
+# Odoo telephony connector
 
-Asterisk is an OpenSource software for telephony.
-It is used worldwide to run IPBXes inside companies.
-This project connects Asterisk to Odoo/OpenERP.
+This projets aims at connecting Odoo to different phone systems. Phone systems currently supported are Asterisk (an OpenSource IPBX, cf [asterisk.org](http://www.asterisk.org/) and OVH (the centrex offer of OVH, cf the [OVH website](http://www.ovhtelecom.fr/telephonie/)).
 
-This project also provides a serie of modules (base\_phone, base\_phone\_popup,
-crm\_phone, hr\_phone, event\_phone, etc...) that are independant from
-Asterisk and can be usefull on all Odoo/OpenERP installations.
+This project provides:
+* a serie of modules (base\_phone, base\_phone\_popup,
+  crm\_phone, hr\_phone, event\_phone, etc...) that are independant from
+  the phone system and can be usefull on all Odoo installations.
+* several modules (asterisk\_click2dial, ovh\_telephony\_connector)
+  that are specific to a particular phone system.
 
-The main maintainer of the Asterisk-OpenERP connector is Alexis de Lattre from
+The main maintainer of this project is Alexis de Lattre from
 Akretion (alexis.delattre \_at\_ akretion.com).
 
 To know more about the OpenERP-Asterisk connector, refer to the documentation

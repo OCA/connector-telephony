@@ -1,8 +1,8 @@
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    Base Phone module for Odoo
-#    Copyright (C) 2014-2015 Alexis de Lattre (alexis@via.ecp.fr)
+#    OVH Connector module for Odoo
+#    Copyright (C) 2015 Alexis de Lattre <alexis@via.ecp.fr>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -19,17 +19,4 @@
 #
 ##############################################################################
 
-import openerp
-
-
-class BasePhoneController(openerp.addons.web.http.Controller):
-    _cp_path = '/base_phone'
-
-    @openerp.addons.web.http.jsonrequest
-    def click2dial(self, req, phone_number, click2dial_model, click2dial_id):
-        res = req.session.model('phone.common').click2dial(
-            phone_number, {
-                'click2dial_model': click2dial_model,
-                'click2dial_id': click2dial_id,
-                })
-        return res
+from . import ovh_connector

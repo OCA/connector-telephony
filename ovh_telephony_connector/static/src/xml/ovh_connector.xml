@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    OVH connector module for Odoo
+    Copyright (C) 2015 Alexis de Lattre <alexis@via.ecp.fr>
+    The licence is in the file __openerp__.py
+-->
+
+<template>
+
+    <!-- Add Dial button in phone widget for click2dial feature -->
+    <t t-extend="FieldPhone">
+        <t t-jquery="a.oe_form_uri" t-operation="after">
+            <a id="click2dial" href="#" class="oe_bold"/>
+        </t>
+    </t>
+
+</template>

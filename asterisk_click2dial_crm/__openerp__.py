@@ -31,34 +31,18 @@
 Asterisk Click2dial CRM
 =======================
 
-This module adds CRM-specific features to the asterisk_click2dial module.
+This module is *EMPTY* ; so you should uninstall it now.
+The code that used to be in this module has been moved to the module
+*crm_phone* that is available in the same GitHub repository
+https://github.com/OCA/connector-telephony
 
-It adds 2 features :
-
-First, when you do a click2dial, OpenERP will propose you to create an outbound
-phone call in the CRM ; if you answer 'Yes', it will create the phone call in
-the CRM and open it in a new tab. If some users don't want to be asked to
-create a phone call in the CRM each time they do a click2dial, you should
-disable the corresponding option in the 'Telephony' tab of the 'User' form.
-
-Second, when you receive a phone call and run the wizard
-"Open calling partner", if the partner is found in OpenERP, you will see a
-button that proposes to create an inbound phone call in the CRM.
-
-This module has been initially developped by Zikzakmedia and has been
-completely re-written by Akretion.
-
-A detailed documentation for the OpenERP-Asterisk connector is available on the
-Akretion Web site :
-http://www.akretion.com/products-and-services/openerp-asterisk-voip-connector
+This module will be removed from the repository in the near future.
 """,
     "depends": [
         'asterisk_click2dial',
         'crm_phone',
     ],
-    "data": [
-        'res_users_view.xml',
-    ],
+    "data": [],
     "installable": True,
-    "application": True,
+    "application": False,
 }
