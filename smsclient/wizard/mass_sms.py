@@ -29,7 +29,7 @@ class part_sms(models.TransientModel):
 
     @api.model
     def _default_get_gateway(self):
-        sms_obj = self.pool.get('sms.smsclient')
+        sms_obj = self.env['sms.smsclient']
         gateway_ids = sms_obj.search([], limit=1)
         return gateway_ids and gateway_ids[0] or False
 
