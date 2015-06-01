@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<openerp>
-    <data>
-        <record id="group_sms_user" model="res.groups">
-            <field name="name">SMS / User</field>
-        </record>
-    </data>
-</openerp>

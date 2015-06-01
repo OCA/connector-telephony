@@ -1,8 +1,0 @@
-"id","name","model_id:id","group_id:id","perm_read","perm_write","perm_create","perm_unlink"
-"access_sms_smsclient_global","sms.smsclient Global","smsclient.model_sms_smsclient",,1,0,0,0
-"access_sms_smsclient_queue_global","sms.smsclient.queue Global","smsclient.model_sms_smsclient_queue",,1,0,0,0
-"access_sms_smsclient_parms_global","sms.smsclient.parms Global","smsclient.model_sms_smsclient_parms",,1,0,0,0
-"access_sms_smsclient_history_global","sms.smsclient.history Global","smsclient.model_sms_smsclient_history",,1,0,0,0
-"access_smsclient_queue_user","sms.smsclient.queue User","model_sms_smsclient_queue","group_sms_user",1,1,1,1
-"access_sms_smsclient_history_user","sms.smsclient.history User","model_sms_smsclient_history","group_sms_user",1,1,1,0
-"access_partner_sms_send_global","access_partner_sms_send global","model_partner_sms_send",,1,0,1,0
