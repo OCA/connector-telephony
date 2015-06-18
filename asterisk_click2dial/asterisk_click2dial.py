@@ -253,6 +253,13 @@ class asterisk_server(orm.Model):
                     _logger.debug("Found a matching Event in 'Ring' state")
                     calling_party_number = chan.get('CallerIDNum')
                     break
+                # Compatibility with Asterisk 1.4
+                if (
+                        chan.get('State') == 'Ringing' and
+                        chan.get('ConnectedLineNum') == user.internal_number):
+                    _logger.debug("Found a matching Event in 'Ring' state")
+                    calling_party_number = chan.get('CallerIDNum')
+                    break
                 # 6 = Up
                 if (
                         chan.get('ChannelState') == '6'
