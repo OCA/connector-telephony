@@ -1,5 +1,20 @@
 #! /usr/bin/python
 # -*- encoding: utf-8 -*-
+#  Copyright (C) 2010-2015 Alexis de Lattre <alexis.delattre@akretion.com>
+#
+#  This program is free software: you can redistribute it and/or modify
+#  it under the terms of the GNU Affero General Public License as
+#  published by the Free Software Foundation, either version 3 of the
+#  License, or (at your option) any later version.
+#
+#  This program is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#  GNU Affero General Public License for more details.
+#
+#  You should have received a copy of the GNU Affero General Public License
+#  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 """
  Name lookup in OpenERP for incoming and outgoing calls with an
  Asterisk IPBX
@@ -78,29 +93,13 @@
 
 """
 
-__author__ = "Alexis de Lattre <alexis.delattre@akretion.com>"
-__date__ = "August 2014"
-__version__ = "0.5"
-
-#  Copyright (C) 2010-2014 Alexis de Lattre <alexis.delattre@akretion.com>
-#
-#  This program is free software: you can redistribute it and/or modify
-#  it under the terms of the GNU Affero General Public License as
-#  published by the Free Software Foundation, either version 3 of the
-#  License, or (at your option) any later version.
-#
-#  This program is distributed in the hope that it will be useful,
-#  but WITHOUT ANY WARRANTY; without even the implied warranty of
-#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#  GNU Affero General Public License for more details.
-#
-#  You should have received a copy of the GNU Affero General Public License
-#  along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
 import xmlrpclib
 import sys
 from optparse import OptionParser
 
+__author__ = "Alexis de Lattre <alexis.delattre@akretion.com>"
+__date__ = "June 2015"
+__version__ = "0.6"
 
 # Name that will be displayed if there is no match
 # and no geolocalisation. Set it to False if you don't want
@@ -117,16 +116,24 @@ options = [
         'action': 'store', 'default': 8069,
         'help': "Port of OpenERP's XML-RPC interface. Default = 8069"},
     {'names': ('-e', '--ssl'), 'dest': 'ssl',
-        'help': "Use XML-RPC secure i.e. with SSL instead of clear XML-RPC. "
-        "Default = no, use clear XML-RPC",
+        'help': "Use SSL connections instead of clear connections. "
+        "Default = no, use clear XML-RPC or JSON-RPC",
+        'action': 'store_true', 'default': False},
+    {'names': ('-j', '--jsonrpc'), 'dest': 'jsonrpc',
+        'help': "Use JSON-RPC instead of the default protocol XML-RPC. "
+        "Default = no, use XML-RPC",
         'action': 'store_true', 'default': False},
     {'names': ('-d', '--database'), 'dest': 'database', 'type': 'string',
         'action': 'store', 'default': 'openerp',
         'help': "OpenERP database name. Default = 'openerp'"},
-    {'names': ('-u', '--user-id'), 'dest': 'user', 'type': 'int',
+    {'names': ('-u', '--user-id'), 'dest': 'userid', 'type': 'int',
         'action': 'store', 'default': 2,
-        'help': "OpenERP user ID to use when connecting to OpenERP. "
-        "Default = 2"},
+        'help': "OpenERP user ID to use when connecting to OpenERP in "
+        "XML-RPC. Default = 2"},
+    {'names': ('-t', '--username'), 'dest': 'username', 'type': 'string',
+        'action': 'store', 'default': 'demo',
+        'help': "OpenERP username to use when connecting to OpenERP in "
+        "JSON-RPC. Default = demo"},
     {'names': ('-w', '--password'), 'dest': 'password', 'type': 'string',
         'action': 'store', 'default': 'demo',
         'help': "Password of the OpenERP user. Default = 'demo'"},
@@ -262,11 +269,11 @@ def main(options, arguments):
         # i.e. not just digits, but a real name, then we don't try to
         # connect to OpenERP or geoloc, we just keep it
         if (
-                stdinput.get('agi_calleridname')
-                and not stdinput.get('agi_calleridname').isdigit()
-                and stdinput.get('agi_calleridname').lower()
-                not in ['asterisk', 'unknown', 'anonymous']
-                and not options.notify):
+                stdinput.get('agi_calleridname') and
+                not stdinput.get('agi_calleridname').isdigit() and
+                stdinput.get('agi_calleridname').lower()
+                not in ['asterisk', 'unknown', 'anonymous'] and
+                not options.notify):
             stdout_write(
                 'VERBOSE "Incoming CallerID name is %s"\n'
                 % stdinput.get('agi_calleridname'))
@@ -290,43 +297,61 @@ def main(options, arguments):
 
     stdout_write('VERBOSE "Phone number = %s"\n' % phone_number)
 
+    if options.notify and not arguments:
+        stdout_write(
+            'VERBOSE "When using the notify option, you must give arguments '
+            'to the script"\n')
+        exit(0)
+
+    if options.notify:
+        method = 'incall_notify_by_login'
+    else:
+        method = 'get_name_from_phone_number'
+
     res = False
     # Yes, this script can be used without "-s openerp_server" !
-    if options.server:
-        if options.ssl:
-            stdout_write(
-                'VERBOSE "Starting XML-RPC secure request on OpenERP %s:%s"\n'
-                % (options.server, str(options.port)))
-            protocol = 'https'
-        else:
-            stdout_write(
-                'VERBOSE "Starting clear XML-RPC request on OpenERP %s:%s"\n'
-                % (options.server, str(options.port)))
-            protocol = 'http'
-
-        sock = xmlrpclib.ServerProxy(
-            '%s://%s:%s/xmlrpc/object'
-            % (protocol, options.server, str(options.port)))
-
+    if options.server and options.jsonrpc:
+        import odoorpc
+        proto = options.ssl and 'jsonrpc+ssl' or 'jsonrpc'
+        stdout_write(
+            'VERBOSE "Starting %s request on OpenERP %s:%d database '
+            '%s username %s"\n' % (
+                proto.upper(), options.server, options.port, options.database,
+                options.username))
         try:
-            if options.notify and arguments:
+            odoo = odoorpc.ODOO(options.server, proto, options.port)
+            odoo.login(options.database, options.username, options.password)
+            if options.notify:
+                res = odoo.execute(
+                    'phone.common', method, phone_number, arguments)
+            else:
+                res = odoo.execute('phone.common', method, phone_number)
+            stdout_write('VERBOSE "Called method %s"\n' % method)
+        except:
+            stdout_write(
+                'VERBOSE "Could not connect to OpenERP in JSON-RPC"\n')
+    elif options.server:
+        proto = options.ssl and 'https' or 'http'
+        stdout_write(
+            'VERBOSE "Starting %s XML-RPC request on OpenERP %s:%d '
+            'database %s user ID %d"\n' % (
+                proto, options.server, options.port, options.database,
+                options.userid))
+        sock = xmlrpclib.ServerProxy(
+            '%s://%s:%d/xmlrpc/object'
+            % (proto, options.server, options.port))
+        try:
+            if options.notify:
                 res = sock.execute(
-                    options.database, options.user, options.password,
-                    'phone.common', 'incall_notify_by_login',
-                    phone_number, arguments)
-                stdout_write('VERBOSE "Calling incall_notify_by_login"\n')
+                    options.database, options.userid, options.password,
+                    'phone.common', method, phone_number, arguments)
             else:
                 res = sock.execute(
-                    options.database, options.user, options.password,
-                    'phone.common', 'get_name_from_phone_number',
-                    phone_number)
-                stdout_write('VERBOSE "Calling get_name_from_phone_number"\n')
-            stdout_write('VERBOSE "End of XML-RPC request on OpenERP"\n')
-            if not res:
-                stdout_write('VERBOSE "Phone number not found in OpenERP"\n')
+                    options.database, options.userid, options.password,
+                    'phone.common', method, phone_number)
+            stdout_write('VERBOSE "Called method %s"\n' % method)
         except:
-            stdout_write('VERBOSE "Could not connect to OpenERP"\n')
-            res = False
+            stdout_write('VERBOSE "Could not connect to OpenERP in XML-RPC"\n')
         # To simulate a long execution of the XML-RPC request
         # import time
         # time.sleep(5)
@@ -345,6 +370,7 @@ def main(options, arguments):
     else:
         # if the number is not found in OpenERP and geoloc is off,
         # we put 'not_found_name' as Name
+        stdout_write('VERBOSE "Phone number not found in OpenERP"\n')
         res = not_found_name
 
     # All SIP phones should support UTF-8...
