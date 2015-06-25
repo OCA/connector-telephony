@@ -38,6 +38,7 @@ openerp.base_phone = function (instance) {
                 if (href_text && !this.options.dial_button_invisible) {
                   click2dial_text = _t('Dial');
                 }
+                this.$el.find('#click2dial').off('click');
                 this.$el.find('#click2dial')
                     .text(click2dial_text)
                     .on('click', function(ev) {
