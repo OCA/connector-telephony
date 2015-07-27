@@ -18,10 +18,16 @@
                 <label string="This wizard reformats the phone, mobile and fax numbers of all partners in standard international format e.g. +33141981242" colspan="4"/>
                 <label colspan="4" string="Phone numbers that couldn't be reformatted:"/>
                 <field name="phonenumbers_not_reformatted" colspan="4" nolabel="1"/>
+                <field name="state" invisible="1"/>
             </group>
             <footer>
-                <button name="run_reformat_all_phonenumbers" string="Reformat all phone numbers" type="object" class="oe_highlight"/>
-                <button special="cancel" string="Cancel" class="oe_link" />
+                <button name="run_reformat_all_phonenumbers"
+                    string="Reformat all phone numbers" type="object"
+                    class="oe_highlight" states="draft"/>
+                <button special="cancel" string="Close"
+                    class="oe_highlight" states="done"/>
+                <button special="cancel" string="Cancel"
+                    class="oe_link" states="draft"/>
             </footer>
         </form>
     </field>

@@ -45,6 +45,9 @@
     </field>
 </record>
 
+<record id="base.action_partner_form" model="ir.actions.act_window">
+    <field name="context">{'search_default_customer':1, 'raise_if_phone_parse_fails': True}</field>
+</record>
 
 </data>
 </openerp>
