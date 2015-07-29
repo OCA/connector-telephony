@@ -39,7 +39,7 @@ class smsclient(models.Model):
     @api.model
     def get_method(self):
         method = super(smsclient, self).get_method()
-        method.append(('ovh smpp', 'OVH SMPP'), )
+        method.append(('ovh http', 'OVH HTTP'), )
         return method
 
     @api.onchange('method')
