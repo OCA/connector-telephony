@@ -133,7 +133,7 @@ class SMSClient(models.Model):
 
     @api.model
     def get_method(self):
-        return [('http', 'HTTP Method')]
+        return []
 
     name = fields.Char('Gateway Name', size=256, required=True)
     url = fields.Char('Gateway URL', size=256,
@@ -218,6 +218,7 @@ class SMSClient(models.Model):
     nostop_visible = fields.Boolean(default=False)
     char_limit = fields.Boolean('Character Limit', default=True)
     char_limit_visible = fields.Boolean(default=False)
+    default_gateway = fields.Boolean(default=False)
 
 
     @api.onchange('method')
