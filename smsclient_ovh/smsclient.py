@@ -70,12 +70,15 @@ class smsclient(models.Model):
                               % (gateway.name,))
             url = gateway.url
             name = url
-            if gateway.method == 'http':
+            if gateway.method == 'ovh http':
                 prms = {}
                 prms['smsAccount'] = gateway.sms_account
                 prms['login'] = gateway.login_provider
                 prms['password'] = gateway.password_provider
                 prms['from'] = gateway.from_provider
+                # if '+' in data.mobile_to:
+                #     prms['to'] = data.mobile_to.replace('+', '0')
+                # else:
                 prms['to'] = data.mobile_to
                 prms['message'] = data.text
                 if gateway.nostop:
