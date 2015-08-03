@@ -26,6 +26,7 @@
     "version": "1.0",
     "depends": ["base",
                 "email_template",
+                'base_phone',
                 ],
     "author": "Julius Network Solutions,SYLEAM,OpenERP SA,Akretion",
     'images': ['images/sms.jpeg', 'images/gateway.jpeg', 'images/gateway_access.jpeg','images/client.jpeg','images/send_sms.jpeg'],
