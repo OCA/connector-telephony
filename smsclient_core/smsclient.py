@@ -260,7 +260,7 @@ class SMSClient(models.Model):
             'validity': data.validity,
             'classes': data.classes,
             'deffered': data.deferred,
-            'priorirty': data.priority,
+            'priority': data.priority,
             'coding': data.coding,
             'tag': data.tag,
             'nostop': data.nostop,
@@ -287,7 +287,7 @@ class SMSClient(models.Model):
                 if len(sms.msg) > 160:
                     error_ids.append(sms.id)
                     continue
-            if sms.gateway_id.method == 'http':
+            if 'http' in sms.gateway_id.method:
                 try:
                     answer = urllib.urlopen(sms.name)
                     print answer.read()

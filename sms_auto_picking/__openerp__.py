@@ -34,6 +34,7 @@
      'smsclient_core',
  ],
  'data': [
+     'cron.xml'
  ],
  'installable': True,
  'application': False,

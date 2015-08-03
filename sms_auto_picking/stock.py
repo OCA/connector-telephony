@@ -20,59 +20,35 @@
 #
 ###############################################################################
 
-from openerp import api, models
-from openerp.osv import fields
+from openerp import api, models, fields
 
 
 class StockPicking(models.Model):
     _inherit = 'stock.picking'
 
-    def _get_pickings(self, cr, uid, ids, context=None):
-        res = set()
-        for move in self.browse(cr, uid, ids, context=context):
-            if move.picking_id:
-                res.add(move.picking_id.id)
-        return list(res)
+    sms_sent = fields.Boolean()
 
-    def _state_get(self, cr, uid, ids, field_name, args, context=None):
-        res = super(StockPicking, self)._state_get(cr, uid, ids, field_name, args, context)
-        sms_sender_obj = self.pool.get('partner.sms.send')
-        gateway_obj = self.pool.get('sms.smsclient')
-        gateway_ids = gateway_obj.search(cr, uid, [('default_gateway', '=', True)])
-        gateway = gateway_obj.browse(cr, uid, gateway_ids[0])
-        for pick in self.browse(cr, uid, ids):
-            import ipdb; ipdb.set_trace()
-            if res[pick.id] == 'assigned':
-                data = {
-                    'gateway': gateway_ids[0],
-                    'text': 'Your picking %s is ready to transfert' % pick.name,
-                    'mobile_to': pick.partner_id.phone,
-                }
-                sms_sender_id = sms_sender_obj.create(cr, uid, data)
-                sms_sender_obj.browse(cr, uid, sms_sender_id).sms_send()
-        return res
+    @api.model
+    def _send_sms(self):
+        sms_sender_obj = self.env['partner.sms.send']
+        gateways = self.env['sms.smsclient'].search([('default_gateway', '=', True)])
+        gateway = gateways[0]
+        pickings = self.env['stock.picking'].search([('state', '=', 'assigned'),
+                                                     ('sms_sent', '=', False)
+                                                     ])
+        for pick in pickings:
+            data = {
+                'gateway': gateway.id,
+                'text': 'Your picking %s is ready to transfert' % pick.name,
+                'mobile_to': pick.partner_id.phone,
+            }
+            sms_sender = sms_sender_obj.create(data)
+            sms_sender.sms_send()
+            pick.sms_sent = True
 
-    _columns = {
-        'state': fields.function(_state_get, type="selection", copy=False,
-            store={
-                'stock.picking': (lambda self, cr, uid, ids, ctx: ids, ['move_type'], 20),
-                'stock.move': (_get_pickings, ['state', 'picking_id', 'partially_available'], 20)},
-            selection=[
-                ('draft', 'Draft'),
-                ('cancel', 'Cancelled'),
-                ('waiting', 'Waiting Another Operation'),
-                ('confirmed', 'Waiting Availability'),
-                ('partially_available', 'Partially Available'),
-                ('assigned', 'Ready to Transfer'),
-                ('done', 'Transferred'),
-                ], string='Status', readonly=True, select=True, track_visibility='onchange',
-            help="""
-                * Draft: not confirmed yet and will not be scheduled until confirmed\n
-                * Waiting Another Operation: waiting for another move to proceed before it becomes automatically available (e.g. in Make-To-Order flows)\n
-                * Waiting Availability: still waiting for the availability of products\n
-                * Partially Available: some products are available and reserved\n
-                * Ready to Transfer: products reserved, simply waiting for confirmation.\n
-                * Transferred: has been processed, can't be modified or cancelled anymore\n
-                * Cancelled: has been cancelled, can't be confirmed anymore"""
-        ),
-    }
+    @api.one
+    def copy(self, default=None):
+        if default is None:
+            default = {}
+        default['sms_sent'] = False
+        return super(StockPicking, self).copy(default=default)
