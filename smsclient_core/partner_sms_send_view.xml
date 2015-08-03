@@ -26,21 +26,6 @@
 	                    <page string="Message">
 					    	<field name="text" colspan="4" nolabel="1"/>
 	                   	</page>
-	                   	<page string="Additional option">
-   		                	<group>	  	 	
-	           		          	<group>
-	   		          	        	<field name="validity"/>
-	   		          	        	<field name="classes"/>
-	   		          	        	<field name="deferred"/>
-	   		          	        	<field name="nostop"/>
-	           		          	</group>
-	   		          	        <group>
-		                   			<field name="priority"/>
-		                   			<field name="coding"/>
-		                   			<field name="tag"/>
-								</group>
-							</group>
-						</page>
 					</notebook>
                     <footer>
                         <button name="sms_send" string="Send SMS" type="object" class="oe_highlight"/>
