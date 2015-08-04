@@ -29,7 +29,13 @@
                 "smsclient_core",
                 ],
     "author": "Julius Network Solutions,SYLEAM,OpenERP SAi,Akretion",
-    'images': ['images/sms.jpeg', 'images/gateway.jpeg', 'images/gateway_access.jpeg','images/client.jpeg','images/send_sms.jpeg'],
+    'images': [
+        'images/sms.jpeg',
+        'images/gateway.jpeg',
+        'images/gateway_access.jpeg',
+        'images/client.jpeg',
+        'images/send_sms.jpeg'
+    ],
     "description": """
 SMS Client module provides:
 -------------
