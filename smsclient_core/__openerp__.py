@@ -46,7 +46,7 @@ SMS Client module provides:
 -------------
 Sending SMSs very easily, individually or collectively.
 
-    """
+    """,
     "website": "http://julius.fr",
     "category": "Phone",
     "demo": [],

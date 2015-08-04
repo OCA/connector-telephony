@@ -52,7 +52,6 @@ class partner_sms_send(models.Model):
         partner_pool = self.env['res.partner']
         active_ids = self._context.get('active_ids')
         res = {}
-        i = 0
         if len(active_ids) > 1:
             raise Warning(_('You can only select one partner'))
         for partner in partner_pool.browse(active_ids):
@@ -281,7 +280,7 @@ class SMSClient(models.Model):
             if 'http' in sms.gateway_id.method:
                 try:
                     answer = urllib.urlopen(sms.name)
-                    print answer.read()
+                    logging.INFO(answer.read())
                 except Exception, e:
                     raise Warning(e)
             history_obj.create({

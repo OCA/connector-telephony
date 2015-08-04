@@ -59,7 +59,7 @@ class part_sms(models.TransientModel):
             if result in (None, False):
                 return str("--------")
             return str(result)
-        com = re.compile('(\[\[.+?\]\])')
+        com = re.compile(r'(\[\[.+?\]\])')
         msg = com.sub(merge, message)
         return msg
 
