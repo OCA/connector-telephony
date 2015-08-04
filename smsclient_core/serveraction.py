@@ -35,7 +35,7 @@ class ServerAction(models.Model):
     """
     _inherit = 'ir.actions.server'
 
-    mobile = fields.Char('Mobile No', size=512, help="Provides fields that "
+    mobile = fields.Char('Mobile No', help="Provides fields that "
                          "be used to fetch the mobile number, e.g. you select"
                          " the invoice, then "
                          "`object.invoice_address_id.mobile` is the field "
@@ -142,7 +142,6 @@ class ServerAction(models.Model):
                         ('tag', '=', gateway.tag),
                         ('nostop', '=', gateway.nostop)
                         ])
-                    print sms_in_q
                     if not sms_in_q:
                         queue_obj.create(vals)
                         _logger.info('SMS successfully send to : %s' % (to))

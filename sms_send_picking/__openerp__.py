@@ -23,10 +23,10 @@
 {
     'name': 'Sms Send Picking',
     'version': '0.0.1',
-    'author': 'Akretion',
+    'author': 'Akretion, OCA',
     'website': 'www.akretion.com',
     'license': 'AGPL-3',
-    'category': 'Generic Modules',
+    'category': 'Phone',
     'description': """
         Automatic sms sending when a delivery is ready to transfert
     """,

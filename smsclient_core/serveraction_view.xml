@@ -12,16 +12,13 @@
                             <field name="sms"/>
                             <field name="mobile"/>
                             <field name="sms_server" invisible="1"/>
-                	        <field name="sms_template_id" domain="[('sms_template','=',True)]" attrs="{'required':[('state','=','sms')]}"/>
+                            <field name="sms_template_id" domain="[('sms_template','=',True)]" attrs="{'required':[('state','=','sms')]}"/>
                         </group>
                     </page>
                 </page>
-                <!-- <field name="sms" position="attributes"> -->
-                <!--  	<attribute name="invisible">1</attribute> --> 
-					<!-- <attribute name="required">0</attribute> -->
-					<!-- <attribute name="attrs">{}</attribute> -->
-                <!-- </field> -->
             </field>
         </record>
     </data>
 </openerp>
+>>>
+>
