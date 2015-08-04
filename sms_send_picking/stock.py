@@ -34,7 +34,8 @@ class StockPicking(models.Model):
         gateways = self.env['sms.smsclient'].search([('default_gateway', '=', True)])
         gateway = gateways[0]
         pickings = self.env['stock.picking'].search([('state', '=', 'assigned'),
-                                                     ('sms_sent', '=', False)
+                                                     ('sms_sent', '=', False),
+                                                     ('picking_type_id.code', '=', 'outgoing')
                                                      ])
         for pick in pickings:
             data = {
