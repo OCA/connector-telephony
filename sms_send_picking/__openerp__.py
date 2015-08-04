@@ -27,9 +27,6 @@
     'website': 'www.akretion.com',
     'license': 'AGPL-3',
     'category': 'Phone',
-    'description': """
-        Automatic sms sending when a delivery is ready to transfert
-    """,
     'depends': [
         'stock',
         'smsclient_core',
