@@ -26,13 +26,13 @@ from openerp import api, models, fields
 class StockPicking(models.Model):
     _inherit = 'stock.picking'
 
-    sms_sent = fields.Boolean()
+    sms_sent = fields.Boolean(default=False)
 
     @api.model
     def _send_sms(self):
         sms_sender_obj = self.env['partner.sms.send']
         gateways = self.env['sms.smsclient'].search([('default_gateway', '=',
-                                                      True)])
+                                                      True)], limit=1)
         gateway = gateways[0]
         pickings = self.env['stock.picking'].search(
             [('state', '=', 'assigned'), ('sms_sent', '=', False),
@@ -46,10 +46,3 @@ class StockPicking(models.Model):
             sms_sender = sms_sender_obj.create(data)
             sms_sender.sms_send()
             pick.sms_sent = True
-
-    @api.one
-    def copy(self, default=None):
-        if default is None:
-            default = {}
-        default['sms_sent'] = False
-        return super(StockPicking, self).copy(default=default)
