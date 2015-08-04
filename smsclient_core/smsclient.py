@@ -29,14 +29,14 @@ import logging
 _logger = logging.getLogger(__name__)
 
 
-priority_list = [
+PRIORITY_LIST = [
     ('0', '0'),
     ('1', '1'),
     ('2', '2'),
     ('3', '3')
 ]
 
-classes_list = [
+CLASSES_LIST = [
     ('0', 'Flash'),
     ('1', 'Phone display'),
     ('2', 'SIM'),
@@ -95,13 +95,13 @@ class partner_sms_send(models.Model):
                               help='the maximum time -in minute(s)-'
                                    'before the message is dropped')
     classes = fields.Selection(
-        classes_list,
+        CLASSES_LIST,
         'Class',
         help='the sms class: flash(0), phone display(1), SIM(2), toolkit(3)')
     deferred = fields.Integer('Deferred',
                               help='the time -in minute(s)- '
                                    'to wait before sending the message')
-    priority = fields.Selection(priority_list, 'Priority',
+    priority = fields.Selection(PRIORITY_LIST, 'Priority',
                                 help='The priority of the message')
     coding = fields.Selection([
         ('1', '7 bit'),
@@ -173,7 +173,7 @@ class SMSClient(models.Model):
                               )
     validity_visible = fields.Boolean(default=False)
     classes = fields.Selection(
-        classes_list, 'Class',
+        CLASSES_LIST, 'Class',
         help='The SMS class: flash(0),phone display(1),SIM(2),toolkit(3)',
         default='1'
     )
@@ -184,7 +184,7 @@ class SMSClient(models.Model):
         default=0)
     deferred_visible = fields.Boolean(default=False)
 
-    priority = fields.Selection(priority_list,
+    priority = fields.Selection(PRIORITY_LIST,
                                 'Priority',
                                 help='The priority of the message ',
                                 default='3')
@@ -332,7 +332,7 @@ class SMSQueue(models.Model):
         help='The maximum time -in minute(s)- before the message is dropped')
 
     classes = fields.Selection(
-        classes_list,
+        CLASSES_LIST,
         'Class',
         help='The sms class: flash(0), phone display(1), SIM(2), toolkit(3)')
     deferred = fields.Integer(
@@ -402,8 +402,4 @@ class HistoryLine(models.Model):
     to = fields.Char('Mobile No', size=15, readonly=True)
     sms = fields.Text('SMS', size=160, readonly=True)
 
-    @api.model
-    def create(self, vals):
-        res = super(HistoryLine, self).create(vals)
-        return res
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
