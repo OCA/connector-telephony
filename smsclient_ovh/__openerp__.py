@@ -28,7 +28,7 @@
                 "email_template",
                 "smsclient_core",
                 ],
-    "author": "Julius Network Solutions,SYLEAM,OpenERP SAi,Akretion",
+    "author": "Julius Network Solutions,SYLEAM,OpenERP SA,OCA,Akretion",
     'images': [
         'images/sms.jpeg',
         'images/gateway.jpeg',
