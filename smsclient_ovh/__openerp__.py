@@ -36,12 +36,6 @@
         'images/client.jpeg',
         'images/send_sms.jpeg'
     ],
-    "description": """
-SMS Client module provides:
--------------
-
-OVH http connector
-    """,
     "website": "http://julius.fr",
     "category": "Tools",
     "demo": [],

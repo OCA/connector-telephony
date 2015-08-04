@@ -36,14 +36,7 @@
         'images/client.jpeg',
         'images/send_sms.jpeg'
     ],
-    "description": """
-This Module was developped by SYLEAM and OpenERP SA in a first place.
-Then, it was updated to the 7.0 version by Julius Network Solutions, and
-updated to 8.0 by Akretion.
-    """,
     "summary": """
-SMS Client module provides:
--------------
 Sending SMSs very easily, individually or collectively.
 
     """,
