@@ -280,7 +280,7 @@ class SMSClient(models.Model):
             if 'http' in sms.gateway_id.method:
                 try:
                     answer = urllib.urlopen(sms.name)
-                    logging.INFO(answer.read())
+                    _logger.info(answer.read())
                 except Exception, e:
                     raise Warning(e)
             history_obj.create({
