@@ -20,17 +20,11 @@
 #
 ###############################################################################
 
-from openerp import fields, api, models, _
+from openerp import api, models, _
 from openerp.exceptions import Warning
 import urllib
 import logging
 _logger = logging.getLogger(__name__)
-
-try:
-    from SOAPpy import WSDL
-except:
-    _logger.warning("ERROR IMPORTING SOAPpy, if not installed, please install"
-                    "it: e.g.: apt-get install python-soappy")
 
 
 class smsclient(models.Model):
@@ -66,8 +60,8 @@ class smsclient(models.Model):
         gateway = data.gateway
         if gateway:
             if not self._check_permissions(gateway):
-                raise Warning(_('You have no permission to access %s ')
-                              % (gateway.name,))
+                raise Warning(_('You have no permission to access %s ') %
+                              (gateway.name, ))
             url = gateway.url
             name = url
             if gateway.method == 'ovh http':

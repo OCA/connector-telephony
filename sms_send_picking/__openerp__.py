@@ -20,26 +20,23 @@
 #
 ###############################################################################
 
-{'name': 'Sms Send Picking',
- 'version': '0.0.1',
- 'author': 'Akretion',
- 'website': 'www.akretion.com',
- 'license': 'AGPL-3',
- 'category': 'Generic Modules',
- 'description': """
-    Automatic sms sending when a delivery is ready to transfert
- """,
- 'depends': [
-     'stock',
-     'smsclient_core',
- ],
- 'data': [
-     'cron.xml'
- ],
- 'installable': True,
- 'application': False,
+{
+    'name': 'Sms Send Picking',
+    'version': '0.0.1',
+    'author': 'Akretion',
+    'website': 'www.akretion.com',
+    'license': 'AGPL-3',
+    'category': 'Generic Modules',
+    'description': """
+        Automatic sms sending when a delivery is ready to transfert
+    """,
+    'depends': [
+        'stock',
+        'smsclient_core',
+    ],
+    'data': [
+        'cron.xml'
+    ],
+    'installable': True,
+    'application': False,
 }
-
-
-
-

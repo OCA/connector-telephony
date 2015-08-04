@@ -31,12 +31,12 @@ class StockPicking(models.Model):
     @api.model
     def _send_sms(self):
         sms_sender_obj = self.env['partner.sms.send']
-        gateways = self.env['sms.smsclient'].search([('default_gateway', '=', True)])
+        gateways = self.env['sms.smsclient'].search([('default_gateway', '=',
+                                                      True)])
         gateway = gateways[0]
-        pickings = self.env['stock.picking'].search([('state', '=', 'assigned'),
-                                                     ('sms_sent', '=', False),
-                                                     ('picking_type_id.code', '=', 'outgoing')
-                                                     ])
+        pickings = self.env['stock.picking'].search(
+            [('state', '=', 'assigned'), ('sms_sent', '=', False),
+             ('picking_type_id.code', '=', 'outgoing')])
         for pick in pickings:
             data = {
                 'gateway': gateway.id,

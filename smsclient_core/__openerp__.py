@@ -29,7 +29,13 @@
                 'base_phone',
                 ],
     "author": "Julius Network Solutions,SYLEAM,OpenERP SA,Akretion",
-    'images': ['images/sms.jpeg', 'images/gateway.jpeg', 'images/gateway_access.jpeg','images/client.jpeg','images/send_sms.jpeg'],
+    'images': [
+        'images/sms.jpeg',
+        'images/gateway.jpeg',
+        'images/gateway_access.jpeg',
+        'images/client.jpeg',
+        'images/send_sms.jpeg'
+    ],
     "description": """
 SMS Client module provides:
 -------------
@@ -47,7 +53,6 @@ updated to 8.0 by Akretion.
         "security/ir.model.access.csv",
         "smsclient_view.xml",
         "serveraction_view.xml",
-#        "smsclient_wizard.xml",
         "smsclient_data.xml",
         "wizard/mass_sms_view.xml",
         "partner_sms_send_view.xml",
