@@ -28,7 +28,8 @@
                 "email_template",
                 'base_phone',
                 ],
-    "author": "Julius Network Solutions,SYLEAM,OpenERP SA,Akretion,OCA",
+    "author": "Julius Network Solutions,SYLEAM,OpenERP SA,Akretion,"
+              "Odoo Community Association (OCA)",
     'images': [
         'images/sms.jpeg',
         'images/gateway.jpeg',

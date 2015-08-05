@@ -28,7 +28,8 @@
                 "email_template",
                 "smsclient_core",
                 ],
-    "author": "Julius Network Solutions,SYLEAM,OpenERP SA,OCA,Akretion",
+    "author": "Julius Network Solutions,SYLEAM,OpenERP SA,"
+              "Odoo Community Association (OCA),Akretion",
     'images': [
         'images/sms.jpeg',
         'images/gateway.jpeg',
