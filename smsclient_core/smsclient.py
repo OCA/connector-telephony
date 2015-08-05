@@ -396,7 +396,7 @@ class HistoryLine(models.Model):
         'sms.smsclient',
         'SMS Gateway',
         help='Do not display STOP clause in the message, this requires that'
-             'this is not an advertising message',
+             ' this is not an advertising message',
         ondelete='set null',
         required=True)
     to = fields.Char('Mobile No', size=15, readonly=True)
