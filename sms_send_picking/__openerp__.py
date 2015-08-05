@@ -23,7 +23,7 @@
 {
     'name': 'Sms Send Picking',
     'version': '0.0.1',
-    'author': 'Akretion, OCA',
+    'author': 'Akretion, Odoo Community Association (OCA)',
     'website': 'www.akretion.com',
     'license': 'AGPL-3',
     'category': 'Phone',
