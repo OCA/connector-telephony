@@ -339,12 +339,8 @@ class SMSQueue(models.Model):
         'Deferred',
         help='The time -in minute(s)- to wait before sending the message')
 
-    priority = fields.Selection([
-        ('0', '0'),
-        ('1', '1'),
-        ('2', '2'),
-        ('3', '3')
-        ], 'Priority', help='The priority of the message ')
+    priority = fields.Selection(PRIORITY_LIST, 'Priority',
+                                help='The priority of the message ')
     coding = fields.Selection([
         ('1', '7 bit'),
         ('2', 'Unicode')
