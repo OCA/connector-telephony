@@ -21,6 +21,7 @@
 ###############################################################################
 
 from openerp import api, models, fields
+from openerp.tools.translate import _
 
 
 class StockPicking(models.Model):
@@ -40,7 +41,7 @@ class StockPicking(models.Model):
         for pick in pickings:
             data = {
                 'gateway': gateway.id,
-                'text': 'Your picking %s is ready to transfert' % pick.name,
+                'text': _('Your picking %s is ready to transfert') % pick.name,
                 'mobile_to': pick.partner_id.phone,
             }
             sms_sender = sms_sender_obj.create(data)
