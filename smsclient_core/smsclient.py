@@ -134,8 +134,7 @@ class SMSClient(models.Model):
         return []
 
     @api.multi
-    def get_provider_conf(self, name, args):
-        res = {}
+    def _get_provider_conf(self):
         for sms_provider in self:
             global_section_name = 'sms_provider'
             # default vals
@@ -146,24 +145,23 @@ class SMSClient(models.Model):
                                                 sms_provider.name
                                                 ))
                 if serv_config.has_section(custom_section_name):
+                    config_vals.update(serv_config.items(custom_section_name))
                     if config_vals.get('url_service'):
-                        config_vals['url'] = int(config_vals['url_service'])
+                        sms_provider.url = config_vals['url_service']
                     if config_vals.get('sms_account'):
-                        config_vals['sms_account'] = int(config_vals['sms_account'])
+                        sms_provider.sms_account = config_vals['sms_account']
                     if config_vals.get('login'):
-                        config_vals['login_provider'] = int(config_vals['login'])
+                        sms_provider.login_provider = config_vals['login']
                     if config_vals.get('password'):
-                        config_vals['password_provider'] = int(config_vals['password'])
+                        sms_provider.password_provider = config_vals['password']
                     if config_vals.get('from'):
-                        config_vals['from_provider'] = int(config_vals['from'])
-                        res[mail_server.id] = config_vals
-        return res
+                        sms_provider.from_provider = config_vals['from']
 
 
     name = fields.Char('Gateway Name', required=True)
     url = fields.Char('Gateway URL',
-                      required=True, help='Base url for message',
-                      compute='get_provider_conf'
+                      help='Base url for message',
+                      compute='_get_provider_conf'
                       )
     url_visible = fields.Boolean(default=False)
     history_line = fields.One2many('sms.smsclient.history',
@@ -182,13 +180,13 @@ class SMSClient(models.Model):
                                 'sid',
                                 'uid',
                                 'Users Allowed')
-    sms_account = fields.Char(compute='get_provider_conf')
+    sms_account = fields.Char(compute='_get_provider_conf')
     sms_account_visible = fields.Boolean(default=False)
-    login_provider = fields.Char(compute='get_provider_conf')
+    login_provider = fields.Char(compute='_get_provider_conf')
     login_provider_visible = fields.Boolean(default=False)
-    password_provider = fields.Char(compute='get_provider_conf')
+    password_provider = fields.Char(compute='_get_provider_conf')
     password_provider_visible = fields.Boolean(default=False)
-    from_provider = fields.Char(compute='get_provider_conf')
+    from_provider = fields.Char(compute='_get_provider_conf')
     from_provider_visible = fields.Boolean(default=False)
 
     code = fields.Char('Verification Code')
