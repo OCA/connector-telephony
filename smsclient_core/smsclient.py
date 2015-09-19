@@ -173,11 +173,9 @@ class SMSClient(models.Model):
         ('waiting', 'Waiting for Verification'),
         ('confirm', 'Verified'),
         ], 'Gateway Status', index=True, readonly=True, default='new')
-    users_id = fields.Many2many('res.users',
-                                'res_smsserver_group_rel',
-                                'sid',
-                                'uid',
-                                'Users Allowed')
+    user_ids = fields.Many2many(
+        'res.users',
+        string='Users Allowed')
     sms_account = fields.Char(compute='_get_provider_conf')
     sms_account_visible = fields.Boolean(default=False)
     login_provider = fields.Char(compute='_get_provider_conf')
@@ -186,23 +184,21 @@ class SMSClient(models.Model):
     password_provider_visible = fields.Boolean(default=False)
     from_provider = fields.Char(compute='_get_provider_conf')
     from_provider_visible = fields.Boolean(default=False)
-
     code = fields.Char('Verification Code')
     code_visible = fields.Boolean(default=False)
     body = fields.Text('Message',
                        help="The message text that will be send along with the"
                             " email which is send through this server")
-    validity = fields.Integer('Validity',
-                              help='The maximum time - in minute(s) - '
-                                   'before the message is dropped',
-                              default=10
-                              )
+    validity = fields.Integer(
+        help='The maximum time - in minute(s) - before the message is dropped',
+        default=10,
+        )
     validity_visible = fields.Boolean(default=False)
     classes = fields.Selection(
         CLASSES_LIST, 'Class',
         help='The SMS class: flash(0),phone display(1),SIM(2),toolkit(3)',
         default='1'
-    )
+        )
     classes_visible = fields.Boolean(default=False)
     deferred = fields.Integer(
         'Deferred',
@@ -255,13 +251,10 @@ class SMSClient(models.Model):
             self.tag_visible = False
             self.char_limit_visible = False
 
-    @api.model
-    def _check_permissions(self, gateway):
-        cr = self.env.cr
-        cr.execute('select * from res_smsserver_group_rel'
-                   ' where sid= %s and uid= %s' % (gateway.id, self.env.uid))
-        data = cr.fetchall()
-        if len(data) <= 0:
+    @api.multi
+    def _check_permissions(self):
+        self.ensure_one()
+        if not self.env.uid in self.sudo().user_ids.ids:
             return False
         return True
 
