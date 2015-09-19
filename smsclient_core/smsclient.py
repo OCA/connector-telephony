@@ -381,26 +381,6 @@ class SMSQueue(models.Model):
              'this is not an advertising message')
 
 
-class Properties(models.Model):
-    _name = 'sms.smsclient.parms'
-    _description = 'SMS Client Properties'
-
-    name = fields.Char('Property name', size=256,
-                       help='Name of the property whom appear on the URL')
-    value = fields.Char('Property value', size=256,
-                        help='Value associate on the property for the URL')
-    gateway_id = fields.Many2one('sms.smsclient', 'SMS Gateway')
-    type = fields.Selection([
-        ('user', 'User'),
-        ('password', 'Password'),
-        ('sender', 'Sender Name'),
-        ('to', 'Recipient No'),
-        ('sms', 'SMS Message'),
-        ('extra', 'Extra Info')
-        ], 'API Method', select=True,
-        help='If parameter concern a value to substitute, indicate it')
-
-
 class HistoryLine(models.Model):
     _name = 'sms.smsclient.history'
     _description = 'SMS Client History'
