@@ -59,7 +59,7 @@ class smsclient(models.Model):
         super(smsclient, self)._send_message(data)
         gateway = data.gateway
         if gateway:
-            if not self._check_permissions(gateway):
+            if not gateway._check_permissions():
                 raise Warning(_('You have no permission to access %s ') %
                               (gateway.name, ))
             url = gateway.url
