@@ -98,36 +98,6 @@
         <menuitem name="Gateway List" id="menu_smsclient_administration_sms_server" parent="menu_smsclient_administration_server" action="action_sms_smsclient_tree"/>
 
         <!-- ************************************************************** -->
-        <!-- ** History of sending message ******************************** -->
-        <!-- ************************************************************** -->
-        <record model="ir.ui.view" id="sms_smsclient_history_tree">
-            <field name="name">sms.smsclient.history.tree</field>
-            <field name="model">sms.smsclient.history</field>
-            <field name="arch" type="xml">
-                <tree string="Gateway History" editable="bottom">
-                    <field name="date_create"/>
-                    <field name="user_id"/>
-                    <field name="name"/>
-                    <field name="gateway_id"/>
-                    <field name="to"/>
-                    <field name="sms"/>
-                </tree>
-            </field>
-        </record>
-
-        <record model="ir.actions.act_window" id="action_sms_smsclient_history_tree">
-            <field name="name">SMS Gateway History</field>
-            <field name="res_model">sms.smsclient.history</field>
-            <field name="view_type">form</field>
-            <field name="view_mode">tree</field>
-            <field name="view_id" ref="sms_smsclient_history_tree" />
-        </record>
-
-        <menuitem name="SMS Gateway History" id="menu_smsclient_administration_sms_server_history" parent="menu_smsclient_administration_server" action="action_sms_smsclient_history_tree"/>
-
-        <act_window context="{'gateway_id': active_id}" domain="[('gateway_id', '=', active_id)]" id="act_sms_gateway_2_sms_history" name="SMS History" res_model="sms.smsclient.history" src_model="sms.smsclient"/>
-
-        <!-- ************************************************************** -->
         <!-- ** Message queue ********************************************* -->
         <!-- ************************************************************** -->
         <record model="ir.ui.view" id="sms_smsclient_message_queue_tree">

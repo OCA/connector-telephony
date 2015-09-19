@@ -164,8 +164,6 @@ class SMSClient(models.Model):
                       compute='_get_provider_conf'
                       )
     url_visible = fields.Boolean(default=False)
-    history_line = fields.One2many('sms.smsclient.history',
-                                   'gateway_id', 'History')
     method = fields.Selection(string='API Method',
                               selection='get_method',
                               index=True,
@@ -292,7 +290,6 @@ class SMSClient(models.Model):
     @api.model
     def _check_queue(self):
         queue_obj = self.env['sms.smsclient.queue']
-        history_obj = self.env['sms.smsclient.history']
         sids = queue_obj.search([
             ('state', '!=', 'send'),
             ('state', '!=', 'sending')
@@ -311,12 +308,6 @@ class SMSClient(models.Model):
                     _logger.info(answer.read())
                 except Exception, e:
                     raise Warning(e)
-            history_obj.create({
-                'name': _('SMS Sent'),
-                'gateway_id': sms.gateway_id.id,
-                'sms': sms.msg,
-                'to': sms.mobile,
-                })
             sent_ids.append(sms.id)
         rec_sent_ids = queue_obj.browse(sent_ids)
         rec_sent_ids.write({'state': 'send'})
@@ -379,31 +370,3 @@ class SMSQueue(models.Model):
         'NoStop',
         help='Do not display STOP clause in the message, this requires that'
              'this is not an advertising message')
-
-
-class HistoryLine(models.Model):
-    _name = 'sms.smsclient.history'
-    _description = 'SMS Client History'
-
-    @api.model
-    def _get_default_user(self):
-        return self.env.uid
-
-    name = fields.Char('Description', size=160, required=True, readonly=True)
-    date_create = fields.Datetime(
-        'Date',
-        readonly=True,
-        default=fields.Datetime.now)
-    user_id = fields.Many2one('res.users', 'Username', readonly=True,
-                              select=True, default=_get_default_user)
-    gateway_id = fields.Many2one(
-        'sms.smsclient',
-        'SMS Gateway',
-        help='Do not display STOP clause in the message, this requires that'
-             ' this is not an advertising message',
-        ondelete='set null',
-        required=True)
-    to = fields.Char('Mobile No', size=15, readonly=True)
-    sms = fields.Text('SMS', size=160, readonly=True)
-
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
