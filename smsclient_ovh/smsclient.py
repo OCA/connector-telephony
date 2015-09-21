@@ -27,13 +27,13 @@ import logging
 _logger = logging.getLogger(__name__)
 
 
-class smsclient(models.Model):
+class SmsClient(models.Model):
     _inherit = "sms.smsclient"
 
     @api.model
     def get_method(self):
         method = super(smsclient, self).get_method()
-        method.append(('ovh http', 'OVH HTTP'), )
+        method.append(('ovh_http', 'OVH HTTP'), )
         return method
 
     @api.onchange('method')
@@ -54,40 +54,28 @@ class smsclient(models.Model):
             self.tag_visible = True
             self.char_limit_visible = True
 
+
+class SmsSms(models.Model):
+    _inherit = "sms.sms"
+
     @api.model
-    def _send_message(self, data):
-        super(smsclient, self)._send_message(data)
-        gateway = data.gateway
-        if gateway:
-            if not gateway._check_permissions():
-                raise Warning(_('You have no permission to access %s ') %
-                              (gateway.name, ))
-            url = gateway.url
-            name = url
-            if gateway.method == 'ovh http':
-                prms = {}
-                prms['smsAccount'] = gateway.sms_account
-                prms['login'] = gateway.login_provider
-                prms['password'] = gateway.password_provider
-                prms['from'] = gateway.from_provider
-                # if '+' in data.mobile_to:
-                #     prms['to'] = data.mobile_to.replace('+', '0')
-                # else:
-                prms['to'] = data.mobile_to
-                prms['message'] = data.text
-                if gateway.nostop:
-                    prms['noStop'] = 1
-                if gateway.deferred:
-                    prms['deferred'] = gateway.deferred
-                if gateway.classes:
-                    prms['class'] = gateway.classes
-                if gateway.tag:
-                    prms['tag'] = gateway.tag
-                if gateway.coding:
-                    prms['smsCoding'] = gateway.coding
-                params = urllib.urlencode(prms)
-                name = url + "?" + params
-            sms_obj = self.env['sms.sms']
-            vals = self._prepare_sms(data, name)
-            sms_obj.create(vals)
-        return True
+    def _prepare_ovh_http(self):
+        params = {
+            'smsAccount': gateway.sms_account,
+            'login': gateway.login_provider,
+            'password': gateway.password_provider,
+            'from': gateway.from_provider,
+            'to': self.mobile_to,
+            'message': self.text,
+            }
+        if self.nostop:
+            params['noStop'] = 1
+        if self.deferred:
+            params['deferred'] = self.deferred
+        if self.classes:
+            params['class'] = self.classes
+        if self.tag:
+            params['tag'] = self.tag
+        if self.coding:
+            params['smsCoding'] = self.coding
+        return params
