@@ -19,9 +19,7 @@
 #
 ##############################################################################
 
-from openerp import models, fields, api, _
-from openerp.exceptions import Warning as UserError
-import re
+from openerp import models, fields, api
 
 
 class WizardSendSms(models.TransientModel):
@@ -29,9 +27,7 @@ class WizardSendSms(models.TransientModel):
 
     @api.model
     def _default_get_gateway(self):
-        gateway_obj = self.env['sms.gateway']
-        gateway_ids = gateway_obj.search([], limit=1)
-        return gateway_ids and gateway_ids[0] or False
+        return self.env['sms.gateway'].search([], limit=1).id
 
     @api.model
     def _default_get_partner(self):
