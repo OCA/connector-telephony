@@ -27,7 +27,7 @@ _logger = logging.getLogger(__name__)
 
 
 class SmsClient(models.Model):
-    _inherit = "sms.smsclient"
+    _inherit = "sms.gateway"
 
     @api.model
     def get_method(self):
