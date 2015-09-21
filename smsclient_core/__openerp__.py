@@ -52,7 +52,6 @@ Sending SMSs very easily, individually or collectively.
         "serveraction_view.xml",
         "smsclient_data.xml",
         "wizard/mass_sms_view.xml",
-        "partner_sms_send_view.xml",
         "smstemplate_view.xml"
     ],
     "active": False,

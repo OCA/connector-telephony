@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <openerp>
     <data>
-        <record model="ir.ui.view" id="view_part_sms">
+        <record model="ir.ui.view" id="view_wizard_send_sms">
             <field name="model">wizard.send.sms</field>
             <field name="arch" type="xml">
             	<form string="SMS Gateway - Sens SMS" version="7.0">
@@ -11,7 +11,14 @@
 					<notebook>
 	                    <page string="Message">
                             <field name="message" colspan="4" nolabel="1"/>
-	                   	</page>
+                            <!-- TODO limit to 10 the number of partner to show -->
+                            <field name="partner_ids" colspan="4" nolabel="1">
+                                <tree options="{'limit': 10}">
+                                    <field name="name"/>
+                                    <field name="mobile"/>
+                                </tree>
+                            </field>
+                        </page>
 	                   	<page string="Additional option">
    		                	<group>	  	 	
 	           		          	<group>
@@ -29,7 +36,7 @@
 						</page>
 					</notebook>
 		            <footer>
-		                <button string="Send Mass SMS" name="sms_mass_send" type="object" class="oe_highlight"/>
+		                <button string="Send SMS" name="send" type="object" class="oe_highlight"/>
 		                or
 		                <button string="Cancel" class="oe_link" special="cancel"/>
 		            </footer>
@@ -37,12 +44,12 @@
             </field>
         </record>
         
- 		<act_window name="Send Mass SMS"
+ 		<act_window name="Send an SMS"
             res_model="wizard.send.sms"
             src_model="res.partner"
             view_mode="form"
             target="new"
             key2="client_action_multi"
-            id="action_part_sms" />
+            id="action_wizard_send_sms" />
     </data>
 </openerp>

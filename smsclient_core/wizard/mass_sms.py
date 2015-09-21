@@ -33,11 +33,15 @@ class WizardSendSms(models.TransientModel):
         gateway_ids = sms_client_obj.search([], limit=1)
         return gateway_ids and gateway_ids[0] or False
 
+    @api.model
+    def _default_get_partner(self):
+        if self._context.get('active_model') == 'res.partner':
+            return self._context.get('active_ids')
+
     @api.onchange('gateway_id')
     def onchange_gateway_mass(self):
         for key in ['validity', 'classes', 'deferred', 'priority',
                     'coding', 'tag', 'nostop']:
-            print key, self.gateway_id[key]
             self[key] = self.gateway_id[key]
 
     @api.model
@@ -58,7 +62,7 @@ class WizardSendSms(models.TransientModel):
         }
 
     @api.multi
-    def sms_mass_send(self):
+    def send(self):
         sms_obj = self.env['sms.sms']
         partner_obj = self.env['res.partner']
         for partner in partner_obj.browse(self._context.get('active_ids')):
@@ -94,3 +98,4 @@ class WizardSendSms(models.TransientModel):
     nostop = fields.Boolean(
         help='Do not display STOP clause in the message, this requires that '
              'this is not an advertising message')
+    partner_ids = fields.Many2many('res.partner', default=_default_get_partner)

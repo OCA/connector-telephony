@@ -3,11 +3,6 @@
     <data>
 
         <!-- ************************************************************** -->
-        <!-- ** Global menu for SMS Client ******************************** -->
-        <!-- ************************************************************** -->
-        <menuitem name="SMS Gateway" id="menu_smsclient_administration_server" parent="base.menu_config"/>
-
-        <!-- ************************************************************** -->
         <!-- ** SMS Gateway list ****************************************** -->
         <!-- ************************************************************** -->
         <record model="ir.ui.view" id="sms_smsclient_form">
@@ -94,7 +89,10 @@
             <field name="view_id" ref="sms_smsclient_tree" />
         </record>
 
-        <menuitem name="Gateway List" id="menu_smsclient_administration_sms_server" parent="menu_smsclient_administration_server" action="action_sms_smsclient_tree"/>
+        <menuitem name="Gateway List"
+                  id="menu_smsclient_administration_sms_server"
+                  parent="base_phone.menu_config_phone"
+                  action="action_sms_smsclient_tree"/>
 
         <record model="ir.ui.view" id="sms_sms_tree">
             <field name="model">sms.sms</field>
@@ -150,9 +148,18 @@
             <field name="view_id" ref="sms_sms_tree" />
         </record>
 
-        <menuitem name="Sms Message" id="menu_smsclient_administration_sms" parent="menu_smsclient_administration_server" action="action_sms_sms_tree"/>
+        <menuitem name="Sms Message"
+                  id="menu_smsclient_administration_sms"
+                  sequence="110"
+                  parent="base_phone.menu_config_phone"
+                  action="action_sms_sms_tree"/>
 
-        <act_window context="{'gateway_id': active_id}" domain="[('gateway_id', '=', active_id)]" id="act_sms_gateway_2_sms" name="Sms Message" res_model="sms.sms" src_model="sms.smsclient"/>
+        <act_window context="{'gateway_id': active_id}"
+                    domain="[('gateway_id', '=', active_id)]"
+                    id="act_sms_gateway_2_sms"
+                    name="Sms Message"
+                    res_model="sms.sms"
+                    src_model="sms.smsclient"/>
 
     </data>
 </openerp>
