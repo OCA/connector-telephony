@@ -6,7 +6,6 @@
         <!-- ** SMS Gateway list ****************************************** -->
         <!-- ************************************************************** -->
         <record model="ir.ui.view" id="sms_smsclient_form">
-            <field name="name">sms.smsclient.form</field>
             <field name="model">sms.smsclient</field>
             <field name="priority" eval="8"/>
             <field name="arch" type="xml">
@@ -69,7 +68,6 @@
         </record>
 
         <record model="ir.ui.view" id="sms_smsclient_tree">
-            <field name="name">sms.smsclient.tree</field>
             <field name="model">sms.smsclient</field>
             <field name="priority" eval="8"/>
             <field name="arch" type="xml">
@@ -89,8 +87,9 @@
             <field name="view_id" ref="sms_smsclient_tree" />
         </record>
 
-        <menuitem name="Gateway List"
+        <menuitem name="SMS Gateway"
                   id="menu_smsclient_administration_sms_server"
+                  sequence="100"
                   parent="base_phone.menu_config_phone"
                   action="action_sms_smsclient_tree"/>
 
@@ -148,7 +147,7 @@
             <field name="view_id" ref="sms_sms_tree" />
         </record>
 
-        <menuitem name="Sms Message"
+        <menuitem name="SMS Message"
                   id="menu_smsclient_administration_sms"
                   sequence="110"
                   parent="base_phone.menu_config_phone"
