@@ -5,8 +5,8 @@
         <!-- ************************************************************** -->
         <!-- ** SMS Gateway list ****************************************** -->
         <!-- ************************************************************** -->
-        <record model="ir.ui.view" id="sms_smsclient_form">
-            <field name="model">sms.smsclient</field>
+        <record model="ir.ui.view" id="sms_gateway_form">
+            <field name="model">sms.gateway</field>
             <field name="priority" eval="8"/>
             <field name="arch" type="xml">
                 <form string="SMS Gateway">
@@ -67,8 +67,8 @@
             </field>
         </record>
 
-        <record model="ir.ui.view" id="sms_smsclient_tree">
-            <field name="model">sms.smsclient</field>
+        <record model="ir.ui.view" id="sms_gateway_tree">
+            <field name="model">sms.gateway</field>
             <field name="priority" eval="8"/>
             <field name="arch" type="xml">
                 <tree string="SMS Gateways">
@@ -79,19 +79,19 @@
             </field>
         </record>
 
-        <record model="ir.actions.act_window" id="action_sms_smsclient_tree">
+        <record model="ir.actions.act_window" id="action_sms_gateway_tree">
             <field name="name">SMS Gateway</field>
-            <field name="res_model">sms.smsclient</field>
+            <field name="res_model">sms.gateway</field>
             <field name="view_type">form</field>
             <field name="view_mode">form,tree</field>
-            <field name="view_id" ref="sms_smsclient_tree" />
+            <field name="view_id" ref="sms_gateway_tree" />
         </record>
 
         <menuitem name="SMS Gateway"
-                  id="menu_smsclient_administration_sms_server"
+                  id="menu_gateway_administration_sms_server"
                   sequence="100"
                   parent="base_phone.menu_config_phone"
-                  action="action_sms_smsclient_tree"/>
+                  action="action_sms_gateway_tree"/>
 
         <record model="ir.ui.view" id="sms_sms_tree">
             <field name="model">sms.sms</field>
@@ -148,7 +148,7 @@
         </record>
 
         <menuitem name="SMS Message"
-                  id="menu_smsclient_administration_sms"
+                  id="menu_gateway_administration_sms"
                   sequence="110"
                   parent="base_phone.menu_config_phone"
                   action="action_sms_sms_tree"/>
@@ -158,7 +158,7 @@
                     id="act_sms_gateway_2_sms"
                     name="Sms Message"
                     res_model="sms.sms"
-                    src_model="sms.smsclient"/>
+                    src_model="sms.gateway"/>
 
     </data>
 </openerp>

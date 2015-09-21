@@ -46,7 +46,7 @@ CLASSES_LIST = [
 
 
 class SMSClient(models.Model):
-    _name = 'sms.smsclient'
+    _name = 'sms.gateway'
     _description = 'SMS Client'
 
     @api.model
@@ -186,7 +186,7 @@ class SmsSms(models.Model):
         readonly=True,
         states={'draft': [('readonly', False)]})
     gateway_id = fields.Many2one(
-        'sms.smsclient',
+        'sms.gateway',
         'SMS Gateway',
         readonly=True,
         states={'draft': [('readonly', False)]})

@@ -1,11 +1,11 @@
-# Catalan translation for openerp-smsclient
+# Catalan translation for openerp-gateway
 # Copyright (c) 2012 Rosetta Contributors and Canonical Ltd 2012
-# This file is distributed under the same license as the openerp-smsclient package.
+# This file is distributed under the same license as the openerp-gateway package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2012.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: openerp-smsclient\n"
+"Project-Id-Version: openerp-gateway\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-09-10 10:24+0000\n"
 "PO-Revision-Date: 2012-02-25 17:41+0000\n"
@@ -18,215 +18,215 @@ msgstr ""
 "X-Launchpad-Export-Date: 2012-02-26 05:17+0000\n"
 "X-Generator: Launchpad (build 14860)\n"
 
-#. module: smsclient
-#: selection:sms.smsclient,method:0
+#. module: gateway
+#: selection:sms.gateway,method:0
 msgid "SMPP Method"
 msgstr "Mètode SMPP"
 
-#. module: smsclient
-#: field:sms.smsclient,property_ids:0
+#. module: gateway
+#: field:sms.gateway,property_ids:0
 msgid "Parameters"
 msgstr "Paràmetres"
 
-#. module: smsclient
-#: field:sms.smsclient,url:0
+#. module: gateway
+#: field:sms.gateway,url:0
 msgid "Gateway URL"
 msgstr "URL de la passarel·la"
 
-#. module: smsclient
-#: field:sms.smsclient.history,sms:0
+#. module: gateway
+#: field:sms.gateway.history,sms:0
 msgid "SMS"
 msgstr "SMS"
 
-#. module: smsclient
+#. module: gateway
 #: field:ir.actions.server,sms_server:0
 msgid "SMS Server"
 msgstr "Servidor SMS"
 
-#. module: smsclient
+#. module: gateway
 #: field:sms.sms,msg:0
 msgid "SMS Text"
 msgstr "Text del SMS"
 
-#. module: smsclient
-#: code:addons/smsclient/wizard/verifycode.py:43
+#. module: gateway
+#: code:addons/gateway/wizard/verifycode.py:43
 #, python-format
 msgid "Gateway already verified!"
 msgstr "La passarel·la ja està verificada!"
 
-#. module: smsclient
+#. module: gateway
 #: field:sms.sms,name:0
 msgid "SMS Request"
 msgstr "Petició SMS"
 
-#. module: smsclient
-#: wizard_view:sms.smsclient.code.send,init:0
-#: wizard_button:sms.smsclient.code.send,init,send:0
+#. module: gateway
+#: wizard_view:sms.gateway.code.send,init:0
+#: wizard_button:sms.gateway.code.send,init,send:0
 msgid "Send Code"
 msgstr "Envia codi"
 
-#. module: smsclient
-#: field:sms.smsclient.parms,value:0
+#. module: gateway
+#: field:sms.gateway.parms,value:0
 msgid "Property value"
 msgstr "Valor propietat"
 
-#. module: smsclient
-#: selection:sms.smsclient.parms,type:0
+#. module: gateway
+#: selection:sms.gateway.parms,type:0
 #: view:sms.sms:0
 msgid "SMS Message"
 msgstr "Missatge SMS"
 
-#. module: smsclient
-#: selection:sms.smsclient,state:0
+#. module: gateway
+#: selection:sms.gateway,state:0
 msgid "Not Verified"
 msgstr "No verificat"
 
-#. module: smsclient
-#: help:sms.smsclient.parms,type:0
+#. module: gateway
+#: help:sms.gateway.parms,type:0
 msgid "If parameter concern a value to substitute, indicate it"
 msgstr "Si el paràmetre es refereix a un valor a substituir, indiqueu-lo."
 
-#. module: smsclient
+#. module: gateway
 #: selection:sms.sms,state:0
 msgid "Sent"
 msgstr "Enviat"
 
-#. module: smsclient
-#: help:sms.smsclient.code.verify,init,code:0
+#. module: gateway
+#: help:sms.gateway.code.verify,init,code:0
 msgid "Enter the verification code that you get in your verification sms"
 msgstr ""
 "Introduïu el codi de verificació que heu rebut en el vostre SMS de "
 "verificació."
 
-#. module: smsclient
-#: model:ir.model,name:smsclient.model_sms_smsclient
+#. module: gateway
+#: model:ir.model,name:gateway.model_sms_gateway
 msgid "SMS Client"
 msgstr "Client SMS"
 
-#. module: smsclient
-#: model:ir.actions.wizard,name:smsclient.sms_smsclient_send_code
+#. module: gateway
+#: model:ir.actions.wizard,name:gateway.sms_gateway_send_code
 msgid "Send Verification Code"
 msgstr "Envia codi de verificació"
 
-#. module: smsclient
-#: field:sms.smsclient.history,name:0
+#. module: gateway
+#: field:sms.gateway.history,name:0
 msgid "Description"
 msgstr "Descripció"
 
-#. module: smsclient
-#: view:sms.smsclient:0
+#. module: gateway
+#: view:sms.gateway:0
 msgid "Permission"
 msgstr "Permís"
 
-#. module: smsclient
-#: help:sms.smsclient.parms,value:0
+#. module: gateway
+#: help:sms.gateway.parms,value:0
 msgid "Value associate on the property for the URL"
 msgstr "Valor associat a la propietat per la URL."
 
-#. module: smsclient
-#: field:sms.smsclient,code:0
-#: wizard_field:sms.smsclient.code.verify,init,code:0
+#. module: gateway
+#: field:sms.gateway,code:0
+#: wizard_field:sms.gateway.code.verify,init,code:0
 msgid "Verification Code"
 msgstr "Codi de verificació"
 
-#. module: smsclient
-#: code:addons/smsclient/wizard/sendcode.py:54
+#. module: gateway
+#: code:addons/gateway/wizard/sendcode.py:54
 #, python-format
 msgid "Verification Failed. Please check the Server Configuration!"
 msgstr "Ha fallat la verificació. Comproveu la configuració del servidor!"
 
-#. module: smsclient
-#: code:addons/smsclient/smsclient.py:72
+#. module: gateway
+#: code:addons/gateway/gateway.py:72
 #, python-format
 msgid "This method is not implemented (%s)"
 msgstr "Aquest mètode no està implementat (%s)"
 
-#. module: smsclient
-#: help:sms.smsclient.code.send,init,smsto:0
+#. module: gateway
+#: help:sms.gateway.code.send,init,smsto:0
 msgid ""
 "Enter the Mobile No on which you want to receive the Verification Code"
 msgstr "Introduïu el Nº de móbil a on voleu rebre el codi de verificació."
 
-#. module: smsclient
-#: code:addons/smsclient/smsclient.py:114
+#. module: gateway
+#: code:addons/gateway/gateway.py:114
 #, python-format
 msgid "SMS Sent"
 msgstr "SMS enviat"
 
-#. module: smsclient
-#: selection:sms.smsclient.parms,type:0
+#. module: gateway
+#: selection:sms.gateway.parms,type:0
 msgid "Recipient No"
 msgstr "Nº recepció"
 
-#. module: smsclient
-#: field:sms.smsclient.history,date_create:0
+#. module: gateway
+#: field:sms.gateway.history,date_create:0
 #: field:sms.sms,date_create:0
 msgid "Date"
 msgstr "Data"
 
-#. module: smsclient
-#: selection:sms.smsclient,state:0
+#. module: gateway
+#: selection:sms.gateway,state:0
 msgid "Waiting for Verification"
 msgstr "Esperant verificació"
 
-#. module: smsclient
-#: model:ir.model,name:smsclient.model_sms_smsclient_parms
+#. module: gateway
+#: model:ir.model,name:gateway.model_sms_gateway_parms
 msgid "SMS Client Properties"
 msgstr "Propietats client SMS"
 
-#. module: smsclient
-#: selection:sms.smsclient.parms,type:0
+#. module: gateway
+#: selection:sms.gateway.parms,type:0
 msgid "Password"
 msgstr "﻿Contrasenya"
 
-#. module: smsclient
-#: field:sms.smsclient,users_id:0
+#. module: gateway
+#: field:sms.gateway,users_id:0
 msgid "Users Allowed"
 msgstr "Usuaris permesos"
 
-#. module: smsclient
-#: help:sms.smsclient.parms,name:0
+#. module: gateway
+#: help:sms.gateway.parms,name:0
 msgid "Name of the property whom appear on the URL"
 msgstr "Nom de la propietat que apareix a la URL."
 
-#. module: smsclient
-#: selection:sms.smsclient.parms,type:0
+#. module: gateway
+#: selection:sms.gateway.parms,type:0
 msgid "User"
 msgstr "Usuari"
 
-#. module: smsclient
-#: field:sms.smsclient.history,user_id:0
+#. module: gateway
+#: field:sms.gateway.history,user_id:0
 msgid "Username"
 msgstr "Nom d'usuari"
 
-#. module: smsclient
-#: model:ir.actions.act_window,name:smsclient.act_sms_gateway_2_sms_queue
-#: model:ir.actions.act_window,name:smsclient.action_sms.sms_tree
-#: model:ir.ui.menu,name:smsclient.menu_smsclient_administration_sms_server_queue
+#. module: gateway
+#: model:ir.actions.act_window,name:gateway.act_sms_gateway_2_sms_queue
+#: model:ir.actions.act_window,name:gateway.action_sms.sms_tree
+#: model:ir.ui.menu,name:gateway.menu_gateway_administration_sms_server_queue
 #: view:sms.sms:0
 msgid "Message Queue"
 msgstr "Cua de missatges"
 
-#. module: smsclient
-#: view:sms.smsclient.history:0
+#. module: gateway
+#: view:sms.gateway.history:0
 #: view:sms.sms:0
 msgid "Gateway History"
 msgstr "Historial de la passarel·la"
 
-#. module: smsclient
-#: model:ir.model,name:smsclient.model_ir_actions_server
+#. module: gateway
+#: model:ir.model,name:gateway.model_ir_actions_server
 msgid "ir.actions.server"
 msgstr "ir.accions.servidor"
 
-#. module: smsclient
+#. module: gateway
 #: help:ir.actions.server,sms_server:0
 msgid "Select the SMS Gateway configuration to use with this action"
 msgstr ""
 "Seleccioneu la configuració de la passarel·la SMS que s'utilitzarà amb "
 "aquesta acció."
 
-#. module: smsclient
-#: help:sms.smsclient,body:0
+#. module: gateway
+#: help:sms.gateway,body:0
 msgid ""
 "The message text that will be send along with the email which is send "
 "through this server"
@@ -234,177 +234,177 @@ msgstr ""
 "El text del missatge que serà enviat junt amb l'Email que és enviat "
 "mitjançant aquest servidor."
 
-#. module: smsclient
-#: wizard_button:sms.smsclient.code.send,init,end:0
-#: wizard_button:sms.smsclient.code.verify,init,end:0
+#. module: gateway
+#: wizard_button:sms.gateway.code.send,init,end:0
+#: wizard_button:sms.gateway.code.verify,init,end:0
 msgid "Cancel"
 msgstr "Cancel·la"
 
-#. module: smsclient
-#: view:sms.smsclient:0
+#. module: gateway
+#: view:sms.gateway:0
 msgid "Access Permission"
 msgstr "Permís d'accés"
 
-#. module: smsclient
-#: help:sms.smsclient,url:0
+#. module: gateway
+#: help:sms.gateway,url:0
 msgid "Base url for message"
 msgstr "URL base pel missatge"
 
-#. module: smsclient
-#: wizard_field:sms.smsclient.code.send,init,smsto:0
-#: field:sms.smsclient.history,to:0
+#. module: gateway
+#: wizard_field:sms.gateway.code.send,init,smsto:0
+#: field:sms.gateway.history,to:0
 #: field:sms.sms,mobile:0
 msgid "Mobile No"
 msgstr "Núm. mòbil"
 
-#. module: smsclient
-#: code:addons/smsclient/smsclient.py:72
-#: code:addons/smsclient/wizard/sendcode.py:54
-#: code:addons/smsclient/wizard/verifycode.py:43
-#: code:addons/smsclient/wizard/verifycode.py:48
+#. module: gateway
+#: code:addons/gateway/gateway.py:72
+#: code:addons/gateway/wizard/sendcode.py:54
+#: code:addons/gateway/wizard/verifycode.py:43
+#: code:addons/gateway/wizard/verifycode.py:48
 #: selection:sms.sms,state:0
 #, python-format
 msgid "Error"
 msgstr "Error"
 
-#. module: smsclient
-#: model:ir.actions.act_window,name:smsclient.act_sms_gateway_2_sms_history
+#. module: gateway
+#: model:ir.actions.act_window,name:gateway.act_sms_gateway_2_sms_history
 msgid "SMS History"
 msgstr "Historial SMS"
 
-#. module: smsclient
-#: code:addons/smsclient/wizard/verifycode.py:48
+#. module: gateway
+#: code:addons/gateway/wizard/verifycode.py:48
 #, python-format
 msgid "Verification failed. Invalid Verification Code!"
 msgstr "Ha fallat la verificació. Codi de verificació invàlid!"
 
-#. module: smsclient
+#. module: gateway
 #: selection:sms.sms,state:0
 msgid "Queued"
 msgstr "En cua"
 
-#. module: smsclient
-#: model:ir.ui.menu,name:smsclient.menu_smsclient_administration_sms_server
+#. module: gateway
+#: model:ir.ui.menu,name:gateway.menu_gateway_administration_sms_server
 msgid "Gateway List"
 msgstr "Llista passarel·la"
 
-#. module: smsclient
-#: field:sms.smsclient,history_line:0
+#. module: gateway
+#: field:sms.gateway,history_line:0
 msgid "History"
 msgstr "Historial"
 
-#. module: smsclient
-#: field:sms.smsclient,method:0
-#: field:sms.smsclient.parms,type:0
+#. module: gateway
+#: field:sms.gateway,method:0
+#: field:sms.gateway.parms,type:0
 msgid "API Method"
 msgstr "Mètode API"
 
-#. module: smsclient
-#: field:sms.smsclient,state:0
+#. module: gateway
+#: field:sms.gateway,state:0
 msgid "Gateway Status"
 msgstr "Estat passarel·la"
 
-#. module: smsclient
-#: code:addons/smsclient/smsclient.py:69
+#. module: gateway
+#: code:addons/gateway/gateway.py:69
 #, python-format
 msgid "Permission Error!"
 msgstr "Error dels permisos!"
 
-#. module: smsclient
-#: wizard_view:sms.smsclient.code.verify,init:0
-#: wizard_button:sms.smsclient.code.verify,init,check:0
+#. module: gateway
+#: wizard_view:sms.gateway.code.verify,init:0
+#: wizard_button:sms.gateway.code.verify,init,check:0
 msgid "Verify Code"
 msgstr "Verifica codi"
 
-#. module: smsclient
-#: selection:sms.smsclient.parms,type:0
+#. module: gateway
+#: selection:sms.gateway.parms,type:0
 msgid "Sender Name"
 msgstr "Nom del remitent"
 
-#. module: smsclient
-#: view:sms.smsclient:0
+#. module: gateway
+#: view:sms.gateway:0
 msgid "Gateway Parameters"
 msgstr "Paràmetres passarel·la"
 
-#. module: smsclient
+#. module: gateway
 #: selection:sms.sms,state:0
 msgid "Waiting"
 msgstr "En espera"
 
-#. module: smsclient
-#: view:sms.smsclient:0
+#. module: gateway
+#: view:sms.gateway:0
 msgid "General"
 msgstr "General"
 
-#. module: smsclient
-#: selection:sms.smsclient,method:0
+#. module: gateway
+#: selection:sms.gateway,method:0
 msgid "HTTP Method"
 msgstr "Mètode HTTP"
 
-#. module: smsclient
-#: model:ir.actions.wizard,name:smsclient.sms_smsclient_verify_code
+#. module: gateway
+#: model:ir.actions.wizard,name:gateway.sms_gateway_verify_code
 msgid "Verify SMS Gateway"
 msgstr "Verifica passarel·la SMS"
 
-#. module: smsclient
-#: model:ir.model,name:smsclient.model_sms_smsclient_history
+#. module: gateway
+#: model:ir.model,name:gateway.model_sms_gateway_history
 msgid "SMS Client History"
 msgstr "Historial client SMS"
 
-#. module: smsclient
-#: model:ir.model,name:smsclient.model_sms.sms
+#. module: gateway
+#: model:ir.model,name:gateway.model_sms.sms
 msgid "SMS Queue"
 msgstr "Cua SMS"
 
-#. module: smsclient
-#: code:addons/smsclient/smsclient.py:69
+#. module: gateway
+#: code:addons/gateway/gateway.py:69
 #, python-format
 msgid "You have no permission to access %s "
 msgstr "No teniu permisos per accedir %s "
 
-#. module: smsclient
-#: model:ir.actions.act_window,name:smsclient.action_sms_smsclient_history_tree
-#: model:ir.ui.menu,name:smsclient.menu_smsclient_administration_sms_server_history
+#. module: gateway
+#: model:ir.actions.act_window,name:gateway.action_sms_gateway_history_tree
+#: model:ir.ui.menu,name:gateway.menu_gateway_administration_sms_server_history
 msgid "SMS Gateway History"
 msgstr "Historial passarel·la SMS"
 
-#. module: smsclient
-#: selection:sms.smsclient,state:0
+#. module: gateway
+#: selection:sms.gateway,state:0
 msgid "Verified"
 msgstr "Verificat"
 
-#. module: smsclient
-#: field:sms.smsclient,name:0
+#. module: gateway
+#: field:sms.gateway,name:0
 msgid "Gateway Name"
 msgstr "Nom passarel·la"
 
-#. module: smsclient
+#. module: gateway
 #: view:sms.sms:0
 #: field:sms.sms,error:0
 msgid "Last Error"
 msgstr "Últim error"
 
-#. module: smsclient
-#: field:sms.smsclient,body:0
+#. module: gateway
+#: field:sms.gateway,body:0
 msgid "Message"
 msgstr "Missatge"
 
-#. module: smsclient
+#. module: gateway
 #: field:sms.sms,state:0
 msgid "Message Status"
 msgstr "Estat del missatge"
 
-#. module: smsclient
-#: field:sms.smsclient.parms,name:0
+#. module: gateway
+#: field:sms.gateway.parms,name:0
 msgid "Property name"
 msgstr "Nom de la propietat"
 
-#. module: smsclient
-#: model:ir.actions.act_window,name:smsclient.action_sms_smsclient_tree
-#: model:ir.ui.menu,name:smsclient.menu_smsclient_administration_server
-#: view:sms.smsclient:0
-#: field:sms.smsclient.history,gateway_id:0
-#: field:sms.smsclient.parms,gateway_id:0
+#. module: gateway
+#: model:ir.actions.act_window,name:gateway.action_sms_gateway_tree
+#: model:ir.ui.menu,name:gateway.menu_gateway_administration_server
+#: view:sms.gateway:0
+#: field:sms.gateway.history,gateway_id:0
+#: field:sms.gateway.parms,gateway_id:0
 #: field:sms.sms,gateway_id:0
 msgid "SMS Gateway"
 msgstr "Passarel·la SMS"

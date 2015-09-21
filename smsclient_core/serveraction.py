@@ -26,7 +26,7 @@ import time
 import logging
 import urllib
 
-_logger = logging.getLogger('smsclient')
+_logger = logging.getLogger('gateway')
 
 
 class ServerAction(models.Model):
@@ -41,7 +41,7 @@ class ServerAction(models.Model):
                          "`object.invoice_address_id.mobile` is the field "
                          "which gives the correct mobile number")
     sms = fields.Char('SMS', size=160, translate=True)
-    sms_server = fields.Many2one('sms.smsclient', 'SMS Server',
+    sms_server = fields.Many2one('sms.gateway', 'SMS Server',
                                  help='Select the SMS Gateway configuration'
                                  ' to use with this action')
     sms_template_id = fields.Many2one('email.template', 'SMS Template',

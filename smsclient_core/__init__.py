@@ -20,7 +20,7 @@
 #
 ##############################################################################
 
-from . import smsclient
+from . import sms_gateway
 from . import serveraction
 from . import wizard
 from . import smstemplate

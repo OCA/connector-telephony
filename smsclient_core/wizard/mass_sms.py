@@ -29,8 +29,8 @@ class WizardSendSms(models.TransientModel):
 
     @api.model
     def _default_get_gateway(self):
-        sms_client_obj = self.env['sms.smsclient']
-        gateway_ids = sms_client_obj.search([], limit=1)
+        gateway_obj = self.env['sms.gateway']
+        gateway_ids = gateway_obj.search([], limit=1)
         return gateway_ids and gateway_ids[0] or False
 
     @api.model
@@ -70,7 +70,7 @@ class WizardSendSms(models.TransientModel):
             sms_obj.create(vals)
 
     gateway_id = fields.Many2one(
-        'sms.smsclient',
+        'sms.gateway',
         required=True,
         default=_default_get_gateway)
     message = fields.Text(required=True)

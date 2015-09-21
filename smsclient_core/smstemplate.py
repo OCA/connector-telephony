@@ -27,4 +27,4 @@ class email_template(models.Model):
 
     sms_template = fields.Boolean('SMS Template')
     mobile_to = fields.Char('To (Mobile)', size=256)
-    gateway_id = fields.Many2one('sms.smsclient', 'SMS Gateway')
+    gateway_id = fields.Many2one('sms.gateway', 'SMS Gateway')
