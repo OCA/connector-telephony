@@ -125,7 +125,6 @@ class ServerAction(models.Model):
                         'deferred': gateway.deferred,
                         'priority': gateway.priority,
                         'coding': gateway.coding,
-                        'tag': gateway.tag,
                         'nostop': gateway.nostop,
                     }
                     sms_in_q = sms_obj.search([
@@ -139,7 +138,6 @@ class ServerAction(models.Model):
                         ('deferred', '=', gateway.deferred),
                         ('priority', '=', gateway.priority),
                         ('coding', '=', gateway.coding),
-                        ('tag', '=', gateway.tag),
                         ('nostop', '=', gateway.nostop)
                         ])
                     if not sms_in_q:

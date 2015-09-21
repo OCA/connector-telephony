@@ -30,7 +30,6 @@
 	   		          	        <group>
 		                   			<field name="priority"/>
 		                   			<field name="coding"/>
-		                   			<field name="tag"/>
 								</group>
 							</group>
 						</page>

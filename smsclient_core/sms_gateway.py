@@ -130,8 +130,6 @@ class SMSClient(models.Model):
         default='1'
     )
     coding_visible = fields.Boolean(default=False)
-    tag = fields.Char('Tag', help='an optional tag')
-    tag_visible = fields.Boolean(default=False)
     nostop = fields.Boolean(
         help='Do not display STOP clause in the message, this requires that '
              'this is not an advertising message',
@@ -155,7 +153,6 @@ class SMSClient(models.Model):
             self.nostop_visible = False
             self.priority_visible = False
             self.coding_visible = False
-            self.tag_visible = False
             self.char_limit_visible = False
 
     @api.multi
@@ -219,9 +216,6 @@ class SmsSms(models.Model):
         ('1', '7 bit'),
         ('2', 'Unicode')
         ], help='The sms coding: 1 for 7 bit or 2 for unicode')
-    tag = fields.Char(
-        size=256,
-        help='An optional tag')
     nostop = fields.Boolean(
         'NoStop',
         help='Do not display STOP clause in the message, this requires that'

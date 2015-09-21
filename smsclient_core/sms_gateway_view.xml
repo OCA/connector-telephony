@@ -54,8 +54,6 @@
                                         <field name="priority_visible" invisible="1"/>
                                         <field name="coding" attrs="{'invisible': [('coding_visible', '=', False),]}"/>
                                         <field name="coding_visible" invisible="1"/>
-                                        <field name="tag" attrs="{'invisible': [('tag_visible', '=', False),]}"/>
-                                        <field name="tag_visible" invisible="1"/>
                                         <field name="char_limit" attrs="{'invisible': [('char_limit_visible', '=', False),]}"/>
                                         <field name="char_limit_visible" invisible="1"/>
                                     </group>
