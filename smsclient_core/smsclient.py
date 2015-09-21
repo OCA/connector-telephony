@@ -45,7 +45,7 @@ CLASSES_LIST = [
 ]
 
 
-class partner_sms_send(models.Model):
+class partner_sms_send(models.TransientModel):
     _name = "partner.sms.send"
 
     @api.model
@@ -65,6 +65,7 @@ class partner_sms_send(models.Model):
         gateways = sms_obj.search([], limit=1)
         return gateways or False
 
+    #TODO move to new API
     @api.multi
     def onchange_gateway(self, gateway_id):
         sms_obj = self.env['sms.smsclient']
@@ -157,6 +158,11 @@ class SMSClient(models.Model):
                     if config_vals.get('from'):
                         sms_provider.from_provider = config_vals['from']
 
+    @api.multi
+    @depends('method')
+    def _get_protocole(self):
+        for record in self:
+            self.protocole = self.method.split('_')[0]
 
     name = fields.Char('Gateway Name', required=True)
     url = fields.Char('Gateway URL',
@@ -164,10 +170,10 @@ class SMSClient(models.Model):
                       compute='_get_provider_conf'
                       )
     url_visible = fields.Boolean(default=False)
-    method = fields.Selection(string='API Method',
-                              selection='get_method',
-                              index=True,
-                              )
+    method = fields.Selection(
+        string='API Method',
+        selection='get_method')
+    protocole = fields.Char(compute='_get_protocole')
     state = fields.Selection([
         ('new', 'Not Verified'),
         ('waiting', 'Waiting for Verification'),
@@ -275,50 +281,20 @@ class SMSClient(models.Model):
             'nostop': data.nostop,
         }
 
-    # This method must be inherit to forming the url according to the provider
     @api.model
-    def _send_message(self, data):
-        return True
-
-    @api.model
-    def _check_queue(self):
+    def _run_send_sms(self):
         sms_obj = self.env['sms.sms']
-        sids = sms_obj.search([
-            ('state', '!=', 'send'),
-            ('state', '!=', 'sending')
-            ], limit=30)
-        error_ids = []
-        sent_ids = []
-        for sms in sids:
-            sms.state = 'sending'
-            if sms.gateway_id.char_limit:
-                if len(sms.msg) > 160:
-                    error_ids.append(sms.id)
-                    continue
-            if 'http' in sms.gateway_id.method:
-                try:
-                    answer = urllib.urlopen(sms.name)
-                    _logger.info(answer.read())
-                except Exception, e:
-                    raise Warning(e)
-            sent_ids.append(sms.id)
-        rec_sent_ids = sms_obj.browse(sent_ids)
-        rec_sent_ids.write({'state': 'send'})
-        rec_error_ids = sms_obj.browse(error_ids)
-        rec_error_ids.write({
-            'state': 'error',
-            'error': 'Size of SMS should not be more then 160 char'
-            })
+        sms_ids = sms_obj.search([('state', '=', 'draft')])
+        for sms in sms_obj.browse(sms_ids):
+            sms._send()
         return True
 
 
 class SmsSms(models.Model):
     _name = 'sms.sms'
     _description = 'SMS'
+    _rec_name = 'mobile'
 
-    name = fields.Text('SMS Request', size=256,
-                       required=True, readonly=True,
-                       states={'draft': [('readonly', False)]})
     msg = fields.Text('SMS Text', size=256,
                       required=True, readonly=True,
                       states={'draft': [('readonly', False)]})
@@ -362,3 +338,33 @@ class SmsSms(models.Model):
         'NoStop',
         help='Do not display STOP clause in the message, this requires that'
              'this is not an advertising message')
+
+    @api.multi
+    def _send_http(self)
+        self.ensure_one()
+        if not hasattr(self, "_prepare_%s" % sms.gateway_id.method):
+            raise NotImplemented
+        params = getattr(self, "_prepare_%s" % sms.gateway_id.method)()
+        params_encoded = urllib.urlencode(method())
+        answer = urllib.urlopen("%s?%s" % self.url, params_encode)
+        _logger.debug(answer.read())
+
+    @api.multi
+    def _send(self):
+        self.ensure_one()
+        if sms.gateway_id.char_limit and len(sms.msg) > 160:
+            sms.write({
+                'state': 'error'
+                'error': 'Size of SMS should not be more then 160 char'
+                })
+        if not hasattr(self, "_send_%s" % protocole):
+            raise NotImplemented
+        else:
+            try:
+                with self.cr.savepoint():
+                    getattr(self, "_send_%s" % protocole)()
+                    self.write({'state': 'send'])
+            except Exception, e:
+                logger.error('Failed to send sms', e)
+                self.write({'error': e, 'state': 'error'})
+            self.cr.commit()
