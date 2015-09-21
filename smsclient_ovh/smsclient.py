@@ -87,7 +87,7 @@ class smsclient(models.Model):
                     prms['smsCoding'] = gateway.coding
                 params = urllib.urlencode(prms)
                 name = url + "?" + params
-            queue_obj = self.env['sms.smsclient.queue']
-            vals = self._prepare_smsclient_queue(data, name)
-            queue_obj.create(vals)
+            sms_obj = self.env['sms.sms']
+            vals = self._prepare_sms(data, name)
+            sms_obj.create(vals)
         return True
