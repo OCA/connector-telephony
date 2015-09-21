@@ -21,7 +21,6 @@
 ###############################################################################
 
 from openerp import api, models, _
-from openerp.exceptions import Warning
 import urllib
 import logging
 _logger = logging.getLogger(__name__)
@@ -79,3 +78,15 @@ class SmsSms(models.Model):
         if self.coding:
             params['smsCoding'] = self.coding
         return params
+
+    @api.multi
+    def _send_http_ovh(self):
+        self.ensure_one()
+        params = self._prepare_http_ovh()
+        params_encoded = urllib.urlencode(params)
+        url = "%s?%s" % (self.gateway_id.url, params_encoded)
+        _logger.debug("Call OVH API : %s", url)
+        answer = urllib.urlopen(url)
+        response = answer.read()
+        if response[0:2] != 'OK':
+            raise ValueError(response)
