@@ -32,14 +32,14 @@ class SmsClient(models.Model):
 
     @api.model
     def get_method(self):
-        method = super(smsclient, self).get_method()
-        method.append(('ovh_http', 'OVH HTTP'), )
+        method = super(SmsClient, self).get_method()
+        method.append(('http_ovh', 'OVH HTTP'), )
         return method
 
     @api.onchange('method')
     def onchange_method(self):
-        super(smsclient, self).onchange_method()
-        if self.method == 'ovh http':
+        super(SmsClient, self).onchange_method()
+        if self.method == 'http_ovh':
             self.url_visible = True
             self.sms_account_visible = True
             self.login_provider_visible = True
@@ -59,14 +59,14 @@ class SmsSms(models.Model):
     _inherit = "sms.sms"
 
     @api.model
-    def _prepare_ovh_http(self):
+    def _prepare_http_ovh(self):
         params = {
-            'smsAccount': gateway.sms_account,
-            'login': gateway.login_provider,
-            'password': gateway.password_provider,
-            'from': gateway.from_provider,
-            'to': self.mobile_to,
-            'message': self.text,
+            'smsAccount': self.gateway_id.sms_account,
+            'login': self.gateway_id.login_provider,
+            'password': self.gateway_id.password_provider,
+            'from': self.gateway_id.from_provider,
+            'to': self.mobile,
+            'message': self.message,
             }
         if self.nostop:
             params['noStop'] = 1
