@@ -23,7 +23,7 @@
 ##############################################################################
 
 from openerp import models, fields, api, _
-from openerp.exceptions import Warning
+from openerp.exceptions import Warning as UserError
 import urllib
 import logging
 from openerp.addons.server_environment import serv_config
@@ -138,28 +138,19 @@ class SMSClient(models.Model):
     def _get_provider_conf(self):
         for sms_provider in self:
             global_section_name = 'sms_provider'
-            # default vals
             config_vals = {}
             if serv_config.has_section(global_section_name):
-                config_vals.update((serv_config.items(global_section_name)))
+                config_vals.update(serv_config.items(global_section_name))
                 custom_section_name = '.'.join((global_section_name,
                                                 sms_provider.name
                                                 ))
                 if serv_config.has_section(custom_section_name):
                     config_vals.update(serv_config.items(custom_section_name))
-                    if config_vals.get('url_service'):
-                        sms_provider.url = config_vals['url_service']
-                    if config_vals.get('sms_account'):
-                        sms_provider.sms_account = config_vals['sms_account']
-                    if config_vals.get('login'):
-                        sms_provider.login_provider = config_vals['login']
-                    if config_vals.get('password'):
-                        sms_provider.password_provider = config_vals['password']
-                    if config_vals.get('from'):
-                        sms_provider.from_provider = config_vals['from']
+                for key in config_vals:
+                    sms_provider[key] = config_vals[key]
 
     @api.multi
-    @depends('method')
+    @api.depends('method')
     def _get_protocole(self):
         for record in self:
             self.protocole = self.method.split('_')[0]
@@ -229,16 +220,17 @@ class SMSClient(models.Model):
     coding_visible = fields.Boolean(default=False)
     tag = fields.Char('Tag', help='an optional tag')
     tag_visible = fields.Boolean(default=False)
-    nostop = fields.Boolean('NoStop',
-                            help='Do not display STOP clause in the message,'
-                                 'this requires that this is not an'
-                                 'advertising message',
-                            default=True
-                            )
+    nostop = fields.Boolean(
+        help='Do not display STOP clause in the message, this requires that '
+             'this is not an advertising message',
+        default=True)
     nostop_visible = fields.Boolean(default=False)
     char_limit = fields.Boolean('Character Limit', default=True)
     char_limit_visible = fields.Boolean(default=False)
     default_gateway = fields.Boolean(default=False)
+    partner_id = fields.Many2one(
+        'res.partner',
+        string='Partner')
 
     @api.onchange('method')
     def onchange_method(self):
@@ -265,29 +257,9 @@ class SMSClient(models.Model):
         return True
 
     @api.model
-    def _prepare_sms(self, data, name):
-        return {
-            'name': name,
-            'gateway_id': data.gateway.id,
-            'state': 'draft',
-            'mobile': data.mobile_to,
-            'msg': data.text,
-            'validity': data.validity,
-            'classes': data.classes,
-            'deffered': data.deferred,
-            'priority': data.priority,
-            'coding': data.coding,
-            'tag': data.tag,
-            'nostop': data.nostop,
-        }
-
-    @api.model
     def _run_send_sms(self):
-        sms_obj = self.env['sms.sms']
-        sms_ids = sms_obj.search([('state', '=', 'draft')])
-        for sms in sms_obj.browse(sms_ids):
-            sms._send()
-        return True
+        sms = self.env['sms.sms'].search([('state', '=', 'draft')])
+        return sms.send()
 
 
 class SmsSms(models.Model):
@@ -295,76 +267,93 @@ class SmsSms(models.Model):
     _description = 'SMS'
     _rec_name = 'mobile'
 
-    msg = fields.Text('SMS Text', size=256,
-                      required=True, readonly=True,
-                      states={'draft': [('readonly', False)]})
-    mobile = fields.Char('Mobile No', size=256,
-                         required=True, readonly=True,
-                         states={'draft': [('readonly', False)]})
-    gateway_id = fields.Many2one('sms.smsclient',
-                                 'SMS Gateway', readonly=True,
-                                 states={'draft': [('readonly', False)]})
+    message = fields.Text(
+        size=256,
+        required=True,
+        readonly=True,
+        states={'draft': [('readonly', False)]})
+    mobile = fields.Char(
+        required=True,
+        readonly=True,
+        states={'draft': [('readonly', False)]})
+    gateway_id = fields.Many2one(
+        'sms.smsclient',
+        'SMS Gateway',
+        readonly=True,
+        states={'draft': [('readonly', False)]})
     state = fields.Selection([
         ('draft', 'Queued'),
         ('send', 'Sent'),
+        ('cancel', 'Cancel'),
         ('error', 'Error'),
-    ], 'Message Status', select=True, readonly=True, default='draft')
-    error = fields.Text('Last Error', size=256,
-                        readonly=True,
-                        states={'draft': [('readonly', False)]})
-    date_create = fields.Datetime('Date', readonly=True,
-                                  default=fields.Datetime.now)
+        ], 'Message Status',
+        select=True,
+        readonly=True,
+        default='draft')
+    error = fields.Text(
+        'Last Error',
+        size=256,
+        readonly=True,
+        states={'draft': [('readonly', False)]})
     validity = fields.Integer(
         'Validity',
         help='The maximum time -in minute(s)- before the message is dropped')
-
     classes = fields.Selection(
-        CLASSES_LIST,
-        'Class',
+        selection=CLASSES_LIST,
         help='The sms class: flash(0), phone display(1), SIM(2), toolkit(3)')
     deferred = fields.Integer(
-        'Deferred',
         help='The time -in minute(s)- to wait before sending the message')
-
-    priority = fields.Selection(PRIORITY_LIST, 'Priority',
-                                help='The priority of the message ')
+    priority = fields.Selection(
+        selection=PRIORITY_LIST,
+        help='The priority of the message ')
     coding = fields.Selection([
         ('1', '7 bit'),
         ('2', 'Unicode')
-        ], 'Coding', help='The sms coding: 1 for 7 bit or 2 for unicode')
-    tag = fields.Char('Tag', size=256,
-                      help='An optional tag')
+        ], help='The sms coding: 1 for 7 bit or 2 for unicode')
+    tag = fields.Char(
+        size=256,
+        help='An optional tag')
     nostop = fields.Boolean(
         'NoStop',
         help='Do not display STOP clause in the message, this requires that'
              'this is not an advertising message')
 
     @api.multi
-    def _send_http(self)
+    def _send_http(self):
         self.ensure_one()
-        if not hasattr(self, "_prepare_%s" % sms.gateway_id.method):
+        if not hasattr(self, "_prepare_%s" % self.gateway_id.method):
             raise NotImplemented
-        params = getattr(self, "_prepare_%s" % sms.gateway_id.method)()
-        params_encoded = urllib.urlencode(method())
-        answer = urllib.urlopen("%s?%s" % self.url, params_encode)
+        params = getattr(self, "_prepare_%s" % self.gateway_id.method)()
+        params_encoded = urllib.urlencode(params)
+        answer = urllib.urlopen(
+            "%s?%s" % (self.gateway_id.url, params_encoded))
         _logger.debug(answer.read())
 
     @api.multi
-    def _send(self):
-        self.ensure_one()
-        if sms.gateway_id.char_limit and len(sms.msg) > 160:
-            sms.write({
-                'state': 'error'
-                'error': 'Size of SMS should not be more then 160 char'
-                })
-        if not hasattr(self, "_send_%s" % protocole):
-            raise NotImplemented
-        else:
-            try:
-                with self.cr.savepoint():
-                    getattr(self, "_send_%s" % protocole)()
-                    self.write({'state': 'send'])
-            except Exception, e:
-                logger.error('Failed to send sms', e)
-                self.write({'error': e, 'state': 'error'})
-            self.cr.commit()
+    def send(self):
+        for sms in self:
+            if sms.gateway_id.char_limit and len(sms.message) > 160:
+                sms.write({
+                    'state': 'error',
+                    'error': 'Size of SMS should not be more then 160 char',
+                    })
+            if not hasattr(self, "_send_%s" % self.gateway_id.protocole):
+                raise NotImplemented
+            else:
+                try:
+                    with sms._cr.savepoint():
+                        getattr(sms, "_send_%s" % self.gateway_id.protocole)()
+                        sms.write({'state': 'send', 'error': ''})
+                except Exception, e:
+                    _logger.error('Failed to send sms', e)
+                    sms.write({'error': e, 'state': 'error'})
+                sms._cr.commit()
+        return True
+
+    @api.multi
+    def cancel(self):
+        self.write({'state': 'cancel'})
+
+    @api.multi
+    def retry(self):
+        self.write({'state': 'draft'})

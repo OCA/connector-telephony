@@ -5,12 +5,11 @@
 <!-- Create Menu From view -->
 
         <record id="view_partner_sms_send" model="ir.ui.view">
-            <field name="name">Send SMS</field>
             <field name="model">partner.sms.send</field>
             <field name="arch" type="xml">
                 <form string="SMS - Gateway: clickatell">
                     <group string="Gateway">
-                        <field name="gateway" on_change="onchange_gateway(gateway,context)"/>
+                        <field name="gateway"/>
                     </group>
                     <group string="Bulk SMS send" colspan="4">
                         <group>

@@ -2,16 +2,15 @@
 <openerp>
     <data>
         <record model="ir.ui.view" id="view_part_sms">
-            <field name="name">part.sms.view</field>
-            <field name="model">part.sms</field>
+            <field name="model">wizard.send.sms</field>
             <field name="arch" type="xml">
             	<form string="SMS Gateway - Sens SMS" version="7.0">
 	                <group string="Gateway" colspan="4">
-	        			<field name="gateway" />
+                        <field name="gateway_id"/>
 					</group>
 					<notebook>
 	                    <page string="Message">
-					    	<field name="text" colspan="4" nolabel="1"/>
+                            <field name="message" colspan="4" nolabel="1"/>
 	                   	</page>
 	                   	<page string="Additional option">
    		                	<group>	  	 	
@@ -39,7 +38,7 @@
         </record>
         
  		<act_window name="Send Mass SMS"
-            res_model="part.sms" 
+            res_model="wizard.send.sms"
             src_model="res.partner"
             view_mode="form"
             target="new"

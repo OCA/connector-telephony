@@ -20,113 +20,77 @@
 ##############################################################################
 
 from openerp import models, fields, api, _
-from openerp.exceptions import Warning
+from openerp.exceptions import Warning as UserError
 import re
 
 
-class part_sms(models.TransientModel):
-    _name = 'part.sms'
+class WizardSendSms(models.TransientModel):
+    _name = 'wizard.send.sms'
 
     @api.model
     def _default_get_gateway(self):
-        sms_obj = self.env['sms.smsclient']
-        gateway_ids = sms_obj.search([], limit=1)
+        sms_client_obj = self.env['sms.smsclient']
+        gateway_ids = sms_client_obj.search([], limit=1)
         return gateway_ids and gateway_ids[0] or False
 
-    @api.onchange('gateway')
-    def onchange_gateway_mass(self, gateway_id):
-        if not gateway_id:
-            return {}
-        sms_obj = self.env['sms.smsclient']
-        gateway = sms_obj.browse(gateway_id)
-        return {
-            'value': {
-                'validity': gateway.validity,
-                'classes': gateway.classes,
-                'deferred': gateway.deferred,
-                'priority': gateway.priority,
-                'coding': gateway.coding,
-                'tag': gateway.tag,
-                'nostop': gateway.nostop,
-            }
-        }
+    @api.onchange('gateway_id')
+    def onchange_gateway_mass(self):
+        for key in ['validity', 'classes', 'deferred', 'priority',
+                    'coding', 'tag', 'nostop']:
+            print key, self.gateway_id[key]
+            self[key] = self.gateway_id[key]
 
     @api.model
-    def _merge_message(self, message, object, partner):
-        def merge(match):
-            exp = str(match.group()[2: -2]).strip()
-            result = eval(exp, {'object': object, 'partner': partner})
-            if result in (None, False):
-                return str("--------")
-            return str(result)
-        com = re.compile(r'(\[\[.+?\]\])')
-        msg = com.sub(merge, message)
-        return msg
+    def _prepare_sms_vals(self, partner):
+        return {
+            'gateway_id': self.gateway_id.id,
+            'state': 'draft',
+            'message': self.message,
+            'validity': self.validity,
+            'classes': self.classes,
+            'deferred': self.deferred,
+            'priority': self.priority,
+            'coding': self.coding,
+            'tag': self.tag,
+            'nostop': self.nostop,
+            'partner_id': partner.id,
+            'mobile': partner.mobile,
+        }
 
     @api.multi
     def sms_mass_send(self):
-        client_obj = self.env['sms.smsclient']
+        sms_obj = self.env['sms.sms']
         partner_obj = self.env['res.partner']
-        active_ids = self._context.get('active_ids')
-        for data in self:
-            if not data.gateway:
-                raise Warning(_('No Gateway Found'))
-            else:
-                for partner in partner_obj.browse(active_ids):
-                    data.mobile_to = partner.mobile
-                    client_obj._send_message(data)
-        return True
+        for partner in partner_obj.browse(self._context.get('active_ids')):
+            vals = self._prepare_sms_vals(partner)
+            sms_obj.create(vals)
 
-    gateway = fields.Many2one(
+    gateway_id = fields.Many2one(
         'sms.smsclient',
-        'SMS Gateway',
         required=True,
-        default=_default_get_gateway
-    )
-    text = fields.Text('Text', required=True)
+        default=_default_get_gateway)
+    message = fields.Text(required=True)
     validity = fields.Integer(
-        'Validity',
-        help='The maximum time -in minute(s)- before the message is dropped'
-    )
-    classes = fields.Selection(
-        [
-            ('0', 'Flash'),
-            ('1', 'Phone display'),
-            ('2', 'SIM'),
-            ('3', 'Toolkit'),
-        ], 'Class',
-        help='The sms class: flash(0),phone display(1),SIM(2),toolkit(3)')
+        help='The maximum time -in minute(s)- before the message is dropped')
+    classes = fields.Selection([
+        ('0', 'Flash'),
+        ('1', 'Phone display'),
+        ('2', 'SIM'),
+        ('3', 'Toolkit'),
+        ], help='The sms class: flash(0),phone display(1),SIM(2),toolkit(3)')
     deferred = fields.Integer(
-        'Deferred',
-        help='The time -in minute(s)- to wait before sending the message'
-    )
-    priority = fields.Selection(
-        [
-            ('0', '0'),
-            ('1', '1'),
-            ('2', '2'),
-            ('3', '3')
-        ],
-        'Priority',
-        help='The priority of the message'
-    )
-    coding = fields.Selection(
-        [
-            ('1', '7 bit'),
-            ('2', 'Unicode')
-        ],
-        'Coding',
-        help='The sms coding: 1 for 7 bit or 2 for unicode'
-    )
-    tag = fields.Char('Tag', size=256, help='An optional tag')
-    nostop = fields.Selection(
-        [
-            ('0', '0'),
-            ('1', '1')
-        ],
-        'NoStop',
-        help='Do not display STOP clause in the message, this requires that'
-        ' this is not an advertising message'
-    )
-
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
+        help='The time -in minute(s)- to wait before sending the message')
+    priority = fields.Selection([
+        ('0', '0'),
+        ('1', '1'),
+        ('2', '2'),
+        ('3', '3')
+        ], help='The priority of the message')
+    coding = fields.Selection([
+        ('1', '7 bit'),
+        ('2', 'Unicode')
+        ], help='The sms coding: 1 for 7 bit or 2 for unicode')
+    tag = fields.Char(size=256, help='An optional tag')
+    nostop = fields.Boolean(
+        help='Do not display STOP clause in the message, this requires that '
+             'this is not an advertising message')

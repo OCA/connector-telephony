@@ -99,12 +99,17 @@
         <record model="ir.ui.view" id="sms_sms_tree">
             <field name="model">sms.sms</field>
             <field name="arch" type="xml">
-                <tree string="Message Queue">
-                    <field name="date_create"/>
+                <tree string="Sms">
+                    <field name="create_date"/>
                     <field name="mobile"/>
-                    <field name="msg"/>
+                    <field name="message"/>
                     <field name="state"/>
                     <field name="gateway_id"/>
+                    <button string="Send" states="draft" type="object" name="send" icon="gtk-ok"/>
+                    <button string="Retry" states="error" type="object" name="retry" icon="gtk-redo"/>
+                    <button string="Cancel" states="draft,error" type="object" name="cancel" icon="terp-gtk-stop"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,done"/>
+
                 </tree>
             </field>
         </record>
@@ -112,23 +117,31 @@
         <record model="ir.ui.view" id="sms_sms_form">
             <field name="model">sms.sms</field>
             <field name="arch" type="xml">
-                <form string="Gateway History">
-                    <group>
-                        <field name="date_create"/>
-                        <field name="gateway_id"/>
-                        <field name="mobile"/>
-                        <field name="state"/>
-                        <separator string="SMS Message" colspan="4"/>
-                        <field name="msg" colspan="4" nolabel="1"/>
-                        <separator string="Last Error" colspan="4"/>
-                        <field name="error" colspan="4" nolabel="1"/>
-                    </group>
+                <form string="Sms">
+                    <header>
+                        <button string="Send" states="draft" type="object" name="send"/>
+                        <button string="Retry" states="error" type="object" name="retry"/>
+                        <button string="Cancel" states="draft,error" type="object" name="cancel"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,done"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <field name="create_date"/>
+                            <field name="gateway_id"/>
+                            <field name="mobile"/>
+                            <field name="state"/>
+                            <separator string="SMS Message" colspan="4"/>
+                            <field name="message" colspan="4" nolabel="1"/>
+                            <separator string="Last Error" colspan="4"/>
+                            <field name="error" colspan="4" nolabel="1"/>
+                        </group>
+                    </sheet>
                 </form>
             </field>
         </record>
 
         <record model="ir.actions.act_window" id="action_sms_sms_tree">
-            <field name="name">Sms Message</field>
+            <field name="name">Sms</field>
             <field name="res_model">sms.sms</field>
             <field name="view_type">form</field>
             <field name="view_mode">form,tree</field>
