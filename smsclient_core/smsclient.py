@@ -221,9 +221,6 @@ class SMSClient(models.Model):
     char_limit = fields.Boolean('Character Limit', default=True)
     char_limit_visible = fields.Boolean(default=False)
     default_gateway = fields.Boolean(default=False)
-    partner_id = fields.Many2one(
-        'res.partner',
-        string='Partner')
 
     @api.onchange('method')
     def onchange_method(self):
@@ -310,6 +307,13 @@ class SmsSms(models.Model):
         'NoStop',
         help='Do not display STOP clause in the message, this requires that'
              'this is not an advertising message')
+    partner_id = fields.Many2one(
+        'res.partner',
+        string='Partner')
+
+    @api.onchange('partner_id')
+    def onchange_partner_id(self):
+        self.mobile = self.partner_id.mobile
 
     @api.multi
     def send(self):
