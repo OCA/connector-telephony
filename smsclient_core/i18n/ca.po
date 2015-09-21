@@ -44,7 +44,7 @@ msgid "SMS Server"
 msgstr "Servidor SMS"
 
 #. module: smsclient
-#: field:sms.smsclient.queue,msg:0
+#: field:sms.sms,msg:0
 msgid "SMS Text"
 msgstr "Text del SMS"
 
@@ -55,7 +55,7 @@ msgid "Gateway already verified!"
 msgstr "La passarel·la ja està verificada!"
 
 #. module: smsclient
-#: field:sms.smsclient.queue,name:0
+#: field:sms.sms,name:0
 msgid "SMS Request"
 msgstr "Petició SMS"
 
@@ -72,7 +72,7 @@ msgstr "Valor propietat"
 
 #. module: smsclient
 #: selection:sms.smsclient.parms,type:0
-#: view:sms.smsclient.queue:0
+#: view:sms.sms:0
 msgid "SMS Message"
 msgstr "Missatge SMS"
 
@@ -87,7 +87,7 @@ msgid "If parameter concern a value to substitute, indicate it"
 msgstr "Si el paràmetre es refereix a un valor a substituir, indiqueu-lo."
 
 #. module: smsclient
-#: selection:sms.smsclient.queue,state:0
+#: selection:sms.sms,state:0
 msgid "Sent"
 msgstr "Enviat"
 
@@ -160,7 +160,7 @@ msgstr "Nº recepció"
 
 #. module: smsclient
 #: field:sms.smsclient.history,date_create:0
-#: field:sms.smsclient.queue,date_create:0
+#: field:sms.sms,date_create:0
 msgid "Date"
 msgstr "Data"
 
@@ -201,15 +201,15 @@ msgstr "Nom d'usuari"
 
 #. module: smsclient
 #: model:ir.actions.act_window,name:smsclient.act_sms_gateway_2_sms_queue
-#: model:ir.actions.act_window,name:smsclient.action_sms_smsclient_queue_tree
+#: model:ir.actions.act_window,name:smsclient.action_sms.sms_tree
 #: model:ir.ui.menu,name:smsclient.menu_smsclient_administration_sms_server_queue
-#: view:sms.smsclient.queue:0
+#: view:sms.sms:0
 msgid "Message Queue"
 msgstr "Cua de missatges"
 
 #. module: smsclient
 #: view:sms.smsclient.history:0
-#: view:sms.smsclient.queue:0
+#: view:sms.sms:0
 msgid "Gateway History"
 msgstr "Historial de la passarel·la"
 
@@ -253,7 +253,7 @@ msgstr "URL base pel missatge"
 #. module: smsclient
 #: wizard_field:sms.smsclient.code.send,init,smsto:0
 #: field:sms.smsclient.history,to:0
-#: field:sms.smsclient.queue,mobile:0
+#: field:sms.sms,mobile:0
 msgid "Mobile No"
 msgstr "Núm. mòbil"
 
@@ -262,7 +262,7 @@ msgstr "Núm. mòbil"
 #: code:addons/smsclient/wizard/sendcode.py:54
 #: code:addons/smsclient/wizard/verifycode.py:43
 #: code:addons/smsclient/wizard/verifycode.py:48
-#: selection:sms.smsclient.queue,state:0
+#: selection:sms.sms,state:0
 #, python-format
 msgid "Error"
 msgstr "Error"
@@ -279,7 +279,7 @@ msgid "Verification failed. Invalid Verification Code!"
 msgstr "Ha fallat la verificació. Codi de verificació invàlid!"
 
 #. module: smsclient
-#: selection:sms.smsclient.queue,state:0
+#: selection:sms.sms,state:0
 msgid "Queued"
 msgstr "En cua"
 
@@ -327,7 +327,7 @@ msgid "Gateway Parameters"
 msgstr "Paràmetres passarel·la"
 
 #. module: smsclient
-#: selection:sms.smsclient.queue,state:0
+#: selection:sms.sms,state:0
 msgid "Waiting"
 msgstr "En espera"
 
@@ -352,7 +352,7 @@ msgid "SMS Client History"
 msgstr "Historial client SMS"
 
 #. module: smsclient
-#: model:ir.model,name:smsclient.model_sms_smsclient_queue
+#: model:ir.model,name:smsclient.model_sms.sms
 msgid "SMS Queue"
 msgstr "Cua SMS"
 
@@ -379,8 +379,8 @@ msgid "Gateway Name"
 msgstr "Nom passarel·la"
 
 #. module: smsclient
-#: view:sms.smsclient.queue:0
-#: field:sms.smsclient.queue,error:0
+#: view:sms.sms:0
+#: field:sms.sms,error:0
 msgid "Last Error"
 msgstr "Últim error"
 
@@ -390,7 +390,7 @@ msgid "Message"
 msgstr "Missatge"
 
 #. module: smsclient
-#: field:sms.smsclient.queue,state:0
+#: field:sms.sms,state:0
 msgid "Message Status"
 msgstr "Estat del missatge"
 
@@ -405,6 +405,6 @@ msgstr "Nom de la propietat"
 #: view:sms.smsclient:0
 #: field:sms.smsclient.history,gateway_id:0
 #: field:sms.smsclient.parms,gateway_id:0
-#: field:sms.smsclient.queue,gateway_id:0
+#: field:sms.sms,gateway_id:0
 msgid "SMS Gateway"
 msgstr "Passarel·la SMS"

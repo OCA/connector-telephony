@@ -77,7 +77,7 @@ class ServerAction(models.Model):
                 continue
             if action.state == 'sms':
                 _logger.info('Send SMS')
-                queue_obj = self.env['sms.smsclient.queue']
+                sms_obj = self.env['sms.sms']
                 mobile = str(action.mobile)
                 to = None
                 try:
@@ -128,7 +128,7 @@ class ServerAction(models.Model):
                         'tag': gateway.tag,
                         'nostop': gateway.nostop,
                     }
-                    sms_in_q = queue_obj.search([
+                    sms_in_q = sms_obj.search([
                         ('name', '=', gateway.url),
                         ('gateway_id', '=', gateway.id),
                         ('state', '=', 'draft'),
@@ -143,7 +143,7 @@ class ServerAction(models.Model):
                         ('nostop', '=', gateway.nostop)
                         ])
                     if not sms_in_q:
-                        queue_obj.create(vals)
+                        sms_obj.create(vals)
                         _logger.info('SMS successfully send to : %s' % (to))
                 except Exception, e:
                     _logger.error('Failed to send SMS : %s' % repr(e))

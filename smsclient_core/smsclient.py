@@ -259,7 +259,7 @@ class SMSClient(models.Model):
         return True
 
     @api.model
-    def _prepare_smsclient_queue(self, data, name):
+    def _prepare_sms(self, data, name):
         return {
             'name': name,
             'gateway_id': data.gateway.id,
@@ -282,8 +282,8 @@ class SMSClient(models.Model):
 
     @api.model
     def _check_queue(self):
-        queue_obj = self.env['sms.smsclient.queue']
-        sids = queue_obj.search([
+        sms_obj = self.env['sms.sms']
+        sids = sms_obj.search([
             ('state', '!=', 'send'),
             ('state', '!=', 'sending')
             ], limit=30)
@@ -302,9 +302,9 @@ class SMSClient(models.Model):
                 except Exception, e:
                     raise Warning(e)
             sent_ids.append(sms.id)
-        rec_sent_ids = queue_obj.browse(sent_ids)
+        rec_sent_ids = sms_obj.browse(sent_ids)
         rec_sent_ids.write({'state': 'send'})
-        rec_error_ids = queue_obj.browse(error_ids)
+        rec_error_ids = sms_obj.browse(error_ids)
         rec_error_ids.write({
             'state': 'error',
             'error': 'Size of SMS should not be more then 160 char'
@@ -312,9 +312,9 @@ class SMSClient(models.Model):
         return True
 
 
-class SMSQueue(models.Model):
-    _name = 'sms.smsclient.queue'
-    _description = 'SMS Queue'
+class SmsSms(models.Model):
+    _name = 'sms.sms'
+    _description = 'SMS'
 
     name = fields.Text('SMS Request', size=256,
                        required=True, readonly=True,
@@ -330,7 +330,6 @@ class SMSQueue(models.Model):
                                  states={'draft': [('readonly', False)]})
     state = fields.Selection([
         ('draft', 'Queued'),
-        ('sending', 'Waiting'),
         ('send', 'Sent'),
         ('error', 'Error'),
     ], 'Message Status', select=True, readonly=True, default='draft')

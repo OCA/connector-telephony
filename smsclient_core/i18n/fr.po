@@ -43,7 +43,7 @@ msgid "SMS Server"
 msgstr "Serveur de SMS"
 
 #. module: smsclient
-#: field:sms.smsclient.queue,msg:0
+#: field:sms.sms,msg:0
 msgid "SMS Text"
 msgstr "Texte du SMS"
 
@@ -54,7 +54,7 @@ msgid "Gateway already verified!"
 msgstr "Cette passerelle a déjà été vérifié"
 
 #. module: smsclient
-#: field:sms.smsclient.queue,name:0
+#: field:sms.sms,name:0
 msgid "SMS Request"
 msgstr "Requête par SMS"
 
@@ -71,7 +71,7 @@ msgstr "Valeur de la propriété"
 
 #. module: smsclient
 #: selection:sms.smsclient.parms,type:0
-#: view:sms.smsclient.queue:0
+#: view:sms.sms:0
 msgid "SMS Message"
 msgstr "Message SMS"
 
@@ -86,7 +86,7 @@ msgid "If parameter concern a value to substitute, indicate it"
 msgstr "Si le paramètre concerne une valeur à substituer, indiquer le"
 
 #. module: smsclient
-#: selection:sms.smsclient.queue,state:0
+#: selection:sms.sms,state:0
 msgid "Sent"
 msgstr "Envoyer"
 
@@ -162,7 +162,7 @@ msgstr "N° du destinataire"
 
 #. module: smsclient
 #: field:sms.smsclient.history,date_create:0
-#: field:sms.smsclient.queue,date_create:0
+#: field:sms.sms,date_create:0
 msgid "Date"
 msgstr "Date"
 
@@ -203,15 +203,15 @@ msgstr "Nom d’utilisateur"
 
 #. module: smsclient
 #: model:ir.actions.act_window,name:smsclient.act_sms_gateway_2_sms_queue
-#: model:ir.actions.act_window,name:smsclient.action_sms_smsclient_queue_tree
+#: model:ir.actions.act_window,name:smsclient.action_sms.sms_tree
 #: model:ir.ui.menu,name:smsclient.menu_smsclient_administration_sms_server_queue
-#: view:sms.smsclient.queue:0
+#: view:sms.sms:0
 msgid "Message Queue"
 msgstr "File d'attente des messages"
 
 #. module: smsclient
 #: view:sms.smsclient.history:0
-#: view:sms.smsclient.queue:0
+#: view:sms.sms:0
 msgid "Gateway History"
 msgstr "Historique de la passerelle"
 
@@ -253,7 +253,7 @@ msgstr "Adresse de base pour le message"
 #. module: smsclient
 #: wizard_field:sms.smsclient.code.send,init,smsto:0
 #: field:sms.smsclient.history,to:0
-#: field:sms.smsclient.queue,mobile:0
+#: field:sms.sms,mobile:0
 msgid "Mobile No"
 msgstr "N° de portable"
 
@@ -262,7 +262,7 @@ msgstr "N° de portable"
 #: code:addons/smsclient/wizard/sendcode.py:54
 #: code:addons/smsclient/wizard/verifycode.py:43
 #: code:addons/smsclient/wizard/verifycode.py:48
-#: selection:sms.smsclient.queue,state:0
+#: selection:sms.sms,state:0
 #, python-format
 msgid "Error"
 msgstr "Erreur"
@@ -279,7 +279,7 @@ msgid "Verification failed. Invalid Verification Code!"
 msgstr "Échec de vérification. Code de vérification non valide!"
 
 #. module: smsclient
-#: selection:sms.smsclient.queue,state:0
+#: selection:sms.sms,state:0
 msgid "Queued"
 msgstr "En file d'attente"
 
@@ -327,7 +327,7 @@ msgid "Gateway Parameters"
 msgstr "Paramètres de la passerelle"
 
 #. module: smsclient
-#: selection:sms.smsclient.queue,state:0
+#: selection:sms.sms,state:0
 msgid "Waiting"
 msgstr "En attente"
 
@@ -352,7 +352,7 @@ msgid "SMS Client History"
 msgstr "Historique du client SMS"
 
 #. module: smsclient
-#: model:ir.model,name:smsclient.model_sms_smsclient_queue
+#: model:ir.model,name:smsclient.model_sms.sms
 msgid "SMS Queue"
 msgstr "File d'attente des SMS"
 
@@ -379,8 +379,8 @@ msgid "Gateway Name"
 msgstr "Nom de la passerelle"
 
 #. module: smsclient
-#: view:sms.smsclient.queue:0
-#: field:sms.smsclient.queue,error:0
+#: view:sms.sms:0
+#: field:sms.sms,error:0
 msgid "Last Error"
 msgstr "Dernière erreur"
 
@@ -390,7 +390,7 @@ msgid "Message"
 msgstr "Message"
 
 #. module: smsclient
-#: field:sms.smsclient.queue,state:0
+#: field:sms.sms,state:0
 msgid "Message Status"
 msgstr "État du message"
 
@@ -405,6 +405,6 @@ msgstr "Nom de la propriété"
 #: view:sms.smsclient:0
 #: field:sms.smsclient.history,gateway_id:0
 #: field:sms.smsclient.parms,gateway_id:0
-#: field:sms.smsclient.queue,gateway_id:0
+#: field:sms.sms,gateway_id:0
 msgid "SMS Gateway"
 msgstr "Passerelle SMS"
