@@ -129,7 +129,6 @@
                             <field name="create_date"/>
                             <field name="gateway_id"/>
                             <field name="mobile"/>
-                            <field name="state"/>
                             <separator string="SMS Message" colspan="4"/>
                             <field name="message" colspan="4" nolabel="1"/>
                             <separator string="Last Error" colspan="4"/>

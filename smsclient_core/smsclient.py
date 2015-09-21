@@ -149,12 +149,6 @@ class SMSClient(models.Model):
                 for key in config_vals:
                     sms_provider[key] = config_vals[key]
 
-    @api.multi
-    @api.depends('method')
-    def _get_protocole(self):
-        for record in self:
-            self.protocole = self.method.split('_')[0]
-
     name = fields.Char('Gateway Name', required=True)
     url = fields.Char('Gateway URL',
                       help='Base url for message',
@@ -164,7 +158,6 @@ class SMSClient(models.Model):
     method = fields.Selection(
         string='API Method',
         selection='get_method')
-    protocole = fields.Char(compute='_get_protocole')
     state = fields.Selection([
         ('new', 'Not Verified'),
         ('waiting', 'Waiting for Verification'),
@@ -319,17 +312,6 @@ class SmsSms(models.Model):
              'this is not an advertising message')
 
     @api.multi
-    def _send_http(self):
-        self.ensure_one()
-        if not hasattr(self, "_prepare_%s" % self.gateway_id.method):
-            raise NotImplemented
-        params = getattr(self, "_prepare_%s" % self.gateway_id.method)()
-        params_encoded = urllib.urlencode(params)
-        answer = urllib.urlopen(
-            "%s?%s" % (self.gateway_id.url, params_encoded))
-        _logger.debug(answer.read())
-
-    @api.multi
     def send(self):
         for sms in self:
             if sms.gateway_id.char_limit and len(sms.message) > 160:
@@ -337,15 +319,15 @@ class SmsSms(models.Model):
                     'state': 'error',
                     'error': 'Size of SMS should not be more then 160 char',
                     })
-            if not hasattr(self, "_send_%s" % self.gateway_id.protocole):
+            if not hasattr(self, "_send_%s" % self.gateway_id.method):
                 raise NotImplemented
             else:
                 try:
                     with sms._cr.savepoint():
-                        getattr(sms, "_send_%s" % self.gateway_id.protocole)()
+                        getattr(sms, "_send_%s" % self.gateway_id.method)()
                         sms.write({'state': 'send', 'error': ''})
                 except Exception, e:
-                    _logger.error('Failed to send sms', e)
+                    _logger.error('Failed to send sms %s', e)
                     sms.write({'error': e, 'state': 'error'})
                 sms._cr.commit()
         return True
