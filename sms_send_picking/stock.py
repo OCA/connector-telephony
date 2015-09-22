@@ -31,7 +31,7 @@ class StockPicking(models.Model):
 
     #TODO use a templating instead
     @api.model
-    def _prepare_availability_sms_notification(self):
+    def _prepare_availability_by_sms_notification(self):
         gateway = self.env['sms.gateway'].search([
             ('default_gateway', '=', True)], limit=1)
         return {
@@ -50,7 +50,7 @@ class StockPicking(models.Model):
         }
 
     @api.model
-    def _get_send_picking_availability_sms_domain(self):
+    def _get_send_picking_availability_by_sms_domain(self):
         return [
             ('state', '=', 'assigned'),
             ('availability_sent_by_sms', '=', False),
@@ -59,9 +59,9 @@ class StockPicking(models.Model):
 
     @api.model
     def _cron_send_picking_availability_by_sms(self):
-        domain = self._get_send_picking_availability_sms_domain()
+        domain = self._get_send_picking_availability_by_sms_domain()
         pickings = self.env['stock.picking'].search(domain)
         for picking in pickings:
-            vals = picking._prepare_availability_sms_notification()
+            vals = picking._prepare_availability_by_sms_notification()
             self.env['sms.sms'].create(vals)
         pickings.write({'availability_sent_by_sms': True})
