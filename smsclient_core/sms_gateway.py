@@ -172,7 +172,6 @@ class SMSClient(models.Model):
             domain = []
         domain.append(('state', '=', 'draft'))
         sms = self.env['sms.sms'].search(domain)
-        import pdb; pdb.set_trace()
         return sms.send()
 
 
