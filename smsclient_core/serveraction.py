@@ -125,6 +125,7 @@ class ServerAction(models.Model):
 #                        'deferred': gateway.deferred,
 #                        'priority': gateway.priority,
 #                        'coding': gateway.coding,
+#                        'tag': gateway.tag,
 #                        'nostop': gateway.nostop,
 #                    }
 #                    sms_in_q = sms_obj.search([
@@ -138,6 +139,7 @@ class ServerAction(models.Model):
 #                        ('deferred', '=', gateway.deferred),
 #                        ('priority', '=', gateway.priority),
 #                        ('coding', '=', gateway.coding),
+#                        ('tag', '=', gateway.tag),
 #                        ('nostop', '=', gateway.nostop)
 #                        ])
 #                    if not sms_in_q:
@@ -150,5 +152,3 @@ class ServerAction(models.Model):
 #        if act_ids:
 #            return super(ServerAction, self).run()
 #        return False
-#
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

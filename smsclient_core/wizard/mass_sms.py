@@ -37,7 +37,7 @@ class WizardSendSms(models.TransientModel):
     @api.onchange('gateway_id')
     def onchange_gateway_mass(self):
         for key in ['validity', 'classes', 'deferred', 'priority',
-                    'coding', 'nostop']:
+                    'coding', 'tag', 'nostop']:
             self[key] = self.gateway_id[key]
 
     @api.model
@@ -51,6 +51,7 @@ class WizardSendSms(models.TransientModel):
             'deferred': self.deferred,
             'priority': self.priority,
             'coding': self.coding,
+            'tag': self.tag,
             'nostop': self.nostop,
             'partner_id': partner.id,
             'mobile': partner.mobile,
@@ -89,6 +90,7 @@ class WizardSendSms(models.TransientModel):
         ('1', '7 bit'),
         ('2', 'Unicode')
         ], help='The sms coding: 1 for 7 bit or 2 for unicode')
+    tag = fields.Char(size=256, help='An optional tag')
     nostop = fields.Boolean(
         help='Do not display STOP clause in the message, this requires that '
              'this is not an advertising message')
