@@ -48,6 +48,7 @@ Sending SMSs very easily, individually or collectively.
     "data": [
         "security/groups.xml",
         "security/ir.model.access.csv",
+        "security/ir.rule.csv",
         "sms_gateway_view.xml",
         "serveraction_view.xml",
         "sms_gateway_data.xml",

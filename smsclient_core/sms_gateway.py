@@ -138,6 +138,7 @@ class SMSClient(models.Model):
     char_limit = fields.Boolean('Character Limit', default=True)
     char_limit_visible = fields.Boolean(default=False)
     default_gateway = fields.Boolean(default=False)
+    company_id = fields.Many2one('res.company')
 
     @api.onchange('method')
     def onchange_method(self):
@@ -163,8 +164,12 @@ class SMSClient(models.Model):
         return True
 
     @api.model
-    def _run_send_sms(self):
-        sms = self.env['sms.sms'].search([('state', '=', 'draft')])
+    def _run_send_sms(self, domain=None):
+        if domain is None:
+            domain = []
+        domain.append(('state', '=', 'draft'))
+        sms = self.env['sms.sms'].search(domain)
+        import pdb; pdb.set_trace()
         return sms.send()
 
 
@@ -223,6 +228,7 @@ class SmsSms(models.Model):
     partner_id = fields.Many2one(
         'res.partner',
         string='Partner')
+    company_id = fields.Many2one('res.company')
 
     @api.onchange('partner_id')
     def onchange_partner_id(self):
@@ -236,12 +242,12 @@ class SmsSms(models.Model):
                     'state': 'error',
                     'error': 'Size of SMS should not be more then 160 char',
                     })
-            if not hasattr(self, "_send_%s" % self.gateway_id.method):
+            if not hasattr(sms, "_send_%s" % sms.gateway_id.method):
                 raise NotImplemented
             else:
                 try:
                     with sms._cr.savepoint():
-                        getattr(sms, "_send_%s" % self.gateway_id.method)()
+                        getattr(sms, "_send_%s" % sms.gateway_id.method)()
                         sms.write({'state': 'send', 'error': ''})
                 except Exception, e:
                     _logger.error('Failed to send sms %s', e)

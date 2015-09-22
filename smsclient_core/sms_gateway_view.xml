@@ -15,6 +15,7 @@
                             <h1><field name="name" nolabel="1" placeholder="Name" colspan="2"/></h1>
                             <field name="method" nolabel="1" placeholder="Method" colspan="2"/>
                             <field name="default_gateway"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
                         </group>
                         <notebook colspan="4">
                             <page string="General">
@@ -103,8 +104,7 @@
                     <button string="Send" states="draft" type="object" name="send" icon="gtk-ok"/>
                     <button string="Retry" states="error" type="object" name="retry" icon="gtk-redo"/>
                     <button string="Cancel" states="draft,error" type="object" name="cancel" icon="terp-gtk-stop"/>
-                    <field name="state" widget="statusbar" statusbar_visible="draft,done"/>
-
+                    <field name="state"/>
                 </tree>
             </field>
         </record>
@@ -117,7 +117,7 @@
                         <button string="Send" states="draft" type="object" name="send"/>
                         <button string="Retry" states="error" type="object" name="retry"/>
                         <button string="Cancel" states="draft,error" type="object" name="cancel"/>
-                        <field name="state" widget="statusbar" statusbar_visible="draft,done"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,send"/>
                     </header>
                     <sheet>
                         <label for="partner_id" class="oe_edit_only"/>
@@ -127,6 +127,7 @@
                         <group>
                             <field name="create_date"/>
                             <field name="gateway_id"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
                             <separator string="SMS Message" colspan="4"/>
                             <field name="message" colspan="4" nolabel="1"/>
                             <separator string="Last Error" colspan="4"/>

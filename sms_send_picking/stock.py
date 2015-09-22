@@ -35,9 +35,9 @@ class StockPicking(models.Model):
         gateway = self.env['sms.gateway'].search([
             ('default_gateway', '=', True)], limit=1)
         return {
-            'gateway': gateway.id,
-            'message': _('Your picking %s is ready to transfert') % pick.name,
-            'mobile': self.partner_id.phone,
+            'gateway_id': gateway.id,
+            'message': _('Your picking %s is ready to transfert') % self.name,
+            'mobile': self.partner_id.mobile,
             'partner_id': self.partner_id.id,
             'state': 'draft',
             'validity': gateway.validity,
@@ -46,6 +46,7 @@ class StockPicking(models.Model):
             'priority': gateway.priority,
             'coding': gateway.coding,
             'nostop': gateway.nostop,
+            'company_id': self.company_id.id,
         }
 
     @api.model
