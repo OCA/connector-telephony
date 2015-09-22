@@ -8,8 +8,9 @@
             <field name="numbercall">-1</field>
             <field eval="False" name="doall"/>
             <field eval="'stock.picking'" name="model"/>
-            <field eval="'_send_sms'" name="function"/>
+            <field eval="'_cron_send_picking_availability_by_sms'" name="function"/>
             <field eval="'()'" name="args"/>
+            <field name="active" eval="False"/>
         </record>
     </data>
 </openerp>

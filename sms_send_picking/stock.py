@@ -27,23 +27,40 @@ from openerp.tools.translate import _
 class StockPicking(models.Model):
     _inherit = 'stock.picking'
 
-    sms_sent = fields.Boolean(default=False)
+    availability_sent_by_sms = fields.Boolean(default=False)
+
+    #TODO use a templating instead
+    @api.model
+    def _prepare_availability_sms_notification(self):
+        gateway = self.env['sms.gateway'].search([
+            ('default_gateway', '=', True)], limit=1)
+        return {
+            'gateway': gateway.id,
+            'message': _('Your picking %s is ready to transfert') % pick.name,
+            'mobile': self.partner_id.phone,
+            'partner_id': self.partner_id.id,
+            'state': 'draft',
+            'validity': gateway.validity,
+            'classes': gateway.classes,
+            'deferred': gateway.deferred,
+            'priority': gateway.priority,
+            'coding': gateway.coding,
+            'nostop': gateway.nostop,
+        }
 
     @api.model
-    def _send_sms(self):
-        sms_sender_obj = self.env['partner.sms.send']
-        gateways = self.env['sms.smsclient'].search([('default_gateway', '=',
-                                                      True)], limit=1)
-        gateway = gateways[0]
-        pickings = self.env['stock.picking'].search(
-            [('state', '=', 'assigned'), ('sms_sent', '=', False),
-             ('picking_type_id.code', '=', 'outgoing')])
-        for pick in pickings:
-            data = {
-                'gateway': gateway.id,
-                'text': _('Your picking %s is ready to transfert') % pick.name,
-                'mobile_to': pick.partner_id.phone,
-            }
-            sms_sender = sms_sender_obj.create(data)
-            sms_sender.sms_send()
-            pick.sms_sent = True
+    def _get_send_picking_availability_sms_domain(self):
+        return [
+            ('state', '=', 'assigned'),
+            ('availability_sent_by_sms', '=', False),
+            ('picking_type_id.code', '=', 'outgoing'),
+            ]
+
+    @api.model
+    def _cron_send_picking_availability_by_sms(self):
+        domain = self._get_send_picking_availability_sms_domain()
+        pickings = self.env['stock.picking'].search(domain)
+        for picking in pickings:
+            vals = picking._prepare_availability_sms_notification()
+            self.env['sms.sms'].create(vals)
+        pickings.write({'availability_sent_by_sms': True})
