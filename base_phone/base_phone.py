@@ -90,7 +90,7 @@ class PhoneCommon(models.AbstractModel):
                     init_value = vals.get(field)
                     try:
                         res_parse = phonenumbers.parse(
-                            vals.get(field), countrycode)
+                            vals.get(field), countrycode.upper())
                         vals[field] = phonenumbers.format_number(
                             res_parse, phonenumbers.PhoneNumberFormat.E164)
                         if init_value != vals[field]:
