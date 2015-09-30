@@ -1,5 +1,5 @@
-[![Build Status](https://travis-ci.org/OCA/connector-telephony.svg?branch=8.0)](https://travis-ci.org/OCA/connector-telephony)
-[![Coverage Status](https://coveralls.io/repos/OCA/connector-telephony/badge.png?branch=8.0)](https://coveralls.io/r/OCA/connector-telephony?branch=8.0)
+[![Build Status](https://travis-ci.org/OCA/connector-telephony.svg?branch=9.0)](https://travis-ci.org/OCA/connector-telephony)
+[![Coverage Status](https://coveralls.io/repos/OCA/connector-telephony/badge.png?branch=9.0)](https://coveralls.io/r/OCA/connector-telephony?branch=9.0)
 
 # Odoo telephony connector
 
@@ -24,15 +24,15 @@ Available addons
 ----------------
 addon | version | summary
 --- | --- | ---
-[asterisk_click2dial](asterisk_click2dial/) | 0.4 | Asterisk-OpenERP connector
-[asterisk_click2dial_crm](asterisk_click2dial_crm/) | 0.1 | Asterisk Click2dial CRM
-[base_phone](base_phone/) | 0.1 | Validate phone numbers
-[base_phone_popup](base_phone_popup/) | 0.4 | Pop-up the related form view to the user on incoming calls
-[crm_claim_phone](crm_claim_phone/) | 0.1 | Validate phone numbers in CRM Claims
-[crm_phone](crm_phone/) | 0.1 | Validate phone numbers in CRM
-[event_phone](event_phone/) | 0.1 | Validate phone numbers in Events
-[hr_phone](hr_phone/) | 0.1 | Validate phone numbers in HR
-[hr_recruitment_phone](hr_recruitment_phone/) | 0.1 | Validate phone numbers in HR Recruitment
-[ovh_telephony_connector](ovh_telephony_connector/) | 0.1 | OVH-Odoo telephony connector (click2call)
+[asterisk_click2dial](asterisk_click2dial/) | 0.5 | Asterisk-OpenERP connector
+[asterisk_click2dial_crm](asterisk_click2dial_crm/) | 0.2 | Asterisk Click2dial CRM
+[base_phone](base_phone/) | 0.2 | Validate phone numbers
+[base_phone_popup](base_phone_popup/) | 0.5 | Pop-up the related form view to the user on incoming calls
+[crm_claim_phone](crm_claim_phone/) | 0.2 | Validate phone numbers in CRM Claims
+[crm_phone](crm_phone/) | 0.2 | Validate phone numbers in CRM
+[event_phone](event_phone/) | 0.2 | Validate phone numbers in Events
+[hr_phone](hr_phone/) | 0.2 | Validate phone numbers in HR
+[hr_recruitment_phone](hr_recruitment_phone/) | 0.2 | Validate phone numbers in HR Recruitment
+[ovh_telephony_connector](ovh_telephony_connector/) | 0.2 | OVH-Odoo telephony connector (click2call)
 
 [//]: # (end addons)

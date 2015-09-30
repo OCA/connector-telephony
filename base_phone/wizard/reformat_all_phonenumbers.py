@@ -37,15 +37,14 @@ class reformat_all_phonenumbers(models.TransientModel):
         ('done', 'Done'),
         ], string='State', default='draft')
 
-    def run_reformat_all_phonenumbers(self, cr, uid, ids, context=None):
+    def run_reformat_all_phonenumbers(self, ids):
         logger.info('Starting to reformat all the phone numbers')
         phonenumbers_not_reformatted = ''
-        phoneobjects = self.pool['phone.common']._get_phone_fields(
-            cr, uid, context=context)
-        ctx_raise = dict(context, raise_if_phone_parse_fails=True)
+        phoneobjects = self.env['phone.common']._get_phone_fields()
+        ctx_raise = dict(self.env.context, raise_if_phone_parse_fails=True)
         for objname in phoneobjects:
-            fields = self.pool[objname]._phone_fields
-            obj = self.pool[objname]
+            fields = self.env[objname]._phone_fields
+            obj = self.env[objname]
             logger.info(
                 'Starting to reformat phone numbers on object %s '
                 '(fields = %s)' % (objname, fields))
@@ -58,18 +57,16 @@ class reformat_all_phonenumbers(models.TransientModel):
                 domain = ['|', ('active', '=', True), ('active', '=', False)]
             else:
                 domain = []
-            all_ids = obj.search(cr, uid, domain, context=context)
-            for entry in obj.read(
-                    cr, uid, all_ids, fields, context=context):
+            all_ids = obj.search(domain)
+            for entry in obj.read(all_ids, fields):
                 init_entry = entry.copy()
                 # entry is _updated_ by the fonction
                 # _generic_reformat_phonenumbers()
                 try:
-                    obj._generic_reformat_phonenumbers(
-                        cr, uid, [entry['id']], entry, context=ctx_raise)
+                    self.env.context = ctx_raise
+                    obj._generic_reformat_phonenumbers([entry['id']], entry)
                 except Exception, e:
-                    name = obj.name_get(
-                        cr, uid, [init_entry['id']], context=context)[0][1]
+                    name = obj.name_get([init_entry['id']])[0][1]
                     phonenumbers_not_reformatted += \
                         "Problem on %s '%s'. Error message: %s\n" % (
                             obj._description, name, unicode(e))
@@ -86,19 +83,12 @@ class reformat_all_phonenumbers(models.TransientModel):
                         '[%s] Reformating phone number: FROM %s TO %s' % (
                             obj._description, unicode(init_entry),
                             unicode(entry)))
-                    obj.write(
-                        cr, uid, init_entry['id'], entry, context=context)
+                    obj.write(init_entry['id'], entry)
         if not phonenumbers_not_reformatted:
             phonenumbers_not_reformatted = \
                 'All phone numbers have been reformatted successfully.'
-        self.write(
-            cr, uid, ids[0], {
-                'phonenumbers_not_reformatted': phonenumbers_not_reformatted,
-                'state': 'done',
-                }, context=context)
+        self.write(ids[0], {'phonenumbers_not_reformatted': phonenumbers_not_reformatted, 'state': 'done'})
         logger.info('End of the phone number reformatting wizard')
-        action = self.pool['ir.actions.act_window'].for_xml_id(
-            cr, uid, 'base_phone', 'reformat_all_phonenumbers_action',
-            context=context)
+        action = self.env['ir.actions.act_window'].for_xml_id('base_phone', 'reformat_all_phonenumbers_action')
         action['res_id'] = ids[0]
         return action

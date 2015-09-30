@@ -2,14 +2,29 @@
    Copyright (C) 2013-2014 Alexis de Lattre <alexis@via.ecp.fr>
    The licence is in the file __openerp__.py */
 
-openerp.base_phone = function (instance) {
+odoo.define('base_phone.base_phone', function (require) {
 
-    var _t = instance.web._t;
+var WebClient = require('web.WebClient');
+var web_client = require('web.web_client');
+var ListView = require('web.ListView');
+var form_common = require('web.form_common');
+var form_widgets = require('web.form_widgets');
+var core = require('web.core');
+var _t = core._t;
 
-    instance.base_phone.FieldPhone = instance.web.form.FieldChar.extend({
+var base_phone = {};
+
+openerp.web.form.FieldChar = core.form_widget_registry.get('char');
+
+//var FieldPhone = form_common.AbstractField.extend(form_common.ReinitializeFieldMixin, {
+var FieldPhone = form_widgets.FieldChar.extend({
         template: 'FieldPhone',
+        widget_class: 'oe_form_field_phone',
+        content: "",
+        init: function() {
+            this._super.apply(this, arguments);
+        },
         initialize_content: function() {
-            this._super();
             var $button = this.$el.find('button');
             $button.click(this.on_button_clicked);
             this.setupFocus($button);
@@ -20,7 +35,7 @@ openerp.base_phone = function (instance) {
             } else {
                 var self = this;
                 var phone_num = this.get('value');
-                //console.log('BASE_PHONE phone_num = %s', phone_num);
+                console.log('BASE_PHONE phone_num = %s', phone_num);
                 var href = '#';
                 var href_text = '';
                 if (phone_num) {
@@ -50,7 +65,7 @@ openerp.base_phone = function (instance) {
                             'click2dial_model': self.view.dataset.model,
                             'click2dial_id': self.view.datarecord.id};
                         self.rpc('/base_phone/click2dial', arg).done(function(r) {
-                            //console.log('Click2dial r=%s', JSON.stringify(r));
+                            console.log('Click2dial r=%s', JSON.stringify(r));
                             if (r === false) {
                                 self.do_warn("Click2dial failed");
                             } else if (typeof r === 'object') {
@@ -72,7 +87,7 @@ openerp.base_phone = function (instance) {
                                         target: 'new',
                                         context: context,
                                         };
-                                    instance.client.action_manager.do_action(action);
+                                    web_client.action_manager.do_action(action);
                                 }
                             }
                         });
@@ -84,12 +99,16 @@ openerp.base_phone = function (instance) {
         }
     });
 
-    instance.web.form.widgets.add('phone', 'instance.base_phone.FieldPhone');
+    core.form_widget_registry.add('phone', FieldPhone);
 
-    instance.base_phone.FieldFax = instance.web.form.FieldChar.extend({
+    //var FieldFax = form_common.AbstractField.extend(form_common.ReinitializeFieldMixin, {
+    var FieldFax = form_widgets.FieldChar.extend({
         template: 'FieldFax',
+        content: "",
+        init: function() {
+            this._super.apply(this, arguments);
+        },
         initialize_content: function() {
-            this._super();
             var $button = this.$el.find('button');
             $button.click(this.on_button_clicked);
             this.setupFocus($button);
@@ -99,7 +118,7 @@ openerp.base_phone = function (instance) {
                 this._super();
             } else {
                 var fax_num = this.get('value');
-                //console.log('BASE_PHONE fax_num = %s', fax_num);
+                console.log('BASE_PHONE fax_num = %s', fax_num);
                 var href = '#';
                 var href_text = '';
                 if (fax_num) {
@@ -120,17 +139,28 @@ openerp.base_phone = function (instance) {
         }
     });
 
-    instance.web.form.widgets.add('fax', 'instance.base_phone.FieldFax');
+    core.form_widget_registry.add('fax', FieldFax);
 
     /* ability to add widget="phone" in TREE view */
-    var _super_list_char_format_ = instance.web.list.Char.prototype._format;
-    instance.web.list.Char.prototype._format = function(row_data, options) {
+    /*console.log(ListView);
+    var _super_list_char_format_ = ListView.ColumnChar.prototype._format;
+    ListView.ColumnChar.prototype._format = function(row_data, options) {
         res = _super_list_char_format_.call(this, row_data, options);
         var value = row_data[this.id].value;
         if (value && this.widget === 'phone') {
             return formatInternational('', value);
         }
         return res;
-    };
+    };*/
 
-};
+// singleton
+//bus.bus = new bus.Bus();
+//return bus;
+
+});
+
+/*
+<td class="oe_form_group_cell" colspan="1" width="99%"><span class="oe_form_field oe_form_field_char">
+  <span class="oe_form_char_content">+37127437468</span>
+</span></td>
+*/

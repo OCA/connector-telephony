@@ -31,26 +31,21 @@ class CrmLead(models.Model):
     _country_field = 'country_id'
     _partner_field = None
 
-    def create(self, cr, uid, vals, context=None):
-        vals_reformated = self._generic_reformat_phonenumbers(
-            cr, uid, None, vals, context=context)
-        return super(CrmLead, self).create(
-            cr, uid, vals_reformated, context=context)
+    def create(self, vals):
+        vals_reformated = self._generic_reformat_phonenumbers(None, vals)
+        return super(CrmLead, self).create(vals_reformated)
 
-    def write(self, cr, uid, ids, vals, context=None):
+    def write(self, ids, vals):
         vals_reformated = self._generic_reformat_phonenumbers(
-            cr, uid, ids, vals, context=context)
-        return super(CrmLead, self).write(
-            cr, uid, ids, vals_reformated, context=context)
+            ids, vals)
+        return super(CrmLead, self).write(ids, vals_reformated)
 
-    def name_get(self, cr, uid, ids, context=None):
-        if context is None:
-            context = {}
-        if context.get('callerid'):
+    def name_get(self, ids):
+        if self.env.context.get('callerid'):
             res = []
             if isinstance(ids, (int, long)):
                 ids = [ids]
-            for lead in self.browse(cr, uid, ids, context=context):
+            for lead in self.browse(ids):
                 if lead.partner_name and lead.contact_name:
                     name = u'%s (%s)' % (lead.contact_name, lead.partner_name)
                 elif lead.partner_name:
@@ -62,29 +57,28 @@ class CrmLead(models.Model):
                 res.append((lead.id, name))
             return res
         else:
-            return super(CrmLead, self).name_get(
-                cr, uid, ids, context=context)
+            return super(CrmLead, self).name_get(ids)
 
 
-class CrmPhonecall(models.Model):
+'''class CrmPhonecall(models.Model):
     _name = 'crm.phonecall'
     _inherit = ['crm.phonecall', 'phone.common']
     _phone_fields = ['partner_phone', 'partner_mobile']
     _country_field = None
     _partner_field = 'partner_id'
 
-    def create(self, cr, uid, vals, context=None):
+    def create(self, vals):
         vals_reformated = self._generic_reformat_phonenumbers(
-            cr, uid, None, vals, context=context)
+            None, vals)
         return super(CrmPhonecall, self).create(
-            cr, uid, vals_reformated, context=context)
+            vals_reformated)
 
-    def write(self, cr, uid, ids, vals, context=None):
+    def write(self, ids, vals):
         vals_reformated = self._generic_reformat_phonenumbers(
-            cr, uid, ids, vals, context=context)
+            ids, vals)
         return super(CrmPhonecall, self).write(
-            cr, uid, ids, vals_reformated, context=context)
-
+            ids, vals_reformated)
+'''
 
 class ResUsers(models.Model):
     _inherit = "res.users"

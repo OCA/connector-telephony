@@ -2,11 +2,18 @@
    Copyright (C) 2014 Alexis de Lattre <alexis@via.ecp.fr>
    The licence is in the file __openerp__.py */
 
-openerp.asterisk_click2dial = function (instance) {
+odoo.define('asterisk_click2dial.click2dial', function (require) {
 
-    var _t = instance.web._t;
+    var UserMenu = require('web.UserMenu');
+    var WebClient = require('web.WebClient');
+    var web_client = require('web.web_client');
+    var Widget = require('web.Widget');
+    var core = require('web.core');
+    var _t = core._t;
 
-    instance.web.OpenCaller = instance.web.Widget.extend({
+    var click2dial = {};
+
+    click2dial.OpenCaller = Widget.extend({
         template:'asterisk_click2dial.OpenCaller',
 
         start: function () {
@@ -19,8 +26,8 @@ openerp.asterisk_click2dial = function (instance) {
             event.stopPropagation();
             var self = this;
             self.rpc('/asterisk_click2dial/get_record_from_my_channel', {}).done(function(r) {
-            // console.log('RESULT RPC r='+r);
-            // console.log('RESULT RPC type r='+typeof r);
+            console.log('RESULT RPC r='+r);
+            console.log('RESULT RPC type r='+typeof r);
             if (r === false) {
                  self.do_notify(
                     _t('Failure'),
@@ -36,7 +43,7 @@ openerp.asterisk_click2dial = function (instance) {
                     target: 'new',
                     context: {'default_calling_number': r},
                  };
-                instance.client.action_manager.do_action(action);
+                web_client.action_manager.do_action(action);
  
                 }
             else if (typeof r == 'object' && r.length == 3) {
@@ -52,22 +59,23 @@ openerp.asterisk_click2dial = function (instance) {
                     target: 'current',
                     context: {},
                 };
-                instance.client.action_manager.do_action(action);
+                web_client.action_manager.do_action(action);
             }
         });
        },
     });
 
-    instance.web.UserMenu.include({
+    UserMenu.include({
         do_update: function(){
             this._super.apply(this, arguments);
             this.update_promise.then(function() {
-                var asterisk_button = new instance.web.OpenCaller();
-                asterisk_button.appendTo(instance.webclient.$el.find('.oe_systray'));
+                var asterisk_button = new click2dial.OpenCaller();
+                console.log(this);
+                asterisk_button.appendTo($('.oe_systray'));
             });
         },
     });
 
-};
+});
 
 
