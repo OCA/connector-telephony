@@ -31,14 +31,10 @@ class hr_applicant(orm.Model):
     _country_field = None
     _partner_field = 'partner_id'
 
-    def create(self, cr, uid, vals, context=None):
-        vals_reformated = self._generic_reformat_phonenumbers(
-            cr, uid, None, vals, context=context)
-        return super(hr_applicant, self).create(
-            cr, uid, vals_reformated, context=context)
+    def create(self, vals):
+        vals_reformated = self._generic_reformat_phonenumbers(None, vals)
+        return super(hr_applicant, self).create(vals_reformated)
 
-    def write(self, cr, uid, ids, vals, context=None):
-        vals_reformated = self._generic_reformat_phonenumbers(
-            cr, uid, ids, vals, context=context)
-        return super(hr_applicant, self).write(
-            cr, uid, ids, vals_reformated, context=context)
+    def write(self, ids, vals):
+        vals_reformated = self._generic_reformat_phonenumbers(ids, vals)
+        return super(hr_applicant, self).write(ids, vals_reformated)

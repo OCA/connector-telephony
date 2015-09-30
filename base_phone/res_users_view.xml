@@ -28,11 +28,11 @@
     <field name="model">res.users</field>
     <field name="inherit_id" ref="base.view_users_form_simple_modif" />
     <field name="arch" type="xml">
-        <group string="Email Preferences" position="after">
+        <footer position="before">
             <group name="phone" string="Telephony Preferences" invisible="1">
             <!-- Empty group, that is used by other phone modules -->
             </group>
-        </group>
+        </footer>
     </field>
 </record>
 

@@ -19,12 +19,12 @@
                 <field name="number_of_digits_to_match_from_end" />
             </group>
         </group>
-        <field name="phone" position="attributes">
+        <!--<field name="phone" position="attributes">
             <attribute name="widget">phone</attribute>
         </field>
         <field name="fax" position="attributes">
             <attribute name="widget">fax</attribute>
-        </field>
+        </field>-->
     </field>
 </record>
 

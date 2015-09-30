@@ -19,51 +19,46 @@
 #
 ##############################################################################
 
-from openerp.osv import orm, fields
-from openerp.tools.translate import _
+from openerp import models, fields, api, _
+from openerp.exceptions import ValidationError
 import logging
 import phonenumbers
 
 _logger = logging.getLogger(__name__)
 
 
-class number_not_found(orm.TransientModel):
+class NumberNotFound(models.TransientModel):
     _name = "number.not.found"
     _description = "Number not found"
 
-    _columns = {
-        'calling_number': fields.char(
-            'Calling Number', size=64, readonly=True,
-            help="Phone number of calling party that has been obtained "
-            "from the telephony server, in the format used by the "
-            "telephony server (not E.164)."),
-        'e164_number': fields.char(
-            'E.164 Number', size=64,
-            help="E.164 equivalent of the calling number."),
-        'number_type': fields.selection(
-            [('phone', 'Fixed'), ('mobile', 'Mobile')],
-            'Fixed/Mobile', required=True),
-        'to_update_partner_id': fields.many2one(
-            'res.partner', 'Partner to Update',
-            help="Partner on which the phone number will be written"),
-        'current_partner_phone': fields.related(
-            'to_update_partner_id', 'phone', type='char',
-            relation='res.partner', string='Current Phone', readonly=True),
-        'current_partner_mobile': fields.related(
-            'to_update_partner_id', 'mobile', type='char',
-            relation='res.partner', string='Current Mobile', readonly=True),
-        }
+    calling_number = fields.Char(
+        'Calling Number', size=64, readonly=True,
+        help="Phone number of calling party that has been obtained "
+        "from the telephony server, in the format used by the "
+        "telephony server (not E.164).")
+    e164_number = fields.Char(
+        'E.164 Number', size=64,
+        help="E.164 equivalent of the calling number.")
+    number_type = fields.Selection(
+        [('phone', 'Fixed'), ('mobile', 'Mobile')],
+        'Fixed/Mobile', required=True)
+    to_update_partner_id = fields.Many2one(
+        'res.partner', 'Partner to Update',
+        help="Partner on which the phone number will be written")
+    current_partner_phone = fields.Char(
+        related='to_update_partner_id.phone', string='Current Phone', readonly=True)
+    current_partner_mobile = fields.Char(
+        related='to_update_partner_id.mobile', string='Current Mobile', readonly=True)
 
-    def default_get(self, cr, uid, fields_list, context=None):
-        res = super(number_not_found, self).default_get(
-            cr, uid, fields_list, context=context
-        )
+    @api.model
+    def default_get(self, fields_list):
+        res = super(NumberNotFound, self).default_get(fields_list)
         if not res:
             res = {}
         if res.get('calling_number'):
-            convert = self.pool['res.partner']._generic_reformat_phonenumbers(
-                cr, uid, None, {'phone': res.get('calling_number')},
-                context=context)
+            print "test1"
+            print res.get('calling_number')
+            convert = self.env['res.partner']._generic_reformat_phonenumbers(None, {'phone': res.get('calling_number')})
             parsed_num = phonenumbers.parse(convert.get('phone'))
             res['e164_number'] = phonenumbers.format_number(
                 parsed_num, phonenumbers.PhoneNumberFormat.INTERNATIONAL)
@@ -74,15 +69,13 @@ class number_not_found(orm.TransientModel):
                 res['number_type'] = 'phone'
         return res
 
-    def create_partner(self, cr, uid, ids, context=None):
+    def create_partner(self, ids):
         '''Function called by the related button of the wizard'''
-        if context is None:
-            context = {}
-        wiz = self.browse(cr, uid, ids[0], context=context)
+        wiz = self.browse(ids[0])
         parsed_num = phonenumbers.parse(wiz.e164_number, None)
         phonenumbers.number_type(parsed_num)
 
-        context['default_%s' % wiz.number_type] = wiz.e164_number
+        self.env.context['default_%s' % wiz.number_type] = wiz.e164_number
         action = {
             'name': _('Create New Partner'),
             'view_mode': 'form,tree,kanban',
@@ -90,19 +83,15 @@ class number_not_found(orm.TransientModel):
             'type': 'ir.actions.act_window',
             'nodestroy': False,
             'target': 'current',
-            'context': context,
+            'context': self.env.context,
             }
         return action
 
-    def update_partner(self, cr, uid, ids, context=None):
-        wiz = self.browse(cr, uid, ids[0], context=context)
+    def update_partner(self, ids):
+        wiz = self.browse(ids[0])
         if not wiz.to_update_partner_id:
-            raise orm.except_orm(
-                _('Error:'),
-                _("Select the Partner to Update."))
-        self.pool['res.partner'].write(
-            cr, uid, wiz.to_update_partner_id.id,
-            {wiz.number_type: wiz.e164_number}, context=context)
+            raise ValidationError(_("Select the Partner to Update."))
+        self.env['res.partner'].write(wiz.to_update_partner_id.id, {wiz.number_type: wiz.e164_number})
         action = {
             'name': _('Partner: %s' % wiz.to_update_partner_id.name),
             'type': 'ir.actions.act_window',
@@ -111,16 +100,14 @@ class number_not_found(orm.TransientModel):
             'nodestroy': False,
             'target': 'current',
             'res_id': wiz.to_update_partner_id.id,
-            'context': context,
+            'context': self.env.context,
             }
         return action
 
-    def onchange_to_update_partner(
-            self, cr, uid, ids, to_update_partner_id, context=None):
+    def onchange_to_update_partner(self, ids, to_update_partner_id):
         res = {'value': {}}
         if to_update_partner_id:
-            to_update_partner = self.pool['res.partner'].browse(
-                cr, uid, to_update_partner_id, context=context)
+            to_update_partner = self.env['res.partner'].browse(to_update_partner_id)
             res['value'].update({
                 'current_partner_phone': to_update_partner.phone,
                 'current_partner_mobile': to_update_partner.mobile,
