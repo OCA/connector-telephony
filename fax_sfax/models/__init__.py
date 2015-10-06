@@ -18,6 +18,5 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from . import fax_common
-from . import fax_payload
-from . import fax_transmission
+from . import fax_adapter_sfax
+from . import res_company

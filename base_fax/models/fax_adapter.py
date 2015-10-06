@@ -21,12 +21,12 @@
 from openerp import models, fields
 
 
-class FaxAdapter(models.AbstractModel):
+class FaxAdapter(models.Model):
     _name = 'fax.adapter'
-    _inherit = 'phone.common'
     _description = 'Meant to be inherited by proprietary adapters'
-    transmission_ids = fields.Many2one(
-        'fax.payload.transmission',
+    transmission_ids = fields.One2many(
+        comodel_name='fax.payload.transmission',
+        inverse_name='adapter_id',
         string='Transmissions',
         help='Transmissions that have taken place over this adapter',
     )

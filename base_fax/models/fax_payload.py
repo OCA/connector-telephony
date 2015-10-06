@@ -50,11 +50,12 @@ class FaxPayload(models.Model):
         default='PDF',
         required=True,
     )
-    receipt_transmission_id = fields.One2many(
+    # receipt_transmission_id = fields.One2many(
+    #     'fax.payload.transmission',
+    # )
+    transmission_ids = fields.One2many(
         'fax.payload.transmission',
-    )
-    transmission_ids = fields.Many2one(
-        'fax.payload.transmission',
+        inverse_name='payload_id',
     )
 
     def __convert_image(self, base64_encoded_image, image_type, ):

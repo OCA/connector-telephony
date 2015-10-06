@@ -18,20 +18,16 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from openerp import models, fields
+from openerp import models, fields, api
 
 
 class FaxPayloadTransmission(models.Model):
     _name = 'fax.payload.transmission'
     _description = 'Generic Fax Transmission Record Object'
-    _inherit = ['fax.common']
+    _inherit = ['phone.common']
     _phone_fields = ['remote_fax', 'local_fax']
     _phone_name_sequence = 10
-    _country_fields = 'country_id'
-    adapter_id = self.One2many(
-        'fax.adapter',
-        required=True,
-    )
+    # _country_fields = 'country_id'
     #  _partner_field = None
 
     @api.one
@@ -68,9 +64,14 @@ class FaxPayloadTransmission(models.Model):
     timestamp = fields.Datetime(
         string='Transmission Timestamp',
     )
-    response_id = fields.Text(
+    response_num = fields.Text(
         help='API Response (Transmission) ID',
     )
-    payload_id = fields.One2many(
-        'fax.payload',
+    payload_id = fields.Many2one(
+        comodel_name='fax.payload',
+        required=True,
+    )
+    adapter_id = fields.Many2one(
+        comodel_name='fax.adapter',
+        required=True,
     )

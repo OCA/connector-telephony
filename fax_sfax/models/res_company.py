@@ -23,4 +23,8 @@ from openerp import models, fields
 
 class ResCompany(models.Model):
     _inherit = 'res.company'
-    sfax_adapter_ids = fields.Many2one('fax.adapter.sfax')
+    sfax_adapter_ids = fields.One2many(
+        'fax.adapter.sfax',
+        inverse_name='company_id',
+        help='Company that adapter is associated with',
+    )

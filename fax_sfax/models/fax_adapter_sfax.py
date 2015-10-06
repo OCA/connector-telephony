@@ -18,8 +18,8 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from openerp import models, fields
-from pkcs7 import PKCS7Encoder
+from openerp import models, fields, api
+from .pkcs7 import PKCS7Encoder
 from Crypto.Cipher import AES
 import requests
 import base64
@@ -73,7 +73,7 @@ class FaxAdapterSfax(models.Model):
         required = True,
         help = 'Client IP for API connection',
     )
-    app_ip = fields.Char(
+    app_id = fields.Char(
         required = True,
         help = 'App ID for this API connection',
     )

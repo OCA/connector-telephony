@@ -20,4 +20,4 @@
 ##############################################################################
 from . import fax_adapter
 from . import fax_payload
-from . import fax_transmission
+from . import fax_payload_transmission

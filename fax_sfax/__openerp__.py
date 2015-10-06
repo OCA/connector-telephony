@@ -29,6 +29,7 @@
         'base_fax',
     ],
     'data': [
+        'views/res_company_view.xml',
     ],
     'installable': True,
     'application': False,
