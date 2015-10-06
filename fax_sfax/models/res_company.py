@@ -21,15 +21,6 @@
 from openerp import models, fields
 
 
-class FaxCommon(models.AbstractModel):
-    _name = 'fax.common'
-    _inherit = 'phone.common'
-    _description = 'Inherit Phone + Add Fax Functions'
-    
-    def send_fax(self, dialed_number, fax_payload_id):
-        ''' This function is designed to be overridden in submodules '''
-        return {
-            'dialed_number': dialed_number,
-            'fax_payload_id': fax_payload_id.id,
-            'response_id': False,   #  < fax.payload.transmission record
-        }
+class ResCompany(models.Model):
+    _inherit = 'res.company'
+    sfax_adapter_ids = fields.Many2one('fax.adapter.sfax')

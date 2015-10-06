@@ -18,6 +18,15 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from . import fax_adapter
-from . import fax_payload
-from . import fax_transmission
+from openerp import models, fields
+
+
+class FaxAdapter(models.AbstractModel):
+    _name = 'fax.adapter'
+    _inherit = 'phone.common'
+    _description = 'Meant to be inherited by proprietary adapters'
+    transmission_ids = fields.Many2one(
+        'fax.payload.transmission',
+        string='Transmissions',
+        help='Transmissions that have taken place over this adapter',
+    )
