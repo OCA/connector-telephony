@@ -67,15 +67,15 @@ class FaxAdapterSfax(models.Model):
             self.token = False
 
     company_id = fields.Many2one('res.company')
-    username = fields.Text(
+    username = fields.Char(
         required=True,
         help='SFax Username / Security Context for API connection',
     )
-    encrypt_key = fields.Text(
+    encrypt_key = fields.Char(
         required=True,
         help='SFax PassKey for API connection',
     )
-    vector = fields.Text(
+    vector = fields.Char(
         required=True,
         help='SFax Vector for API connection',
     )
@@ -92,11 +92,11 @@ class FaxAdapterSfax(models.Model):
         default='https://api.sfaxme.com/api',
         help='URI for API (usually don\'t want to change this)',
     )
-    token = fields.Text(
-        readonly=True,
+    token = fields.Char(
+        readonly=True, compute='_compute_token',
     )
 
-    def call_api(self, action, uri_params, post_data=None, files={}):
+    def call_api(self, action, uri_params, post_data=None, files=None):
         '''
         Call SFax api action (/api/:action e.g /api/sendfax)
         :param  action: str Action to perform (uri part)

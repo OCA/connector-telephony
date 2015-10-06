@@ -16,7 +16,7 @@
             <field name="arch" type="xml">
                 <xpath expr="//group[@string='Bank Accounts']" position="before">
                     <group name="SFax Adapters">
-                        <field name="sfax_adapter_ids" widget="select">
+                        <field name="sfax_adapter_ids">
                             <form name="SFax Adapter">
                                 <group name="Auth/Encryption">
                                     <field name="username"/>
@@ -27,6 +27,7 @@
                                     <field name="uri"/>
                                     <field name="app_id"/>
                                     <field name="client_ip"/>
+                                    <field name="token"/>
                                 </group>
                             </form>
                         </field>
