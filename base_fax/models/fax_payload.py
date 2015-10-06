@@ -18,7 +18,7 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from openerp import models, fields, api, tools
+from openerp import models, fields, api
 from PIL import Image
 from io import BytesIO
 
@@ -29,7 +29,7 @@ class FaxPayload(models.Model):
     _phone_name_sequence = 10
     _country_fields = 'country_id'
     #  _partner_field = None
-    
+
     ref = fields.Char(
         string='Fax Reference ID',
     )
@@ -73,7 +73,7 @@ class FaxPayload(models.Model):
         :param  fax_number:    str Number to fax to
         :return fax.payload.transmission:   Representing fax transmission
         '''
-        return False   #  < fax.payload.transmission record
+        return False   # fax.payload.transmission record
 
     @api.model
     def create(self, vals, ):
@@ -88,10 +88,10 @@ class FaxPayload(models.Model):
         if vals.get('image'):
             image_type = vals.get('image_type') or self.image_type
             vals['image'] = self.__convert_image(
-                vals['image'], vals['image_type']
+                vals['image'], image_type
             )
         elif vals.get('image_type'):
             vals['image'] = self.__convert_image(
-                self.image, vals['image_type']
+                self.image, image_type
             )
         super(FaxPayload, self).write(vals)

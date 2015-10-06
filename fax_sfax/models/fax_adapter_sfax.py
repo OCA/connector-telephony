@@ -25,6 +25,10 @@ import requests
 import base64
 import time
 import urllib
+import logging
+
+
+_logger = logging.getLogger(__name__)
 
 
 class FaxAdapterSfax(models.Model):
@@ -32,14 +36,20 @@ class FaxAdapterSfax(models.Model):
     _inherit = 'fax.adapter'
     _description = 'It provides bindings for SFax auth & methods'
     API_ERROR_ID = -1
-    
+
     @api.one
     def _compute_token(self, ):
         ''' Get security token from SFax '''
         try:
             timestr = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
-            raw = "AppId=”+APPID+”&AppKey="+PASSKEY+"&GenDT="+timestr+"&Client="+CLIENT_IP+"&"
-            
+            params = {
+                'AppId': self.app_id,
+                'AppKey': self.encrypt_key,
+                'GenDT': timestr,
+                'Client': self.client_ip,
+            }
+            raw = urllib.urlencode(params) + '&'
+
             mode = AES.MODE_CBC
             encode_obj = PKCS7Encoder()
             encrypt_obj = AES.new(
@@ -49,7 +59,7 @@ class FaxAdapterSfax(models.Model):
             cipher = encrypt_obj.encrypt(padding)
             enc_cipher = base64.b64encode(cipher)
             self.token = urllib.quote(enc_cipher)
-            
+
         except Exception as e:
             _logger.warn(
                 'Was not able to create security token. Exception: %s', e
@@ -58,38 +68,42 @@ class FaxAdapterSfax(models.Model):
 
     company_id = fields.Many2one('res.company')
     username = fields.Text(
-        required = True,
-        help = 'SFax Username / Security Context for API connection',
+        required=True,
+        help='SFax Username / Security Context for API connection',
     )
     encrypt_key = fields.Text(
-        required = True,
-        help = 'SFax PassKey for API connection',
+        required=True,
+        help='SFax PassKey for API connection',
     )
     vector = fields.Text(
-        required = True,
-        help = 'SFax Vector for API connection',
+        required=True,
+        help='SFax Vector for API connection',
     )
     client_ip = fields.Char(
-        required = True,
-        help = 'Client IP for API connection',
+        required=True,
+        help='Client IP for API connection',
     )
     app_id = fields.Char(
-        required = True,
-        help = 'App ID for this API connection',
+        required=True,
+        help='App ID for this API connection',
     )
     uri = fields.Char(
-        required = True,
-        default = 'https://api.sfaxme.com/api',
-        help = 'URI for API (usually don\'t want to change this)',
+        required=True,
+        default='https://api.sfaxme.com/api',
+        help='URI for API (usually don\'t want to change this)',
     )
     token = fields.Text(
-        readonly = True,
+        readonly=True,
     )
-    
+
     def call_api(self, action, uri_params, post_data=None, files={}):
         '''
         Call SFax api action (/api/:action e.g /api/sendfax)
-        
+        :param  action: str Action to perform (uri part)
+        :param  uri_params: dict Params to pass as GET params
+        :param  post_data: dict Data to pass as POST
+        :param  files: dict of file tuples to upload. Keyed by name
+        :return response: mixed
         '''
         uri = '%(uri)s/%(action)s' % {
             'uri': self.uri,
@@ -98,17 +112,17 @@ class FaxAdapterSfax(models.Model):
         if post_data is not None:
             resp = requests.post(
                 uri,
-                params = uri_params,
-                data = post_data,
-                files = files,
+                params=uri_params,
+                data=post_data,
+                files=files,
             )
         else:
             resp = requests.get(
                 uri,
-                params = uri_params
+                params=uri_params
             )
         return resp.json()
-        
+
     def __get_file_tuple(self, field_name, basename, fp, content_type):
         '''
         Prepare a file for upload through requests
