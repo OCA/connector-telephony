@@ -85,7 +85,8 @@ class FaxSfaxAdapter(models.Model):
     )
     app_id = fields.Char(
         required=True,
-        help='App ID for this API connection',
+        string='API Key',
+        help='Key for this API connection',
     )
     uri = fields.Char(
         required=True,
