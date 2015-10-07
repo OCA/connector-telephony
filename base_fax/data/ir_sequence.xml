@@ -9,14 +9,22 @@
 <openerp>
     <data>
         
-        <record forcecreate="1" id="seq_fax_payload" model="ir.sequence">
+        <record id="ir_sequence_type_fax_payload" model="ir.sequence.type">
+            <field name="name">Fax Payload</field>
+            <field name="code">fax.payload</field>
+        </record>
+        <record id="ir_sequence_fax_payload" model="ir.sequence">
             <field name="name">Fax Payload</field>
             <field name="code">fax.payload</field>
             <field name="prefix">FXP</field>
             <field name="padding">4</field>
         </record>
         
-        <record forcecreate="1" id="seq_fax_payload_transmission" model="ir.sequence">
+        <record id="ir_sequence_type_fax_payload_transmission" model="ir.sequence.type">
+            <field name="name">Fax Payload Transmission</field>
+            <field name="code">fax.payload.transmission</field>
+        </record>
+        <record id="ir_sequence_type_fax_payload_transmission" model="ir.sequence">
             <field name="name">Fax Payload Transmission</field>
             <field name="code">fax.payload.transmission</field>
             <field name="prefix">FXT</field>
