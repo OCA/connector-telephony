@@ -7,7 +7,7 @@
 -->
 
 <openerp>
-    <data>
+    <data noupdate="1">
         
         <record id="ir_sequence_type_fax_payload" model="ir.sequence.type">
             <field name="name">Fax Payload</field>
