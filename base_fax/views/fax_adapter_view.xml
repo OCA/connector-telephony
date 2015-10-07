@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+    Copyright (C) 2014-2015 LasLabs [https://laslabs.com]
+    @author Dave Lasley <dave@laslabs.com>
+    The licence is in the file __openerp__.py
+-->
+
+<openerp>
+    <data>
+        
+        <!-- Top menu item -->
+        <menuitem name="Faxing" id="fax_menu_main"
+            groups="base.group_user" sequence="90"/>
+        
+    </data>
+</openerp>

@@ -21,6 +21,7 @@
 from openerp import models, fields, api
 from .pkcs7 import PKCS7Encoder
 from Crypto.Cipher import AES
+from io import BytesIO
 import requests
 import base64
 import time
@@ -43,7 +44,7 @@ class FaxSfaxAdapter(models.Model):
         try:
             timestr = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
             params = {
-                'AppId': self.app_id,
+                'AppId': self.api_key,
                 'AppKey': self.encrypt_key,
                 'GenDT': timestr,
                 'Client': self.client_ip,
@@ -83,7 +84,7 @@ class FaxSfaxAdapter(models.Model):
         required=True,
         help='Client IP for API connection',
     )
-    app_id = fields.Char(
+    api_key = fields.Char(
         required=True,
         string='API Key',
         help='Key for this API connection',
@@ -97,20 +98,25 @@ class FaxSfaxAdapter(models.Model):
         readonly=True, compute='_compute_token',
     )
 
-    def _call_api(self, action, uri_params, post_data=None, files=None):
+    def __call_api(self, action, uri_params, post_data=None, files=None):
         '''
         Call SFax api action (/api/:action e.g /api/sendfax)
         :param  action: str Action to perform (uri part)
         :param  uri_params: dict Params to pass as GET params
         :param  post_data: dict Data to pass as POST
-        :param  files: dict of file tuples to upload. Keyed by name
+        :param  files: list of file tuples to upload. (__get_file_tuple)
         :return response: mixed
         '''
         uri = '%(uri)s/%(action)s' % {
             'uri': self.uri,
             'action': action,
         }
-        if post_data is not None:
+        uri_params.update({
+            'token': self.token,
+            'ApiKey': self.api_key,
+        })
+        if post_data is not None or files is not None:
+            _logger.debug('POST to %s with params %s', uri, uri_params)
             resp = requests.post(
                 uri,
                 params=uri_params,
@@ -118,17 +124,20 @@ class FaxSfaxAdapter(models.Model):
                 files=files,
             )
         else:
+            _logger.debug('GET to %s with params %s', uri, uri_params)
             resp = requests.get(
                 uri,
                 params=uri_params
             )
+        _logger.debug('Raw response: %s', resp.text)
         return resp.json()
 
-    def __get_file_tuple(self, field_name, basename, fp, content_type):
+    def __get_file_tuple(self, field_name, basename,
+                         fp, content_type='application/pdf'):
         '''
         Prepare a file for upload through requests
-        :param  field_name:  str
-        :param  basename:    str
+        :param  field_name:  str Form field name
+        :param  basename:    str Of file
         :param  fp:  File like object (open, StringIO, etc)
         :param  content_type: str    main and subtype (application/pdf)
         :return tuple:
@@ -142,8 +151,31 @@ class FaxSfaxAdapter(models.Model):
         :param  payload_id: fax.payload To Send
         :return fax.payload.transmission: Representing fax transmission
         '''
-        image = payload_id.image
-        if payload_id.image_type != 'PDF':
-            image = payload_id._convert_image(image, 'PDF')
         
+        image = payload_id.image
+
+        if payload_id.image_type != 'PDF':
+            image = payload_id._convert_image(image, 'PDF', False)
+        else:
+            image = image.decode('base64')
+
+        with BytesIO() as io:
+            io.write(image)
+            images = [self.__get_file_tuple(
+                field_name='file',
+                basename='%s.pdf' % payload_id.name,
+                fp=io,
+            )]
+            fax_number = payload_id.convert_to_dial_number(
+                fax_number
+            )
+            send_name = payload_id.get_name_from_phone_number(
+                fax_number
+            )
+            params = {
+                'RecipientFax': fax_number,
+                'RecipientName': send_name,
+            }
+            resp = self.__call_api('SendFax', params, images)
+            _logger.debug('Got resp %s', resp)
 

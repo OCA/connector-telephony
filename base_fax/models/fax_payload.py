@@ -96,11 +96,14 @@ class FaxPayload(models.Model):
             )
         super(FaxPayload, self).write(vals)
 
-    def _convert_image(self, base64_encoded_image, image_type, ):
+    def _convert_image(self, base64_encoded_image, image_type, b64_out=True):
         ''' Convert image for storage and use by the fax adapter '''
         binary = base64_encoded_image.decode('base64')
         with BytesIO(binary) as raw_image:
             image = Image.open(raw_image)
             with BytesIO() as new_raw:
                 image.save(new_raw, image_type)
-                return new_raw.getvalue().encode('base64')
+                val = new_raw.getvalue()
+                if b64_out:
+                    val = val.encode('base64')
+                return val

@@ -29,6 +29,8 @@
         'base_phone',
     ],
     'data': [
+        'views/fax_adapter_view.xml',
+        'views/fax_payload_view.xml',
         'data/ir_sequence.xml',
     ],
     'installable': True,

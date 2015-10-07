@@ -30,6 +30,9 @@ class FaxAdapter(models.AbstractModel):
         string='Transmissions',
         help='Transmissions that have taken place over this adapter',
     )
+    name = fields.Char(
+        required=True
+    )
 
     def _send(self, fax_number, payload_id, ):
         '''
