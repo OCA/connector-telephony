@@ -10,7 +10,7 @@
     <data>
         
         <!-- Top menu item -->
-        <menuitem name="Faxing" id="fax_menu_main"
+        <menuitem name="Faxing" id="base_fax.fax_menu_main" parent="mail.mail_feeds_main"
             groups="base.group_user" sequence="90"/>
         
         <!-- Left menu items -->
