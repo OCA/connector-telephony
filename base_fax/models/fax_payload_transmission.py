@@ -30,13 +30,9 @@ class FaxPayloadTransmission(models.Model):
     # _country_fields = 'country_id'
     #  _partner_field = None
 
-    @api.one
     def _compute_status(self, ):
-        '''
-        Gets fax status from API.
-        This is meant to be overriden by proprietary modules
-        '''
-        self.status = 'draft'
+        ''' Compute Transmission Status '''
+        pass
 
     remote_fax = fields.Char()
     local_fax = fields.Char()
@@ -58,6 +54,7 @@ class FaxPayloadTransmission(models.Model):
         ],
         readonly=True,
         required=True,
+        default='draft',
         compute='_compute_status',
         help='Transmission Status',
     )
@@ -74,4 +71,11 @@ class FaxPayloadTransmission(models.Model):
     adapter_id = fields.Many2one(
         comodel_name='fax.adapter',
         required=True,
+    )
+    ref = fields.Char(
+        readonly=True,
+        required=True,
+        default=lambda self: self.env['ir.sequence'].next_by_code(
+            'fax.payload.transmission'
+        )
     )

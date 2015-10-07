@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+    Copyright (C) 2014-2015 LasLabs [https://laslabs.com]
+    @author Dave Lasley <dave@laslabs.com>
+    The licence is in the file __openerp__.py
+-->
+
+<openerp>
+    <data>
+        
+        <record forcecreate="1" id="seq_fax_payload" model="ir.sequence">
+            <field name="name">Fax Payload</field>
+            <field name="code">fax.payload</field>
+            <field name="prefix">FXP</field>
+            <field name="padding">4</field>
+        </record>
+        
+        <record forcecreate="1" id="seq_fax_payload_transmission" model="ir.sequence">
+            <field name="name">Fax Payload Transmission</field>
+            <field name="code">fax.payload.transmission</field>
+            <field name="prefix">FXT</field>
+            <field name="padding">4</field>
+        </record>
+        
+    </data>
+</openerp>

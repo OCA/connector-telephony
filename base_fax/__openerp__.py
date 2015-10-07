@@ -29,6 +29,7 @@
         'base_phone',
     ],
     'data': [
+        'data/ir_sequence.xml',
     ],
     'installable': True,
     'application': False,

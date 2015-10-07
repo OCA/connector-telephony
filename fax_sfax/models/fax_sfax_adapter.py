@@ -31,8 +31,8 @@ import logging
 _logger = logging.getLogger(__name__)
 
 
-class FaxAdapterSfax(models.Model):
-    _name = 'fax.adapter.sfax'
+class FaxSfaxAdapter(models.Model):
+    _name = 'fax.sfax.adapter'
     _inherit = 'fax.adapter'
     _description = 'It provides bindings for SFax auth & methods'
     API_ERROR_ID = -1
@@ -96,7 +96,7 @@ class FaxAdapterSfax(models.Model):
         readonly=True, compute='_compute_token',
     )
 
-    def call_api(self, action, uri_params, post_data=None, files=None):
+    def _call_api(self, action, uri_params, post_data=None, files=None):
         '''
         Call SFax api action (/api/:action e.g /api/sendfax)
         :param  action: str Action to perform (uri part)
@@ -133,3 +133,16 @@ class FaxAdapterSfax(models.Model):
         :return tuple:
         '''
         return (field_name, (basename, fp, content_type, {'Expires': '0'}))
+    
+    def _send(self, fax_number, payload_id, ):
+        '''
+        Sends fax. Designed to be overridden in submodules
+        :param  fax_number: str Number to fax to
+        :param  payload_id: fax.payload To Send
+        :return fax.payload.transmission: Representing fax transmission
+        '''
+        image = payload_id.image
+        if payload_id.image_type != 'PDF':
+            image = payload_id._convert_image(image, 'PDF')
+        
+

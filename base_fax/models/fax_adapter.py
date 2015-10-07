@@ -21,7 +21,7 @@
 from openerp import models, fields
 
 
-class FaxAdapter(models.Model):
+class FaxAdapter(models.AbstractModel):
     _name = 'fax.adapter'
     _description = 'Meant to be inherited by proprietary adapters'
     transmission_ids = fields.One2many(
@@ -30,3 +30,12 @@ class FaxAdapter(models.Model):
         string='Transmissions',
         help='Transmissions that have taken place over this adapter',
     )
+
+    def _send(self, fax_number, payload_id, ):
+        '''
+        Sends fax. Designed to be overridden in submodules
+        :param  fax_number: str Number to fax to
+        :param  payload_id: fax.payload To Send
+        :return fax.payload.transmission: Representing fax transmission
+        '''
+        return False   # fax.payload.transmission record

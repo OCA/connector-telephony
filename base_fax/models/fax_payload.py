@@ -30,8 +30,8 @@ class FaxPayload(models.Model):
     _country_fields = 'country_id'
     #  _partner_field = None
 
-    ref = fields.Char(
-        string='Fax Reference ID',
+    name = fields.Char(
+        help='Name of image'
     )
     image = fields.Binary(
         string='Fax Image',
@@ -57,28 +57,28 @@ class FaxPayload(models.Model):
         'fax.payload.transmission',
         inverse_name='payload_id',
     )
+    ref = fields.Char(
+        readonly=True,
+        required=True,
+        default=lambda self: self.env['ir.sequence'].next_by_code(
+            'fax.payload'
+        )
+    )
 
-    def __convert_image(self, base64_encoded_image, image_type, ):
-        ''' Convert image for storage and use by the fax adapter '''
-        binary = base64_encoded_image.decode('base64')
-        with BytesIO(binary) as raw_image:
-            image = Image.open(raw_image)
-            with BytesIO() as new_raw:
-                image.save(new_raw, image_type)
-                return new_raw.getvalue().encode('base64')
-
-    def send(self, fax_number, ):
+    @api.one
+    def _send(self, adapter_id, fax_number, ):
         '''
-        Sends fax. Designed to be overridden in submodules
-        :param  fax_number:    str Number to fax to
-        :return fax.payload.transmission:   Representing fax transmission
+        Sends fax using specified adapter
+        :param  adapter_id: fax.adapter (or proprietary) to use
+        :param  fax_number: str Number to fax to
+        :return fax.payload.transmission: Representing fax transmission
         '''
-        return False   # fax.payload.transmission record
+        return adapter_id._send(fax_number, self)
 
     @api.model
     def create(self, vals, ):
         if vals.get('image'):
-            vals['image'] = self.__convert_image(
+            vals['image'] = self._convert_image(
                 vals['image'], vals['image_type']
             )
         super(FaxPayload, self).create(vals)
@@ -87,11 +87,20 @@ class FaxPayload(models.Model):
     def write(self, vals, ):
         if vals.get('image'):
             image_type = vals.get('image_type') or self.image_type
-            vals['image'] = self.__convert_image(
+            vals['image'] = self._convert_image(
                 vals['image'], image_type
             )
         elif vals.get('image_type'):
-            vals['image'] = self.__convert_image(
+            vals['image'] = self._convert_image(
                 self.image, image_type
             )
         super(FaxPayload, self).write(vals)
+
+    def _convert_image(self, base64_encoded_image, image_type, ):
+        ''' Convert image for storage and use by the fax adapter '''
+        binary = base64_encoded_image.decode('base64')
+        with BytesIO(binary) as raw_image:
+            image = Image.open(raw_image)
+            with BytesIO() as new_raw:
+                image.save(new_raw, image_type)
+                return new_raw.getvalue().encode('base64')
