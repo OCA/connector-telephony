@@ -40,9 +40,5 @@
             <field name="view_mode">tree,form</field>
         </record>
         
-        <!-- Left menu item -->
-        <menuitem id="fax_payload_menu" parent="base_fax.fax_menu_main"
-            action="fax_payload_action" sequence="10"/>
-        
     </data>
 </openerp>

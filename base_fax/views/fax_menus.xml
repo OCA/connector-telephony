@@ -13,5 +13,9 @@
         <menuitem name="Faxing" id="fax_menu_main"
             groups="base.group_user" sequence="90"/>
         
+        <!-- Left menu items -->
+        <menuitem id="fax_payload_menu" parent="base_fax.fax_menu_main"
+            action="fax_payload_action" sequence="10"/>
+        
     </data>
 </openerp>
