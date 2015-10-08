@@ -34,7 +34,7 @@ _logger = logging.getLogger(__name__)
 
 class FaxAdapterSfax(models.Model):
     _name = 'fax.adapter.sfax'
-    _description = 'It provides bindings for SFax auth & methods'
+    _description = 'SFax Adapter'
     API_ERROR_ID = -1
 
     @api.one
@@ -66,6 +66,10 @@ class FaxAdapterSfax(models.Model):
             )
             self.token = False
 
+    name = fields.Char(
+        required=True,
+        default='SFax',
+    )
     company_id = fields.Many2one('res.company')
     transmission_ids = fields.Many2many(
         'fax.payload.transmission'

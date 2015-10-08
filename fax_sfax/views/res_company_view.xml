@@ -18,6 +18,10 @@
                     <group name="SFax Adapters">
                         <field name="sfax_adapter_ids">
                             <form name="SFax Adapter">
+                                <group name="adapter">
+                                    <field name="name"/>
+                                    <field name="id" readonly="True"/>
+                                </group>
                                 <group name="Auth/Encryption">
                                     <field name="username"/>
                                     <field name="encrypt_key"/>

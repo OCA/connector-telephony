@@ -18,12 +18,18 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from openerp import models, fields
+from openerp import models, fields, api
 
 
 class FaxBase(models.Model):
     _name = 'fax.base'
-    _description = 'Meant to provide base fax model and relations to adapters'
+    _description = 'Fax Base'
+    
+    @api.one
+    def _compute_adapter_name(self, ):
+        if self.adapter_pk:
+            self.adapter_name = self.__get_adapter().name
+    
     transmission_ids = fields.One2many(
         comodel_name='fax.payload.transmission',
         inverse_name='adapter_id',
@@ -33,19 +39,25 @@ class FaxBase(models.Model):
     name = fields.Char(
         required=True
     )
-    adapter_model = fields.Many2one(
-        'res.model',
-        domain=[('name', '=like', 'fax.%',)],
+    adapter_model_id = fields.Many2one(
+        'ir.model',
+        domain=[('model', '=like', 'fax.%',)],
         help='Proprietary fax adapter model',
     )
-    adapter_pk = fields.Int(
+    adapter_model_name = fields.Char(
+        related='adapter_model_id.name',
+    )
+    adapter_pk = fields.Integer(
         help='ID of the proprierary fax adapter',
+    )
+    adapter_name = fields.Char(
+        compute='_compute_adapter_name',
     )
 
     @api.multi
     def __get_adapter(self, ):
         self.ensure_one()
-        return self.adapter_model.browse(self.adapter_pk)
+        return self.adapter_model_id.browse(self.adapter_pk)
 
     @api.multi
     def _send(self, fax_number, payload_ids, ):

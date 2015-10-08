@@ -23,7 +23,7 @@ from openerp import models, fields, api
 
 class FaxPayloadTransmission(models.Model):
     _name = 'fax.payload.transmission'
-    _description = 'Generic Fax Transmission Record Object'
+    _description = 'Fax Transmission Record'
     _inherit = ['phone.common']
     _phone_fields = ['remote_fax', 'local_fax']
     _phone_name_sequence = 10
@@ -41,7 +41,7 @@ class FaxPayloadTransmission(models.Model):
         string='Fax Direction',
         help='Whether transmission was incoming or outgoing',
     )
-    status = fields.Selection(
+    state = fields.Selection(
         [
             ('draft', 'Draft'),
             ('transmit', 'Transmitted'),
@@ -75,12 +75,16 @@ class FaxPayloadTransmission(models.Model):
     )
     ref = fields.Char(
         readonly=True,
-        required=True,
-        default=lambda self: self.env['ir.sequence'].next_by_code(
-            'fax.payload.transmission'
-        ),
     )
 
+    @api.model
+    def create(self, vals):
+        vals['ref'] = self.env['ir.sequence'].next_by_code(
+            'fax.payload.transmission'
+        )
+        return super(FaxPayloadTransmission, self).create(vals)
+
+    @api.one
     def action_transmit(self, ):
         self.write({
             'status': 'transmit',

@@ -25,7 +25,7 @@ from io import BytesIO
 
 class FaxPayload(models.Model):
     _name = 'fax.payload'
-    _description = 'Fax Data Object'
+    _description = 'Fax Data Payload'
     _phone_name_sequence = 10
     _country_fields = 'country_id'
     #  _partner_field = None
@@ -36,7 +36,7 @@ class FaxPayload(models.Model):
     image = fields.Binary(
         string='Fax Image',
         attachment=True,
-        readonly=True,
+        #readonly=True,
         required=True,
     )
     image_type = fields.Selection(
@@ -59,10 +59,6 @@ class FaxPayload(models.Model):
     )
     ref = fields.Char(
         readonly=True,
-        required=True,
-        default=lambda self: self.env['ir.sequence'].next_by_code(
-            'fax.payload'
-        )
     )
 
     @api.one
@@ -81,6 +77,9 @@ class FaxPayload(models.Model):
             vals['image'] = self._convert_image(
                 vals['image'], vals['image_type']
             )
+        vals['ref'] = self.env['ir.sequence'].next_by_code(
+            'fax.payload'
+        )
         super(FaxPayload, self).create(vals)
 
     @api.one

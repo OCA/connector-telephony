@@ -10,20 +10,24 @@
     <data>
         
         <record id="fax_payload_form" model="ir.ui.view">
-            <field name="name">fax.payload.form</field>
+            <field name="name">Payload</field>
             <field name="model">fax.payload</field>
             <field name="arch" type="xml">
                 <form string="Fax Payload">
-                    <field name="ref"/>
-                    <field name="name"/>
-                    <field name="image" widget="image"/>
-                    <field name="transmission_ids" readonly="True"/>
+                    <sheet>
+                        <h1 name="ref"/>
+                        <group>
+                            <field name="image" widget="image"/>
+                            <field name="name"/>
+                            <field name="transmission_ids" readonly="True"/>
+                        </group>
+                    </sheet>
                 </form>
             </field>
         </record>
         
         <record id="fax_payload_tree" model="ir.ui.view">
-            <field name="name">fax.payload.tree</field>
+            <field name="name">Payloads</field>
             <field name="model">fax.payload</field>
             <field name="arch" type="xml">
                 <tree string="Fax Payloads">
@@ -34,7 +38,7 @@
         </record>
         
         <record id="fax_payload_action" model="ir.actions.act_window">
-            <field name="name">fax.payload.action</field>
+            <field name="name">Payloads</field>
             <field name="res_model">fax.payload</field>
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
