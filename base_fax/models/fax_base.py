@@ -21,9 +21,9 @@
 from openerp import models, fields
 
 
-class FaxAdapter(models.AbstractModel):
-    _name = 'fax.adapter'
-    _description = 'Meant to be inherited by proprietary adapters'
+class FaxBase(models.Model):
+    _name = 'fax.base'
+    _description = 'Meant to provide base fax model and relations to adapters'
     transmission_ids = fields.One2many(
         comodel_name='fax.payload.transmission',
         inverse_name='adapter_id',
@@ -33,12 +33,41 @@ class FaxAdapter(models.AbstractModel):
     name = fields.Char(
         required=True
     )
+    adapter_model = fields.Many2one(
+        'res.model',
+        domain=[('name', '=like', 'fax.%',)],
+        help='Proprietary fax adapter model',
+    )
+    adapter_pk = fields.Int(
+        help='ID of the proprierary fax adapter',
+    )
 
-    def _send(self, fax_number, payload_id, ):
+    @api.multi
+    def __get_adapter(self, ):
+        self.ensure_one()
+        return self.adapter_model.browse(self.adapter_pk)
+
+    @api.multi
+    def _send(self, fax_number, payload_ids, ):
         '''
-        Sends fax. Designed to be overridden in submodules
+        Sends payload using _send on proprietary adapter
         :param  fax_number: str Number to fax to
-        :param  payload_id: fax.payload To Send
+        :param  payload_ids: fax.payload record(s) To Send
         :return fax.payload.transmission: Representing fax transmission
         '''
-        return False   # fax.payload.transmission record
+        self.ensure_one()
+        adapter = self.__get_adapter()
+        transmission = adapter._send(fax_number, payload_ids, )
+        transmission.action_transmit()
+
+    @api.multi
+    def _get_transmission_status(self, transmission_id, ):
+        '''
+        Returns _get_transmission_status from proprietary adapter
+        :param  transmission_id: fax.payload.transmission To Check On
+        :return (transmission_status: str, status_msg: str)
+        '''
+        self.ensure_one()
+        adapter = self.__get_adapter()
+        return adapter._get_transmission_status(transmission_id, )
+    

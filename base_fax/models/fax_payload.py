@@ -69,7 +69,7 @@ class FaxPayload(models.Model):
     def _send(self, adapter_id, fax_number, ):
         '''
         Sends fax using specified adapter
-        :param  adapter_id: fax.adapter (or proprietary) to use
+        :param  adapter_id: fax.base to use
         :param  fax_number: str Number to fax to
         :return fax.payload.transmission: Representing fax transmission
         '''

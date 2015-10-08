@@ -30,10 +30,6 @@ class FaxPayloadTransmission(models.Model):
     # _country_fields = 'country_id'
     #  _partner_field = None
 
-    def _compute_status(self, ):
-        ''' Compute Transmission Status '''
-        pass
-
     remote_fax = fields.Char()
     local_fax = fields.Char()
     direction = fields.Selection(
@@ -54,9 +50,14 @@ class FaxPayloadTransmission(models.Model):
         ],
         readonly=True,
         required=True,
+        store=True,
         default='draft',
-        compute='_compute_status',
         help='Transmission Status',
+    )
+    status_msg = fields.Text(
+        readonly=True,
+        store=True,
+        help='Final status message/error received from remote',
     )
     timestamp = fields.Datetime(
         string='Transmission Timestamp',
@@ -64,12 +65,12 @@ class FaxPayloadTransmission(models.Model):
     response_num = fields.Text(
         help='API Response (Transmission) ID',
     )
-    payload_id = fields.Many2one(
+    payload_id = fields.Many2many(
         comodel_name='fax.payload',
         required=True,
     )
     adapter_id = fields.Many2one(
-        comodel_name='fax.adapter',
+        comodel_name='fax.base',
         required=True,
     )
     ref = fields.Char(
@@ -77,5 +78,10 @@ class FaxPayloadTransmission(models.Model):
         required=True,
         default=lambda self: self.env['ir.sequence'].next_by_code(
             'fax.payload.transmission'
-        )
+        ),
     )
+
+    def action_transmit(self, ):
+        self.write({
+            'status': 'transmit',
+        })

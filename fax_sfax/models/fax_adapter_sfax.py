@@ -32,9 +32,8 @@ import logging
 _logger = logging.getLogger(__name__)
 
 
-class FaxSfaxAdapter(models.Model):
-    _name = 'fax.sfax.adapter'
-    _inherit = 'fax.adapter'
+class FaxAdapterSfax(models.Model):
+    _name = 'fax.adapter.sfax'
     _description = 'It provides bindings for SFax auth & methods'
     API_ERROR_ID = -1
 
@@ -68,6 +67,9 @@ class FaxSfaxAdapter(models.Model):
             self.token = False
 
     company_id = fields.Many2one('res.company')
+    transmission_ids = fields.Many2many(
+        'fax.payload.transmission'
+    )
     username = fields.Char(
         required=True,
         help='SFax Username / Security Context for API connection',
@@ -98,6 +100,7 @@ class FaxSfaxAdapter(models.Model):
         readonly=True, compute='_compute_token',
     )
 
+    @api.multi
     def __call_api(self, action, uri_params, post_data=None, files=None):
         '''
         Call SFax api action (/api/:action e.g /api/sendfax)
@@ -107,6 +110,7 @@ class FaxSfaxAdapter(models.Model):
         :param  files: list of file tuples to upload. (__get_file_tuple)
         :return response: mixed
         '''
+        self.ensure_one()
         uri = '%(uri)s/%(action)s' % {
             'uri': self.uri,
             'action': action,
@@ -144,38 +148,61 @@ class FaxSfaxAdapter(models.Model):
         '''
         return (field_name, (basename, fp, content_type, {'Expires': '0'}))
     
-    def _send(self, fax_number, payload_id, ):
+    @api.multi
+    def _send(self, fax_to, payload_ids, ):
         '''
         Sends fax. Designed to be overridden in submodules
-        :param  fax_number: str Number to fax to
-        :param  payload_id: fax.payload To Send
+        :param  fax_to: str Number to fax to
+        :param  payload_ids: fax.payload record(s) To Send
         :return fax.payload.transmission: Representing fax transmission
         '''
-        
-        image = payload_id.image
+        self.ensure_one()
+        images = []
+        for payload_id in payload_ids:
 
-        if payload_id.image_type != 'PDF':
-            image = payload_id._convert_image(image, 'PDF', False)
-        else:
-            image = image.decode('base64')
+            image = payload_id.image
 
-        with BytesIO() as io:
-            io.write(image)
-            images = [self.__get_file_tuple(
+            if payload_id.image_type != 'PDF':
+                image = payload_id._convert_image(image, 'PDF', False)
+            else:
+                image = image.decode('base64')
+
+            images.append({
+                'name': payload_id.name,
+                'io': BytesIO(),
+            })
+            images[-1]['io'].write(image)
+            
+        for idx, (name, io) in enumerate(images):
+            images[idx] = self.__get_file_tuple(
                 field_name='file',
-                basename='%s.pdf' % payload_id.name,
+                basename='%s.pdf' % name,
                 fp=io,
-            )]
-            fax_number = payload_id.convert_to_dial_number(
-                fax_number
             )
-            send_name = payload_id.get_name_from_phone_number(
-                fax_number
-            )
-            params = {
-                'RecipientFax': fax_number,
-                'RecipientName': send_name,
-            }
-            resp = self.__call_api('SendFax', params, images)
-            _logger.debug('Got resp %s', resp)
+            
+        fax_to = payload_id.convert_to_dial_number(fax_to)
+        send_name = payload_id.get_name_from_phone_number(fax_to)
+        params = {
+            'RecipientFax': fax_to,
+            'RecipientName': send_name,
+        }
+        resp = self.__call_api('SendFax', params, images)
+        _logger.debug('Got resp %s', resp)
 
+        vals = {
+            
+        }
+        
+        self.write({
+            'transmission_ids': (0, 0, vals)
+        })
+
+    @api.model
+    def _get_transmission_status(self, transmission_id, ):
+        '''
+        Returns xmission status and msg
+        :param  transmission_id: fax.payload.transmission To Check On
+        :return (transmission_status: str, status_msg: str)
+        '''
+        
+    

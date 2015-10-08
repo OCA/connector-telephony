@@ -11,11 +11,14 @@
         
         <!-- Top menu item -->
         <menuitem name="Faxing" id="base_fax.fax_menu_main" parent="mail.mail_feeds_main"
-            groups="base.group_user" sequence="90"/>
+                  groups="base.group_user" sequence="90"/>
         
         <!-- Left menu items -->
-        <menuitem id="fax_payload_menu" parent="base_fax.fax_menu_main"
-            action="fax_payload_action" sequence="10"/>
+        <menuitem name="Payloads" id="fax_payload_menu" parent="base_fax.fax_menu_main"
+                  action="fax_payload_action" sequence="10"/>
+        
+        <menuitem name="Transmissions" id="fax_payload_transmission_menu" parent="base_fax.fax_menu_main"
+                  action="fax_payload_transmission_action" sequence="20"/>
         
     </data>
 </openerp>

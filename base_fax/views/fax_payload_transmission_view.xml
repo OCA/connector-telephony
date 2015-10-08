@@ -9,11 +9,11 @@
 <openerp>
     <data>
         
-        <record id="fax_payload_form" model="ir.ui.view">
-            <field name="name">fax.payload.form</field>
-            <field name="model">fax.payload</field>
+        <record id="fax_payload_transmission_form" model="ir.ui.view">
+            <field name="name">fax.payload.transmission.form</field>
+            <field name="model">fax.payload.transmission</field>
             <field name="arch" type="xml">
-                <form string="Fax Payload">
+                <form string="Fax Transmission">
                     <field name="ref"/>
                     <field name="name"/>
                     <field name="image" widget="image"/>
@@ -22,19 +22,20 @@
             </field>
         </record>
         
-        <record id="fax_payload_tree" model="ir.ui.view">
-            <field name="name">fax.payload.tree</field>
+        <record id="fax_payload_transmission_tree" model="ir.ui.view">
+            <field name="name">fax.payload.transmission.tree</field>
             <field name="model">fax.payload</field>
             <field name="arch" type="xml">
-                <tree string="Fax Payloads">
+                <tree string="Fax Transmissions">
                     <field name="ref"/>
-                    <field name="name"/>
+                    <field name="local_fax"/>
+                    <field name="remote_fax"/>
                 </tree>
             </field>
         </record>
         
-        <record id="fax_payload_action" model="ir.actions.act_window">
-            <field name="name">fax.payload.action</field>
+        <record id="fax_payload_transmission_action" model="ir.actions.act_window">
+            <field name="name">fax.payload.transmission.action</field>
             <field name="res_model">fax.payload</field>
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
