@@ -22,7 +22,7 @@
 
 {
     'name': 'CRM Phone',
-    'version': '0.1',
+    'version': '8.0.0.1.0',
     'category': 'Phone',
     'license': 'AGPL-3',
     'summary': 'Validate phone numbers in CRM',
