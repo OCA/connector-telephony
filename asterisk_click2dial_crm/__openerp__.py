@@ -22,7 +22,7 @@
 
 {
     "name": "Asterisk Click2dial CRM",
-    "version": "0.1",
+    "version": "8.0.0.1.0",
     "author": "Akretion,Odoo Community Association (OCA)",
     "website": "http://www.akretion.com",
     "license": "AGPL-3",
