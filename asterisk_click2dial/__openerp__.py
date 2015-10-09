@@ -22,7 +22,7 @@
 
 {
     'name': 'Asterisk Click2dial',
-    'version': '0.4',
+    'version': '8.0.0.4.0',
     'category': 'Phone',
     'license': 'AGPL-3',
     'summary': 'Asterisk-OpenERP connector',
