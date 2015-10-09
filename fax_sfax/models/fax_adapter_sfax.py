@@ -23,7 +23,6 @@ from .pkcs7 import PKCS7Encoder
 from Crypto.Cipher import AES
 from io import BytesIO
 import requests
-import base64
 import time
 import urllib
 import logging
@@ -42,13 +41,12 @@ class FaxAdapterSfax(models.Model):
         ''' Get security token from SFax '''
         try:
             timestr = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
-            params = {
-                'AppId': self.api_key,
-                'AppKey': self.encrypt_key,
-                'GenDT': timestr,
-                'Client': self.client_ip,
+            
+            raw = 'Username=%(uname)s&ApiKey=%(key)s&GenDT=%(timestr)s&' % {
+                'uname': self.username,
+                'key': self.api_key,
+                'timestr': timestr,
             }
-            raw = urllib.urlencode(params) + '&'
 
             mode = AES.MODE_CBC
             encode_obj = PKCS7Encoder()
@@ -57,8 +55,9 @@ class FaxAdapterSfax(models.Model):
             )
             padding = encode_obj.encode(raw)
             cipher = encrypt_obj.encrypt(padding)
-            enc_cipher = base64.b64encode(cipher)
-            self.token = urllib.quote(enc_cipher)
+            enc_cipher = cipher.encode('base64')
+            _logger.debug('Got SFax token %s', enc_cipher)
+            self.token = enc_cipher
 
         except Exception as e:
             _logger.warn(
@@ -86,10 +85,6 @@ class FaxAdapterSfax(models.Model):
         required=True,
         help='SFax Vector for API connection',
     )
-    client_ip = fields.Char(
-        required=True,
-        help='Client IP for API connection',
-    )
     api_key = fields.Char(
         required=True,
         string='API Key',
@@ -100,7 +95,7 @@ class FaxAdapterSfax(models.Model):
         default='https://api.sfaxme.com/api',
         help='URI for API (usually don\'t want to change this)',
     )
-    token = fields.Char(
+    token = fields.Text(
         readonly=True, compute='_compute_token',
     )
 
@@ -119,29 +114,34 @@ class FaxAdapterSfax(models.Model):
             'uri': self.uri,
             'action': action,
         }
-        uri_params.update({
+        params = {
             'token': self.token,
             'ApiKey': self.api_key,
-        })
+        }
+        params.update(uri_params)
         if post_data is not None or files is not None:
-            _logger.debug('POST to %s with params %s', uri, uri_params)
+            _logger.debug('POST to %s with params %s and files %s',
+                          uri, params, files)
             resp = requests.post(
                 uri,
-                params=uri_params,
+                params=params,
                 data=post_data,
                 files=files,
             )
         else:
-            _logger.debug('GET to %s with params %s', uri, uri_params)
+            _logger.debug('GET to %s with params %s', uri, params)
             resp = requests.get(
                 uri,
-                params=uri_params
+                params=params
             )
-        _logger.debug('Raw response: %s', resp.text)
-        return resp.json()
+        _logger.debug('Raw (%s) response: %s', resp.status_code, resp.text)
+        _logger.debug('Response headers: %s', resp.headers)
+        try:
+            return resp.json()
+        except ValueError:
+            return False
 
-    def __get_file_tuple(self, field_name, basename,
-                         fp, content_type='application/pdf'):
+    def __get_file_tuple(self, basename, fp, content_type='application/pdf'):
         '''
         Prepare a file for upload through requests
         :param  field_name:  str Form field name
@@ -150,14 +150,15 @@ class FaxAdapterSfax(models.Model):
         :param  content_type: str    main and subtype (application/pdf)
         :return tuple:
         '''
-        return (field_name, (basename, fp, content_type, {'Expires': '0'}))
+        return (basename, fp, content_type, {'Expires': '0'})
     
     @api.multi
-    def _send(self, fax_to, payload_ids, ):
+    def _send(self, dialable, payload_ids, send_name=False, ):
         '''
-        Sends fax. Designed to be overridden in submodules
-        :param  fax_to: str Number to fax to
+        Sends payload using _send on proprietary adapter
+        :param  dialable: str Number to fax to (convert_to_dial_number)
         :param  payload_ids: fax.payload record(s) To Send
+        :param  send_name: str Name of person to send to
         :return fax.payload.transmission: Representing fax transmission
         '''
         self.ensure_one()
@@ -171,35 +172,46 @@ class FaxAdapterSfax(models.Model):
             else:
                 image = image.decode('base64')
 
-            images.append({
-                'name': payload_id.name,
-                'io': BytesIO(),
-            })
-            images[-1]['io'].write(image)
+            images.append([
+                payload_id.name,
+                BytesIO(),
+            ])
+            images[-1][1].write(image)
             
         for idx, (name, io) in enumerate(images):
             images[idx] = self.__get_file_tuple(
-                field_name='file',
                 basename='%s.pdf' % name,
                 fp=io,
             )
-            
-        fax_to = payload_id.convert_to_dial_number(fax_to)
-        send_name = payload_id.get_name_from_phone_number(fax_to)
-        params = {
-            'RecipientFax': fax_to,
-            'RecipientName': send_name,
-        }
-        resp = self.__call_api('SendFax', params, images)
-        _logger.debug('Got resp %s', resp)
 
-        vals = {
-            
+        params = {
+            'RecipientFax': dialable,
+            'RecipientName': send_name if send_name else '',
         }
-        
-        self.write({
-            'transmission_ids': (0, 0, vals)
-        })
+
+        for image in images:
+            resp = self.__call_api('SendFax', params, files={
+                'file': image
+            })
+            _logger.debug('Got resp %s', resp)
+
+            state = 'transmit' if resp.get('isSuccess') else 'transmit_except'
+            vals = {
+                'remote_fax': dialable,
+                'direction': 'out',
+                'state': state,
+                'status_msg': resp.get('message'),
+                'timestamp': fields.Datetime.now(),
+                'response_num': resp.get('SendFaxQueueId'),
+                'payload_id': payload_id.id,
+            }
+            
+            self.write({
+                'transmission_ids': (0, 0, vals)
+            })
+            
+            if not resp.get('isSuccess'):
+                raise IOError("Fax transmission failure. Got resp %s", resp)
 
     @api.model
     def _get_transmission_status(self, transmission_id, ):
@@ -208,5 +220,5 @@ class FaxAdapterSfax(models.Model):
         :param  transmission_id: fax.payload.transmission To Check On
         :return (transmission_status: str, status_msg: str)
         '''
-        
+        pass
     

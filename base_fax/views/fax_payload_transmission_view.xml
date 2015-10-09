@@ -19,7 +19,9 @@
                                statusbar_colors="{&quot;transmit_except&quot;:&quot;red&quot;,&quot;transmit&quot;:&quot;blue&quot;}"/>
                     </header>
                     <sheet>
-                        <h1 name="ref"/>
+                        <h1>
+                            <field name="ref"/>
+                        </h1>
                         <group>
                             <field name="adapter_id"/>
                             <field name="payload_id"/>

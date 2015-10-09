@@ -26,9 +26,6 @@ from io import BytesIO
 class FaxPayload(models.Model):
     _name = 'fax.payload'
     _description = 'Fax Data Payload'
-    _phone_name_sequence = 10
-    _country_fields = 'country_id'
-    #  _partner_field = None
 
     name = fields.Char(
         help='Name of image'
@@ -47,8 +44,10 @@ class FaxPayload(models.Model):
             ('BMP', 'BMP'),
             ('GIF', 'GIF'),
         ],
-        default='PDF',
+        default='PNG',
         required=True,
+        string='Image Format',
+        help='Store image as this format',
     )
     # receipt_transmission_id = fields.One2many(
     #     'fax.payload.transmission',
@@ -80,7 +79,7 @@ class FaxPayload(models.Model):
         vals['ref'] = self.env['ir.sequence'].next_by_code(
             'fax.payload'
         )
-        super(FaxPayload, self).create(vals)
+        return super(FaxPayload, self).create(vals)
 
     @api.one
     def write(self, vals, ):

@@ -19,6 +19,10 @@
 #
 ##############################################################################
 from openerp import models, fields, api
+import logging
+
+
+_logger = logging.getLogger(__name__)
 
 
 class FaxBase(models.Model):
@@ -45,7 +49,7 @@ class FaxBase(models.Model):
         help='Proprietary fax adapter model',
     )
     adapter_model_name = fields.Char(
-        related='adapter_model_id.name',
+        related='adapter_model_id.model',
     )
     adapter_pk = fields.Integer(
         help='ID of the proprierary fax adapter',
@@ -53,24 +57,32 @@ class FaxBase(models.Model):
     adapter_name = fields.Char(
         compute='_compute_adapter_name',
     )
+    country_id = fields.Many2one(
+        'res.country',
+        default=lambda s: s.env.user.company_id.country_id
+    )
 
     @api.multi
     def __get_adapter(self, ):
         self.ensure_one()
-        return self.adapter_model_id.browse(self.adapter_pk)
+        adapter_obj = self.env[self.adapter_model_id.model]
+        adapter_id = adapter_obj.browse(self.adapter_pk)
+        _logger.debug('Got adapter model %s and obj %s',
+                      adapter_obj, adapter_id)
+        return adapter_id
 
     @api.multi
-    def _send(self, fax_number, payload_ids, ):
+    def _send(self, dialable, payload_ids, send_name=False, ):
         '''
         Sends payload using _send on proprietary adapter
-        :param  fax_number: str Number to fax to
+        :param  dialable: str Number to fax to (convert_to_dial_number)
         :param  payload_ids: fax.payload record(s) To Send
+        :param  send_name: str Name of person to send to
         :return fax.payload.transmission: Representing fax transmission
         '''
         self.ensure_one()
         adapter = self.__get_adapter()
-        transmission = adapter._send(fax_number, payload_ids, )
-        transmission.action_transmit()
+        transmission = adapter._send(dialable, payload_ids, send_name)
 
     @api.multi
     def _get_transmission_status(self, transmission_id, ):

@@ -18,21 +18,4 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from openerp import models, fields, api
-
-
-class SendFax(models.TransientModel):
-    _name = 'send_fax'
-    _description = 'Wizard to send faxes'
-    
-    def _default_session(self, ):
-        return self.env['sale.rental'].browse(self._context.get('active_id'))
-
-    fax_to = fields.Char(
-        string='Fax To',
-        help='Phone number of remote fax machine',
-    )
-    adapter_id = fields.Many2one(
-        'fax.adapter',
-    )
-    
+from . import send_fax

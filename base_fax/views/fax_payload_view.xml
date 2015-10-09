@@ -15,9 +15,12 @@
             <field name="arch" type="xml">
                 <form string="Fax Payload">
                     <sheet>
-                        <h1 name="ref"/>
+                        <h1>
+                            <field name="ref"/>
+                        </h1>
                         <group>
                             <field name="image" widget="image"/>
+                            <field name="image_type"/>
                             <field name="name"/>
                             <field name="transmission_ids" readonly="True"/>
                         </group>

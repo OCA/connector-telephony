@@ -30,8 +30,6 @@
                                 <group name="App Specific">
                                     <field name="uri"/>
                                     <field name="api_key"/>
-                                    <field name="client_ip"/>
-                                    <field name="token"/>
                                 </group>
                             </form>
                         </field>

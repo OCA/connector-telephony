@@ -9,13 +9,20 @@
 <openerp>
     <data>
         
-        <record model="ir.ui.view" id="wizard_send_fax">
+        <record model="ir.ui.view" id="send_fax_wizard">
             <field name='name'>Send Fax</field>
-            <field name='model'>base_fax.send_fax</field>
+            <field name='model'>fax.send_fax</field>
             <field name='arch' type='xml'>
                 <form string='Send Fax'>
-                    <group>
-                        
+                    <group name="adapter">
+                        <field name="adapter_id"/>
+                    </group>
+                    <group name="transmission">
+                        <field name="fax_to_number"/>
+                    </group>
+                    <group name="payload">
+                        <field name="name"/>
+                        <field name="image" widget="image"/>
                     </group>
                     <footer>
                         <button special='cancel' string='Cancel'/>
@@ -26,10 +33,10 @@
             </field>
         </record>
         
-        <act_window id='launch_create_location_move_wizard'
-                    name='Move Locations'
-                    src_model='sale.rental'
-                    res_model='sale_rental.create.location.move'
+        <act_window id='send_fax_wizard_action'
+                    name='Send Fax'
+                    src_model='fax.base'
+                    res_model='fax.send_fax'
                     view_mode='form'
                     target='new'
                     key2='client_action_multi'/>

@@ -27,8 +27,8 @@ class FaxPayloadTransmission(models.Model):
     _inherit = ['phone.common']
     _phone_fields = ['remote_fax', 'local_fax']
     _phone_name_sequence = 10
-    # _country_fields = 'country_id'
-    #  _partner_field = None
+    _country_fields = None
+    _partner_field = None
 
     remote_fax = fields.Char()
     local_fax = fields.Char()
@@ -37,6 +37,7 @@ class FaxPayloadTransmission(models.Model):
             ('in', 'Inbound'),
             ('out', 'Outbound'),
         ],
+        readonly=True,
         default='in',
         string='Fax Direction',
         help='Whether transmission was incoming or outgoing',
@@ -60,14 +61,15 @@ class FaxPayloadTransmission(models.Model):
         help='Final status message/error received from remote',
     )
     timestamp = fields.Datetime(
+        readonly=True,
         string='Transmission Timestamp',
     )
-    response_num = fields.Text(
+    response_num = fields.Char(
+        readonly=True,
         help='API Response (Transmission) ID',
     )
     payload_id = fields.Many2many(
         comodel_name='fax.payload',
-        required=True,
     )
     adapter_id = fields.Many2one(
         comodel_name='fax.base',
@@ -82,7 +84,13 @@ class FaxPayloadTransmission(models.Model):
         vals['ref'] = self.env['ir.sequence'].next_by_code(
             'fax.payload.transmission'
         )
-        return super(FaxPayloadTransmission, self).create(vals)
+        vals_reformated = self._generic_reformat_phonenumbers(vals)
+        return super(FaxPayloadTransmission, self).create(vals_reformated)
+
+    @api.one
+    def write(self, vals):
+        vals_reformated = self._generic_reformat_phonenumbers(vals)
+        super(FaxPayloadTransmission, self).write(vals_reformated)
 
     @api.one
     def action_transmit(self, ):
