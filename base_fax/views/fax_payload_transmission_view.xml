@@ -24,12 +24,12 @@
                         </h1>
                         <group>
                             <field name="adapter_id"/>
-                            <field name="payload_id"/>
                             <field name="remote_fax"/>
                             <field name="local_fax"/>
                             <field name="direction"/>
                             <field name="timestamp"/>
                             <field name="response_num"/>
+                            <field name="payload_ids"/>
                             <field name="status_msg"/>
                         </group>
                     </sheet>

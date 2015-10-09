@@ -19,6 +19,10 @@
 #
 ##############################################################################
 from openerp import models, fields, api
+import logging
+
+
+_logger = logging.getLogger(__name__)
 
 
 class FaxPayloadTransmission(models.Model):
@@ -27,7 +31,7 @@ class FaxPayloadTransmission(models.Model):
     _inherit = ['phone.common']
     _phone_fields = ['remote_fax', 'local_fax']
     _phone_name_sequence = 10
-    _country_fields = None
+    _country_field = None
     _partner_field = None
 
     remote_fax = fields.Char()
@@ -68,7 +72,7 @@ class FaxPayloadTransmission(models.Model):
         readonly=True,
         help='API Response (Transmission) ID',
     )
-    payload_id = fields.Many2many(
+    payload_ids = fields.Many2many(
         comodel_name='fax.payload',
     )
     adapter_id = fields.Many2one(
@@ -84,13 +88,14 @@ class FaxPayloadTransmission(models.Model):
         vals['ref'] = self.env['ir.sequence'].next_by_code(
             'fax.payload.transmission'
         )
-        vals_reformated = self._generic_reformat_phonenumbers(vals)
-        return super(FaxPayloadTransmission, self).create(vals_reformated)
+        vals_reformatted = self._generic_reformat_phonenumbers(vals)
+        _logger.debug('Reformatted for new: %s', vals_reformatted)
+        return super(FaxPayloadTransmission, self).create(vals_reformatted)
 
     @api.one
     def write(self, vals):
-        vals_reformated = self._generic_reformat_phonenumbers(vals)
-        super(FaxPayloadTransmission, self).write(vals_reformated)
+        vals_reformatted = self._generic_reformat_phonenumbers(vals)
+        super(FaxPayloadTransmission, self).write(vals_reformatted)
 
     @api.one
     def action_transmit(self, ):

@@ -82,7 +82,10 @@ class FaxBase(models.Model):
         '''
         self.ensure_one()
         adapter = self.__get_adapter()
-        transmission = adapter._send(dialable, payload_ids, send_name)
+        transmission_vals = adapter._send(dialable, payload_ids, send_name)
+        self.write({
+            'transmission_ids': [(0, 0, transmission_vals)],
+        })
 
     @api.multi
     def _get_transmission_status(self, transmission_id, ):

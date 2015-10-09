@@ -52,9 +52,9 @@ class FaxPayload(models.Model):
     # receipt_transmission_id = fields.One2many(
     #     'fax.payload.transmission',
     # )
-    transmission_ids = fields.One2many(
+    transmission_ids = fields.Many2many(
         'fax.payload.transmission',
-        inverse_name='payload_id',
+        inverse_name='payload_ids',
     )
     ref = fields.Char(
         readonly=True,
