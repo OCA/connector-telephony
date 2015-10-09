@@ -22,7 +22,7 @@
     'name': 'Extension to base_phone providing fax core',
     'version': '8.0.0.1',
     'category': 'Phone',
-    'author': "LasLabs",
+    'author': "LasLabs, Odoo Community Association (OCA)",
     'license': 'AGPL-3',
     'website': 'https://github.com/OCA/connector-telephony',
     'depends': [

@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    Author: Dave Lasley <dave@laslabs.com>
-#    Copyright: 2015 LasLabs, Inc [https://laslabs.com]
+#    Copyright: 2015 LasLabs Inc. [https://laslabs.com]
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -22,7 +22,7 @@
     'name': 'Extension of base_fax providing SFax bindings',
     'version': '8.0.0.1',
     'category': 'Phone',
-    'author': "LasLabs",
+    'author': "LasLabs, Odoo Community Association (OCA)",
     'license': 'AGPL-3',
     'website': 'https://github.com/OCA/connector-telephony',
     'depends': [
