@@ -22,7 +22,7 @@
 
 {
     'name': 'Base Phone Pop-up',
-    'version': '0.4',
+    'version': '8.0.0.4.0',
     'category': 'Phone',
     'license': 'AGPL-3',
     'summary': 'Pop-up the related form view to the user on incoming calls',
