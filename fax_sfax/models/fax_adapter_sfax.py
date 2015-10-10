@@ -223,13 +223,3 @@ class FaxAdapterSfax(models.Model):
             'payload_ids': [(4, p.id, 0) for p in payload_ids],
         }
         return vals
-        
-    @api.model
-    def _get_transmission_status(self, transmission_id, ):
-        '''
-        Returns xmission status and msg
-        :param  transmission_id: fax.payload.transmission To Check On
-        :return (transmission_status: str, status_msg: str)
-        '''
-        pass
-    
