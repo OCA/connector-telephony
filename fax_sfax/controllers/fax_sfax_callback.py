@@ -131,7 +131,7 @@ class FaxSfaxCallback(http.Controller):
         }
         
         if len(transmission_id) == 0:
-            #   @TODO: Download the payload from server
+            transmission_id.adapter_id._fetch_payloads(transmission_id)
             sfax_id.write({
                 'transmission_ids': [(0, 0, transmission_vals)],
             })

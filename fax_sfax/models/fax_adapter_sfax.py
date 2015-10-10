@@ -139,13 +139,14 @@ class FaxAdapterSfax(models.Model):
         return True
 
     @api.multi
-    def __call_api(self, action, uri_params, post_data=None, files=None):
+    def __call_api(self, action, uri_params, post=None, files=None, json=True):
         '''
         Call SFax api action (/api/:action e.g /api/sendfax)
         :param  action: str Action to perform (uri part)
         :param  uri_params: dict Params to pass as GET params
-        :param  post_data: dict Data to pass as POST
+        :param  post: dict Data to pass as POST
         :param  files: list of file tuples to upload. (__get_file_tuple)
+        :param  json: bool Whether to decode response as json
         :return response: mixed
         '''
         self.ensure_one()
@@ -175,8 +176,16 @@ class FaxAdapterSfax(models.Model):
             )
         _logger.debug('Raw (%s) response: %s', resp.status_code, resp.text)
         _logger.debug('Response headers: %s', resp.headers)
+        
+        if not resp.ok:
+            _logger.error('Received error from AP')
+            return False
+        
         try:
-            return resp.json()
+            if json:
+                return resp.json()
+            resp.raw.decode_content = True
+            return resp.raw
         except ValueError:
             return False
     
@@ -223,3 +232,34 @@ class FaxAdapterSfax(models.Model):
             'payload_ids': [(4, p.id, 0) for p in payload_ids],
         }
         return vals
+
+    @api.one
+    def _fetch_payloads(self, transmission_ids):
+        '''
+        Fetches payload for transmission_ids from API
+        :param  transmission_ids: fax.payload.transmissions To fetch for
+        '''
+        for transmission_id in transmission_ids:
+    
+            if transmission_id.direction == 'out':
+                raise NotImplementedError('Outbound Payload download not implemented')
+    
+            pdf_data = self.__call_api(
+                'downloadinboundfaxaspdf',
+                {'FaxID': transmission_id.response_num},
+            )
+    
+            name = '[%(id)s] %(to)s => %(from)s' % {
+                'id': transmission_id.response_num,
+                'to': transmission_id.remote_fax,
+                'from': transmission_id.local_fax,
+            }
+            payload_vals = {
+                'image': pdf_data,
+                'image_type': 'PDF',
+                'name': name,
+            }
+    
+            transmission_id.write({
+                'payload_ids': (0, 0, payload_vals)
+            })

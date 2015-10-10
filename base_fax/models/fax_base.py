@@ -78,7 +78,6 @@ class FaxBase(models.Model):
         :param  dialable: str Number to fax to (convert_to_dial_number)
         :param  payload_ids: fax.payload record(s) To Send
         :param  send_name: str Name of person to send to
-        :return fax.payload.transmission: Representing fax transmission
         '''
         self.ensure_one()
         adapter = self._get_adapter()
@@ -88,13 +87,12 @@ class FaxBase(models.Model):
         })
 
     @api.multi
-    def _get_transmission_status(self, transmission_id, ):
+    def _fetch_payloads(self, transmission_ids, ):
         '''
-        Returns _get_transmission_status from proprietary adapter
-        :param  transmission_id: fax.payload.transmission To Check On
-        :return (transmission_status: str, status_msg: str)
+        Gets payloads using _fetch_payloads on proprietary adapter
+        :param  transmission_ids: fax.payload.transmission To fetch for
         '''
         self.ensure_one()
         adapter = self._get_adapter()
-        return adapter._get_transmission_status(transmission_id, )
+        adapter._fetch_payloads(transmission_ids, )
     
