@@ -97,7 +97,7 @@ class FaxAdapterSfax(models.Model):
     )
 
     @api.multi
-    def __call_api(self, action, uri_params, post_data='', files=None):
+    def __call_api(self, action, uri_params, post_data=None, files=None):
         '''
         Call SFax api action (/api/:action e.g /api/sendfax)
         :param  action: str Action to perform (uri part)
@@ -149,27 +149,24 @@ class FaxAdapterSfax(models.Model):
         '''
         self.ensure_one()
         images = []
+        files = {}
         for payload_id in payload_ids:
 
             image = payload_id.image
 
             if payload_id.image_type != 'PDF':
-                image = payload_id._convert_image(image, 'PDF')
+                image = payload_id._convert_image(image, 'PDF', False)
             else:
                 image = image.decode('base64')
 
-            images.append([
-                payload_id.name,
-                BytesIO(),
-            ])
-            images[-1][1].write(image)
+            files[payload_id.name + '.pdf'] = image
 
         params = {
             'RecipientFax': dialable,
             'RecipientName': send_name if send_name else '',
+            'OptionalParams': '',
         }
 
-        files = {'%s.pdf' % name: image for name, image in images}
         resp = self.__call_api('SendFax', params, files=files)
         _logger.debug('Got resp %s', resp)
 

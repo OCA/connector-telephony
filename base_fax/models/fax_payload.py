@@ -100,6 +100,13 @@ class FaxPayload(models.Model):
         with BytesIO(binary) as raw_image:
             image = Image.open(raw_image)
             with BytesIO() as new_raw:
+
+                # prevent IOError: PIL doesn't support alpha for some formats
+                if image_type in ['BMP', 'PDF']:
+                    if len(image.split()) == 4:
+                        r, g, b, a = image.split()
+                        image = Image.merge("RGB", (r, g, b))
+                
                 image.save(new_raw, image_type)
                 val = new_raw.getvalue()
                 if b64_out:
