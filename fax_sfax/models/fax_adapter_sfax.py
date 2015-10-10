@@ -22,6 +22,7 @@ from openerp import models, fields, api
 from .pkcs7 import PKCS7Encoder
 from Crypto.Cipher import AES
 from io import BytesIO
+from datetime import timedelta
 import requests
 import time
 import urllib
@@ -95,6 +96,47 @@ class FaxAdapterSfax(models.Model):
     token = fields.Text(
         readonly=True, compute='_compute_token',
     )
+    
+    @api.multi
+    def validate_token(self, token):
+        '''
+        Decrypt token and validate authenticity
+        :param  token: str
+        :return valid: bool
+        '''
+        self.ensure_one()
+        mode = AES.MODE_CBC
+        encode_obj = PKCS7Encoder()
+        encrypt_obj = AES.new(
+            self.encrypt_key, mode, self.vector.encode('ascii')
+        )
+        token = token.decode('base64')
+        enc_cipher = encrypt_obj.decrypt(token)
+        decoded = encode_obj.decode(enc_cipher)
+        _logger.debug('Decoded SFax token %s', decoded)
+        token_obj = {}
+        for i in token.split('&'):
+            try:
+                k, v = i.split('=')
+                token_obj[k] = v
+            except ValueError:
+                continue
+        time_obj = time.strptime(token_obj['GenDT'], "%Y-%m-%dT%H:%M:%SZ")
+        delta = time.gmtime() - time_obj
+        if delta >= timedelta(minutes=15):
+            _logger.debug('Token expired (Got %s, expect less than %s)',
+                          delta, timedelta(minutes=15))
+            return False
+        if token_obj['ApiKey'] != self.api_key:
+            _logger.debug('Incorrect Api key (Got %s, expect %s)',
+                          token_obj['ApiKey'], self.api_key)
+            return False
+        if token_obj['Username'] != self.username:
+            _logger.debug('Incorrect Username (Got %s, expect %s)',
+                          token_obj['Username'], self.username)
+            return False
+        _logger.debug('Valid token!')
+        return True
 
     @api.multi
     def __call_api(self, action, uri_params, post_data=None, files=None):

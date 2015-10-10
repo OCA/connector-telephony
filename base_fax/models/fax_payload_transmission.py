@@ -59,6 +59,14 @@ class FaxPayloadTransmission(models.Model):
         default='draft',
         help='Transmission Status',
     )
+    attempt_num = fields.Integer(
+        string='Attempts',
+        help='Outbound Fax Attempts',
+    )
+    page_num = fields.Integer(
+        string='Pages',
+        help='Number Of Pages',
+    )
     status_msg = fields.Text(
         readonly=True,
         store=True,

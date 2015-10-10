@@ -63,7 +63,7 @@ class FaxBase(models.Model):
     )
 
     @api.multi
-    def __get_adapter(self, ):
+    def _get_adapter(self, ):
         self.ensure_one()
         adapter_obj = self.env[self.adapter_model_id.model]
         adapter_id = adapter_obj.browse(self.adapter_pk)
@@ -81,7 +81,7 @@ class FaxBase(models.Model):
         :return fax.payload.transmission: Representing fax transmission
         '''
         self.ensure_one()
-        adapter = self.__get_adapter()
+        adapter = self._get_adapter()
         transmission_vals = adapter._send(dialable, payload_ids, send_name)
         self.write({
             'transmission_ids': [(0, 0, transmission_vals)],
@@ -95,6 +95,6 @@ class FaxBase(models.Model):
         :return (transmission_status: str, status_msg: str)
         '''
         self.ensure_one()
-        adapter = self.__get_adapter()
+        adapter = self._get_adapter()
         return adapter._get_transmission_status(transmission_id, )
     
