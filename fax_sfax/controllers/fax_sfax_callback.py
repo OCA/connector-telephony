@@ -117,7 +117,6 @@ class FaxSfaxCallback(http.Controller):
         return self.throw_error(NoOperationException())
         
     def process_in_fax(self, sfax_id, transmission_id, vals):
-        
         transmission_vals = {
             'local_fax': vals.get('intofaxnumber'),
             'remote_fax': vals.get('infromfaxnumber'),
@@ -129,17 +128,9 @@ class FaxSfaxCallback(http.Controller):
             'status_msg': 'OK',
             'response_num': vals['faxid'],
         }
-        
-        if len(transmission_id) == 0:
-            transmission_id.adapter_id._fetch_payloads(transmission_id)
-            sfax_id.write({
-                'transmission_ids': [(0, 0, transmission_vals)],
-            })
-        else:
-            transmission_id.write(transmission_vals)
+        self.save_transmission(transmission_id, transmission_vals)
     
     def process_out_fax(self, sfax_id, transmission_id, vals):
-        
         transmission_vals = {
             'local_fax': vals.get('outfromfaxnumber'),
             'remote_fax': vals.get('outtofaxnumber'),
@@ -151,11 +142,14 @@ class FaxSfaxCallback(http.Controller):
             'status_msg': vals['outresultdescr'],
             'response_num': vals['faxid'],
         }
-        
+        self.save_transmission(transmission_id, transmission_vals)
+
+    def save_transmission(self, transmission_id, transmission_vals):
         if len(transmission_id) == 0:
-            #   @TODO: Download the payload from server
+            transmission_id.adapter_id._fetch_payloads(transmission_id)
             sfax_id.write({
                 'transmission_ids': [(0, 0, transmission_vals)],
             })
         else:
             transmission_id.write(transmission_vals)
+

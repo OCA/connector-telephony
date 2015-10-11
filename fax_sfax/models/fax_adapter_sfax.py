@@ -242,17 +242,23 @@ class FaxAdapterSfax(models.Model):
         for transmission_id in transmission_ids:
     
             if transmission_id.direction == 'out':
-                raise NotImplementedError('Outbound Payload download not implemented')
+                to = transmission_id.remote_fax
+                frm = transmission_id.local_fax
+                api_direction = 'outbound'
+            else:
+                to = transmission_id.local_fax
+                frm = transmission_id.remote_fax
+                api_direction = 'inbound'
     
             pdf_data = self.__call_api(
-                'downloadinboundfaxaspdf',
+                'download%(dir)sfaxaspdf' % {'dir': api_direction},
                 {'FaxID': transmission_id.response_num},
             )
     
             name = '[%(id)s] %(to)s => %(from)s' % {
                 'id': transmission_id.response_num,
-                'to': transmission_id.remote_fax,
-                'from': transmission_id.local_fax,
+                'to': to,
+                'from': frm,
             }
             payload_vals = {
                 'image': pdf_data,
