@@ -47,7 +47,8 @@ class freeswitch_server(orm.Model):
         'port': fields.integer(
             'Port', required=True,
             help="TCP port on which the FreeSWITCH Event Socket listens. "
-            "Defined in /etc/freeswitch/autoload_configs/event_socket.conf.xml on FreeSWITCH."),
+            "Defined in /etc/freeswitch/autoload_configs/event_socket.conf.xml "
+            "on FreeSWITCH."),
         'out_prefix': fields.char(
             'Out Prefix', size=4, help="Prefix to dial to make outgoing "
             "calls. If you don't use a prefix to make outgoing calls, "
@@ -61,8 +62,8 @@ class freeswitch_server(orm.Model):
         'context': fields.char(
             'Dialplan Context', size=50, required=True,
             help="FreeSWITCH dialplan context from which the calls will be "
-            "made; e.g. 'XML default'. Refer to /etc/freeswitch/dialplan/* on your FreeSWITCH  "
-            "server."),
+            "made; e.g. 'XML default'. Refer to /etc/freeswitch/dialplan/* "
+            "on your FreeSWITCH server."),
         'wait_time': fields.integer(
             'Wait Time (sec)', required=True,
             help="Amount of time (in seconds) FreeSWITCH will try to reach "
@@ -152,7 +153,8 @@ class freeswitch_server(orm.Model):
                 fs_server = self.browse(
                     cr, uid, freeswitch_server_ids[0], context=context)
         servers = self.pool.get('freeswitch.server')
-        server_ids = servers.search(cr, uid, [('id', '=', fs_server.id)], context=context)
+        server_ids = servers.search(cr, uid, [('id', '=', fs_server.id)],
+                                    context=context)
         fake_fs_server = servers.browse(cr, uid, server_ids, context=context)
         for rec in fake_fs_server:
             fs_server = rec
@@ -433,9 +435,8 @@ class PhoneCommon(orm.AbstractModel):
             channel += '/%s' % user.dial_suffix
 
         try:
-            # originate FreeTDM/1/3 1234567 XML Internal-FXS
-            # originate user/2005 1003 XML Internal-FXS
-            # originate <effective_caller_id_number=1234,originate_timeout=7,call_timeout=7>user/2005 1005 XML Internal-FXS 'Caller ID showed to OpenERP user' 90125
+            # originate <csv global vars>user/2005 1005 DP_TYPE DP_NAME
+            #    'Caller ID name showed to aleg' 90125
             dial_string = (('<' + variable + '>') if variable else '') + \
                 channel + ' ' + fs_number + ' ' + fs_server.context + ' ' + \
                 '\'FreeSWITCH/Odoo Connector\' ' + fs_number

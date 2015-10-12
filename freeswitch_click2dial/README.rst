@@ -59,6 +59,16 @@ To install this module, you need to:
 
 * Click on the module and install it
 
+Additionally, you will need the FreeSWITCH ESL python module. You will find it
+under ${FREESWITCH_SRC_TOP_DIR}/libs/esl/python. Go to
+${FREESWITCH_SRC_TOP_DIR}/libs/esl. Type make. Then make pymod. You will then
+need to install ${FREESWITCH_SRC_TOP_DIR}/libs/esl/python/ESL.py and
+${FREESWITCH_SRC_TOP_DIR}/libs/esl/python/_ESL.so into the appropriate places
+on your OpenERP/Odoo server.
+(https://wiki.freeswitch.org/wiki/Event_Socket_Library#Installation for more
+information.) An alternative method would involve
+https://github.com/gurteshwar/freeswitch-esl-python.
+
 Configuration
 =============
 

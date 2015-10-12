@@ -46,7 +46,8 @@
  Of course, you should adapt this example to the FreeSWITCH server you are using.
  This is especially true of the options variable in the application function.
  The user (by number id, not name) that is used to connect to OpenERP/Odoo must
- have "Phone CallerID" access rights. That may also require "Technical Features" rights.
+ have "Phone CallerID" access rights. That may also require "Technical Features"
+ rights.
 
 """
 
@@ -198,7 +199,8 @@ def main(name, phone_number, options):
             if not res:
                 stdout_write('VERBOSE "Phone number not found in OpenERP"\n')
         except:
-            stdout_write('VERBOSE "Could not connect to OpenERP %s"\n' % options["database"])
+            stdout_write('VERBOSE "Could not connect to OpenERP %s"\n'
+                         % options["database"])
             res = False
         # To simulate a long execution of the XML-RPC request
         # import time
