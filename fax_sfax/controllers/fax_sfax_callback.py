@@ -87,16 +87,16 @@ class FaxSfaxCallback(http.Controller):
     @http.route('/fax/sfax/callback', type='http', auth='none')
     def do_callback(self, token, **kwargs):
         
-        transmission_mdl = http.request.env['fax.payload.transmission']
+        transmission_mdl = http.request.env['fax.payload.transmission'].sudo()
         transmission_id = transmission_mdl.search([
-            ('response_num', '=', kwargs['faxid'])
+            ('response_num', '=', kwargs.get('faxid', None))
         ])
         
         if len(transmission_id) > 1:
             return self.throw_error(MultipleTransmissionException())
         
         if len(transmission_id) == 0:
-            sfax_ids = http.request.env['fax.adapter.sfax'].search([])
+            sfax_ids = http.request.env['fax.adapter.sfax'].sudo().search([])
         else:
             sfax_ids = transmission_id.adapter_id
             
