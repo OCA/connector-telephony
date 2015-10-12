@@ -96,7 +96,9 @@ class FaxSfaxCallback(http.Controller):
             return self.throw_error(MultipleTransmissionException())
         
         if len(transmission_id) == 0:
-            sfax_ids = http.request.env['fax.adapter.sfax'].sudo().search([])
+            sfax_ids = http.request.env['fax.base'].sudo().search([
+                ('adapter_model_name', '=', 'fax.adapter.sfax')
+            ])
         else:
             sfax_ids = transmission_id.adapter_id
             
