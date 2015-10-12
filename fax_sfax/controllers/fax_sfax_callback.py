@@ -84,7 +84,7 @@ class FaxSfaxCallback(http.Controller):
             exception.headers,
         )
 
-    @http.route('/fax/sfax/callback', type='json', auth='none')
+    @http.route('/fax/sfax/callback', type='http', auth='none')
     def do_callback(self, token, **kwargs):
         
         transmission_mdl = http.request.env['fax.payload.transmission']
