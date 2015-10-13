@@ -22,7 +22,7 @@ from openerp import models, fields, api
 from .pkcs7 import PKCS7Encoder
 from Crypto.Cipher import AES
 from io import BytesIO
-from datetime import timedelta
+from datetime import timedelta, datetime
 import requests
 import time
 import urllib
@@ -115,14 +115,15 @@ class FaxAdapterSfax(models.Model):
         decoded = encode_obj.decode(enc_cipher)
         _logger.debug('Decoded SFax token %s', decoded)
         token_obj = {}
-        for i in token.split('&'):
+        for i in decoded.split('&'):
             try:
                 k, v = i.split('=')
                 token_obj[k] = v
             except ValueError:
                 continue
-        time_obj = time.strptime(token_obj['GenDT'], "%Y-%m-%dT%H:%M:%SZ")
-        delta = time.gmtime() - time_obj
+        _logger.debug('Got Sfax token parts %s', token_obj)
+        time_obj = datetime.strptime(token_obj['GenDT'], "%Y-%m-%dT%H:%M:%SZ")
+        delta = datetime.now() - time_obj
         if delta >= timedelta(minutes=15):
             _logger.debug('Token expired (Got %s, expect less than %s)',
                           delta, timedelta(minutes=15))
@@ -159,13 +160,13 @@ class FaxAdapterSfax(models.Model):
             'ApiKey': self.api_key,
         }
         params.update(uri_params)
-        if post_data or files is not None:
+        if post or files is not None:
             _logger.debug('POST to %s with params %s and files %s',
                           uri, params, files)
             resp = requests.post(
                 uri,
                 params=params,
-                data=post_data,
+                data=post,
                 files=files,
             )
         else:
@@ -174,8 +175,8 @@ class FaxAdapterSfax(models.Model):
                 uri,
                 params=params
             )
-        _logger.debug('Raw (%s) response: %s', resp.status_code, resp.text)
-        _logger.debug('Response headers: %s', resp.headers)
+        _logger.debug('Response status: %s, Headers: %s',
+                      resp.status_code, resp.headers)
         
         if not resp.ok:
             _logger.error('Received error from AP')
@@ -184,8 +185,7 @@ class FaxAdapterSfax(models.Model):
         try:
             if json:
                 return resp.json()
-            resp.raw.decode_content = True
-            return resp.raw
+            return resp.content
         except ValueError:
             return False
     
@@ -251,10 +251,13 @@ class FaxAdapterSfax(models.Model):
                 api_direction = 'inbound'
     
             pdf_data = self.__call_api(
-                'download%(dir)sfaxaspdf' % {'dir': api_direction},
+                'Download%(dir)sFaxAsTif' % {'dir': api_direction},
                 {'FaxID': transmission_id.response_num},
-            )
-    
+                json=False
+            ).encode('base64')
+            with open('/tmp/sfax', 'wb') as fh:
+                fh.write(pdf_data)
+
             name = '[%(id)s] %(to)s => %(from)s' % {
                 'id': transmission_id.response_num,
                 'to': to,
@@ -262,10 +265,10 @@ class FaxAdapterSfax(models.Model):
             }
             payload_vals = {
                 'image': pdf_data,
-                'image_type': 'PDF',
+                'image_type': 'PNG',
                 'name': name,
             }
-    
+
             transmission_id.write({
-                'payload_ids': (0, 0, payload_vals)
+                'payload_ids': [(0, 0, payload_vals)]
             })

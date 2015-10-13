@@ -34,8 +34,12 @@ class FaxPayloadTransmission(models.Model):
     _country_field = None
     _partner_field = None
 
-    remote_fax = fields.Char()
-    local_fax = fields.Char()
+    remote_fax = fields.Char(
+        select=True,
+    )
+    local_fax = fields.Char(
+        select=True
+    )
     direction = fields.Selection(
         [
             ('in', 'Inbound'),
@@ -55,7 +59,6 @@ class FaxPayloadTransmission(models.Model):
         ],
         readonly=True,
         required=True,
-        store=True,
         default='draft',
         help='Transmission Status',
     )
@@ -78,6 +81,7 @@ class FaxPayloadTransmission(models.Model):
     )
     response_num = fields.Char(
         readonly=True,
+        select=True,
         help='API Response (Transmission) ID',
     )
     payload_ids = fields.Many2many(
@@ -89,6 +93,7 @@ class FaxPayloadTransmission(models.Model):
     )
     ref = fields.Char(
         readonly=True,
+        select=True,
     )
 
     @api.model

@@ -32,7 +32,7 @@ class FaxBase(models.Model):
     @api.one
     def _compute_adapter_name(self, ):
         if self.adapter_pk:
-            self.adapter_name = self.__get_adapter().name
+            self.adapter_name = self._get_adapter().name
     
     transmission_ids = fields.One2many(
         comodel_name='fax.payload.transmission',
@@ -71,7 +71,7 @@ class FaxBase(models.Model):
                       adapter_obj, adapter_id)
         return adapter_id
 
-    @api.multi
+    @api.one
     def _send(self, dialable, payload_ids, send_name=False, ):
         '''
         Sends payload using _send on proprietary adapter
@@ -79,20 +79,18 @@ class FaxBase(models.Model):
         :param  payload_ids: fax.payload record(s) To Send
         :param  send_name: str Name of person to send to
         '''
-        self.ensure_one()
         adapter = self._get_adapter()
         transmission_vals = adapter._send(dialable, payload_ids, send_name)
         self.write({
             'transmission_ids': [(0, 0, transmission_vals)],
         })
 
-    @api.multi
+    @api.one
     def _fetch_payloads(self, transmission_ids, ):
         '''
         Gets payloads using _fetch_payloads on proprietary adapter
         :param  transmission_ids: fax.payload.transmission To fetch for
         '''
-        self.ensure_one()
         adapter = self._get_adapter()
         adapter._fetch_payloads(transmission_ids, )
     
