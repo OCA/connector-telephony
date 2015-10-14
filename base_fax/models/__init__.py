@@ -21,3 +21,4 @@
 from . import fax_adapter
 from . import fax_payload
 from . import fax_payload_transmission
+from . import res_company

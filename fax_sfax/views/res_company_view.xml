@@ -12,28 +12,26 @@
         <record id="res_company_view_form" model="ir.ui.view">
             <field name="name">res.company.view.form</field>
             <field name="model">res.company</field>
-            <field name='inherit_id' ref='base.view_company_form'/>
+            <field name='inherit_id' ref='base_fax.res_company_view_form'/>
             <field name="arch" type="xml">
-                <xpath expr="//group[@string='Bank Accounts']" position="before">
-                    <group name="SFax Adapters">
-                        <field name="sfax_adapter_ids">
-                            <form name="SFax Adapter">
-                                <group name="adapter">
-                                    <field name="name"/>
-                                    <field name="id" readonly="True"/>
-                                </group>
-                                <group name="Auth/Encryption">
-                                    <field name="username"/>
-                                    <field name="encrypt_key"/>
-                                    <field name="vector"/>
-                                </group>
-                                <group name="App Specific">
-                                    <field name="uri"/>
-                                    <field name="api_key"/>
-                                </group>
-                            </form>
-                        </field>
-                    </group>
+                <xpath expr="//field[@name='fax_adapter_ids']" position="before">
+                    <field name="sfax_adapter_ids">
+                        <form name="SFax Adapter">
+                            <group name="adapter">
+                                <field name="name"/>
+                                <field name="id" readonly="True"/>
+                            </group>
+                            <group name="Auth/Encryption">
+                                <field name="username"/>
+                                <field name="encrypt_key"/>
+                                <field name="vector"/>
+                            </group>
+                            <group name="App Specific">
+                                <field name="uri"/>
+                                <field name="api_key"/>
+                            </group>
+                        </form>
+                    </field>
                 </xpath>
             </field>
         </record>

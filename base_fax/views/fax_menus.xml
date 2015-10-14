@@ -14,8 +14,6 @@
                   groups="base.group_user" sequence="90"/>
         
         <!-- Left menu items -->
-        <menuitem name="Adapters" id="fax_adapter_menu" parent="base_fax.fax_menu_main"
-                  action="fax_adapter_action" sequence="10"/>
         
         <menuitem name="Payloads" id="fax_payload_menu" parent="base_fax.fax_menu_main"
                   action="fax_payload_action" sequence="20"/>

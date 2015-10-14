@@ -70,7 +70,6 @@ class FaxAdapterSfax(models.Model):
         required=True,
         default='SFax',
     )
-    company_id = fields.Many2one('res.company')
     username = fields.Char(
         required=True,
         help='SFax Username / Security Context for API connection',
@@ -95,6 +94,9 @@ class FaxAdapterSfax(models.Model):
     )
     token = fields.Text(
         readonly=True, compute='_compute_token',
+    )
+    company_id = fields.Many2one(
+        'res.company'
     )
     
     @api.multi

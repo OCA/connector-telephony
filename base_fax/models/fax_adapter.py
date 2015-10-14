@@ -64,6 +64,9 @@ class FaxAdapter(models.Model):
         'res.country',
         default=lambda s: s.env.user.company_id.country_id
     )
+    company_id = fields.Many2one(
+        'fax.adapter',
+    )
 
     @api.multi
     def _get_adapter(self, ):
