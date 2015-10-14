@@ -60,4 +60,5 @@ http://www.akretion.com/products-and-services/openerp-asterisk-voip-connector
         ],
     'images': [],
     'active': False,
+    'installable': False,
 }
