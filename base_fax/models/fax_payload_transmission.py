@@ -88,7 +88,7 @@ class FaxPayloadTransmission(models.Model):
         comodel_name='fax.payload',
     )
     adapter_id = fields.Many2one(
-        comodel_name='fax.base',
+        comodel_name='fax.adapter',
         required=True,
     )
     ref = fields.Char(

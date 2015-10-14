@@ -35,7 +35,7 @@
         
         <act_window id='send_fax_wizard_action'
                     name='Send Fax'
-                    src_model='fax.base'
+                    src_model='fax.adapter'
                     res_model='fax.send_fax'
                     view_mode='form'
                     target='new'

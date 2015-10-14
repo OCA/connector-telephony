@@ -18,6 +18,6 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from . import fax_base
+from . import fax_adapter
 from . import fax_payload
 from . import fax_payload_transmission

@@ -35,14 +35,14 @@ class SendFax(models.TransientModel):
     _phone_fields = ['fax_to_number']
     
     def _get_default_session(self, ):
-        return self.env['fax.base'].browse(self._context.get('active_id'))
+        return self.env['fax.adapter'].browse(self._context.get('active_id'))
 
     fax_to_number = fields.Char(
         string='Fax To',
         help='Phone number of remote fax machine',
     )
     adapter_id = fields.Many2one(
-        'fax.base',
+        'fax.adapter',
         default=_get_default_session,
     )
     name = fields.Char(

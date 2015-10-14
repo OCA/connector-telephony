@@ -25,9 +25,9 @@ import logging
 _logger = logging.getLogger(__name__)
 
 
-class FaxBase(models.Model):
-    _name = 'fax.base'
-    _description = 'Fax Base'
+class FaxAdapter(models.Model):
+    _name = 'fax.adapter'
+    _description = 'Base Fax Adapter'
     
     @api.one
     def _compute_adapter_name(self, ):
@@ -45,7 +45,10 @@ class FaxBase(models.Model):
     )
     adapter_model_id = fields.Many2one(
         'ir.model',
-        domain=[('model', '=like', 'fax.%',)],
+        domain=[
+            ('model', '=like', 'fax.%',),
+            ('model', '!=', 'fax.adapter'),
+        ],
         help='Proprietary fax adapter model',
     )
     adapter_model_name = fields.Char(

@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    Author: Dave Lasley <dave@laslabs.com>
-#    Copyright: 2015 LasLabs, Inc [https://laslabs.com]
+#    Copyright: 2015 LasLabs Inc..
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -18,26 +18,13 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-{
-    'name': 'Extension to base_phone providing fax core',
-    'version': '8.0.0.1',
-    'category': 'Phone',
-    'author': "LasLabs, Odoo Community Association (OCA)",
-    'license': 'AGPL-3',
-    'website': 'https://github.com/OCA/connector-telephony',
-    'depends': [
-        'base_phone',
-    ],
-    'data': [
-        'security/fax_security.xml',
-        'security/ir.model.access.csv',
-        'views/fax_adapter_view.xml',
-        'views/fax_payload_view.xml',
-        'views/fax_payload_transmission_view.xml',
-        'views/fax_menus.xml',
-        'wizard/send_fax_view.xml',
-        'data/ir_sequence.xml',
-    ],
-    'installable': True,
-    'application': False,
-}
+from openerp import models, fields
+
+
+class ResCompany(models.Model):
+    _inherit = 'res.company'
+    fax_adapter_ids = fields.One2many(
+        'fax.adapter',
+        inverse_name='company_id',
+        help='Company that adapter is associated with',
+    )

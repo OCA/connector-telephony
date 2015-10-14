@@ -9,9 +9,9 @@
 <openerp>
     <data>
         
-        <record id="fax_base_form" model="ir.ui.view">
+        <record id="fax_adapter_form" model="ir.ui.view">
             <field name="name">Adapter</field>
-            <field name="model">fax.base</field>
+            <field name="model">fax.adapter</field>
             <field name="arch" type="xml">
                 <form string="Fax Adapters">
                     <group>
@@ -24,9 +24,9 @@
             </field>
         </record>
         
-        <record id="fax_base_tree" model="ir.ui.view">
+        <record id="fax_adapter_tree" model="ir.ui.view">
             <field name="name">Adapters</field>
-            <field name="model">fax.base</field>
+            <field name="model">fax.adapter</field>
             <field name="arch" type="xml">
                 <tree string="Fax Adapters">
                     <field name="name"/>
@@ -37,9 +37,9 @@
             </field>
         </record>
         
-        <record id="fax_base_action" model="ir.actions.act_window">
+        <record id="fax_adapter_action" model="ir.actions.act_window">
             <field name="name">Adapters</field>
-            <field name="res_model">fax.base</field>
+            <field name="res_model">fax.adapter</field>
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
         </record>
