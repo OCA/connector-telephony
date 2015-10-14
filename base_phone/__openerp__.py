@@ -86,5 +86,5 @@ for any help or question about this module.
     'demo': ['base_phone_demo.xml'],
     'test': ['test/phonenum.yml'],
     'images': [],
-    'installable': True,
+    'installable': False,
 }
