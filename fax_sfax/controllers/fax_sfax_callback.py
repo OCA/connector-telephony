@@ -41,10 +41,9 @@ class DataException(Exception):
             'error': self.error,
             'error_description': self.description,
         }
-    
+
     def __str__(self, ):
         return dumps(self.to_dict())
-    
 
 
 class AuthenticationException(Exception):
@@ -67,7 +66,7 @@ class InvalidTokenException(AuthenticationException):
     status = 403
     error = 'invalid_token'
     description = 'Invalid token provided in request'
-    
+
 
 class MultipleTransmissionException(DataException):
     error = 'multiple_transmission'
@@ -93,54 +92,53 @@ class FaxSfaxCallback(http.Controller):
             exception.status,
             exception.headers,
         )
-    
+
     def __ok(self, ):
         return http.Response(
             'OK',
             200,
         )
-    
 
     @http.route('/fax/sfax/callback', type='http', auth='none')
     def do_callback(self, token, **kwargs):
-        
+
         transmission_mdl = http.request.env['fax.transmission'].sudo()
         transmission_id = transmission_mdl.search([
             ('response_num', '=', kwargs.get('faxid', None))
         ])
-        
+
         if len(transmission_id) > 1:
             return self.__throw_error(MultipleTransmissionException())
-        
+
         if len(transmission_id) == 0:
             sfax_ids = http.request.env['fax.adapter'].sudo().search([
                 ('adapter_model_name', '=', 'fax.adapter.sfax')
             ])
         else:
             sfax_ids = transmission_id.adapter_id
-            
+
         sfax_id = None
         for sfax in sfax_ids:
             if sfax._get_adapter().validate_token(token):
                 sfax_id = sfax
                 break
-        
+
         if sfax_id is None:
             return self.__throw_error(AuthenticationException())
-        
+
         kwargs['faxdateiso'] = datetime.strptime(
             kwargs['faxdateiso'], '%Y-%m-%dT%H:%M:%SZ'
         )
-        
+
         if kwargs.get('outfromfaxnumber'):
             self.process_out_fax(sfax_id, transmission_id, kwargs)
             return self.__ok()
         else:
             self.process_in_fax(sfax_id, transmission_id, kwargs)
             return self.__ok()
-        
+
         return self.__throw_error(NoOperationException())
-        
+
     def process_in_fax(self, sfax_id, transmission_id, vals):
         transmission_vals = {
             'local_fax': vals.get('intofaxnumber'),
@@ -154,7 +152,7 @@ class FaxSfaxCallback(http.Controller):
             'response_num': vals['faxid'],
         }
         self.save_transmission(sfax_id, transmission_id, transmission_vals)
-    
+
     def process_out_fax(self, sfax_id, transmission_id, vals):
         transmission_vals = {
             'local_fax': vals.get('outfromfaxnumber'),

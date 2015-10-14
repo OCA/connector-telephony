@@ -21,11 +21,9 @@
 from openerp import models, fields, api
 from .pkcs7 import PKCS7Encoder
 from Crypto.Cipher import AES
-from io import BytesIO
 from datetime import timedelta, datetime
 import requests
 import time
-import urllib
 import logging
 
 
@@ -42,7 +40,7 @@ class FaxAdapterSfax(models.Model):
         ''' Get security token from SFax '''
         try:
             timestr = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
-            
+
             raw = 'Username=%(uname)s&ApiKey=%(key)s&GenDT=%(timestr)s&' % {
                 'uname': self.username,
                 'key': self.api_key,
@@ -98,7 +96,7 @@ class FaxAdapterSfax(models.Model):
     company_id = fields.Many2one(
         'res.company'
     )
-    
+
     @api.multi
     def validate_token(self, token):
         '''
@@ -179,11 +177,11 @@ class FaxAdapterSfax(models.Model):
             )
         _logger.debug('Response status: %s, Headers: %s',
                       resp.status_code, resp.headers)
-        
+
         if not resp.ok:
             _logger.error('Received error from AP')
             return False
-        
+
         try:
             if json:
                 return resp.json()
@@ -201,7 +199,6 @@ class FaxAdapterSfax(models.Model):
         :return vals: dict To create a fax.transmission
         '''
         self.ensure_one()
-        images = []
         files = {}
         for payload_id in payload_ids:
 

@@ -28,12 +28,12 @@ _logger = logging.getLogger(__name__)
 class FaxAdapter(models.Model):
     _name = 'fax.adapter'
     _description = 'Base Fax Adapter'
-    
+
     @api.one
     def _compute_adapter_name(self, ):
         if self.adapter_pk:
             self.adapter_name = self._get_adapter().name
-    
+
     transmission_ids = fields.One2many(
         comodel_name='fax.transmission',
         inverse_name='adapter_id',
@@ -99,4 +99,3 @@ class FaxAdapter(models.Model):
         '''
         adapter = self._get_adapter()
         adapter._fetch_payloads(transmission_ids, )
-    

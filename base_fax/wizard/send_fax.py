@@ -33,7 +33,7 @@ class SendFax(models.TransientModel):
     _country_field = 'country_id'
     _partner_field = None
     _phone_fields = ['fax_to_number']
-    
+
     def _get_default_session(self, ):
         return self.env['fax.adapter'].browse(self._context.get('active_id'))
 
@@ -55,7 +55,7 @@ class SendFax(models.TransientModel):
         'res.country',
         default=lambda s: s.env.user.company_id.country_id
     )
-    
+
     @api.one
     def send_fax(self, ):
         payload_id = self.env['fax.payload'].create({

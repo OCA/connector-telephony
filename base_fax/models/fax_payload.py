@@ -81,7 +81,7 @@ class FaxPayload(models.Model):
                     'name': '%02d.png' % idx,
                     'image': img,
                 }))
-            del vals['image'] # < The warning was killing my OCD
+            del vals['image']  # < The warning was killing my OCD
         vals['ref'] = self.env['ir.sequence'].next_by_code(
             'fax.payload'
         )
@@ -109,7 +109,7 @@ class FaxPayload(models.Model):
                     'name': '%02d.png' % idx,
                     'image': img,
                 }))
-            del vals['image'] # < The warning was killing my OCD
+            del vals['image']  # < The warning was killing my OCD
         super(FaxPayload, self).write(vals)
 
     def _convert_image(self, image, image_type, b64_out=True, b64_in=True):
