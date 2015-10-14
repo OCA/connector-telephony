@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Copyright (C) 2014-2015 LasLabs [https://laslabs.com]
+    @author Dave Lasley <dave@laslabs.com>
+    The licence is in the file __openerp__.py
+-->
+
+<openerp>
+    
+    <data noupdate="0">
+    
+        <record id="group_fax_user" model="res.groups">
+            <field name="name">Fax User</field>
+        </record>
+        
+        <record id="group_fax_admin" model="res.groups">
+            <field name="name">Fax Admin</field>
+        </record>
+    
+    </data>
+    
+</openerp>

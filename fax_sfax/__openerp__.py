@@ -29,6 +29,7 @@
         'base_fax',
     ],
     'data': [
+        'security/ir.model.access.csv',
         'views/res_company_view.xml',
     ],
     'installable': True,

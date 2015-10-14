@@ -29,6 +29,8 @@
         'base_phone',
     ],
     'data': [
+        'security/fax_security.xml',
+        'security/ir.model.access.csv',
         'views/fax_base_view.xml',
         'views/fax_payload_view.xml',
         'views/fax_payload_transmission_view.xml',
