@@ -269,6 +269,9 @@ class FaxAdapterSfax(models.Model):
                 'name': name,
             }
 
-            transmission_id.write({
-                'payload_ids': [(0, 0, payload_vals)]
-            })
+            try:
+                transmission_id.write({
+                    'payload_ids': [(0, 0, payload_vals)]
+                })
+            except Exception as e:
+                _logger.error('Cannot save inbound image - %s', e)
