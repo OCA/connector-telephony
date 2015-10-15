@@ -18,14 +18,18 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from openerp import models, fields, api
-from PIL import Image, ImageSequence
-from io import BytesIO
+from openerp import models, fields, api, tools
 
 
 class FaxPayloadPage(models.Model):
     _name = 'fax.payload.page'
     _description = 'Fax Payload Page'
+
+    @api.depends('image')
+    def _compute_images(self, ):
+        for rec in self:
+            rec.image_medium = tools.image_resize_image_medium(rec.image)
+            rec.image_small = tools.image_resize_image_small(rec.image)
 
     name = fields.Char(
         help='Name of image'
@@ -35,6 +39,18 @@ class FaxPayloadPage(models.Model):
         attachment=True,
         # readonly=True,
         required=True,
+    )
+    image_medium = fields.Binary(
+        string='Medium Image',
+        compute='_compute_images',
+        store=True,
+        attachment=True,
+    )
+    image_small = fields.Binary(
+        string='Small Image',
+        compute='_compute_images',
+        store=True,
+        attachment=True,
     )
     payload_id = fields.Many2one(
         'fax.payload',
