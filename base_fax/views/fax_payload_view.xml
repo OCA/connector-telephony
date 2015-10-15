@@ -28,13 +28,13 @@
                                 <field name="page_ids" mode="kanban">
                                     <kanban>
                                         <field name="name"/>
-                                        <field name="image" widget="image"/>
+                                        <field name="image_large" widget="image"/>
                                         <templates>
                                             <t t-name="kanban-box">
                                                 <div t-attf-class="oe_kanban_global_click">
                                                     <a t-if="!read_only_mode" type="delete" class="fa fa-times pull-right"/>
                                                     <div class="o_kanban_image">
-                                                        <img t-att-src="'data:image/png;base64,'+record.image_small.raw_value"/>
+                                                        <img t-att-src="'data:image/png;base64,'+record.image_large.raw_value"/>
                                                     </div>
                                                     <div class="oe_kanban_details">
                                                         <field name="name"/>
@@ -47,7 +47,7 @@
                                         <sheet>
                                             <group>
                                                 <field name="name"/>
-                                                <field name="image"/>
+                                                <field name="image_xlarge" widget="image"/>
                                             </group>
                                         </sheet>
                                     </form>

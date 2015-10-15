@@ -26,10 +26,13 @@ class FaxPayloadPage(models.Model):
     _description = 'Fax Payload Page'
 
     @api.depends('image')
-    def _compute_images(self, ):
+    def _compute_images(self):
         for rec in self:
+            rec.image_xlarge = tools.image_resize_image_big(rec.image)
+            rec.image_large = tools.image_resize_image(
+                rec.image, (384,384), 'base64', None, True
+            )
             rec.image_medium = tools.image_resize_image_medium(rec.image)
-            rec.image_small = tools.image_resize_image_small(rec.image)
 
     name = fields.Char(
         help='Name of image'
@@ -40,15 +43,24 @@ class FaxPayloadPage(models.Model):
         # readonly=True,
         required=True,
     )
-    image_medium = fields.Binary(
-        string='Medium Image',
+    image_xlarge = fields.Binary(
+        string='XLarge Image (1024x1024)',
         compute='_compute_images',
+        readonly=True,
         store=True,
         attachment=True,
     )
-    image_small = fields.Binary(
-        string='Small Image',
+    image_large = fields.Binary(
+        string='Large Image (384x384)',
         compute='_compute_images',
+        readonly=True,
+        store=True,
+        attachment=True,
+    )
+    image_medium = fields.Binary(
+        string='Medium Image (128x128)',
+        compute='_compute_images',
+        readonly=True,
         store=True,
         attachment=True,
     )
