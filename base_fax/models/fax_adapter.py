@@ -35,7 +35,7 @@ class FaxAdapter(models.Model):
             self.adapter_name = self._get_adapter().name
     
     transmission_ids = fields.One2many(
-        comodel_name='fax.payload.transmission',
+        comodel_name='fax.transmission',
         inverse_name='adapter_id',
         string='Transmissions',
         help='Transmissions that have taken place over this adapter',
@@ -95,7 +95,7 @@ class FaxAdapter(models.Model):
     def _fetch_payloads(self, transmission_ids, ):
         '''
         Gets payloads using _fetch_payloads on proprietary adapter
-        :param  transmission_ids: fax.payload.transmission To fetch for
+        :param  transmission_ids: fax.transmission To fetch for
         '''
         adapter = self._get_adapter()
         adapter._fetch_payloads(transmission_ids, )

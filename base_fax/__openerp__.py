@@ -32,7 +32,7 @@
         'security/fax_security.xml',
         'security/ir.model.access.csv',
         'views/fax_payload_view.xml',
-        'views/fax_payload_transmission_view.xml',
+        'views/fax_transmission_view.xml',
         'views/res_company_view.xml',
         'views/fax_menus.xml',
         'wizard/send_fax_view.xml',

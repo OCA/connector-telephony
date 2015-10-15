@@ -25,8 +25,8 @@ import logging
 _logger = logging.getLogger(__name__)
 
 
-class FaxPayloadTransmission(models.Model):
-    _name = 'fax.payload.transmission'
+class FaxTransmission(models.Model):
+    _name = 'fax.transmission'
     _description = 'Fax Transmission Record'
     _inherit = ['phone.common']
     _phone_fields = ['remote_fax', 'local_fax']
@@ -99,16 +99,16 @@ class FaxPayloadTransmission(models.Model):
     @api.model
     def create(self, vals):
         vals['ref'] = self.env['ir.sequence'].next_by_code(
-            'fax.payload.transmission'
+            'fax.transmission'
         )
         vals_reformatted = self._generic_reformat_phonenumbers(vals)
         _logger.debug('Reformatted for new: %s', vals_reformatted)
-        return super(FaxPayloadTransmission, self).create(vals_reformatted)
+        return super(FaxTransmission, self).create(vals_reformatted)
 
     @api.one
     def write(self, vals):
         vals_reformatted = self._generic_reformat_phonenumbers(vals)
-        super(FaxPayloadTransmission, self).write(vals_reformatted)
+        super(FaxTransmission, self).write(vals_reformatted)
 
     @api.one
     def action_transmit(self, ):

@@ -9,9 +9,9 @@
 <openerp>
     <data>
         
-        <record id="fax_payload_transmission_form" model="ir.ui.view">
+        <record id="fax_transmission_form" model="ir.ui.view">
             <field name="name">Transmission</field>
-            <field name="model">fax.payload.transmission</field>
+            <field name="model">fax.transmission</field>
             <field name="arch" type="xml">
                 <form string="Fax Transmission">
                     <header>
@@ -37,9 +37,9 @@
             </field>
         </record>
         
-        <record id="fax_payload_transmission_tree" model="ir.ui.view">
+        <record id="fax_transmission_tree" model="ir.ui.view">
             <field name="name">Transmissions</field>
-            <field name="model">fax.payload.transmission</field>
+            <field name="model">fax.transmission</field>
             <field name="arch" type="xml">
                 <tree string="Fax Transmissions">
                     <field name="ref"/>
@@ -49,9 +49,9 @@
             </field>
         </record>
         
-        <record id="fax_payload_transmission_action" model="ir.actions.act_window">
+        <record id="fax_transmission_action" model="ir.actions.act_window">
             <field name="name">Transmissions</field>
-            <field name="res_model">fax.payload.transmission</field>
+            <field name="res_model">fax.transmission</field>
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
         </record>

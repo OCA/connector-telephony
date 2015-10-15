@@ -18,8 +18,8 @@
         <menuitem name="Payloads" id="fax_payload_menu" parent="base_fax.fax_menu_main"
                   action="fax_payload_action" sequence="20"/>
         
-        <menuitem name="Transmissions" id="fax_payload_transmission_menu" parent="base_fax.fax_menu_main"
-                  action="fax_payload_transmission_action" sequence="30"/>
+        <menuitem name="Transmissions" id="fax_transmission_menu" parent="base_fax.fax_menu_main"
+                  action="fax_transmission_action" sequence="30"/>
         
     </data>
 </openerp>

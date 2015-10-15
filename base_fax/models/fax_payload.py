@@ -50,10 +50,10 @@ class FaxPayload(models.Model):
         help='Store image as this format',
     )
     # receipt_transmission_id = fields.One2many(
-    #     'fax.payload.transmission',
+    #     'fax.transmission',
     # )
     transmission_ids = fields.Many2many(
-        'fax.payload.transmission',
+        'fax.transmission',
         inverse_name='payload_ids',
     )
     ref = fields.Char(
@@ -66,7 +66,7 @@ class FaxPayload(models.Model):
         Sends fax using specified adapter
         :param  adapter_id: fax.adapter to use
         :param  fax_number: str Number to fax to
-        :return fax.payload.transmission: Representing fax transmission
+        :return fax.transmission: Representing fax transmission
         '''
         return adapter_id._send(fax_number, self)
 

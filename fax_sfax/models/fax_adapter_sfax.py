@@ -198,7 +198,7 @@ class FaxAdapterSfax(models.Model):
         :param  dialable: str Number to fax to (convert_to_dial_number)
         :param  payload_ids: fax.payload record(s) To Send
         :param  send_name: str Name of person to send to
-        :return vals: dict To create a fax.payload.transmission
+        :return vals: dict To create a fax.transmission
         '''
         self.ensure_one()
         images = []
@@ -239,7 +239,7 @@ class FaxAdapterSfax(models.Model):
     def _fetch_payloads(self, transmission_ids):
         '''
         Fetches payload for transmission_ids from API
-        :param  transmission_ids: fax.payload.transmissions To fetch for
+        :param  transmission_ids: fax.transmissions To fetch for
         '''
         for transmission_id in transmission_ids:
     

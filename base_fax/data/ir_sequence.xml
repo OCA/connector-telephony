@@ -20,13 +20,13 @@
             <field name="padding">4</field>
         </record>
         
-        <record id="ir_sequence_type_fax_payload_transmission" model="ir.sequence.type">
+        <record id="ir_sequence_type_fax_transmission" model="ir.sequence.type">
             <field name="name">Fax Payload Transmission</field>
-            <field name="code">fax.payload.transmission</field>
+            <field name="code">fax.transmission</field>
         </record>
-        <record id="ir_sequence_type_fax_payload_transmission" model="ir.sequence">
+        <record id="ir_sequence_type_fax_transmission" model="ir.sequence">
             <field name="name">Fax Payload Transmission</field>
-            <field name="code">fax.payload.transmission</field>
+            <field name="code">fax.transmission</field>
             <field name="prefix">FXT</field>
             <field name="padding">5</field>
         </record>
