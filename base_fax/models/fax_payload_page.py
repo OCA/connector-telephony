@@ -18,8 +18,25 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from . import fax_adapter
-from . import fax_payload
-from . import fax_payload_page
-from . import fax_transmission
-from . import res_company
+from openerp import models, fields, api
+from PIL import Image, ImageSequence
+from io import BytesIO
+
+
+class FaxPayloadPage(models.Model):
+    _name = 'fax.payload.page'
+    _description = 'Fax Payload Page'
+
+    name = fields.Char(
+        help='Name of image'
+    )
+    image = fields.Binary(
+        string='Fax Image',
+        attachment=True,
+        # readonly=True,
+        required=True,
+    )
+    payload_id = fields.Many2one(
+        'fax.payload',
+        inverse_name='page_ids',
+    )

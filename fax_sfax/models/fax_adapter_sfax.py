@@ -190,7 +190,7 @@ class FaxAdapterSfax(models.Model):
             return resp.content
         except ValueError:
             return False
-    
+
     @api.multi
     def _send(self, dialable, payload_ids, send_name=False, ):
         '''
@@ -235,6 +235,12 @@ class FaxAdapterSfax(models.Model):
         }
         return vals
 
+    @api.model
+    def _debug_fetch_all_payloads(self, ):
+        ''' This shouldn't be needed past module creation   '''
+        transmission_ids = self.env['fax.transmission'].search([])
+        self.search([])._fetch_payloads(transmission_ids)
+
     @api.one
     def _fetch_payloads(self, transmission_ids):
         '''
@@ -242,7 +248,7 @@ class FaxAdapterSfax(models.Model):
         :param  transmission_ids: fax.transmissions To fetch for
         '''
         for transmission_id in transmission_ids:
-    
+
             if transmission_id.direction == 'out':
                 to = transmission_id.remote_fax
                 frm = transmission_id.local_fax
@@ -251,14 +257,12 @@ class FaxAdapterSfax(models.Model):
                 to = transmission_id.local_fax
                 frm = transmission_id.remote_fax
                 api_direction = 'inbound'
-    
+
             pdf_data = self.__call_api(
                 'Download%(dir)sFaxAsTif' % {'dir': api_direction},
                 {'FaxID': transmission_id.response_num},
                 json=False
             ).encode('base64')
-            with open('/tmp/sfax', 'wb') as fh:
-                fh.write(pdf_data)
 
             name = '[%(id)s] %(to)s => %(from)s' % {
                 'id': transmission_id.response_num,

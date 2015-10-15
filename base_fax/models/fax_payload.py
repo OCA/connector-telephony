@@ -19,7 +19,7 @@
 #
 ##############################################################################
 from openerp import models, fields, api
-from PIL import Image
+from PIL import Image, ImageSequence
 from io import BytesIO
 
 
@@ -28,13 +28,7 @@ class FaxPayload(models.Model):
     _description = 'Fax Data Payload'
 
     name = fields.Char(
-        help='Name of image'
-    )
-    image = fields.Binary(
-        string='Fax Image',
-        attachment=True,
-        #readonly=True,
-        required=True,
+        help='Name of payload'
     )
     image_type = fields.Selection(
         [
@@ -49,12 +43,13 @@ class FaxPayload(models.Model):
         string='Image Format',
         help='Store image as this format',
     )
-    # receipt_transmission_id = fields.One2many(
-    #     'fax.transmission',
-    # )
     transmission_ids = fields.Many2many(
         'fax.transmission',
         inverse_name='payload_ids',
+    )
+    page_ids = fields.One2many(
+        'fax.payload.page',
+        inverse_name='payload_id',
     )
     ref = fields.Char(
         readonly=True,
@@ -72,10 +67,21 @@ class FaxPayload(models.Model):
 
     @api.model
     def create(self, vals, ):
+        '''
+        Override Create method, inject a sequence ref and pages using `image`
+        :param  vals['image']: str Raw image data, will convert to page_ids
+        '''
         if vals.get('image'):
-            vals['image'] = self._convert_image(
+            images = self._convert_image(
                 vals['image'], vals['image_type']
             )
+            vals['page_ids'] = []
+            for idx, img in enumerate(images):
+                vals['page_ids'].append((0, 0, {
+                    'name': '%02d.png' % idx,
+                    'image': img,
+                }))
+            del vals['image'] # < The warning was killing my OCD
         vals['ref'] = self.env['ir.sequence'].next_by_code(
             'fax.payload'
         )
@@ -83,15 +89,27 @@ class FaxPayload(models.Model):
 
     @api.one
     def write(self, vals, ):
+        '''
+        Override write to allow for image type conversions and page appends
+        :param  vals['image_type']: str Will convert existing pages if needed
+        :param  vals['image']: str Raw image data, will add as page_ids
+        '''
+        if vals.get('image_type'):
+            if self.image_type != vals['image_type']:
+                for img in self.page_ids:
+                    img.image = self._convert_image(
+                        img['image'], vals['image_type']
+                    )
         if vals.get('image'):
+            vals['page_ids'] = []
             image_type = vals.get('image_type') or self.image_type
-            vals['image'] = self._convert_image(
-                vals['image'], image_type
-            )
-        elif vals.get('image_type'):
-            vals['image'] = self._convert_image(
-                self.image, image_type
-            )
+            images = self._convert_image(vals['image'], image_type)
+            for idx, img in enumerate(images):
+                vals['page_ids'].append((0, 0, {
+                    'name': '%02d.png' % idx,
+                    'image': img,
+                }))
+            del vals['image'] # < The warning was killing my OCD
         super(FaxPayload, self).write(vals)
 
     def _convert_image(self, image, image_type, b64_out=True, b64_in=True):
@@ -101,20 +119,20 @@ class FaxPayload(models.Model):
         :param  image_type: str
         :param  b64_out: bool
         :param  b64_in: bool
+        :return images: list Of raw image data (pages)
         '''
         binary = image.decode('base64') if b64_in else image
         with BytesIO(binary) as raw_image:
             image = Image.open(raw_image)
-            with BytesIO() as new_raw:
-
-                # prevent IOError: PIL doesn't support alpha for some formats
-                if image_type in ['BMP', 'PDF']:
-                    if len(image.split()) == 4:
-                        r, g, b, a = image.split()
-                        image = Image.merge("RGB", (r, g, b))
-                
-                image.save(new_raw, image_type)
-                val = new_raw.getvalue()
-                if b64_out:
-                    val = val.encode('base64')
-                return val
+            # prevent IOError: PIL doesn't support alpha for some formats
+            if image_type in ['BMP', 'PDF']:
+                if len(image.split()) == 4:
+                    r, g, b, a = image.split()
+                    image = Image.merge("RGB", (r, g, b))
+            for frame in ImageSequence.Iterator(image):
+                with BytesIO() as raw:
+                    frame.save(raw, image_type)
+                    val = raw.getvalue()
+                    if b64_out:
+                        val = val.encode('base64')
+                    yield val

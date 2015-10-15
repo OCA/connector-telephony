@@ -19,7 +19,7 @@
             <field name="prefix">FXP</field>
             <field name="padding">4</field>
         </record>
-        
+
         <record id="ir_sequence_type_fax_transmission" model="ir.sequence.type">
             <field name="name">Fax Payload Transmission</field>
             <field name="code">fax.transmission</field>
