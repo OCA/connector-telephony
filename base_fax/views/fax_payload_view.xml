@@ -22,8 +22,38 @@
                             <field name="image_type"/>
                             <field name="name"/>
                             <field name="transmission_ids" readonly="True"/>
-                            <field name="page_ids"/>
                         </group>
+                        <notebook colspan="4">
+                            <page string="Pages" autofocus="autofocus">
+                                <field name="page_ids" mode="kanban">
+                                    <kanban>
+                                        <field name="name"/>
+                                        <field name="image" widget="image"/>
+                                        <templates>
+                                            <t t-name="kanban-box">
+                                                <div t-attf-class="oe_kanban_global_click">
+                                                    <a t-if="!read_only_mode" type="delete" class="fa fa-times pull-right"/>
+                                                    <div class="o_kanban_image">
+                                                        <img t-att-src="kanban_image('fax.payload.page', 'image_small', record.image.raw_value)"/>
+                                                    </div>
+                                                    <div class="oe_kanban_details">
+                                                        <field name="name"/>
+                                                    </div>
+                                                </div>
+                                            </t>
+                                        </templates>
+                                    </kanban>
+                                    <form string="Page">
+                                        <sheet>
+                                            <group>
+                                                <field name="name"/>
+                                                <field name="image"/>
+                                            </group>
+                                        </sheet>
+                                    </form>
+                                </field>
+                            </page>
+                        </notebook>
                     </sheet>
                 </form>
             </field>
