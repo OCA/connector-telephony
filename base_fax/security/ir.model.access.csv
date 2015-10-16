@@ -1,6 +1,6 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_fax_base_user,fax.base.user,base_fax.model_fax_base,group_fax_user,1,0,0,0
-access_fax_base_admin,fax.base.admin,base_fax.model_fax_base,group_fax_admin,1,1,1,1
+access_fax_base_user,fax.base.user,base_fax.model_fax_adapter,group_fax_user,1,0,0,0
+access_fax_base_admin,fax.base.admin,base_fax.model_fax_adapter,group_fax_admin,1,1,1,1
 access_fax_payload_user,fax.payload.user,base_fax.model_fax_payload,group_fax_user,1,0,0,0
 access_fax_payload_admin,fax.payload.admin,base_fax.model_fax_payload,group_fax_admin,1,1,1,1
 access_fax_payload_transmission_user,fax.transmission.user,base_fax.model_fax_transmission,group_fax_user,1,0,0,0
