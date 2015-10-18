@@ -3,33 +3,32 @@
 # * base_phone_popup
 # 
 # Translators:
-# Matjaž Mozetič <m.mozetic@matmoz.si>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: connector-telephony (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-10-14 02:09+0000\n"
-"PO-Revision-Date: 2015-10-13 05:02+0000\n"
-"Last-Translator: Matjaž Mozetič <m.mozetic@matmoz.si>\n"
-"Language-Team: Slovenian (http://www.transifex.com/oca/OCA-connector-telephony-8-0/language/sl/)\n"
+"PO-Revision-Date: 2015-10-12 18:36+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
+"Language-Team: English (http://www.transifex.com/oca/OCA-connector-telephony-8-0/language/en/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: sl\n"
-"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);\n"
+"Language: en\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: base_phone_popup
 #: code:addons/base_phone_popup/popup.py:49
 #, python-format
 msgid "Number Not Found"
-msgstr "Številka ni najdena"
+msgstr "Number Not Found"
 
 #. module: base_phone_popup
 #: field:res.users,context_incall_popup:0
 msgid "Pop-up on Incoming Calls"
-msgstr "Pojavno okno ob prejemu klicev"
+msgstr "Pop-up on Incoming Calls"
 
 #. module: base_phone_popup
 #: model:ir.model,name:base_phone_popup.model_res_users
 msgid "Users"
-msgstr "Uporabniki"
+msgstr "Users"

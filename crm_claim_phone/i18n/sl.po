@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# * base_phone_popup
+# * crm_claim_phone
 # 
 # Translators:
 # Matjaž Mozetič <m.mozetic@matmoz.si>, 2015
@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: connector-telephony (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-10-14 02:09+0000\n"
-"PO-Revision-Date: 2015-10-13 05:02+0000\n"
+"PO-Revision-Date: 2015-10-13 05:04+0000\n"
 "Last-Translator: Matjaž Mozetič <m.mozetic@matmoz.si>\n"
 "Language-Team: Slovenian (http://www.transifex.com/oca/OCA-connector-telephony-8-0/language/sl/)\n"
 "MIME-Version: 1.0\n"
@@ -18,18 +18,12 @@ msgstr ""
 "Language: sl\n"
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);\n"
 
-#. module: base_phone_popup
-#: code:addons/base_phone_popup/popup.py:49
-#, python-format
-msgid "Number Not Found"
-msgstr "Številka ni najdena"
+#. module: crm_claim_phone
+#: model:ir.model,name:crm_claim_phone.model_crm_claim
+msgid "Claim"
+msgstr "Zahtevek"
 
-#. module: base_phone_popup
-#: field:res.users,context_incall_popup:0
-msgid "Pop-up on Incoming Calls"
-msgstr "Pojavno okno ob prejemu klicev"
-
-#. module: base_phone_popup
-#: model:ir.model,name:base_phone_popup.model_res_users
-msgid "Users"
-msgstr "Uporabniki"
+#. module: crm_claim_phone
+#: view:crm.claim:crm_claim_phone.crm_case_claims_form_view
+msgid "phone"
+msgstr "telefon"

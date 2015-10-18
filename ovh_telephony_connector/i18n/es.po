@@ -1,0 +1,92 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * ovh_telephony_connector
+# 
+# Translators:
+# Enrique Zanardi <ezanardi@atlantux.com>, 2015
+msgid ""
+msgstr ""
+"Project-Id-Version: connector-telephony (8.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-10-14 02:09+0000\n"
+"PO-Revision-Date: 2015-10-14 11:36+0000\n"
+"Last-Translator: Enrique Zanardi <ezanardi@atlantux.com>\n"
+"Language-Team: Spanish (http://www.transifex.com/oca/OCA-connector-telephony-8-0/language/es/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: es\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: ovh_telephony_connector
+#: code:addons/ovh_telephony_connector/ovh_connector.py:99
+#, python-format
+msgid ""
+"Click to call to OVH failed.\n"
+"Here is the error: '%s'"
+msgstr ""
+
+#. module: ovh_telephony_connector
+#: code:addons/ovh_telephony_connector/ovh_connector.py:60
+#, python-format
+msgid "Missing OVH Billing Number on user %s"
+msgstr "Falta número OVH a facturar en el usuario %s"
+
+#. module: ovh_telephony_connector
+#: code:addons/ovh_telephony_connector/ovh_connector.py:64
+#, python-format
+msgid "Missing OVH Calling Number on user %s"
+msgstr ""
+
+#. module: ovh_telephony_connector
+#: code:addons/ovh_telephony_connector/ovh_connector.py:68
+#, python-format
+msgid "Missing OVH Click2call Login on user %s"
+msgstr "Falta usuario para Click2call OVH en el usuario %s"
+
+#. module: ovh_telephony_connector
+#: code:addons/ovh_telephony_connector/ovh_connector.py:72
+#, python-format
+msgid "Missing OVH Click2dial Password on user %s"
+msgstr "Falta contraseña para Click2call OVH en el usuario %s"
+
+#. module: ovh_telephony_connector
+#: code:addons/ovh_telephony_connector/ovh_connector.py:55
+#, python-format
+msgid "Missing phone number"
+msgstr "Falta el número de teléfono"
+
+#. module: ovh_telephony_connector
+#: field:res.users,ovh_billing_number:0
+msgid "OVH Billing Number"
+msgstr "Número OVH a facturar"
+
+#. module: ovh_telephony_connector
+#: field:res.users,ovh_calling_number:0
+msgid "OVH Calling Number"
+msgstr ""
+
+#. module: ovh_telephony_connector
+#: field:res.users,ovh_click2call_login:0
+msgid "OVH Click2call Login"
+msgstr "Usuario para Click2call OVH"
+
+#. module: ovh_telephony_connector
+#: field:res.users,ovh_click2call_password:0
+msgid "OVH Click2call Password"
+msgstr "Contraseña para Click2call OVH"
+
+#. module: ovh_telephony_connector
+#: view:res.users:ovh_telephony_connector.view_users_form
+msgid "OVH Parameters"
+msgstr "Parámetros OVH"
+
+#. module: ovh_telephony_connector
+#: help:res.users,ovh_calling_number:0
+msgid "The phone number that will be presented during a click2dial"
+msgstr "Número de teléfono que se presentará durante un 'click2dial'"
+
+#. module: ovh_telephony_connector
+#: model:ir.model,name:ovh_telephony_connector.model_res_users
+msgid "Users"
+msgstr "Usuarios"

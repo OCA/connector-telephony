@@ -1,38 +1,69 @@
-# Translation of OpenERP Server.
+# Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* crm_phone
-#
-# Matjaž Mozetič <m.mozetic@matmoz.si>, 2015.
+# * crm_phone
+# 
+# Translators:
+# Matjaž Mozetič <m.mozetic@matmoz.si>, 2015
 msgid ""
 msgstr ""
-"Project-Id-Version: OpenERP Server 7.0\n"
+"Project-Id-Version: connector-telephony (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-25 21:38+0000\n"
-"PO-Revision-Date: 2015-04-05 09:26+0200\n"
+"POT-Creation-Date: 2015-10-14 02:09+0000\n"
+"PO-Revision-Date: 2015-10-13 05:04+0000\n"
 "Last-Translator: Matjaž Mozetič <m.mozetic@matmoz.si>\n"
-"Language-Team: Slovenian <translate@matmoz.si>\n"
+"Language-Team: Slovenian (http://www.transifex.com/oca/OCA-connector-telephony-8-0/language/sl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: \n"
 "Language: sl\n"
-"X-Generator: Lokalize 1.5\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);\n"
 
 #. module: crm_phone
-#: view:number.not.found:0
+#: view:wizard.create.crm.phonecall:crm_phone.create_crm_phonecall_view
+msgid "CRM phone call"
+msgstr "CRM telefonski klic"
+
+#. module: crm_phone
+#: model:ir.actions.act_window,name:crm_phone.action_create_crm_phonecall
+msgid "Create CRM phonecall"
+msgstr "Ustvari CRM telefonski klic"
+
+#. module: crm_phone
+#: code:addons/crm_phone/crm_phone.py:111
+#, python-format
+msgid "Create Call in CRM"
+msgstr "Ustvari klic v CRM"
+
+#. module: crm_phone
+#: view:number.not.found:crm_phone.number_not_found_form
 msgid "Create Lead with this Number"
 msgstr "Ustvari indic s to številko"
 
 #. module: crm_phone
-#: code:addons/crm_phone/wizard/number_not_found.py:50
+#: code:addons/crm_phone/wizard/number_not_found.py:49
 #, python-format
 msgid "Create New Lead"
 msgstr "Ustvari nov indic"
 
 #. module: crm_phone
-#: view:number.not.found:0
+#: view:wizard.create.crm.phonecall:crm_phone.create_crm_phonecall_view
+msgid "Create a phone call in the CRM ?"
+msgstr "Naj ustvarim klic v CRM?"
+
+#. module: crm_phone
+#: view:number.not.found:crm_phone.number_not_found_form
 msgid "Create or Update a Lead"
 msgstr "Ustvari ali posodobi indic"
+
+#. module: crm_phone
+#: field:wizard.create.crm.phonecall,create_uid:0
+msgid "Created by"
+msgstr "Ustvaril"
+
+#. module: crm_phone
+#: field:wizard.create.crm.phonecall,create_date:0
+msgid "Created on"
+msgstr "Ustvarjeno"
 
 #. module: crm_phone
 #: field:number.not.found,current_lead_mobile:0
@@ -45,10 +76,25 @@ msgid "Current Phone"
 msgstr "Trenutna telefonska številka"
 
 #. module: crm_phone
-#: code:addons/crm_phone/wizard/number_not_found.py:70
+#: code:addons/crm_phone/wizard/number_not_found.py:69
 #, python-format
 msgid "Error:"
 msgstr "Napaka:"
+
+#. module: crm_phone
+#: field:wizard.create.crm.phonecall,id:0
+msgid "ID"
+msgstr "ID"
+
+#. module: crm_phone
+#: field:wizard.create.crm.phonecall,write_uid:0
+msgid "Last Updated by"
+msgstr "Zadnji posodobil"
+
+#. module: crm_phone
+#: field:wizard.create.crm.phonecall,write_date:0
+msgid "Last Updated on"
+msgstr "Zadnjič posodobljeno"
 
 #. module: crm_phone
 #: help:number.not.found,to_update_lead_id:0
@@ -66,7 +112,7 @@ msgid "Lead/Opportunity"
 msgstr "Indic / priložnost"
 
 #. module: crm_phone
-#: code:addons/crm_phone/wizard/number_not_found.py:76
+#: code:addons/crm_phone/wizard/number_not_found.py:75
 #, python-format
 msgid "Lead: %s"
 msgstr "Indic: %s"
@@ -77,40 +123,53 @@ msgid "Number not found"
 msgstr "Številka ni najdena"
 
 #. module: crm_phone
+#: code:addons/crm_phone/wizard/create_crm_phonecall.py:65
+#, python-format
+msgid "Phone Call"
+msgstr "Telefonski klic"
+
+#. module: crm_phone
 #: model:ir.model,name:crm_phone.model_crm_phonecall
 msgid "Phonecall"
 msgstr "Telefonski klic"
 
 #. module: crm_phone
-#: code:addons/crm_phone/wizard/number_not_found.py:71
+#: field:res.users,context_propose_creation_crm_call:0
+msgid "Propose to create a call in CRM after a click2dial"
+msgstr "Predlagaj ustvarjanje klica v CRM po click2dial"
+
+#. module: crm_phone
+#: code:addons/crm_phone/wizard/number_not_found.py:70
 #, python-format
 msgid "Select the Lead to Update."
 msgstr "Izbira indica za posodobitev"
 
 #. module: crm_phone
-#: sql_constraint:crm.lead:0
-msgid "The probability of closing the deal should be between 0% and 100%!"
-msgstr "Verjetnost sklenitve posla mora biti med 0% in 100%!"
-
-#. module: crm_phone
-#: view:number.not.found:0
+#: view:number.not.found:crm_phone.number_not_found_form
 msgid "Update Lead with this Number"
 msgstr "Posodobitev indica s to številko"
 
 #. module: crm_phone
-#: view:crm.lead:0
+#: model:ir.model,name:crm_phone.model_res_users
+msgid "Users"
+msgstr "Uporabniki"
+
+#. module: crm_phone
+#: view:wizard.create.crm.phonecall:crm_phone.create_crm_phonecall_view
+msgid "Yes"
+msgstr "Da"
+
+#. module: crm_phone
+#: view:crm.lead:crm_phone.crm_case_form_view_leads
+#: view:crm.lead:crm_phone.crm_case_form_view_oppor
 msgid "fax"
 msgstr "faks"
 
 #. module: crm_phone
-#: view:crm.lead:0
-#: view:crm.phonecall:0
+#: view:crm.lead:crm_phone.crm_case_form_view_leads
+#: view:crm.lead:crm_phone.crm_case_form_view_oppor
+#: view:crm.lead:crm_phone.crm_case_tree_view_leads
+#: view:crm.phonecall:crm_phone.crm_case_phone_form_view
+#: view:crm.phonecall:crm_phone.crm_case_phone_tree_view
 msgid "phone"
 msgstr "telefon"
-
-#. module: crm_phone
-#: model:ir.model,name:crm_phone.model_phone_common
-msgid "phone.common"
-msgstr "phone.common"
-
-

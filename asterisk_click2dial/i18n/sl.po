@@ -3,77 +3,77 @@
 # * asterisk_click2dial
 # 
 # Translators:
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2012
+# Matjaž Mozetič <m.mozetic@matmoz.si>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: connector-telephony (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-10-14 02:09+0000\n"
-"PO-Revision-Date: 2015-10-12 18:36+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
-"Language-Team: Portuguese (Brazil) (http://www.transifex.com/oca/OCA-connector-telephony-8-0/language/pt_BR/)\n"
+"PO-Revision-Date: 2015-10-13 05:41+0000\n"
+"Last-Translator: Matjaž Mozetič <m.mozetic@matmoz.si>\n"
+"Language-Team: Slovenian (http://www.transifex.com/oca/OCA-connector-telephony-8-0/language/sl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: pt_BR\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Language: sl\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);\n"
 
 #. module: asterisk_click2dial
 #: field:asterisk.server,login:0
 msgid "AMI Login"
-msgstr ""
+msgstr "AMI prijava"
 
 #. module: asterisk_click2dial
 #: field:asterisk.server,password:0
 msgid "AMI Password"
-msgstr ""
+msgstr "AMI geslo"
 
 #. module: asterisk_click2dial
 #: field:asterisk.server,active:0
 msgid "Active"
-msgstr ""
+msgstr "Aktivno"
 
 #. module: asterisk_click2dial
 #: field:asterisk.server,alert_info:0
 msgid "Alert-Info SIP Header"
-msgstr ""
+msgstr "Alert-Info SIP glava"
 
 #. module: asterisk_click2dial
 #: help:asterisk.server,wait_time:0
 msgid ""
 "Amount of time (in seconds) Asterisk will try to reach the user's phone "
 "before hanging up."
-msgstr ""
+msgstr "Količina časa (v sekundah), ko bo Asterisk poskušal klicati uporabnikov račun preden odloži."
 
 #. module: asterisk_click2dial
 #: field:res.users,asterisk_chan_type:0
 msgid "Asterisk Channel Type"
-msgstr ""
+msgstr "Tip Asterisk kanala"
 
 #. module: asterisk_click2dial
 #: field:asterisk.server,ip_address:0
 msgid "Asterisk IP address or DNS"
-msgstr ""
+msgstr "Asterisk IP naslov ali DNS"
 
 #. module: asterisk_click2dial
 #: view:asterisk.server:asterisk_click2dial.view_asterisk_server_form
 msgid "Asterisk Manager Interface"
-msgstr ""
+msgstr "Vmesnik upravitelja Asterisk"
 
 #. module: asterisk_click2dial
 #: field:res.users,asterisk_server_id:0
 msgid "Asterisk Server"
-msgstr ""
+msgstr "Asterisk strežnik"
 
 #. module: asterisk_click2dial
 #: field:asterisk.server,name:0
 msgid "Asterisk Server Name"
-msgstr ""
+msgstr "Naziv Asterisk strežnika"
 
 #. module: asterisk_click2dial
 #: view:asterisk.server:asterisk_click2dial.view_asterisk_server_search
 msgid "Asterisk Server Search"
-msgstr ""
+msgstr "Iskanje Asterisk strežnika"
 
 #. module: asterisk_click2dial
 #: view:asterisk.server:asterisk_click2dial.view_asterisk_server_form
@@ -82,50 +82,50 @@ msgstr ""
 #: model:ir.model,name:asterisk_click2dial.model_asterisk_server
 #: model:ir.ui.menu,name:asterisk_click2dial.act_menu_ast_server
 msgid "Asterisk Servers"
-msgstr "Servidores Asterisk"
+msgstr "Asterisk strežniki"
 
 #. module: asterisk_click2dial
 #: help:res.users,asterisk_chan_type:0
 msgid ""
 "Asterisk channel type, as used in the Asterisk dialplan. If the user has a "
 "regular IP phone, the channel type is 'SIP'."
-msgstr ""
+msgstr "Tip Asterisk kanala, ki se uporablja v Asterisk načrtu klicanja. Če uporabnik nima običajnega IP telefona, je kanal tipa 'SIP'."
 
 #. module: asterisk_click2dial
 #: help:asterisk.server,context:0
 msgid ""
 "Asterisk dialplan context from which the calls will be made. Refer to "
 "/etc/asterisk/extensions.conf on your Asterisk server."
-msgstr ""
+msgstr "Kontekst Asterisk načrta klicanja, iz katerega se izvajajo klici. Sklicujte se na /etc/asterisk/extensions.conf na Asterisk strežniku."
 
 #. module: asterisk_click2dial
 #: help:res.users,asterisk_server_id:0
 msgid ""
 "Asterisk server on which the user's phone is connected. If you leave this "
 "field empty, it will use the first Asterisk server of the user's company."
-msgstr ""
+msgstr "Asterisk strežnik, na katerega je priklopljen uporabnikov telefon. Če pustite to polje prazno, bo uporabljen prvi Asterisk strežnik pod družbo uporabnika."
 
 #. module: asterisk_click2dial
 #: field:res.users,cdraccount:0
 msgid "CDR Account"
-msgstr ""
+msgstr "CDR račun"
 
 #. module: asterisk_click2dial
 #: help:res.users,cdraccount:0
 msgid "Call Detail Record (CDR) account used for billing this user."
-msgstr ""
+msgstr "Call Detail Record (CDR) račun uporabljen pri obračunu za tega uporabnika."
 
 #. module: asterisk_click2dial
 #: code:addons/asterisk_click2dial/asterisk_click2dial.py:374
 #: field:res.users,callerid:0
 #, python-format
 msgid "Caller ID"
-msgstr "Identificação da Chamada"
+msgstr "ID klicatelja"
 
 #. module: asterisk_click2dial
 #: help:res.users,callerid:0
 msgid "Caller ID used for the calls initiated by this user."
-msgstr "ID de Chamada utilizado para as chamadas iniciadas por esse usuário."
+msgstr "ID klicatelja, ki se uporablja za izhodne klice tega uporabnika."
 
 #. module: asterisk_click2dial
 #: code:addons/asterisk_click2dial/asterisk_click2dial.py:279
@@ -133,7 +133,7 @@ msgstr "ID de Chamada utilizado para as chamadas iniciadas por esse usuário."
 msgid ""
 "Can't get calling number from  Asterisk.\n"
 "Here is the error: '%s'"
-msgstr ""
+msgstr "Ne morem pridobiti klicne številke iz Asterisk.\nNapaka: '%s'"
 
 #. module: asterisk_click2dial
 #: code:addons/asterisk_click2dial/asterisk_click2dial.py:457
@@ -141,39 +141,39 @@ msgstr ""
 msgid ""
 "Click to dial with Asterisk failed.\n"
 "Here is the error: '%s'"
-msgstr ""
+msgstr "Klik za klic z Asterisk ni uspel.\nNapaka: '%s'"
 
 #. module: asterisk_click2dial
 #: field:asterisk.server,company_id:0
 msgid "Company"
-msgstr "Empresa"
+msgstr "Družba"
 
 #. module: asterisk_click2dial
 #: help:asterisk.server,company_id:0
 msgid "Company who uses the Asterisk server."
-msgstr ""
+msgstr "Družba, ki uporablja Asterisk strežnik."
 
 #. module: asterisk_click2dial
 #: code:addons/asterisk_click2dial/asterisk_click2dial.py:227
 #, python-format
 msgid "Connection Test Failed!"
-msgstr ""
+msgstr "Test povezave neuspešen!"
 
 #. module: asterisk_click2dial
 #: code:addons/asterisk_click2dial/asterisk_click2dial.py:233
 #, python-format
 msgid "Connection Test Successfull!"
-msgstr ""
+msgstr "Test povezave uspešen!"
 
 #. module: asterisk_click2dial
 #: field:asterisk.server,create_uid:0
 msgid "Created by"
-msgstr ""
+msgstr "Ustvaril"
 
 #. module: asterisk_click2dial
 #: field:asterisk.server,create_date:0
 msgid "Created on"
-msgstr ""
+msgstr "Ustvarjeno"
 
 #. module: asterisk_click2dial
 #: selection:res.users,asterisk_chan_type:0
@@ -183,17 +183,17 @@ msgstr "DAHDI"
 #. module: asterisk_click2dial
 #: field:asterisk.server,context:0
 msgid "Dialplan Context"
-msgstr ""
+msgstr "Kontekst načrta klicanja"
 
 #. module: asterisk_click2dial
 #: view:asterisk.server:asterisk_click2dial.view_asterisk_server_form
 msgid "Dialplan Parameters"
-msgstr ""
+msgstr "Parametri načrta klicanja"
 
 #. module: asterisk_click2dial
 #: constraint:asterisk.server:0 constraint:res.users:0
 msgid "Error message in raise"
-msgstr ""
+msgstr "Sproženo sporočilo o napaki"
 
 #. module: asterisk_click2dial
 #: code:addons/asterisk_click2dial/asterisk_click2dial.py:111
@@ -212,30 +212,30 @@ msgstr ""
 #: code:addons/asterisk_click2dial/asterisk_click2dial.py:456
 #, python-format
 msgid "Error:"
-msgstr ""
+msgstr "Napaka:"
 
 #. module: asterisk_click2dial
 #: field:asterisk.server,extension_priority:0
 msgid "Extension Priority"
-msgstr ""
+msgstr "Prioriteta interne številke"
 
 #. module: asterisk_click2dial
 #. openerp-web
 #: code:addons/asterisk_click2dial/static/src/js/asterisk_click2dial.js:26
 #, python-format
 msgid "Failure"
-msgstr ""
+msgstr "Okvara"
 
 #. module: asterisk_click2dial
 #: selection:res.users,asterisk_chan_type:0
 msgid "H323"
-msgstr ""
+msgstr "H323"
 
 #. module: asterisk_click2dial
 #: code:addons/asterisk_click2dial/asterisk_click2dial.py:228
 #, python-format
 msgid "Here is the error message: %s"
-msgstr ""
+msgstr "Sporočilo o napaki: %s"
 
 #. module: asterisk_click2dial
 #: selection:res.users,asterisk_chan_type:0
@@ -245,41 +245,41 @@ msgstr "IAX2"
 #. module: asterisk_click2dial
 #: field:asterisk.server,id:0
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: asterisk_click2dial
 #: help:asterisk.server,ip_address:0
 msgid "IP address or DNS name of the Asterisk server."
-msgstr ""
+msgstr "IP naslov ali DNS naziv Asterisk strežnika."
 
 #. module: asterisk_click2dial
 #: code:addons/asterisk_click2dial/asterisk_click2dial.py:373
 #: field:res.users,internal_number:0
 #, python-format
 msgid "Internal Number"
-msgstr ""
+msgstr "Interna številka"
 
 #. module: asterisk_click2dial
 #: field:asterisk.server,write_uid:0
 msgid "Last Updated by"
-msgstr ""
+msgstr "Zadnji posodobil"
 
 #. module: asterisk_click2dial
 #: field:asterisk.server,write_date:0
 msgid "Last Updated on"
-msgstr ""
+msgstr "Zadnjič posodobljeno"
 
 #. module: asterisk_click2dial
 #: selection:res.users,asterisk_chan_type:0
 msgid "Local"
-msgstr ""
+msgstr "Lokalno"
 
 #. module: asterisk_click2dial
 #: help:asterisk.server,login:0
 msgid ""
 "Login that OpenERP will use to communicate with the Asterisk Manager "
 "Interface. Refer to /etc/asterisk/manager.conf on your Asterisk server."
-msgstr ""
+msgstr "Prijava, ki bo uporabljena za komunikacijo z vmesnikom Asterisk upravitelja. Sklicujte se na /etc/asterisk/manager.conf na Asterisk strežniku."
 
 #. module: asterisk_click2dial
 #: selection:res.users,asterisk_chan_type:0
@@ -290,107 +290,107 @@ msgstr "MGCP"
 #: code:addons/asterisk_click2dial/asterisk_click2dial.py:404
 #, python-format
 msgid "Missing phone number"
-msgstr ""
+msgstr "Manjkajoča telefonska številka"
 
 #. module: asterisk_click2dial
 #. openerp-web
 #: code:addons/asterisk_click2dial/static/src/js/asterisk_click2dial.js:45
 #, python-format
 msgid "Moving to %s ID %d"
-msgstr ""
+msgstr "Preklop na %s ID %d"
 
 #. module: asterisk_click2dial
 #: code:addons/asterisk_click2dial/asterisk_click2dial.py:164
 #, python-format
 msgid "No Asterisk server configured for the company '%s'."
-msgstr ""
+msgstr "Za družbo '%s' ni nastavljenega Asterisk strežnika."
 
 #. module: asterisk_click2dial
 #: code:addons/asterisk_click2dial/asterisk_click2dial.py:421
 #, python-format
 msgid "No callerID configured for the current user"
-msgstr ""
+msgstr "Trenutni uporabnik nima nastavljenega ID klicatelja"
 
 #. module: asterisk_click2dial
 #: code:addons/asterisk_click2dial/asterisk_click2dial.py:185
 #, python-format
 msgid "No channel type configured for the current user."
-msgstr ""
+msgstr "Trenutni uporabnik nima nastavljenega tipa kanala."
 
 #. module: asterisk_click2dial
 #: code:addons/asterisk_click2dial/asterisk_click2dial.py:191
 #, python-format
 msgid "No resource name configured for the current user"
-msgstr ""
+msgstr "Trenutni uporabnik nima nastavljenega naziva vira."
 
 #. module: asterisk_click2dial
 #. openerp-web
 #: code:addons/asterisk_click2dial/static/src/js/asterisk_click2dial.js:31
 #, python-format
 msgid "Number Not Found"
-msgstr ""
+msgstr "Številka ni najdena"
 
 #. module: asterisk_click2dial
 #: code:addons/asterisk_click2dial/asterisk_click2dial.py:234
 #, python-format
 msgid "Odoo can successfully login to the Asterisk Manager Interface."
-msgstr ""
+msgstr "Odoo se lahko uspešno prijavlja v vmesnik Asterisk upravitelja."
 
 #. module: asterisk_click2dial
 #: code:addons/asterisk_click2dial/asterisk_click2dial.py:113
 #, python-format
 msgid "Only use digits for the '%s' on the Asterisk server '%s'"
-msgstr ""
+msgstr "Uporabite le številke za '%s' na Asterisk strežniku '%s'"
 
 #. module: asterisk_click2dial
 #. openerp-web
 #: code:addons/asterisk_click2dial/static/src/xml/asterisk_click2dial.xml:13
 #, python-format
 msgid "Open Caller"
-msgstr ""
+msgstr "Odprti klicatelj"
 
 #. module: asterisk_click2dial
 #: view:res.users:asterisk_click2dial.view_users_form
 msgid "Optional Asterisk Parameters - for experts only, can be left empty"
-msgstr ""
+msgstr "Opcijski Asterisk parametri - le za napredne uporabnike, lahko pustite prazno"
 
 #. module: asterisk_click2dial
 #: field:asterisk.server,out_prefix:0
 msgid "Out Prefix"
-msgstr ""
+msgstr "Izhodna predpona"
 
 #. module: asterisk_click2dial
 #: help:asterisk.server,password:0
 msgid ""
 "Password that OpenERP will use to communicate with the Asterisk Manager "
 "Interface. Refer to /etc/asterisk/manager.conf on your Asterisk server."
-msgstr ""
+msgstr "Geslo, ki bo uporabljeno za komunikacijo z vmesnikom Asterisk upravitelja. Sklicujte se na /etc/asterisk/manager.conf na Asterisk strežniku."
 
 #. module: asterisk_click2dial
 #: field:asterisk.server,port:0
 msgid "Port"
-msgstr ""
+msgstr "Vrata"
 
 #. module: asterisk_click2dial
 #: help:asterisk.server,out_prefix:0
 msgid ""
 "Prefix to dial to make outgoing calls. If you don't use a prefix to make "
 "outgoing calls, leave empty."
-msgstr ""
+msgstr "Predpona za izhodne klice. Če predpone za izhodne klice ne uporabljate, pustite prazno."
 
 #. module: asterisk_click2dial
 #: help:asterisk.server,extension_priority:0
 msgid ""
 "Priority of the extension in the Asterisk dialplan. Refer to "
 "/etc/asterisk/extensions.conf on your Asterisk server."
-msgstr ""
+msgstr "Prioriteta intrne številke Asterisk načrta klicanja. Sklicujte se na /etc/asterisk/extensions.conf na Asterisk strežniku."
 
 #. module: asterisk_click2dial
 #. openerp-web
 #: code:addons/asterisk_click2dial/static/src/js/asterisk_click2dial.js:27
 #, python-format
 msgid "Problem in the connection to Asterisk"
-msgstr ""
+msgstr "Težave pri povezavi z Asterisk"
 
 #. module: asterisk_click2dial
 #: code:addons/asterisk_click2dial/asterisk_click2dial.py:211
@@ -398,14 +398,14 @@ msgstr ""
 msgid ""
 "Problem in the request from OpenERP to Asterisk. Here is the error message: "
 "%s"
-msgstr ""
+msgstr "Težave pri zahtevkih iz OpenERP na Asterisk. Napaka: %s"
 
 #. module: asterisk_click2dial
 #: code:addons/asterisk_click2dial/asterisk_click2dial.py:372
 #: field:res.users,resource:0
 #, python-format
 msgid "Resource Name"
-msgstr ""
+msgstr "Naziv vira"
 
 #. module: asterisk_click2dial
 #: help:res.users,resource:0
@@ -414,12 +414,12 @@ msgid ""
 "'Dial(SIP/phone1)' in your Asterisk dialplan to ring the SIP phone of this "
 "user, then the resource name for this user is 'phone1'.  For a SIP phone, "
 "the phone number is often used as resource name, but not always."
-msgstr ""
+msgstr "Naziv vira za izbrani tip kanala. Če npr. za tega uporabnika uporabljate 'Dial(SIP/phone1)' za klicanje SIP telefonov, bo pri tem uporabniku naziv vira 'phone1'. Za SIP telefone se kot naziv vira pogosto uporablja telefonska številka, a ne vedno."
 
 #. module: asterisk_click2dial
 #: selection:res.users,asterisk_chan_type:0
 msgid "SCCP"
-msgstr ""
+msgstr "SCCP"
 
 #. module: asterisk_click2dial
 #: selection:res.users,asterisk_chan_type:0
@@ -429,7 +429,7 @@ msgstr "SIP"
 #. module: asterisk_click2dial
 #: view:asterisk.server:asterisk_click2dial.view_asterisk_server_form
 msgid "Server Name"
-msgstr ""
+msgstr "Naziv strežnika"
 
 #. module: asterisk_click2dial
 #: help:asterisk.server,alert_info:0
@@ -438,7 +438,7 @@ msgid ""
 "feature. If empty, the Alert-Info header will not be added. You can use it "
 "to have a special ring tone for click2dial (a silent one !) or to activate "
 "auto-answer for example."
-msgstr ""
+msgstr "Nastavitev Alert-info glave za SIP zahteve na IP telefona uporabnika za funkcijo click2dial. Če je prazno, se Alert-info glava ne doda. Uporabite jo lahko npr. za posebna zvonjenja pri click2dial (npr. tiha!) ali aktiviranje telefonskega odzivnika."
 
 #. module: asterisk_click2dial
 #: help:res.users,variable:0
@@ -446,7 +446,7 @@ msgid ""
 "Set a user-specific 'Variable' field in the Asterisk Manager Interface "
 "'originate' request for the click2dial feature. If you want to have several "
 "variable headers, separate them with '|'."
-msgstr ""
+msgstr "Nastavite uporabniško 'variabilno' polje pri 'izvornem' zahtevku vmesnika Asterisk upravitelja za click2dial funkcijo. Če želite imeti več različnih variabilnih glav, jih ločite z '|'."
 
 #. module: asterisk_click2dial
 #: help:res.users,alert_info:0
@@ -455,48 +455,48 @@ msgid ""
 "the click2dial feature. If empty, the Alert-Info header will not be added. "
 "You can use it to have a special ring tone for click2dial (a silent one !) "
 "or to activate auto-answer for example."
-msgstr ""
+msgstr "Nastavitev uporabniške Alert-info glave za SIP zahteve na IP telefona uporabnika za funkcijo click2dial. Če je prazno, se Alert-info glava ne doda. Uporabite jo lahko npr. za posebna zvonjenja pri click2dial (npr. tiha!) ali aktiviranje telefonskega odzivnika."
 
 #. module: asterisk_click2dial
 #: selection:res.users,asterisk_chan_type:0
 msgid "Skinny"
-msgstr "Skinny"
+msgstr "Mršav"
 
 #. module: asterisk_click2dial
 #: view:res.users:asterisk_click2dial.view_users_form
 msgid "Standard Asterisk Parameters"
-msgstr ""
+msgstr "Standardni Asterisk parametri"
 
 #. module: asterisk_click2dial
 #. openerp-web
 #: code:addons/asterisk_click2dial/static/src/js/asterisk_click2dial.js:44
 #, python-format
 msgid "Success"
-msgstr ""
+msgstr "Uspeh"
 
 #. module: asterisk_click2dial
 #: help:asterisk.server,port:0
 msgid ""
 "TCP port on which the Asterisk Manager Interface listens. Defined in "
 "/etc/asterisk/manager.conf on Asterisk."
-msgstr ""
+msgstr "TCP vrata, na katerih vmesnik Asterisk upravitelja posluša. Določeno je v /etc/asterisk/manager.conf na Asterisk strežniku."
 
 #. module: asterisk_click2dial
 #: view:asterisk.server:asterisk_click2dial.view_asterisk_server_form
 msgid "Test Connection to Asterisk"
-msgstr ""
+msgstr "Test povezave z Asterisk"
 
 #. module: asterisk_click2dial
 #: code:addons/asterisk_click2dial/asterisk_click2dial.py:383
 #, python-format
 msgid "The '%s' for the user '%s' should only have ASCII caracters"
-msgstr ""
+msgstr "'%s' za uporabnika '%s' bi moral vsebovati le ASCII znake"
 
 #. module: asterisk_click2dial
 #: code:addons/asterisk_click2dial/asterisk_click2dial.py:138
 #, python-format
 msgid "The '%s' should only have ASCII caracters for the Asterisk server '%s'"
-msgstr ""
+msgstr "'%s' bi moral vsebovati ASCII znake za Asterisk strežnik '%s'"
 
 #. module: asterisk_click2dial
 #: code:addons/asterisk_click2dial/asterisk_click2dial.py:122
@@ -504,48 +504,48 @@ msgstr ""
 msgid ""
 "The 'extension priority' must be a positive value for the Asterisk server "
 "'%s'"
-msgstr ""
+msgstr "Za Asterisk strežnik '%s' mora 'prioriteta interne številke' biti pozitivna vrednost"
 
 #. module: asterisk_click2dial
 #: help:asterisk.server,active:0
 msgid ""
 "The active field allows you to hide the Asterisk server without deleting it."
-msgstr ""
+msgstr "Polje aktivno omogoča skrivanje Asterisk strežnika, ne da bi ga brisali."
 
 #. module: asterisk_click2dial
 #: help:res.users,internal_number:0
 msgid "User's internal phone number."
-msgstr ""
+msgstr "Uporabnikova interna telefonska številka."
 
 #. module: asterisk_click2dial
 #: field:res.users,alert_info:0
 msgid "User-specific Alert-Info SIP Header"
-msgstr ""
+msgstr "Uporabniška Alert-Info SIP glava"
 
 #. module: asterisk_click2dial
 #: field:res.users,dial_suffix:0
 msgid "User-specific Dial Suffix"
-msgstr ""
+msgstr "Uporabniška klicna pripona"
 
 #. module: asterisk_click2dial
 #: field:res.users,variable:0
 msgid "User-specific Variable"
-msgstr ""
+msgstr "Uporabniška spremenljivka"
 
 #. module: asterisk_click2dial
 #: help:res.users,dial_suffix:0
 msgid "User-specific dial suffix such as aa=2wb for SCCP auto answer."
-msgstr ""
+msgstr "Uporabniška klicna pripona kot aa=2wb za SCCP samodejno odgovarjanje."
 
 #. module: asterisk_click2dial
 #: model:ir.model,name:asterisk_click2dial.model_res_users
 msgid "Users"
-msgstr ""
+msgstr "Uporabniki"
 
 #. module: asterisk_click2dial
 #: field:asterisk.server,wait_time:0
 msgid "Wait Time (sec)"
-msgstr ""
+msgstr "Čas čakanja (sekund)"
 
 #. module: asterisk_click2dial
 #: code:addons/asterisk_click2dial/asterisk_click2dial.py:117
@@ -553,14 +553,14 @@ msgstr ""
 msgid ""
 "You should set a 'Wait time' value between 1 and 120 seconds for the "
 "Asterisk server '%s'"
-msgstr ""
+msgstr "Za Asterisk strežnik '%s' morate nastaviti vrednost 'časa čakanja' med 1 in 120 sekundami"
 
 #. module: asterisk_click2dial
 #: code:addons/asterisk_click2dial/asterisk_click2dial.py:127
 #, python-format
 msgid ""
 "You should set a TCP port between 1 and 65535 for the Asterisk server '%s'"
-msgstr ""
+msgstr "Za Asterisk strežnik '%s' morate nastaviti TCP vrata med 1 in 65535."
 
 #. module: asterisk_click2dial
 #: selection:res.users,asterisk_chan_type:0
