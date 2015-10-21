@@ -22,7 +22,7 @@
 
 {
     'name': 'HR Phone',
-    'version': '0.2',
+    'version': '8.0.0.1.0',
     'category': 'Phone',
     'license': 'AGPL-3',
     'summary': 'Validate phone numbers in HR',
@@ -47,7 +47,7 @@ for any help or question about this module.
         'hr_view.xml',
         ],
     'images': [],
-    'installable': True,
+    'installable': true,
     'auto_install': True,
     'active': False,
 }

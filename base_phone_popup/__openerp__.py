@@ -22,7 +22,7 @@
 
 {
     'name': 'Base Phone Pop-up',
-    'version': '0.5',
+    'version': '9.0.0.1.0',
     'category': 'Phone',
     'license': 'AGPL-3',
     'summary': 'Pop-up the related form view to the user on incoming calls',
@@ -57,7 +57,6 @@ http://www.akretion.com/products-and-services/openerp-asterisk-voip-connector
     'depends': ['base_phone', 'web_action_request'],
     'data': [
         'res_users_view.xml',
-        'res_partners_view.xml',
         ],
     'images': [],
     'active': False,

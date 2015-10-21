@@ -22,7 +22,7 @@
 
 {
     'name': 'Base Phone',
-    'version': '0.2',
+    'version': '9.0.0.1.0',
     'category': 'Phone',
     'license': 'AGPL-3',
     'summary': 'Validate phone numbers',

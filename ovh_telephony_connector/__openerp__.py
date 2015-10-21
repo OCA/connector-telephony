@@ -21,7 +21,7 @@
 
 {
     'name': 'OVH Telephony Connector',
-    'version': '0.2',
+    'version': '9.0.0.1.0',
     'category': 'Phone',
     'license': 'AGPL-3',
     'summary': 'OVH-Odoo telephony connector (click2call)',
