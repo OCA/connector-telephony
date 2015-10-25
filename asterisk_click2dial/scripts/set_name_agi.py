@@ -388,7 +388,7 @@ def main(options, arguments):
     return True
 
 if __name__ == '__main__':
-    usage = "Usage: get_name_agi.py [options] login1 login2 login3 ..."
+    usage = "Usage: set_name_agi.py [options] login1 login2 login3 ..."
     epilog = "Script written by Alexis de Lattre. "
     "Published under the GNU AGPL licence."
     description = "This is an AGI script that sends a query to OpenERP. "
