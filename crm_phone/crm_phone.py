@@ -1,4 +1,4 @@
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
 #
 #    CRM phone module for Odoo/OpenERP
@@ -31,26 +31,21 @@ class CrmLead(models.Model):
     _country_field = 'country_id'
     _partner_field = None
 
-    def create(self, cr, uid, vals, context=None):
-        vals_reformated = self._generic_reformat_phonenumbers(
-            cr, uid, None, vals, context=context)
-        return super(CrmLead, self).create(
-            cr, uid, vals_reformated, context=context)
+    @api.model
+    def create(self, vals):
+        vals_reformated = self._reformat_phonenumbers_create(vals)
+        return super(CrmLead, self).create(vals_reformated)
 
-    def write(self, cr, uid, ids, vals, context=None):
-        vals_reformated = self._generic_reformat_phonenumbers(
-            cr, uid, ids, vals, context=context)
-        return super(CrmLead, self).write(
-            cr, uid, ids, vals_reformated, context=context)
+    @api.multi
+    def write(self, vals):
+        vals_reformated = self._reformat_phonenumbers_write(vals)
+        return super(CrmLead, self).write(vals_reformated)
 
-    def name_get(self, cr, uid, ids, context=None):
-        if context is None:
-            context = {}
-        if context.get('callerid'):
+    @api.multi
+    def name_get(self):
+        if self.env.context.get('callerid'):
             res = []
-            if isinstance(ids, (int, long)):
-                ids = [ids]
-            for lead in self.browse(cr, uid, ids, context=context):
+            for lead in self:
                 if lead.partner_name and lead.contact_name:
                     name = u'%s (%s)' % (lead.contact_name, lead.partner_name)
                 elif lead.partner_name:
@@ -62,28 +57,7 @@ class CrmLead(models.Model):
                 res.append((lead.id, name))
             return res
         else:
-            return super(CrmLead, self).name_get(
-                cr, uid, ids, context=context)
-
-
-class CrmPhonecall(models.Model):
-    _name = 'crm.phonecall'
-    _inherit = ['crm.phonecall', 'phone.common']
-    _phone_fields = ['partner_phone', 'partner_mobile']
-    _country_field = None
-    _partner_field = 'partner_id'
-
-    def create(self, cr, uid, vals, context=None):
-        vals_reformated = self._generic_reformat_phonenumbers(
-            cr, uid, None, vals, context=context)
-        return super(CrmPhonecall, self).create(
-            cr, uid, vals_reformated, context=context)
-
-    def write(self, cr, uid, ids, vals, context=None):
-        vals_reformated = self._generic_reformat_phonenumbers(
-            cr, uid, ids, vals, context=context)
-        return super(CrmPhonecall, self).write(
-            cr, uid, ids, vals_reformated, context=context)
+            return super(CrmLead, self).name_get()
 
 
 class ResUsers(models.Model):

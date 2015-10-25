@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  Copyright (C) 2014 Alexis de Lattre <alexis@via.ecp.fr>
+  Copyright (C) 2014-2015 Alexis de Lattre <alexis@via.ecp.fr>
   The licence is in the file __openerp__.py
 -->
 
@@ -17,21 +17,6 @@
         </field>
     </field>
 </record>
-
-<record id="view_event_form" model="ir.ui.view">
-    <field name="name">event_phone.event.form</field>
-    <field name="model">event.event</field>
-    <field name="inherit_id" ref="event.view_event_form"/>
-    <field name="arch" type="xml">
-        <xpath expr="//field[@name='registration_ids']/form//field[@name='phone']" position="attributes">
-            <attribute name="widget">phone</attribute>
-        </xpath>
-        <xpath expr="////field[@name='registration_ids']/tree/field[@name='phone']" position="attributes">
-            <attribute name="widget">phone</attribute>
-        </xpath>
-    </field>
-</record>
-
 
 </data>
 </openerp>

@@ -1,8 +1,8 @@
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
-#    Asterisk Click2dial module for OpenERP
-#    Copyright (C) 2010-2014 Alexis de Lattre <alexis@via.ecp.fr>
+#    Asterisk Click2dial module for Odoo
+#    Copyright (C) 2010-2015 Alexis de Lattre <alexis@via.ecp.fr>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -22,7 +22,7 @@
 
 {
     'name': 'Asterisk Click2dial',
-    'version': '8.0.0.4.0',
+    'version': '9.0.0.4.0',
     'category': 'Phone',
     'license': 'AGPL-3',
     'summary': 'Asterisk-OpenERP connector',

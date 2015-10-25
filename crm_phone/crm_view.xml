@@ -12,9 +12,7 @@
     <field name="model">crm.lead</field>
     <field name="inherit_id" ref="crm.crm_case_form_view_leads"/>
     <field name="arch" type="xml">
-        <field name="phone" position="attributes">
-            <attribute name="widget">phone</attribute>
-        </field>
+        <!-- seems this one was forgotten by the editor -->
         <field name="mobile" position="attributes">
             <attribute name="widget">phone</attribute>
         </field>
@@ -40,9 +38,6 @@
     <field name="model">crm.lead</field>
     <field name="inherit_id" ref="crm.crm_case_form_view_oppor"/>
     <field name="arch" type="xml">
-        <field name="phone" position="attributes">
-            <attribute name="widget">phone</attribute>
-        </field>
         <field name="mobile" position="attributes">
             <attribute name="widget">phone</attribute>
         </field>
@@ -52,6 +47,7 @@
     </field>
 </record>
 
+<!--
 <record id="crm_case_phone_form_view" model="ir.ui.view">
     <field name="name">crm_phone.crm_phonecall.form</field>
     <field name="model">crm.phonecall</field>
@@ -76,6 +72,7 @@
         </field>
     </field>
 </record>
+-->
 
 </data>
 </openerp>

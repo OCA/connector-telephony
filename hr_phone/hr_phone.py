@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    HR phone module for Odoo/OpenERP
-#    Copyright (c) 2012-2014 Akretion (http://www.akretion.com)
+#    Copyright (c) 2012-2015 Akretion (http://www.akretion.com)
 #    @author: Alexis de Lattre <alexis.delattre@akretion.com>
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -20,10 +20,10 @@
 #
 ##############################################################################
 
-from openerp.osv import orm
+from openerp import models, api
 
 
-class hr_employee(orm.Model):
+class HrEmployee(models.Model):
     _name = 'hr.employee'
     _inherit = ['hr.employee', 'phone.common']
     _phone_fields = ['work_phone', 'mobile_phone']
@@ -31,14 +31,12 @@ class hr_employee(orm.Model):
     _country_field = 'country_id'
     _partner_field = None
 
-    def create(self, cr, uid, vals, context=None):
-        vals_reformated = self._generic_reformat_phonenumbers(
-            cr, uid, None, vals, context=context)
-        return super(hr_employee, self).create(
-            cr, uid, vals_reformated, context=context)
+    @api.model
+    def create(self, vals):
+        vals_reformated = self._reformat_phonenumbers_create(vals)
+        return super(HrEmployee, self).create(vals_reformated)
 
-    def write(self, cr, uid, ids, vals, context=None):
-        vals_reformated = self._generic_reformat_phonenumbers(
-            cr, uid, ids, vals, context=context)
-        return super(hr_employee, self).write(
-            cr, uid, ids, vals_reformated, context=context)
+    @api.multi
+    def write(self, vals):
+        vals_reformated = self._reformat_phonenumbers_write(vals)
+        return super(HrEmployee, self).write(vals_reformated)

@@ -1,5 +1,5 @@
-/* Asterisk_click2dial module for OpenERP
-   Copyright (C) 2014 Alexis de Lattre <alexis@via.ecp.fr>
+/* Asterisk_click2dial module for Odoo
+   Copyright (C) 2014-2015 Alexis de Lattre <alexis@via.ecp.fr>
    The licence is in the file __openerp__.py */
 
 openerp.asterisk_click2dial = function (instance) {
