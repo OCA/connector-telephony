@@ -21,8 +21,10 @@ env:
   matrix:
   - LINT_CHECK="1"
   - TRANSIFEX="1"
-  - TESTS="1" ODOO_REPO="odoo/odoo"
-  - TESTS="1" ODOO_REPO="OCA/OCB"
+  - TESTS="1" ODOO_REPO="odoo/odoo" EXCLUDE="asterisk_click2dial,asterisk_click2dial_crm"
+  - TESTS="1" ODOO_REPO="OCA/OCB" EXCLUDE="asterisk_click2dial,asterisk_click2dial_crm"
+  - TESTS="1" ODOO_REPO="odoo/odoo" INCLUDE="asterisk_click2dial,asterisk_click2dial_crm"
+  - TESTS="1" ODOO_REPO="OCA/OCB" INCLUDE="asterisk_click2dial,asterisk_click2dial_crm"
 
 virtualenv:
   system_site_packages: true
