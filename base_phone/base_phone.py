@@ -198,18 +198,13 @@ class PhoneCommon(models.AbstractModel):
     def _get_phone_fields(self):
         '''Returns a dict with key = object name
         and value = list of phone fields'''
-        models = self.env['ir.model'].search([('osv_memory', '=', False)])
         res = []
-        for model in models:
-            senv = False
-            try:
-                senv = self.env[model.model]
-            except:
-                continue
+        for model_name in self.env.registry:
+            senv = self.env[model_name]
             if (
-                    '_phone_fields' in dir(senv) and
+                    getattr(senv, '_phone_fields', None) and
                     isinstance(senv._phone_fields, list)):
-                res.append(model.model)
+                res.append(model_name)
         return res
 
     def click2dial(self, cr, uid, erp_number, context=None):
