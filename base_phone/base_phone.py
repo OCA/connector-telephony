@@ -103,10 +103,12 @@ class PhoneCommon(models.AbstractModel):
                         #    by a user via the Web interface
                         # logger is usefull when the record is created/written
                         #    via the webservices
-                        _logger.error(
-                            "Cannot reformat the phone number '%s' to "
-                            "international format with region=%s"
-                            % (vals.get(field), countrycode))
+                        # Just don't generate this error message during testing
+                        if not context.get('yml_test'):
+                            _logger.error(
+                                "Cannot reformat the phone number '%s' to "
+                                "international format with region=%s"
+                                % (vals.get(field), countrycode))
                         if context.get('raise_if_phone_parse_fails'):
                             raise Warning(
                                 _("Cannot reformat the phone number '%s' to "

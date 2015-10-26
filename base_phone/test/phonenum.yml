@@ -16,7 +16,7 @@
 -
   Write invalid phone number
 -
-  !record {model: res.partner, id: partner3}:
+  !record {model: res.partner, id: partner3, context: {"yml_test": True}}:
     name: Jean Badphone
     phone: 42
 -
