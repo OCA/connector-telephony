@@ -77,7 +77,7 @@ class PhoneCommon(models.AbstractModel):
                 if user.company_id.country_id:
                     countrycode = user.company_id.country_id.code
                 else:
-                    _logger.error(
+                    _logger.warning(
                         _("You should set a country on the company '%s' "
                             "to allow the reformat of phone numbers")
                         % user.company_id.name)
@@ -94,7 +94,7 @@ class PhoneCommon(models.AbstractModel):
                         vals[field] = phonenumbers.format_number(
                             res_parse, phonenumbers.PhoneNumberFormat.E164)
                         if init_value != vals[field]:
-                            _logger.info(
+                            _logger.debug(
                                 "%s initial value: '%s' updated value: '%s'"
                                 % (field, init_value, vals[field]))
                     except Exception, e:
