@@ -78,9 +78,9 @@ class PhoneCommon(models.AbstractModel):
                     countrycode = user.company_id.country_id.code
                 else:
                     _logger.warning(
-                        _("You should set a country on the company '%s' "
-                            "to allow the reformat of phone numbers")
-                        % user.company_id.name)
+                        "You should set a country on the company '%s' "
+                        "to allow the reformat of phone numbers",
+                        user.company_id.name)
                     countrycode = None
                 # with country code = None, phonenumbers.parse() will work
                 # with phonenumbers formatted in E164, but will fail with
@@ -95,8 +95,8 @@ class PhoneCommon(models.AbstractModel):
                             res_parse, phonenumbers.PhoneNumberFormat.E164)
                         if init_value != vals[field]:
                             _logger.debug(
-                                "%s initial value: '%s' updated value: '%s'"
-                                % (field, init_value, vals[field]))
+                                "%s initial value: '%s' updated value: '%s'",
+                                field, init_value, vals[field])
                     except Exception, e:
                         # I do BOTH logger and raise, because:
                         # raise is usefull when the record is created/written
