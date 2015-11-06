@@ -4,8 +4,8 @@
 SMS send picking
 ===========
 
-This module provide a cron and a method to automaticly sending a SMS when a
-picking delivery is ready to transfert
+This module provides a cron and a method to automaticly sending a SMS when a
+picking delivery is ready to transfert.
 
 
 Configuration

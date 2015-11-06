@@ -36,7 +36,7 @@ class StockPicking(models.Model):
             ('default_gateway', '=', True)], limit=1)
         return {
             'gateway_id': gateway.id,
-            'message': _('Your picking %s is ready to transfert') % self.name,
+            'message': _('Your picking %s is ready to transfer.') % self.name,
             'mobile': self.partner_id.mobile,
             'partner_id': self.partner_id.id,
             'state': 'draft',
