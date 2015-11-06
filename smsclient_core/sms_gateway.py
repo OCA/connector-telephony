@@ -97,9 +97,9 @@ class SMSClient(models.Model):
     code_visible = fields.Boolean(default=False)
     body = fields.Text('Message',
                        help="The message text that will be send along with the"
-                            " email which is send through this server")
+                            " email which is send through this server.")
     validity = fields.Integer(
-        help='The maximum time - in minute(s) - before the message is dropped',
+        help='The maximum time - in minute(s) - before the message is dropped.',
         default=10,
         )
     validity_visible = fields.Boolean(default=False)
@@ -111,7 +111,7 @@ class SMSClient(models.Model):
     classes_visible = fields.Boolean(default=False)
     deferred = fields.Integer(
         'Deferred',
-        help='The time -in minute(s)- to wait before sending the message',
+        help='The time -in minute(s)- to wait before sending the message.',
         default=0)
     deferred_visible = fields.Boolean(default=False)
 
@@ -134,7 +134,7 @@ class SMSClient(models.Model):
     tag_visible = fields.Boolean(default=False)
     nostop = fields.Boolean(
         help='Do not display STOP clause in the message, this requires that '
-             'this is not an advertising message',
+             'this is not an advertising message.',
         default=True)
     nostop_visible = fields.Boolean(default=False)
     char_limit = fields.Boolean('Character Limit', default=True)
@@ -210,12 +210,12 @@ class SmsSms(models.Model):
         states={'draft': [('readonly', False)]})
     validity = fields.Integer(
         'Validity',
-        help='The maximum time -in minute(s)- before the message is dropped')
+        help='The maximum time -in minute(s)- before the message is dropped.')
     classes = fields.Selection(
         selection=CLASSES_LIST,
         help='The sms class: flash(0), phone display(1), SIM(2), toolkit(3)')
     deferred = fields.Integer(
-        help='The time -in minute(s)- to wait before sending the message')
+        help='The time -in minute(s)- to wait before sending the message.')
     priority = fields.Selection(
         selection=PRIORITY_LIST,
         help='The priority of the message ')
@@ -229,7 +229,7 @@ class SmsSms(models.Model):
     nostop = fields.Boolean(
         'NoStop',
         help='Do not display STOP clause in the message, this requires that'
-             'this is not an advertising message')
+             'this is not an advertising message.')
     partner_id = fields.Many2one(
         'res.partner',
         string='Partner')

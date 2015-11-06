@@ -4,7 +4,7 @@
 SMS client core
 ===========
 
-This module provide base function to send sms. It not works in stand alone, it needs a least one provider module
+This module provides base function to send sms. It is not meant to work alone and needs a least one provider module.
 
 Installation
 ============
