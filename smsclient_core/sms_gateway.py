@@ -210,30 +210,49 @@ class SmsSms(models.Model):
         states={'draft': [('readonly', False)]})
     validity = fields.Integer(
         'Validity',
+        readonly=True,
+        states={'draft': [('readonly', False)]},
         help='The maximum time -in minute(s)- before the message is dropped.')
     classes = fields.Selection(
+        readonly=True,
+        states={'draft': [('readonly', False)]},
         selection=CLASSES_LIST,
         help='The sms class: flash(0), phone display(1), SIM(2), toolkit(3)')
     deferred = fields.Integer(
+        readonly=True,
+        states={'draft': [('readonly', False)]},
         help='The time -in minute(s)- to wait before sending the message.')
     priority = fields.Selection(
+        readonly=True,
+        states={'draft': [('readonly', False)]},
         selection=PRIORITY_LIST,
         help='The priority of the message ')
     coding = fields.Selection([
         ('1', '7 bit'),
         ('2', 'Unicode')
-        ], help='The sms coding: 1 for 7 bit or 2 for unicode')
+        ], readonly=True,
+        states={'draft': [('readonly', False)]},
+        help='The sms coding: 1 for 7 bit or 2 for unicode')
     tag = fields.Char(
         size=256,
+        readonly=True,
+        states={'draft': [('readonly', False)]},
         help='An optional tag')
     nostop = fields.Boolean(
         'NoStop',
+        readonly=True,
+        states={'draft': [('readonly', False)]},
         help='Do not display STOP clause in the message, this requires that'
              'this is not an advertising message.')
     partner_id = fields.Many2one(
         'res.partner',
+        readonly=True,
+        states={'draft': [('readonly', False)]},
         string='Partner')
-    company_id = fields.Many2one('res.company')
+    company_id = fields.Many2one(
+        'res.company',
+        readonly=True,
+        states={'draft': [('readonly', False)]})
 
     @api.onchange('partner_id')
     def onchange_partner_id(self):

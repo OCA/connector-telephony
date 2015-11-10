@@ -127,7 +127,7 @@
                         <label for="mobile" class="oe_edit_only"/>
                         <h1><field name="mobile"/></h1>
                         <group>
-                            <field name="create_date"/>
+                            <field name="create_date" readonly="True"/>
                             <field name="gateway_id"/>
                             <field name="company_id" groups="base.group_multi_company"/>
                             <separator string="SMS Message" colspan="4"/>
