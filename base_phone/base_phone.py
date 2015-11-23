@@ -82,6 +82,8 @@ class PhoneCommon(models.AbstractModel):
                         "to allow the reformat of phone numbers",
                         user.company_id.name)
                     countrycode = None
+            if countrycode:
+                countrycode = countrycode.upper()
                 # with country code = None, phonenumbers.parse() will work
                 # with phonenumbers formatted in E164, but will fail with
                 # phone numbers in national format
@@ -90,7 +92,7 @@ class PhoneCommon(models.AbstractModel):
                     init_value = vals.get(field)
                     try:
                         res_parse = phonenumbers.parse(
-                            vals.get(field), countrycode.upper())
+                            vals.get(field), countrycode)
                         vals[field] = phonenumbers.format_number(
                             res_parse, phonenumbers.PhoneNumberFormat.E164)
                         if init_value != vals[field]:
