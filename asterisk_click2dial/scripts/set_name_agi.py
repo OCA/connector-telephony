@@ -235,8 +235,6 @@ def convert_to_ascii(my_unicode):
 
 
 def main(options, arguments):
-    # print 'options = %s' % options
-    # print 'arguments = %s' % arguments
 
     # AGI passes parameters to the script on standard input
     stdinput = {}

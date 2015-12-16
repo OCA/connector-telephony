@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
-#    Base Phone Pop-up module for Odoo/OpenERP
+#    Base Phone Pop-up module for Odoo 9
 #    Copyright (C) 2014 Alexis de Lattre <alexis@via.ecp.fr>
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -22,7 +22,7 @@
 
 {
     'name': 'Base Phone Pop-up',
-    'version': '8.0.0.4.0',
+    'version': '9.0.0.1.0',
     'category': 'Phone',
     'license': 'AGPL-3',
     'summary': 'Pop-up the related form view to the user on incoming calls',
@@ -60,5 +60,4 @@ http://www.akretion.com/products-and-services/openerp-asterisk-voip-connector
         ],
     'images': [],
     'active': False,
-    'installable': False,
 }
