@@ -49,8 +49,6 @@ class PhoneCommon(models.AbstractModel):
             import phonenumbers
             from phonenumbers import geocoder
             query = phonenumbers.parse("+27823374587", None)
-            x = query.country_code
-            print x
             region = geocoder.description_for_number(query, "en")
             action = {
                 'name': _('Number %s (%s) Not Found' % (number, region) ),
@@ -74,15 +72,12 @@ class PhoneCommon(models.AbstractModel):
 
     @api.model
     def incall_notify_by_login(self, params):
-        print params
         number = params['number']
         login_list = params['login_list']
         login_list = set(login_list) #make unique
         login_list = list(login_list)
-        print login_list
 
         assert isinstance(login_list, list), 'login_list must be a list'
-
 
         blinking_action = {
             "type": "ir.actions.client",

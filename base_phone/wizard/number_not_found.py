@@ -56,8 +56,6 @@ class NumberNotFound(models.TransientModel):
         if not res:
             res = {}
         if res.get('calling_number'):
-            print "test1"
-            print res.get('calling_number')
             convert = self.env['res.partner']._generic_reformat_phonenumbers(None, {'phone': res.get('calling_number')})
             parsed_num = phonenumbers.parse(convert.get('phone'))
             res['e164_number'] = phonenumbers.format_number(
@@ -69,13 +67,13 @@ class NumberNotFound(models.TransientModel):
                 res['number_type'] = 'phone'
         return res
 
+    @api.model
     def create_partner(self, ids):
         '''Function called by the related button of the wizard'''
         wiz = self.browse(ids[0])
         parsed_num = phonenumbers.parse(wiz.e164_number, None)
         phonenumbers.number_type(parsed_num)
 
-        self.env.context['default_%s' % wiz.number_type] = wiz.e164_number
         action = {
             'name': _('Create New Partner'),
             'view_mode': 'form,tree,kanban',
@@ -83,10 +81,11 @@ class NumberNotFound(models.TransientModel):
             'type': 'ir.actions.act_window',
             'nodestroy': False,
             'target': 'current',
-            'context': self.env.context,
+            'context': {'default_%s' % wiz.number_type: wiz.e164_number},
             }
         return action
 
+    @api.model
     def update_partner(self, ids):
         wiz = self.browse(ids[0])
         if not wiz.to_update_partner_id:
@@ -104,6 +103,7 @@ class NumberNotFound(models.TransientModel):
             }
         return action
 
+    @api.model
     def onchange_to_update_partner(self, ids, to_update_partner_id):
         res = {'value': {}}
         if to_update_partner_id:

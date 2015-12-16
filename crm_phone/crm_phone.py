@@ -95,8 +95,8 @@ class PhoneCommon(models.AbstractModel):
     _inherit = 'phone.common'
 
     @api.model
-    def click2dial(self, erp_number):
-        res = super(PhoneCommon, self).click2dial(erp_number)
+    def click2dial(self, erp_number, params):
+        res = super(PhoneCommon, self).click2dial(erp_number, params)
         if (
                 self.env.user.context_propose_creation_crm_call and
                 self.env.context.get('click2dial_model')

@@ -37,7 +37,8 @@ class reformat_all_phonenumbers(models.TransientModel):
         ('done', 'Done'),
         ], string='State', default='draft')
 
-    def run_reformat_all_phonenumbers(self, ids):
+    @api.multi
+    def run_reformat_all_phonenumbers(self):
         logger.info('Starting to reformat all the phone numbers')
         phonenumbers_not_reformatted = ''
         phoneobjects = self.env['phone.common']._get_phone_fields()
@@ -87,8 +88,8 @@ class reformat_all_phonenumbers(models.TransientModel):
         if not phonenumbers_not_reformatted:
             phonenumbers_not_reformatted = \
                 'All phone numbers have been reformatted successfully.'
-        self.write(ids[0], {'phonenumbers_not_reformatted': phonenumbers_not_reformatted, 'state': 'done'})
+        self.write({'phonenumbers_not_reformatted': phonenumbers_not_reformatted, 'state': 'done'})
         logger.info('End of the phone number reformatting wizard')
         action = self.env['ir.actions.act_window'].for_xml_id('base_phone', 'reformat_all_phonenumbers_action')
-        action['res_id'] = ids[0]
+        action['res_id'] = self.id
         return action

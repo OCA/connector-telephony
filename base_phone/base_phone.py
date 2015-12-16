@@ -33,8 +33,6 @@ class PhoneCommon(models.AbstractModel):
     _name = 'phone.common'
 
     def _generic_reformat_phonenumbers(self, ids, vals):
-        print "_generic_reformat_phonenumbers called"
-        print vals
         """Reformat phone numbers in E.164 format i.e. +33141981242"""
         assert isinstance(self._country_field, (str, unicode, type(None))),\
             'Wrong self._country_field'
@@ -207,6 +205,7 @@ class PhoneCommon(models.AbstractModel):
                 res.append(model.model)
         return res
 
+    @api.model
     def click2dial(self, erp_number):
         '''This function is designed to be overridden in IPBX-specific
         modules, such as asterisk_click2dial or ovh_telephony_connector'''
@@ -252,24 +251,13 @@ class ResPartner(models.Model):
 
     @api.multi
     def write(self, vals):
-        print vals
-        print "test2"
-        print self.id
         vals_reformated = self._generic_reformat_phonenumbers(None, vals)
-        print vals
         return super(ResPartner, self).write(vals_reformated)
 
     @api.multi
     def name_get(self,  *args, **kwargs):
-        print args
-        print kwargs
-        print self.env.context
-        print "before self.env.context.get('callerid'"
         if self.env.context.get('callerid'):
-            print "GOT self.env.context.get('callerid'"
             res = []
-            #if isinstance(ids, (int, long)):
-            #    ids = [ids]
             for partner in self: #.browse(ids):
                 if partner.parent_id and partner.parent_id.is_company:
                     name = u'%s (%s)' % (partner.name, partner.parent_id.name)

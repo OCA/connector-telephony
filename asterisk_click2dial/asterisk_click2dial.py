@@ -84,7 +84,8 @@ class AsteriskServer(models.Model):
         "for example.")
     company_id = fields.Many2one(
         'res.company', 'Company',
-        help="Company who uses the Asterisk server.",default="_get_default_company")
+        help="Company who uses the Asterisk server.",
+        default=lambda self: self.env['res.company']._company_default_get())
 
     '''_defaults = {
         'active': True,
@@ -95,8 +96,8 @@ class AsteriskServer(models.Model):
         self.env['res.company']._company_default_get('asterisk.server'),
     }'''
 
-    def _get_default_company(self):
-        return self.env['res.company']._company_default_get()
+    #def _get_default_company(self):
+    #    return self.env['res.company']._company_default_get()
 
     @api.constrains('out_prefix', 'wait_time', 'extension_priority', 'port',
             'context', 'alert_info', 'login', 'password')
@@ -214,8 +215,6 @@ class AsteriskServer(models.Model):
         calling_party_number = False
         try:
             list_chan = ast_manager.Status()
-            # from pprint import pprint
-            # pprint(list_chan)
             _logger.debug("Result of Status AMI request: %s", list_chan)
             for chan in list_chan.values():
                 sip_account = user.asterisk_chan_type + '/' + user.resource
