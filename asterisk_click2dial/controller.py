@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
-#    Asterisk click2dial module for OpenERP
+#    Asterisk click2dial module for Odoo 9
 #    Copyright (C) 2014 Alexis de Lattre (alexis@via.ecp.fr)
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -19,13 +19,11 @@
 #
 ##############################################################################
 
-import openerp
+from openerp import http
 
 
-class AsteriskClick2dialController(openerp.addons.web.http.Controller):
-    _cp_path = '/asterisk_click2dial'
+class AsteriskClick2dialController(http.Controller):
 
-    @openerp.addons.web.http.jsonrequest
-    def get_record_from_my_channel(self, req):
-        res = req.session.model('asterisk.server').get_record_from_my_channel()
-        return res
+    @http.route('/asterisk_click2dial/get_record_from_my_channel/', type='json', auth='public')
+    def get_record_from_my_channel(self, **kw):
+        return http.request.env['asterisk.server'].get_record_from_my_channel()
