@@ -22,7 +22,7 @@
 
 {
     'name': 'Base Phone',
-    'version': '8.0.0.1.0',
+    'version': '0.2',
     'category': 'Phone',
     'license': 'AGPL-3',
     'summary': 'Validate phone numbers',
@@ -79,5 +79,5 @@ for any help or question about this module.
     'demo': ['base_phone_demo.xml'],
     'test': ['test/phonenum.yml'],
     'images': [],
-    'installable': False,
+    'installable': True,
 }

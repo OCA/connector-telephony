@@ -22,7 +22,7 @@
 
 {
     'name': 'CRM Claim Phone',
-    'version': '8.0.0.1.0',
+    'version': '9.0.0.1.0',
     'category': 'Phone',
     'license': 'AGPL-3',
     'summary': 'Validate phone numbers in CRM Claims',
@@ -44,7 +44,7 @@ for any help or question about this module.
     'depends': ['base_phone', 'crm_claim'],
     'data': ['crm_claim_view.xml'],
     'images': [],
-    'installable': False,
+    'installable': True,
     'auto_install': True,
     'active': False,
 }

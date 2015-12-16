@@ -21,7 +21,7 @@
 
 {
     'name': 'OVH Telephony Connector',
-    'version': '8.0.0.1.0',
+    'version': '9.0.0.1.0',
     'category': 'Phone',
     'license': 'AGPL-3',
     'summary': 'OVH-Odoo telephony connector (click2call)',
@@ -35,5 +35,5 @@
     'demo': [],
     'qweb': ['static/src/xml/*.xml'],
     'application': True,
-    'installable': False,
+    'installable': True,
 }

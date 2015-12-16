@@ -20,10 +20,10 @@
 #
 ##############################################################################
 
-from openerp.osv import orm
+from openerp import api, fields, models, tools
 
 
-class hr_employee(orm.Model):
+class hr_employee(models.Model):
     _name = 'hr.employee'
     _inherit = ['hr.employee', 'phone.common']
     _phone_fields = ['work_phone', 'mobile_phone']
@@ -31,14 +31,10 @@ class hr_employee(orm.Model):
     _country_field = 'country_id'
     _partner_field = None
 
-    def create(self, cr, uid, vals, context=None):
-        vals_reformated = self._generic_reformat_phonenumbers(
-            cr, uid, None, vals, context=context)
-        return super(hr_employee, self).create(
-            cr, uid, vals_reformated, context=context)
+    def create(self, vals):
+        vals_reformated = self._generic_reformat_phonenumbers(None, vals)
+        return super(hr_employee, self).create(vals_reformated)
 
-    def write(self, cr, uid, ids, vals, context=None):
-        vals_reformated = self._generic_reformat_phonenumbers(
-            cr, uid, ids, vals, context=context)
-        return super(hr_employee, self).write(
-            cr, uid, ids, vals_reformated, context=context)
+    def write(self, ids, vals):
+        vals_reformated = self._generic_reformat_phonenumbers(ids, vals)
+        return super(hr_employee, self).write(ids, vals_reformated)

@@ -22,7 +22,7 @@
 
 {
     "name": "Asterisk Click2dial CRM",
-    "version": "8.0.0.1.0",
+    "version": "9.0.0.1.0",
     "author": "Akretion,Odoo Community Association (OCA)",
     "website": "http://www.akretion.com",
     "license": "AGPL-3",
@@ -43,6 +43,6 @@ This module will be removed from the repository in the near future.
         'crm_phone',
     ],
     "data": [],
-    'installable': False,
+    'installable': True,
     "application": False,
 }

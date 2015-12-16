@@ -47,7 +47,7 @@ for any help or question about this module.
         'hr_view.xml',
         ],
     'images': [],
-    'installable': False,
+    'installable': true,
     'auto_install': True,
     'active': False,
 }

@@ -22,7 +22,7 @@
 
 {
     'name': 'Asterisk Click2dial',
-    'version': '8.0.0.4.0',
+    'version': '9.0.0.1.0',
     'category': 'Phone',
     'license': 'AGPL-3',
     'summary': 'Asterisk-OpenERP connector',
@@ -107,6 +107,6 @@ http://www.akretion.com/products-and-services/openerp-asterisk-voip-connector
     'qweb': ['static/src/xml/*.xml'],
     'css': ['static/src/css/*.css'],
     'application': True,
-    'installable': False,
+    'installable': True,
     'active': False,
 }
