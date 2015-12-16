@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    Base Phone Pop-up module for Odoo/OpenERP
+#    Base Phone Pop-up module for Odoo 9
 #    Copyright (C) 2014 Alexis de Lattre <alexis@via.ecp.fr>
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -19,22 +19,20 @@
 #
 ##############################################################################
 
-from openerp.osv import orm, fields
-from openerp.tools.translate import _
+from openerp import models, fields, api, _
 import logging
 
 
 logger = logging.getLogger(__name__)
 
 
-class phone_common(orm.AbstractModel):
+class PhoneCommon(models.AbstractModel):
     _inherit = 'phone.common'
 
-    def _prepare_incall_pop_action(
-            self, cr, uid, record_res, number, context=None):
+    def _prepare_incall_pop_action(self, record_res, number):
         action = False
         if record_res:
-            obj = self.pool[record_res[0]]
+            obj = self.env[record_res[0]]
             action = {
                 'name': obj._description,
                 'type': 'ir.actions.act_window',
@@ -56,25 +54,28 @@ class phone_common(orm.AbstractModel):
             }
         return action
 
-    def incall_notify_by_login(
-            self, cr, uid, number, login_list, context=None):
+    @api.model
+    def incall_notify_by_login(self, params):
+        number = params['number']
+        login_list = params['login_list']
+        login_list = set(login_list) #make unique
+        login_list = list(login_list)
+
         assert isinstance(login_list, list), 'login_list must be a list'
-        res = self.get_record_from_phone_number(
-            cr, uid, number, context=context)
-        user_ids = self.pool['res.users'].search(
-            cr, uid, [('login', 'in', login_list)], context=context)
+
+
+        res = self.get_record_from_phone_number(number)
+        users = self.env['res.users'].search([('login', 'in', login_list)]) #.filtered(lambda u: u.login in login_list) #search([('login', 'in', login_list)])
         logger.debug(
             'Notify incoming call from number %s to users %s'
-            % (number, user_ids))
-        action = self._prepare_incall_pop_action(
-            cr, uid, res, number, context=context)
+            % (number, users))
+        action = self._prepare_incall_pop_action(res, number)
+        print action
         if action:
-            users = self.pool['res.users'].read(
-                cr, uid, user_ids, ['context_incall_popup'], context=context)
             for user in users:
                 if user['context_incall_popup']:
-                    self.pool['action.request'].notify(
-                        cr, user['id'], action)
+                    self.env.uid = user['id']
+                    self.env['action.request'].notify(action)
                     logger.debug(
                         'This action has been sent to user ID %d: %s'
                         % (user['id'], action))
@@ -85,13 +86,7 @@ class phone_common(orm.AbstractModel):
         return callerid
 
 
-class res_users(orm.Model):
+class ResUsers(models.Model):
     _inherit = 'res.users'
 
-    _columns = {
-        'context_incall_popup': fields.boolean('Pop-up on Incoming Calls'),
-        }
-
-    _defaults = {
-        'context_incall_popup': True,
-        }
+    context_incall_popup =  fields.Boolean('Pop-up on Incoming Calls', default=True)
