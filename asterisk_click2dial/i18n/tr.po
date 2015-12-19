@@ -1,0 +1,573 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * asterisk_click2dial
+# 
+# Translators:
+# Altinisik <aaltinisik@altinkaya.com.tr>, 2015
+msgid ""
+msgstr ""
+"Project-Id-Version: connector-telephony (8.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-11-01 04:07+0000\n"
+"PO-Revision-Date: 2015-12-18 20:20+0000\n"
+"Last-Translator: Altinisik <aaltinisik@altinkaya.com.tr>\n"
+"Language-Team: Turkish (http://www.transifex.com/oca/OCA-connector-telephony-8-0/language/tr/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: tr\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#. module: asterisk_click2dial
+#: field:asterisk.server,login:0
+msgid "AMI Login"
+msgstr "AMI Kullanıcı adı"
+
+#. module: asterisk_click2dial
+#: field:asterisk.server,password:0
+msgid "AMI Password"
+msgstr "AMI Şifresi"
+
+#. module: asterisk_click2dial
+#: field:asterisk.server,active:0
+msgid "Active"
+msgstr "Aktif"
+
+#. module: asterisk_click2dial
+#: field:asterisk.server,alert_info:0
+msgid "Alert-Info SIP Header"
+msgstr "Alert-Info SIP başlığı"
+
+#. module: asterisk_click2dial
+#: help:asterisk.server,wait_time:0
+msgid ""
+"Amount of time (in seconds) Asterisk will try to reach the user's phone "
+"before hanging up."
+msgstr "Asterisk sunucu kullanıcıya telefon irtibatlarken kullanıcının telefonunu kaç saniye beklesin  "
+
+#. module: asterisk_click2dial
+#: field:res.users,asterisk_chan_type:0
+msgid "Asterisk Channel Type"
+msgstr "Asterisk Kanal tipi"
+
+#. module: asterisk_click2dial
+#: field:asterisk.server,ip_address:0
+msgid "Asterisk IP address or DNS"
+msgstr "Asterisk sunucu IP ya da Alan adı adresi "
+
+#. module: asterisk_click2dial
+#: view:asterisk.server:asterisk_click2dial.view_asterisk_server_form
+msgid "Asterisk Manager Interface"
+msgstr "Asterisk Manager Interface"
+
+#. module: asterisk_click2dial
+#: field:res.users,asterisk_server_id:0
+msgid "Asterisk Server"
+msgstr "Asterisk Sunucu"
+
+#. module: asterisk_click2dial
+#: field:asterisk.server,name:0
+msgid "Asterisk Server Name"
+msgstr "Asterisk Sunucu Adı"
+
+#. module: asterisk_click2dial
+#: view:asterisk.server:asterisk_click2dial.view_asterisk_server_search
+msgid "Asterisk Server Search"
+msgstr "Asterisk Sunucu Arama"
+
+#. module: asterisk_click2dial
+#: view:asterisk.server:asterisk_click2dial.view_asterisk_server_form
+#: view:asterisk.server:asterisk_click2dial.view_asterisk_server_tree
+#: model:ir.actions.act_window,name:asterisk_click2dial.action_asterisk_server
+#: model:ir.model,name:asterisk_click2dial.model_asterisk_server
+#: model:ir.ui.menu,name:asterisk_click2dial.act_menu_ast_server
+msgid "Asterisk Servers"
+msgstr "Asterisk Sunucuları"
+
+#. module: asterisk_click2dial
+#: help:res.users,asterisk_chan_type:0
+msgid ""
+"Asterisk channel type, as used in the Asterisk dialplan. If the user has a "
+"regular IP phone, the channel type is 'SIP'."
+msgstr "Asterisk arama planında kullanılan kanal tipi. Eğer kullanıcının standart bir kurulumu varsa kanal tipi 'SIP' seçilmelidir."
+
+#. module: asterisk_click2dial
+#: help:asterisk.server,context:0
+msgid ""
+"Asterisk dialplan context from which the calls will be made. Refer to "
+"/etc/asterisk/extensions.conf on your Asterisk server."
+msgstr "Asterisk arama planındaki aramaların yapılacağı  'context'. Bilgi için Asterisk sunucuda  /etc/asterisk/extensions.conf dosyasını inceleyin."
+
+#. module: asterisk_click2dial
+#: help:res.users,asterisk_server_id:0
+msgid ""
+"Asterisk server on which the user's phone is connected. If you leave this "
+"field empty, it will use the first Asterisk server of the user's company."
+msgstr "Kullanıcının telefonunun bağlı olduğu Asterisk sunucusu. Eğer boş bırakırsanız kullanıcının şirketinin öntanımlı Asterisk sunucusunu kullanacak."
+
+#. module: asterisk_click2dial
+#: field:res.users,cdraccount:0
+msgid "CDR Account"
+msgstr "CDR Hesabı"
+
+#. module: asterisk_click2dial
+#: help:res.users,cdraccount:0
+msgid "Call Detail Record (CDR) account used for billing this user."
+msgstr "Call Detail Record (CDR) kullanıcının faturasının hesaplamak için kullanılan hesap."
+
+#. module: asterisk_click2dial
+#: code:addons/asterisk_click2dial/asterisk_click2dial.py:374
+#: field:res.users,callerid:0
+#, python-format
+msgid "Caller ID"
+msgstr "Caller ID"
+
+#. module: asterisk_click2dial
+#: help:res.users,callerid:0
+msgid "Caller ID used for the calls initiated by this user."
+msgstr "Bu kullanıcı tarafından yapılan aramalarda çıkacak Caller ID"
+
+#. module: asterisk_click2dial
+#: code:addons/asterisk_click2dial/asterisk_click2dial.py:279
+#, python-format
+msgid ""
+"Can't get calling number from  Asterisk.\n"
+"Here is the error: '%s'"
+msgstr "Arayan numara Asterisk sunucudan alınamadı.\nHata mesajı: '%s'"
+
+#. module: asterisk_click2dial
+#: code:addons/asterisk_click2dial/asterisk_click2dial.py:457
+#, python-format
+msgid ""
+"Click to dial with Asterisk failed.\n"
+"Here is the error: '%s'"
+msgstr "Asterisk sunucu ile tıkla ara başarısız oldu.\nHata mesajı: '%s'"
+
+#. module: asterisk_click2dial
+#: field:asterisk.server,company_id:0
+msgid "Company"
+msgstr "Şirket"
+
+#. module: asterisk_click2dial
+#: help:asterisk.server,company_id:0
+msgid "Company who uses the Asterisk server."
+msgstr "Asterisk sunucuyu kullanan şirket"
+
+#. module: asterisk_click2dial
+#: code:addons/asterisk_click2dial/asterisk_click2dial.py:227
+#, python-format
+msgid "Connection Test Failed!"
+msgstr "Bağlantı denemesi Başarısız!"
+
+#. module: asterisk_click2dial
+#: code:addons/asterisk_click2dial/asterisk_click2dial.py:233
+#, python-format
+msgid "Connection Test Successfull!"
+msgstr "Bağlantı denemesi başarılı !"
+
+#. module: asterisk_click2dial
+#: field:asterisk.server,create_uid:0
+msgid "Created by"
+msgstr "Oluşturan"
+
+#. module: asterisk_click2dial
+#: field:asterisk.server,create_date:0
+msgid "Created on"
+msgstr "Oluşturuldu"
+
+#. module: asterisk_click2dial
+#: selection:res.users,asterisk_chan_type:0
+msgid "DAHDI"
+msgstr "DAHDI"
+
+#. module: asterisk_click2dial
+#: field:asterisk.server,context:0
+msgid "Dialplan Context"
+msgstr "Dialplan context"
+
+#. module: asterisk_click2dial
+#: view:asterisk.server:asterisk_click2dial.view_asterisk_server_form
+msgid "Dialplan Parameters"
+msgstr "Dialplan parametreleri"
+
+#. module: asterisk_click2dial
+#: constraint:asterisk.server:0 constraint:res.users:0
+msgid "Error message in raise"
+msgstr "Çıkan hata mesajı"
+
+#. module: asterisk_click2dial
+#: code:addons/asterisk_click2dial/asterisk_click2dial.py:111
+#: code:addons/asterisk_click2dial/asterisk_click2dial.py:116
+#: code:addons/asterisk_click2dial/asterisk_click2dial.py:121
+#: code:addons/asterisk_click2dial/asterisk_click2dial.py:126
+#: code:addons/asterisk_click2dial/asterisk_click2dial.py:135
+#: code:addons/asterisk_click2dial/asterisk_click2dial.py:163
+#: code:addons/asterisk_click2dial/asterisk_click2dial.py:184
+#: code:addons/asterisk_click2dial/asterisk_click2dial.py:190
+#: code:addons/asterisk_click2dial/asterisk_click2dial.py:210
+#: code:addons/asterisk_click2dial/asterisk_click2dial.py:277
+#: code:addons/asterisk_click2dial/asterisk_click2dial.py:382
+#: code:addons/asterisk_click2dial/asterisk_click2dial.py:403
+#: code:addons/asterisk_click2dial/asterisk_click2dial.py:420
+#: code:addons/asterisk_click2dial/asterisk_click2dial.py:456
+#, python-format
+msgid "Error:"
+msgstr "Hata:"
+
+#. module: asterisk_click2dial
+#: field:asterisk.server,extension_priority:0
+msgid "Extension Priority"
+msgstr "Hat önceliği"
+
+#. module: asterisk_click2dial
+#. openerp-web
+#: code:addons/asterisk_click2dial/static/src/js/asterisk_click2dial.js:26
+#, python-format
+msgid "Failure"
+msgstr "Başarısızlık"
+
+#. module: asterisk_click2dial
+#: selection:res.users,asterisk_chan_type:0
+msgid "H323"
+msgstr "H323"
+
+#. module: asterisk_click2dial
+#: code:addons/asterisk_click2dial/asterisk_click2dial.py:228
+#, python-format
+msgid "Here is the error message: %s"
+msgstr "İşte hata mesajı: %s"
+
+#. module: asterisk_click2dial
+#: selection:res.users,asterisk_chan_type:0
+msgid "IAX2"
+msgstr "IAX2"
+
+#. module: asterisk_click2dial
+#: field:asterisk.server,id:0
+msgid "ID"
+msgstr "ID"
+
+#. module: asterisk_click2dial
+#: help:asterisk.server,ip_address:0
+msgid "IP address or DNS name of the Asterisk server."
+msgstr "Asterisk sunucunun IP ya da DNS adı"
+
+#. module: asterisk_click2dial
+#: code:addons/asterisk_click2dial/asterisk_click2dial.py:373
+#: field:res.users,internal_number:0
+#, python-format
+msgid "Internal Number"
+msgstr "Dahili Numara"
+
+#. module: asterisk_click2dial
+#: field:asterisk.server,write_uid:0
+msgid "Last Updated by"
+msgstr "Son güncelleyen"
+
+#. module: asterisk_click2dial
+#: field:asterisk.server,write_date:0
+msgid "Last Updated on"
+msgstr "Son güncellendiği"
+
+#. module: asterisk_click2dial
+#: selection:res.users,asterisk_chan_type:0
+msgid "Local"
+msgstr "dahili"
+
+#. module: asterisk_click2dial
+#: help:asterisk.server,login:0
+msgid ""
+"Login that OpenERP will use to communicate with the Asterisk Manager "
+"Interface. Refer to /etc/asterisk/manager.conf on your Asterisk server."
+msgstr "Asterisk sunucuya AMI ile bağlanırken kullanılacak kullanıcı adı. Bilgi için /etc/asterisk/manager.conf dosyasını inceleyin."
+
+#. module: asterisk_click2dial
+#: selection:res.users,asterisk_chan_type:0
+msgid "MGCP"
+msgstr "MGCP"
+
+#. module: asterisk_click2dial
+#: code:addons/asterisk_click2dial/asterisk_click2dial.py:404
+#, python-format
+msgid "Missing phone number"
+msgstr "Kayıp telefon no"
+
+#. module: asterisk_click2dial
+#. openerp-web
+#: code:addons/asterisk_click2dial/static/src/js/asterisk_click2dial.js:45
+#, python-format
+msgid "Moving to %s ID %d"
+msgstr "Taşınıyor %s ID %d"
+
+#. module: asterisk_click2dial
+#: code:addons/asterisk_click2dial/asterisk_click2dial.py:164
+#, python-format
+msgid "No Asterisk server configured for the company '%s'."
+msgstr "Şirket '%s' için Asterisk sunucu tanımlanmamış"
+
+#. module: asterisk_click2dial
+#: code:addons/asterisk_click2dial/asterisk_click2dial.py:421
+#, python-format
+msgid "No callerID configured for the current user"
+msgstr "Kullanıcı için CallerID tanımlanmamış"
+
+#. module: asterisk_click2dial
+#: code:addons/asterisk_click2dial/asterisk_click2dial.py:185
+#, python-format
+msgid "No channel type configured for the current user."
+msgstr "Bu kullanıcı için kanal tipi tanımlı değil."
+
+#. module: asterisk_click2dial
+#: code:addons/asterisk_click2dial/asterisk_click2dial.py:191
+#, python-format
+msgid "No resource name configured for the current user"
+msgstr "Bu kullanıcı için kaynak adı tanımlanmamış"
+
+#. module: asterisk_click2dial
+#. openerp-web
+#: code:addons/asterisk_click2dial/static/src/js/asterisk_click2dial.js:31
+#, python-format
+msgid "Number Not Found"
+msgstr "Numara bulunamadı"
+
+#. module: asterisk_click2dial
+#: code:addons/asterisk_click2dial/asterisk_click2dial.py:234
+#, python-format
+msgid "Odoo can successfully login to the Asterisk Manager Interface."
+msgstr "Odoo Asterisk Yönetim Arayüzüne başarılı bir şekide bağlandı"
+
+#. module: asterisk_click2dial
+#: code:addons/asterisk_click2dial/asterisk_click2dial.py:113
+#, python-format
+msgid "Only use digits for the '%s' on the Asterisk server '%s'"
+msgstr "Kullanılacak rakam sayısı '%s'  Asterisk sunucu '%s'"
+
+#. module: asterisk_click2dial
+#. openerp-web
+#: code:addons/asterisk_click2dial/static/src/xml/asterisk_click2dial.xml:13
+#, python-format
+msgid "Open Caller"
+msgstr "Arayanı Aç"
+
+#. module: asterisk_click2dial
+#: view:res.users:asterisk_click2dial.view_users_form
+msgid "Optional Asterisk Parameters - for experts only, can be left empty"
+msgstr "Opsiyonel Asterisk parametreleri  - uzman kullanıcılar için boş bırakılabilir"
+
+#. module: asterisk_click2dial
+#: field:asterisk.server,out_prefix:0
+msgid "Out Prefix"
+msgstr "Çıkış ön eki (Prefix)"
+
+#. module: asterisk_click2dial
+#: help:asterisk.server,password:0
+msgid ""
+"Password that OpenERP will use to communicate with the Asterisk Manager "
+"Interface. Refer to /etc/asterisk/manager.conf on your Asterisk server."
+msgstr "Asterisk sunucuya AMI ile bağlanırken kullanılacak kullanıcı adı. Bilgi için /etc/asterisk/manager.conf dosyasını inceleyin."
+
+#. module: asterisk_click2dial
+#: field:asterisk.server,port:0
+msgid "Port"
+msgstr "Port"
+
+#. module: asterisk_click2dial
+#: help:asterisk.server,out_prefix:0
+msgid ""
+"Prefix to dial to make outgoing calls. If you don't use a prefix to make "
+"outgoing calls, leave empty."
+msgstr "Dış hatlara çıkmak için kullanılan ek rakalar. Dış hatta çıkmak için önek kullanmıyorsanız boş bırakabilirsiniz. ör: 9"
+
+#. module: asterisk_click2dial
+#: help:asterisk.server,extension_priority:0
+msgid ""
+"Priority of the extension in the Asterisk dialplan. Refer to "
+"/etc/asterisk/extensions.conf on your Asterisk server."
+msgstr "Asterisk arama planındaki aramaların yapılacağı  'context'. Bilgi için Asterisk sunucuda  /etc/asterisk/extensions.conf dosyasını inceleyin."
+
+#. module: asterisk_click2dial
+#. openerp-web
+#: code:addons/asterisk_click2dial/static/src/js/asterisk_click2dial.js:27
+#, python-format
+msgid "Problem in the connection to Asterisk"
+msgstr "Asterisk bağlantısında Hata"
+
+#. module: asterisk_click2dial
+#: code:addons/asterisk_click2dial/asterisk_click2dial.py:211
+#, python-format
+msgid ""
+"Problem in the request from OpenERP to Asterisk. Here is the error message: "
+"%s"
+msgstr "Odoo --> Asterisk isteğinde hata oluştu. Hata mesajı: %s"
+
+#. module: asterisk_click2dial
+#: code:addons/asterisk_click2dial/asterisk_click2dial.py:372
+#: field:res.users,resource:0
+#, python-format
+msgid "Resource Name"
+msgstr "Kaynak Adı"
+
+#. module: asterisk_click2dial
+#: help:res.users,resource:0
+msgid ""
+"Resource name for the channel type selected. For example, if you use "
+"'Dial(SIP/phone1)' in your Asterisk dialplan to ring the SIP phone of this "
+"user, then the resource name for this user is 'phone1'.  For a SIP phone, "
+"the phone number is often used as resource name, but not always."
+msgstr "Seçilen kanal tipi için kaynak adı.  Örnek, Eğer Asterisk arama planında kullanıcının telefonunu aramak için 'Dial(SIP/tel1)' yazıyorsanız bu alana tel1 yazmalısınız. SIP telefonlar için kaynak adı genelde dahili numaradır mesela: 1200"
+
+#. module: asterisk_click2dial
+#: selection:res.users,asterisk_chan_type:0
+msgid "SCCP"
+msgstr "SCCP"
+
+#. module: asterisk_click2dial
+#: selection:res.users,asterisk_chan_type:0
+msgid "SIP"
+msgstr "SIP"
+
+#. module: asterisk_click2dial
+#: view:asterisk.server:asterisk_click2dial.view_asterisk_server_form
+msgid "Server Name"
+msgstr "Sunucu Adı"
+
+#. module: asterisk_click2dial
+#: help:asterisk.server,alert_info:0
+msgid ""
+"Set Alert-Info header in SIP request to user's IP Phone for the click2dial "
+"feature. If empty, the Alert-Info header will not be added. You can use it "
+"to have a special ring tone for click2dial (a silent one !) or to activate "
+"auto-answer for example."
+msgstr "Tıka çevir özelliği için SIP isteğindeki Alert-Info başlığını belirleyin. Boş bırakılırsa Alert-Info başlığı eklenmez.  Bu alanı özel bir zil sesi (sessiz zil mesela) ya da otomatik cevaplama ayarlamak için kullanabilirsiniz."
+
+#. module: asterisk_click2dial
+#: help:res.users,variable:0
+msgid ""
+"Set a user-specific 'Variable' field in the Asterisk Manager Interface "
+"'originate' request for the click2dial feature. If you want to have several "
+"variable headers, separate them with '|'."
+msgstr "Tıkla ara yapılırken Asterisk Yönetim Arayüzünde oluşturulan 'originate' isteği içinde kullanıcı tanımlı 'Değişken' belirleyebilirsiniz. Eğer birden fazla değişken tanımlamak isterseniz değişkenleri  '|' ile ayırın."
+
+#. module: asterisk_click2dial
+#: help:res.users,alert_info:0
+msgid ""
+"Set a user-specific Alert-Info header in SIP request to user's IP Phone for "
+"the click2dial feature. If empty, the Alert-Info header will not be added. "
+"You can use it to have a special ring tone for click2dial (a silent one !) "
+"or to activate auto-answer for example."
+msgstr "Tıka çevir özelliği için SIP isteğine kullanıcıya özel bir Alert-Info başlığı belirleyin. Boş bırakılırsa Alert-Info başlığı eklenmez.  Bu alanı özel bir zil sesi (sessiz zil mesela) ya da otomatik cevaplama ayarlamak için kullanabilirsiniz."
+
+#. module: asterisk_click2dial
+#: selection:res.users,asterisk_chan_type:0
+msgid "Skinny"
+msgstr "Sıska"
+
+#. module: asterisk_click2dial
+#: view:res.users:asterisk_click2dial.view_users_form
+msgid "Standard Asterisk Parameters"
+msgstr "Standart Asterisk Parametreleri"
+
+#. module: asterisk_click2dial
+#. openerp-web
+#: code:addons/asterisk_click2dial/static/src/js/asterisk_click2dial.js:44
+#, python-format
+msgid "Success"
+msgstr "Başarılı"
+
+#. module: asterisk_click2dial
+#: help:asterisk.server,port:0
+msgid ""
+"TCP port on which the Asterisk Manager Interface listens. Defined in "
+"/etc/asterisk/manager.conf on Asterisk."
+msgstr "Asterisk Yönetim Arayüzü (AMI) bağlantı portu. /etc/asterisk/manager.conf dosyasında tanımlıdır."
+
+#. module: asterisk_click2dial
+#: view:asterisk.server:asterisk_click2dial.view_asterisk_server_form
+msgid "Test Connection to Asterisk"
+msgstr "Asterisk bağlantısını dene"
+
+#. module: asterisk_click2dial
+#: code:addons/asterisk_click2dial/asterisk_click2dial.py:383
+#, python-format
+msgid "The '%s' for the user '%s' should only have ASCII caracters"
+msgstr "Kullanıcının '%s' sadece ASCII karakterlerden oluşabilir. Kullanıcı '%s' "
+
+#. module: asterisk_click2dial
+#: code:addons/asterisk_click2dial/asterisk_click2dial.py:138
+#, python-format
+msgid "The '%s' should only have ASCII caracters for the Asterisk server '%s'"
+msgstr "'%s' sadece ASCII karakterlerden oluşabilir. Asterisk sunucu '%s'"
+
+#. module: asterisk_click2dial
+#: code:addons/asterisk_click2dial/asterisk_click2dial.py:122
+#, python-format
+msgid ""
+"The 'extension priority' must be a positive value for the Asterisk server "
+"'%s'"
+msgstr "'Dahili hat önceliği' pozitif bir değer olmalıdır. Asterisk sunucu: '%s'"
+
+#. module: asterisk_click2dial
+#: help:asterisk.server,active:0
+msgid ""
+"The active field allows you to hide the Asterisk server without deleting it."
+msgstr "Aktif alanı Asterisk sunucusunu gerçekten silmeden gizlemenize yarar."
+
+#. module: asterisk_click2dial
+#: help:res.users,internal_number:0
+msgid "User's internal phone number."
+msgstr "Kullanıcının dahili telefon numarası."
+
+#. module: asterisk_click2dial
+#: field:res.users,alert_info:0
+msgid "User-specific Alert-Info SIP Header"
+msgstr "Kullanıcıya özel Alert-Info SIP Başlığı"
+
+#. module: asterisk_click2dial
+#: field:res.users,dial_suffix:0
+msgid "User-specific Dial Suffix"
+msgstr "Kullanıcı-tanımlı arama son eki"
+
+#. module: asterisk_click2dial
+#: field:res.users,variable:0
+msgid "User-specific Variable"
+msgstr "Kullanıcıya özel Değişken"
+
+#. module: asterisk_click2dial
+#: help:res.users,dial_suffix:0
+msgid "User-specific dial suffix such as aa=2wb for SCCP auto answer."
+msgstr "Kullanıcı-özel arama soneki mesela SCCP otomatik yanıtlama için  aa=2wb"
+
+#. module: asterisk_click2dial
+#: model:ir.model,name:asterisk_click2dial.model_res_users
+msgid "Users"
+msgstr "Kullanıcılar"
+
+#. module: asterisk_click2dial
+#: field:asterisk.server,wait_time:0
+msgid "Wait Time (sec)"
+msgstr "Bekleme zamanı (sn)"
+
+#. module: asterisk_click2dial
+#: code:addons/asterisk_click2dial/asterisk_click2dial.py:117
+#, python-format
+msgid ""
+"You should set a 'Wait time' value between 1 and 120 seconds for the "
+"Asterisk server '%s'"
+msgstr "'Bekleme zamanı (sn)' değerini 1 ile 120 saniye arasında ayarlamalısınız. Asterisk sunucu '%s'"
+
+#. module: asterisk_click2dial
+#: code:addons/asterisk_click2dial/asterisk_click2dial.py:127
+#, python-format
+msgid ""
+"You should set a TCP port between 1 and 65535 for the Asterisk server '%s'"
+msgstr "1 ile 65535 arasında bir TCP portu belirlemelisiniz. Asterisk sunucu '%s'"
+
+#. module: asterisk_click2dial
+#: selection:res.users,asterisk_chan_type:0
+msgid "Zap"
+msgstr "ZAP"
+
+#. module: asterisk_click2dial
+#: selection:res.users,asterisk_chan_type:0
+msgid "mISDN"
+msgstr "mISDN"
