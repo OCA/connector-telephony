@@ -218,18 +218,21 @@ class freeswitch_server(orm.Model):
                 _("Connection Test Failed!"),
                 _("Here is the error message: %s" % e))
         finally:
-            if fs_manager.connected() is not 1:
+            try:
+                if fs_manager.connected() is not 1:
+                    raise orm.except_orm(
+                        _("Connection Test Failed!"),
+                        _("Check Host, Port and Password"))
+                else:
+                    fs_manager.disconnect()
+                    raise orm.except_orm(
+                        _("Connection Test Successfull!"),
+                        _("OpenERP can successfully login to the FreeSWITCH Event "
+                          "Socket."))
+            except Exception, e:
                 raise orm.except_orm(
                     _("Connection Test Failed!"),
                     _("Check Host, Port and Password"))
-            else:
-                try:
-                    if fs_manager:
-                        fs_manager.disconnect()
-                raise orm.except_orm(
-                    _("Connection Test Successfull!"),
-                    _("OpenERP can successfully login to the FreeSWITCH Event "
-                      "Socket."))
 
     def _get_calling_number(self, cr, uid, context=None):
 
