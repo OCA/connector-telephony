@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+# coding: utf-8
 # © 2004-2009 OpenERP SA (<http://openerp.com>)
 # © 2011 SYLEAM (<http://syleam.fr/>)
 # © 2013 Julius Network Solutions SARL <contact@julius.fr>
@@ -39,8 +39,5 @@ Sending SMSs very easily, individually or collectively.
         "wizard/mass_sms_view.xml",
         "smstemplate_view.xml"
     ],
-    "active": False,
     "installable": True,
 }
-
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
