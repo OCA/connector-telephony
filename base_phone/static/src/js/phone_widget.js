@@ -128,7 +128,9 @@ openerp.base_phone = function (instance) {
         res = _super_list_char_format_.call(this, row_data, options);
         var value = row_data[this.id].value;
         if (value && this.widget === 'phone') {
-            return formatInternational('', value);
+            readable_space = formatInternational('', value);
+            readable_no_break_space = readable_space.replace(/\s/g, ' ');
+            return readable_no_break_space;
         }
         return res;
     };
