@@ -83,7 +83,6 @@ for any help or question about this module.
 >>>>>>> Feature "Open Calling Partner" replaced by "Open Caller", with a completely new behavior
         ],
     'qweb': ['static/src/xml/*.xml'],
-    'demo': ['base_phone_demo.xml'],
     'test': ['test/phonenum.yml'],
     'images': [],
     'installable': False,
