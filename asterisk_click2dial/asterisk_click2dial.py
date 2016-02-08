@@ -255,15 +255,15 @@ class asterisk_server(orm.Model):
                     break
                 # 6 = Up
                 if (
-                        chan.get('ChannelState') == '6'
-                        and sip_account in chan.get('BridgedChannel', '')):
+                        chan.get('ChannelState') == '6' and
+                        sip_account in chan.get('BridgedChannel', '')):
                     _logger.debug("Found a matching Event in 'Up' state")
                     calling_party_number = chan.get('CallerIDNum')
                     break
                 # Compatibility with Asterisk 1.4
                 if (
-                        chan.get('State') == 'Up'
-                        and sip_account in chan.get('Link', '')):
+                        chan.get('State') == 'Up' and
+                        sip_account in chan.get('Link', '')):
                     _logger.debug("Found a matching Event in 'Up' state")
                     calling_party_number = chan.get('CallerIDNum')
                     break
