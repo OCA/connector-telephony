@@ -1,4 +1,9 @@
 -
+  Write country = FR for the main company
+-
+  !record {model: res.company, id: base.main_company}:
+    country_id: base.fr
+-
   Write french phone numbers in national format
 -
   !record {model: res.partner, id: partner1}:
