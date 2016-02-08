@@ -78,9 +78,8 @@ class reformat_all_phonenumbers(models.TransientModel):
                             obj._description, name, unicode(e)))
                     continue
                 if any(
-                        [init_entry.get(field)
-                            != entry.get(field) for field
-                            in fields]):
+                        [init_entry.get(field) != entry.get(field) for
+                         field in fields]):
                     entry.pop('id')
                     logger.info(
                         '[%s] Reformating phone number: FROM %s TO %s' % (
