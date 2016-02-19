@@ -1,34 +1,17 @@
-# -*- coding: utf-8 -*-
-##############################################################################
-#
-#    OpenERP, Open Source Management Solution
-#    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>).
-#    Copyright (C) 2011 SYLEAM (<http://syleam.fr/>)
-#    Copyright (C) 2013 Julius Network Solutions SARL <contact@julius.fr>
-#    Copyright (C) 2015 Valentin Chemiere <valentin.chemiere@akretion.com>
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as
-#    published by the Free Software Foundation, either version 3 of the
-#    License, or (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU Affero General Public License for more details.
-#
-#    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-#
-##############################################################################
+# coding: utf-8
+# Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>).
+# Copyright (C) 2011 SYLEAM (<http://syleam.fr/>)
+# Copyright (C) 2013 Julius Network Solutions SARL <contact@julius.fr>
+# Copyright (C) 2015 Valentin Chemiere <valentin.chemiere@akretion.com>
+# Copyright (C) 2015 Sébastien BEAU <sebastien.beau@akretion.com>
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+
+import logging
 
 from openerp import models, fields, api, _
-from openerp.exceptions import Warning as UserError
-import urllib
-import logging
 from openerp.addons.server_environment import serv_config
-_logger = logging.getLogger(__name__)
 
+_logger = logging.getLogger(__name__)
 
 PRIORITY_LIST = [
     ('0', '0'),
@@ -61,18 +44,16 @@ class SMSClient(models.Model):
             if serv_config.has_section(global_section_name):
                 config_vals.update(serv_config.items(global_section_name))
                 custom_section_name = '.'.join((global_section_name,
-                                                sms_provider.name
-                                                ))
+                                                sms_provider.name))
                 if serv_config.has_section(custom_section_name):
                     config_vals.update(serv_config.items(custom_section_name))
                 for key in config_vals:
                     sms_provider[key] = config_vals[key]
 
     name = fields.Char('Gateway Name', required=True)
-    url = fields.Char('Gateway URL',
-                      help='Base url for message',
-                      compute='_get_provider_conf'
-                      )
+    url = fields.Char(
+        string='Gateway URL', compute='_get_provider_conf',
+        help='Base url for message')
     url_visible = fields.Boolean(default=False)
     method = fields.Selection(
         string='API Method',
@@ -95,30 +76,27 @@ class SMSClient(models.Model):
     from_provider_visible = fields.Boolean(default=False)
     code = fields.Char('Verification Code')
     code_visible = fields.Boolean(default=False)
-    body = fields.Text('Message',
-                       help="The message text that will be send along with the"
-                            " email which is send through this server.")
+    body = fields.Text(
+        string='Message',
+        help="The message text that will be send along with the"
+             " email which is send through this server.")
     validity = fields.Integer(
-        help='The maximum time - in minute(s) - before the message is dropped.',
         default=10,
-        )
+        help="The maximum time - in minute(s) - before the message "
+             "is dropped.")
     validity_visible = fields.Boolean(default=False)
     classes = fields.Selection(
         CLASSES_LIST, 'Class',
-        help='The SMS class: flash(0),phone display(1),SIM(2),toolkit(3)',
-        default='1'
-        )
+        default='1',
+        help='The SMS class: flash(0),phone display(1),SIM(2),toolkit(3)')
     classes_visible = fields.Boolean(default=False)
     deferred = fields.Integer(
-        'Deferred',
-        help='The time -in minute(s)- to wait before sending the message.',
-        default=0)
+        default=0,
+        help='The time -in minute(s)- to wait before sending the message.')
     deferred_visible = fields.Boolean(default=False)
-
-    priority = fields.Selection(PRIORITY_LIST,
-                                'Priority',
-                                help='The priority of the message ',
-                                default='3')
+    priority = fields.Selection(
+        PRIORITY_LIST, string='Priority', default='3',
+        help='The priority of the message')
     priority_visible = fields.Boolean(default=False)
     coding = fields.Selection([
         ('1', '7 bit'),
@@ -133,9 +111,9 @@ class SMSClient(models.Model):
     tag = fields.Char('Tag', help='an optional tag')
     tag_visible = fields.Boolean(default=False)
     nostop = fields.Boolean(
+        default=True,
         help='Do not display STOP clause in the message, this requires that '
-             'this is not an advertising message.',
-        default=True)
+             'this is not an advertising message.')
     nostop_visible = fields.Boolean(default=False)
     char_limit = fields.Boolean('Character Limit', default=True)
     char_limit_visible = fields.Boolean(default=False)
@@ -162,7 +140,7 @@ class SMSClient(models.Model):
     @api.multi
     def _check_permissions(self):
         self.ensure_one()
-        if not self.env.uid in self.sudo().user_ids.ids:
+        if self.env.uid not in self.sudo().user_ids.ids:
             return False
         return True
 
@@ -196,7 +174,7 @@ class SmsSms(models.Model):
         states={'draft': [('readonly', False)]})
     state = fields.Selection([
         ('draft', 'Queued'),
-        ('send', 'Sent'),
+        ('sent', 'Sent'),
         ('cancel', 'Cancel'),
         ('error', 'Error'),
         ], 'Message Status',
@@ -264,7 +242,7 @@ class SmsSms(models.Model):
             if sms.gateway_id.char_limit and len(sms.message) > 160:
                 sms.write({
                     'state': 'error',
-                    'error': 'Size of SMS should not be more then 160 char',
+                    'error': _('Size of SMS should not be more then 160 char'),
                     })
             if not hasattr(sms, "_send_%s" % sms.gateway_id.method):
                 raise NotImplemented
@@ -272,7 +250,7 @@ class SmsSms(models.Model):
                 try:
                     with sms._cr.savepoint():
                         getattr(sms, "_send_%s" % sms.gateway_id.method)()
-                        sms.write({'state': 'send', 'error': ''})
+                        sms.write({'state': 'sent', 'error': ''})
                 except Exception, e:
                     _logger.error('Failed to send sms %s', e)
                     sms.write({'error': e, 'state': 'error'})

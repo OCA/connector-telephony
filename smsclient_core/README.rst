@@ -2,7 +2,7 @@
     :alt: License: AGPL-3
 
 SMS client core
-===========
+===============
 
 This module provides base function to send sms. It is not meant to work alone and needs a least one provider module.
 
@@ -29,9 +29,6 @@ To use this module, you need to:
 * select on or multiple partner
 * go to more and will found some wizards to send sms
 
-For further information, please visit:
-
-* https://www.odoo.com/forum/help-1
 
 Known issues / Roadmap
 ======================
