@@ -1,8 +1,8 @@
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    Base Phone module for OpenERP
-#    Copyright (C) 2014 Alexis de Lattre <alexis@via.ecp.fr>
+#    Base Phone module for Odoo
+#    Copyright (C) 2014-2015 Alexis de Lattre <alexis@via.ecp.fr>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -22,7 +22,7 @@
 
 {
     'name': 'Base Phone',
-    'version': '8.0.0.1.0',
+    'version': '9.0.0.1.0',
     'category': 'Phone',
     'license': 'AGPL-3',
     'summary': 'Validate phone numbers',
@@ -85,5 +85,5 @@ for any help or question about this module.
     'qweb': ['static/src/xml/*.xml'],
     'test': ['test/phonenum.yml'],
     'images': [],
-    'installable': False,
+    'installable': True,
 }
