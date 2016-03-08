@@ -123,9 +123,14 @@ var FieldFax = formwidgets.FieldChar.extend({
         }
     });
 
-core.form_widget_registry
-    .add('phone', FieldPhone)
-    .add('fax', FieldFax);
+// To avoid conflicts, we check that widgets do not exist before using
+if(!core.form_widget_registry.get('fax')){
+    core.form_widget_registry.add('fax', FieldFax);
+}
+
+if(!core.form_widget_registry.get('phone')){
+    core.form_widget_registry.add('phone', FieldPhone);
+}
 
 /*
 var Column = require('web.list_view.js');
