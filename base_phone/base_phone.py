@@ -1,8 +1,8 @@
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    Base Phone module for Odoo/OpenERP
-#    Copyright (C) 2010-2014 Alexis de Lattre <alexis@via.ecp.fr>
+#    Base Phone module for Odoo
+#    Copyright (C) 2010-2015 Alexis de Lattre <alexis@via.ecp.fr>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -21,7 +21,7 @@
 
 from openerp import models, fields, api, _
 from openerp.tools.safe_eval import safe_eval
-from openerp.exceptions import Warning
+from openerp.exceptions import UserError
 import logging
 # Lib for phone number reformating -> pip install phonenumbers
 import phonenumbers
@@ -32,88 +32,96 @@ _logger = logging.getLogger(__name__)
 class PhoneCommon(models.AbstractModel):
     _name = 'phone.common'
 
-    def _generic_reformat_phonenumbers(
-            self, cr, uid, ids, vals, context=None):
-        """Reformat phone numbers in E.164 format i.e. +33141981242"""
+    @api.model
+    def _reformat_phonenumbers_create(self, vals):
+        assert isinstance(self._phone_fields, list),\
+            'self._phone_fields must be a list'
+        if any([vals.get(field) for field in self._phone_fields]):
+            countrycode = self._get_countrycode_from_vals(vals)
+            countrycode = self._countrycode_fallback(countrycode)
+            vals = self._reformat_phonenumbers(vals, countrycode)
+        return vals
+
+    @api.multi
+    def _reformat_phonenumbers_write(self, vals):
+        assert isinstance(self._phone_fields, list),\
+            'self._phone_fields must be a list'
+        if any([vals.get(field) for field in self._phone_fields]):
+            countrycode = self._get_countrycode_from_vals(vals)
+            if not countrycode:
+                if self._country_field:
+                    country = safe_eval(
+                        'self.' + self._country_field, {'self': self})
+                    countrycode = country and country.code or None
+                elif self._partner_field:
+                    partner = safe_eval(
+                        'self.' + self._partner_field, {'self': self})
+                    if partner:
+                        countrycode = partner.country_id and\
+                            partner.country_id.code or None
+
+            countrycode = self._countrycode_fallback(countrycode)
+            vals = self._reformat_phonenumbers(vals, countrycode)
+        return vals
+
+    @api.model
+    def _get_countrycode_from_vals(self, vals):
         assert isinstance(self._country_field, (str, unicode, type(None))),\
             'Wrong self._country_field'
         assert isinstance(self._partner_field, (str, unicode, type(None))),\
             'Wrong self._partner_field'
-        assert isinstance(self._phone_fields, list),\
-            'self._phone_fields must be a list'
-        if context is None:
-            context = {}
-        if ids and isinstance(ids, (int, long)):
-            ids = [ids]
-        if any([vals.get(field) for field in self._phone_fields]):
-            user = self.pool['res.users'].browse(cr, uid, uid, context=context)
-            # country_id on res.company is a fields.function that looks at
-            # company_id.partner_id.addres(default).country_id
-            countrycode = None
-            if self._country_field:
-                if vals.get(self._country_field):
-                    country = self.pool['res.country'].browse(
-                        cr, uid, vals[self._country_field], context=context)
-                    countrycode = country.code
-                elif ids:
-                    rec = self.browse(cr, uid, ids[0], context=context)
-                    country = safe_eval(
-                        'rec.' + self._country_field, {'rec': rec})
-                    countrycode = country and country.code or None
-            elif self._partner_field:
-                if vals.get(self._partner_field):
-                    partner = self.pool['res.partner'].browse(
-                        cr, uid, vals[self._partner_field], context=context)
-                    countrycode = partner.country_id and\
-                        partner.country_id.code or None
-                elif ids:
-                    rec = self.browse(cr, uid, ids[0], context=context)
-                    partner = safe_eval(
-                        'rec.' + self._partner_field, {'rec': rec})
-                    if partner:
-                        countrycode = partner.country_id and\
-                            partner.country_id.code or None
-            if not countrycode:
-                if user.company_id.country_id:
-                    countrycode = user.company_id.country_id.code
-                else:
-                    _logger.warning(
-                        "You should set a country on the company '%s' "
-                        "to allow the reformat of phone numbers",
-                        user.company_id.name)
-                    countrycode = None
-            if countrycode:
-                countrycode = countrycode.upper()
-                # with country code = None, phonenumbers.parse() will work
-                # with phonenumbers formatted in E164, but will fail with
-                # phone numbers in national format
-            for field in self._phone_fields:
-                if vals.get(field):
-                    init_value = vals.get(field)
-                    try:
-                        res_parse = phonenumbers.parse(
-                            vals.get(field), countrycode)
-                        vals[field] = phonenumbers.format_number(
-                            res_parse, phonenumbers.PhoneNumberFormat.E164)
-                        if init_value != vals[field]:
-                            _logger.debug(
-                                "%s initial value: '%s' updated value: '%s'",
-                                field, init_value, vals[field])
-                    except Exception, e:
-                        # I do BOTH logger and raise, because:
-                        # raise is usefull when the record is created/written
-                        #    by a user via the Web interface
-                        # logger is usefull when the record is created/written
-                        #    via the webservices
-                        _logger.error(
-                            "Cannot reformat the phone number '%s' to "
-                            "international format with region=%s"
-                            % (vals.get(field), countrycode))
-                        if context.get('raise_if_phone_parse_fails'):
-                            raise Warning(
-                                _("Cannot reformat the phone number '%s' to "
-                                    "international format. Error message: %s")
-                                % (vals.get(field), e))
+        countrycode = None
+        if self._country_field and vals.get(self._country_field):
+            country = self.env['res.country'].browse(
+                vals[self._country_field])
+            countrycode = country.code
+        elif self._partner_field and vals.get(self._partner_field):
+            partner = self.env['res.partner'].browse(
+                vals[self._partner_field])
+            countrycode = partner.country_id.code or False
+        return countrycode
+
+    @api.model
+    def _countrycode_fallback(self, countrycode):
+        if not countrycode:
+            if self.env.user.company_id.country_id:
+                countrycode = self.env.user.company_id.country_id.code
+            else:
+                _logger.error(
+                    "You should set a country on the company '%s' "
+                    "to allow the reformat of phone numbers",
+                    self.env.user.company_id.name)
+        return countrycode
+
+    @api.model
+    def _reformat_phonenumbers(self, vals, countrycode):
+        for field in self._phone_fields:
+            if vals.get(field):
+                init_value = vals.get(field)
+                try:
+                    res_parse = phonenumbers.parse(
+                        vals.get(field), countrycode.upper())
+                    vals[field] = phonenumbers.format_number(
+                        res_parse, phonenumbers.PhoneNumberFormat.E164)
+                    if init_value != vals[field]:
+                        _logger.info(
+                            "%s initial value: '%s' updated value: '%s'"
+                            % (field, init_value, vals[field]))
+                except Exception, e:
+                    # I do BOTH logger and raise, because:
+                    # raise is usefull when the record is created/written
+                    #    by a user via the Web interface
+                    # logger is usefull when the record is created/written
+                    #    via the webservices
+                    _logger.error(
+                        "Cannot reformat the phone number '%s' to "
+                        "international format with region=%s",
+                        vals.get(field), countrycode)
+                    if self.env.context.get('raise_if_phone_parse_fails'):
+                        raise UserError(
+                            _("Cannot reformat the phone number '%s' to "
+                                "international format. Error message: %s")
+                            % (vals.get(field), e))
         return vals
 
     @api.model
@@ -198,7 +206,7 @@ class PhoneCommon(models.AbstractModel):
     def _get_phone_fields(self):
         '''Returns a dict with key = object name
         and value = list of phone fields'''
-        models = self.env['ir.model'].search([('osv_memory', '=', False)])
+        models = self.env['ir.model'].search([('transient', '=', False)])
         res = []
         for model in models:
             senv = False
@@ -212,7 +220,8 @@ class PhoneCommon(models.AbstractModel):
                 res.append(model.model)
         return res
 
-    def click2dial(self, cr, uid, erp_number, context=None):
+    @api.model
+    def click2dial(self, erp_number):
         '''This function is designed to be overridden in IPBX-specific
         modules, such as asterisk_click2dial or ovh_telephony_connector'''
         return {'dialed_number': erp_number}
@@ -249,26 +258,21 @@ class ResPartner(models.Model):
     _country_field = 'country_id'
     _partner_field = None
 
-    def create(self, cr, uid, vals, context=None):
-        vals_reformated = self._generic_reformat_phonenumbers(
-            cr, uid, None, vals, context=context)
-        return super(ResPartner, self).create(
-            cr, uid, vals_reformated, context=context)
+    @api.model
+    def create(self, vals):
+        vals_reformated = self._reformat_phonenumbers_create(vals)
+        return super(ResPartner, self).create(vals_reformated)
 
-    def write(self, cr, uid, ids, vals, context=None):
-        vals_reformated = self._generic_reformat_phonenumbers(
-            cr, uid, ids, vals, context=context)
-        return super(ResPartner, self).write(
-            cr, uid, ids, vals_reformated, context=context)
+    @api.multi
+    def write(self, vals):
+        vals_reformated = self._reformat_phonenumbers_write(vals)
+        return super(ResPartner, self).write(vals_reformated)
 
-    def name_get(self, cr, uid, ids, context=None):
-        if context is None:
-            context = {}
-        if context.get('callerid'):
+    @api.multi
+    def name_get(self):
+        if self._context.get('callerid'):
             res = []
-            if isinstance(ids, (int, long)):
-                ids = [ids]
-            for partner in self.browse(cr, uid, ids, context=context):
+            for partner in self:
                 if partner.parent_id and partner.parent_id.is_company:
                     name = u'%s (%s)' % (partner.name, partner.parent_id.name)
                 else:
@@ -276,8 +280,7 @@ class ResPartner(models.Model):
                 res.append((partner.id, name))
             return res
         else:
-            return super(ResPartner, self).name_get(
-                cr, uid, ids, context=context)
+            return super(ResPartner, self).name_get()
 
 
 class ResCompany(models.Model):
