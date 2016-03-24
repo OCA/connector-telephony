@@ -1,4 +1,4 @@
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
 #
 #    Base Phone module for Odoo
@@ -61,11 +61,9 @@ class ReformatAllPhonenumbers(models.TransientModel):
             all_entries = obj.search(domain)
 
             for entry in all_entries:
-                print "entry=", entry
                 init_entry_vals = {}
                 for field in fields:
                     init_entry_vals[field] = entry[field]
-                print "init_entry=", init_entry_vals
                 entry_vals = init_entry_vals.copy()
                 # entry is _updated_ by the fonction
                 # _generic_reformat_phonenumbers()
@@ -84,7 +82,6 @@ class ReformatAllPhonenumbers(models.TransientModel):
                 if any([
                         init_entry_vals.get(field) != entry_vals.get(field) for
                         field in fields]):
-                    print "entry_vals=", entry_vals
                     logger.info(
                         '[%s] Reformating phone number: FROM %s TO %s',
                         obj._description, unicode(init_entry_vals),
