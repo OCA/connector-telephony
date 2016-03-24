@@ -59,7 +59,6 @@ There is no specific usage procedure for this module.
 Known issues / Roadmap
 ======================
 
-* ...
 
 Bug Tracker
 ===========
