@@ -1,4 +1,4 @@
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
 #
 #    Base Phone module for OpenERP
@@ -19,12 +19,12 @@
 #
 ##############################################################################
 
-from openerp.osv import orm
+from openerp import models
 from openerp.report import report_sxw
 import phonenumbers
 
 
-class base_phone_installed(orm.AbstractModel):
+class BasePhoneInstalled(models.AbstractModel):
     '''When you use monkey patching, the code is executed when the module
     is in the addons_path of the OpenERP server, even is the module is not
     installed ! In order to avoid the side-effects it can create,
