@@ -42,8 +42,8 @@ class AsteriskServer(models.Model):
 
     name = fields.Char(string='Asterisk Server Name', size=50, required=True)
     active = fields.Boolean(
-        string='Active', help="The active field allows you to hide the Asterisk"
-        "server without deleting it.", default=True)
+        string='Active', help="The active field allows you to hide the"
+        "Asterisk server without deleting it.", default=True)
     ip_address = fields.Char(
         string='Asterisk IP address or DNS', size=50, required=True,
         help="IP address or DNS name of the Asterisk server.")
@@ -87,8 +87,8 @@ class AsteriskServer(models.Model):
         "for example.")
     company_id = fields.Many2one(
         'res.company', string='Company',
-        help="Company who uses the Asterisk server.",
-        default=lambda self: self.env['res.company']._company_default_get('asterisk.server'))
+        help="Company who uses the Asterisk server.", default=lambda self:
+        self.env['res.company']._company_default_get('asterisk.server'))
 
     @api.one
     @api.constrains('out_prefix', 'wait_time', 'extension_priority', 'port',
@@ -103,23 +103,29 @@ class AsteriskServer(models.Model):
 
             if out_prefix[1] and not out_prefix[1].isdigit():
                 raise UserError(
-                    _("Error: Only use digits for the '%s' on the Asterisk server '%s'" % (out_prefix[0], server.name)))
+                    _("Error: Only use digits for the '%s' on the Asterisk"
+                      "server '%s'" % (out_prefix[0], server.name)))
             if server.wait_time < 1 or server.wait_time > 120:
                 raise UserError(
-                    _("Error:You should set a 'Wait time' value between 1 and 120 seconds for the Asterisk server '%s'" % server.name))
+                    _("Error:You should set a 'Wait time' value between 1"
+                      "and 120 seconds for the Asterisk server '%s'"
+                      % server.name))
             if server.extension_priority < 1:
                 raise UserError(
-                    _("Error: The 'extension priority' must be a positive value for the Asterisk server '%s'" % server.name))
+                    _("Error: The 'extension priority' must be a positive"
+                      "value for the Asterisk server '%s'" % server.name))
             if server.port > 65535 or server.port < 1:
                 raise UserError(
-                    _("Error: You should set a TCP port between 1 and 65535 for the Asterisk server '%s'" % server.name))
+                    _("Error: You should set a TCP port between 1 and 65535"
+                      "for the Asterisk server '%s'" % server.name))
             for check_str in [dialplan_context, alert_info, login, password]:
                 if check_str[1]:
                     try:
                         check_str[1].encode('ascii')
                     except UnicodeEncodeError:
                         raise UserError(
-                            _("Error: The '%s' should only have ASCII caracters for the Asterisk server '%s'"
+                            _("Error: The '%s' should only have ASCII"
+                              "caracters for the Asterisk server '%s'"
                                 % (check_str[0], server.name)))
         return True
 
@@ -136,7 +142,8 @@ class AsteriskServer(models.Model):
             # we take the first one of the user's company
             if not ast_server:
                 raise UserError(
-                    _("Error: No Asterisk server configured for the company '%s'.")
+                    _("Error: No Asterisk server configured for the"
+                      "company '%s'.")
                     % user.company_id.name)
         return ast_server
 
@@ -176,7 +183,8 @@ class AsteriskServer(models.Model):
                 % ast_server.ip_address)
             _logger.error("Here is the error message: %s" % e)
             raise UserError(
-                _("Error: Problem in the request from OpenERP to Asterisk. Here is the error message: %s" % e))
+                _("Error: Problem in the request from OpenERP to Asterisk."
+                  "Here is the error message: %s" % e))
 
         return (user, ast_server, ast_manager)
 
@@ -195,7 +203,8 @@ class AsteriskServer(models.Model):
             if ast_manager:
                 ast_manager.Logoff()
         raise UserError(
-            _("Connection Test Successfull! Odoo can successfully login to the Asterisk Manager Interface."))
+            _("Connection Test Successfull! Odoo can successfully login to the"
+              "Asterisk Manager Interface."))
 
     def _get_calling_number(self):
 
@@ -211,21 +220,21 @@ class AsteriskServer(models.Model):
                 # 4 = Ring
                 if (
                     chan.get('ChannelState') == '4' and
-                    chan.get('ConnectedLineNum') == user.internal_number):
+                        chan.get('ConnectedLineNum') == user.internal_number):
                     _logger.debug("Found a matching Event in 'Ring' state")
                     calling_party_number = chan.get('CallerIDNum')
                     break
                 # 6 = Up
                 if (
                     chan.get('ChannelState') == '6' and
-                    sip_account in chan.get('BridgedChannel', '')):
+                        sip_account in chan.get('BridgedChannel', '')):
                     _logger.debug("Found a matching Event in 'Up' state")
                     calling_party_number = chan.get('CallerIDNum')
                     break
                 # Compatibility with Asterisk 1.4
                 if (
                     chan.get('State') == 'Up' and
-                    sip_account in chan.get('Link', '')):
+                        sip_account in chan.get('Link', '')):
                     _logger.debug("Found a matching Event in 'Up' state")
                     calling_party_number = chan.get('CallerIDNum')
                     break
@@ -236,7 +245,8 @@ class AsteriskServer(models.Model):
             _logger.error(
                 "Here are the details of the error: '%s'" % unicode(e))
             raise UserError(
-                _("Error: Can't get calling number from  Asterisk.\nHere is the error: '%s'" % unicode(e)))
+                _("Error: Can't get calling number from  Asterisk.\nHere is"
+                  "the error: '%s'" % unicode(e)))
 
         finally:
             ast_manager.Logoff()
@@ -248,7 +258,8 @@ class AsteriskServer(models.Model):
         calling_number = self._get_calling_number()
         # calling_number = "0641981246"
         if calling_number:
-            record = self.env['phone.common'].get_record_from_phone_number(calling_number)
+            record = self.env['phone.common'].\
+                get_record_from_phone_number(calling_number)
             if record:
                 return record
             else:
@@ -291,7 +302,8 @@ class ResUsers(models.Model):
         ('Local', 'Local'),
     ], string='Asterisk Channel Type',
         help="Asterisk channel type, as used in the Asterisk dialplan. "
-        "If the user has a regular IP phone, the channel type is 'SIP'.", default='SIP')
+        "If the user has a regular IP phone, the channel type is 'SIP'.",
+        default='SIP')
     resource = fields.Char(
         string='Resource Name', size=64,
         help="Resource name for the channel type selected. For example, "
@@ -333,7 +345,8 @@ class ResUsers(models.Model):
                         check_string[1].encode('ascii')
                     except UnicodeEncodeError:
                         raise UserError(
-                            _("Error: The '%s' for the user '%s' should only have ASCII caracters")
+                            _("Error: The '%s' for the user '%s' should only"
+                              "have ASCII caracters")
                             % (check_string[0], user.name))
         return True
 
@@ -395,7 +408,8 @@ class PhoneCommon(models.AbstractModel):
             _logger.error(
                 "Here are the details of the error: '%s'" % unicode(e))
             raise UserError(
-                _("Error: Click to dial with Asterisk failed.\nHere is the error: '%s'")
+                _("Error: Click to dial with Asterisk failed.\n"
+                  "Here is the error: '%s'")
                 % unicode(e))
         finally:
             ast_manager.Logoff()
