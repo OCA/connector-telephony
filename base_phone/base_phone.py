@@ -73,11 +73,11 @@ class PhoneCommon(models.AbstractModel):
         countrycode = None
         if self._country_field and vals.get(self._country_field):
             country = self.env['res.country'].browse(
-                vals[self._country_field])
+                int(vals[self._country_field]))
             countrycode = country.code
         elif self._partner_field and vals.get(self._partner_field):
             partner = self.env['res.partner'].browse(
-                vals[self._partner_field])
+                int(vals[self._partner_field]))
             countrycode = partner.country_id.code or False
         return countrycode
 
