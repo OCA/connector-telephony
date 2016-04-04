@@ -210,22 +210,22 @@ class AsteriskServer(models.Model):
                 sip_account = user.asterisk_chan_type + '/' + user.resource
                 # 4 = Ring
                 if (
-                        chan.get('ChannelState') == '4' and
-                        chan.get('ConnectedLineNum') == user.internal_number):
+                    chan.get('ChannelState') == '4' and
+                    chan.get('ConnectedLineNum') == user.internal_number):
                     _logger.debug("Found a matching Event in 'Ring' state")
                     calling_party_number = chan.get('CallerIDNum')
                     break
                 # 6 = Up
                 if (
-                        chan.get('ChannelState') == '6'
-                        and sip_account in chan.get('BridgedChannel', '')):
+                    chan.get('ChannelState') == '6' and
+                    sip_account in chan.get('BridgedChannel', '')):
                     _logger.debug("Found a matching Event in 'Up' state")
                     calling_party_number = chan.get('CallerIDNum')
                     break
                 # Compatibility with Asterisk 1.4
                 if (
-                        chan.get('State') == 'Up'
-                        and sip_account in chan.get('Link', '')):
+                    chan.get('State') == 'Up' and
+                    sip_account in chan.get('Link', '')):
                     _logger.debug("Found a matching Event in 'Up' state")
                     calling_party_number = chan.get('CallerIDNum')
                     break
