@@ -47,7 +47,7 @@ for any help or question about this module.
         'hr_recruitment_view.xml',
         ],
     'images': [],
-    'installable': True,
+    'installable': False,
     'auto_install': True,
     'active': False,
 }

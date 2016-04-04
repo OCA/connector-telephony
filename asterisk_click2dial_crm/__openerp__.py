@@ -43,6 +43,6 @@ This module will be removed from the repository in the near future.
         'crm_phone',
     ],
     "data": [],
-    "installable": True,
+    'installable': False,
     "application": False,
 }

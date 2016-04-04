@@ -44,7 +44,7 @@ for any help or question about this module.
     'depends': ['base_phone', 'crm_claim'],
     'data': ['crm_claim_view.xml'],
     'images': [],
-    'installable': True,
+    'installable': False,
     'auto_install': True,
     'active': False,
 }

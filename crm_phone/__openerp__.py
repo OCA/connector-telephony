@@ -51,7 +51,7 @@ for any help or question about this module.
         ],
     'test': ['test/phonenum.yml'],
     'images': [],
-    'installable': True,
+    'installable': False,
     'auto_install': True,
     'active': False,
 }

@@ -35,5 +35,5 @@
     'demo': [],
     'qweb': ['static/src/xml/*.xml'],
     'application': True,
-    'installable': True,
+    'installable': False,
 }
