@@ -24,7 +24,7 @@ Available addons
 ----------------
 addon | version | summary
 --- | --- | ---
-[asterisk_click2dial](asterisk_click2dial/) | 8.0.0.4.0 | Asterisk-OpenERP connector
+[asterisk_click2dial](asterisk_click2dial/) | 9.0.0.1.0 | Asterisk-OpenERP connector
 [asterisk_click2dial_crm](asterisk_click2dial_crm/) | 8.0.0.1.0 | Asterisk Click2dial CRM
 [base_phone](base_phone/) | 8.0.0.1.0 | Validate phone numbers
 [base_phone_popup](base_phone_popup/) | 8.0.0.4.0 | Pop-up the related form view to the user on incoming calls
