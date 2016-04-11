@@ -42,3 +42,19 @@ class hr_applicant(orm.Model):
             cr, uid, ids, vals, context=context)
         return super(hr_applicant, self).write(
             cr, uid, ids, vals_reformated, context=context)
+
+    def name_get(self, cr, uid, ids, context=None):
+        if context is None:
+            context = {}
+        if context.get('callerid'):
+            res = []
+            if isinstance(ids, (int, long)):
+                ids = [ids]
+            for applicant in self.browse(cr, uid, ids, context=context):
+                name = applicant.partner_name
+                if applicant.state not in ['done', 'cancel']:
+                    res.append((applicant.id, name))
+            return res
+        else:
+            return super(hr_applicant, self).name_get(
+                cr, uid, ids, context=context)
