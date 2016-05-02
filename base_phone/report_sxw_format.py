@@ -44,17 +44,20 @@ def format(
     if self.pool.get('base.phone.installed') and phone and text:
         # text should already be in E164 format, so we don't have
         # to give a country code to phonenumbers.parse()
-        phone_number = phonenumbers.parse(text)
-        if phone_format == 'international':
-            res = phonenumbers.format_number(
-                phone_number, phonenumbers.PhoneNumberFormat.INTERNATIONAL)
-        elif phone_format == 'national':
-            res = phonenumbers.format_number(
-                phone_number, phonenumbers.PhoneNumberFormat.NATIONAL)
-        elif phone_format == 'e164':
-            res = phonenumbers.format_number(
-                phone_number, phonenumbers.PhoneNumberFormat.E164)
-        else:
+        try:
+            phone_number = phonenumbers.parse(text)
+            if phone_format == 'international':
+                res = phonenumbers.format_number(
+                    phone_number, phonenumbers.PhoneNumberFormat.INTERNATIONAL)
+            elif phone_format == 'national':
+                res = phonenumbers.format_number(
+                    phone_number, phonenumbers.PhoneNumberFormat.NATIONAL)
+            elif phone_format == 'e164':
+                res = phonenumbers.format_number(
+                    phone_number, phonenumbers.PhoneNumberFormat.E164)
+            else:
+                res = text
+        except:
             res = text
     else:
         res = format_original(self, text, oldtag=oldtag)
