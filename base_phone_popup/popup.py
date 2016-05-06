@@ -84,6 +84,31 @@ class phone_common(orm.AbstractModel):
             callerid = False
         return callerid
 
+    def incall_notify_by_extension(
+            self, cr, uid, number, extension_list, context=None):
+        assert isinstance(extension_list, list), 'extension_list must be a list'
+        res = self.get_record_from_phone_number(
+            cr, uid, number, context=context)
+        user_ids = self.pool['res.users'].search(
+            cr, uid, [('internal_number', 'in', extension_list)], context=context)
+        logger.debug(
+            'Notify incoming call from number %s to users %s'
+            % (number, user_ids))
+        action = self._prepare_incall_pop_action(
+            cr, uid, res, number, context=context)
+        if action:
+            users = self.pool['res.users'].read(
+                cr, uid, user_ids, ['context_incall_popup'], context=context)
+            for user in users:
+                if user['context_incall_popup']:
+                    self.pool['action.request'].notify(
+                        cr, uid, to_id=user['id'], **action)
+        if res:
+            callerid = res[2]
+        else:
+            callerid = False
+        return callerid
+
 
 class res_users(orm.Model):
     _inherit = 'res.users'

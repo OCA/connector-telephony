@@ -1,4 +1,4 @@
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
 #
 #    Base Phone Pop-up module for Odoo/OpenERP
@@ -22,7 +22,7 @@
 
 {
     'name': 'Base Phone Pop-up',
-    'version': '0.4',
+    'version': '7.0.0.0.4',
     'category': 'Phone',
     'license': 'AGPL-3',
     'summary': 'Pop-up the related form view to the user on incoming calls',

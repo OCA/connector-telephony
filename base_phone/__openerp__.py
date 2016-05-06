@@ -1,4 +1,4 @@
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
 #
 #    Base Phone module for OpenERP
@@ -22,7 +22,7 @@
 
 {
     'name': 'Base Phone',
-    'version': '0.1',
+    'version': '7.0.0.0.1',
     'category': 'Phone',
     'license': 'AGPL-3',
     'summary': 'Validate phone numbers',

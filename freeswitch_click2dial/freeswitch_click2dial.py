@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    Asterisk Click2dial module for OpenERP
+#    FreeSWITCH Click2dial module for OpenERP
+#    Copyright (C) 2014 Trever L. Adams
 #    Copyright (C) 2010-2013 Alexis de Lattre <alexis@via.ecp.fr>
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -24,60 +25,51 @@ from openerp.tools.translate import _
 import logging
 # Lib for phone number reformating -> pip install phonenumbers
 import phonenumbers
-
-try:
-    # Lib py-asterisk from http://code.google.com/p/py-asterisk/
-    # -> pip install py-Asterisk
-    from Asterisk import Manager
-except ImportError:
-    Manager = None
+import ESL
+# import sys
+import csv
+import StringIO
+import re
 
 _logger = logging.getLogger(__name__)
 
 
-class asterisk_server(orm.Model):
-    '''Asterisk server object, stores the parameters of the Asterisk IPBXs'''
-    _name = "asterisk.server"
-    _description = "Asterisk Servers"
+class freeswitch_server(orm.Model):
+    '''FreeSWITCH server object, stores the parameters of the FreeSWITCH IPBXs'''
+    _name = "freeswitch.server"
+    _description = "FreeSWITCH Servers"
     _columns = {
-        'name': fields.char('Asterisk Server Name', size=50, required=True),
+        'name': fields.char('FreeSWITCH Server Name', size=50, required=True),
         'active': fields.boolean(
-            'Active', help="The active field allows you to hide the Asterisk "
+            'Active', help="The active field allows you to hide the FreeSWITCH "
             "server without deleting it."),
         'ip_address': fields.char(
-            'Asterisk IP address or DNS', size=50, required=True,
-            help="IP address or DNS name of the Asterisk server."),
+            'FreeSWITCH IP address or DNS', size=50, required=True,
+            help="IP address or DNS name of the FreeSWITCH server."),
         'port': fields.integer(
             'Port', required=True,
-            help="TCP port on which the Asterisk Manager Interface listens. "
-            "Defined in /etc/asterisk/manager.conf on Asterisk."),
+            help="TCP port on which the FreeSWITCH Event Socket listens. "
+            "Defined in /etc/freeswitch/autoload_configs/event_socket.conf.xml "
+            "on FreeSWITCH."),
         'out_prefix': fields.char(
             'Out Prefix', size=4, help="Prefix to dial to make outgoing "
             "calls. If you don't use a prefix to make outgoing calls, "
             "leave empty."),
-        'login': fields.char(
-            'AMI Login', size=30, required=True,
-            help="Login that OpenERP will use to communicate with the "
-            "Asterisk Manager Interface. Refer to /etc/asterisk/manager.conf "
-            "on your Asterisk server."),
         'password': fields.char(
-            'AMI Password', size=30, required=True,
+            'Event Socket Password', size=30, required=True,
             help="Password that OpenERP will use to communicate with the "
-            "Asterisk Manager Interface. Refer to /etc/asterisk/manager.conf "
-            "on your Asterisk server."),
+            "FreeSWITCH Event Socket. Refer to "
+            "/etc/freeswitch/autoload_configs/event_socket.conf.xml "
+            "on your FreeSWITCH server."),
         'context': fields.char(
             'Dialplan Context', size=50, required=True,
-            help="Asterisk dialplan context from which the calls will be "
-            "made. Refer to /etc/asterisk/extensions.conf on your Asterisk "
-            "server."),
+            help="FreeSWITCH dialplan context from which the calls will be "
+            "made; e.g. 'XML default'. Refer to /etc/freeswitch/dialplan/* "
+            "on your FreeSWITCH server."),
         'wait_time': fields.integer(
             'Wait Time (sec)', required=True,
-            help="Amount of time (in seconds) Asterisk will try to reach "
+            help="Amount of time (in seconds) FreeSWITCH will try to reach "
             "the user's phone before hanging up."),
-        'extension_priority': fields.integer(
-            'Extension Priority', required=True,
-            help="Priority of the extension in the Asterisk dialplan. Refer "
-            "to /etc/asterisk/extensions.conf on your Asterisk server."),
         'alert_info': fields.char(
             'Alert-Info SIP Header', size=255,
             help="Set Alert-Info header in SIP request to user's IP Phone "
@@ -87,17 +79,17 @@ class asterisk_server(orm.Model):
             "for example."),
         'company_id': fields.many2one(
             'res.company', 'Company',
-            help="Company who uses the Asterisk server."),
+            help="Company who uses the FreeSWITCH server."),
     }
 
     _defaults = {
         'active': True,
-        'port': 5038,  # Default AMI port
-        'extension_priority': 1,
-        'wait_time': 15,
+        'port': 8021,  # Default Event Socket port
+        'context': 'XML default',
+        'wait_time': 60,
         'company_id': lambda self, cr, uid, context:
         self.pool['res.company']._company_default_get(
-            cr, uid, 'asterisk.server', context=context),
+            cr, uid, 'freeswitch.server', context=context),
     }
 
     def _check_validity(self, cr, uid, ids):
@@ -105,30 +97,24 @@ class asterisk_server(orm.Model):
             out_prefix = ('Out prefix', server.out_prefix)
             dialplan_context = ('Dialplan context', server.context)
             alert_info = ('Alert-Info SIP header', server.alert_info)
-            login = ('AMI login', server.login)
-            password = ('AMI password', server.password)
+            password = ('Event Socket password', server.password)
 
             if out_prefix[1] and not out_prefix[1].isdigit():
                 raise orm.except_orm(
                     _('Error:'),
-                    _("Only use digits for the '%s' on the Asterisk server "
+                    _("Only use digits for the '%s' on the FreeSWITCH server "
                         "'%s'" % (out_prefix[0], server.name)))
             if server.wait_time < 1 or server.wait_time > 120:
                 raise orm.except_orm(
                     _('Error:'),
                     _("You should set a 'Wait time' value between 1 and 120 "
-                        "seconds for the Asterisk server '%s'" % server.name))
-            if server.extension_priority < 1:
-                raise orm.except_orm(
-                    _('Error:'),
-                    _("The 'extension priority' must be a positive value for "
-                        "the Asterisk server '%s'" % server.name))
+                        "seconds for the FreeSWITCH server '%s'" % server.name))
             if server.port > 65535 or server.port < 1:
                 raise orm.except_orm(
                     _('Error:'),
                     _("You should set a TCP port between 1 and 65535 for the "
-                        "Asterisk server '%s'" % server.name))
-            for check_str in [dialplan_context, alert_info, login, password]:
+                        "FreeSWITCH server '%s'" % server.name))
+            for check_str in [dialplan_context, alert_info, password]:
                 if check_str[1]:
                     try:
                         check_str[1].encode('ascii')
@@ -136,7 +122,7 @@ class asterisk_server(orm.Model):
                         raise orm.except_orm(
                             _('Error:'),
                             _("The '%s' should only have ASCII caracters for "
-                                "the Asterisk server '%s'"
+                                "the FreeSWITCH server '%s'"
                                 % (check_str[0], server.name)))
         return True
 
@@ -144,74 +130,81 @@ class asterisk_server(orm.Model):
         _check_validity,
         "Error message in raise",
         [
-            'out_prefix', 'wait_time', 'extension_priority', 'port',
-            'context', 'alert_info', 'login', 'password']
+            'out_prefix', 'wait_time', 'port',
+            'context', 'alert_info', 'password']
         )]
 
     def _reformat_number(
-            self, cr, uid, erp_number, ast_server=None, context=None):
+            self, cr, uid, erp_number, fs_server=None, context=None):
         '''
         This function is dedicated to the transformation of the number
-        available in OpenERP to the number that Asterisk should dial.
+        available in OpenERP to the number that FreeSWITCH should dial.
         You may have to inherit this function in another module specific
         for your company if you are not happy with the way I reformat
         the OpenERP numbers.
         '''
         assert(erp_number), 'Missing phone number'
         _logger.debug('Number before reformat = %s' % erp_number)
-        if not ast_server:
-            ast_server = self._get_asterisk_server_from_user(
+        if not fs_server:
+            fs_server = self._get_freeswitch_server_from_user(
                 cr, uid, context=context)
 
         # erp_number are supposed to be in E.164 format, so no need to
         # give a country code here
         parsed_num = phonenumbers.parse(erp_number, None)
-        country_code = ast_server.company_id.country_id.code
+        country_code = fs_server.company_id.country_id.code
         assert(country_code), 'Missing country on company'
         _logger.debug('Country code = %s' % country_code)
-        to_dial_number = phonenumbers.format_out_of_country_calling_number(
-            parsed_num, country_code.upper()).replace(' ', '').replace('-', '')
+        to_dial_number = str(phonenumbers.format_out_of_country_calling_number(
+            parsed_num, country_code.upper())).translate(None, ' -.()/')
         # Add 'out prefix' to all numbers
-        if ast_server.out_prefix:
-            _logger.debug('Out prefix = %s' % ast_server.out_prefix)
-            to_dial_number = '%s%s' % (ast_server.out_prefix, to_dial_number)
-        _logger.debug('Number to be sent to Asterisk = %s' % to_dial_number)
+        if fs_server.out_prefix:
+            _logger.debug('Out prefix = %s' % fs_server.out_prefix)
+            to_dial_number = '%s%s' % (fs_server.out_prefix, to_dial_number)
+        _logger.debug('Number to be sent to FreeSWITCH = %s' % to_dial_number)
         return to_dial_number
 
-    def _get_asterisk_server_from_user(self, cr, uid, context=None):
-        '''Returns an asterisk.server browse object'''
-        # We check if the user has an Asterisk server configured
+    def _get_freeswitch_server_from_user(self, cr, uid, context=None):
+        '''Returns an freeswitch.server browse object'''
+        # We check if the user has an FreeSWITCH server configured
         user = self.pool['res.users'].browse(cr, uid, uid, context=context)
-        if user.asterisk_server_id.id:
-            ast_server = user.asterisk_server_id
+        if user.freeswitch_server_id.id:
+            fs_server = user.freeswitch_server_id
         else:
-            asterisk_server_ids = self.search(
+            freeswitch_server_ids = self.search(
                 cr, uid, [('company_id', '=', user.company_id.id)],
                 context=context)
-        # If the user doesn't have an asterisk server,
+        # If the user doesn't have an freeswitch server,
         # we take the first one of the user's company
-            if not asterisk_server_ids:
+            if not freeswitch_server_ids:
                 raise orm.except_orm(
                     _('Error:'),
-                    _("No Asterisk server configured for the company '%s'.")
+                    _("No FreeSWITCH server configured for the company '%s'.")
                     % user.company_id.name)
             else:
-                ast_server = self.browse(
-                    cr, uid, asterisk_server_ids[0], context=context)
-        return ast_server
+                fs_server = self.browse(
+                    cr, uid, freeswitch_server_ids[0], context=context)
+        servers = self.pool.get('freeswitch.server')
+        server_ids = servers.search(cr, uid, [('id', '=', fs_server.id)],
+                                    context=context)
+        fake_fs_server = servers.browse(cr, uid, server_ids, context=context)
+        for rec in fake_fs_server:
+            fs_server = rec
+            break
+        return fs_server
 
-    def _connect_to_asterisk(self, cr, uid, context=None):
+    def _connect_to_freeswitch(self, cr, uid, context=None):
         '''
-        Open the connection to the Asterisk Manager
-        Returns an instance of the Asterisk Manager
+        Open the connection to the FreeSWITCH Event Socket
+        Returns an instance of the FreeSWITCH Event Socket
 
         '''
         user = self.pool['res.users'].browse(cr, uid, uid, context=context)
 
-        ast_server = self._get_asterisk_server_from_user(
+        fs_server = self._get_freeswitch_server_from_user(
             cr, uid, context=context)
         # We check if the current user has a chan type
-        if not user.asterisk_chan_type:
+        if not user.freeswitch_chan_type:
             raise orm.except_orm(
                 _('Error:'),
                 _('No channel type configured for the current user.'))
@@ -223,103 +216,93 @@ class asterisk_server(orm.Model):
                 _('No resource name configured for the current user'))
 
         _logger.debug(
-            "User's phone: %s/%s" % (user.asterisk_chan_type, user.resource))
+            "User's phone: %s/%s" % (user.freeswitch_chan_type, user.resource))
         _logger.debug(
-            "Asterisk server: %s:%d"
-            % (ast_server.ip_address, ast_server.port))
+            "FreeSWITCH server: %s:%d"
+            % (fs_server.ip_address, fs_server.port))
 
-        # Connect to the Asterisk Manager Interface
+        # Connect to the FreeSWITCH Event Socket
         try:
-            ast_manager = Manager.Manager(
-                (ast_server.ip_address, ast_server.port),
-                ast_server.login, ast_server.password)
+            fs_manager = ESL.ESLconnection(str(fs_server.ip_address),
+                str(fs_server.port), str(fs_server.password))
         except Exception, e:
             _logger.error(
-                "Error in the request to the Asterisk Manager Interface %s"
-                % ast_server.ip_address)
+                "Error in the request to the FreeSWITCH Event Socket %s"
+                % fs_server.ip_address)
             _logger.error("Here is the error message: %s" % e)
             raise orm.except_orm(
                 _('Error:'),
-                _("Problem in the request from OpenERP to Asterisk. "
+                _("Problem in the request from OpenERP to FreeSWITCH. "
                   "Here is the error message: %s" % e))
+            # return (False, False, False)
 
-        return (user, ast_server, ast_manager)
+        return (user, fs_server, fs_manager)
 
-    def test_ami_connection(self, cr, uid, ids, context=None):
+    def test_es_connection(self, cr, uid, ids, context=None):
         assert len(ids) == 1, 'Only 1 ID'
-        ast_server = self.browse(cr, uid, ids[0], context=context)
+        fs_server = self.browse(cr, uid, ids[0], context=context)
+        fs_manager = False
         try:
-            ast_manager = Manager.Manager(
-                (ast_server.ip_address, ast_server.port),
-                ast_server.login,
-                ast_server.password)
+            fs_manager = ESL.ESLconnection(str(fs_server.ip_address),
+                str(fs_server.port), str(fs_server.password))
         except Exception, e:
             raise orm.except_orm(
                 _("Connection Test Failed!"),
                 _("Here is the error message: %s" % e))
         finally:
-            try:
-                if ast_manager:
-                    ast_manager.Logoff()
-            except Exception:
-                pass
-            raise orm.except_orm(
-                _("Connection Test Successfull!"),
-                _("OpenERP can successfully login to the Asterisk Manager "
-                  "Interface."))
+            if fs_manager.connected() is not 1:
+                raise orm.except_orm(
+                    _("Connection Test Failed!"),
+                    _("Check Host, Port and Password"))
+            else:
+                try:
+                    if fs_manager:
+                        fs_manager.disconnect()
+                except Exception:
+                    pass
+                raise orm.except_orm(
+                    _("Connection Test Successfull!"),
+                    _("OpenERP can successfully login to the FreeSWITCH Event "
+                      "Socket."))
 
     def _get_calling_number(self, cr, uid, context=None):
 
-        user, ast_server, ast_manager = self._connect_to_asterisk(
+        user, fs_server, fs_manager = self._connect_to_freeswitch(
             cr, uid, context=context)
         calling_party_number = False
         try:
-            list_chan = ast_manager.Status()
-            # from pprint import pprint
-            # pprint(list_chan)
-            _logger.debug("Result of Status AMI request: %s", list_chan)
-            for chan in list_chan.values():
-                sip_account = user.asterisk_chan_type + '/' + user.resource
-                # 4 = Ring
-                if (
-                        chan.get('ChannelState') == '4' and
-                        chan.get('ConnectedLineNum') == user.internal_number):
-                    _logger.debug("Found a matching Event in 'Ring' state")
-                    calling_party_number = chan.get('CallerIDNum')
+            ret = fs_manager.api('show', "calls as delim | like callee_cid_num " +
+                                 str(user.internal_number))
+            f = StringIO.StringIO(ret.getBody())
+            reader = csv.DictReader(f, delimiter='|')
+            for row in reader:
+                if "uuid" not in row or row["uuid"] == "" or row["uuid"] == "uuid":
                     break
-                # 6 = Up
-                if (
-                        chan.get('ChannelState') == '6'
-                        and sip_account in chan.get('BridgedChannel', '')):
-                    _logger.debug("Found a matching Event in 'Up' state")
-                    calling_party_number = chan.get('CallerIDNum')
-                    break
-                # Compatibility with Asterisk 1.4
-                if (
-                        chan.get('State') == 'Up'
-                        and sip_account in chan.get('Link', '')):
-                    _logger.debug("Found a matching Event in 'Up' state")
-                    calling_party_number = chan.get('CallerIDNum')
-                    break
+                if row["callstate"] not in ["EARLY", "ACTIVE", "RINGING"]:
+                    continue
+                if row["b_cid_num"] and row["b_cid_num"] is not None:
+                    calling_party_number = row["b_cid_num"]
+                elif row["cid_num"] and row["cid_num"] is not None:
+                    calling_party_number = row["cid_num"]
         except Exception, e:
             _logger.error(
-                "Error in the Status request to Asterisk server %s"
-                % ast_server.ip_address)
+                "Error in the Status request to FreeSWITCH server %s"
+                % fs_server.ip_address)
             _logger.error(
                 "Here are the details of the error: '%s'" % unicode(e))
             raise orm.except_orm(
                 _('Error:'),
-                _("Can't get calling number from  Asterisk.\nHere is the "
+                _("Can't get calling number from FreeSWITCH.\nHere is the "
                     "error: '%s'" % unicode(e)))
 
         finally:
-            ast_manager.Logoff()
+            fs_manager.disconnect()
 
         _logger.debug("Calling party number: '%s'" % calling_party_number)
         return calling_party_number
 
     def get_record_from_my_channel(self, cr, uid, context=None):
-        calling_number = self.pool['asterisk.server']._get_calling_number(
+        calling_number = self.pool['freeswitch.server']._get_calling_number(
             cr, uid, context=context)
         # calling_number = "0641981246"
         if calling_number:
@@ -347,31 +330,29 @@ class res_users(orm.Model):
         'callerid': fields.char(
             'Caller ID', size=50,
             help="Caller ID used for the calls initiated by this user."),
-        # You'd probably think: Asterisk should reuse the callerID of sip.conf!
+        # You'd probably think: FreeSWITCH should reuse the callerID of sip.conf!
         # But it cannot, cf
-        # http://lists.digium.com/pipermail/asterisk-users/2012-January/269787.html
+        # http://lists.digium.com/pipermail/freeswitch-users/2012-January/269787.html
         'cdraccount': fields.char(
             'CDR Account', size=50,
             help="Call Detail Record (CDR) account used for billing this "
             "user."),
-        'asterisk_chan_type': fields.selection([
-            ('SIP', 'SIP'),
-            ('IAX2', 'IAX2'),
-            ('DAHDI', 'DAHDI'),
-            ('Zap', 'Zap'),
+        'freeswitch_chan_type': fields.selection([
+            ('user', 'SIP'),
+            ('FreeTDM', 'FreeTDM'),
             ('Skinny', 'Skinny'),
             ('MGCP', 'MGCP'),
             ('mISDN', 'mISDN'),
             ('H323', 'H323'),
             ('SCCP', 'SCCP'),
             ('Local', 'Local'),
-            ], 'Asterisk Channel Type',
-            help="Asterisk channel type, as used in the Asterisk dialplan. "
+            ], 'FreeSWITCH Channel Type',
+            help="FreeSWITCH channel type, as used in the FreeSWITCH dialplan. "
             "If the user has a regular IP phone, the channel type is 'SIP'."),
         'resource': fields.char(
             'Resource Name', size=64,
             help="Resource name for the channel type selected. For example, "
-            "if you use 'Dial(SIP/phone1)' in your Asterisk dialplan to ring "
+            "if you use 'Dial(SIP/phone1)' in your FreeSWITCH dialplan to ring "
             "the SIP phone of this user, then the resource name for this user "
             "is 'phone1'.  For a SIP phone, the phone number is often used as "
             "resource name, but not always."),
@@ -384,19 +365,19 @@ class res_users(orm.Model):
             "activate auto-answer for example."),
         'variable': fields.char(
             'User-specific Variable', size=255,
-            help="Set a user-specific 'Variable' field in the Asterisk "
-            "Manager Interface 'originate' request for the click2dial "
+            help="Set a user-specific 'Variable' field in the FreeSWITCH "
+            "Event Socket 'originate' request for the click2dial "
             "feature. If you want to have several variable headers, separate "
             "them with '|'."),
-        'asterisk_server_id': fields.many2one(
-            'asterisk.server', 'Asterisk Server',
-            help="Asterisk server on which the user's phone is connected. "
-            "If you leave this field empty, it will use the first Asterisk "
+        'freeswitch_server_id': fields.many2one(
+            'freeswitch.server', 'FreeSWITCH Server',
+            help="FreeSWITCH server on which the user's phone is connected. "
+            "If you leave this field empty, it will use the first FreeSWITCH "
             "server of the user's company."),
         }
 
     _defaults = {
-        'asterisk_chan_type': 'SIP',
+        'freeswitch_chan_type': 'SIP',
     }
 
     def _check_validity(self, cr, uid, ids):
@@ -434,11 +415,11 @@ class phone_common(orm.AbstractModel):
                 _('Error:'),
                 _('Missing phone number'))
 
-        user, ast_server, ast_manager = \
-            self.pool['asterisk.server']._connect_to_asterisk(
+        user, fs_server, fs_manager = \
+            self.pool['freeswitch.server']._connect_to_freeswitch(
                 cr, uid, context=context)
-        ast_number = self.pool['asterisk.server']._reformat_number(
-            cr, uid, erp_number, ast_server, context=context)
+        fs_number = self.pool['freeswitch.server']._reformat_number(
+            cr, uid, erp_number, fs_server, context=context)
 
         # The user should have a CallerID
         if not user.callerid:
@@ -446,44 +427,59 @@ class phone_common(orm.AbstractModel):
                 _('Error:'),
                 _('No callerID configured for the current user'))
 
-        variable = []
-        if user.asterisk_chan_type == 'SIP':
+        variable = ""
+        if user.freeswitch_chan_type == 'SIP':
             # We can only have one alert-info header in a SIP request
             if user.alert_info:
-                variable.append(
-                    'SIPAddHeader=Alert-Info: %s' % user.alert_info)
-            elif ast_server.alert_info:
-                variable.append(
-                    'SIPAddHeader=Alert-Info: %s' % ast_server.alert_info)
+                variable += 'alert_info=' + user.alert_info
+            elif fs_server.alert_info:
+                variable += 'alert_info=' + fs_server.alert_info
             if user.variable:
                 for user_variable in user.variable.split('|'):
-                    variable.append(user_variable.strip())
-        channel = '%s/%s' % (user.asterisk_chan_type, user.resource)
+                    if len(variable) and len(user_variable):
+                        variable += ','
+                    variable += user_variable.strip()
+        if user.callerid:
+            caller_name = re.search(r'([^<]*).*', user.callerid).group(1).strip()
+            caller_number = re.search(r'.*<(.*)>.*', user.callerid).group(1).strip()
+            if caller_name:
+                if len(variable):
+                    variable += ','
+                caller_name = caller_name.replace(",", r"\,")
+                variable += 'effective_caller_id_name=' + caller_name
+            if caller_number:
+                if len(variable):
+                    variable += ','
+                variable += 'effective_caller_id_number=' + caller_number
+            if fs_server.wait_time != 60:
+                if len(variable):
+                    variable += ','
+                variable += 'ignore_early_media=true' + ','
+                variable += 'originate_timeout=' + str(fs_server.wait_time)
+        channel = '%s/%s' % (user.freeswitch_chan_type, user.resource)
         if user.dial_suffix:
             channel += '/%s' % user.dial_suffix
 
         try:
-            ast_manager.Originate(
-                channel,
-                context=ast_server.context,
-                extension=ast_number,
-                priority=str(ast_server.extension_priority),
-                timeout=str(ast_server.wait_time * 1000),
-                caller_id=user.callerid,
-                account=user.cdraccount,
-                variable=variable)
+            # originate <csv global vars>user/2005 1005 DP_TYPE DP_NAME
+            #    'Caller ID name showed to aleg' 90125
+            dial_string = (('<' + variable + '>') if variable else '') + \
+                channel + ' ' + fs_number + ' ' + fs_server.context + ' ' + \
+                '\'FreeSWITCH/Odoo Connector\' ' + fs_number
+            # raise orm.except_orm(_('Error :'), dial_string)
+            fs_manager.api('originate', dial_string.encode("ascii"))
         except Exception, e:
             _logger.error(
-                "Error in the Originate request to Asterisk server %s"
-                % ast_server.ip_address)
+                "Error in the Originate request to FreeSWITCH server %s"
+                % fs_server.ip_address)
             _logger.error(
                 "Here are the details of the error: '%s'" % unicode(e))
             raise orm.except_orm(
                 _('Error:'),
-                _("Click to dial with Asterisk failed.\nHere is the error: "
+                _("Click to dial with FreeSWITCH failed.\nHere is the error: "
                     "'%s'")
                 % unicode(e))
         finally:
-            ast_manager.Logoff()
+            fs_manager.disconnect()
 
-        return {'dialed_number': ast_number}
+        return {'dialed_number': fs_number}

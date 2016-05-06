@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    FreeSWITCH Click2dial module for OpenERP
+    Copyright (C) 2014 Alexis de Lattre <alexis@via.ecp.fr>
+    The licence is in the file __openerp__.py
+-->
+
+<template>
+
+    <!-- Add phone button in top right menu for "Open Caller" -->
+    <t t-name="freeswitch_click2dial.OpenCaller">
+        <div title="Open Caller"
+                class="oe_topbar_item oe_topbar_open_caller">
+            <button class="oe_i">A</button>
+            <!-- oe_i is a special icon font : 'A' represents a phone -->
+        </div>
+    </t>
+
+    <!-- Add Dial button in phone widget for click2dial feature -->
+    <t t-extend="FieldPhone">
+        <t t-jquery="a.oe_form_uri" t-operation="after">
+            <a id="click2dial" href="#" class="oe_bold"/>
+        </t>
+    </t>
+
+</template>

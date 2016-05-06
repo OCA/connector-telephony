@@ -1,0 +1,92 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#	* freeswitch_click2dial_crm
+#
+# Rudolf Schnapka <schnapkar@golive-saar.de>, 2015.
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 7.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-08-25 22:02+0000\n"
+"PO-Revision-Date: 2015-01-03 11:40+0100\n"
+"Last-Translator: Rudolf Schnapka <schnapkar@golive-saar.de>\n"
+"Language-Team: German <kde-i18n-de@kde.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+"Language: de\n"
+"X-Generator: Lokalize 1.5\n"
+
+#. module: freeswitch_click2dial_crm
+#: view:wizard.create.crm.phonecall:0
+msgid "CRM phone call"
+msgstr "CRM Telefonat"
+
+#. module: freeswitch_click2dial_crm
+#: model:ir.actions.act_window,name:freeswitch_click2dial_crm.action_create_crm_phonecall
+msgid "Create CRM phonecall"
+msgstr "CRM-Telefonat anlegen"
+
+#. module: freeswitch_click2dial_crm
+#: code:addons/freeswitch_click2dial_crm/freeswitch_click2dial_crm.py:46
+#, python-format
+msgid "Create Call in CRM"
+msgstr "Anruf im CRM anlegen"
+
+#. module: freeswitch_click2dial_crm
+#: view:wizard.create.crm.phonecall:0
+msgid "Create a phone call in the CRM ?"
+msgstr "Telefonat im CRM anlegen?"
+
+#. module: freeswitch_click2dial_crm
+#: model:ir.model,name:freeswitch_click2dial_crm.model_crm_lead
+msgid "Lead/Opportunity"
+msgstr "Lead/Chance"
+
+#. module: freeswitch_click2dial_crm
+#: view:wizard.create.crm.phonecall:0
+msgid "No"
+msgstr "Nr"
+
+#. module: freeswitch_click2dial_crm
+#: model:ir.model,name:freeswitch_click2dial_crm.model_wizard_open_calling_partner
+msgid "Open calling partner"
+msgstr "Anrufenden Teilnehmer öffnen"
+
+#. module: freeswitch_click2dial_crm
+#: model:ir.model,name:freeswitch_click2dial_crm.model_res_partner
+msgid "Partner"
+msgstr "Partner"
+
+#. module: freeswitch_click2dial_crm
+#: field:res.users,context_propose_creation_crm_call:0
+msgid "Propose to create a call in CRM after a click2dial"
+msgstr "Vorschlag ein Telefonat im CRM nach Click2Dial anzulegen"
+
+#. module: freeswitch_click2dial_crm
+#: model:ir.model,name:freeswitch_click2dial_crm.model_reformat_all_phonenumbers
+msgid "Reformat all phone numbers"
+msgstr "Alle Rufnummer neu formatieren"
+
+#. module: freeswitch_click2dial_crm
+#: model:ir.model,name:freeswitch_click2dial_crm.model_res_users
+msgid "Users"
+msgstr "Anwender"
+
+#. module: freeswitch_click2dial_crm
+#: view:wizard.create.crm.phonecall:0
+msgid "Yes"
+msgstr "Ja"
+
+#. module: freeswitch_click2dial_crm
+#: model:ir.model,name:freeswitch_click2dial_crm.model_phone_common
+msgid "phone.common"
+msgstr "phone.common"
+
+#. module: freeswitch_click2dial_crm
+#: model:ir.model,name:freeswitch_click2dial_crm.model_wizard_create_crm_phonecall
+msgid "wizard.create.crm.phonecall"
+msgstr "wizard.create.crm.phonecall"
+
+
