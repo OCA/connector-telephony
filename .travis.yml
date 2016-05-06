@@ -31,7 +31,7 @@ install:
   - git clone https://github.com/OCA/maintainer-quality-tools.git ${HOME}/maintainer-quality-tools
   - export PATH=${HOME}/maintainer-quality-tools/travis:${PATH}
   - travis_install_nightly
-  - pip install phonenumbers py-Asterisk SOAPpy
+  - pip install phonenumbers py-Asterisk SOAPpy FreeSWITCH-ESL-Python
   - hg clone http://bitbucket.org/anybox/web_action_request -b ${VERSION} ${HOME}/dependencies/web_action_request
   - hg clone http://bitbucket.org/anybox/bus_enhanced ${HOME}/dependencies/bus_enhanced
 
