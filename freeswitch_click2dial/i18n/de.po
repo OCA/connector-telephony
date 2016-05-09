@@ -194,11 +194,6 @@ msgid "Connection Test Successfull!"
 msgstr "Verbindungstest erfolgreich!"
 
 #. module: freeswitch_click2dial
-#: selection:res.users,freeswitch_chan_type:0
-msgid "DAHDI"
-msgstr "DAHDI"
-
-#. module: freeswitch_click2dial
 #: field:freeswitch.server,context:0
 msgid "Dialplan Context"
 msgstr "Wählplan-Umfeld"
@@ -241,20 +236,10 @@ msgid "Fail"
 msgstr "Gescheitert"
 
 #. module: freeswitch_click2dial
-#: selection:res.users,freeswitch_chan_type:0
-msgid "H323"
-msgstr "H323"
-
-#. module: freeswitch_click2dial
 #: code:addons/freeswitch_click2dial/freeswitch_click2dial.py:256
 #, python-format
 msgid "Here is the error message: %s"
 msgstr "Dies ist die Fehlermeldung: %s"
-
-#. module: freeswitch_click2dial
-#: selection:res.users,freeswitch_chan_type:0
-msgid "IAX2"
-msgstr "IAX2"
 
 #. module: freeswitch_click2dial
 #: help:freeswitch.server,ip_address:0
@@ -267,16 +252,6 @@ msgstr "IP-Addresse oder DNS des FreeSWITCH-Servers."
 #, python-format
 msgid "Internal Number"
 msgstr "Interne Rufnummer"
-
-#. module: freeswitch_click2dial
-#: selection:res.users,freeswitch_chan_type:0
-msgid "Local"
-msgstr "Lokal"
-
-#. module: freeswitch_click2dial
-#: selection:res.users,freeswitch_chan_type:0
-msgid "MGCP"
-msgstr "MGCP"
 
 #. module: freeswitch_click2dial
 #: code:addons/freeswitch_click2dial/freeswitch_click2dial.py:433
@@ -441,16 +416,6 @@ msgstr ""
 "SIP-Telefonen wird häufig die Rufummer als Ressourcenname eingesetzt."
 
 #. module: freeswitch_click2dial
-#: selection:res.users,freeswitch_chan_type:0
-msgid "SCCP"
-msgstr "SCCP"
-
-#. module: freeswitch_click2dial
-#: selection:res.users,freeswitch_chan_type:0
-msgid "SIP"
-msgstr "SIP"
-
-#. module: freeswitch_click2dial
 #: view:freeswitch.server:0
 msgid "Server Name"
 msgstr "Servername"
@@ -494,8 +459,53 @@ msgstr ""
 
 #. module: freeswitch_click2dial
 #: selection:res.users,freeswitch_chan_type:0
+msgid "SIP"
+msgstr ""
+
+#. module: freeswitch_click2dial
+#: selection:res.users,freeswitch_chan_type:0
+msgid "FreeTDM"
+msgstr ""
+
+#. module: freeswitch_click2dial
+#: selection:res.users,freeswitch_chan_type:0
 msgid "Skinny"
-msgstr "Schlank"
+msgstr ""
+
+#. module: freeswitch_click2dial
+#: selection:res.users,freeswitch_chan_type:0
+msgid "H323"
+msgstr ""
+
+#. module: freeswitch_click2dial
+#: selection:res.users,freeswitch_chan_type:0
+msgid "XMPP/JINGLE"
+msgstr ""
+
+#. module: freeswitch_click2dial
+#: selection:res.users,freeswitch_chan_type:0
+msgid "GSM SMS/Voice"
+msgstr ""
+
+#. module: freeswitch_click2dial
+#: selection:res.users,freeswitch_chan_type:0
+msgid "SkypeOpen"
+msgstr ""
+
+#. module: freeswitch_click2dial
+#: selection:res.users,freeswitch_chan_type:0
+msgid "Khomp"
+msgstr ""
+
+#. module: freeswitch_click2dial
+#: selection:res.users,freeswitch_chan_type:0
+msgid "Opal Multi-protocol"
+msgstr ""
+
+#. module: freeswitch_click2dial
+#: selection:res.users,freeswitch_chan_type:0
+msgid "Portaudio"
+msgstr ""
 
 #. module: freeswitch_click2dial
 #: view:res.users:0
@@ -596,16 +606,6 @@ msgid ""
 msgstr ""
 "Sie müssen einen TCP-Port zwischen 1 und 65535 beim FreeSWITCH-Server '%s' "
 "setzen"
-
-#. module: freeswitch_click2dial
-#: selection:res.users,freeswitch_chan_type:0
-msgid "Zap"
-msgstr "Zap"
-
-#. module: freeswitch_click2dial
-#: selection:res.users,freeswitch_chan_type:0
-msgid "mISDN"
-msgstr "mISDN"
 
 #. module: freeswitch_click2dial
 #: model:ir.model,name:freeswitch_click2dial.model_phone_common

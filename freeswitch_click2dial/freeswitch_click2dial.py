@@ -35,7 +35,7 @@ _logger = logging.getLogger(__name__)
 
 
 class freeswitch_server(orm.Model):
-    '''FreeSWITCH server object, stores the parameters of the FreeSWITCH IPBXs'''
+    '''FreeSWITCH server object, stores the parameters of the FreeSWITCH Servers'''
     _name = "freeswitch.server"
     _description = "FreeSWITCH Servers"
     _columns = {
@@ -330,9 +330,6 @@ class res_users(orm.Model):
         'callerid': fields.char(
             'Caller ID', size=50,
             help="Caller ID used for the calls initiated by this user."),
-        # You'd probably think: FreeSWITCH should reuse the callerID of sip.conf!
-        # But it cannot, cf
-        # http://lists.digium.com/pipermail/freeswitch-users/2012-January/269787.html
         'cdraccount': fields.char(
             'CDR Account', size=50,
             help="Call Detail Record (CDR) account used for billing this "
@@ -340,12 +337,14 @@ class res_users(orm.Model):
         'freeswitch_chan_type': fields.selection([
             ('user', 'SIP'),
             ('FreeTDM', 'FreeTDM'),
-            ('Skinny', 'Skinny'),
-            ('MGCP', 'MGCP'),
-            ('mISDN', 'mISDN'),
-            ('H323', 'H323'),
-            ('SCCP', 'SCCP'),
-            ('Local', 'Local'),
+            ('skinny', 'Skinny'),
+            ('h323', 'H323'),
+            ('dingaling', 'XMPP/JINGLE'),
+            ('gsmopen','GSM SMS/Voice'),
+            ('skypeopen', 'SkypeOpen'),
+            ('Khomp', 'Khomp'),
+            ('opal','Opal Multi-protocol'),
+            ('portaudio','Portaudio'),
             ], 'FreeSWITCH Channel Type',
             help="FreeSWITCH channel type, as used in the FreeSWITCH dialplan. "
             "If the user has a regular IP phone, the channel type is 'SIP'."),
