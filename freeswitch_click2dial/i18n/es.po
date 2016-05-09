@@ -22,10 +22,6 @@ msgstr ""
 msgid "Event Socket password"
 msgstr "Contraseña Event Socket"
 
-#. module: freeswitch_click2dial
-#: selection:res.users,freeswitch_chan_type:0
-msgid "SIP"
-msgstr "SIP"
 
 #. module: freeswitch_click2dial
 #: field:freeswitch.server,international_prefix:0
@@ -36,11 +32,6 @@ msgstr "Prefijo internacional"
 #: help:freeswitch.server,ip_address:0
 msgid "IPv4 address or DNS name of the FreeSWITCH server."
 msgstr "Dirección IPv4 o nombre DNS del servidor FreeSWITCH."
-
-#. module: freeswitch_click2dial
-#: selection:res.users,freeswitch_chan_type:0
-msgid "mISDN"
-msgstr "mISDN"
 
 #. module: freeswitch_click2dial
 #: constraint:ir.model:0
@@ -82,11 +73,6 @@ msgstr "Servidores FreeSWITCH"
 #: constraint:ir.actions.act_window:0
 msgid "Invalid model name in the action definition."
 msgstr "Nombre del modelo inválido en la definición de acción."
-
-#. module: freeswitch_click2dial
-#: selection:res.users,freeswitch_chan_type:0
-msgid "DAHDI"
-msgstr "DAHDI"
 
 #. module: freeswitch_click2dial
 #: field:res.users,callerid:0
@@ -164,11 +150,6 @@ msgstr ""
 "realizar llamadas, dejar en blanco."
 
 #. module: freeswitch_click2dial
-#: selection:res.users,freeswitch_chan_type:0
-msgid "Zap"
-msgstr "Zap"
-
-#. module: freeswitch_click2dial
 #: help:freeswitch.server,context:0
 msgid ""
 "FreeSWITCH dialplan context from which the calls will be made; e.g. 'XML default'. Refer to "
@@ -183,16 +164,6 @@ msgid "Caller ID used for the calls initiated by this user."
 msgstr "ID llamada que utiliza para las llamadas iniciadas por este usuario."
 
 #. module: freeswitch_click2dial
-#: selection:res.users,freeswitch_chan_type:0
-msgid "IAX2"
-msgstr "IAX2"
-
-#. module: freeswitch_click2dial
-#: view:res.company:0
-msgid "IPBX"
-msgstr "IPBX"
-
-#. module: freeswitch_click2dial
 #: model:ir.module.module,shortdesc:freeswitch_click2dial.module_meta_information
 msgid "FreeSWITCH Click2dial"
 msgstr "FreeSWITCH Click2dial"
@@ -204,8 +175,13 @@ msgstr "Lista de servidores de FreeSWITCH."
 
 #. module: freeswitch_click2dial
 #: selection:res.users,freeswitch_chan_type:0
-msgid "MGCP"
-msgstr "MGCP"
+msgid "SIP"
+msgstr ""
+
+#. module: freeswitch_click2dial
+#: selection:res.users,freeswitch_chan_type:0
+msgid "FreeTDM"
+msgstr ""
 
 #. module: freeswitch_click2dial
 #: selection:res.users,freeswitch_chan_type:0
@@ -214,7 +190,37 @@ msgstr ""
 
 #. module: freeswitch_click2dial
 #: selection:res.users,freeswitch_chan_type:0
-msgid "FreeTDM"
+msgid "H323"
+msgstr ""
+
+#. module: freeswitch_click2dial
+#: selection:res.users,freeswitch_chan_type:0
+msgid "XMPP/JINGLE"
+msgstr ""
+
+#. module: freeswitch_click2dial
+#: selection:res.users,freeswitch_chan_type:0
+msgid "GSM SMS/Voice"
+msgstr ""
+
+#. module: freeswitch_click2dial
+#: selection:res.users,freeswitch_chan_type:0
+msgid "SkypeOpen"
+msgstr ""
+
+#. module: freeswitch_click2dial
+#: selection:res.users,freeswitch_chan_type:0
+msgid "Khomp"
+msgstr ""
+
+#. module: freeswitch_click2dial
+#: selection:res.users,freeswitch_chan_type:0
+msgid "Opal Multi-protocol"
+msgstr ""
+
+#. module: freeswitch_click2dial
+#: selection:res.users,freeswitch_chan_type:0
+msgid "Portaudio"
 msgstr ""
 
 #. module: freeswitch_click2dial
@@ -312,11 +318,6 @@ msgstr ""
 #: constraint:freeswitch.server:0
 msgid "Only use digits for 'international prefix'"
 msgstr "Sólo utilizar dígitos para el \"prefijo internacional\""
-
-#. module: freeswitch_click2dial
-#: selection:res.users,freeswitch_chan_type:0
-msgid "H323"
-msgstr "H323"
 
 #. module: freeswitch_click2dial
 #: field:freeswitch.server,national_prefix:0

@@ -172,8 +172,53 @@ msgstr "Test de connexion réussi !"
 
 #. module: freeswitch_click2dial
 #: selection:res.users,freeswitch_chan_type:0
-msgid "DAHDI"
-msgstr "DAHDI"
+msgid "SIP"
+msgstr ""
+
+#. module: freeswitch_click2dial
+#: selection:res.users,freeswitch_chan_type:0
+msgid "FreeTDM"
+msgstr ""
+
+#. module: freeswitch_click2dial
+#: selection:res.users,freeswitch_chan_type:0
+msgid "Skinny"
+msgstr ""
+
+#. module: freeswitch_click2dial
+#: selection:res.users,freeswitch_chan_type:0
+msgid "H323"
+msgstr ""
+
+#. module: freeswitch_click2dial
+#: selection:res.users,freeswitch_chan_type:0
+msgid "XMPP/JINGLE"
+msgstr ""
+
+#. module: freeswitch_click2dial
+#: selection:res.users,freeswitch_chan_type:0
+msgid "GSM SMS/Voice"
+msgstr ""
+
+#. module: freeswitch_click2dial
+#: selection:res.users,freeswitch_chan_type:0
+msgid "SkypeOpen"
+msgstr ""
+
+#. module: freeswitch_click2dial
+#: selection:res.users,freeswitch_chan_type:0
+msgid "Khomp"
+msgstr ""
+
+#. module: freeswitch_click2dial
+#: selection:res.users,freeswitch_chan_type:0
+msgid "Opal Multi-protocol"
+msgstr ""
+
+#. module: freeswitch_click2dial
+#: selection:res.users,freeswitch_chan_type:0
+msgid "Portaudio"
+msgstr ""
 
 #. module: freeswitch_click2dial
 #: field:freeswitch.server,context:0
@@ -218,20 +263,10 @@ msgid "Fail"
 msgstr "Fail"
 
 #. module: freeswitch_click2dial
-#: selection:res.users,freeswitch_chan_type:0
-msgid "H323"
-msgstr "H323"
-
-#. module: freeswitch_click2dial
 #: code:addons/freeswitch_click2dial/freeswitch_click2dial.py:256
 #, python-format
 msgid "Here is the error message: %s"
 msgstr "Voilà le message d'erreur : %s"
-
-#. module: freeswitch_click2dial
-#: selection:res.users,freeswitch_chan_type:0
-msgid "IAX2"
-msgstr "IAX2"
 
 #. module: freeswitch_click2dial
 #: help:freeswitch.server,ip_address:0
@@ -244,16 +279,6 @@ msgstr "Adresse IP ou DNS du serveur FreeSWITCH."
 #, python-format
 msgid "Internal Number"
 msgstr "Numéro interne"
-
-#. module: freeswitch_click2dial
-#: selection:res.users,freeswitch_chan_type:0
-msgid "Local"
-msgstr "Local"
-
-#. module: freeswitch_click2dial
-#: selection:res.users,freeswitch_chan_type:0
-msgid "MGCP"
-msgstr "MGCP"
 
 #. module: freeswitch_click2dial
 #: code:addons/freeswitch_click2dial/freeswitch_click2dial.py:433
@@ -393,16 +418,6 @@ msgid "Resource name for the channel type selected. For example, if you use 'Dia
 msgstr "Resource name for the channel type selected. For example, if you use 'Dial(SIP/phone1)' in your FreeSWITCH dialplan to ring the SIP phone of this user, then the resource name for this user is 'phone1'.  For a SIP phone, the phone number is often used as resource name, but not always."
 
 #. module: freeswitch_click2dial
-#: selection:res.users,freeswitch_chan_type:0
-msgid "SCCP"
-msgstr "SCCP"
-
-#. module: freeswitch_click2dial
-#: selection:res.users,freeswitch_chan_type:0
-msgid "SIP"
-msgstr "SIP"
-
-#. module: freeswitch_click2dial
 #: view:freeswitch.server:0
 msgid "Server Name"
 msgstr "Nom du serveur"
@@ -421,16 +436,6 @@ msgstr "Set a user-specific 'Variable' field in the FreeSWITCH Event Socket 'ori
 #: help:res.users,alert_info:0
 msgid "Set a user-specific Alert-Info header in SIP request to user's IP Phone for the click2dial feature. If empty, the Alert-Info header will not be added. You can use it to have a special ring tone for click2dial (a silent one !) or to activate auto-answer for example."
 msgstr "Set a user-specific Alert-Info header in SIP request to user's IP Phone for the click2dial feature. If empty, the Alert-Info header will not be added. You can use it to have a special ring tone for click2dial (a silent one !) or to activate auto-answer for example."
-
-#. module: freeswitch_click2dial
-#: selection:res.users,freeswitch_chan_type:0
-msgid "Skinny"
-msgstr "Skinny"
-
-#. module: freeswitch_click2dial
-#: selection:res.users,freeswitch_chan_type:0
-msgid "FreeTDM"
-msgstr ""
 
 #. module: freeswitch_click2dial
 #: view:res.users:0
@@ -517,16 +522,6 @@ msgstr "Vous devez indiquer une valeur comprise entre 1 et 120 secondes pour le 
 #, python-format
 msgid "You should set a TCP port between 1 and 65535 for the FreeSWITCH server '%s'"
 msgstr "Vous devez mettre un port TCP entre 1 et 65535 pour le serveur FreeSWITCH '%s'"
-
-#. module: freeswitch_click2dial
-#: selection:res.users,freeswitch_chan_type:0
-msgid "Zap"
-msgstr "Zap"
-
-#. module: freeswitch_click2dial
-#: selection:res.users,freeswitch_chan_type:0
-msgid "mISDN"
-msgstr "mISDN"
 
 #. module: freeswitch_click2dial
 #: model:ir.model,name:freeswitch_click2dial.model_phone_common
