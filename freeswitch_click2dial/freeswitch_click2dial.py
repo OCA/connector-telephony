@@ -24,7 +24,7 @@ from openerp.osv import fields, orm
 from openerp.tools.translate import _
 import logging
 import ESL
-import sys
+#import sys
 import csv
 import StringIO
 import re
@@ -306,6 +306,7 @@ class res_users(orm.Model):
         'freeswitch_chan_type': fields.selection([
             ('user', 'SIP'),
             ('FreeTDM', 'FreeTDM'),
+            ('verto.rtc','Verto'),
             ('skinny', 'Skinny'),
             ('h323', 'H323'),
             ('dingaling', 'XMPP/JINGLE'),
@@ -316,14 +317,20 @@ class res_users(orm.Model):
             ('portaudio','Portaudio'),
             ], 'FreeSWITCH Channel Type',
             help="FreeSWITCH channel type, as used in the FreeSWITCH dialplan. "
-            "If the user has a regular IP phone, the channel type is 'SIP'."),
+            "If the user has a regular IP phone, the channel type is 'SIP'. Use "
+            "Verto for verto.rtc connections only if you haven't added "
+            "'${verto_contact ${dialed_user}@${dialed_domain}}' to the default "
+            "dial string. Otherwise, use SIP. (This better allows for changes "
+            "to the user directory and changes in type of phone without the "
+            "need for further changes in OpenERP/Odoo.)"),
         'resource': fields.char(
             'Resource Name', size=64,
             help="Resource name for the channel type selected. For example, "
-            "if you use 'Dial(SIP/phone1)' in your FreeSWITCH dialplan to ring "
+            "if you use 'user/phone1' in your FreeSWITCH dialplan to ring "
             "the SIP phone of this user, then the resource name for this user "
             "is 'phone1'.  For a SIP phone, the phone number is often used as "
-            "resource name, but not always."),
+            "resource name, but not always. FreeTDM will be the span followed "
+            "by the port (i.e. 1/5)."),
         'alert_info': fields.char(
             'User-specific Alert-Info SIP Header', size=255,
             help="Set a user-specific Alert-Info header in SIP request to "
