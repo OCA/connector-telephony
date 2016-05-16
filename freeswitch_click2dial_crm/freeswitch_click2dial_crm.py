@@ -38,12 +38,12 @@ class phone_common(orm.AbstractModel):
         res = super(phone_common, self).click2dial(
             cr, uid, erp_number, context=context)
         user = self.pool['res.users'].browse(cr, uid, uid, context=context)
-        if (
-                context.get('click2dial_model') == 'res.partner'
-                and user.context_propose_creation_crm_call):
-            res.update({
-                'action_name': _('Create Call in CRM'),
-                'action_model': 'wizard.create.crm.phonecall',
+        if(
+            context.get('click2dial_model') == 'res.partner' and
+            user.context_propose_creation_crm_call):
+                res.update({
+                    'action_name': _('Create Call in CRM'),
+                    'action_model': 'wizard.create.crm.phonecall',
                 })
         return res
 

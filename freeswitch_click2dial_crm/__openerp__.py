@@ -35,10 +35,10 @@ This module adds CRM-specific features to the freeswitch_click2dial module.
 
 It adds 2 features :
 
-First, when you do a click2dial, OpenERP will propose you to create an outbound
-phone call in the CRM ; if you answer 'Yes', it will create the phone call in
-the CRM and open it in a new tab. If some users don't want to be asked to
-create a phone call in the CRM each time they do a click2dial, you should
+First, when you do a click2dial, OpenERP will propose you to create an
+outbound phone call in the CRM ; if you answer 'Yes', it will create the phone
+call in the CRM and open it in a new tab. If some users don't want to be asked
+to create a phone call in the CRM each time they do a click2dial, you should
 disable the corresponding option in the 'Telephony' tab of the 'User' form.
 
 Second, when you receive a phone call and run the wizard
@@ -48,8 +48,8 @@ button that proposes to create an inbound phone call in the CRM.
 This module has been initially developed by Zikzakmedia and has been
 completely re-written by Akretion.
 
-A detailed documentation for the OpenERP-FreeSWITCH connector is available on the
-Akretion Web site :
+A detailed documentation for the OpenERP-FreeSWITCH connector is available on
+the Akretion Web site :
 http://www.akretion.com/products-and-services/openerp-freeswitch-voip-connector
 """,
     "depends": [
