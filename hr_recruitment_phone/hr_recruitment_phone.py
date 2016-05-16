@@ -43,6 +43,20 @@ class hr_applicant(orm.Model):
         return super(hr_applicant, self).write(
             cr, uid, ids, vals_reformated, context=context)
 
+    # The only reason this is overloaded her as applicant.name is the
+    # position. This is what base_phone.py:name_get will return.
+    # It makes more sense in this context to return the applicant's name.
+    # This code appears weird as it returns [] in the cases:
+    # 1) hired - done or 2) refused - cancel.
+    # This is done so that an employees record is used instead of the
+    # applicant record. The following (cancel) applies here as well.
+    # It is done for cancel so that an applicant who is refused doesn't
+    # cause problems if that number is reassigned to another entity in the
+    # future or the same person applies for the same or different position
+    # in the future. We cannot call super name_get in these cases as it will
+    # still return the position the person applied for and the pop-up
+    # functionality would then pull up this record. Both of these are
+    # undesirable.
     def name_get(self, cr, uid, ids, context=None):
         if context is None:
             context = {}
