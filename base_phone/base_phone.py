@@ -72,12 +72,16 @@ class PhoneCommon(models.AbstractModel):
             'Wrong self._partner_field'
         countrycode = None
         if self._country_field and vals.get(self._country_field):
+            # When updating a partner in the frontend of the POS
+            # Odoo generate a write() with the ID of the country as unicode !!!
+            # example : vals = {u'country_id': u'9'}
+            # So we have to convert it to an integer before browsing
             country = self.env['res.country'].browse(
                 int(vals[self._country_field]))
             countrycode = country.code
         elif self._partner_field and vals.get(self._partner_field):
             partner = self.env['res.partner'].browse(
-                int(vals[self._partner_field]))
+                vals[self._partner_field])
             countrycode = partner.country_id.code or False
         return countrycode
 
