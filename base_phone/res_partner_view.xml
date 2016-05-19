@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  Base Phone module for OpenERP
-  Copyright (C) 2010-2014 Alexis de Lattre <alexis@via.ecp.fr>
-  The licence is in the file __openerp__.py
+  © 2010-2016 Akretion (Alexis de Lattre <alexis.delattre@akretion.com>)
+  License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 -->
 
-<openerp>
+<odoo>
 <data>
 
 <record id="view_partner_form" model="ir.ui.view">
@@ -31,8 +30,8 @@
 </record>
 
 <record id="base.action_partner_form" model="ir.actions.act_window">
-    <field name="context">{'search_default_customer':1, 'raise_if_phone_parse_fails': True}</field>
+    <field name="context">{'search_default_customer': 1, 'raise_if_phone_parse_fails': True}</field>
 </record>
 
 </data>
-</openerp>
+</odoo>
