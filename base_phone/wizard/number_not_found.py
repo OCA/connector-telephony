@@ -59,8 +59,8 @@ class NumberNotFound(models.TransientModel):
         if not res:
             res = {}
         if res.get('calling_number'):
-            convert = self.env['res.partner']._generic_reformat_phonenumbers(
-                None, {'phone': res.get('calling_number')})
+            convert = self.env['res.partner']._reformat_phonenumbers_create(
+                {'phone': res.get('calling_number')})
             parsed_num = phonenumbers.parse(convert.get('phone'))
             res['e164_number'] = phonenumbers.format_number(
                 parsed_num, phonenumbers.PhoneNumberFormat.INTERNATIONAL)
@@ -93,13 +93,13 @@ class NumberNotFound(models.TransientModel):
 
     @api.multi
     def update_partner(self):
+        self.ensure_one()
         wiz = self[0]
         if not wiz.to_update_partner_id:
             raise exceptions.Warning(
                 _('Error'),
                 _('Select the Partner to Update.'))
-        self.env['res.partner'].write(
-            wiz.to_update_partner_id.id,
+        wiz.to_update_partner_id.write(
             {wiz.number_type: wiz.e164_number})
         action = {
             'name': _('Partner: %s' % wiz.to_update_partner_id.name),
@@ -115,5 +115,5 @@ class NumberNotFound(models.TransientModel):
 
     @api.onchange('to_update_partner_id')
     def onchange_to_update_partner(self):
-        self.current_partner_phone = self.to_update_partner.phone or False
-        self.current_partner_mobile = self.to_update_partner.mobile or False
+        self.current_partner_phone = self.to_update_partner_id.phone or False
+        self.current_partner_mobile = self.to_update_partner_id.mobile or False
