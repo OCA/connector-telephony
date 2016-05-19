@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  Asterisk Click2dial module for OpenERP
-  Copyright (C) 2010-2014 Alexis de Lattre <alexis@via.ecp.fr>
+  Asterisk Click2dial module for Odoo
+  Copyright (C) 2010-2016 Akretion (Alexis de Lattre <alexis.delattre@akretion.com>)
   The licence is in the file __openerp__.py
 -->
 
-<openerp>
+<odoo>
 <data>
 
-<!-- Search view for asterisk.server -->
 <record id="view_asterisk_server_search" model="ir.ui.view">
     <field name="name">asterisk.server.search</field>
     <field name="model">asterisk.server</field>
@@ -20,12 +19,11 @@
     </field>
 </record>
 
-<!-- Form view for asterisk.server -->
 <record id="view_asterisk_server_form" model="ir.ui.view">
     <field name="name">asterisk.server.form</field>
     <field name="model">asterisk.server</field>
     <field name="arch" type="xml">
-        <form string="Asterisk Servers" version="7.0">
+        <form string="Asterisk Servers">
             <sheet>
                 <div class="oe_title">
                     <label for="name" string="Server Name" class="oe_edit_only"/>
@@ -52,14 +50,17 @@
                     <field name="extension_priority" />
                     <field name="out_prefix" />
                     <field name="alert_info" />
-                    <field name="wait_time" />
+                    <label for="wait_time"/>
+                    <div>
+                        <field name="wait_time" class="oe_inline"/>
+                        <label string=" seconds" class="oe_inline"/>
+                    </div>
                 </group>
             </sheet>
         </form>
     </field>
 </record>
 
-<!-- Tree view for asterisk.server -->
 <record id="view_asterisk_server_tree" model="ir.ui.view">
     <field name="name">asterisk.server.tree</field>
     <field name="model">asterisk.server</field>
@@ -73,7 +74,6 @@
     </field>
 </record>
 
-<!-- Action for asterisk.server -->
 <record id="action_asterisk_server" model="ir.actions.act_window">
     <field name="name">Asterisk Servers</field>
     <field name="res_model">asterisk.server</field>
@@ -85,4 +85,4 @@
 
 
 </data>
-</openerp>
+</odoo>
