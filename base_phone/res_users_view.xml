@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-    Base Phone module for OpenERP
-    Copyright (C) 2010-2014 Alexis de Lattre <alexis@via.ecp.fr>
-    The licence is in the file __openerp__.py
+  © 2010-2016 Akretion (Alexis de Lattre <alexis.delattre@akretion.com>)
+  License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 -->
 
-<openerp>
+<odoo>
 <data>
 
 <record id="view_users_form" model="ir.ui.view">
@@ -37,4 +36,4 @@
 </record>
 
 </data>
-</openerp>
+</odoo>
