@@ -1,4 +1,4 @@
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
 #
 #    OVH connector module for Odoo
@@ -20,7 +20,7 @@
 ##############################################################################
 
 from openerp import models, fields, api, _
-from openerp.exceptions import Warning
+from openerp.exceptions import UserError
 import logging
 
 try:
@@ -51,24 +51,24 @@ class PhoneCommon(models.AbstractModel):
     def click2dial(self, erp_number):
         res = super(PhoneCommon, self).click2dial(erp_number)
         if not erp_number:
-            raise Warning(
+            raise UserError(
                 _('Missing phone number'))
 
         user = self.env.user
         if not user.ovh_billing_number:
-            raise Warning(
+            raise UserError(
                 _('Missing OVH Billing Number on user %s') % user.name)
 
         if not user.ovh_calling_number:
-            raise Warning(
+            raise UserError(
                 _('Missing OVH Calling Number on user %s') % user.name)
 
         if not user.ovh_click2call_login:
-            raise Warning(
+            raise UserError(
                 _('Missing OVH Click2call Login on user %s') % user.name)
 
         if not user.ovh_click2call_password:
-            raise Warning(
+            raise UserError(
                 _('Missing OVH Click2dial Password on user %s') % user.name)
 
         soap = WSDL.Proxy('https://www.ovh.com/soapi/soapi-re-1.63.wsdl')
@@ -77,9 +77,9 @@ class PhoneCommon(models.AbstractModel):
         _logger.debug(
             'Starting OVH telephonyClick2CallDo request with '
             'login = %s billing number = %s calling number = %s '
-            'and called_number = %s'
-            % (user.ovh_click2call_login, user.ovh_billing_number,
-                user.ovh_calling_number, called_number))
+            'and called_number = %s',
+            user.ovh_click2call_login, user.ovh_billing_number,
+            user.ovh_calling_number, called_number)
 
         try:
             soap.telephonyClick2CallDo(
@@ -94,8 +94,8 @@ class PhoneCommon(models.AbstractModel):
             _logger.error(
                 "Error in the OVH telephonyClick2CallDo request")
             _logger.error(
-                "Here are the details of the error: '%s'" % unicode(e))
-            raise Warning(
+                "Here are the details of the error: '%s'", unicode(e))
+            raise UserError(
                 _("Click to call to OVH failed.\nHere is the error: "
                     "'%s'")
                 % unicode(e))
