@@ -5,12 +5,12 @@
 odoo.define('asterisk_click2dial.click2dial', function (require) {
 "use strict";
 
-var _t = core._t;
 var UserMenu = require('web.UserMenu');
 var WebClient = require('web.WebClient');
 var web_client = require('web.web_client');
 var Widget = require('web.Widget');
 var core = require('web.core');
+var _t = core._t;
 
 var click2dial = {};
 
@@ -71,7 +71,7 @@ click2dial.OpenCaller = Widget.extend({
             this._super.apply(this, arguments);
             this.update_promise.then(function() {
                 var asterisk_button = new click2dial.OpenCaller();
-                //console.log(this);
+                // attach the phone logo/button to the systray
                 asterisk_button.appendTo($('.oe_systray'));
             });
         },

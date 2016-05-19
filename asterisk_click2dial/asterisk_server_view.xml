@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  Asterisk Click2dial module for Odoo
-  Copyright (C) 2010-2016 Akretion (Alexis de Lattre <alexis.delattre@akretion.com>)
-  The licence is in the file __openerp__.py
+  © 2010-2016 Akretion (Alexis de Lattre <alexis.delattre@akretion.com>)
+  License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 -->
 
 <odoo>
