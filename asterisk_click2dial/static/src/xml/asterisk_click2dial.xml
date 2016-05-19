@@ -7,13 +7,12 @@
 <template>
 
     <!-- Add phone button in top right menu for "Open Caller" -->
-    <!--
     <t t-name="asterisk_click2dial.OpenCaller">
         <li class="oe_topbar_item oe_topbar_open_caller"
                 title="Open Caller">
             <a id="asterisk-open-caller" href="#" class="fa fa-phone"/>
         </li>
-    </t>-->
+    </t>
 
     <!-- Add Dial button in phone widget for click2dial feature -->
     <t t-extend="FieldPhone">
