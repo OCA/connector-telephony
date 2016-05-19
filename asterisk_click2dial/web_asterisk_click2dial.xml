@@ -4,10 +4,9 @@
   License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 -->
 
-<openerp>
+<odoo>
 <data>
 
-<!--
 <template id="assets_backend" name="asterisk_click2dial assets"
           inherit_id="web.assets_backend">
     <xpath expr="." position="inside">
@@ -15,7 +14,6 @@
             src="/asterisk_click2dial/static/src/js/asterisk_click2dial.js"></script>
     </xpath>
 </template>
--->
 
 </data>
-</openerp>
+</odoo>
