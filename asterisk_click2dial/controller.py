@@ -1,14 +1,16 @@
 # -*- coding: utf-8 -*-
 # © 2014-2016 Akretion (Alexis de Lattre <alexis.delattre@akretion.com>)
+# © 2015-2016 Juris Malinens (port to v9)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-import openerp
+from openerp import http
 
 
-class AsteriskClick2dialController(openerp.addons.web.http.Controller):
-    _cp_path = '/asterisk_click2dial'
+class AsteriskClick2dialController(http.Controller):
 
-    @openerp.addons.web.http.jsonrequest
-    def get_record_from_my_channel(self, req):
-        res = req.session.model('asterisk.server').get_record_from_my_channel()
+    @http.route(
+        '/asterisk_click2dial/get_record_from_my_channel/',
+        type='json', auth='public')
+    def get_record_from_my_channel(self, **kw):
+        res = http.request.env['asterisk.server'].get_record_from_my_channel()
         return res
