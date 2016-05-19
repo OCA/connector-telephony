@@ -5,6 +5,7 @@
 from openerp import models, fields, api, _
 from openerp.exceptions import UserError, ValidationError
 import logging
+from pprint import pformat
 
 try:
     # pip install py-Asterisk
@@ -167,37 +168,44 @@ class AsteriskServer(models.Model):
             "the Asterisk Manager Interface."))
 
     @api.model
-    def _get_calling_number(self):
+    def _get_calling_number_from_channel(self, chan, user):
+        '''Method designed to be inherited to work with
+        very old or very new versions of Asterisk'''
+        sip_account = user.asterisk_chan_type + '/' + user.resource
+        internal_number = user.internal_number
+        # 4 = Ring
+        # 6 = Up
+        if (
+                chan.get('ChannelState') in ('4', '6') and (
+                    chan.get('ConnectedLineNum') == internal_number or
+                    chan.get('EffectiveConnectedLineNum') == internal_number or
+                    sip_account in chan.get('BridgedChannel', ''))):
+            _logger.debug(
+                "Found a matching Event with channelstate = %s",
+                chan.get('ChannelState'))
+            return chan.get('CallerIDNum')
+        # Compatibility with Asterisk 1.4
+        if (
+                chan.get('State') == 'Up' and
+                sip_account in chan.get('Link', '')):
+            _logger.debug("Found a matching Event in 'Up' state")
+            return chan.get('CallerIDNum')
+        return False
 
+    @api.model
+    def _get_calling_number(self):
         user, ast_server, ast_manager = self._connect_to_asterisk()
         calling_party_number = False
         try:
             list_chan = ast_manager.Status()
             # from pprint import pprint
             # pprint(list_chan)
-            _logger.debug("Result of Status AMI request: %s", list_chan)
+            _logger.debug("Result of Status AMI request:")
+            _logger.debug(pformat(list_chan))
             for chan in list_chan.values():
-                sip_account = user.asterisk_chan_type + '/' + user.resource
-                # 4 = Ring
-                if (
-                        chan.get('ChannelState') == '4' and
-                        chan.get('ConnectedLineNum') == user.internal_number):
-                    _logger.debug("Found a matching Event in 'Ring' state")
-                    calling_party_number = chan.get('CallerIDNum')
-                    break
-                # 6 = Up
-                if (
-                        chan.get('ChannelState') == '6' and
-                        sip_account in chan.get('BridgedChannel', '')):
-                    _logger.debug("Found a matching Event in 'Up' state")
-                    calling_party_number = chan.get('CallerIDNum')
-                    break
-                # Compatibility with Asterisk 1.4
-                if (
-                        chan.get('State') == 'Up' and
-                        sip_account in chan.get('Link', '')):
-                    _logger.debug("Found a matching Event in 'Up' state")
-                    calling_party_number = chan.get('CallerIDNum')
+                calling_party_number = self._get_calling_number_from_channel(
+                    chan, user)
+                if calling_party_number:
                     break
         except Exception, e:
             _logger.error(
