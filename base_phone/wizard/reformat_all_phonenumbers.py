@@ -1,4 +1,4 @@
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
 #
 #    Base Phone module for Odoo
@@ -19,13 +19,13 @@
 #
 ##############################################################################
 
-from openerp import models, fields
+from openerp import models, fields, api
 import logging
 
 logger = logging.getLogger(__name__)
 
 
-class reformat_all_phonenumbers(models.TransientModel):
+class ReformatAllPhonenumbers(models.TransientModel):
     _name = "reformat.all.phonenumbers"
     _inherit = "res.config.installer"
     _description = "Reformat all phone numbers"
@@ -37,18 +37,18 @@ class reformat_all_phonenumbers(models.TransientModel):
         ('done', 'Done'),
         ], string='State', default='draft')
 
-    def run_reformat_all_phonenumbers(self, cr, uid, ids, context=None):
+    @api.multi
+    def run_reformat_all_phonenumbers(self):
+        self.ensure_one()
         logger.info('Starting to reformat all the phone numbers')
-        phonenumbers_not_reformatted = ''
-        phoneobjects = self.pool['phone.common']._get_phone_fields(
-            cr, uid, context=context)
-        ctx_raise = dict(context, raise_if_phone_parse_fails=True)
+        phonenumbers_not_reformatted = u''
+        phoneobjects = self.env['phone.common']._get_phone_fields()
         for objname in phoneobjects:
-            fields = self.pool[objname]._phone_fields
-            obj = self.pool[objname]
+            fields = self.env[objname]._phone_fields
+            obj = self.env[objname]
             logger.info(
                 'Starting to reformat phone numbers on object %s '
-                '(fields = %s)' % (objname, fields))
+                '(fields = %s)', objname, fields)
             # search if this object has an 'active' field
             if obj._columns.get('active') or objname == 'hr.employee':
                 # hr.employee inherits from 'resource.resource' and
@@ -58,47 +58,44 @@ class reformat_all_phonenumbers(models.TransientModel):
                 domain = ['|', ('active', '=', True), ('active', '=', False)]
             else:
                 domain = []
-            all_ids = obj.search(cr, uid, domain, context=context)
-            for entry in obj.read(
-                    cr, uid, all_ids, fields, context=context):
-                init_entry = entry.copy()
+            all_entries = obj.search(domain)
+
+            for entry in all_entries:
+                init_entry_vals = {}
+                for field in fields:
+                    init_entry_vals[field] = entry[field]
+                entry_vals = init_entry_vals.copy()
                 # entry is _updated_ by the fonction
                 # _generic_reformat_phonenumbers()
                 try:
-                    obj._generic_reformat_phonenumbers(
-                        cr, uid, [entry['id']], entry, context=ctx_raise)
+                    entry.with_context(raise_if_phone_parse_fails=True).\
+                        _reformat_phonenumbers_write(entry_vals)
                 except Exception, e:
-                    name = obj.name_get(
-                        cr, uid, [init_entry['id']], context=context)[0][1]
+                    name = entry.name_get()[0][1]
                     phonenumbers_not_reformatted += \
                         "Problem on %s '%s'. Error message: %s\n" % (
                             obj._description, name, unicode(e))
                     logger.warning(
-                        "Problem on %s '%s'. Error message: %s" % (
-                            obj._description, name, unicode(e)))
+                        "Problem on %s '%s'. Error message: %s",
+                        obj._description, name, unicode(e))
                     continue
-                if any(
-                        [init_entry.get(field)
-                            != entry.get(field) for field
-                            in fields]):
-                    entry.pop('id')
+                if any([
+                        init_entry_vals.get(field) != entry_vals.get(field) for
+                        field in fields]):
                     logger.info(
-                        '[%s] Reformating phone number: FROM %s TO %s' % (
-                            obj._description, unicode(init_entry),
-                            unicode(entry)))
-                    obj.write(
-                        cr, uid, init_entry['id'], entry, context=context)
+                        '[%s] Reformating phone number: FROM %s TO %s',
+                        obj._description, unicode(init_entry_vals),
+                        unicode(entry_vals))
+                    entry.write(entry_vals)
         if not phonenumbers_not_reformatted:
             phonenumbers_not_reformatted = \
                 'All phone numbers have been reformatted successfully.'
-        self.write(
-            cr, uid, ids[0], {
-                'phonenumbers_not_reformatted': phonenumbers_not_reformatted,
-                'state': 'done',
-                }, context=context)
+        self.write({
+            'phonenumbers_not_reformatted': phonenumbers_not_reformatted,
+            'state': 'done',
+            })
         logger.info('End of the phone number reformatting wizard')
-        action = self.pool['ir.actions.act_window'].for_xml_id(
-            cr, uid, 'base_phone', 'reformat_all_phonenumbers_action',
-            context=context)
-        action['res_id'] = ids[0]
+        action = self.env['ir.actions.act_window'].for_xml_id(
+            'base_phone', 'reformat_all_phonenumbers_action')
+        action['res_id'] = self.id
         return action
