@@ -1,12 +1,20 @@
-/*  © 2016 Akretion (Alexis de Lattre <alexis.delattre@akretion.com>)
+/*  © 2014-2016 Akretion (Alexis de Lattre <alexis.delattre@akretion.com>)
+    © 2015-2016 Juris Malinens (port to v9)
     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).   */
 
-odoo.define('asterisk_click2dial.OpenCaller', function (require) {
+odoo.define('asterisk_click2dial.click2dial', function (require) {
 "use strict";
 
 var _t = core._t;
+var UserMenu = require('web.UserMenu');
+var WebClient = require('web.WebClient');
+var web_client = require('web.web_client');
 var Widget = require('web.Widget');
-var OpenCaller = Widget.extend({
+var core = require('web.core');
+
+var click2dial = {};
+
+click2dial.OpenCaller = Widget.extend({
     template: 'asterisk_click2dial.OpenCaller',
 
     start: function () {
@@ -36,7 +44,7 @@ var OpenCaller = Widget.extend({
                 target: 'new',
                 context: {'default_calling_number': r},
              };
-            instance.client.action_manager.do_action(action);
+            web_client.action_manager.do_action(action);
 
             }
         else if (typeof r == 'object' && r.length == 3) {
@@ -52,22 +60,21 @@ var OpenCaller = Widget.extend({
                 target: 'current',
                 context: {},
             };
-            instance.client.action_manager.do_action(action);
+            web_client.action_manager.do_action(action);
         }
     });
    },
 });
 
-    instance.web.UserMenu.include({
+    UserMenu.include({
         do_update: function(){
             this._super.apply(this, arguments);
             this.update_promise.then(function() {
-                var asterisk_button = new instance.web.OpenCaller();
-                asterisk_button.appendTo(instance.webclient.$el.find('.oe_systray'));
+                var asterisk_button = new click2dial.OpenCaller();
+                //console.log(this);
+                asterisk_button.appendTo($('.oe_systray'));
             });
         },
     });
 
 });
-
-
