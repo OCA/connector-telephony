@@ -20,13 +20,18 @@ To know more about the OpenERP-Asterisk connector, refer to the documentation
 http://www.akretion.com/en/products-and-services/openerp-asterisk-voip-connector
 
 [//]: # (addons)
+Available addons
+----------------
+addon | version | summary
+--- | --- | ---
+[base_phone](base_phone/) | 9.0.0.1.0 | Validate phone numbers
+
 Unported addons
 ---------------
 addon | version | summary
 --- | --- | ---
 [asterisk_click2dial](asterisk_click2dial/) | 8.0.0.4.0 (unported) | Asterisk-OpenERP connector
 [asterisk_click2dial_crm](asterisk_click2dial_crm/) | 8.0.0.1.0 (unported) | Asterisk Click2dial CRM
-[base_phone](base_phone/) | 8.0.0.1.0 (unported) | Validate phone numbers
 [base_phone_popup](base_phone_popup/) | 8.0.0.4.0 (unported) | Pop-up the related form view to the user on incoming calls
 [crm_claim_phone](crm_claim_phone/) | 8.0.0.1.0 (unported) | Validate phone numbers in CRM Claims
 [crm_phone](crm_phone/) | 8.0.0.1.0 (unported) | Validate phone numbers in CRM
