@@ -3,15 +3,15 @@
 # * base_phone
 # 
 # Translators:
-# Altinisik <aaltinisik@altinkaya.com.tr>, 2015
+# Ahmet Altınışık <aaltinisik@altinkaya.com.tr>, 2015
 msgid ""
 msgstr ""
-"Project-Id-Version: connector-telephony (8.0)\n"
+"Project-Id-Version: connector-telephony (9.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-01 04:07+0000\n"
-"PO-Revision-Date: 2015-12-18 20:39+0000\n"
-"Last-Translator: Altinisik <aaltinisik@altinkaya.com.tr>\n"
-"Language-Team: Turkish (http://www.transifex.com/oca/OCA-connector-telephony-8-0/language/tr/)\n"
+"POT-Creation-Date: 2016-05-20 02:42+0000\n"
+"PO-Revision-Date: 2016-05-19 12:41+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
+"Language-Team: Turkish (http://www.transifex.com/oca/OCA-connector-telephony-9-0/language/tr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -19,17 +19,17 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #. module: base_phone
-#: field:number.not.found,calling_number:0
+#: model:ir.model.fields,field_description:base_phone.field_number_not_found_calling_number
 msgid "Calling Number"
 msgstr "Arayan No"
 
 #. module: base_phone
-#: view:reformat.all.phonenumbers:base_phone.reformat_all_phonenumbers_form
+#: model:ir.ui.view,arch_db:base_phone.reformat_all_phonenumbers_form
 msgid "Cancel"
 msgstr "İptal"
 
 #. module: base_phone
-#: code:addons/base_phone/base_phone.py:112
+#: code:addons/base_phone/base_phone.py:122
 #, python-format
 msgid ""
 "Cannot reformat the phone number '%s' to international format. Error "
@@ -38,21 +38,21 @@ msgstr "Telefon numarası '%s' uluslararası formata çevrilemedi. Hata mesajı:
 
 #. module: base_phone
 #. openerp-web
-#: code:addons/base_phone/static/src/js/phone_widget.js:46
+#: code:addons/base_phone/static/src/js/phone_widget.js:50
 #, python-format
 msgid "Click2dial started"
 msgstr "Tıkla çevir başlatıldı"
 
 #. module: base_phone
 #. openerp-web
-#: code:addons/base_phone/static/src/js/phone_widget.js:58
+#: code:addons/base_phone/static/src/js/phone_widget.js:62
 #, python-format
 msgid "Click2dial successfull"
 msgstr "Tıkla çevir başarılı"
 
 #. module: base_phone
-#: view:number.not.found:base_phone.number_not_found_form
-#: view:reformat.all.phonenumbers:base_phone.reformat_all_phonenumbers_form
+#: model:ir.ui.view,arch_db:base_phone.number_not_found_form
+#: model:ir.ui.view,arch_db:base_phone.reformat_all_phonenumbers_form
 msgid "Close"
 msgstr "Kapat"
 
@@ -62,49 +62,57 @@ msgid "Companies"
 msgstr "Şirketler"
 
 #. module: base_phone
-#: code:addons/base_phone/wizard/number_not_found.py:87
+#: code:addons/base_phone/wizard/number_not_found.py:84
 #, python-format
 msgid "Create New Partner"
 msgstr "Yeni iş ortağı oluştur"
 
 #. module: base_phone
-#: view:number.not.found:base_phone.number_not_found_form
+#: model:ir.ui.view,arch_db:base_phone.number_not_found_form
 msgid "Create Partner with this Number"
 msgstr "Bu numara ile yeni iş ortağı oluştur"
 
 #. module: base_phone
-#: view:number.not.found:base_phone.number_not_found_form
+#: model:ir.ui.view,arch_db:base_phone.number_not_found_form
 msgid "Create or Update a Partner"
 msgstr "Bir iş ortağı Oluştur ya da Güncelle"
 
 #. module: base_phone
-#: field:number.not.found,create_uid:0
-#: field:reformat.all.phonenumbers,create_uid:0
+#: model:ir.model.fields,field_description:base_phone.field_number_not_found_create_uid
+#: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers_create_uid
 msgid "Created by"
 msgstr "Oluşturan"
 
 #. module: base_phone
-#: field:number.not.found,create_date:0
-#: field:reformat.all.phonenumbers,create_date:0
+#: model:ir.model.fields,field_description:base_phone.field_number_not_found_create_date
+#: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers_create_date
 msgid "Created on"
 msgstr "Oluşturuldu"
 
 #. module: base_phone
-#: field:number.not.found,current_partner_mobile:0
+#: model:ir.model.fields,field_description:base_phone.field_number_not_found_current_partner_mobile
 msgid "Current Mobile"
 msgstr "Kayıtlı Cep"
 
 #. module: base_phone
-#: field:number.not.found,current_partner_phone:0
+#: model:ir.model.fields,field_description:base_phone.field_number_not_found_current_partner_phone
 msgid "Current Phone"
 msgstr "Kayıtlı Telefon"
 
 #. module: base_phone
 #. openerp-web
-#: code:addons/base_phone/static/src/js/phone_widget.js:39
+#: code:addons/base_phone/static/src/js/phone_widget.js:43
 #, python-format
 msgid "Dial"
 msgstr "Çevir"
+
+#. module: base_phone
+#: model:ir.model.fields,field_description:base_phone.field_base_phone_installed_display_name
+#: model:ir.model.fields,field_description:base_phone.field_number_not_found_display_name
+#: model:ir.model.fields,field_description:base_phone.field_phone_common_display_name
+#: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers_display_name
+msgid "Display Name"
+msgstr ""
 
 #. module: base_phone
 #: selection:reformat.all.phonenumbers,state:0
@@ -117,25 +125,20 @@ msgid "Draft"
 msgstr "Taslak"
 
 #. module: base_phone
-#: field:number.not.found,e164_number:0
+#: model:ir.model.fields,field_description:base_phone.field_number_not_found_e164_number
 msgid "E.164 Number"
 msgstr "E.164 Numara"
 
 #. module: base_phone
-#: help:number.not.found,e164_number:0
+#: model:ir.model.fields,help:base_phone.field_number_not_found_e164_number
 msgid "E.164 equivalent of the calling number."
 msgstr "arayan numaranın E.164 eşdeğeri"
 
 #. module: base_phone
-#: view:res.users:base_phone.view_users_form_simple_modif
-msgid "Email Preferences"
-msgstr "E posta Seçenekleri"
-
-#. module: base_phone
-#: code:addons/base_phone/wizard/number_not_found.py:101
+#: code:addons/base_phone/wizard/number_not_found.py:99
 #, python-format
-msgid "Error:"
-msgstr "Hata:"
+msgid "Error"
+msgstr ""
 
 #. module: base_phone
 #: selection:number.not.found,number_type:0
@@ -143,18 +146,20 @@ msgid "Fixed"
 msgstr "Sabit"
 
 #. module: base_phone
-#: field:number.not.found,number_type:0
+#: model:ir.model.fields,field_description:base_phone.field_number_not_found_number_type
 msgid "Fixed/Mobile"
 msgstr "Sabit/Cep"
 
 #. module: base_phone
-#: field:base.phone.installed,id:0 field:number.not.found,id:0
-#: field:phone.common,id:0 field:reformat.all.phonenumbers,id:0
+#: model:ir.model.fields,field_description:base_phone.field_base_phone_installed_id
+#: model:ir.model.fields,field_description:base_phone.field_number_not_found_id
+#: model:ir.model.fields,field_description:base_phone.field_phone_common_id
+#: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers_id
 msgid "ID"
 msgstr "ID"
 
 #. module: base_phone
-#: help:res.company,number_of_digits_to_match_from_end:0
+#: model:ir.model.fields,help:base_phone.field_res_company_number_of_digits_to_match_from_end
 msgid ""
 "In several situations, OpenERP will have to find a Partner/Lead/Employee/..."
 " from a phone number presented by the calling party. As the phone numbers "
@@ -166,14 +171,22 @@ msgid ""
 msgstr "Bir çok farklı durumda Odoo arayan numaradan bir İş ortağı/Çalışan vs bulmalıdır. Telefon numaraları servis sağlayıcılar tarafından farklı biçimlerde gönderilebildiği için en iyi yöntem telefon numarasının son N hanesi ile eşleşen kaydı bulmaktır. N bu alana girmeniz gereken değerdir."
 
 #. module: base_phone
-#: field:number.not.found,write_uid:0
-#: field:reformat.all.phonenumbers,write_uid:0
+#: model:ir.model.fields,field_description:base_phone.field_base_phone_installed___last_update
+#: model:ir.model.fields,field_description:base_phone.field_number_not_found___last_update
+#: model:ir.model.fields,field_description:base_phone.field_phone_common___last_update
+#: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers___last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: base_phone
+#: model:ir.model.fields,field_description:base_phone.field_number_not_found_write_uid
+#: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers_write_uid
 msgid "Last Updated by"
 msgstr "Son güncelleyen"
 
 #. module: base_phone
-#: field:number.not.found,write_date:0
-#: field:reformat.all.phonenumbers,write_date:0
+#: model:ir.model.fields,field_description:base_phone.field_number_not_found_write_date
+#: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers_write_date
 msgid "Last Updated on"
 msgstr "Son güncellendiği"
 
@@ -183,18 +196,18 @@ msgid "Mobile"
 msgstr "Cep"
 
 #. module: base_phone
-#: view:number.not.found:base_phone.number_not_found_form
+#: model:ir.ui.view,arch_db:base_phone.number_not_found_form
 msgid "Number Not Found"
 msgstr "Numara bulunamadı"
 
 #. module: base_phone
-#: view:number.not.found:base_phone.number_not_found_form
+#: model:ir.ui.view,arch_db:base_phone.number_not_found_form
 msgid "Number converted to international format:"
 msgstr "Uluslarası biçime çevrilen numara:"
 
 #. module: base_phone
 #. openerp-web
-#: code:addons/base_phone/static/src/js/phone_widget.js:59
+#: code:addons/base_phone/static/src/js/phone_widget.js:63
 #, python-format
 msgid "Number dialed:"
 msgstr "Aranan numara:"
@@ -205,12 +218,12 @@ msgid "Number not found"
 msgstr "Numara bulunamadı"
 
 #. module: base_phone
-#: view:number.not.found:base_phone.number_not_found_form
+#: model:ir.ui.view,arch_db:base_phone.number_not_found_form
 msgid "Number not found:"
 msgstr "Numara bulunamadı:"
 
 #. module: base_phone
-#: field:res.company,number_of_digits_to_match_from_end:0
+#: model:ir.model.fields,field_description:base_phone.field_res_company_number_of_digits_to_match_from_end
 msgid "Number of Digits To Match From End"
 msgstr "Sondan eşleştirilecek rakam adedi"
 
@@ -220,23 +233,23 @@ msgid "Partner"
 msgstr "İş Ortağı"
 
 #. module: base_phone
-#: help:number.not.found,to_update_partner_id:0
+#: model:ir.model.fields,help:base_phone.field_number_not_found_to_update_partner_id
 msgid "Partner on which the phone number will be written"
 msgstr "Telefon numarasının yazılacağı iş ortağı"
 
 #. module: base_phone
-#: field:number.not.found,to_update_partner_id:0
+#: model:ir.model.fields,field_description:base_phone.field_number_not_found_to_update_partner_id
 msgid "Partner to Update"
 msgstr "Güncellenecek iş ortağı"
 
 #. module: base_phone
-#: code:addons/base_phone/wizard/number_not_found.py:107
+#: code:addons/base_phone/wizard/number_not_found.py:105
 #, python-format
 msgid "Partner: %s"
 msgstr "iş ortağı: %s"
 
 #. module: base_phone
-#: view:res.company:base_phone.view_company_form
+#: model:ir.ui.view,arch_db:base_phone.view_company_form
 msgid "Phone"
 msgstr "Telefon"
 
@@ -246,19 +259,19 @@ msgid "Phone CallerID"
 msgstr "Telefon CallerID"
 
 #. module: base_phone
-#: help:number.not.found,calling_number:0
+#: model:ir.model.fields,help:base_phone.field_number_not_found_calling_number
 msgid ""
 "Phone number of calling party that has been obtained from the telephony "
 "server, in the format used by the telephony server (not E.164)."
 msgstr "Sizi arayan numaranın telefon sunucusundan alınan telefon numarası (E.164 değil)"
 
 #. module: base_phone
-#: field:reformat.all.phonenumbers,phonenumbers_not_reformatted:0
+#: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers_phonenumbers_not_reformatted
 msgid "Phone numbers that couldn't be reformatted"
 msgstr "yeniden biçimlendirilemeyen telefon numaraları "
 
 #. module: base_phone
-#: view:reformat.all.phonenumbers:base_phone.reformat_all_phonenumbers_form
+#: model:ir.ui.view,arch_db:base_phone.reformat_all_phonenumbers_form
 msgid "Phone numbers that couldn't be reformatted:"
 msgstr "Yeniden biçimlendirilemeyen telefon numaraları:"
 
@@ -270,30 +283,30 @@ msgstr "Telefon numaralarını yeniden biçimlendir"
 
 #. module: base_phone
 #: model:ir.model,name:base_phone.model_reformat_all_phonenumbers
-#: view:reformat.all.phonenumbers:base_phone.reformat_all_phonenumbers_form
+#: model:ir.ui.view,arch_db:base_phone.reformat_all_phonenumbers_form
 msgid "Reformat all phone numbers"
 msgstr "Bütün telefon numaralarını yeniden biçimlendir"
 
 #. module: base_phone
-#: code:addons/base_phone/wizard/number_not_found.py:102
+#: code:addons/base_phone/wizard/number_not_found.py:100
 #, python-format
 msgid "Select the Partner to Update."
 msgstr "Güncellenecek iş ortağını seçin."
 
 #. module: base_phone
-#: field:reformat.all.phonenumbers,state:0
+#: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers_state
 msgid "State"
 msgstr "Durum"
 
 #. module: base_phone
 #: model:ir.ui.menu,name:base_phone.menu_config_phone
-#: view:res.users:base_phone.view_users_form
+#: model:ir.ui.view,arch_db:base_phone.view_users_form
 msgid "Telephony"
 msgstr "Telefon"
 
 #. module: base_phone
-#: view:res.users:base_phone.view_users_form
-#: view:res.users:base_phone.view_users_form_simple_modif
+#: model:ir.ui.view,arch_db:base_phone.view_users_form
+#: model:ir.ui.view,arch_db:base_phone.view_users_form_simple_modif
 msgid "Telephony Preferences"
 msgstr "Telefon Ayarları"
 
@@ -305,7 +318,7 @@ msgid ""
 msgstr "'Sondan eşleştirilecek rakam adedi' alanına sadece pozitif sayılar girilmelidir."
 
 #. module: base_phone
-#: view:reformat.all.phonenumbers:base_phone.reformat_all_phonenumbers_form
+#: model:ir.ui.view,arch_db:base_phone.reformat_all_phonenumbers_form
 msgid ""
 "This wizard reformats the phone, mobile and fax numbers of all partners in "
 "standard international format e.g. +33141981242"
@@ -313,26 +326,22 @@ msgstr "Bu sihirbaz Cep, sabit telefon ve faks numaralarını standart E.164 ulu
 
 #. module: base_phone
 #. openerp-web
-#: code:addons/base_phone/static/src/js/phone_widget.js:47
+#: code:addons/base_phone/static/src/js/phone_widget.js:51
 #, python-format
 msgid "Unhook your ringing phone"
 msgstr "Çalan telefonunuzu açın"
 
 #. module: base_phone
-#: view:number.not.found:base_phone.number_not_found_form
+#: model:ir.ui.view,arch_db:base_phone.number_not_found_form
 msgid "Update Partner with this Number"
 msgstr "İş ortağını bu numara ile güncelle"
 
 #. module: base_phone
-#: view:res.company:base_phone.view_company_form
-#: view:res.partner:base_phone.view_partner_form
-msgid "fax"
-msgstr "Faks"
+#: model:ir.model,name:base_phone.model_base_phone_installed
+msgid "base.phone.installed"
+msgstr ""
 
 #. module: base_phone
-#: view:res.company:base_phone.view_company_form
-#: view:res.partner:base_phone.view_partner_form
-#: view:res.partner:base_phone.view_partner_simple_form
-#: view:res.partner:base_phone.view_partner_tree
-msgid "phone"
-msgstr "telefon"
+#: model:ir.model,name:base_phone.model_phone_common
+msgid "phone.common"
+msgstr ""
