@@ -14,7 +14,6 @@
     <field name="arch" type="xml">
         <form string="Number Not Found">
             <div class="oe_title">
-                <label string="Number not found:" for="calling_number"/>
                 <h1>
                     <field name="calling_number" />
                 </h1>
