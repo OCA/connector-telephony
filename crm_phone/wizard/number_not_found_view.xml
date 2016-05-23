@@ -16,14 +16,16 @@
             <group name="lead" string="Create or Update a Lead"
                 colspan="1">
                 <button name="create_lead" colspan="2"
-                    string="Create Lead with this Number" type="object"/>
+                    string="Create Lead with this Number" type="object"
+                    class="oe_highlight"/>
                 <field name="to_update_lead_id"/>
                 <field name="current_lead_phone" widget="phone"
                     options="{'dial_button_invisible': True}"/>
                 <field name="current_lead_mobile" widget="phone"
                     options="{'dial_button_invisible': True}"/>
                 <button name="update_lead" colspan="2"
-                    string="Update Lead with this Number" type="object"/>
+                    string="Update Lead with this Number" type="object"
+                    class="oe_highlight"/>
             </group>
         </group>
     </field>
