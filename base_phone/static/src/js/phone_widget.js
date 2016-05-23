@@ -7,6 +7,7 @@ odoo.define('base_phone.phone_widget', function (require) {
 
 var core = require('web.core');
 var formwidgets = require('web.form_widgets');
+var web_client = require('web.web_client');
 var _t = core._t;
 
 
@@ -76,7 +77,7 @@ var FieldPhone = formwidgets.FieldChar.extend({
                                         target: 'new',
                                         context: context,
                                         };
-                                    formwidgets.client.action_manager.do_action(action);
+                                    web_client.action_manager.do_action(action);
                                 }
                             }
                         });
@@ -133,7 +134,7 @@ if(!core.form_widget_registry.get('phone')){
 }
 
 /*
-var Column = require('web.list_view.js');
+var Column = require('web.ListView');
 
 var ColumnPhone = Column.extend({
     // ability to add widget="phone" in TREE view
@@ -141,18 +142,21 @@ var ColumnPhone = Column.extend({
         console.log('row_data=' + row_data);
         console.log('options=');
         console.log(options);
-        var value = row_data[this.id].value;
-        if (value && this.widget === 'phone') {
+         var value = row_data[this.id].value;
+         if (value) {
             readable_space = formatInternational('', value);
             readable_no_break_space = readable_space.replace(/\s/g, ' ');
+            console('special return');
             return readable_no_break_space;
-        }
+         }
         console.log('return normal');
         return this._super(row_data, options);
     }
 });
 
+if (!core.list_widget_registry.get('phone')) {
+    core.list_widget_registry.add('field.phone', ColumnPhone);
+// a mon avis, il y a une mauvaise compréhension : fields.phone signifiera fields.Phone dans le python
+} */
 
-core.list_widget_registry.add('field.phone', ColumnPhone);
-*/
 });
