@@ -6,33 +6,28 @@ from openerp import models, api, _
 import phonenumbers
 
 
-# TODO : crm.phonecall : doesn't exist any more... what is the replacement ?
-
 class WizardCreateCrmPhonecall(models.TransientModel):
     _name = "wizard.create.crm.phonecall"
 
     @api.multi
     def button_create_outgoing_phonecall(self):
         self.ensure_one()
-        return self._create_open_crm_phonecall(crm_categ='Outbound')
+        return self._create_open_crm_phonecall('outbound')
 
     @api.model
-    def _create_open_crm_phonecall(self, crm_categ):
-        categ = self.with_context(lang='en_US').env['crm.case.categ'].search(
-            [('name', '=', crm_categ)])
-        case_section = self.env['crm.case.section'].search(
+    def _create_open_crm_phonecall(self, direction='outbound'):
+        teams = self.env['crm.team'].search(
             [('member_ids', 'in', self._uid)])
         action_ctx = self.env.context.copy()
         action_ctx.update({
-            'default_categ_id': categ and categ[0].id or False,
-            'default_section_id':
-            case_section and case_section[0].id or False,
+            'default_direction': direction,
+            'default_team_id': teams and teams[0].id or False,
         })
         domain = False
         if self.env.context.get('click2dial_model') == 'res.partner':
             partner_id = self.env.context.get('click2dial_id')
             action_ctx['default_partner_id'] = partner_id
-            domain = [('partner_id', '=', partner_id)]
+            domain = [('partner_id', 'child_of', partner_id)]
         elif self.env.context.get('click2dial_model') == 'crm.lead':
             lead_id = self.env.context.get('click2dial_id')
             action_ctx['default_opportunity_id'] = lead_id
@@ -50,7 +45,7 @@ class WizardCreateCrmPhonecall(models.TransientModel):
             'type': 'ir.actions.act_window',
             'res_model': 'crm.phonecall',
             'domain': domain,
-            'view_mode': 'form,tree',
+            'view_mode': 'form,tree,calendar',
             'nodestroy': False,  # close the pop-up wizard after action
             'target': 'current',
             'context': action_ctx,
