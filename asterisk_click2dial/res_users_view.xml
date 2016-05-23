@@ -35,5 +35,17 @@
     </field>
 </record>
 
+<record id="view_users_form_simple_modif" model="ir.ui.view">
+    <field name="name">asterisk_click2dial.users.preferences.form</field>
+    <field name="model">res.users</field>
+    <field name="inherit_id" ref="base_phone.view_users_form_simple_modif"/>
+    <field name="arch" type="xml">
+        <group name="phone" position="attributes">
+            <attribute name="invisible">0</attribute>
+        </group>
+    </field>
+</record>
+
+
 </data>
 </odoo>
