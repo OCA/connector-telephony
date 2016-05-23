@@ -22,3 +22,19 @@ class HrApplicant(models.Model):
     def write(self, vals):
         vals_reformated = self._reformat_phonenumbers_write(vals)
         return super(HrApplicant, self).write(vals_reformated)
+
+    @api.multi
+    def name_get(self):
+        if self._context.get('callerid'):
+            res = []
+            for appl in self:
+                if appl.partner_id:
+                    name = u'%s (%s)' % (appl.partner_id.name, appl.name)
+                elif appl.partner_name:
+                    name = u'%s (%s)' % (appl.partner_name, appl.name)
+                else:
+                    name = appl.name
+                res.append((appl.id, name))
+            return res
+        else:
+            return super(HrApplicant, self).name_get()
