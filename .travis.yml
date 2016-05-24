@@ -33,7 +33,7 @@ install:
   - travis_install_nightly
   - pip install phonenumbers py-Asterisk SOAPpy
   - hg clone http://bitbucket.org/juris_malinens/web_action_request -b ${VERSION} ${HOME}/web_action_request # Pull request is not merged in anybox
-  - hg clone http://bitbucket.org/anybox/bus_enhanced ${HOME}/bus_enhanced
+  - hg clone http://bitbucket.org/juris_malinens/bus_enhanced -b ${VERSION} ${HOME}/bus_enhanced # Pull request is not merged in anybox
 
 script:
   - travis_run_tests
