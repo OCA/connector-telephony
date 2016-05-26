@@ -57,6 +57,13 @@ click2dial.OpenCaller = Widget.extend({
                 res_id: r[1],
                 view_mode: 'form,tree',
                 views: [[false, 'form']],
+                /* If you want to make it work with the 'web' module
+                of Odoo Enterprise edition, you have to change the line
+                target: 'current',
+                  to:
+                target: 'new',
+                If you want to use target: 'current', with web/enterprise,
+                you have to reload the Web page just after */
                 target: 'current',
                 context: {},
             };
