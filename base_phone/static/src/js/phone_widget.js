@@ -10,7 +10,6 @@ var formwidgets = require('web.form_widgets');
 var web_client = require('web.web_client');
 var _t = core._t;
 
-
 var FieldPhone = formwidgets.FieldChar.extend({
         template: 'FieldPhone',
         initialize_content: function() {
@@ -25,22 +24,20 @@ var FieldPhone = formwidgets.FieldChar.extend({
             } else {
                 var self = this;
                 var phone_num = this.get('value');
-                // console.log('BASE_PHONE phone_num = %s', phone_num);
+                console.log('BASE_PHONE phone_num = %s', phone_num);
                 var href = '#';
-                var href_text = '';
                 if (phone_num) {
                   href = 'tel:' + phone_num;
-                  href_text = formatInternational('', phone_num) || '';
                 }
-                if (href_text) {
-                    this.$el.find('a.oe_form_uri').attr('href', href).text(href_text);
-                    this.$el.find('span.oe_form_char_content').text('');
-                } else {
-                    this.$el.find('a.oe_form_uri').attr('href', '').text('');
-                    this.$el.find('span.oe_form_char_content').text(phone_num || '');
+                if (phone_num) {
+                    this.$el.find('a').attr('href', href).text(phone_num);
                 }
+                else {
+                    this.$el.find('a').attr('href', '').text('');
+                }
+                /*
                 var click2dial_text = '';
-                if (href_text && !this.options.dial_button_invisible) {
+                if (formatted_phone_num && !this.options.dial_button_invisible) {
                   click2dial_text = _t('Dial');
                 }
                 this.$el.find('#click2dial').off('click');
@@ -81,7 +78,7 @@ var FieldPhone = formwidgets.FieldChar.extend({
                                 }
                             }
                         });
-                    });
+                    }); */
             }
         },
         on_button_clicked: function() {
@@ -105,17 +102,14 @@ var FieldFax = formwidgets.FieldChar.extend({
                 var fax_num = this.get('value');
                 // console.log('BASE_PHONE fax_num = %s', fax_num);
                 var href = '#';
-                var href_text = '';
                 if (fax_num) {
                     href = 'fax:' + fax_num;
-                    href_text = formatInternational('', fax_num) || '';
                 }
-                if (href_text) {
-                    this.$el.find('a.oe_form_uri').attr('href', href).text(href_text);
-                    this.$el.find('span.oe_form_char_content').text('');
-                } else {
-                    this.$el.find('a.oe_form_uri').attr('href', '').text('');
-                    this.$el.find('span.oe_form_char_content').text(fax_num || '');
+                if (fax_num) {
+                    this.$el.find('a').attr('href', href).text(fax_num);
+                }
+                else {
+                    this.$el.find('a').attr('href', '').text('');
                 }
             }
         },
@@ -125,6 +119,10 @@ var FieldFax = formwidgets.FieldChar.extend({
     });
 
 // To avoid conflicts, we check that widgets do not exist before using
+
+console.log("core.form_widget_registry.get('fax')=" + core.form_widget_registry.get('fax'));
+console.log("core.form_widget_registry.get('PHONE')=" + core.form_widget_registry.get('phone'));
+
 if(!core.form_widget_registry.get('fax')){
     core.form_widget_registry.add('fax', FieldFax);
 }

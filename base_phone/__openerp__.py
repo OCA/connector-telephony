@@ -33,9 +33,9 @@
     'data': [
         'security/phone_security.xml',
         'security/ir.model.access.csv',
-        'res_partner_view.xml',
-        'res_company_view.xml',
-        'res_users_view.xml',
+        'views/res_partner_view.xml',
+        'views/res_company_view.xml',
+        'views/res_users_view.xml',
         'wizard/reformat_all_phonenumbers_view.xml',
         'wizard/number_not_found_view.xml',
         'web_phone.xml',
