@@ -29,11 +29,11 @@
 -
   !python {model: res.partner}: |
     partner1 = self.browse(cr, uid, ref('partner1'), context=context)
-    assert partner1.mobile == '+33642774266', 'Mobile number not written in E.164 format (partner1)'
-    assert partner1.fax == '+33145421242', 'Fax number not written in E.164 format (partner1)'
+    assert partner1.mobile == '+33 6 42 77 42 66', 'Mobile number not written in E.164 format (partner1)'
+    assert partner1.fax == '+33 1 45 42 12 42', 'Fax number not written in E.164 format (partner1)'
     partner2 = self.browse(cr, uid, ref('partner2'), context=context)
-    assert partner2.phone == '+41216191010', 'Phone number not written in E.164 format (partner2)'
-    assert partner2.mobile == '+41796064242', 'Mobile number not written in E.164 format (partner2)'
+    assert partner2.phone == '+41 21 619 10 10', 'Phone number not written in E.164 format (partner2)'
+    assert partner2.mobile == '+41 79 606 42 42', 'Mobile number not written in E.164 format (partner2)'
 -
   Check that invalid phone numbers are kept unchanged
 -
