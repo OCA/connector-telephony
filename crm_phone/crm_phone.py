@@ -3,25 +3,21 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from openerp import models, fields, api, _
+from openerp.addons.base_phone.fields import Phone
 
 
 class CrmLead(models.Model):
-    _name = 'crm.lead'
-    _inherit = ['crm.lead', 'phone.common']
-    _phone_fields = ['phone', 'mobile', 'fax']
+    _inherit = 'crm.lead'
     _phone_name_sequence = 20
-    _country_field = 'country_id'
-    _partner_field = None
 
-    @api.model
-    def create(self, vals):
-        vals_reformated = self._reformat_phonenumbers_create(vals)
-        return super(CrmLead, self).create(vals_reformated)
-
-    @api.multi
-    def write(self, vals):
-        vals_reformated = self._reformat_phonenumbers_write(vals)
-        return super(CrmLead, self).write(vals_reformated)
+    phone = Phone(country_field='country_id')
+    mobile = Phone(country_field='country_id')
+    phone = Phone(country_field='country_id')
+    phonecall_ids = fields.One2many(
+        'crm.phonecall', 'opportunity_id', string='Phone Calls')
+    phonecall_count = fields.Integer(
+        compute='_count_phonecalls', string='Number of Phonecalls',
+        readonly=True)
 
     @api.multi
     def name_get(self):
@@ -41,12 +37,6 @@ class CrmLead(models.Model):
         else:
             return super(CrmLead, self).name_get()
 
-    phonecall_ids = fields.One2many(
-        'crm.phonecall', 'opportunity_id', string='Phone Calls')
-    phonecall_count = fields.Integer(
-        compute='_count_phonecalls', string='Number of Phonecalls',
-        readonly=True)
-
     @api.multi
     @api.depends('phonecall_ids')
     def _count_phonecalls(self):
@@ -61,11 +51,8 @@ class CrmLead(models.Model):
 
 class CrmPhonecall(models.Model):
     _name = 'crm.phonecall'
-    _inherit = ['phone.common', 'mail.thread']
+    _inherit = ['mail.thread']
     _order = "id desc"
-    _phone_fields = ['partner_phone', 'partner_mobile']
-    _country_field = None
-    _partner_field = 'partner_id'
 
     # Restore the object that existed in v8
     # and doesn't exist in v9 community any more
@@ -87,8 +74,8 @@ class CrmPhonecall(models.Model):
         default=lambda self: self.env['crm.team']._get_default_team_id())
     partner_id = fields.Many2one(
         'res.partner', string='Contact', ondelete='cascade')
-    partner_phone = fields.Char(string='Phone')
-    partner_mobile = fields.Char(string='Mobile')
+    partner_phone = Phone(string='Phone', partner_field='partner_id')
+    partner_mobile = Phone(string='Mobile', partner_field='partner_id')
     priority = fields.Selection([
         ('0', 'Low'),
         ('1', 'Normal'),
@@ -111,16 +98,6 @@ class CrmPhonecall(models.Model):
         ('inbound', 'Inbound'),
         ('outbound', 'Outbound'),
         ], string='Type', required=True, default='outbound')
-
-    @api.model
-    def create(self, vals):
-        vals_reformated = self._reformat_phonenumbers_create(vals)
-        return super(CrmPhonecall, self).create(vals_reformated)
-
-    @api.multi
-    def write(self, vals):
-        vals_reformated = self._reformat_phonenumbers_write(vals)
-        return super(CrmPhonecall, self).write(vals_reformated)
 
     @api.onchange('partner_id')
     def onchange_partner_id(self):
