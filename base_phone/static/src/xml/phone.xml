@@ -7,48 +7,16 @@
 
 <templates id="template" xml:space="preserve">
 
-<t t-name="FieldPhone">
-    <span class="oe_form_field oe_form_field_email" t-att-style="widget.node.attrs.style">
-        <t t-if="widget.get('effective_readonly')">
-            <a href="#" class="oe_form_uri"/><span class="oe_form_char_content"/>
-            <!--
-            You should add the following "<a .. />" in your IPBX-specific
-            module (such as asterisk_click2dial or ovh_telephony_connector)
-            via <t t-extend="FieldPhone">
-            <a id="click2dial" href="#" class="oe_bold"/>
-            -->
-        </t>
-        <t t-if="!widget.get('effective_readonly')">
-            <div>
-                <input type="text"
-                    t-att-id="widget.id_for_label"
-                    t-att-tabindex="widget.node.attrs.tabindex"
-                    t-att-autofocus="widget.node.attrs.autofocus"
-                    t-att-placeholder="widget.node.attrs.placeholder"
-                    t-att-maxlength="widget.field.size"
-                />
-            </div>
-        </t>
-    </span>
+<t t-name="FieldPhone" t-extend="FieldEmail">
+    <t t-jquery="span:first">
+        this.removeClass('oe_form_field_email').addClass('oe_form_field_phone');
+    </t>
 </t>
 
-<t t-name="FieldFax">
-    <span class="oe_form_field oe_form_field_email" t-att-style="widget.node.attrs.style">
-        <t t-if="widget.get('effective_readonly')">
-            <a href="#" class="oe_form_uri"/><span class="oe_form_char_content"/>
-        </t>
-        <t t-if="!widget.get('effective_readonly')">
-            <div>
-                <input type="text"
-                    t-att-id="widget.id_for_label"
-                    t-att-tabindex="widget.node.attrs.tabindex"
-                    t-att-autofocus="widget.node.attrs.autofocus"
-                    t-att-placeholder="widget.node.attrs.placeholder"
-                    t-att-maxlength="widget.field.size"
-                />
-            </div>
-        </t>
-    </span>
+<t t-name="FieldFax" t-extend="FieldEmail">
+    <t t-jquery="span:first">
+        this.removeClass('oe_form_field_email').addClass('oe_form_field_fax');
+    </t>
 </t>
 
 </templates>
