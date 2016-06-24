@@ -12,8 +12,6 @@
           inherit_id="web.assets_backend">
     <xpath expr="." position="inside">
         <script type="text/javascript"
-            src="/base_phone/static/lib/phonenumbers/PhoneFormat.js"></script>
-        <script type="text/javascript"
             src="/base_phone/static/src/js/phone_widget.js"></script>
     </xpath>
 </template>
