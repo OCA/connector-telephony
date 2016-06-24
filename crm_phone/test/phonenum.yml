@@ -24,13 +24,13 @@
 -
   !python {model: crm.lead}: |
     lead1 = self.browse(cr, uid, ref('lead1'), context=context)
-    assert lead1.mobile == '+33642774277', 'Mobile number not written in E.164 format (lead1)'
-    assert lead1.fax == '+33145444243', 'Fax number not written in E.164 format (lead1)'
+    assert lead1.mobile == '+33 6 42 77 42 77', 'Mobile number not written in E.164 format (lead1)'
+    assert lead1.fax == '+33 1 45 44 42 43', 'Fax number not written in E.164 format (lead1)'
     lead2 = self.browse(cr, uid, ref('lead2'), context=context)
-    assert lead2.phone == '+41431234567', 'Phone number not written in E.164 format (lead2)'
-    self.write(cr, uid, ref('lead3'), {'phone': '0891234567'})
+    assert lead2.phone == '+41 43 123 45 67', 'Phone number not written in E.164 format (lead2)'
+    self.write(cr, uid, ref('lead3'), {'phone': '08912345678'})
     lead3 = self.browse(cr, uid, ref('lead3'), context=context)
-    assert lead3.phone == '+49891234567', 'Phone number not written in E.164 format (lead3)'
+    assert lead3.phone == '+49 89 12345678', 'Phone number not written in E.164 format (lead3)'
 -
   Get name from phone number
 -
