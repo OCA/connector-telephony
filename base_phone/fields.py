@@ -94,7 +94,9 @@ def convert_all_phone_fields(self, vals, fields_to_convert):
         country_code = False
         if country:
             country_code = country.code.upper()
-        loc_vals[field] = convert_phone_field(loc_vals[field], country_code)
+        if loc_vals[field]:
+            loc_vals[field] = convert_phone_field(
+                loc_vals[field], country_code)
     return loc_vals
 
 
