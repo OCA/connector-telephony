@@ -45,7 +45,6 @@ class Phone(fields.Char):
                 res_parse = phonenumbers.parse(res)
                 res = phonenumbers.format_number(
                     res_parse, phonenumbers.PhoneNumberFormat.INTERNATIONAL)
-                # print "after parse+intl res=", res
             except:
                 pass
         # print 'cache value', res
@@ -82,7 +81,7 @@ def convert_all_phone_fields(self, vals, fields_to_convert):
                 country = self.env['res.country'].browse(vals[country_key])
             else:
                 country = self[country_key]
-        elif partner_key:
+        if partner_key and not country:
             if partner_key in loc_vals:
                 partner = self.env['res.partner'].browse(vals[partner_key])
             else:
