@@ -11,9 +11,10 @@ class ResPartner(models.Model):
     _inherit = 'res.partner'
     _phone_name_sequence = 10
 
-    phone = fields.Phone(country_field='country_id', partner_field=None)
-    mobile = fields.Phone(country_field='country_id', partner_field=None)
-    fax = fields.Phone(country_field='country_id', partner_field=None)
+    phone = fields.Phone(country_field='country_id', partner_field='parent_id')
+    mobile = fields.Phone(
+        country_field='country_id', partner_field='parent_id')
+    fax = fields.Phone(country_field='country_id', partner_field='parent_id')
 
     @api.multi
     def name_get(self):

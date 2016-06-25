@@ -48,7 +48,6 @@
 >>>>>>> Feature "Open Calling Partner" replaced by "Open Caller", with a completely new behavior
         ],
     'qweb': ['static/src/xml/*.xml'],
-    'test': ['test/phonenum.yml'],
     'images': [],
     'installable': True,
 }
