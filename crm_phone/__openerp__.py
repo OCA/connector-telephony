@@ -36,7 +36,6 @@ for any help or question about this module.
         'wizard/create_crm_phonecall_view.xml',
         ],
     'demo': ['demo/crm_phonecall.xml'],
-    'test': ['test/phonenum.yml'],
     'installable': True,
     'auto_install': True,
 }

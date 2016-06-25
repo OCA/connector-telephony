@@ -41,7 +41,6 @@
         'web_phone.xml',
         ],
     'qweb': ['static/src/xml/*.xml'],
-    'test': ['test/phonenum.yml'],
     'images': [],
     'installable': True,
 }
