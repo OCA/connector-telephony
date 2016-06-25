@@ -50,16 +50,15 @@ class PhoneCommon(models.AbstractModel):
             end_number_to_match = presented_number
 
         sorted_phonemodels = self._get_phone_models()
-        # [('res.parter', 10), ('crm.lead', 20)]
-        for (obj, prio) in sorted_phonemodels:
+        for obj_dict in sorted_phonemodels:
+            obj = obj_dict['object']
             pg_search_number = str('%' + end_number_to_match)
             _logger.debug(
                 "Will search phone and mobile numbers in %s ending with '%s'",
                 obj._name, end_number_to_match)
             domain = []
-            for field in obj._fields:
-                if isinstance(obj._fields[field], Phone):
-                    domain.append((field, '=like', pg_search_number))
+            for field in obj_dict['fields']:
+                domain.append((field, '=like', pg_search_number))
             if len(domain) > 1:
                 domain = ['|'] * (len(domain) - 1) + domain
             _logger.debug('searching on %s with domain=%s', obj._name, domain)
@@ -85,7 +84,7 @@ class PhoneCommon(models.AbstractModel):
 
     @api.model
     def _get_phone_models(self):
-        res = []
+        phoneobj = []
         for model_name in self.env.registry.keys():
             senv = False
             try:
@@ -95,10 +94,20 @@ class PhoneCommon(models.AbstractModel):
             if (
                     hasattr(senv, '_phone_name_sequence') and
                     isinstance(senv._phone_name_sequence, int)):
-                res.append((senv, senv._phone_name_sequence))
+                phoneobj.append((senv, senv._phone_name_sequence))
 
-        phonemodels_sorted = sorted(res, key=lambda element: element[1])
-        return phonemodels_sorted
+        phoneobj_sorted = sorted(phoneobj, key=lambda element: element[1])
+
+        res = []
+        for (obj, prio) in phoneobj_sorted:
+            entry = {'object': obj, 'fields': []}
+            for field in obj._fields:
+                if isinstance(obj._fields[field], Phone):
+                    entry['fields'].append(field)
+            res.append(entry)
+        # [{'fields': ['fax', 'phone', 'mobile'], 'object': res.partner()},
+        #  {'fields': ['fax', 'phone', 'mobile'], 'object': crm.lead()}]
+        return res
 
     @api.model
     def click2dial(self, erp_number):

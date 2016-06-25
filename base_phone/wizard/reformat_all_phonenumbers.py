@@ -1,23 +1,6 @@
 # -*- coding: utf-8 -*-
-##############################################################################
-#
-#    Base Phone module for Odoo
-#    Copyright (C) 2012-2015 Alexis de Lattre <alexis@via.ecp.fr>
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as
-#    published by the Free Software Foundation, either version 3 of the
-#    License, or (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU Affero General Public License for more details.
-#
-#    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-#
-##############################################################################
+# © 2012-2016 Akretion (Alexis de Lattre <alexis.delattre@akretion.com>)
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from openerp import models, fields, api
 import logging
@@ -42,15 +25,15 @@ class ReformatAllPhonenumbers(models.TransientModel):
         self.ensure_one()
         logger.info('Starting to reformat all the phone numbers')
         phonenumbers_not_reformatted = u''
-        phoneobjects = self.env['phone.common']._get_phone_fields()
-        for objname in phoneobjects:
-            fields = self.env[objname]._phone_fields
-            obj = self.env[objname]
+        phoneobjects = self.env['phone.common']._get_phone_models()
+        for obj_dict in phoneobjects:
+            fields = obj_dict['fields']
+            obj = obj_dict['object']
             logger.info(
                 'Starting to reformat phone numbers on object %s '
-                '(fields = %s)', objname, fields)
+                '(fields = %s)', obj._name, fields)
             # search if this object has an 'active' field
-            if obj._columns.get('active') or objname == 'hr.employee':
+            if obj._fields.get('active') or obj._name == 'hr.employee':
                 # hr.employee inherits from 'resource.resource' and
                 # 'resource.resource' has an active field
                 # As I don't know how to detect such cases, I hardcode it here
@@ -61,32 +44,11 @@ class ReformatAllPhonenumbers(models.TransientModel):
             all_entries = obj.search(domain)
 
             for entry in all_entries:
-                init_entry_vals = {}
+                vals = {}
                 for field in fields:
-                    init_entry_vals[field] = entry[field]
-                entry_vals = init_entry_vals.copy()
-                # entry is _updated_ by the fonction
-                # _generic_reformat_phonenumbers()
-                try:
-                    entry.with_context(raise_if_phone_parse_fails=True).\
-                        _reformat_phonenumbers_write(entry_vals)
-                except Exception, e:
-                    name = entry.name_get()[0][1]
-                    phonenumbers_not_reformatted += \
-                        "Problem on %s '%s'. Error message: %s\n" % (
-                            obj._description, name, unicode(e))
-                    logger.warning(
-                        "Problem on %s '%s'. Error message: %s",
-                        obj._description, name, unicode(e))
-                    continue
-                if any([
-                        init_entry_vals.get(field) != entry_vals.get(field) for
-                        field in fields]):
-                    logger.info(
-                        '[%s] Reformating phone number: FROM %s TO %s',
-                        obj._description, unicode(init_entry_vals),
-                        unicode(entry_vals))
-                    entry.write(entry_vals)
+                    vals[field] = entry[field]
+                if any([value for value in vals.values()]):
+                    entry.write(vals)
         if not phonenumbers_not_reformatted:
             phonenumbers_not_reformatted = \
                 'All phone numbers have been reformatted successfully.'
