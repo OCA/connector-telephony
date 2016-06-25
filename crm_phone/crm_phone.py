@@ -10,9 +10,9 @@ class CrmLead(models.Model):
     _inherit = 'crm.lead'
     _phone_name_sequence = 20
 
-    phone = Phone(country_field='country_id')
-    mobile = Phone(country_field='country_id')
-    fax = Phone(country_field='country_id')
+    phone = Phone(country_field='country_id', partner_field='partner_id')
+    mobile = Phone(country_field='country_id', partner_field='partner_id')
+    fax = Phone(country_field='country_id', partner_field='partner_id')
     phonecall_ids = fields.One2many(
         'crm.phonecall', 'opportunity_id', string='Phone Calls')
     phonecall_count = fields.Integer(
