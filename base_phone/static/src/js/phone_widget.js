@@ -131,30 +131,26 @@ if(!core.form_widget_registry.get('phone')){
     core.form_widget_registry.add('phone', FieldPhone);
 }
 
-/*
-var Column = require('web.ListView');
 
-var ColumnPhone = Column.extend({
+var treewidgets = require('web.ListView');
+
+var ColumnPhone = treewidgets.Column.extend({
     // ability to add widget="phone" in TREE view
     _format: function(row_data, options) {
-        console.log('row_data=' + row_data);
-        console.log('options=');
-        console.log(options);
-         var value = row_data[this.id].value;
-         if (value) {
-            readable_space = formatInternational('', value);
-            readable_no_break_space = readable_space.replace(/\s/g, ' ');
-            console('special return');
-            return readable_no_break_space;
-         }
-        console.log('return normal');
+        var value = row_data[this.id].value;
+        if (value) {
+            return _.template("<a href='tel:<%-href%>'><%-text%></a>")({
+                href: value.replace(' ', ''),
+                text: value
+            });
+        }
         return this._super(row_data, options);
     }
 });
 
+
 if (!core.list_widget_registry.get('phone')) {
     core.list_widget_registry.add('field.phone', ColumnPhone);
-// a mon avis, il y a une mauvaise compréhension : fields.phone signifiera fields.Phone dans le python
-} */
+}
 
 });
