@@ -45,6 +45,8 @@ class Phone(fields.Char):
                 res_parse = phonenumbers.parse(res)
                 res = phonenumbers.format_number(
                     res_parse, phonenumbers.PhoneNumberFormat.INTERNATIONAL)
+                narrow_no_break_space = u'\u202f'
+                res = res.replace(' ', narrow_no_break_space)
             except:
                 pass
         # print 'cache value', res
