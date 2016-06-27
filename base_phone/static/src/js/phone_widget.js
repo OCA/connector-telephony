@@ -24,13 +24,10 @@ var FieldPhone = formwidgets.FieldChar.extend({
             } else {
                 var self = this;
                 var phone_num = this.get('value');
-                console.log('BASE_PHONE phone_num = %s', phone_num);
-                var href = '#';
+                // console.log('BASE_PHONE phone_num = %s', phone_num);
                 if (phone_num) {
-                  href = 'tel:' + phone_num;
-                }
-                if (phone_num) {
-                    this.$el.find('a').attr('href', href).text(phone_num);
+                    var raw_phone_num = phone_num.replace(/ /g, '');
+                    this.$el.find('a').attr('href', 'tel:' + raw_phone_num).text(phone_num);
                 }
                 else {
                     this.$el.find('a').attr('href', '').text('');
@@ -101,12 +98,9 @@ var FieldFax = formwidgets.FieldChar.extend({
             } else {
                 var fax_num = this.get('value');
                 // console.log('BASE_PHONE fax_num = %s', fax_num);
-                var href = '#';
                 if (fax_num) {
-                    href = 'fax:' + fax_num;
-                }
-                if (fax_num) {
-                    this.$el.find('a').attr('href', href).text(fax_num);
+                    var raw_fax_num = fax_num.replace(/ /g, '');
+                    this.$el.find('a').attr('href', 'fax:' + raw_fax_num).text(fax_num);
                 }
                 else {
                     this.$el.find('a').attr('href', '').text('');
@@ -119,10 +113,6 @@ var FieldFax = formwidgets.FieldChar.extend({
     });
 
 // To avoid conflicts, we check that widgets do not exist before using
-
-console.log("core.form_widget_registry.get('fax')=" + core.form_widget_registry.get('fax'));
-console.log("core.form_widget_registry.get('PHONE')=" + core.form_widget_registry.get('phone'));
-
 if(!core.form_widget_registry.get('fax')){
     core.form_widget_registry.add('fax', FieldFax);
 }
@@ -137,11 +127,12 @@ var treewidgets = require('web.ListView');
 var ColumnPhone = treewidgets.Column.extend({
     // ability to add widget="phone" in TREE view
     _format: function(row_data, options) {
-        var value = row_data[this.id].value;
-        if (value) {
+        var phone_num = row_data[this.id].value;
+        if (phone_num) {
+            var raw_phone_num = phone_num.replace(/ /g, '');
             return _.template("<a href='tel:<%-href%>'><%-text%></a>")({
-                href: value.replace(' ', ''),
-                text: value
+                href: raw_phone_num,
+                text: phone_num
             });
         }
         return this._super(row_data, options);
