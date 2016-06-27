@@ -126,7 +126,7 @@ class PhoneCommon(models.AbstractModel):
         '''
         assert(erp_number), 'Missing phone number'
         _logger.debug('Number before reformat = %s' % erp_number)
-        # erp_number are supposed to be in E.164 format, so no need to
+        # erp_number are supposed to be in International format, so no need to
         # give a country code here
         parsed_num = phonenumbers.parse(erp_number, None)
         country_code = self.env.user.company_id.country_id.code
