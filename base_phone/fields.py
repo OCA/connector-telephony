@@ -57,6 +57,9 @@ def convert_phone_field(value, country_code):
     _logger.debug(
         'convert_phone_field value=%s country=%s', value, country_code)
     try:
+        narrow_no_break_space = u'\u202f'
+        # phonenumbers.parse fails with narrow_no_break_space
+        value = value.replace(narrow_no_break_space, '')
         res_parse = phonenumbers.parse(
             value, country_code)
         _logger.debug('res_parse=%s', res_parse)
