@@ -25,16 +25,18 @@ var FieldPhone = formwidgets.FieldChar.extend({
                 var self = this;
                 var phone_num = this.get('value');
                 // console.log('BASE_PHONE phone_num = %s', phone_num);
+                var raw_phone_num = '';
                 if (phone_num) {
-                    var raw_phone_num = phone_num.replace(/ /g, '');
-                    this.$el.find('a').attr('href', 'tel:' + raw_phone_num).text(phone_num);
+                    // remove non-breaking-space
+                    raw_phone_num = phone_num.replace(/ /g, '');
+                    raw_phone_num = raw_phone_num.replace(/-/g, '');
+                    this.$el.find('a.oe_form_uri').attr('href', 'tel:' + raw_phone_num).text(phone_num);
                 }
                 else {
-                    this.$el.find('a').attr('href', '').text('');
+                    this.$el.find('a.oe_form_uri').attr('href', '').text('');
                 }
-                /*
                 var click2dial_text = '';
-                if (formatted_phone_num && !this.options.dial_button_invisible) {
+                if (phone_num && !this.options.dial_button_invisible) {
                   click2dial_text = _t('Dial');
                 }
                 this.$el.find('#click2dial').off('click');
@@ -45,7 +47,7 @@ var FieldPhone = formwidgets.FieldChar.extend({
                             _t('Click2dial started'),
                             _t('Unhook your ringing phone'));
                         var arg = {
-                            'phone_number': phone_num,
+                            'phone_number': raw_phone_num,
                             'click2dial_model': self.view.dataset.model,
                             'click2dial_id': self.view.datarecord.id};
                         self.rpc('/base_phone/click2dial', arg).done(function(r) {
@@ -60,7 +62,7 @@ var FieldPhone = formwidgets.FieldChar.extend({
                                     var context = {
                                         'click2dial_model': self.view.dataset.model,
                                         'click2dial_id': self.view.datarecord.id,
-                                        'phone_number': phone_num,
+                                        'phone_number': raw_phone_num,
                                         };
                                     var action = {
                                         name: r.action_name,
@@ -75,7 +77,7 @@ var FieldPhone = formwidgets.FieldChar.extend({
                                 }
                             }
                         });
-                    }); */
+                    });
             }
         },
         on_button_clicked: function() {
