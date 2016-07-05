@@ -107,7 +107,7 @@ def convert_all_phone_fields(self, vals, fields_to_convert):
 def get_phone_fields(self, vals):
     fields_to_convert = []
     for key in vals:
-        if isinstance(self._fields[key], Phone):
+        if isinstance(self._fields.get(key), Phone):
             fields_to_convert.append(key)
     return fields_to_convert
 
