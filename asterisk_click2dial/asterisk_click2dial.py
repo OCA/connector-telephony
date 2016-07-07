@@ -422,7 +422,7 @@ class PhoneCommon(orm.AbstractModel):
                 _('No callerID configured for the current user'))
 
         variable = []
-        if user.asterisk_chan_type == 'SIP' or user.asterisk_chan_type == 'PJSIP':
+        if user.asterisk_chan_type in ['SIP', 'PJSIP']:
             # We can only have one alert-info header in a SIP request
             if user.alert_info:
                 variable.append(
