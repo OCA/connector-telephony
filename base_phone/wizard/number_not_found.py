@@ -1,26 +1,9 @@
 # -*- coding: utf-8 -*-
-##############################################################################
-#
-#    Base Phone module for Odoo
-#    Copyright (C) 2010-2015 Alexis de Lattre <alexis@via.ecp.fr>
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as
-#    published by the Free Software Foundation, either version 3 of the
-#    License, or (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU Affero General Public License for more details.
-#
-#    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-#
-##############################################################################
+# © 2010-2016 Akretion (Alexis de Lattre <alexis.delattre@akretion.com>)
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from openerp import models, fields, api, exceptions
-from openerp.tools.translate import _
+from openerp import models, fields, api, _
+from openerp.exceptions import UserError
 import logging
 import phonenumbers
 
@@ -59,16 +42,26 @@ class NumberNotFound(models.TransientModel):
         if not res:
             res = {}
         if res.get('calling_number'):
-            convert = self.env['res.partner']._reformat_phonenumbers_create(
-                {'phone': res.get('calling_number')})
-            parsed_num = phonenumbers.parse(convert.get('phone'))
-            res['e164_number'] = phonenumbers.format_number(
-                parsed_num, phonenumbers.PhoneNumberFormat.INTERNATIONAL)
-            number_type = phonenumbers.number_type(parsed_num)
-            if number_type == 1:
-                res['number_type'] = 'mobile'
-            else:
-                res['number_type'] = 'phone'
+            if not self.env.user.company_id.country_id:
+                raise UserError(_(
+                    'Missing country on company %s'
+                    % self.env.user.company_id.name))
+            country_code = self.env.user.company_id.country_id.code
+            try:
+                parsed_num = phonenumbers.parse(
+                    res['calling_number'], country_code)
+                res['e164_number'] = phonenumbers.format_number(
+                    parsed_num, phonenumbers.PhoneNumberFormat.INTERNATIONAL)
+                number_type = phonenumbers.number_type(parsed_num)
+                if number_type == 1:
+                    res['number_type'] = 'mobile'
+                else:
+                    res['number_type'] = 'phone'
+            except Exception, e:
+                _logger.error(
+                    "Cannot reformat the phone number '%s': %s",
+                    res['calling_number'], e)
+                pass
         return res
 
     @api.multi
@@ -96,9 +89,7 @@ class NumberNotFound(models.TransientModel):
         self.ensure_one()
         wiz = self[0]
         if not wiz.to_update_partner_id:
-            raise exceptions.Warning(
-                _('Error'),
-                _('Select the Partner to Update.'))
+            raise UserError(_('Select the Partner to Update.'))
         wiz.to_update_partner_id.write(
             {wiz.number_type: wiz.e164_number})
         action = {
@@ -112,8 +103,3 @@ class NumberNotFound(models.TransientModel):
             'context': self._context,
         }
         return action
-
-    @api.onchange('to_update_partner_id')
-    def onchange_to_update_partner(self):
-        self.current_partner_phone = self.to_update_partner_id.phone or False
-        self.current_partner_mobile = self.to_update_partner_id.mobile or False
