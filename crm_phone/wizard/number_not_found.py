@@ -62,12 +62,3 @@ class NumberNotFound(models.TransientModel):
                 },
             }
         return action
-
-    @api.onchange('to_update_lead_id')
-    def onchange_to_update_lead(self):
-        if self.to_update_lead_id:
-            self.current_lead_phone = self.to_update_lead_id.phone
-            self.current_lead_mobile = self.to_update_lead_id.mobile
-        else:
-            self.current_lead_phone = False
-            self.current_lead_mobile = False
