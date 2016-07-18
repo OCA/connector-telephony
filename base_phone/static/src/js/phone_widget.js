@@ -28,7 +28,7 @@ var FieldPhone = formwidgets.FieldChar.extend({
                 var raw_phone_num = '';
                 if (phone_num) {
                     // remove non-breaking-space
-                    raw_phone_num = phone_num.replace(/ /g, '');
+                    raw_phone_num = phone_num.replace(/ /g, '');
                     raw_phone_num = raw_phone_num.replace(/-/g, '');
                     this.$el.find('a.oe_form_uri').attr('href', 'tel:' + raw_phone_num).text(phone_num);
                 }
@@ -101,7 +101,8 @@ var FieldFax = formwidgets.FieldChar.extend({
                 var fax_num = this.get('value');
                 // console.log('BASE_PHONE fax_num = %s', fax_num);
                 if (fax_num) {
-                    var raw_fax_num = fax_num.replace(/ /g, '');
+                    var raw_fax_num = fax_num.replace(/ /g, '');
+                    raw_fax_num = raw_fax_num.replace(/-/g, '');
                     this.$el.find('a').attr('href', 'fax:' + raw_fax_num).text(fax_num);
                 }
                 else {
