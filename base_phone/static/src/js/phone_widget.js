@@ -129,7 +129,7 @@ openerp.base_phone = function (instance) {
         var value = row_data[this.id].value;
         if (value && this.widget === 'phone') {
             readable_space = formatInternational('', value);
-            readable_no_break_space = readable_space.replace(/\s/g, ' ');
+            readable_no_break_space = readable_space.replace(/\s/g, ' ');
             return readable_no_break_space;
         }
         return res;
