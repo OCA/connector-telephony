@@ -45,7 +45,8 @@ var FieldPhone = formwidgets.FieldChar.extend({
                     .on('click', function(ev) {
                         self.do_notify(
                             _t('Click2dial started'),
-                            _t('Unhook your ringing phone'));
+                            _t('Unhook your ringing phone'),
+                            false);
                         var arg = {
                             'phone_number': raw_phone_num,
                             'click2dial_model': self.view.dataset.model,
@@ -57,7 +58,8 @@ var FieldPhone = formwidgets.FieldChar.extend({
                             } else if (typeof r === 'object') {
                                 self.do_notify(
                                     _t('Click2dial successfull'),
-                                    _t('Number dialed:') + ' ' + r.dialed_number);
+                                    _t('Number dialed:') + ' ' + r.dialed_number,
+                                    false);
                                 if (r.action_model) {
                                     var context = {
                                         'click2dial_model': self.view.dataset.model,
