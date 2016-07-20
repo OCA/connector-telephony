@@ -33,9 +33,9 @@ install:
   - travis_install_nightly
   - pip install phonenumbers py-Asterisk SOAPpy
   - hg clone http://bitbucket.org/anybox/web_action_request -b ${VERSION} ${HOME}/web_action_request
-  - if [ -d /home/travis/odoo-${VERSION}/addons ]; then ln -s ${HOME}/web_action_request/web_action_request /home/travis/${ODOO_REPO##*/}-${VERSION}/addons; fi
+  - if [ -d /home/travis/${ODOO_REPO##*/}-${VERSION}/addons ]; then ln -s ${HOME}/web_action_request/web_action_request /home/travis/${ODOO_REPO##*/}-${VERSION}/addons; fi
   - hg clone http://bitbucket.org/anybox/bus_enhanced -b ${VERSION} ${HOME}/bus_enhanced
-  - if [ -d /home/travis/odoo-${VERSION}/addons ]; then ln -s ${HOME}/bus_enhanced/bus_enhanced /home/travis/${ODOO_REPO##*/}-${VERSION}/addons; fi
+  - if [ -d /home/travis/${ODOO_REPO##*/}-${VERSION}/addons ]; then ln -s ${HOME}/bus_enhanced/bus_enhanced /home/travis/${ODOO_REPO##*/}-${VERSION}/addons; fi
 
 script:
   - travis_run_tests
