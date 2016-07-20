@@ -29,10 +29,18 @@ click2dial.OpenCaller = Widget.extend({
         self.rpc('/asterisk_click2dial/get_record_from_my_channel', {}).done(function(r) {
         // console.log('RESULT RPC r='+r);
         // console.log('RESULT RPC type r='+typeof r);
+        // console.log('RESULT RPC isNaN r='+isNaN(r));
         if (r === false) {
-             self.do_notify(
+             self.do_warn(
                 _t('Failure'),
-                _t('Problem in the connection to Asterisk'));
+                _t('Problem in the connection to Asterisk'),
+                false);
+        }
+        else if (typeof r == 'string' && isNaN(r)) {
+             self.do_warn(
+                r,
+                _t('The calling number is not a phone number!'),
+                false);
         }
         else if (typeof r == 'string') {
              var action = {
@@ -50,7 +58,8 @@ click2dial.OpenCaller = Widget.extend({
         else if (typeof r == 'object' && r.length == 3) {
             self.do_notify( // Not working
                 _t('Success'),
-                _t('Moving to %s ID %d', r[0], r[1]));
+                _t('Moving to %s ID %d', r[0], r[1]),
+                false);
             var action = {
                 type: 'ir.actions.act_window',
                 res_model: r[0],
