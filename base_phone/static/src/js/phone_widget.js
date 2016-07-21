@@ -1,5 +1,5 @@
 /* Base phone module for Odoo
-   Copyright (C) 2013-2015 Alexis de Lattre <alexis@via.ecp.fr>
+   Copyright (C) 2013-2016 Alexis de Lattre <alexis@via.ecp.fr>
    The licence is in the file __openerp__.py */
 
 odoo.define('base_phone.phone_widget', function (require) {
@@ -134,7 +134,8 @@ var ColumnPhone = treewidgets.Column.extend({
     _format: function(row_data, options) {
         var phone_num = row_data[this.id].value;
         if (phone_num) {
-            var raw_phone_num = phone_num.replace(/ /g, '');
+            var raw_phone_num = phone_num.replace(/ /g, '');
+            raw_phone_num = raw_phone_num.replace(/-/g, '');
             return _.template("<a href='tel:<%-href%>'><%-text%></a>")({
                 href: raw_phone_num,
                 text: phone_num
