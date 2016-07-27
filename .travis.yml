@@ -26,7 +26,9 @@ install:
   - travis_install_nightly
   - pip install phonenumbers py-Asterisk gevent_psycopg2 gevent_socketio FreeSWITCH-ESL-Python
   - hg clone http://bitbucket.org/anybox/web_action_request -b ${VERSION} ${HOME}/web_action_request
+  - if [ -d /home/travis/${ODOO_REPO##*/}-${VERSION}/addons ]; then ln -s ${HOME}/web_action_request/web_action_request /home/travis/${ODOO_REPO##*/}-${VERSION}/addons; fi
   - hg clone http://bitbucket.org/anybox/web_socketio ${HOME}/web_socketio
+  - if [ -d /home/travis/${ODOO_REPO##*/}-${VERSION}/addons ]; then ln -s ${HOME}/web_socketio/web_socketio /home/travis/${ODOO_REPO##*/}-${VERSION}/addons; fi
 
 script:
   - travis_run_tests

@@ -92,7 +92,7 @@ http://www.akretion.com/products-and-services/openerp-freeswitch-voip-connector
     'author': "Trever L. Adams,Akretion,Odoo Community Association (OCA)",
     'website': 'https://github.com/treveradams/connector-telephony',
     'depends': ['base_phone'],
-    'external_dependencies': {'python': ['phonenumbers', 'ESL']},
+    'external_dependencies': {'python': ['phonenumbers', 'freeswitchESL']},
     'data': [
         'freeswitch_server_view.xml',
         'res_users_view.xml',

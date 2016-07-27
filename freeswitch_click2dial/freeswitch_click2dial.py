@@ -25,7 +25,10 @@ from openerp.tools.translate import _
 import logging
 # Lib for phone number reformating -> pip install phonenumbers
 import phonenumbers
-import ESL
+try:
+    from freeswitchESL import ESL
+except ImportError:
+    import ESL
 # import sys
 import csv
 import StringIO
