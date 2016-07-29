@@ -1,5 +1,5 @@
 /* Base phone module for Odoo
-   Copyright (C) 2013-2015 Alexis de Lattre <alexis@via.ecp.fr>
+   Copyright (C) 2013-2016 Alexis de Lattre <alexis@via.ecp.fr>
    The licence is in the file __openerp__.py */
 
 odoo.define('base_phone.phone_widget', function (require) {
@@ -7,8 +7,8 @@ odoo.define('base_phone.phone_widget', function (require) {
 
 var core = require('web.core');
 var formwidgets = require('web.form_widgets');
+var web_client = require('web.web_client');
 var _t = core._t;
-
 
 var FieldPhone = formwidgets.FieldChar.extend({
         template: 'FieldPhone',
@@ -25,21 +25,18 @@ var FieldPhone = formwidgets.FieldChar.extend({
                 var self = this;
                 var phone_num = this.get('value');
                 // console.log('BASE_PHONE phone_num = %s', phone_num);
-                var href = '#';
-                var href_text = '';
+                var raw_phone_num = '';
                 if (phone_num) {
-                  href = 'tel:' + phone_num;
-                  href_text = formatInternational('', phone_num) || '';
+                    // remove non-breaking-space
+                    raw_phone_num = phone_num.replace(/ /g, '');
+                    raw_phone_num = raw_phone_num.replace(/-/g, '');
+                    this.$el.find('a.oe_form_uri').attr('href', 'tel:' + raw_phone_num).text(phone_num);
                 }
-                if (href_text) {
-                    this.$el.find('a.oe_form_uri').attr('href', href).text(href_text);
-                    this.$el.find('span.oe_form_char_content').text('');
-                } else {
+                else {
                     this.$el.find('a.oe_form_uri').attr('href', '').text('');
-                    this.$el.find('span.oe_form_char_content').text(phone_num || '');
                 }
                 var click2dial_text = '';
-                if (href_text && !this.options.dial_button_invisible) {
+                if (phone_num && !this.options.dial_button_invisible) {
                   click2dial_text = _t('Dial');
                 }
                 this.$el.find('#click2dial').off('click');
@@ -48,9 +45,10 @@ var FieldPhone = formwidgets.FieldChar.extend({
                     .on('click', function(ev) {
                         self.do_notify(
                             _t('Click2dial started'),
-                            _t('Unhook your ringing phone'));
+                            _t('Unhook your ringing phone'),
+                            false);
                         var arg = {
-                            'phone_number': phone_num,
+                            'phone_number': raw_phone_num,
                             'click2dial_model': self.view.dataset.model,
                             'click2dial_id': self.view.datarecord.id};
                         self.rpc('/base_phone/click2dial', arg).done(function(r) {
@@ -60,12 +58,13 @@ var FieldPhone = formwidgets.FieldChar.extend({
                             } else if (typeof r === 'object') {
                                 self.do_notify(
                                     _t('Click2dial successfull'),
-                                    _t('Number dialed:') + ' ' + r.dialed_number);
+                                    _t('Number dialed:') + ' ' + r.dialed_number,
+                                    false);
                                 if (r.action_model) {
                                     var context = {
                                         'click2dial_model': self.view.dataset.model,
                                         'click2dial_id': self.view.datarecord.id,
-                                        'phone_number': phone_num,
+                                        'phone_number': raw_phone_num,
                                         };
                                     var action = {
                                         name: r.action_name,
@@ -76,7 +75,7 @@ var FieldPhone = formwidgets.FieldChar.extend({
                                         target: 'new',
                                         context: context,
                                         };
-                                    formwidgets.client.action_manager.do_action(action);
+                                    web_client.action_manager.do_action(action);
                                 }
                             }
                         });
@@ -103,18 +102,13 @@ var FieldFax = formwidgets.FieldChar.extend({
             } else {
                 var fax_num = this.get('value');
                 // console.log('BASE_PHONE fax_num = %s', fax_num);
-                var href = '#';
-                var href_text = '';
                 if (fax_num) {
-                    href = 'fax:' + fax_num;
-                    href_text = formatInternational('', fax_num) || '';
+                    var raw_fax_num = fax_num.replace(/ /g, '');
+                    raw_fax_num = raw_fax_num.replace(/-/g, '');
+                    this.$el.find('a').attr('href', 'fax:' + raw_fax_num).text(fax_num);
                 }
-                if (href_text) {
-                    this.$el.find('a.oe_form_uri').attr('href', href).text(href_text);
-                    this.$el.find('span.oe_form_char_content').text('');
-                } else {
-                    this.$el.find('a.oe_form_uri').attr('href', '').text('');
-                    this.$el.find('span.oe_form_char_content').text(fax_num || '');
+                else {
+                    this.$el.find('a').attr('href', '').text('');
                 }
             }
         },
@@ -132,27 +126,28 @@ if(!core.form_widget_registry.get('phone')){
     core.form_widget_registry.add('phone', FieldPhone);
 }
 
-/*
-var Column = require('web.list_view.js');
 
-var ColumnPhone = Column.extend({
+var treewidgets = require('web.ListView');
+
+var ColumnPhone = treewidgets.Column.extend({
     // ability to add widget="phone" in TREE view
     _format: function(row_data, options) {
-        console.log('row_data=' + row_data);
-        console.log('options=');
-        console.log(options);
-        var value = row_data[this.id].value;
-        if (value && this.widget === 'phone') {
-            readable_space = formatInternational('', value);
-            readable_no_break_space = readable_space.replace(/\s/g, ' ');
-            return readable_no_break_space;
+        var phone_num = row_data[this.id].value;
+        if (phone_num) {
+            var raw_phone_num = phone_num.replace(/ /g, '');
+            raw_phone_num = raw_phone_num.replace(/-/g, '');
+            return _.template("<a href='tel:<%-href%>'><%-text%></a>")({
+                href: raw_phone_num,
+                text: phone_num
+            });
         }
-        console.log('return normal');
         return this._super(row_data, options);
     }
 });
 
 
-core.list_widget_registry.add('field.phone', ColumnPhone);
-*/
+if (!core.list_widget_registry.get('phone')) {
+    core.list_widget_registry.add('field.phone', ColumnPhone);
+}
+
 });

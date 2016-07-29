@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  Copyright (C) 2014 Alexis de Lattre <alexis@via.ecp.fr>
-  The licence is in the file __openerp__.py
+  © 2014-2016 Akretion (Alexis de Lattre <alexis.delattre@akretion.com>)
+  License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl)
 -->
 
-<openerp>
+<odoo>
 <data>
+
 
 <record id="crm_case_form_view_job" model="ir.ui.view">
     <field name="name">hr_recruitment_phone.hr_applicant.form</field>
@@ -32,5 +33,6 @@
     </field>
 </record>
 
+
 </data>
-</openerp>
+</odoo>

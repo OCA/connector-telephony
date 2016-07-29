@@ -1,26 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  Copyright (C) 2014 Alexis de Lattre <alexis@via.ecp.fr>
-  The licence is in the file __openerp__.py
+  © 2014-2016 Akretion (Alexis de Lattre <alexis.delattre@akretion.com>)
+  License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 -->
 
-<openerp>
+<odoo>
 <data>
+
 
 <record id="crm_case_form_view_leads" model="ir.ui.view">
     <field name="name">crm_phone.crm_lead.form</field>
     <field name="model">crm.lead</field>
     <field name="inherit_id" ref="crm.crm_case_form_view_leads"/>
     <field name="arch" type="xml">
-        <field name="phone" position="attributes">
-            <attribute name="widget">phone</attribute>
-        </field>
         <field name="mobile" position="attributes">
             <attribute name="widget">phone</attribute>
         </field>
         <field name="fax" position="attributes">
             <attribute name="widget">fax</attribute>
         </field>
+        <div name="button_box" position="inside">
+            <button class="oe_inline oe_stat_button" type="action"
+                name="%(crm_phone.crm_phonecall_action)d"
+                icon="fa-phone"
+                context="{'search_default_opportunity_id': active_id}">
+                <field string="Calls" name="phonecall_count" widget="statinfo"/>
+             </button>
+        </div>
     </field>
 </record>
 
@@ -40,42 +46,23 @@
     <field name="model">crm.lead</field>
     <field name="inherit_id" ref="crm.crm_case_form_view_oppor"/>
     <field name="arch" type="xml">
-        <field name="phone" position="attributes">
-            <attribute name="widget">phone</attribute>
-        </field>
         <field name="mobile" position="attributes">
             <attribute name="widget">phone</attribute>
         </field>
         <field name="fax" position="attributes">
             <attribute name="widget">fax</attribute>
         </field>
+        <div name="button_box" position="inside">
+            <button class="oe_inline oe_stat_button" type="action"
+                name="%(crm_phone.crm_phonecall_action)d"
+                icon="fa-phone"
+                context="{'search_default_opportunity_id': active_id}">
+                <field string="Calls" name="phonecall_count" widget="statinfo"/>
+             </button>
+        </div>
     </field>
 </record>
 
-<record id="crm_case_phone_form_view" model="ir.ui.view">
-    <field name="name">crm_phone.crm_phonecall.form</field>
-    <field name="model">crm.phonecall</field>
-    <field name="inherit_id" ref="crm.crm_case_phone_form_view"/>
-    <field name="arch" type="xml">
-        <field name="partner_phone" position="attributes">
-            <attribute name="widget">phone</attribute>
-        </field>
-        <field name="partner_mobile" position="attributes">
-            <attribute name="widget">phone</attribute>
-        </field>
-    </field>
-</record>
-
-<record id="crm_case_phone_tree_view" model="ir.ui.view">
-    <field name="name">crm_phone.crm_phonecall.tree</field>
-    <field name="model">crm.phonecall</field>
-    <field name="inherit_id" ref="crm.crm_case_phone_tree_view"/>
-    <field name="arch" type="xml">
-        <field name="partner_phone" position="attributes">
-            <attribute name="widget">phone</attribute>
-        </field>
-    </field>
-</record>
 
 </data>
-</openerp>
+</odoo>

@@ -1,28 +1,10 @@
-# -*- encoding: utf-8 -*-
-##############################################################################
-#
-#    CRM Phone module for OpenERP
-#    Copyright (C) 2014 Alexis de Lattre <alexis@via.ecp.fr>
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as
-#    published by the Free Software Foundation, either version 3 of the
-#    License, or (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU Affero General Public License for more details.
-#
-#    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-#
-##############################################################################
-
+# -*- coding: utf-8 -*-
+# © 2014-2016 Akretion (Alexis de Lattre <alexis.delattre@akretion.com>)
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 {
     'name': 'CRM Phone',
-    'version': '8.0.0.1.0',
+    'version': '9.0.1.0.0',
     'category': 'Phone',
     'license': 'AGPL-3',
     'summary': 'Validate phone numbers in CRM',
@@ -42,16 +24,18 @@ for any help or question about this module.
     'author': "Akretion,Odoo Community Association (OCA)",
     'website': 'http://www.akretion.com/',
     'depends': ['base_phone', 'crm'],
+    'conflicts': ['crm_voip'],
     'data': [
+        'security/phonecall_security.xml',
         'security/ir.model.access.csv',
-        'crm_view.xml',
-        'res_users_view.xml',
+        'view/crm_phonecall.xml',
+        'view/crm_lead.xml',
+        'view/res_partner.xml',
+        'view/res_users.xml',
         'wizard/number_not_found_view.xml',
         'wizard/create_crm_phonecall_view.xml',
         ],
-    'test': ['test/phonenum.yml'],
-    'images': [],
-    'installable': False,
+    'demo': ['demo/crm_phonecall.xml'],
+    'installable': True,
     'auto_install': True,
-    'active': False,
 }

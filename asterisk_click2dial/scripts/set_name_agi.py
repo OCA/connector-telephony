@@ -1,6 +1,6 @@
 #! /usr/bin/python
-# -*- encoding: utf-8 -*-
-#  Copyright (C) 2010-2015 Alexis de Lattre <alexis.delattre@akretion.com>
+# -*- coding: utf-8 -*-
+#  © 2010-2016 Akretion (Alexis de Lattre <alexis.delattre@akretion.com>)
 #
 #  This program is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Affero General Public License as
@@ -104,7 +104,7 @@ __version__ = "0.6"
 # Name that will be displayed if there is no match
 # and no geolocalisation. Set it to False if you don't want
 # to have a 'not_found_name' when nothing is found
-not_found_name = "Not in Odoo"
+not_found_name = False
 
 # Define command line options
 options = [

@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  Copyright (C) 2012-2015 Alexis de Lattre <alexis@via.ecp.fr>
-  The licence is in the file __openerp__.py
+  © 2012-2016 (Alexis de Lattre <alexis.delattre@akretion.com>)
+  License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 -->
 
-<openerp>
+<odoo>
 <data>
+
 
 <record id="number_not_found_form" model="ir.ui.view">
     <field name="name">number.not.found.form</field>
     <field name="model">number.not.found</field>
     <field name="arch" type="xml">
-        <form string="Number Not Found" version="7.0">
+        <form string="Number Not Found">
             <div class="oe_title">
-                <label string="Number not found:" for="calling_number"/>
                 <h1>
                     <field name="calling_number" />
                 </h1>
@@ -50,4 +50,4 @@
 
 
 </data>
-</openerp>
+</odoo>

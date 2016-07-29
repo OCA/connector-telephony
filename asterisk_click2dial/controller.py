@@ -1,31 +1,16 @@
-# -*- encoding: utf-8 -*-
-##############################################################################
-#
-#    Asterisk click2dial module for OpenERP
-#    Copyright (C) 2014 Alexis de Lattre (alexis@via.ecp.fr)
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as
-#    published by the Free Software Foundation, either version 3 of the
-#    License, or (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU Affero General Public License for more details.
-#
-#    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-#
-##############################################################################
+# -*- coding: utf-8 -*-
+# © 2014-2016 Akretion (Alexis de Lattre <alexis.delattre@akretion.com>)
+# © 2015-2016 Juris Malinens (port to v9)
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-import openerp
+from openerp import http
 
 
-class AsteriskClick2dialController(openerp.addons.web.http.Controller):
-    _cp_path = '/asterisk_click2dial'
+class AsteriskClick2dialController(http.Controller):
 
-    @openerp.addons.web.http.jsonrequest
-    def get_record_from_my_channel(self, req):
-        res = req.session.model('asterisk.server').get_record_from_my_channel()
+    @http.route(
+        '/asterisk_click2dial/get_record_from_my_channel/',
+        type='json', auth='public')
+    def get_record_from_my_channel(self, **kw):
+        res = http.request.env['asterisk.server'].get_record_from_my_channel()
         return res
