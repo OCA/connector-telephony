@@ -29,11 +29,11 @@
    </settings>
  </configuration>
 
- If you want geoloc add &geoloc=true to the end (it is going to be slow). Notify
- should be the internal number of the called parties. This should be comma (,)
- delimited, not :_: delimted. It is up to you to format the extensions list
- appropriately. The persons who are at extensions in the notify list will receive
- a poppup if so configured and if they are logged in.
+ If you want geoloc, add &geoloc=true to the end (it is going to be slow).
+ Notify should be the internal number of the called parties. This should be
+ comma (,) delimited, not :_: delimited. It is up to you to format the
+ extensions list appropriately. The persons who are at extensions in the
+ notify list will receive a poppup if so configured and if they are logged in.
 
  From the dialplan, do something like this <action application="set"
  data="effective_caller_id_name=${cidlookup(${caller_id_number})}"/>.
@@ -43,16 +43,16 @@
  If you are wishing to set the callee name, <action application="export"
  data="callee_id_name=${cidlookup($1)}" />
 
- Of course, you should adapt this example to the FreeSWITCH server you are using.
- This is especially true of the options variable in the application function.
- The user (by number id, not name) that is used to connect to OpenERP/Odoo must
- have "Phone CallerID" access rights. That may also require "Technical Features"
- rights.
+ Of course, you should adapt this example to the FreeSWITCH server you are
+ using. This is especially true of the options variable in the application
+ function. The user (by number id, not name) that is used to connect to
+ OpenERP/Odoo must have "Phone CallerID" access rights. That may also require
+ "Technical Features" rights.
 
 """
 
 __author__ = "Trever Adams <trever.adams@gmail.com>"
-__date__ = "August 2015"
+__date__ = "May 2016"
 __version__ = "0.5"
 
 #  Copyright (C) 2014-2015 Trever L. Adams <trever.adams@gmail.com>
@@ -82,18 +82,23 @@ import unicodedata
 # and no geolocalisation
 not_found_name = "Not in OpenERP"
 
+# Set to 1 for debugging output
+verbose = 0
+
 
 def stdout_write(string):
     '''Wrapper on sys.stdout.write'''
-    sys.stdout.write(string)
-    sys.stdout.flush()
+    if verbose == 1:
+        sys.stdout.write(string)
+        sys.stdout.flush()
     return True
 
 
 def stderr_write(string):
     '''Wrapper on sys.stderr.write'''
-    sys.stderr.write(string)
-    sys.stdout.flush()
+    if verbose == 1:
+        sys.stderr.write(string)
+        sys.stderr.flush()
     return True
 
 
@@ -141,40 +146,37 @@ def main(name, phone_number, options):
     # i.e. not just digits, but a real name, then we don't try to
     # connect to OpenERP or geoloc, we just keep it
     if (
-            name
-            and not name.isdigit()
-            and name.lower()
-            not in ['freeswitch', 'unknown', 'anonymous']):
-        stdout_write(
-            'VERBOSE "Incoming CallerID name is %s"\n'
-            % name)
-        stdout_write(
-            'VERBOSE "As it is a real name, we do not change it"\n')
+            name and
+            not name.isdigit() and
+            name.lower()
+            not in ['freeswitch', 'unknown', 'anonymous', 'unavailable']):
+        stdout_write('Incoming CallerID name is %s\n' % name)
+        stdout_write('As it is a real name, we do not change it\n')
         return name
 
     if not isinstance(phone_number, str):
-        stdout_write('VERBOSE "Phone number is empty"\n')
+        stdout_write('Phone number is empty\n')
         exit(0)
     # Match for particular cases and anonymous phone calls
     # To test anonymous call in France, dial 3651 + number
     if not phone_number.isdigit():
         stdout_write(
-            'VERBOSE "Phone number (%s) is not a digit"\n' % phone_number)
+            'Phone number (%s) is not a digit\n' % phone_number)
         exit(0)
 
-    stdout_write('VERBOSE "Phone number = %s"\n' % phone_number)
+    stdout_write('Phone number = %s\n' % phone_number)
 
     res = name
     # Yes, this script can be used without "-s openerp_server" !
     if options["server"]:
         if options["ssl"]:
             stdout_write(
-                'VERBOSE "Starting XML-RPC secure request on OpenERP %s:%s"\n'
+                'Starting XML-RPC secure request on OpenERP %s:%s\n'
                 % (options["server"], str(options["port"])))
             protocol = 'https'
         else:
             stdout_write(
-                'VERBOSE "Starting clear XML-RPC request on OpenERP %s:%s"\n'
+                'Starting clear XML-RPC request on OpenERP %s:%s\n'
                 % (options["server"], str(options["port"])))
             protocol = 'http'
 
@@ -188,18 +190,18 @@ def main(name, phone_number, options):
                     options["database"], options["user"], options["password"],
                     'phone.common', 'incall_notify_by_extension',
                     phone_number, options["notify"])
-                stdout_write('VERBOSE "Calling incall_notify_by_extension"\n')
+                stdout_write('Calling incall_notify_by_extension\n')
             else:
                 res = sock.execute(
                     options["database"], options["user"], options["password"],
                     'phone.common', 'get_name_from_phone_number',
                     phone_number)
-                stdout_write('VERBOSE "Calling get_name_from_phone_number"\n')
-            stdout_write('VERBOSE "End of XML-RPC request on OpenERP"\n')
+                stdout_write('Calling get_name_from_phone_number\n')
+            stdout_write('End of XML-RPC request on OpenERP\n')
             if not res:
-                stdout_write('VERBOSE "Phone number not found in OpenERP"\n')
+                stdout_write('Phone number not found in OpenERP\n')
         except:
-            stdout_write('VERBOSE "Could not connect to OpenERP %s"\n'
+            stdout_write('Could not connect to OpenERP %s\n'
                          % options["database"])
             res = False
         # To simulate a long execution of the XML-RPC request
@@ -213,7 +215,7 @@ def main(name, phone_number, options):
     elif options["geoloc"]:
         # if the number is not found in OpenERP, we try to geolocate
         stdout_write(
-            'VERBOSE "Trying to geolocate with country %s and lang %s"\n'
+            'Trying to geolocate with country %s and lang %s\n'
             % (options["country"], options["lang"]))
         res = geolocate_phone_number(
             phone_number, options["country"], options["lang"])
@@ -228,7 +230,7 @@ def main(name, phone_number, options):
     if options["ascii"]:
         res = convert_to_ascii(res)
 
-    stdout_write('VERBOSE "Name = %s"\n' % res)
+    stdout_write('Name = %s\n' % res)
     return res
 
 
@@ -257,8 +259,7 @@ def application(environ, start_response):
         for item in parameters['notify'][0].split(','):
             options["notify"].append(escape(item))
         stdout_write(
-            'VERBOSE "Trying to notify %s"\n'
-            % options["notify"])
+            'Trying to notify %s\n' % options["notify"])
     else:
         options["notify"] = False
     if 'geoloc' in parameters:
@@ -269,6 +270,6 @@ def application(environ, start_response):
 
     status = '200 OK'
     response_headers = [('Content-type', 'text/plain'),
-        ('Content-Length', str(len(output)))]
+                        ('Content-Length', str(len(output)))]
     start_response(status, response_headers)
     return [output]

@@ -1,3 +1,2 @@
 phonenumbers
-py-FreeSWITCH
-ESL
+FreeSWITCH-ESL-Python

@@ -29,7 +29,7 @@
     'author': "Trever L. Adams,Akretion,Odoo Community Association (OCA)",
     'website': 'https://github.com/treveradams/connector-telephony',
     'depends': ['base_phone'],
-    'external_dependencies': {'python': ['ESL']},
+    'external_dependencies': {'python': ['freeswitchESL']},
     'data': [
         'freeswitch_server_view.xml',
         'res_users_view.xml',

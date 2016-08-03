@@ -23,8 +23,11 @@
 from openerp.osv import fields, orm
 from openerp.tools.translate import _
 import logging
-import ESL
-#import sys
+try:
+    from freeswitchESL import ESL
+except ImportError:
+    import ESL
+# import sys
 import csv
 import StringIO
 import re
@@ -39,16 +42,17 @@ class freeswitch_server(orm.Model):
     _columns = {
         'name': fields.char('FreeSWITCH Server Name', size=50, required=True),
         'active': fields.boolean(
-            'Active', help="The active field allows you to hide the FreeSWITCH "
-            "server without deleting it."),
+            'Active', help="The active field allows you to hide the "
+            "FreeSWITCH server without deleting it."),
         'ip_address': fields.char(
             'FreeSWITCH IP address or DNS', size=50, required=True,
             help="IP address or DNS name of the FreeSWITCH server."),
         'port': fields.integer(
             'Port', required=True,
             help="TCP port on which the FreeSWITCH Event Socket listens. "
-            "Defined in /etc/freeswitch/autoload_configs/event_socket.conf.xml "
-            "on FreeSWITCH."),
+            "Defined in "
+            "/etc/freeswitch/autoload_configs/event_socket.conf.xml on "
+            "FreeSWITCH."),
         'out_prefix': fields.char(
             'Out Prefix', size=4, help="Prefix to dial to make outgoing "
             "calls. If you don't use a prefix to make outgoing calls, "
@@ -106,7 +110,8 @@ class freeswitch_server(orm.Model):
                 raise orm.except_orm(
                     _('Error:'),
                     _("You should set a 'Wait time' value between 1 and 120 "
-                        "seconds for the FreeSWITCH server '%s'" % server.name))
+                        "seconds for the FreeSWITCH server '%s'"
+                        % server.name))
             if server.port > 65535 or server.port < 1:
                 raise orm.except_orm(
                     _('Error:'),
@@ -191,7 +196,8 @@ class freeswitch_server(orm.Model):
 
         # Connect to the FreeSWITCH Event Socket
         try:
-            fs_manager = ESL.ESLconnection(str(fs_server.ip_address),
+            fs_manager = ESL.ESLconnection(
+                str(fs_server.ip_address),
                 str(fs_server.port), str(fs_server.password))
         except Exception, e:
             _logger.error(
@@ -211,7 +217,8 @@ class freeswitch_server(orm.Model):
         fs_server = self.browse(cr, uid, ids[0], context=context)
         fs_manager = False
         try:
-            fs_manager = ESL.ESLconnection(str(fs_server.ip_address),
+            fs_manager = ESL.ESLconnection(
+                str(fs_server.ip_address),
                 str(fs_server.port), str(fs_server.password))
         except Exception, e:
             raise orm.except_orm(
@@ -240,19 +247,27 @@ class freeswitch_server(orm.Model):
             cr, uid, context=context)
         calling_party_number = False
         try:
-            ret = fs_manager.api('show', "calls as delim | like callee_cid_num " +
-                                 str(user.internal_number))
+            ret = fs_manager.api(
+                'show', "calls as delim |")
             f = StringIO.StringIO(ret.getBody())
             reader = csv.DictReader(f, delimiter='|')
             for row in reader:
-                if "uuid" not in row or row["uuid"] == "" or row["uuid"] == "uuid":
-                    break
+                if ("uuid" not in row or row["uuid"] == "" or
+                   row["uuid"] == "uuid"):
+                        break
                 if row["callstate"] not in ["EARLY", "ACTIVE", "RINGING"]:
                     continue
-                if row["b_cid_num"] and row["b_cid_num"] is not None:
-                    calling_party_number = row["b_cid_num"]
-                elif row["cid_num"] and row["cid_num"] is not None:
-                    calling_party_number = row["cid_num"]
+                if row["direction"] == "outbound":
+                    if (row["cid_num"] == str(user.internal_number) or
+                       row["accountcode"] == str(user.internal_number)):
+                            if row["dest"] and row["dest"] is not None:
+                                calling_party_number = row["dest"]
+                elif (row["b_cid_num"] == str(user.internal_number) or
+                      row["accountcode"] == str(user.internal_number) or
+                      re.sub(r':', r'/', row["b_name"]) ==
+                      user.freeswitch_chan_type + '/' + user.resource + '/'):
+                        if row["cid_num"] and row["cid_num"] is not None:
+                            calling_party_number = row["cid_num"]
         except Exception, e:
             _logger.error(
                 "Error in the Status request to FreeSWITCH server %s"
@@ -306,23 +321,23 @@ class res_users(orm.Model):
         'freeswitch_chan_type': fields.selection([
             ('user', 'SIP'),
             ('FreeTDM', 'FreeTDM'),
-            ('verto.rtc','Verto'),
+            ('verto.rtc', 'Verto'),
             ('skinny', 'Skinny'),
             ('h323', 'H323'),
             ('dingaling', 'XMPP/JINGLE'),
-            ('gsmopen','GSM SMS/Voice'),
+            ('gsmopen', 'GSM SMS/Voice'),
             ('skypeopen', 'SkypeOpen'),
             ('Khomp', 'Khomp'),
-            ('opal','Opal Multi-protocol'),
-            ('portaudio','Portaudio'),
+            ('opal', 'Opal Multi-protocol'),
+            ('portaudio', 'Portaudio'),
             ], 'FreeSWITCH Channel Type',
-            help="FreeSWITCH channel type, as used in the FreeSWITCH dialplan. "
-            "If the user has a regular IP phone, the channel type is 'SIP'. Use "
-            "Verto for verto.rtc connections only if you haven't added "
-            "'${verto_contact ${dialed_user}@${dialed_domain}}' to the default "
-            "dial string. Otherwise, use SIP. (This better allows for changes "
-            "to the user directory and changes in type of phone without the "
-            "need for further changes in OpenERP/Odoo.)"),
+            help="FreeSWITCH channel type, as used in the FreeSWITCH "
+            "dialplan. If the user has a regular IP phone, the channel type "
+            "is 'SIP'. Use Verto for verto.rtc connections only if you "
+            "haven't added '${verto_contact ${dialed_user}@${dialed_domain}}' "
+            "to the default dial string. Otherwise, use SIP. (This better "
+            "allows for changes to the user directory and changes in type of "
+            "phone without the need for further changes in OpenERP/Odoo.)"),
         'resource': fields.char(
             'Resource Name', size=64,
             help="Resource name for the channel type selected. For example, "
@@ -352,7 +367,7 @@ class res_users(orm.Model):
         }
 
     _defaults = {
-        'freeswitch_chan_type': 'SIP',
+        'freeswitch_chan_type': 'user',
     }
 
     def _check_validity(self, cr, uid, ids):
@@ -410,7 +425,7 @@ class PhoneCommon(orm.AbstractModel):
                 _('No callerID configured for the current user'))
 
         variable = ""
-        if user.freeswitch_chan_type == 'SIP':
+        if user.freeswitch_chan_type == 'user':
             # We can only have one alert-info header in a SIP request
             if user.alert_info:
                 variable += 'alert_info=' + user.alert_info
@@ -422,8 +437,10 @@ class PhoneCommon(orm.AbstractModel):
                         variable += ','
                     variable += user_variable.strip()
         if user.callerid:
-            caller_name = re.search(r'([^<]*).*', user.callerid).group(1).strip()
-            caller_number = re.search(r'.*<(.*)>.*', user.callerid).group(1).strip()
+            caller_name = re.search(r'([^<]*).*',
+                                    user.callerid).group(1).strip()
+            caller_number = re.search(r'.*<(.*)>.*',
+                                      user.callerid).group(1).strip()
             if caller_name:
                 if len(variable):
                     variable += ','
