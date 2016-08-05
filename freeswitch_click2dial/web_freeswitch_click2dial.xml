@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  © 2014-2016 Akretion (Alexis de Lattre <alexis.delattre@akretion.com>)
+  License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+-->
+
+<odoo>
+<data>
+
+<template id="assets_backend" name="freeswitch_click2dial assets"
+          inherit_id="web.assets_backend">
+    <xpath expr="." position="inside">
+        <script type="text/javascript"
+            src="/freeswitch_click2dial/static/src/js/freeswitch_click2dial.js"></script>
+    </xpath>
+</template>
+
+</data>
+</odoo>

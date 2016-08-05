@@ -1,0 +1,615 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#	* freeswitch_click2dial
+#
+# Rudolf Schnapka <schnapkar@golive-saar.de>, 2015.
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 7.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-08-25 21:42+0000\n"
+"PO-Revision-Date: 2015-01-03 11:23+0100\n"
+"Last-Translator: Rudolf Schnapka <schnapkar@golive-saar.de>\n"
+"Language-Team: German <kde-i18n-de@kde.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+"Language: de\n"
+"X-Generator: Lokalize 1.5\n"
+
+#. module: freeswitch_click2dial
+#: field:freeswitch.server,password:0
+msgid "Event Socket Password"
+msgstr "Event Socket Kennwort"
+
+#. module: freeswitch_click2dial
+#: field:freeswitch.server,active:0
+msgid "Active"
+msgstr "Aktiv"
+
+#. module: freeswitch_click2dial
+#: field:freeswitch.server,alert_info:0
+msgid "Alert-Info SIP Header"
+msgstr "Warnhinweis SIP-Kopf"
+
+#. module: freeswitch_click2dial
+#: help:freeswitch.server,wait_time:0
+msgid ""
+"Amount of time (in seconds) FreeSWITCH will try to reach the user's phone "
+"before hanging up."
+msgstr ""
+"Zeit (in Sekunden), in der FreeSWITCH versuchen soll das Telefon des Anwenders "
+"zu erreichen, bevor aufgelegt wird."
+
+#. module: freeswitch_click2dial
+#: model:res.groups,name:freeswitch_click2dial.group_freeswitch_cid
+msgid "FreeSWITCH CallerID"
+msgstr "FreeSWITCH AnruferID"
+
+#. module: freeswitch_click2dial
+#: field:res.users,freeswitch_chan_type:0
+msgid "FreeSWITCH Channel Type"
+msgstr "FreeSWITCH Kanal-Typ"
+
+#. module: freeswitch_click2dial
+#: field:freeswitch.server,ip_address:0
+msgid "FreeSWITCH IP address or DNS"
+msgstr "FreeSWITCH IP-Addresse oder DNS"
+
+#. module: freeswitch_click2dial
+#: view:freeswitch.server:0
+msgid "FreeSWITCH Event Socket"
+msgstr "FreeSWITCH Verwaltungsschnittstelle"
+
+#. module: freeswitch_click2dial
+#: field:res.users,freeswitch_server_id:0
+msgid "FreeSWITCH Server"
+msgstr "FreeSWITCH Server"
+
+#. module: freeswitch_click2dial
+#: field:freeswitch.server,name:0
+msgid "FreeSWITCH Server Name"
+msgstr "FreeSWITCH Servername"
+
+#. module: freeswitch_click2dial
+#: view:freeswitch.server:0
+msgid "FreeSWITCH Server Search"
+msgstr "FreeSWITCH Serversuche"
+
+#. module: freeswitch_click2dial
+#: view:freeswitch.server:0
+#: model:ir.actions.act_window,name:freeswitch_click2dial.action_freeswitch_server
+#: model:ir.model,name:freeswitch_click2dial.model_freeswitch_server
+#: model:ir.ui.menu,name:freeswitch_click2dial.act_menu_fs_server
+msgid "FreeSWITCH Servers"
+msgstr "FreeSWITCH Server"
+
+#. module: freeswitch_click2dial
+#: help:res.users,freeswitch_chan_type:0
+msgid ""
+"FreeSWITCH channel type, as used in the FreeSWITCH dialplan. If the user has a "
+"regular IP phone, the channel type is 'SIP'."
+msgstr ""
+"FreeSWITCH Kanal-Typen, wie im Wählplan verwendet. Hat der Anwender eine "
+"gewöhnliches IP-Telefon, so ist der Kanal-Typ 'SIP'"
+
+#. module: freeswitch_click2dial
+#: help:freeswitch.server,context:0
+msgid ""
+"FreeSWITCH dialplan context from which the calls will be made; e.g. 'XML default'. Refer to "
+"/etc/freeswitch/dialplan/* on your FreeSWITCH server."
+msgstr ""
+"FreeSWITCH Wählplan-Umfeld aus dem Anrufe getätigt werden. Siehe auch "
+"/etc/freeswitch/dialplan/* auf Ihrem FreeSWITCH-Server."
+
+#. module: freeswitch_click2dial
+#: help:res.users,freeswitch_server_id:0
+msgid ""
+"FreeSWITCH server on which the user's phone is connected. If you leave this "
+"field empty, it will use the first FreeSWITCH server of the user's company."
+msgstr ""
+"FreeSWITCH-Server an welchen des Anwenders Telefon angeschlossen ist. Wenn "
+"leer, wird der erste Server im Unternehmen des Anwenders angenommen."
+
+#. module: freeswitch_click2dial
+#. openerp-web
+#: code:addons/freeswitch_click2dial/static/src/js/freeswitch_click2dial.js:26
+#, python-format
+msgid "BIG PB"
+msgstr "BIG PB"
+
+#. module: freeswitch_click2dial
+#: field:res.users,cdraccount:0
+msgid "CDR Account"
+msgstr "CDR-Konto"
+
+#. module: freeswitch_click2dial
+#: help:res.users,cdraccount:0
+msgid "Call Detail Record (CDR) account used for billing this user."
+msgstr "Call Detail Record (CDR) Konto zur Abrechnung mit diesem Anwender."
+
+#. module: freeswitch_click2dial
+#: code:addons/freeswitch_click2dial/freeswitch_click2dial.py:405
+#: field:res.users,callerid:0
+#, python-format
+msgid "Caller ID"
+msgstr "Anrufer-ID"
+
+#. module: freeswitch_click2dial
+#: help:res.users,callerid:0
+msgid "Caller ID used for the calls initiated by this user."
+msgstr "Anrufer-ID wird für ausgehende Anrufe dieses Anwenders genutzt."
+
+#. module: freeswitch_click2dial
+#: field:number.not.found,calling_number:0
+msgid "Calling Number"
+msgstr "Eingehende Rufnummer"
+
+#. module: freeswitch_click2dial
+#: code:addons/freeswitch_click2dial/freeswitch_click2dial.py:310
+#, python-format
+msgid ""
+"Can't get calling number from  FreeSWITCH.\n"
+"Here is the error: '%s'"
+msgstr ""
+"Kann eingehende Rufnummer von FreeSWITCH nicht erhalten.\n"
+"Dies ist die Fehlermeldung: '%s'"
+
+#. module: freeswitch_click2dial
+#: code:addons/freeswitch_click2dial/freeswitch_click2dial.py:481
+#, python-format
+msgid ""
+"Click to dial with FreeSWITCH failed.\n"
+"Here is the error: '%s'"
+msgstr ""
+"Klick zum Wählen ist an FreeSWITCH gescheitert.\n"
+"Dies ist die Fehlermeldung: '%s'"
+
+#. module: freeswitch_click2dial
+#: model:ir.model,name:freeswitch_click2dial.model_res_company
+msgid "Companies"
+msgstr "Unternehmen"
+
+#. module: freeswitch_click2dial
+#: field:freeswitch.server,company_id:0
+msgid "Company"
+msgstr "Unternehmen"
+
+#. module: freeswitch_click2dial
+#: help:freeswitch.server,company_id:0
+msgid "Company who uses the FreeSWITCH server."
+msgstr "Unternehmen, welches den FreeSWITCH-Server nutzt."
+
+#. module: freeswitch_click2dial
+#: code:addons/freeswitch_click2dial/freeswitch_click2dial.py:255
+#, python-format
+msgid "Connection Test Failed!"
+msgstr "Verbindungstest scheiterte!"
+
+#. module: freeswitch_click2dial
+#: code:addons/freeswitch_click2dial/freeswitch_click2dial.py:264
+#, python-format
+msgid "Connection Test Successfull!"
+msgstr "Verbindungstest erfolgreich!"
+
+#. module: freeswitch_click2dial
+#: field:freeswitch.server,context:0
+msgid "Dialplan Context"
+msgstr "Wählplan-Umfeld"
+
+#. module: freeswitch_click2dial
+#: view:freeswitch.server:0
+msgid "Dialplan Parameters"
+msgstr "Wählplan-Parameter"
+
+#. module: freeswitch_click2dial
+#: constraint:freeswitch.server:0
+#: constraint:res.users:0
+msgid "Error message in raise"
+msgstr "Fehlermeldung beim Auslösen"
+
+#. module: freeswitch_click2dial
+#: code:addons/freeswitch_click2dial/freeswitch_click2dial.py:109
+#: code:addons/freeswitch_click2dial/freeswitch_click2dial.py:114
+#: code:addons/freeswitch_click2dial/freeswitch_click2dial.py:119
+#: code:addons/freeswitch_click2dial/freeswitch_click2dial.py:124
+#: code:addons/freeswitch_click2dial/freeswitch_click2dial.py:133
+#: code:addons/freeswitch_click2dial/freeswitch_click2dial.py:191
+#: code:addons/freeswitch_click2dial/freeswitch_click2dial.py:212
+#: code:addons/freeswitch_click2dial/freeswitch_click2dial.py:218
+#: code:addons/freeswitch_click2dial/freeswitch_click2dial.py:238
+#: code:addons/freeswitch_click2dial/freeswitch_click2dial.py:308
+#: code:addons/freeswitch_click2dial/freeswitch_click2dial.py:413
+#: code:addons/freeswitch_click2dial/freeswitch_click2dial.py:432
+#: code:addons/freeswitch_click2dial/freeswitch_click2dial.py:444
+#: code:addons/freeswitch_click2dial/freeswitch_click2dial.py:480
+#, python-format
+msgid "Error:"
+msgstr "Fehler:"
+
+#. module: freeswitch_click2dial
+#. openerp-web
+#: code:addons/freeswitch_click2dial/static/src/js/freeswitch_click2dial.js:25
+#, python-format
+msgid "Fail"
+msgstr "Gescheitert"
+
+#. module: freeswitch_click2dial
+#: code:addons/freeswitch_click2dial/freeswitch_click2dial.py:256
+#, python-format
+msgid "Here is the error message: %s"
+msgstr "Dies ist die Fehlermeldung: %s"
+
+#. module: freeswitch_click2dial
+#: help:freeswitch.server,ip_address:0
+msgid "IP address or DNS name of the FreeSWITCH server."
+msgstr "IP-Addresse oder DNS des FreeSWITCH-Servers."
+
+#. module: freeswitch_click2dial
+#: code:addons/freeswitch_click2dial/freeswitch_click2dial.py:404
+#: field:res.users,internal_number:0
+#, python-format
+msgid "Internal Number"
+msgstr "Interne Rufnummer"
+
+#. module: freeswitch_click2dial
+#: code:addons/freeswitch_click2dial/freeswitch_click2dial.py:433
+#, python-format
+msgid "Missing phone number"
+msgstr "Fehlende Rufnummer"
+
+#. module: freeswitch_click2dial
+#. openerp-web
+#: code:addons/freeswitch_click2dial/static/src/js/freeswitch_click2dial.js:45
+#, python-format
+msgid "Moving to %s ID %d"
+msgstr "Leite um nach %s ID %s"
+
+#. module: freeswitch_click2dial
+#: code:addons/freeswitch_click2dial/freeswitch_click2dial.py:192
+#, python-format
+msgid "No FreeSWITCH server configured for the company '%s'."
+msgstr "Kein FreeSWITCH-Server für das Unternehmen '%s' eingestellt."
+
+#. module: freeswitch_click2dial
+#: code:addons/freeswitch_click2dial/freeswitch_click2dial.py:445
+#, python-format
+msgid "No callerID configured for the current user"
+msgstr "Keine Anrufer-ID für aktuellen Anwender eingestellt"
+
+#. module: freeswitch_click2dial
+#: code:addons/freeswitch_click2dial/freeswitch_click2dial.py:213
+#, python-format
+msgid "No channel type configured for the current user."
+msgstr "Für aktuellen Anwender ist kein Kanal-Typ eingestellt."
+
+#. module: freeswitch_click2dial
+#: code:addons/freeswitch_click2dial/freeswitch_click2dial.py:219
+#, python-format
+msgid "No resource name configured for the current user"
+msgstr "Kein Ressourcenname für aktellen Anwender eingestellt"
+
+#. module: freeswitch_click2dial
+#. openerp-web
+#: code:addons/freeswitch_click2dial/static/src/js/freeswitch_click2dial.js:31
+#, python-format
+msgid "Number Not Found"
+msgstr "Rufnummer nicht gefunden"
+
+#. module: freeswitch_click2dial
+#: model:ir.model,name:freeswitch_click2dial.model_number_not_found
+msgid "Number not found"
+msgstr "Rufnummer nicht gefunden"
+
+#. module: freeswitch_click2dial
+#: code:addons/freeswitch_click2dial/freeswitch_click2dial.py:111
+#, python-format
+msgid "Only use digits for the '%s' on the FreeSWITCH server '%s'"
+msgstr "Nur Ziffern für '%s' auf FreeSWITCH-Server '%s' verwenden"
+
+#. module: freeswitch_click2dial
+#. openerp-web
+#: code:addons/freeswitch_click2dial/static/src/xml/freeswitch_click2dial.xml:13
+#, python-format
+msgid "Open Caller"
+msgstr "Anrufer öffnen"
+
+#. module: freeswitch_click2dial
+#: model:ir.model,name:freeswitch_click2dial.model_wizard_open_calling_partner
+msgid "Open calling partner"
+msgstr "Anrufenden Teilnehmer öffnen"
+
+#. module: freeswitch_click2dial
+#: code:addons/freeswitch_click2dial/freeswitch_click2dial.py:265
+#, python-format
+msgid "OpenERP can successfully login to the FreeSWITCH Event Socket."
+msgstr ""
+"OpenERP kann sich erfolgreich bei der FreeSWITCH-Verwaltungsschnittstelle "
+"anmelden."
+
+#. module: freeswitch_click2dial
+#: view:res.users:0
+msgid "Optional FreeSWITCH Parameters - for experts only, can be left empty"
+msgstr "Wahlweise FreeSWITCH-Parameter - nur für Experten, können auch leer bleiben"
+
+#. module: freeswitch_click2dial
+#: field:freeswitch.server,out_prefix:0
+msgid "Out Prefix"
+msgstr "Ausgehendes Präfix"
+
+#. module: freeswitch_click2dial
+#: model:ir.model,name:freeswitch_click2dial.model_res_partner
+msgid "Partner"
+msgstr "Partner"
+
+#. module: freeswitch_click2dial
+#: help:number.not.found,to_update_partner_id:0
+msgid "Partner on which the phone number will be written"
+msgstr "Partner, dem die Rufnummer zugeschrieben wird"
+
+#. module: freeswitch_click2dial
+#: field:number.not.found,to_update_partner_id:0
+msgid "Partner to Update"
+msgstr "Zu aktualisierender Partner"
+
+#. module: freeswitch_click2dial
+#: help:freeswitch.server,password:0
+msgid ""
+"Password that OpenERP will use to communicate with the FreeSWITCH Event "
+"Socket. Refer to /etc/freeswitch/autoload_configs/event_socket.conf.xml on your FreeSWITCH server."
+msgstr ""
+"Kennwort, welches OpenERP zur Kommunikation mit der "
+"FreeSWITCH-Verwaltungsschnittstelle verwenden soll. Bitte "
+"/etc/freeswitch/autoload_configs/event_socket.conf.xml Ihres FreeSWITCH-Servers konsultieren."
+
+#. module: freeswitch_click2dial
+#: help:number.not.found,calling_number:0
+msgid ""
+"Phone number of calling party that has been obtained from FreeSWITCH, in the "
+"format used by FreeSWITCH (not E.164)."
+msgstr ""
+"Von FreeSWITCH übermittelte Rufnummer des anrufenden Teilnehmers, im durch "
+"FreeSWITCH verwendeten Format (nicht E.164)."
+
+#. module: freeswitch_click2dial
+#: field:freeswitch.server,port:0
+msgid "Port"
+msgstr "Port"
+
+#. module: freeswitch_click2dial
+#: help:freeswitch.server,out_prefix:0
+msgid ""
+"Prefix to dial to make outgoing calls. If you don't use a prefix to make "
+"outgoing calls, leave empty."
+msgstr ""
+"Wahl-Präfix für ausgehende Anrufe. Wenn Sie kein Präfix bei ausgehenden "
+"Anrufen nutzen, lassen Sie dieses leer."
+
+#. module: freeswitch_click2dial
+#: code:addons/freeswitch_click2dial/freeswitch_click2dial.py:239
+#, python-format
+msgid ""
+"Problem in the request from OpenERP to FreeSWITCH. Here is the error message: %s"
+msgstr ""
+"Problem bei der Anforderung von OpenERP an FreeSWITCH. Dies ist die "
+"Fehlermeldung: %s"
+
+#. module: freeswitch_click2dial
+#: code:addons/freeswitch_click2dial/freeswitch_click2dial.py:403
+#: field:res.users,resource:0
+#, python-format
+msgid "Resource Name"
+msgstr "Ressourcenname"
+
+#. module: freeswitch_click2dial
+#: help:res.users,resource:0
+msgid ""
+"Resource name for the channel type selected. For example, if you use "
+"'Dial(SIP/phone1)' in your FreeSWITCH dialplan to ring the SIP phone of this "
+"user, then the resource name for this user is 'phone1'.  For a SIP phone, the "
+"phone number is often used as resource name, but not always."
+msgstr ""
+"Ressourcenname für den gewählten Kanal-Typ. Zum Beispiel verwenden Sie "
+"'Dial(SIP/telefon1)' im FreeSWITCH-Wählplan zum Anwählen der SIP-Telefons "
+"dieses Anwenders, so ist telefon1 der Ressourcenname dieses Anwenders. Bei "
+"SIP-Telefonen wird häufig die Rufummer als Ressourcenname eingesetzt."
+
+#. module: freeswitch_click2dial
+#: view:freeswitch.server:0
+msgid "Server Name"
+msgstr "Servername"
+
+#. module: freeswitch_click2dial
+#: help:freeswitch.server,alert_info:0
+msgid ""
+"Set Alert-Info header in SIP request to user's IP Phone for the click2dial "
+"feature. If empty, the Alert-Info header will not be added. You can use it to "
+"have a special ring tone for click2dial (a silent one !) or to activate "
+"auto-answer for example."
+msgstr ""
+"Setze Hinweis-Kopftext für SIP-Anforderung durch das IP-Telefon des Anwenders "
+"bei Klick-zum-Wählen -Dienst. Wenn leer, wird kein Hinweistext hinzugefügt. "
+"Sie können diesen z. B. verwenden, um einen gesonderten Klingelton (leise!) "
+"bei Klicken-zum-Wählen zu erhalten oder Auto-Abheben einzuschalten."
+
+#. module: freeswitch_click2dial
+#: help:res.users,variable:0
+msgid ""
+"Set a user-specific 'Variable' field in the FreeSWITCH Event Socket "
+"'originate' request for the click2dial feature. If you want to have several "
+"variable headers, separate them with '|'."
+msgstr ""
+"Anwender-spezifisches Feld 'Variable' für die 'originate'-Anforderung bei "
+"Klick2Dial in der FreeSWITCH-Verwaltungsschnittstelle setzen. Sollten Sie "
+"mehrere Variablen wünschen, trennen Sie diese mit '|'."
+
+#. module: freeswitch_click2dial
+#: help:res.users,alert_info:0
+msgid ""
+"Set a user-specific Alert-Info header in SIP request to user's IP Phone for "
+"the click2dial feature. If empty, the Alert-Info header will not be added. "
+"You can use it to have a special ring tone for click2dial (a silent one !) or "
+"to activate auto-answer for example."
+msgstr ""
+"Anwender-spezifische Hinweis-Kopftext in einer SIP-Anforderung bei Klick2Dial "
+"an das SIP-Telefon. Wenn leer, wird kein Hinweistext hinzugefügt. Sie können "
+"diesen z. B. verwenden, um einen gesonderten Klingelton (leise!) bei "
+"Klicken-zum-Wählen zu erhalten oder Auto-Abheben einzuschalten."
+
+#. module: freeswitch_click2dial
+#: selection:res.users,freeswitch_chan_type:0
+msgid "SIP"
+msgstr ""
+
+#. module: freeswitch_click2dial
+#: selection:res.users,freeswitch_chan_type:0
+msgid "FreeTDM"
+msgstr ""
+
+#. module: freeswitch_click2dial
+#: selection:res.users,freeswitch_chan_type:0
+msgid "Skinny"
+msgstr ""
+
+#. module: freeswitch_click2dial
+#: selection:res.users,freeswitch_chan_type:0
+msgid "H323"
+msgstr ""
+
+#. module: freeswitch_click2dial
+#: selection:res.users,freeswitch_chan_type:0
+msgid "XMPP/JINGLE"
+msgstr ""
+
+#. module: freeswitch_click2dial
+#: selection:res.users,freeswitch_chan_type:0
+msgid "GSM SMS/Voice"
+msgstr ""
+
+#. module: freeswitch_click2dial
+#: selection:res.users,freeswitch_chan_type:0
+msgid "SkypeOpen"
+msgstr ""
+
+#. module: freeswitch_click2dial
+#: selection:res.users,freeswitch_chan_type:0
+msgid "Khomp"
+msgstr ""
+
+#. module: freeswitch_click2dial
+#: selection:res.users,freeswitch_chan_type:0
+msgid "Opal Multi-protocol"
+msgstr ""
+
+#. module: freeswitch_click2dial
+#: selection:res.users,freeswitch_chan_type:0
+msgid "Portaudio"
+msgstr ""
+
+#. module: freeswitch_click2dial
+#: view:res.users:0
+msgid "Standard FreeSWITCH Parameters"
+msgstr "Standard FreeSWITCH-Parameter"
+
+#. module: freeswitch_click2dial
+#. openerp-web
+#: code:addons/freeswitch_click2dial/static/src/js/freeswitch_click2dial.js:44
+#, python-format
+msgid "Success"
+msgstr "Erfolg"
+
+#. module: freeswitch_click2dial
+#: help:freeswitch.server,port:0
+msgid ""
+"TCP port on which the FreeSWITCH Event Socket listens. Defined in "
+"/etc/freeswitch/autoload_configs/event_socket.conf.xml on FreeSWITCH."
+msgstr ""
+"TCP-Port auf dem die FreeSWITCH-Verwaltungsschnittstelle lauscht. Festgelegt in "
+"/etc/freeswitch/autoload_configs/event_socket.conf.xml Ihres FreeSWITCH-Servers."
+
+#. module: freeswitch_click2dial
+#: view:freeswitch.server:0
+msgid "Test Connection to FreeSWITCH"
+msgstr "Verbindungstest mit FreeSWITCH-Anlage"
+
+#. module: freeswitch_click2dial
+#: code:addons/freeswitch_click2dial/freeswitch_click2dial.py:414
+#, python-format
+msgid "The '%s' for the user '%s' should only have ASCII caracters"
+msgstr "'%s' des Anwenders '%s' sollte nur aus ASCII-Zeichen bestehen"
+
+#. module: freeswitch_click2dial
+#: code:addons/freeswitch_click2dial/freeswitch_click2dial.py:136
+#, python-format
+msgid "The '%s' should only have ASCII caracters for the FreeSWITCH server '%s'"
+msgstr "'%s' für den FreeSWITCH-Server '%s' sollte nur aus ASCII-Zeichen bestehen"
+
+#. module: freeswitch_click2dial
+#: help:freeswitch.server,active:0
+msgid ""
+"The active field allows you to hide the FreeSWITCH server without deleting it."
+msgstr ""
+"Das Aktiv-Feld ermöglicht es Ihnen einen FreeSWITCH-Server zu verstecken, ohne "
+"ihn gleich löschen zu müssen."
+
+#. module: freeswitch_click2dial
+#: help:res.users,internal_number:0
+msgid "User's internal phone number."
+msgstr "Interne Rufnummer des Anwenders."
+
+#. module: freeswitch_click2dial
+#: field:res.users,alert_info:0
+msgid "User-specific Alert-Info SIP Header"
+msgstr "Anwenderspezifischer Hinweis-Text im SIP-Kopf"
+
+#. module: freeswitch_click2dial
+#: field:res.users,dial_suffix:0
+msgid "User-specific Dial Suffix"
+msgstr "Anwenderspezifisches Wähl-Suffix"
+
+#. module: freeswitch_click2dial
+#: field:res.users,variable:0
+msgid "User-specific Variable"
+msgstr "Anwenderspezifische Variable"
+
+#. module: freeswitch_click2dial
+#: help:res.users,dial_suffix:0
+msgid "User-specific dial suffix such as aa=2wb for SCCP auto answer."
+msgstr "Anwenderspezifisches Wählsuffix, wie z. B. aa=2wb zum Auto-Abheben bei SCCP."
+
+#. module: freeswitch_click2dial
+#: model:ir.model,name:freeswitch_click2dial.model_res_users
+msgid "Users"
+msgstr "Anwender"
+
+#. module: freeswitch_click2dial
+#: field:freeswitch.server,wait_time:0
+msgid "Wait Time (sec)"
+msgstr "Wartezeit (Sek.)"
+
+#. module: freeswitch_click2dial
+#: code:addons/freeswitch_click2dial/freeswitch_click2dial.py:115
+#, python-format
+msgid ""
+"You should set a 'Wait time' value between 1 and 120 seconds for the FreeSWITCH "
+"server '%s'"
+msgstr ""
+"Sie sollten für die Wartezeit Ihres FreeSWITCH-Servers '%s'  einen Wert "
+"zwischen 1 und 120 verwenden"
+
+#. module: freeswitch_click2dial
+#: code:addons/freeswitch_click2dial/freeswitch_click2dial.py:125
+#, python-format
+msgid ""
+"You should set a TCP port between 1 and 65535 for the FreeSWITCH server '%s'"
+msgstr ""
+"Sie müssen einen TCP-Port zwischen 1 und 65535 beim FreeSWITCH-Server '%s' "
+"setzen"
+
+#. module: freeswitch_click2dial
+#: model:ir.model,name:freeswitch_click2dial.model_phone_common
+msgid "phone.common"
+msgstr "phone.common"
+
+

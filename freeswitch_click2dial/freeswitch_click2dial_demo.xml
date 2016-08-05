@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  © 2010-2016 Akretion (Alexis de Lattre <alexis.delattre@akretion.com>)
+  © 2014-2016 Trever L. Adams
+  License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+-->
+
+<odoo>
+<data noupdate="1">
+
+<record id="demo_fs_server" model="freeswitch.server">
+    <field name="name">Akretion FreeSWITCH Server</field>
+    <field name="ip_address">freeswitch.akretion.com</field>
+    <field name="port">8021</field>
+    <field name="password">mypassword</field>
+    <field name="context">from-internal</field>
+    <field name="alert_info">info=&lt;Bellcore-dr5&gt;</field>
+    <field name="company_id" ref="base.main_company" />
+</record>
+<record id="base.user_root" model="res.users">
+    <field name="internal_number">11</field>
+    <field name="resource">11</field>
+    <field name="callerid">Administrator &lt;0141981242&gt;</field>
+    <field name="freeswitch_server_id" ref="demo_fs_server"/>
+</record>
+<record id="base.user_demo" model="res.users">
+    <field name="internal_number">12</field>
+    <field name="resource">12</field>
+    <field name="callerid">Demo user &lt;0141984212&gt;</field>
+    <field name="freeswitch_server_id" ref="demo_fs_server"/>
+</record>
+<record id="base.main_partner" model="res.partner">
+    <field name="country_id" ref="base.fr"/>
+</record>
+
+
+</data>
+</odoo>
+
