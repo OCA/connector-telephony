@@ -253,9 +253,9 @@ class freeswitch_server(orm.Model):
             ret = fs_manager.api('show', str(request))
             f = json.load(StringIO.StringIO(ret.getBody()))
             if int(f['row_count']) > 0:
-                if (f['rows'][0]['initial_cid_name'] == 'Odoo Connector' or
-                   f['rows'][0]['direction'] == 'inbound'):
-                       calling_party_number = f['rows'][0]['dest']
+                if (f['rows'][0]['cid_num'] == user.internal_number or
+                    len(f['rows'][0]['cid_num']) < 3):
+                        calling_party_number = f['rows'][0]['dest']
                 else:
                     calling_party_number = f['rows'][0]['cid_num']
         except Exception, e:
@@ -445,6 +445,9 @@ class PhoneCommon(orm.AbstractModel):
                     variable += ','
                 variable += 'ignore_early_media=true' + ','
                 variable += 'originate_timeout=' + str(fs_server.wait_time)
+            if len(variable):
+                variable += ','
+            variable += 'odoo_connector=true'
         channel = '%s/%s' % (user.freeswitch_chan_type, user.resource)
         if user.dial_suffix:
             channel += '/%s' % user.dial_suffix
@@ -454,7 +457,8 @@ class PhoneCommon(orm.AbstractModel):
             #    'Caller ID name showed to aleg' 90125
             dial_string = (('<' + variable + '>') if variable else '') + \
                 channel + ' ' + fs_number + ' ' + fs_server.context + ' ' + \
-                '\'FreeSWITCH/Odoo Connector\' ' + fs_number
+                '\'' + self.get_name_from_phone_number(fs_number) + '\' ' + \
+                fs_number
             # raise orm.except_orm(_('Error :'), dial_string)
             fs_manager.api('originate', dial_string.encode("ascii"))
         except Exception, e:
