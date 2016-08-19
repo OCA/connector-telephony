@@ -61,6 +61,9 @@ class CrmPhonecall(models.Model):
     date = fields.Datetime(
         string='Date', track_visibility='onchange', copy=False,
         default=lambda self: fields.Datetime.now())
+    end_date = fields.Datetime(
+        string='End Date', track_visibility='onchange', copy=False,
+        default=lambda self: fields.Datetime.now())
     description = fields.Text(string='Description', copy=False)
     company_id = fields.Many2one(
         'res.company', string='Company',

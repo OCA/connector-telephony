@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+phone_system_integration_hr_applicant_write,Write access on hr.applicant for phone system integration and call logging,hr_recruitment.model_hr_applicant,logcall.group_phone_system_integration,1,1,0,0

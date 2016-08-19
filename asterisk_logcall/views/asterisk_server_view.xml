@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Asterisk log call module
+  Copyright (C) 2016 Trever L. Adams
+  The licence is in the file __openerp__.py
+-->
+
+<openerp>
+<data>
+
+        <record id="asterisk_logcall_extra_options" model="ir.ui.view">
+            <field name="name">Asterisk IPBX Servers</field>
+            <field name="model">asterisk.server</field>
+            <field name="inherit_id" ref="asterisk_click2dial.view_asterisk_server_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group[@name='dialplan']" position="after">
+                    <group name="extra" string="Extra Options">
+                        <field name="ucp_url"/>
+                        <field name="server_jitter_correction"/>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+
+
+</data>
+</openerp>

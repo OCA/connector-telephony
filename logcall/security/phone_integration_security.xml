@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  logcall module for Odoo/OpenERP
+  Copyright (C) 2016 Trever L. Adams
+  The licence is in the file __openerp__.py
+-->
+
+<openerp>
+<data noupdate="1">
+
+<!-- New group dedicated to the "Phone System Integration and Logging with Odoo" feature -->
+<record id="group_phone_system_integration" model="res.groups">
+    <field name="name">Phone System Integration and Logging</field>
+</record>
+
+</data>
+</openerp>
