@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+
+    <record id="res_partner_phonecall" model="ir.ui.view">
+        <field name="name">res.partner.type.form.inherit</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="partner_phone_log.res_partner_phonecall"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='phonecall_ids']/tree" position="inside">
+                <field name="recording_id"/>
+            </xpath>
+        </field>
+    </record>
+
+</data>
+</openerp>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  FreeSWITCH log call module
+  Copyright (C) 2016 Trever L. Adams
+  The licence is in the file __openerp__.py
+-->
+
+<openerp>
+<data>
+
+        <record id="freeswitch_logcall_extra_options" model="ir.ui.view">
+            <field name="name">FreeSWITCH Servers</field>
+            <field name="model">freeswitch.server</field>
+            <field name="inherit_id" ref="freeswitch_click2dial.view_freeswitch_server_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group[@name='dialplan']" position="after">
+                    <group name="extra" string="Extra Options">
+                        <field name="ucp_url"/>
+                        <field name="server_jitter_correction"/>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+
+</data>
+</openerp>
