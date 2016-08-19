@@ -34,6 +34,8 @@
  comma (,) delimited, not :_: delimited. It is up to you to format the
  extensions list appropriately. The persons who are at extensions in the
  notify list will receive a poppup if so configured and if they are logged in.
+ The notify list actually shouldn't be in the cidlookup.conf, but should be
+ used when doing notify (in an on answer hook for example).
 
  From the dialplan, do something like this <action application="set"
  data="effective_caller_id_name=${cidlookup(${caller_id_number})}"/>.

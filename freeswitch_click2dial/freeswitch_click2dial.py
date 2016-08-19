@@ -98,7 +98,7 @@ class FreeSWITCHServer(models.Model):
                         check_str[1].encode('ascii')
                     except UnicodeEncodeError:
                         raise ValidationError(
-                            _("The '%s' should only have ASCII caracters for "
+                            _("The '%s' should only have ASCII characters for "
                                 "the FreeSWITCH server '%s'"
                                 % (check_str[0], server.name)))
 
@@ -159,7 +159,8 @@ class FreeSWITCHServer(models.Model):
             try:
                 if fs_manager.connected() is not 1:
                     raise UserError(
-                        _("Connection Test Failed! Check Host, Port and Password"))
+                        _("Connection Test Failed! Check Host, Port and "
+                          "Password"))
                 else:
                     fs_manager.disconnect()
             except Exception, e:
@@ -173,15 +174,21 @@ class FreeSWITCHServer(models.Model):
         user, fs_server, fs_manager = self._connect_to_freeswitch()
         calling_party_number = False
         try:
+            is_fq_res = user.resource.rfind('@')
+            if is_fq_res:
+                if len(user.resource) != is_fq_res:
+                    is_fq_res = True
+                else:
+                    is_fq_res = False
             request = "channels like /" + re.sub(r'/', r':', user.resource) + \
-                ("/" if user.freeswitch_chan_type == "FreeTDM" else "@") + \
-                " as json"
+                (("/" if user.freeswitch_chan_type == "FreeTDM" else "@")
+                 if not is_fq_res else "") + " as json"
             ret = fs_manager.api('show', str(request))
             f = json.load(StringIO.StringIO(ret.getBody()))
             if int(f['row_count']) > 0:
-                if (f['rows'][0]['initial_cid_name'] == 'Odoo Connector' or
-                   f['rows'][0]['direction'] == 'inbound'):
-                       calling_party_number = f['rows'][0]['dest']
+                if (f['rows'][0]['cid_num'] == user.internal_number or
+                    len(f['rows'][0]['cid_num']) < 3):
+                        calling_party_number = f['rows'][0]['dest']
                 else:
                     calling_party_number = f['rows'][0]['cid_num']
         except Exception, e:
@@ -227,7 +234,8 @@ class ResUsers(models.Model):
         "auto answer.")
     callerid = fields.Char(
         string='Caller ID', copy=False,
-        help="Caller ID used for the calls initiated by this user.")
+        help="Caller ID used for the calls initiated by this user. "
+        "This must be in the form of 'Name <NUMBER>'.")
     cdraccount = fields.Char(
         string='CDR Account',
         help="Call Detail Record (CDR) account used for billing this "
@@ -362,16 +370,19 @@ class PhoneCommon(models.AbstractModel):
                 if len(variable):
                     variable += ','
                 caller_name = caller_name.replace(",", r"\,")
-                variable += 'effective_caller_id_name=' + caller_name
+                variable += 'effective_caller_id_name=\'' + caller_name + '\''
             if caller_number:
                 if len(variable):
                     variable += ','
-                variable += 'effective_caller_id_number=' + caller_number
+                variable += 'effective_caller_id_number=\'' + caller_number + '\''
             if fs_server.wait_time != 60:
                 if len(variable):
                     variable += ','
                 variable += 'ignore_early_media=true' + ','
                 variable += 'originate_timeout=' + str(fs_server.wait_time)
+        if len(variable):
+            variable += ','
+        variable += 'odoo_connector=true'
         channel = '%s/%s' % (user.freeswitch_chan_type, user.resource)
         if user.dial_suffix:
             channel += '/%s' % user.dial_suffix
@@ -381,9 +392,10 @@ class PhoneCommon(models.AbstractModel):
             #    'Caller ID name showed to aleg' 90125
             dial_string = (('<' + variable + '>') if variable else '') + \
                 channel + ' ' + fs_number + ' ' + fs_server.context + ' ' + \
-                '\'Odoo Connector\' ' + fs_number
+                '\'' + self.get_name_from_phone_number(fs_number) + '\' ' + \
+                fs_number
             # raise orm.except_orm(_('Error :'), dial_string)
-            fs_manager.api('originate', dial_string.encode("ascii"))
+            fs_manager.api('originate', dial_string.encode('utf-8'))
         except Exception, e:
             _logger.error(
                 "Error in the Originate request to FreeSWITCH server %s",
