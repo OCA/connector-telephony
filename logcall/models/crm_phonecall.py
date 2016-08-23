@@ -32,9 +32,6 @@ logger = logging.getLogger(__name__)
 class ResUsers(models.Model):
     _inherit = 'res.users'
 
-    end_date = fields.Datetime(
-        string='End Date', track_visibility='onchange', copy=False,
-        default=lambda self: fields.Datetime.now())
     context_auto_log_calls = fields.Boolean(
         string='Automatically Log Incoming Calls', default=True)
 
@@ -42,6 +39,9 @@ class ResUsers(models.Model):
 class CrmPhonecall(models.Model):
     _inherit = "crm.phonecall"
 
+    end_date = fields.Datetime(
+        string='End Date', track_visibility='onchange', copy=False,
+        default=lambda self: fields.Datetime.now())
     recording_id = fields.Many2one('ir.attachment', string='Call Recording',
                                    readonly=True)
 
@@ -146,8 +146,11 @@ class PhoneCommon(models.AbstractModel):
                     odoo_start = \
                         phonecalls[0]['date'].strptime('%Y-%m-%d %H:%M:%S')
             if phonecalls[0]['description']:
-                odoo_description = phonecalls[0]['description'] + '\n' + \
-                                   odoo_description
+                if phonecalls[0]['description'].find(odoo_description) != -1:
+                    odoo_description = phonecalls[0]['description'] + '\n' + \
+                                       odoo_description
+                else:
+                    odoo_description = phonecalls[0]['description']
             if phonecalls[0]['recording_id']:
                 attach_id = phonecalls[0]['recording_id']
             phonecall_id = phonecalls[0]
