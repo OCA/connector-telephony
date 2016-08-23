@@ -164,6 +164,7 @@ class PhoneCommon(models.AbstractModel):
                 'type': 'url',
                 'mimetype': 'audio/wav',
                 'url': base_url.format(caller_user=caller_user,
+                                       user_resource=users[0].resource,
                                        odoo_type=odoo_type,
                                        odoo_src=odoo_src,
                                        odoo_dst=odoo_dst,
