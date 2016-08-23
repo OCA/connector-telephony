@@ -31,7 +31,6 @@
                 <group name="main">
                     <group name="left">
                         <field name="date"/>
-                        <field name="end_date"/>
                         <field name="user_id"/>
                         <field name="partner_id"/>
                         <field name="partner_phone" widget="phone"/>
@@ -64,7 +63,6 @@
     <field name="arch" type="xml">
         <tree string="Phone Calls" editable="top">
             <field name="date"/>
-            <field name="end_date"/>
             <field name="name"/>
             <field name="partner_id"/>
             <field name="opportunity_id"/>
@@ -82,7 +80,7 @@
     <field name="name">crm.phonecall.calendar</field>
     <field name="model">crm.phonecall</field>
     <field name="arch" type="xml">
-        <calendar string="Phone Calls" date_start="date" date_stop="end_date" color="user_id">
+        <calendar string="Phone Calls" date_start="date" color="user_id">
             <field name="name"/>
             <field name="partner_id"/>
         </calendar>
@@ -96,7 +94,6 @@
         <search string="Search Phone Calls">
             <field name="name" string="Phonecalls"/>
             <field name="date"/>
-            <field name="end_date"/>
             <field name="user_id"/>
             <field name="partner_id" operator="child_of"/>
             <field name="opportunity_id"/>

@@ -32,6 +32,9 @@ logger = logging.getLogger(__name__)
 class ResUsers(models.Model):
     _inherit = 'res.users'
 
+    end_date = fields.Datetime(
+        string='End Date', track_visibility='onchange', copy=False,
+        default=lambda self: fields.Datetime.now())
     context_auto_log_calls = fields.Boolean(
         string='Automatically Log Incoming Calls', default=True)
 

@@ -2,14 +2,60 @@
 <openerp>
     <data>
 
-        <record id="crm_phonecall_tree_view_recording_link" model="ir.ui.view">
+        <record id="crm_phonecall_form_logcall" model="ir.ui.view">
+            <field name="name">crm.phonecall.form</field>
+            <field name="model">crm.phonecall</field>
+            <field name="inherit_id" ref="crm_phone.crm_phonecall_form"/>
+            <field name="arch" type="xml">
+                <form string="Phone Call">
+                    <sheet>
+                        <group name="main">
+                            <group name="left">
+                                <xpath expr="//field[@name='date']" position="after">
+                                    <field name="end_date"/>
+                                </xpath>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="crm_phonecall_tree_view_logcall" model="ir.ui.view">
             <field name="name">CRM - Phonecalls Tree</field>
             <field name="model">crm.phonecall</field>
             <field name="inherit_id" ref="crm_phone.crm_phonecall_tree"/>
             <field name="arch" type="xml">
+                <xpath expr="//field[@name='date']" position="after">
+                    <field name="end_date"/>
+                </xpath>
                 <xpath expr="//field[@name='opportunity_id']" position="after">
                     <field name="recording_id"/>
                 </xpath>
+            </field>
+        </record>
+
+        <record id="crm_phonecall_search_logcall" model="ir.ui.view">
+            <field name="name">crm.phonecall.search</field>
+            <field name="model">crm.phonecall</field>
+            <field name="arch" type="xml">
+                <search string="Search Phone Calls">
+                    <xpath expr="//field[@name='date']" position="after">
+                         <field name="end_date"/>
+                    </xpath>
+                </search>
+            </field>
+        </record>
+
+        <record id="crm_phonecall_calendar" model="ir.ui.view">
+            <field name="name">crm.phonecall.calendar</field>
+            <field name="model">crm.phonecall</field>
+            <field name="priority" eval="1"/>
+            <field name="arch" type="xml">
+                <calendar string="Phone Calls" date_start="date" date_stop="end_date" color="user_id">
+                    <field name="name"/>
+                    <field name="partner_id"/>
+                </calendar>
             </field>
         </record>
 
