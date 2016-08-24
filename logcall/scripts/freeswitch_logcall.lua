@@ -11,10 +11,14 @@
 -- Outbound (default dialplan, extension to extension, and anything out via gateway or via FXO:
 -- <action application="set" data="api_hangup_hook=lua freeswitch_logcall.lua"/>
 -- Inbound (public dialplan):
--- <action application="export" data="odoo_type="inbound"/>
+-- <action application="export" data="odoo_type=inbound"/>
 -- <action application="export" data="nolocal:api_hangup_hook=lua freeswitch_logcall.lua"/>
 
 require("xmlrpc.http")
+
+function string.starts(String,Start)
+   return string.sub(String,1,string.len(Start))==Start
+end
 
 function GetFileName(url)
   if url == nil then
@@ -51,7 +55,7 @@ function odoo_report_call(odoo_type, odoo_src, odoo_dst, odoo_duration, odoo_sta
 end
 
   odoo_hangupcause = env:getHeader("variable_hangup_cause")
-  if odoo_hangupcause == "LOSE_RACE" then
+  if odoo_hangupcause == "LOSE_RACE" or odoo_hangupcause == "ORIGINATOR_CANCEL" then
     return
   end
 
@@ -112,6 +116,14 @@ end
   local end_epoch = tonumber(env:getHeader("end_epoch"))
   if odoo_start ~= nil and end_epoch ~= nil then
     odoo_duration = tonumber(end_epoch) - tonumber(odoo_start)
+  end
+  if string.starts(odoo_dst, "u:") then
+    presence_id = env:getHeader("presence_id")
+    odoo_dst = presence_id:sub(1, string.find(presence_id, "@") - 1)
+  end
+  if string.starts(odoo_src, "u:") then
+    presence_id = env:getHeader("presence_id")
+    odoo_src = presence_id:sub(1, string.find(presence_id, "@") - 1)
   end
 
 odoo_report_call(odoo_type, odoo_src, odoo_dst, tostring(odoo_duration), tostring(odoo_start), odoo_filename, odoo_uniqueid, odoo_hangupcause)
