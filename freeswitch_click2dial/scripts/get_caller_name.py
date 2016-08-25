@@ -34,6 +34,8 @@
  comma (,) delimited, not :_: delimited. It is up to you to format the
  extensions list appropriately. The persons who are at extensions in the
  notify list will receive a poppup if so configured and if they are logged in.
+ The notify list actually shouldn't be in the cidlookup.conf, but should be
+ used when doing notify (in an on answer hook for example).
 
  From the dialplan, do something like this <action application="set"
  data="effective_caller_id_name=${cidlookup(${caller_id_number})}"/>.
@@ -81,6 +83,8 @@ import unicodedata
 # Name that will be displayed if there is no match
 # and no geolocalisation
 not_found_name = "Not in OpenERP"
+# Name used if name and number are both empty
+unknown_name = "unknown"
 
 # Set to 1 for debugging output
 verbose = 0
@@ -254,6 +258,8 @@ def application(environ, start_response):
         number = escape(parameters['number'][0])
     if 'name' in parameters:
         name = escape(parameters['name'][0])
+    else:
+        name = unknown_name
     if 'notify' in parameters:
         options["notify"] = []
         for item in parameters['notify'][0].split(','):
@@ -266,7 +272,10 @@ def application(environ, start_response):
         options["geoloc"] = True
     else:
         options["geoloc"] = False
-    output += main(name if name else False, number, options)
+    try:
+        output = main(name if name else False, number, options)
+    except:
+        output = name
 
     status = '200 OK'
     response_headers = [('Content-type', 'text/plain'),

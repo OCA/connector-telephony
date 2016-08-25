@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    FreeSWITCH Click2dial module for OpenERP
-#    Copyright (C) 2014 Trever L. Adams
+#    Copyright (C) 2014-2016 Trever L. Adams
 #    Copyright (C) 2010-2013 Alexis de Lattre <alexis@via.ecp.fr>
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -30,9 +30,9 @@ try:
 except ImportError:
     import ESL
 # import sys
-import csv
 import StringIO
 import re
+import json
 
 _logger = logging.getLogger(__name__)
 
@@ -278,20 +278,26 @@ class freeswitch_server(orm.Model):
             cr, uid, context=context)
         calling_party_number = False
         try:
-            ret = fs_manager.api(
-                'show', "calls as delim | like callee_cid_num " +
-                str(user.internal_number))
-            f = StringIO.StringIO(ret.getBody())
-            reader = csv.DictReader(f, delimiter='|')
-            for row in reader:
-                if "uuid" not in row or row["uuid"] == "" or row["uuid"] == "uuid":
-                    break
-                if row["callstate"] not in ["EARLY", "ACTIVE", "RINGING"]:
-                    continue
-                if row["b_cid_num"] and row["b_cid_num"] is not None:
-                    calling_party_number = row["b_cid_num"]
-                elif row["cid_num"] and row["cid_num"] is not None:
-                    calling_party_number = row["cid_num"]
+            is_fq_res = user.resource.rfind('@')
+            if is_fq_res > 0:
+                resource = user.resource[0:is_fq_res]
+            else:
+                resource = user.resource
+            request = "channels like /" + re.sub(r'/', r':', resource) + \
+                ("/" if user.freeswitch_chan_type == "FreeTDM" else "@") + \
+                " as json"
+            ret = fs_manager.api('show', str(request))
+            f = json.load(StringIO.StringIO(ret.getBody()))
+            if int(f['row_count']) > 0:
+                for x in range(0, int(f['row_count'])):
+                    if (is_fq_res and f['rows'][x]['presence_id'] !=
+                       user.resource):
+                            continue
+                    if (f['rows'][x]['cid_num'] == user.internal_number or
+                       len(f['rows'][x]['cid_num']) < 3):
+                            calling_party_number = f['rows'][x]['dest']
+                    else:
+                        calling_party_number = f['rows'][x]['cid_num']
         except Exception, e:
             _logger.error(
                 "Error in the Status request to FreeSWITCH server %s"
@@ -302,12 +308,14 @@ class freeswitch_server(orm.Model):
                 _('Error:'),
                 _("Can't get calling number from FreeSWITCH.\nHere is the "
                     "error: '%s'" % unicode(e)))
-
         finally:
             fs_manager.disconnect()
 
         _logger.debug("Calling party number: '%s'" % calling_party_number)
-        return calling_party_number
+        if isinstance(calling_party_number, int):
+            return calling_party_number
+        else:
+            return False
 
     def get_record_from_my_channel(self, cr, uid, context=None):
         calling_number = self.pool['freeswitch.server']._get_calling_number(
@@ -337,7 +345,8 @@ class res_users(orm.Model):
             "auto answer."),
         'callerid': fields.char(
             'Caller ID', size=50,
-            help="Caller ID used for the calls initiated by this user."),
+            help="Caller ID used for the calls initiated by this user. "
+            "This must be in the form of 'Name <NUMBER>'."),
         'cdraccount': fields.char(
             'CDR Account', size=50,
             help="Call Detail Record (CDR) account used for billing this "
@@ -391,7 +400,7 @@ class res_users(orm.Model):
         }
 
     _defaults = {
-        'freeswitch_chan_type': 'SIP',
+        'freeswitch_chan_type': 'user',
     }
 
     def _check_validity(self, cr, uid, ids):
@@ -409,7 +418,7 @@ class res_users(orm.Model):
                         raise orm.except_orm(
                             _('Error:'),
                             _("The '%s' for the user '%s' should only have "
-                                "ASCII caracters")
+                                "ASCII characters")
                             % (check_string[0], user.name))
         return True
 
@@ -442,7 +451,7 @@ class phone_common(orm.AbstractModel):
                 _('No callerID configured for the current user'))
 
         variable = ""
-        if user.freeswitch_chan_type == 'SIP':
+        if user.freeswitch_chan_type == 'user':
             # We can only have one alert-info header in a SIP request
             if user.alert_info:
                 variable += 'alert_info=' + user.alert_info
@@ -462,16 +471,20 @@ class phone_common(orm.AbstractModel):
                 if len(variable):
                     variable += ','
                 caller_name = caller_name.replace(",", r"\,")
-                variable += 'effective_caller_id_name=' + caller_name
+                variable += 'effective_caller_id_name=\'' + caller_name + '\''
             if caller_number:
                 if len(variable):
                     variable += ','
-                variable += 'effective_caller_id_number=' + caller_number
+                variable += 'effective_caller_id_number=\'' + \
+                    caller_number + '\''
             if fs_server.wait_time != 60:
                 if len(variable):
                     variable += ','
                 variable += 'ignore_early_media=true' + ','
                 variable += 'originate_timeout=' + str(fs_server.wait_time)
+        if len(variable):
+            variable += ','
+        variable += 'odoo_connector=true'
         channel = '%s/%s' % (user.freeswitch_chan_type, user.resource)
         if user.dial_suffix:
             channel += '/%s' % user.dial_suffix
@@ -481,9 +494,10 @@ class phone_common(orm.AbstractModel):
             #    'Caller ID name showed to aleg' 90125
             dial_string = (('<' + variable + '>') if variable else '') + \
                 channel + ' ' + fs_number + ' ' + fs_server.context + ' ' + \
-                '\'FreeSWITCH/Odoo Connector\' ' + fs_number
+                '\'' + self.get_name_from_phone_number(cr, uid, fs_number) + \
+                '\' ' + fs_number
             # raise orm.except_orm(_('Error :'), dial_string)
-            fs_manager.api('originate', dial_string.encode("ascii"))
+            fs_manager.api('originate', dial_string.encode('utf-8'))
         except Exception, e:
             _logger.error(
                 "Error in the Originate request to FreeSWITCH server %s"
