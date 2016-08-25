@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    FreeSWITCH Click2dial module for OpenERP
-#    Copyright (C) 2014 Trever L. Adams
+#    Copyright (C) 2014-2016 Trever L. Adams
 #    Copyright (C) 2010-2013 Alexis de Lattre <alexis@via.ecp.fr>
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -232,32 +232,38 @@ class freeswitch_server(orm.Model):
                         _("Check Host, Port and Password"))
                 else:
                     fs_manager.disconnect()
-                    raise orm.except_orm(
-                        _("Connection Test Successfull!"),
-                        _("OpenERP can successfully login to the FreeSWITCH Event "
-                          "Socket."))
             except Exception, e:
-                raise orm.except_orm(
-                    _("Connection Test Failed!"),
-                    _("Check Host, Port and Password"))
+                pass
+        raise orm.except_orm(
+             _("Connection Test Successfull!"),
+             _("OpenERP can successfully login to the FreeSWITCH Event "
+               "Socket."))
 
     def _get_calling_number(self, cr, uid, context=None):
-
         user, fs_server, fs_manager = self._connect_to_freeswitch(
             cr, uid, context=context)
         calling_party_number = False
         try:
-            request = "channels like /" + re.sub(r'/', r':', user.resource) + \
+            is_fq_res = user.resource.rfind('@')
+            if is_fq_res > 0:
+                resource = user.resource[0:is_fq_res]
+            else:
+                resource = user.resource
+            request = "channels like /" + re.sub(r'/', r':', resource) + \
                 ("/" if user.freeswitch_chan_type == "FreeTDM" else "@") + \
                 " as json"
             ret = fs_manager.api('show', str(request))
             f = json.load(StringIO.StringIO(ret.getBody()))
             if int(f['row_count']) > 0:
-                if (f['rows'][0]['cid_num'] == user.internal_number or
-                    len(f['rows'][0]['cid_num']) < 3):
-                        calling_party_number = f['rows'][0]['dest']
-                else:
-                    calling_party_number = f['rows'][0]['cid_num']
+                for x in range(0, int(f['row_count'])):
+                    if (is_fq_res and f['rows'][x]['presence_id'] !=
+                       user.resource):
+                            continue
+                    if (f['rows'][x]['cid_num'] == user.internal_number or
+                       len(f['rows'][x]['cid_num']) < 3):
+                            calling_party_number = f['rows'][x]['dest']
+                    else:
+                        calling_party_number = f['rows'][x]['cid_num']
         except Exception, e:
             _logger.error(
                 "Error in the Status request to FreeSWITCH server %s"
@@ -268,12 +274,14 @@ class freeswitch_server(orm.Model):
                 _('Error:'),
                 _("Can't get calling number from FreeSWITCH.\nHere is the "
                     "error: '%s'" % unicode(e)))
-
         finally:
             fs_manager.disconnect()
 
         _logger.debug("Calling party number: '%s'" % calling_party_number)
-        return calling_party_number
+        if isinstance(calling_party_number, int):
+            return calling_party_number
+        else:
+            return False
 
     def get_record_from_my_channel(self, cr, uid, context=None):
         calling_number = self.pool['freeswitch.server']._get_calling_number(
@@ -303,7 +311,8 @@ class res_users(orm.Model):
             "auto answer."),
         'callerid': fields.char(
             'Caller ID', size=50,
-            help="Caller ID used for the calls initiated by this user."),
+            help="Caller ID used for the calls initiated by this user. "
+            "This must be in the form of 'Name <NUMBER>'."),
         'cdraccount': fields.char(
             'CDR Account', size=50,
             help="Call Detail Record (CDR) account used for billing this "
@@ -375,7 +384,7 @@ class res_users(orm.Model):
                         raise orm.except_orm(
                             _('Error:'),
                             _("The '%s' for the user '%s' should only have "
-                                "ASCII caracters")
+                                "ASCII characters")
                             % (check_string[0], user.name))
         return True
 
@@ -435,19 +444,20 @@ class PhoneCommon(orm.AbstractModel):
                 if len(variable):
                     variable += ','
                 caller_name = caller_name.replace(",", r"\,")
-                variable += 'effective_caller_id_name=' + caller_name
+                variable += 'effective_caller_id_name=\'' + caller_name + '\''
             if caller_number:
                 if len(variable):
                     variable += ','
-                variable += 'effective_caller_id_number=' + caller_number
+                variable += 'effective_caller_id_number=\'' + \
+                    caller_number + '\''
             if fs_server.wait_time != 60:
                 if len(variable):
                     variable += ','
                 variable += 'ignore_early_media=true' + ','
                 variable += 'originate_timeout=' + str(fs_server.wait_time)
-            if len(variable):
-                variable += ','
-            variable += 'odoo_connector=true'
+        if len(variable):
+            variable += ','
+        variable += 'odoo_connector=true'
         channel = '%s/%s' % (user.freeswitch_chan_type, user.resource)
         if user.dial_suffix:
             channel += '/%s' % user.dial_suffix
@@ -457,10 +467,10 @@ class PhoneCommon(orm.AbstractModel):
             #    'Caller ID name showed to aleg' 90125
             dial_string = (('<' + variable + '>') if variable else '') + \
                 channel + ' ' + fs_number + ' ' + fs_server.context + ' ' + \
-                '\'' + self.get_name_from_phone_number(fs_number) + '\' ' + \
-                fs_number
+                '\'' + self.get_name_from_phone_number(cr, uid, fs_number) + \
+                '\' ' + fs_number
             # raise orm.except_orm(_('Error :'), dial_string)
-            fs_manager.api('originate', dial_string.encode("ascii"))
+            fs_manager.api('originate', dial_string.encode('utf-8'))
         except Exception, e:
             _logger.error(
                 "Error in the Originate request to FreeSWITCH server %s"
