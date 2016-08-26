@@ -27,9 +27,6 @@ click2dial.OpenCaller = Widget.extend({
         event.stopPropagation();
         var self = this;
         self.rpc('/freeswitch_click2dial/get_record_from_my_channel', {}).done(function(r) {
-        // console.log('RESULT RPC r='+r);
-        // console.log('RESULT RPC type r='+typeof r);
-        // console.log('RESULT RPC isNaN r='+isNaN(r));
         if (r === false) {
              self.do_warn(
                 _t('Failure'),

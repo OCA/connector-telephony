@@ -7,12 +7,10 @@
 from openerp import models, fields, api, _
 from openerp.exceptions import UserError, ValidationError
 import logging
-# from pprint import pformat
 try:
     from freeswitchESL import ESL
 except ImportError:
     import ESL
-# import sys
 import StringIO
 import re
 import json
@@ -43,7 +41,7 @@ class FreeSWITCHServer(models.Model):
         "leave empty.")
     password = fields.Char(
         string='Event Socket Password', required=True,
-        help="Password that OpenERP will use to communicate with the "
+        help="Password that OpenERP/Odoo will use to communicate with the "
         "FreeSWITCH Event Socket. Refer to "
         "/etc/freeswitch/autoload_configs/event_socket.conf.xml "
         "on your FreeSWITCH server.")
@@ -120,7 +118,7 @@ class FreeSWITCHServer(models.Model):
         # We check if the current user has an internal number
         if not user.resource:
             raise UserError(
-                _('No resource name configured for the current user'))
+                _('No resource name configured for the current user.'))
 
         _logger.debug(
             "User's phone: %s/%s", user.freeswitch_chan_type, user.resource)
@@ -140,8 +138,6 @@ class FreeSWITCHServer(models.Model):
             raise UserError(
                 _("Problem in the request from Odoo to FreeSWITCH. "
                   "Here is the error message: %s" % e))
-            # return (False, False, False)
-
         return (user, fs_server, fs_manager)
 
     @api.multi
@@ -160,7 +156,7 @@ class FreeSWITCHServer(models.Model):
                 if fs_manager.connected() is not 1:
                     raise UserError(
                         _("Connection Test Failed! Check Host, Port and "
-                          "Password"))
+                          "Password."))
                 else:
                     fs_manager.disconnect()
             except Exception, e:
@@ -177,8 +173,6 @@ class FreeSWITCHServer(models.Model):
             is_fq_res = user.resource.rfind('@')
             if is_fq_res > 0:
                 resource = user.resource[0:is_fq_res]
-                _logger.error("is_fq_res: %d, resource is %s\n",
-                              is_fq_res, resource)
             else:
                 resource = user.resource
             request = "channels like /" + re.sub(r'/', r':', resource) + \
@@ -311,7 +305,7 @@ class ResUsers(models.Model):
                     except UnicodeEncodeError:
                         raise ValidationError(_(
                             "The '%s' for the user '%s' should only have "
-                            "ASCII caracters"),
+                            "ASCII caracters."),
                             check_string[0], user.name)
 
     @api.multi
@@ -342,7 +336,7 @@ class PhoneCommon(models.AbstractModel):
     def click2dial(self, erp_number):
         res = super(PhoneCommon, self).click2dial(erp_number)
         if not erp_number:
-            raise UserError(_('Missing phone number'))
+            raise UserError(_('Missing phone number.'))
 
         user, fs_server, fs_manager = \
             self.env['freeswitch.server']._connect_to_freeswitch()
@@ -355,7 +349,7 @@ class PhoneCommon(models.AbstractModel):
 
         # The user should have a CallerID
         if not user.callerid:
-            raise UserError(_('No callerID configured for the current user'))
+            raise UserError(_('No callerID configured for the current user.'))
 
         variable = ""
         if user.freeswitch_chan_type == 'user':
