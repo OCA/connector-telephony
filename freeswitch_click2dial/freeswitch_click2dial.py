@@ -175,22 +175,27 @@ class FreeSWITCHServer(models.Model):
         calling_party_number = False
         try:
             is_fq_res = user.resource.rfind('@')
-            if is_fq_res:
-                if len(user.resource) != is_fq_res:
-                    is_fq_res = True
-                else:
-                    is_fq_res = False
-            request = "channels like /" + re.sub(r'/', r':', user.resource) + \
+            if is_fq_res > 0:
+                resource = user.resource[0:is_fq_res]
+                _logger.error("is_fq_res: %d, resource is %s\n",
+                              is_fq_res, resource)
+            else:
+                resource = user.resource
+            request = "channels like /" + re.sub(r'/', r':', resource) + \
                 (("/" if user.freeswitch_chan_type == "FreeTDM" else "@")
                  if not is_fq_res else "") + " as json"
             ret = fs_manager.api('show', str(request))
             f = json.load(StringIO.StringIO(ret.getBody()))
             if int(f['row_count']) > 0:
-                if (f['rows'][0]['cid_num'] == user.internal_number or
-                    len(f['rows'][0]['cid_num']) < 3):
-                        calling_party_number = f['rows'][0]['dest']
-                else:
-                    calling_party_number = f['rows'][0]['cid_num']
+                for x in range(0, int(f['row_count'])):
+                    if (is_fq_res and f['rows'][x]['presence_id'] !=
+                       user.resource):
+                            continue
+                    if (f['rows'][x]['cid_num'] == user.internal_number or
+                       len(f['rows'][x]['cid_num']) < 3):
+                            calling_party_number = f['rows'][x]['dest']
+                    else:
+                        calling_party_number = f['rows'][x]['cid_num']
         except Exception, e:
             _logger.error(
                 "Error in the Status request to FreeSWITCH server %s",
@@ -205,7 +210,10 @@ class FreeSWITCHServer(models.Model):
             fs_manager.disconnect()
 
         _logger.debug("Calling party number: '%s'", calling_party_number)
-        return calling_party_number
+        if isinstance(calling_party_number, int):
+            return calling_party_number
+        else:
+            return False
 
     @api.model
     def get_record_from_my_channel(self):
@@ -374,7 +382,8 @@ class PhoneCommon(models.AbstractModel):
             if caller_number:
                 if len(variable):
                     variable += ','
-                variable += 'effective_caller_id_number=\'' + caller_number + '\''
+                variable += 'effective_caller_id_number=\'' + \
+                            caller_number + '\''
             if fs_server.wait_time != 60:
                 if len(variable):
                     variable += ','
