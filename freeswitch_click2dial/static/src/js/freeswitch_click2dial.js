@@ -18,8 +18,6 @@ openerp.freeswitch_click2dial = function (instance) {
             event.stopPropagation();
             var self = this;
             self.rpc('/freeswitch_click2dial/get_record_from_my_channel', {}).done(function(r) {
-            // console.log('RESULT RPC r='+r);
-            // console.log('RESULT RPC type r='+typeof r);
             if (r === false) {
                  self.do_notify(
                     _t('Failure'),
