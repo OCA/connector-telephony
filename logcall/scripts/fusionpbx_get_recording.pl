@@ -66,7 +66,7 @@ else {
     print "Connection: close\n";
     print "Content-Type: text/html\n\n";
     print "<H1>Error </H1>\n";
-    print "The file ".$args{"file"}." does not exists in the server<br>\n";
-    print "Please contact to the administrator for more info.\n\n";
+    print "The file ".$args{"file"}." does not exist on the server<br>\n";
+    print "Please contact the administrator for more info.\n\n";
 }
 

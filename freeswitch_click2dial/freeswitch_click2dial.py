@@ -173,12 +173,7 @@ class FreeSWITCHServer(models.Model):
         try:
             is_fq_res = user.resource.rfind('@')
             if is_fq_res > 0:
-<<<<<<< d8cf9efb5fd18748d1901978041bb8f34ee1717b
                 resource = user.resource[0:is_fq_res]
-=======
-                resource = user.resource[0:is_fq_res+1]
-                _logger.error("is_fq_res: %d, resource is %s\n", is_fq_res, resource)
->>>>>>> Thank you to Alexandr Usov and Stanislav Sinyagin for testing and ideas.
             else:
                 resource = user.resource
             request = "channels like /" + re.sub(r'/', r':', resource) + \

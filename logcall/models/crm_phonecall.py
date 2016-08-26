@@ -1,24 +1,7 @@
 # -*- coding: utf-8 -*-
-##############################################################################
-#
-#    Phone Log-call module for Odoo/OpenERP
-#    Copyright (C) 2016 credativ Ltd (<http://credativ.co.uk>).
-#    Copyright (C) 2016 Trever L. Adams
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as
-#    published by the Free Software Foundation, either version 3 of the
-#    License, or (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU Affero General Public License for more details.
-#
-#    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-#
-##############################################################################
+# (c) 2016 credativ ltd. - Ondřej Kuzník
+# (c) 2016 Trever L. Adams
+# License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 
 from openerp import models, fields, api, _
 from datetime import datetime, timedelta
@@ -148,7 +131,7 @@ class PhoneCommon(models.AbstractModel):
             if phonecalls[0]['description']:
                 if phonecalls[0]['description'].find(odoo_description) != -1:
                     odoo_description = phonecalls[0]['description'] + '\n' + \
-                                       odoo_description
+                        odoo_description
                 else:
                     odoo_description = phonecalls[0]['description']
             if phonecalls[0]['recording_id']:

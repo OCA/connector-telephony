@@ -30,7 +30,6 @@ addon | version | summary
 [base_phone_popup](base_phone_popup/) | 9.0.1.0.0 | Pop-up the related form view to the user on incoming calls
 [crm_phone](crm_phone/) | 9.0.1.0.0 | Validate phone numbers in CRM
 [event_phone](event_phone/) | 9.0.1.0.0 | Validate phone numbers in Events
-[freeswitch_click2dial](freeswitch_click2dial/) | 9.0.1.0.0 | FreeSWITCH-Odoo telephony connector (click2dial)
 [hr_phone](hr_phone/) | 9.0.1.0.0 | Validate phone numbers in HR
 [hr_recruitment_phone](hr_recruitment_phone/) | 9.0.1.0.0 | Validate phone numbers in HR Recruitment
 

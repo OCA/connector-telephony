@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# (c) 2016 Trever L. Adams
 # (c) 2016 credativ ltd. - Ondřej Kuzník
 # License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 
@@ -15,7 +16,8 @@ class CrmPhonecall(models.Model):
 class HrApplicant(models.Model):
     _inherit = 'hr.applicant'
 
-    phonecall_ids = fields.One2many('crm.phonecall', 'hr_applicant_id', string='Phone Calls')
+    phonecall_ids = fields.One2many('crm.phonecall', 'hr_applicant_id',
+                                    string='Phone Calls')
     phonecall_count = fields.Integer(
         compute='_count_phonecalls', string='Number of Phonecalls',
         readonly=True)

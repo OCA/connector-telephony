@@ -5,4 +5,4 @@ phone_system_integration_ir_attachment_create,Create access on ir.attachment for
 phone_system_integration_mail.message_create,Create access on mail.message for phone system integration and call logging,mail.model_mail_message,group_phone_system_integration,1,1,1,0
 phone_system_integration_mail.message_create,Create access on mail.followers for phone system integration and call logging,mail.model_mail_followers,group_phone_system_integration,1,1,1,0
 phone_system_integration_res_partner_write,Write access on res.partner for phone system integration and call logging,base.model_res_partner,group_phone_system_integration,1,1,0,0
-phone_system_integration_crm_lead_write,Write access on crm.lead for phone system integration and call logging,sale_crm.model_crm_lead,group_phone_system_integration,1,1,0,0
+phone_system_integration_crm_lead_write,Write access on crm.lead for phone system integration and call logging,crm.model_crm_lead,group_phone_system_integration,1,1,0,0

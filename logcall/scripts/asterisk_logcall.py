@@ -1,20 +1,9 @@
 #! /usr/bin/python
 # -*- encoding: utf-8 -*-
-#  Copyright (C) 2010-2015 Alexis de Lattre <alexis.delattre@akretion.com>
-#  Copyright (C) 2016 credativ Ltd (<http://credativ.co.uk>).
-#
-#  This program is free software: you can redistribute it and/or modify
-#  it under the terms of the GNU Affero General Public License as
-#  published by the Free Software Foundation, either version 3 of the
-#  License, or (at your option) any later version.
-#
-#  This program is distributed in the hope that it will be useful,
-#  but WITHOUT ANY WARRANTY; without even the implied warranty of
-#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#  GNU Affero General Public License for more details.
-#
-#  You should have received a copy of the GNU Affero General Public License
-#  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#  (c) 2010-2015 Alexis de Lattre <alexis.delattre@akretion.com>
+#  (c) 2016 credativ Ltd (<http://credativ.co.uk>).
+#  (c) 2016 Trever L. Adams
+# License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 
 """
  Log a call and recording within Asterisk
@@ -95,6 +84,7 @@ options = [
         'help': "Password of the OpenERP user. Default = 'demo'"},
 ]
 
+
 def stdout_write(string):
     '''Wrapper on sys.stdout.write'''
     sys.stdout.write(string.encode(sys.stdout.encoding or 'utf-8', 'replace'))
@@ -111,6 +101,7 @@ def stderr_write(string):
     sys.stderr.write(string.encode(sys.stdout.encoding or 'utf-8', 'replace'))
     sys.stdout.flush()
     return True
+
 
 def main(options, arguments):
 
@@ -162,8 +153,11 @@ def main(options, arguments):
             odoo = odoorpc.ODOO(options.server, proto, options.port)
             odoo.login(options.database, options.username, options.password)
             res = odoo.execute(
-                'phone.common', 'log_call_and_recording', odoo_type, odoo_src, odoo_dst, odoo_duration, odoo_start, odoo_filename, odoo_uniqueid, odoo_description)
-            stdout_write('VERBOSE "Called method %s, returned %s"\n' % (method, res))
+                'phone.common', 'log_call_and_recording', odoo_type, odoo_src,
+                odoo_dst, odoo_duration, odoo_start, odoo_filename,
+                odoo_uniqueid, odoo_description)
+            stdout_write('VERBOSE "Called method %s, returned %s"\n' %
+                         (method, res))
         except:
             stdout_write(
                 'VERBOSE "Could not connect to OpenERP in JSON-RPC"\n')
@@ -180,8 +174,11 @@ def main(options, arguments):
         try:
             res = sock.execute(
                 options.database, options.userid, options.password,
-                'phone.common', 'log_call_and_recording', odoo_type, odoo_src, odoo_dst, odoo_duration, odoo_start, odoo_filename, odoo_uniqueid, odoo_description)
-            stdout_write('VERBOSE "Called method %s, returned %s"\n' % (method, res))
+                'phone.common', 'log_call_and_recording', odoo_type, odoo_src,
+                odoo_dst, odoo_duration, odoo_start, odoo_filename,
+                odoo_uniqueid, odoo_description)
+            stdout_write('VERBOSE "Called method %s, returned %s"\n' %
+                         (method, res))
         except:
             stdout_write('VERBOSE "Could not connect to OpenERP in XML-RPC"\n')
 
@@ -189,8 +186,8 @@ def main(options, arguments):
 
 if __name__ == '__main__':
     usage = "Usage: asterisk_logcall.py [options] login1 login2 login3 ..."
-    epilog = "Script written by Craig Gowing based on work by Alexis de Lattre. "
-    "Published under the GNU AGPL licence."
+    epilog = "Script written by Craig Gowing based on work by Alexis de "
+    "Lattre. Published under the GNU AGPL licence."
     description = "This is an AGI script that sends a query to OpenERP. "
     parser = OptionParser(usage=usage, epilog=epilog, description=description)
     for option in options:
