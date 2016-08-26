@@ -27,7 +27,6 @@ try:
     from freeswitchESL import ESL
 except ImportError:
     import ESL
-# import sys
 import StringIO
 import re
 import json
@@ -59,7 +58,7 @@ class freeswitch_server(orm.Model):
             "leave empty."),
         'password': fields.char(
             'Event Socket Password', size=30, required=True,
-            help="Password that OpenERP will use to communicate with the "
+            help="Password that OpenERP/Odoo will use to communicate with the "
             "FreeSWITCH Event Socket. Refer to "
             "/etc/freeswitch/autoload_configs/event_socket.conf.xml "
             "on your FreeSWITCH server."),
@@ -125,7 +124,7 @@ class freeswitch_server(orm.Model):
                         raise orm.except_orm(
                             _('Error:'),
                             _("The '%s' should only have ASCII caracters for "
-                                "the FreeSWITCH server '%s'"
+                                "the FreeSWITCH server '%s'."
                                 % (check_str[0], server.name)))
         return True
 
@@ -186,7 +185,7 @@ class freeswitch_server(orm.Model):
         if not user.resource:
             raise orm.except_orm(
                 _('Error:'),
-                _('No resource name configured for the current user'))
+                _('No resource name configured for the current user.'))
 
         _logger.debug(
             "User's phone: %s/%s" % (user.freeswitch_chan_type, user.resource))
@@ -208,8 +207,6 @@ class freeswitch_server(orm.Model):
                 _('Error:'),
                 _("Problem in the request from OpenERP to FreeSWITCH. "
                   "Here is the error message: %s" % e))
-            # return (False, False, False)
-
         return (user, fs_server, fs_manager)
 
     def test_es_connection(self, cr, uid, ids, context=None):
@@ -229,7 +226,7 @@ class freeswitch_server(orm.Model):
                 if fs_manager.connected() is not 1:
                     raise orm.except_orm(
                         _("Connection Test Failed!"),
-                        _("Check Host, Port and Password"))
+                        _("Check Host, Port and Password."))
                 else:
                     fs_manager.disconnect()
             except Exception, e:
@@ -384,7 +381,7 @@ class res_users(orm.Model):
                         raise orm.except_orm(
                             _('Error:'),
                             _("The '%s' for the user '%s' should only have "
-                                "ASCII characters")
+                                "ASCII characters.")
                             % (check_string[0], user.name))
         return True
 
@@ -404,7 +401,7 @@ class PhoneCommon(orm.AbstractModel):
         if not erp_number:
             raise orm.except_orm(
                 _('Error:'),
-                _('Missing phone number'))
+                _('Missing phone number.'))
 
         user, fs_server, fs_manager = \
             self.pool['freeswitch.server']._connect_to_freeswitch(
@@ -421,7 +418,7 @@ class PhoneCommon(orm.AbstractModel):
         if not user.callerid:
             raise orm.except_orm(
                 _('Error:'),
-                _('No callerID configured for the current user'))
+                _('No callerID configured for the current user.'))
 
         variable = ""
         if user.freeswitch_chan_type == 'user':

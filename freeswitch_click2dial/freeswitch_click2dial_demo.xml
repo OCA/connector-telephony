@@ -10,8 +10,8 @@
 <openerp>
     <data noupdate="1">
         <record id="demo_fs_server" model="freeswitch.server">
-            <field name="name">Akretion FreeSWITCH Server</field>
-            <field name="ip_address">freeswitch.akretion.com</field>
+            <field name="name">Company FreeSWITCH Server</field>
+            <field name="ip_address">freeswitch.example.com</field>
             <field name="port">8021</field>
             <field name="password">mypassword</field>
             <field name="context">from-internal</field>

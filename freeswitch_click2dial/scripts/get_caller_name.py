@@ -144,8 +144,6 @@ def convert_to_ascii(my_unicode):
 
 
 def main(name, phone_number, options):
-    # print 'options = %s' % options
-
     # If we already have a "True" caller ID name
     # i.e. not just digits, but a real name, then we don't try to
     # connect to OpenERP or geoloc, we just keep it
