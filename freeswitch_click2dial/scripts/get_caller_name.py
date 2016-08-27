@@ -1,5 +1,9 @@
 #!/usr/bin/python
 # -*- encoding: utf-8 -*-
+# (c) 2010-2014 Alexis de Lattre <alexis.delattre@akretion.com>
+# (c) 2014-2016 Trever L. Adams <trever.adams@gmail.com>
+# License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
+# flake8: noqa: E501
 """
  Name lookup in OpenERP for incoming and outgoing calls with an
  FreeSWITCH system
@@ -34,8 +38,6 @@
  comma (,) delimited, not :_: delimited. It is up to you to format the
  extensions list appropriately. The persons who are at extensions in the
  notify list will receive a poppup if so configured and if they are logged in.
- The notify list actually shouldn't be in the cidlookup.conf, but should be
- used when doing notify (in an on answer hook for example).
 
  From the dialplan, do something like this <action application="set"
  data="effective_caller_id_name=${cidlookup(${caller_id_number})}"/>.
@@ -54,24 +56,8 @@
 """
 
 __author__ = "Trever Adams <trever.adams@gmail.com>"
-__date__ = "May 2016"
+__date__ = "August 2016"
 __version__ = "0.5"
-
-#  Copyright (C) 2014-2015 Trever L. Adams <trever.adams@gmail.com>
-#  Copyright (C) 2010-2014 Alexis de Lattre <alexis.delattre@akretion.com>
-#
-#  This program is free software: you can redistribute it and/or modify
-#  it under the terms of the GNU Affero General Public License as
-#  published by the Free Software Foundation, either version 3 of the
-#  License, or (at your option) any later version.
-#
-#  This program is distributed in the hope that it will be useful,
-#  but WITHOUT ANY WARRANTY; without even the implied warranty of
-#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#  GNU Affero General Public License for more details.
-#
-#  You should have received a copy of the GNU Affero General Public License
-#  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import sys
 sys.path.append('.')
@@ -228,7 +214,7 @@ def main(name, phone_number, options):
 
     # All SIP phones should support UTF-8...
     # but in case you have analog phones over TDM
-    # or buggy phones, you should use the command line option --ascii
+    # or buggy phones, you should set options["ascii"] to True below
     if options["ascii"]:
         res = convert_to_ascii(res)
 
@@ -249,7 +235,7 @@ def application(environ, start_response):
     options["country"] = "US"
     options["lang"] = "en"
     options["ssl"] = False
-    options["ascii"] = True
+    options["ascii"] = False
     options["max_size"] = 40
     parameters = parse_qs(environ.get('QUERY_STRING', ''))
     if 'number' in parameters:
@@ -275,8 +261,10 @@ def application(environ, start_response):
     except:
         output = name
 
+    output = output.encode('utf-8')
+
     status = '200 OK'
-    response_headers = [('Content-type', 'text/plain'),
+    response_headers = [('Content-type', 'text/plain; charset=utf-8'),
                         ('Content-Length', str(len(output)))]
     start_response(status, response_headers)
     return [output]

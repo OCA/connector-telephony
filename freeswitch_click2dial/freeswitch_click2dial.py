@@ -1,24 +1,7 @@
 # -*- coding: utf-8 -*-
-##############################################################################
-#
-#    FreeSWITCH Click2dial module for OpenERP
-#    Copyright (C) 2014-2016 Trever L. Adams
-#    Copyright (C) 2010-2013 Alexis de Lattre <alexis@via.ecp.fr>
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as
-#    published by the Free Software Foundation, either version 3 of the
-#    License, or (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU Affero General Public License for more details.
-#
-#    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-#
-##############################################################################
+# (c) 2010-2013 Alexis de Lattre <alexis.delattre@akretion.com>
+# (c) 2014-2016 Trever L. Adams <trever.adams@gmail.com>
+# License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 
 from openerp.osv import fields, orm
 from openerp.tools.translate import _
@@ -35,7 +18,8 @@ _logger = logging.getLogger(__name__)
 
 
 class freeswitch_server(orm.Model):
-    '''FreeSWITCH server object, stores the parameters of the FreeSWITCH Servers'''
+    '''FreeSWITCH server object, stores the parameters of the FreeSWITCH
+       Servers'''
     _name = "freeswitch.server"
     _description = "FreeSWITCH Servers"
     _columns = {
@@ -232,9 +216,9 @@ class freeswitch_server(orm.Model):
             except Exception, e:
                 pass
         raise orm.except_orm(
-             _("Connection Test Successfull!"),
-             _("OpenERP can successfully login to the FreeSWITCH Event "
-               "Socket."))
+            _("Connection Test Successful!"),
+            _("OpenERP can successfully login to the FreeSWITCH Event "
+              "Socket."))
 
     def _get_calling_number(self, cr, uid, context=None):
         user, fs_server, fs_manager = self._connect_to_freeswitch(
@@ -253,7 +237,7 @@ class freeswitch_server(orm.Model):
             f = json.load(StringIO.StringIO(ret.getBody()))
             if int(f['row_count']) > 0:
                 for x in range(0, int(f['row_count'])):
-                    if (is_fq_res and f['rows'][x]['presence_id'] !=
+                    if (is_fq_res > 0 and f['rows'][x]['presence_id'] !=
                        user.resource):
                             continue
                     if (f['rows'][x]['cid_num'] == user.internal_number or
@@ -275,7 +259,7 @@ class freeswitch_server(orm.Model):
             fs_manager.disconnect()
 
         _logger.debug("Calling party number: '%s'" % calling_party_number)
-        if isinstance(calling_party_number, int):
+        if calling_party_number and calling_party_number.isdigit():
             return calling_party_number
         else:
             return False
@@ -466,7 +450,6 @@ class PhoneCommon(orm.AbstractModel):
                 channel + ' ' + fs_number + ' ' + fs_server.context + ' ' + \
                 '\'' + self.get_name_from_phone_number(cr, uid, fs_number) + \
                 '\' ' + fs_number
-            # raise orm.except_orm(_('Error :'), dial_string)
             fs_manager.api('originate', dial_string.encode('utf-8'))
         except Exception, e:
             _logger.error(

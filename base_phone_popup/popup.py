@@ -86,11 +86,13 @@ class phone_common(orm.AbstractModel):
 
     def incall_notify_by_extension(
             self, cr, uid, number, extension_list, context=None):
-        assert isinstance(extension_list, list), 'extension_list must be a list'
+        assert isinstance(extension_list, list), \
+            'extension_list must be a list'
         res = self.get_record_from_phone_number(
             cr, uid, number, context=context)
         user_ids = self.pool['res.users'].search(
-            cr, uid, [('internal_number', 'in', extension_list)], context=context)
+            cr, uid, [('internal_number', 'in', extension_list)],
+            context=context)
         logger.debug(
             'Notify incoming call from number %s to users %s'
             % (number, user_ids))
