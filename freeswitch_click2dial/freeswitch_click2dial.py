@@ -176,13 +176,13 @@ class FreeSWITCHServer(models.Model):
             else:
                 resource = user.resource
             request = "channels like /" + re.sub(r'/', r':', resource) + \
-                (("/" if user.freeswitch_chan_type == "FreeTDM" else "@")
-                 if not is_fq_res else "") + " as json"
+                ("/" if user.freeswitch_chan_type == "FreeTDM" else "@") + \
+                " as json"
             ret = fs_manager.api('show', str(request))
             f = json.load(StringIO.StringIO(ret.getBody()))
             if int(f['row_count']) > 0:
                 for x in range(0, int(f['row_count'])):
-                    if (is_fq_res and f['rows'][x]['presence_id'] !=
+                    if (is_fq_res > 0 and f['rows'][x]['presence_id'] !=
                        user.resource):
                             continue
                     if (f['rows'][x]['cid_num'] == user.internal_number or
@@ -204,7 +204,7 @@ class FreeSWITCHServer(models.Model):
             fs_manager.disconnect()
 
         _logger.debug("Calling party number: '%s'", calling_party_number)
-        if isinstance(calling_party_number, int):
+        if calling_party_number and calling_party_number.isdigit():
             return calling_party_number
         else:
             return False
@@ -397,7 +397,6 @@ class PhoneCommon(models.AbstractModel):
                 channel + ' ' + fs_number + ' ' + fs_server.context + ' ' + \
                 '\'' + self.get_name_from_phone_number(fs_number) + '\' ' + \
                 fs_number
-            # raise orm.except_orm(_('Error :'), dial_string)
             fs_manager.api('originate', dial_string.encode('utf-8'))
         except Exception, e:
             _logger.error(
