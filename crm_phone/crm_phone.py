@@ -71,7 +71,8 @@ class CrmPhonecall(models.Model):
         default=lambda self: self.env.user)
     team_id = fields.Many2one(
         'crm.team', string='Sales Team', track_visibility='onchange',
-        default=lambda self: self.env['crm.team']._get_default_team_id())
+        default=lambda self: self.env['crm.team'].browse(
+            self.env['crm.team']._get_default_team_id()))
     partner_id = fields.Many2one(
         'res.partner', string='Contact', ondelete='cascade')
     partner_phone = Phone(string='Phone', partner_field='partner_id')
