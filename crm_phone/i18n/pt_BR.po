@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: connector-telephony (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-11-01 04:07+0000\n"
-"PO-Revision-Date: 2016-09-08 13:36+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
-"Language-Team: French (http://www.transifex.com/oca/OCA-connector-telephony-8-0/language/fr/)\n"
+"PO-Revision-Date: 2015-10-12 18:37+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: Portuguese (Brazil) (http://www.transifex.com/oca/OCA-connector-telephony-8-0/language/pt_BR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: fr\n"
+"Language: pt_BR\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #. module: crm_phone
@@ -36,13 +36,13 @@ msgstr ""
 #. module: crm_phone
 #: view:number.not.found:crm_phone.number_not_found_form
 msgid "Create Lead with this Number"
-msgstr "Créer une piste avec ce numéro"
+msgstr ""
 
 #. module: crm_phone
 #: code:addons/crm_phone/wizard/number_not_found.py:49
 #, python-format
 msgid "Create New Lead"
-msgstr "Créer une nouvelle piste"
+msgstr ""
 
 #. module: crm_phone
 #: view:wizard.create.crm.phonecall:crm_phone.create_crm_phonecall_view
@@ -52,74 +52,74 @@ msgstr ""
 #. module: crm_phone
 #: view:number.not.found:crm_phone.number_not_found_form
 msgid "Create or Update a Lead"
-msgstr "Créer ou mettre à jour une piste"
+msgstr ""
 
 #. module: crm_phone
 #: field:wizard.create.crm.phonecall,create_uid:0
 msgid "Created by"
-msgstr "Créé par"
+msgstr "Criado por"
 
 #. module: crm_phone
 #: field:wizard.create.crm.phonecall,create_date:0
 msgid "Created on"
-msgstr "Date"
+msgstr "Criado em"
 
 #. module: crm_phone
 #: field:number.not.found,current_lead_mobile:0
 msgid "Current Mobile"
-msgstr "Portable actuel"
+msgstr ""
 
 #. module: crm_phone
 #: field:number.not.found,current_lead_phone:0
 msgid "Current Phone"
-msgstr "Téléphone actuel"
+msgstr ""
 
 #. module: crm_phone
 #: code:addons/crm_phone/wizard/number_not_found.py:69
 #, python-format
 msgid "Error:"
-msgstr "Erreur :"
+msgstr ""
 
 #. module: crm_phone
 #: field:wizard.create.crm.phonecall,id:0
 msgid "ID"
-msgstr "ID"
+msgstr "Identificação"
 
 #. module: crm_phone
 #: field:wizard.create.crm.phonecall,write_uid:0
 msgid "Last Updated by"
-msgstr "Dernière mise à jour par"
+msgstr "Última atualização por"
 
 #. module: crm_phone
 #: field:wizard.create.crm.phonecall,write_date:0
 msgid "Last Updated on"
-msgstr "Dernière mise à jour le"
+msgstr "Última atualização em"
 
 #. module: crm_phone
 #: help:number.not.found,to_update_lead_id:0
 msgid "Lead on which the phone number will be written"
-msgstr "Piste sur laquelle le numéro de téléphone sera écrit"
+msgstr ""
 
 #. module: crm_phone
 #: field:number.not.found,to_update_lead_id:0
 msgid "Lead to Update"
-msgstr "Piste à mettre à jour"
+msgstr ""
 
 #. module: crm_phone
 #: model:ir.model,name:crm_phone.model_crm_lead
 msgid "Lead/Opportunity"
-msgstr "Piste/opportunité"
+msgstr ""
 
 #. module: crm_phone
 #: code:addons/crm_phone/wizard/number_not_found.py:75
 #, python-format
 msgid "Lead: %s"
-msgstr "Piste : %s"
+msgstr ""
 
 #. module: crm_phone
 #: model:ir.model,name:crm_phone.model_number_not_found
 msgid "Number not found"
-msgstr "Numéro introuvable"
+msgstr ""
 
 #. module: crm_phone
 #: code:addons/crm_phone/wizard/create_crm_phonecall.py:65
@@ -130,7 +130,7 @@ msgstr ""
 #. module: crm_phone
 #: model:ir.model,name:crm_phone.model_crm_phonecall
 msgid "Phonecall"
-msgstr "Appel téléphonique"
+msgstr ""
 
 #. module: crm_phone
 #: field:res.users,context_propose_creation_crm_call:0
@@ -141,17 +141,17 @@ msgstr ""
 #: code:addons/crm_phone/wizard/number_not_found.py:70
 #, python-format
 msgid "Select the Lead to Update."
-msgstr "Sélectionnez la piste à mettre à jour."
+msgstr ""
 
 #. module: crm_phone
 #: view:number.not.found:crm_phone.number_not_found_form
 msgid "Update Lead with this Number"
-msgstr "Mettre à jour la piste avec ce numéro"
+msgstr ""
 
 #. module: crm_phone
 #: model:ir.model,name:crm_phone.model_res_users
 msgid "Users"
-msgstr "Utilisateurs"
+msgstr ""
 
 #. module: crm_phone
 #: view:wizard.create.crm.phonecall:crm_phone.create_crm_phonecall_view
@@ -162,7 +162,7 @@ msgstr ""
 #: view:crm.lead:crm_phone.crm_case_form_view_leads
 #: view:crm.lead:crm_phone.crm_case_form_view_oppor
 msgid "fax"
-msgstr "fax"
+msgstr ""
 
 #. module: crm_phone
 #: view:crm.lead:crm_phone.crm_case_form_view_leads
@@ -171,4 +171,4 @@ msgstr "fax"
 #: view:crm.phonecall:crm_phone.crm_case_phone_form_view
 #: view:crm.phonecall:crm_phone.crm_case_phone_tree_view
 msgid "phone"
-msgstr "phone"
+msgstr ""

@@ -3,77 +3,76 @@
 # * asterisk_click2dial
 # 
 # Translators:
-# Rudolf Schnapka <rs@techno-flex.de>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: connector-telephony (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-11-01 04:07+0000\n"
-"PO-Revision-Date: 2016-09-09 11:32+0000\n"
-"Last-Translator: Rudolf Schnapka <rs@techno-flex.de>\n"
-"Language-Team: German (http://www.transifex.com/oca/OCA-connector-telephony-8-0/language/de/)\n"
+"PO-Revision-Date: 2015-10-12 18:36+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: Galician (http://www.transifex.com/oca/OCA-connector-telephony-8-0/language/gl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: de\n"
+"Language: gl\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: asterisk_click2dial
 #: field:asterisk.server,login:0
 msgid "AMI Login"
-msgstr "AMI-Anmeldung"
+msgstr ""
 
 #. module: asterisk_click2dial
 #: field:asterisk.server,password:0
 msgid "AMI Password"
-msgstr "AMI-Passwort"
+msgstr ""
 
 #. module: asterisk_click2dial
 #: field:asterisk.server,active:0
 msgid "Active"
-msgstr "Aktiv"
+msgstr ""
 
 #. module: asterisk_click2dial
 #: field:asterisk.server,alert_info:0
 msgid "Alert-Info SIP Header"
-msgstr "Warn-Info SIP-Kopfdaten"
+msgstr ""
 
 #. module: asterisk_click2dial
 #: help:asterisk.server,wait_time:0
 msgid ""
 "Amount of time (in seconds) Asterisk will try to reach the user's phone "
 "before hanging up."
-msgstr "Dauer (in Sekunden), über die Asterisk vor dem Auflegen versucht, den Anschluss des Benutzers zu erreichen."
+msgstr ""
 
 #. module: asterisk_click2dial
 #: field:res.users,asterisk_chan_type:0
 msgid "Asterisk Channel Type"
-msgstr "Asterisk Kanal-Art"
+msgstr ""
 
 #. module: asterisk_click2dial
 #: field:asterisk.server,ip_address:0
 msgid "Asterisk IP address or DNS"
-msgstr "Asterisk IP-Adresse oder DNS"
+msgstr ""
 
 #. module: asterisk_click2dial
 #: view:asterisk.server:asterisk_click2dial.view_asterisk_server_form
 msgid "Asterisk Manager Interface"
-msgstr "Asterisk Manager Schnittstelle (AMI)"
+msgstr ""
 
 #. module: asterisk_click2dial
 #: field:res.users,asterisk_server_id:0
 msgid "Asterisk Server"
-msgstr "Asterisk Server"
+msgstr ""
 
 #. module: asterisk_click2dial
 #: field:asterisk.server,name:0
 msgid "Asterisk Server Name"
-msgstr "Asterisk Serverbezeichnung"
+msgstr ""
 
 #. module: asterisk_click2dial
 #: view:asterisk.server:asterisk_click2dial.view_asterisk_server_search
 msgid "Asterisk Server Search"
-msgstr "Asterisk Serversuche"
+msgstr ""
 
 #. module: asterisk_click2dial
 #: view:asterisk.server:asterisk_click2dial.view_asterisk_server_form
@@ -82,14 +81,14 @@ msgstr "Asterisk Serversuche"
 #: model:ir.model,name:asterisk_click2dial.model_asterisk_server
 #: model:ir.ui.menu,name:asterisk_click2dial.act_menu_ast_server
 msgid "Asterisk Servers"
-msgstr "Asterisk Server"
+msgstr ""
 
 #. module: asterisk_click2dial
 #: help:res.users,asterisk_chan_type:0
 msgid ""
 "Asterisk channel type, as used in the Asterisk dialplan. If the user has a "
 "regular IP phone, the channel type is 'SIP'."
-msgstr "Asterisk Kanal-Art, wie im Wählplan verwendet. Wenn der Benutzer ein normales IP-Telefon verwendet, ist die Kanal-Art 'SIP'."
+msgstr ""
 
 #. module: asterisk_click2dial
 #: help:asterisk.server,context:0
@@ -168,12 +167,12 @@ msgstr ""
 #. module: asterisk_click2dial
 #: field:asterisk.server,create_uid:0
 msgid "Created by"
-msgstr "Erstellt von"
+msgstr "Creado por"
 
 #. module: asterisk_click2dial
 #: field:asterisk.server,create_date:0
 msgid "Created on"
-msgstr "Erstellt am:"
+msgstr "Creado en"
 
 #. module: asterisk_click2dial
 #: selection:res.users,asterisk_chan_type:0
@@ -262,12 +261,12 @@ msgstr ""
 #. module: asterisk_click2dial
 #: field:asterisk.server,write_uid:0
 msgid "Last Updated by"
-msgstr "Zuletzt aktualisiert von"
+msgstr "ültima actualización por"
 
 #. module: asterisk_click2dial
 #: field:asterisk.server,write_date:0
 msgid "Last Updated on"
-msgstr "Zuletzt aktualisiert am"
+msgstr "Última actualización en"
 
 #. module: asterisk_click2dial
 #: selection:res.users,asterisk_chan_type:0

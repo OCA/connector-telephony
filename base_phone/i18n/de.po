@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: connector-telephony (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-11-01 04:07+0000\n"
-"PO-Revision-Date: 2016-09-16 21:46+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
-"Language-Team: French (http://www.transifex.com/oca/OCA-connector-telephony-8-0/language/fr/)\n"
+"PO-Revision-Date: 2015-10-12 18:36+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: German (http://www.transifex.com/oca/OCA-connector-telephony-8-0/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: fr\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Language: de\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: base_phone
 #: field:number.not.found,calling_number:0
@@ -25,7 +25,7 @@ msgstr ""
 #. module: base_phone
 #: view:reformat.all.phonenumbers:base_phone.reformat_all_phonenumbers_form
 msgid "Cancel"
-msgstr "Annuler"
+msgstr ""
 
 #. module: base_phone
 #: code:addons/base_phone/base_phone.py:112
@@ -33,77 +33,77 @@ msgstr "Annuler"
 msgid ""
 "Cannot reformat the phone number '%s' to international format. Error "
 "message: %s"
-msgstr "Impossible de reformatter le numéro de téléphone '%s' au format international. Message d'erreur : %s"
+msgstr ""
 
 #. module: base_phone
 #. openerp-web
 #: code:addons/base_phone/static/src/js/phone_widget.js:46
 #, python-format
 msgid "Click2dial started"
-msgstr "Début du Click2dial"
+msgstr ""
 
 #. module: base_phone
 #. openerp-web
 #: code:addons/base_phone/static/src/js/phone_widget.js:58
 #, python-format
 msgid "Click2dial successfull"
-msgstr "Click2dial réussi"
+msgstr ""
 
 #. module: base_phone
 #: view:number.not.found:base_phone.number_not_found_form
 #: view:reformat.all.phonenumbers:base_phone.reformat_all_phonenumbers_form
 msgid "Close"
-msgstr "Fermer"
+msgstr ""
 
 #. module: base_phone
 #: model:ir.model,name:base_phone.model_res_company
 msgid "Companies"
-msgstr "Sociétés"
+msgstr ""
 
 #. module: base_phone
 #: code:addons/base_phone/wizard/number_not_found.py:87
 #, python-format
 msgid "Create New Partner"
-msgstr "Créer un nouveau partenaire"
+msgstr ""
 
 #. module: base_phone
 #: view:number.not.found:base_phone.number_not_found_form
 msgid "Create Partner with this Number"
-msgstr "Créer un partenaire avec ce numéro"
+msgstr ""
 
 #. module: base_phone
 #: view:number.not.found:base_phone.number_not_found_form
 msgid "Create or Update a Partner"
-msgstr "Créer ou mettre à jour un partenaire"
+msgstr ""
 
 #. module: base_phone
 #: field:number.not.found,create_uid:0
 #: field:reformat.all.phonenumbers,create_uid:0
 msgid "Created by"
-msgstr "Créé par"
+msgstr "Erstellt von"
 
 #. module: base_phone
 #: field:number.not.found,create_date:0
 #: field:reformat.all.phonenumbers,create_date:0
 msgid "Created on"
-msgstr "Date"
+msgstr "Erstellt am:"
 
 #. module: base_phone
 #: field:number.not.found,current_partner_mobile:0
 msgid "Current Mobile"
-msgstr "Portable actuel"
+msgstr ""
 
 #. module: base_phone
 #: field:number.not.found,current_partner_phone:0
 msgid "Current Phone"
-msgstr "Téléphone actuel"
+msgstr ""
 
 #. module: base_phone
 #. openerp-web
 #: code:addons/base_phone/static/src/js/phone_widget.js:39
 #, python-format
 msgid "Dial"
-msgstr "Composer"
+msgstr ""
 
 #. module: base_phone
 #: selection:reformat.all.phonenumbers,state:0
@@ -118,33 +118,33 @@ msgstr ""
 #. module: base_phone
 #: field:number.not.found,e164_number:0
 msgid "E.164 Number"
-msgstr "Numéro E.164"
+msgstr ""
 
 #. module: base_phone
 #: help:number.not.found,e164_number:0
 msgid "E.164 equivalent of the calling number."
-msgstr "Equivalent au format E.164 du numéro appelant."
+msgstr ""
 
 #. module: base_phone
 #: view:res.users:base_phone.view_users_form_simple_modif
 msgid "Email Preferences"
-msgstr "Préférences de messagerie électronique"
+msgstr ""
 
 #. module: base_phone
 #: code:addons/base_phone/wizard/number_not_found.py:101
 #, python-format
 msgid "Error:"
-msgstr "Erreur :"
+msgstr ""
 
 #. module: base_phone
 #: selection:number.not.found,number_type:0
 msgid "Fixed"
-msgstr "Fixe"
+msgstr ""
 
 #. module: base_phone
 #: field:number.not.found,number_type:0
 msgid "Fixed/Mobile"
-msgstr "Fixe/Portable"
+msgstr ""
 
 #. module: base_phone
 #: field:base.phone.installed,id:0 field:number.not.found,id:0
@@ -162,61 +162,61 @@ msgid ""
 "OpenERP is to try to match the end of the phone number in OpenERP with the N"
 " last digits of the phone number presented by the calling party. N is the "
 "value you should enter in this field."
-msgstr "In several situations, OpenERP will have to find a Partner/Lead/Employee/... from a phone number presented by the calling party. As the phone numbers presented by your phone operator may not always be displayed in a standard format, the best method to find the related Partner/Lead/Employee/... in OpenERP is to try to match the end of the phone number in OpenERP with the N last digits of the phone number presented by the calling party. N is the value you should enter in this field."
+msgstr ""
 
 #. module: base_phone
 #: field:number.not.found,write_uid:0
 #: field:reformat.all.phonenumbers,write_uid:0
 msgid "Last Updated by"
-msgstr "Dernière mise à jour par"
+msgstr "Zuletzt aktualisiert von"
 
 #. module: base_phone
 #: field:number.not.found,write_date:0
 #: field:reformat.all.phonenumbers,write_date:0
 msgid "Last Updated on"
-msgstr "Dernière mise à jour le"
+msgstr "Zuletzt aktualisiert am"
 
 #. module: base_phone
 #: selection:number.not.found,number_type:0
 msgid "Mobile"
-msgstr "Portable"
+msgstr ""
 
 #. module: base_phone
 #: view:number.not.found:base_phone.number_not_found_form
 msgid "Number Not Found"
-msgstr "Numéro introuvable"
+msgstr ""
 
 #. module: base_phone
 #: view:number.not.found:base_phone.number_not_found_form
 msgid "Number converted to international format:"
-msgstr "Numéro converti au format international :"
+msgstr ""
 
 #. module: base_phone
 #. openerp-web
 #: code:addons/base_phone/static/src/js/phone_widget.js:59
 #, python-format
 msgid "Number dialed:"
-msgstr "Numéro composé :"
+msgstr ""
 
 #. module: base_phone
 #: model:ir.model,name:base_phone.model_number_not_found
 msgid "Number not found"
-msgstr "Numéro introuvable"
+msgstr ""
 
 #. module: base_phone
 #: view:number.not.found:base_phone.number_not_found_form
 msgid "Number not found:"
-msgstr "Numéro introuvable :"
+msgstr ""
 
 #. module: base_phone
 #: field:res.company,number_of_digits_to_match_from_end:0
 msgid "Number of Digits To Match From End"
-msgstr "Nombre de chiffres à faire correspondre en partant de la fin"
+msgstr ""
 
 #. module: base_phone
 #: model:ir.model,name:base_phone.model_res_partner
 msgid "Partner"
-msgstr "Partenaire"
+msgstr ""
 
 #. module: base_phone
 #: help:number.not.found,to_update_partner_id:0
@@ -232,17 +232,17 @@ msgstr ""
 #: code:addons/base_phone/wizard/number_not_found.py:107
 #, python-format
 msgid "Partner: %s"
-msgstr "Partenaire : %s"
+msgstr ""
 
 #. module: base_phone
 #: view:res.company:base_phone.view_company_form
 msgid "Phone"
-msgstr "Téléphone"
+msgstr ""
 
 #. module: base_phone
 #: model:res.groups,name:base_phone.group_callerid
 msgid "Phone CallerID"
-msgstr "CallerID du téléphone"
+msgstr ""
 
 #. module: base_phone
 #: help:number.not.found,calling_number:0
@@ -254,79 +254,79 @@ msgstr ""
 #. module: base_phone
 #: field:reformat.all.phonenumbers,phonenumbers_not_reformatted:0
 msgid "Phone numbers that couldn't be reformatted"
-msgstr "Numéros de téléphone qui n'ont pas pu être reformatés"
+msgstr ""
 
 #. module: base_phone
 #: view:reformat.all.phonenumbers:base_phone.reformat_all_phonenumbers_form
 msgid "Phone numbers that couldn't be reformatted:"
-msgstr "Numéros de téléphone qui n'ont pas pu être reformatés :"
+msgstr ""
 
 #. module: base_phone
 #: model:ir.actions.act_window,name:base_phone.reformat_all_phonenumbers_action
 #: model:ir.ui.menu,name:base_phone.reformat_all_phonenumbers_menu
 msgid "Reformat Phone Numbers"
-msgstr "Reformate les numéros de téléphone"
+msgstr ""
 
 #. module: base_phone
 #: model:ir.model,name:base_phone.model_reformat_all_phonenumbers
 #: view:reformat.all.phonenumbers:base_phone.reformat_all_phonenumbers_form
 msgid "Reformat all phone numbers"
-msgstr "Reformate tous les numéros de téléphone"
+msgstr ""
 
 #. module: base_phone
 #: code:addons/base_phone/wizard/number_not_found.py:102
 #, python-format
 msgid "Select the Partner to Update."
-msgstr "Selectionnez le partenaire à mettre à jour."
+msgstr ""
 
 #. module: base_phone
 #: field:reformat.all.phonenumbers,state:0
 msgid "State"
-msgstr "État"
+msgstr ""
 
 #. module: base_phone
 #: model:ir.ui.menu,name:base_phone.menu_config_phone
 #: view:res.users:base_phone.view_users_form
 msgid "Telephony"
-msgstr "Téléphonie"
+msgstr ""
 
 #. module: base_phone
 #: view:res.users:base_phone.view_users_form
 #: view:res.users:base_phone.view_users_form_simple_modif
 msgid "Telephony Preferences"
-msgstr "Préférences téléphoniques"
+msgstr ""
 
 #. module: base_phone
 #: sql_constraint:res.company:0
 msgid ""
 "The value of the field 'Number of Digits To Match From End' must be "
 "positive."
-msgstr "The value of the field 'Number of Digits To Match From End' must be positive."
+msgstr ""
 
 #. module: base_phone
 #: view:reformat.all.phonenumbers:base_phone.reformat_all_phonenumbers_form
 msgid ""
 "This wizard reformats the phone, mobile and fax numbers of all partners in "
 "standard international format e.g. +33141981242"
-msgstr "Cet assistant reformate le numéro de téléphone fixe, portable et le fax de tous les partenaires au format standard international i.e. +33141981242"
+msgstr ""
 
 #. module: base_phone
 #. openerp-web
 #: code:addons/base_phone/static/src/js/phone_widget.js:47
 #, python-format
 msgid "Unhook your ringing phone"
-msgstr "Décrochez votre téléphone"
+msgstr ""
 
 #. module: base_phone
 #: view:number.not.found:base_phone.number_not_found_form
 msgid "Update Partner with this Number"
-msgstr "Mettre à jour le partenaire avec ce numéro"
+msgstr ""
 
 #. module: base_phone
 #: view:res.company:base_phone.view_company_form
 #: view:res.partner:base_phone.view_partner_form
 msgid "fax"
-msgstr "fax"
+msgstr ""
 
 #. module: base_phone
 #: view:res.company:base_phone.view_company_form
@@ -334,4 +334,4 @@ msgstr "fax"
 #: view:res.partner:base_phone.view_partner_simple_form
 #: view:res.partner:base_phone.view_partner_tree
 msgid "phone"
-msgstr "phone"
+msgstr ""
