@@ -21,7 +21,10 @@
 
 from openerp.osv import orm
 from openerp.report import report_sxw
-import phonenumbers
+try:
+    import phonenumbers
+except ImportError:
+    logger.warning('Cannot import phonenumbers')
 
 
 class base_phone_installed(orm.AbstractModel):

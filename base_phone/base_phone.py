@@ -24,7 +24,10 @@ from openerp.tools.safe_eval import safe_eval
 from openerp.exceptions import Warning
 import logging
 # Lib for phone number reformating -> pip install phonenumbers
-import phonenumbers
+try:
+    import phonenumbers
+except ImportError:
+    logger.warning('Cannot import phonenumbers')
 
 _logger = logging.getLogger(__name__)
 
