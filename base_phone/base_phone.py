@@ -23,10 +23,14 @@ from openerp import models, fields, api, _
 from openerp.tools.safe_eval import safe_eval
 from openerp.exceptions import Warning
 import logging
-# Lib for phone number reformating -> pip install phonenumbers
-import phonenumbers
 
 _logger = logging.getLogger(__name__)
+
+# Lib for phone number reformating -> pip install phonenumbers
+try:
+    import phonenumbers
+except ImportError:
+    _logger.debug('Cannot import phonenumbers')
 
 
 class PhoneCommon(models.AbstractModel):

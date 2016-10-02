@@ -22,9 +22,13 @@
 from openerp.osv import orm, fields
 from openerp.tools.translate import _
 import logging
-import phonenumbers
 
 _logger = logging.getLogger(__name__)
+
+try:
+    import phonenumbers
+except ImportError:
+    _logger.debug('Cannot import phonenumbers')
 
 
 class number_not_found(orm.TransientModel):
