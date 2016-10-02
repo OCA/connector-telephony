@@ -25,7 +25,7 @@ import logging
 try:
     import phonenumbers
 except ImportError:
-    logger.warning('Cannot import phonenumbers')
+    logger.debug('Cannot import phonenumbers')
 
 _logger = logging.getLogger(__name__)
 

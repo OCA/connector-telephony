@@ -24,7 +24,7 @@ from openerp import models, api, _
 try:
     import phonenumbers
 except ImportError:
-    logger.warning('Cannot import phonenumbers')
+    logger.debug('Cannot import phonenumbers')
 
 
 class wizard_create_crm_phonecall(models.TransientModel):
