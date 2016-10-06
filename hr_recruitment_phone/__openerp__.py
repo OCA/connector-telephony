@@ -28,6 +28,6 @@ for any help or question about this module.
         'security/ir.model.access.csv',
         'hr_recruitment_view.xml',
         ],
-    'installable': True,
+    'installable': False,
     'auto_install': True,
 }

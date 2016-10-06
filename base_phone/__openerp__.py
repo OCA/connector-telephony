@@ -42,5 +42,5 @@
         ],
     'qweb': ['static/src/xml/*.xml'],
     'images': [],
-    'installable': True,
+    'installable': False,
 }
