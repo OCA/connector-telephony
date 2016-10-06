@@ -36,6 +36,6 @@ for any help or question about this module.
         'wizard/create_crm_phonecall_view.xml',
         ],
     'demo': ['demo/crm_phonecall.xml'],
-    'installable': True,
+    'installable': False,
     'auto_install': True,
 }
