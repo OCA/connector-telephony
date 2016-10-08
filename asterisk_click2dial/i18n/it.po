@@ -145,7 +145,7 @@ msgstr ""
 #. module: asterisk_click2dial
 #: field:asterisk.server,company_id:0
 msgid "Company"
-msgstr ""
+msgstr "Azienda"
 
 #. module: asterisk_click2dial
 #: help:asterisk.server,company_id:0
@@ -404,7 +404,7 @@ msgstr ""
 #: field:res.users,resource:0
 #, python-format
 msgid "Resource Name"
-msgstr ""
+msgstr "Nome della Risorsa"
 
 #. module: asterisk_click2dial
 #: help:res.users,resource:0

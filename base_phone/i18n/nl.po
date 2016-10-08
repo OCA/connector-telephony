@@ -216,7 +216,7 @@ msgstr ""
 #. module: base_phone
 #: model:ir.model,name:base_phone.model_res_partner
 msgid "Partner"
-msgstr ""
+msgstr "Relatie"
 
 #. module: base_phone
 #: help:number.not.found,to_update_partner_id:0
