@@ -22,7 +22,7 @@
 
 {
     'name': 'Base Phone',
-    'version': '9.0.0.1.0',
+    'version': '10.0.0.1.0',
     'category': 'Phone',
     'license': 'AGPL-3',
     'summary': 'Validate phone numbers',
@@ -42,5 +42,5 @@
         ],
     'qweb': ['static/src/xml/*.xml'],
     'images': [],
-    'installable': False,
+    'installable': True,
 }

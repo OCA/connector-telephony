@@ -5,7 +5,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 
-from openerp import api, fields, models
+from odoo import api, fields, models
 from operator import attrgetter
 import phonenumbers
 import logging
@@ -21,8 +21,8 @@ class Phone(fields.Char):
     }
 
     def __init__(
-            self, string=None, country_field=None, partner_field=None,
-            **kwargs):
+            self, string=fields.Default, country_field=fields.Default,
+            partner_field=fields.Default, **kwargs):
         super(Phone, self).__init__(
             string=string, country_field=country_field,
             partner_field=partner_field, **kwargs)
