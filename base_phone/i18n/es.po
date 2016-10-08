@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: connector-telephony (9.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-21 10:30+0000\n"
-"PO-Revision-Date: 2016-09-16 21:45+0000\n"
+"PO-Revision-Date: 2016-10-04 09:43+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Spanish (http://www.transifex.com/oca/OCA-connector-telephony-9-0/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -139,7 +139,7 @@ msgstr "Equivalente E.164 del número que llama"
 #: code:addons/base_phone/wizard/number_not_found.py:99
 #, python-format
 msgid "Error"
-msgstr ""
+msgstr "Error"
 
 #. module: base_phone
 #: selection:number.not.found,number_type:0

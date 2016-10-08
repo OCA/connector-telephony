@@ -10,12 +10,12 @@ msgstr ""
 "POT-Creation-Date: 2016-05-21 10:30+0000\n"
 "PO-Revision-Date: 2016-05-19 12:41+0000\n"
 "Last-Translator: <>\n"
-"Language-Team: Dutch (http://www.transifex.com/oca/OCA-connector-telephony-9-0/language/nl/)\n"
+"Language-Team: Croatian (Croatia) (http://www.transifex.com/oca/OCA-connector-telephony-9-0/language/hr_HR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: nl\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: hr_HR\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 
 #. module: base_phone
 #: model:ir.model.fields,field_description:base_phone.field_number_not_found_calling_number
@@ -25,7 +25,7 @@ msgstr ""
 #. module: base_phone
 #: model:ir.ui.view,arch_db:base_phone.reformat_all_phonenumbers_form
 msgid "Cancel"
-msgstr "Annuleren"
+msgstr ""
 
 #. module: base_phone
 #: code:addons/base_phone/base_phone.py:122
@@ -80,13 +80,13 @@ msgstr ""
 #: model:ir.model.fields,field_description:base_phone.field_number_not_found_create_uid
 #: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers_create_uid
 msgid "Created by"
-msgstr ""
+msgstr "Kreirao"
 
 #. module: base_phone
 #: model:ir.model.fields,field_description:base_phone.field_number_not_found_create_date
 #: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers_create_date
 msgid "Created on"
-msgstr ""
+msgstr "Kreirano"
 
 #. module: base_phone
 #: model:ir.model.fields,field_description:base_phone.field_number_not_found_current_partner_mobile
@@ -111,7 +111,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:base_phone.field_phone_common_display_name
 #: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers_display_name
 msgid "Display Name"
-msgstr "Te tonen naam"
+msgstr "Naziv"
 
 #. module: base_phone
 #: selection:reformat.all.phonenumbers,state:0
@@ -155,7 +155,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:base_phone.field_phone_common_id
 #: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers_id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: base_phone
 #: model:ir.model.fields,help:base_phone.field_res_company_number_of_digits_to_match_from_end
@@ -175,19 +175,19 @@ msgstr ""
 #: model:ir.model.fields,field_description:base_phone.field_phone_common___last_update
 #: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers___last_update
 msgid "Last Modified on"
-msgstr "Laatst bijgewerkt op"
+msgstr "Zadnje modificirano"
 
 #. module: base_phone
 #: model:ir.model.fields,field_description:base_phone.field_number_not_found_write_uid
 #: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers_write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "Zadnji ažurirao"
 
 #. module: base_phone
 #: model:ir.model.fields,field_description:base_phone.field_number_not_found_write_date
 #: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers_write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "Zadnje ažurirano"
 
 #. module: base_phone
 #: selection:number.not.found,number_type:0
@@ -229,7 +229,7 @@ msgstr ""
 #. module: base_phone
 #: model:ir.model,name:base_phone.model_res_partner
 msgid "Partner"
-msgstr "Relatie"
+msgstr ""
 
 #. module: base_phone
 #: model:ir.model.fields,help:base_phone.field_number_not_found_to_update_partner_id

@@ -25,7 +25,7 @@ msgstr ""
 #. module: base_phone
 #: model:ir.ui.view,arch_db:base_phone.reformat_all_phonenumbers_form
 msgid "Cancel"
-msgstr ""
+msgstr "Abbrechen"
 
 #. module: base_phone
 #: code:addons/base_phone/base_phone.py:122
@@ -53,12 +53,12 @@ msgstr ""
 #: model:ir.ui.view,arch_db:base_phone.number_not_found_form
 #: model:ir.ui.view,arch_db:base_phone.reformat_all_phonenumbers_form
 msgid "Close"
-msgstr ""
+msgstr "Abschließen"
 
 #. module: base_phone
 #: model:ir.model,name:base_phone.model_res_company
 msgid "Companies"
-msgstr ""
+msgstr "Unternehmen"
 
 #. module: base_phone
 #: code:addons/base_phone/wizard/number_not_found.py:84
@@ -111,7 +111,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:base_phone.field_phone_common_display_name
 #: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers_display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Anzeigename"
 
 #. module: base_phone
 #: selection:reformat.all.phonenumbers,state:0
@@ -175,7 +175,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:base_phone.field_phone_common___last_update
 #: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers___last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Zuletzt geändert am"
 
 #. module: base_phone
 #: model:ir.model.fields,field_description:base_phone.field_number_not_found_write_uid
@@ -229,7 +229,7 @@ msgstr ""
 #. module: base_phone
 #: model:ir.model,name:base_phone.model_res_partner
 msgid "Partner"
-msgstr ""
+msgstr "Partner"
 
 #. module: base_phone
 #: model:ir.model.fields,help:base_phone.field_number_not_found_to_update_partner_id
