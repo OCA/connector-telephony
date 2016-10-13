@@ -22,6 +22,9 @@
 
 from openerp import api, models, fields
 from openerp.tools.translate import _
+import logging
+
+_logger = logging.getLogger(__name__)
 
 
 class StockPicking(models.Model):
@@ -61,7 +64,10 @@ class StockPicking(models.Model):
     def _cron_send_picking_availability_by_sms(self):
         domain = self._get_send_picking_availability_by_sms_domain()
         pickings = self.env['stock.picking'].search(domain)
-        for picking in pickings:
+        total = len(pickings)
+        for idx, picking in enumerate(pickings):
+            _logger.debug('Send Sms for picking %s, progress %s/%s', picking, idx, total)
             vals = picking._prepare_availability_by_sms_notification()
             self.env['sms.sms'].create(vals)
-        pickings.write({'availability_sent_by_sms': True})
+            picking.write({'availability_sent_by_sms': True})
+            picking._cr.commit()
