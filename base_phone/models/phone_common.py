@@ -5,10 +5,12 @@
 from odoo import models, api
 from .. import fields as phone_fields
 import logging
-# Lib for phone number reformating -> pip install phonenumbers
-import phonenumbers
-
 _logger = logging.getLogger(__name__)
+
+try:
+    import phonenumbers
+except ImportError:
+    _logger.debug('Cannot `import phonenumbers`.')
 
 
 class PhoneCommon(models.AbstractModel):

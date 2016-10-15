@@ -5,9 +5,12 @@
 from odoo import models, fields, api, _
 from odoo.exceptions import UserError
 import logging
-import phonenumbers
-
 _logger = logging.getLogger(__name__)
+
+try:
+    import phonenumbers
+except ImportError:
+    _logger.debug('Cannot `import phonenumbers`.')
 
 
 class NumberNotFound(models.TransientModel):

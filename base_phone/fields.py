@@ -7,10 +7,13 @@
 
 from odoo import api, fields, models
 from operator import attrgetter
-import phonenumbers
 import logging
-
 _logger = logging.getLogger(__name__)
+
+try:
+    import phonenumbers
+except ImportError:
+    _logger.debug('Cannot `import phonenumbers`.')
 
 
 class Phone(fields.Char):
