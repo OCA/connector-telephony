@@ -3,6 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo import models, fields, api, _
+from .. import fields as phone_fields
 from odoo.exceptions import UserError
 import logging
 _logger = logging.getLogger(__name__)

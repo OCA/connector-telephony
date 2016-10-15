@@ -21,6 +21,10 @@ class ResCompany(models.Model):
         "Odoo with the N last digits of the phone number presented "
         "by the calling party. N is the value you should enter in this "
         "field.")
+    phone = phone_fields.Phone(
+        country_field='country_id', partner_field='partner_id')
+    fax = phone_fields.Fax(
+        country_field='country_id', partner_field='partner_id')
 
     _sql_constraints = [(
         'number_of_digits_to_match_from_end_positive',

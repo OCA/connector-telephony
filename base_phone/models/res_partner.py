@@ -14,7 +14,7 @@ class ResPartner(models.Model):
     phone = fields.Phone(country_field='country_id', partner_field='parent_id')
     mobile = fields.Phone(
         country_field='country_id', partner_field='parent_id')
-    fax = fields.Phone(country_field='country_id', partner_field='parent_id')
+    fax = fields.Fax(country_field='country_id', partner_field='parent_id')
 
     @api.multi
     def name_get(self):

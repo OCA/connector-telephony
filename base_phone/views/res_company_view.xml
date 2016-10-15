@@ -19,12 +19,6 @@
                     </group>
                 </page>
             </xpath>
-            <field name="phone" position="attributes">
-                <attribute name="widget">phone</attribute>
-            </field>
-            <field name="fax" position="attributes">
-                <attribute name="widget">fax</attribute>
-            </field>
         </field>
     </record>
 

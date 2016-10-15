@@ -31,9 +31,9 @@
                         <button name="create_partner" class="oe_highlight" colspan="2"
                             string="Create Partner with this Number" type="object"/>
                         <field name="to_update_partner_id" />
-                        <field name="current_partner_phone" widget="phone"
+                        <field name="current_partner_phone"
                             options="{'dial_button_invisible': True}"/>
-                        <field name="current_partner_mobile" widget="phone"
+                        <field name="current_partner_mobile"
                             options="{'dial_button_invisible': True}"/>
                         <button name="update_partner" class="oe_highlight" colspan="2"
                             string="Update Partner with this Number" type="object"/>
