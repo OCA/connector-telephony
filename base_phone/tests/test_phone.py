@@ -26,7 +26,6 @@ class TestPhone(TransactionCase):
         partner2 = rpo.create({
             'name': u'Joël Grand-Guillaume',
             'parent_id': self.env.ref('base.res_partner_12').id,
-            'use_parent_address': True,
             'phone': '(0) 21 619 10 10',
             'mobile': '(0) 79 606 42 42',
             })
