@@ -3,8 +3,8 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 
-from openerp import models, api
-from openerp.addons.base_phone import fields
+from odoo import models, api
+from .. import fields
 
 
 class ResPartner(models.Model):
@@ -14,7 +14,7 @@ class ResPartner(models.Model):
     phone = fields.Phone(country_field='country_id', partner_field='parent_id')
     mobile = fields.Phone(
         country_field='country_id', partner_field='parent_id')
-    fax = fields.Phone(country_field='country_id', partner_field='parent_id')
+    fax = fields.Fax(country_field='country_id', partner_field='parent_id')
 
     @api.multi
     def name_get(self):
