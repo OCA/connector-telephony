@@ -2,7 +2,8 @@
 # © 2016 Akretion (Alexis de Lattre <alexis.delattre@akretion.com>)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from openerp import models, fields
+from odoo import models, fields
+from .. import fields as phone_fields
 
 
 class ResCompany(models.Model):
@@ -11,15 +12,19 @@ class ResCompany(models.Model):
     number_of_digits_to_match_from_end = fields.Integer(
         string='Number of Digits To Match From End',
         default=8,
-        help="In several situations, OpenERP will have to find a "
+        help="In several situations, Odoo will have to find a "
         "Partner/Lead/Employee/... from a phone number presented by the "
         "calling party. As the phone numbers presented by your phone "
         "operator may not always be displayed in a standard format, "
         "the best method to find the related Partner/Lead/Employee/... "
-        "in OpenERP is to try to match the end of the phone number in "
-        "OpenERP with the N last digits of the phone number presented "
+        "in Odoo is to try to match the end of the phone number in "
+        "Odoo with the N last digits of the phone number presented "
         "by the calling party. N is the value you should enter in this "
         "field.")
+    phone = phone_fields.Phone(
+        country_field='country_id', partner_field='partner_id')
+    fax = phone_fields.Fax(
+        country_field='country_id', partner_field='partner_id')
 
     _sql_constraints = [(
         'number_of_digits_to_match_from_end_positive',

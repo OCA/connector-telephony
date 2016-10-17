@@ -5,17 +5,13 @@
 -->
 
 <odoo>
-<data>
 
+    <template id="assets_backend" name="base_phone assets"
+        inherit_id="web.assets_backend">
+        <xpath expr="." position="inside">
+            <script type="text/javascript"
+                src="/base_phone/static/src/js/phone_widget.js"></script>
+        </xpath>
+    </template>
 
-<template id="assets_backend" name="base_phone assets"
-          inherit_id="web.assets_backend">
-    <xpath expr="." position="inside">
-        <script type="text/javascript"
-            src="/base_phone/static/src/js/phone_widget.js"></script>
-    </xpath>
-</template>
-
-
-</data>
 </odoo>
