@@ -5,50 +5,48 @@
   The licence is in the file __openerp__.py
 -->
 
-<openerp>
-<data>
+<odoo>
 
-<record id="reformat_all_phonenumbers_form" model="ir.ui.view">
-    <field name="name">reformat_all_phonenumbers.form</field>
-    <field name="model">reformat.all.phonenumbers</field>
-    <field name="arch" type="xml">
-        <form string="Reformat all phone numbers">
-            <group name="main">
-                <label string="This wizard reformats the phone, mobile and fax numbers of all partners in standard international format e.g. +33141981242" colspan="2" states="draft"/>
-                <label colspan="2" string="Phone numbers that couldn't be reformatted:" states="done"/>
-                <field name="phonenumbers_not_reformatted" colspan="2" nolabel="1" states="done"/>
-                <field name="state" invisible="1"/>
-            </group>
-            <footer>
-                <button name="run_reformat_all_phonenumbers"
-                    string="Reformat all phone numbers" type="object"
-                    class="oe_highlight" states="draft"/>
-                <button name="action_next" type="object" string="Close"
-                    class="oe_highlight" states="done"/>
-                <button special="cancel" string="Cancel"
-                    class="oe_link" states="draft"/>
-            </footer>
-        </form>
-    </field>
-</record>
+    <record id="reformat_all_phonenumbers_form" model="ir.ui.view">
+        <field name="name">reformat_all_phonenumbers.form</field>
+        <field name="model">reformat.all.phonenumbers</field>
+        <field name="arch" type="xml">
+            <form string="Reformat all phone numbers">
+                <group name="main">
+                    <label string="This wizard reformats the phone, mobile and fax numbers of all partners in standard international format e.g. +33141981242" colspan="2" states="draft"/>
+                    <label colspan="2" string="Phone numbers that couldn't be reformatted:" states="done"/>
+                    <field name="phonenumbers_not_reformatted" colspan="2" nolabel="1" states="done"/>
+                    <field name="state" invisible="1"/>
+                </group>
+                <footer>
+                    <button name="run_reformat_all_phonenumbers"
+                        string="Reformat all phone numbers" type="object"
+                        class="oe_highlight" states="draft"/>
+                    <button name="action_next" type="object" string="Close"
+                        class="oe_highlight" states="done"/>
+                    <button special="cancel" string="Cancel"
+                        class="oe_link" states="draft"/>
+                </footer>
+            </form>
+        </field>
+    </record>
 
-<record id="reformat_all_phonenumbers_action" model="ir.actions.act_window">
-    <field name="name">Reformat Phone Numbers</field>
-    <field name="res_model">reformat.all.phonenumbers</field>
-    <field name="view_mode">form</field>
-    <field name="target">new</field>
-</record>
+    <record id="reformat_all_phonenumbers_action" model="ir.actions.act_window">
+        <field name="name">Reformat Phone Numbers</field>
+        <field name="res_model">reformat.all.phonenumbers</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
 
-<!-- Menu entry under Settings > Technical -->
-<menuitem id="menu_config_phone" name="Telephony" parent="base.menu_custom"/>
+    <!-- Menu entry under Settings > Technical -->
+    <menuitem id="menu_config_phone" name="Telephony" parent="base.menu_custom"/>
 
-<menuitem id="reformat_all_phonenumbers_menu" action="reformat_all_phonenumbers_action" parent="menu_config_phone" sequence="100"/>
+    <menuitem id="reformat_all_phonenumbers_menu" action="reformat_all_phonenumbers_action" parent="menu_config_phone" sequence="100"/>
 
-<!-- Open the Reformat Phone Numbers wizard after the installation of the module -->
-<record id="reformat_all_phonenumbers_module_install" model="ir.actions.todo">
-    <field name="action_id" ref="reformat_all_phonenumbers_action"/>
-    <field name="type">automatic</field>
-</record>
+    <!-- Open the Reformat Phone Numbers wizard after the installation of the module -->
+    <record id="reformat_all_phonenumbers_module_install" model="ir.actions.todo">
+        <field name="action_id" ref="reformat_all_phonenumbers_action"/>
+        <field name="type">automatic</field>
+    </record>
 
-</data>
-</openerp>
+</odoo>
