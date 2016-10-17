@@ -5,15 +5,19 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 
-from openerp import api, fields, models
+from odoo import api, fields, models
 from operator import attrgetter
-import phonenumbers
 import logging
-
 _logger = logging.getLogger(__name__)
 
+try:
+    import phonenumbers
+except ImportError:
+    _logger.debug('Cannot `import phonenumbers`.')
 
-class Phone(fields.Char):
+
+class Fax(fields.Char):
+    type = 'fax'
 
     _slots = {
         'country_field': None,
@@ -21,9 +25,9 @@ class Phone(fields.Char):
     }
 
     def __init__(
-            self, string=None, country_field=None, partner_field=None,
-            **kwargs):
-        super(Phone, self).__init__(
+            self, string=fields.Default, country_field=fields.Default,
+            partner_field=fields.Default, **kwargs):
+        super(Fax, self).__init__(
             string=string, country_field=country_field,
             partner_field=partner_field, **kwargs)
 
@@ -31,13 +35,13 @@ class Phone(fields.Char):
     _related_partner_field = property(attrgetter('partner_field'))
 
     def _setup_regular_full(self, model):
-        super(Phone, self)._setup_regular_full(model)
+        super(Fax, self)._setup_regular_full(model)
         assert self.country_field in model._fields or \
             self.partner_field in model._fields, \
             "field %s with unknown country_field and partner_field" % self
 
     def convert_to_cache(self, value, record, validate=True):
-        res = super(Phone, self).convert_to_cache(
+        res = super(Fax, self).convert_to_cache(
             value, record, validate=validate)
         # print 'db value', res
         if res:
@@ -51,6 +55,10 @@ class Phone(fields.Char):
                 pass
         # print 'cache value', res
         return res
+
+
+class Phone(Fax):
+    type = 'phone'
 
 
 def convert_phone_field(value, country_code):
@@ -104,7 +112,7 @@ def convert_all_phone_fields(self, vals, fields_to_convert):
 def get_phone_fields(self, vals):
     fields_to_convert = []
     for key in vals:
-        if isinstance(self._fields.get(key), Phone):
+        if isinstance(self._fields.get(key), Fax):
             fields_to_convert.append(key)
     return fields_to_convert
 

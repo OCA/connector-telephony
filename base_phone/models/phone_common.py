@@ -2,13 +2,15 @@
 # © 2010-2016 Akretion (Alexis de Lattre <alexis.delattre@akretion.com>)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from openerp import models, api
-from openerp.addons.base_phone.fields import Phone
+from odoo import models, api
+from .. import fields as phone_fields
 import logging
-# Lib for phone number reformating -> pip install phonenumbers
-import phonenumbers
-
 _logger = logging.getLogger(__name__)
+
+try:
+    import phonenumbers
+except ImportError:
+    _logger.debug('Cannot `import phonenumbers`.')
 
 
 class PhoneCommon(models.AbstractModel):
@@ -102,7 +104,7 @@ class PhoneCommon(models.AbstractModel):
         for (obj, prio) in phoneobj_sorted:
             entry = {'object': obj, 'fields': []}
             for field in obj._fields:
-                if isinstance(obj._fields[field], Phone):
+                if isinstance(obj._fields[field], phone_fields.Phone):
                     entry['fields'].append(field)
             res.append(entry)
         # [{'fields': ['fax', 'phone', 'mobile'], 'object': res.partner()},
