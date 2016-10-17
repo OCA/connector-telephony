@@ -19,13 +19,11 @@
 #
 ##############################################################################
 
-import openerp
+import odoo
 
 
-class BasePhoneController(openerp.addons.web.http.Controller):
-    _cp_path = '/base_phone'
-
-    @openerp.addons.web.http.jsonrequest
+class BasePhoneController(odoo.http.Controller):
+    @odoo.http.route('/base_phone', type='json', auth='none')
     def click2dial(self, req, phone_number, click2dial_model, click2dial_id):
         res = req.session.model('phone.common').click2dial(
             phone_number, {
