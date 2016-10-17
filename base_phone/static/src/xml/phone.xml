@@ -7,16 +7,12 @@
 
 <templates id="template" xml:space="preserve">
 
-<t t-name="FieldPhone" t-extend="FieldEmail">
-    <t t-jquery="span:first">
-        this.removeClass('oe_form_field_email').addClass('oe_form_field_phone');
+    <t t-name="FieldFax">
+        <t t-call="FieldEmail"/>
     </t>
-</t>
 
-<t t-name="FieldFax" t-extend="FieldEmail">
-    <t t-jquery="span:first">
-        this.removeClass('oe_form_field_email').addClass('oe_form_field_fax');
+    <t t-name="FieldPhone">
+        <t t-call="FieldFax"/>
     </t>
-</t>
 
 </templates>

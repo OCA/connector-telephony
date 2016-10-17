@@ -5,49 +5,45 @@
 -->
 
 <odoo>
-<data>
 
-
-<record id="number_not_found_form" model="ir.ui.view">
-    <field name="name">number.not.found.form</field>
-    <field name="model">number.not.found</field>
-    <field name="arch" type="xml">
-        <form string="Number Not Found">
-            <div class="oe_title">
-                <h1>
-                    <field name="calling_number" />
-                </h1>
-                <label string="Number converted to international format:"
-                    for="e164_number"/>
-                <h2>
-                    <field name="e164_number" />
-                </h2>
-                <label for="number_type"/>
-                <h3>
-                    <field name="number_type"/>
-                </h3>
-            </div>
-            <group colspan="4" col="2" name="create-update">
-                <group name="partner" string="Create or Update a Partner"
-                    colspan="1" col="2">
-                    <button name="create_partner" class="oe_highlight" colspan="2"
-                        string="Create Partner with this Number" type="object"/>
-                    <field name="to_update_partner_id" />
-                    <field name="current_partner_phone" widget="phone"
-                        options="{'dial_button_invisible': True}"/>
-                    <field name="current_partner_mobile" widget="phone"
-                        options="{'dial_button_invisible': True}"/>
-                    <button name="update_partner" class="oe_highlight" colspan="2"
-                        string="Update Partner with this Number" type="object"/>
+    <record id="number_not_found_form" model="ir.ui.view">
+        <field name="name">number.not.found.form</field>
+        <field name="model">number.not.found</field>
+        <field name="arch" type="xml">
+            <form string="Number Not Found">
+                <div class="oe_title">
+                    <h1>
+                        <field name="calling_number" />
+                    </h1>
+                    <label string="Number converted to international format:"
+                        for="e164_number"/>
+                    <h2>
+                        <field name="e164_number" />
+                    </h2>
+                    <label for="number_type"/>
+                    <h3>
+                        <field name="number_type"/>
+                    </h3>
+                </div>
+                <group colspan="4" col="2" name="create-update">
+                    <group name="partner" string="Create or Update a Partner"
+                        colspan="1" col="2">
+                        <button name="create_partner" class="oe_highlight" colspan="2"
+                            string="Create Partner with this Number" type="object"/>
+                        <field name="to_update_partner_id" />
+                        <field name="current_partner_phone"
+                            options="{'dial_button_invisible': True}"/>
+                        <field name="current_partner_mobile"
+                            options="{'dial_button_invisible': True}"/>
+                        <button name="update_partner" class="oe_highlight" colspan="2"
+                            string="Update Partner with this Number" type="object"/>
+                    </group>
                 </group>
-            </group>
-            <footer>
-                <button special="cancel" string="Close" class="oe_link"/>
-            </footer>
-        </form>
-    </field>
-</record>
+                <footer>
+                    <button special="cancel" string="Close" class="oe_link"/>
+                </footer>
+            </form>
+        </field>
+    </record>
 
-
-</data>
 </odoo>
