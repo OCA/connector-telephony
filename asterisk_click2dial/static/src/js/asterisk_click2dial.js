@@ -82,6 +82,8 @@ click2dial.OpenCaller = Widget.extend({
    },
 });
 
+    /* TODO port to v10: update_promise doesn't existe in
+    odoo10/addons/web/static/src/js/widgets/user_menu.js
     UserMenu.include({
         do_update: function(){
             this._super.apply(this, arguments);
@@ -91,6 +93,6 @@ click2dial.OpenCaller = Widget.extend({
                 asterisk_button.appendTo($('.oe_systray'));
             });
         },
-    });
+    });  */
 
 });
