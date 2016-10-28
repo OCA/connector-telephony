@@ -24,6 +24,7 @@ for any help or question about this module.
     'author': "Akretion,Odoo Community Association (OCA)",
     'website': 'http://www.akretion.com/',
     'depends': ['base_phone', 'crm'],
+    'external_dependencies': {'python': ['phonenumbers']},
     'conflicts': ['crm_voip'],
     'data': [
         'security/phonecall_security.xml',
