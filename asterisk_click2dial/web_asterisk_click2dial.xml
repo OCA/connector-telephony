@@ -5,7 +5,6 @@
 -->
 
 <odoo>
-<data>
 
 <template id="assets_backend" name="asterisk_click2dial assets"
           inherit_id="web.assets_backend">
@@ -15,5 +14,4 @@
     </xpath>
 </template>
 
-</data>
 </odoo>
