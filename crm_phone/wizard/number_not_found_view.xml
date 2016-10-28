@@ -5,7 +5,7 @@
 -->
 
 <odoo>
-<data>
+
 
 <record id="number_not_found_form" model="ir.ui.view">
     <field name="name">crm_phone.number.not.found.form</field>
@@ -19,9 +19,9 @@
                     string="Create Lead with this Number" type="object"
                     class="oe_highlight"/>
                 <field name="to_update_lead_id"/>
-                <field name="current_lead_phone" widget="phone"
+                <field name="current_lead_phone"
                     options="{'dial_button_invisible': True}"/>
-                <field name="current_lead_mobile" widget="phone"
+                <field name="current_lead_mobile"
                     options="{'dial_button_invisible': True}"/>
                 <button name="update_lead" colspan="2"
                     string="Update Lead with this Number" type="object"
@@ -32,5 +32,4 @@
 </record>
 
 
-</data>
 </odoo>
