@@ -3,7 +3,7 @@
 # © 2015-2016 Juris Malinens (port to v9)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from openerp import http
+from odoo import http
 
 
 class AsteriskClick2dialController(http.Controller):
