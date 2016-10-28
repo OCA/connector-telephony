@@ -4,7 +4,7 @@
 
 {
     'name': 'CRM Phone',
-    'version': '9.0.1.0.0',
+    'version': '10.0.1.0.0',
     'category': 'Phone',
     'license': 'AGPL-3',
     'summary': 'Validate phone numbers in CRM',
@@ -36,6 +36,6 @@ for any help or question about this module.
         'wizard/create_crm_phonecall_view.xml',
         ],
     'demo': ['demo/crm_phonecall.xml'],
-    'installable': False,
+    'installable': True,
     'auto_install': True,
 }

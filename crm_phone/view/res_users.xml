@@ -5,7 +5,6 @@
 -->
 
 <odoo>
-<data>
 
 <!-- Add option on user form view -->
 <record id="view_users_form" model="ir.ui.view">
@@ -32,5 +31,4 @@
     </field>
 </record>
 
-</data>
 </odoo>
