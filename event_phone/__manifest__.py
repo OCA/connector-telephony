@@ -5,7 +5,7 @@
 
 {
     'name': 'Event Phone',
-    'version': '9.0.1.0.0',
+    'version': '10.0.1.0.0',
     'category': 'Phone',
     'license': 'AGPL-3',
     'summary': 'Validate phone numbers in Events',
@@ -25,10 +25,7 @@ for any help or question about this module.
     'author': "Akretion,Odoo Community Association (OCA)",
     'website': 'http://www.akretion.com/',
     'depends': ['base_phone', 'event'],
-    'data': [
-        'security/ir.model.access.csv',
-        'event_view.xml',
-        ],
-    'installable': False,
+    'data': ['security/ir.model.access.csv'],
+    'installable': True,
     'auto_install': True,
 }
