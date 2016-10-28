@@ -5,7 +5,6 @@
 -->
 
 <odoo>
-<data>
 
 
 <record id="crm_case_form_view_leads" model="ir.ui.view">
@@ -13,12 +12,6 @@
     <field name="model">crm.lead</field>
     <field name="inherit_id" ref="crm.crm_case_form_view_leads"/>
     <field name="arch" type="xml">
-        <field name="mobile" position="attributes">
-            <attribute name="widget">phone</attribute>
-        </field>
-        <field name="fax" position="attributes">
-            <attribute name="widget">fax</attribute>
-        </field>
         <div name="button_box" position="inside">
             <button class="oe_inline oe_stat_button" type="action"
                 name="%(crm_phone.crm_phonecall_action)d"
@@ -27,17 +20,6 @@
                 <field string="Calls" name="phonecall_count" widget="statinfo"/>
              </button>
         </div>
-    </field>
-</record>
-
-<record id="crm_case_tree_view_leads" model="ir.ui.view">
-    <field name="name">crm_phone.crm_lead.tree</field>
-    <field name="model">crm.lead</field>
-    <field name="inherit_id" ref="crm.crm_case_tree_view_leads"/>
-    <field name="arch" type="xml">
-        <field name="phone" position="attributes">
-            <attribute name="widget">phone</attribute>
-        </field>
     </field>
 </record>
 
@@ -46,12 +28,6 @@
     <field name="model">crm.lead</field>
     <field name="inherit_id" ref="crm.crm_case_form_view_oppor"/>
     <field name="arch" type="xml">
-        <field name="mobile" position="attributes">
-            <attribute name="widget">phone</attribute>
-        </field>
-        <field name="fax" position="attributes">
-            <attribute name="widget">fax</attribute>
-        </field>
         <div name="button_box" position="inside">
             <button class="oe_inline oe_stat_button" type="action"
                 name="%(crm_phone.crm_phonecall_action)d"
@@ -64,5 +40,4 @@
 </record>
 
 
-</data>
 </odoo>

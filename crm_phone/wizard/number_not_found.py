@@ -2,8 +2,9 @@
 # © 2010-2016 Akretion (Alexis de Lattre <alexis.delattre@akretion.com>)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from openerp import models, fields, api, _
-from openerp.exceptions import UserError
+from odoo import models, fields, api, _
+from odoo.addons.base_phone.fields import Phone
+from odoo.exceptions import UserError
 
 
 class NumberNotFound(models.TransientModel):
@@ -13,10 +14,10 @@ class NumberNotFound(models.TransientModel):
         'crm.lead', string='Lead to Update',
         domain=[('type', '=', 'lead')],
         help="Lead on which the phone number will be written")
-    current_lead_phone = fields.Char(
+    current_lead_phone = Phone(
         related='to_update_lead_id.phone', string='Current Phone',
         readonly=True)
-    current_lead_mobile = fields.Char(
+    current_lead_mobile = Phone(
         related='to_update_lead_id.mobile', string='Current Mobile',
         readonly=True)
 
