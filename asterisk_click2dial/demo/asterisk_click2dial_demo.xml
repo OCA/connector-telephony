@@ -4,8 +4,7 @@
   License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 -->
 
-<odoo>
-<data noupdate="1">
+<odoo noupdate="1">
 
 
 <record id="demo_ast_server" model="asterisk.server">
@@ -37,5 +36,4 @@
 </record>
 
 
-</data>
 </odoo>
