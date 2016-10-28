@@ -19,9 +19,9 @@
 # In this example, we chose 2 seconds.
 
 # To test this script manually (i.e. outside of Asterisk), run :
-# echo "agi_callerid:0141401242"|openerp_popup_timeout.sh
+# echo "agi_callerid:0141401242"|odoo_popup_timeout.sh
 # where 0141401242 is a phone number that could be presented by the calling party
 
 PATH=/usr/local/sbin:/usr/local/bin:/var/lib/asterisk/agi-bin:/sbin:/bin:/usr/sbin:/usr/bin:/usr/share/asterisk/agi-bin
 
-timeout 2s set_name_agi.py --server openerp.mycompany.com --database erp_prod --user-id 12 --password "thepasswd" --notify admin demo
+timeout 2s set_name_agi.py --server odoo.mycompany.com --database erp_prod --user-id 12 --password "thepasswd" --notify admin demo

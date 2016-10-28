@@ -29,4 +29,4 @@
 
 PATH=/usr/local/sbin:/usr/local/bin:/var/lib/asterisk/agi-bin:/sbin:/bin:/usr/sbin:/usr/bin:/usr/share/asterisk/agi-bin:.
 
-timeout 2s set_name_agi.py --server openerp.mycompany.com --database erp_prod --user-id 12 --password "thepasswd" --geoloc --geoloc-country "FR" --geoloc-lang "fr"
+timeout 2s set_name_agi.py --server odoo.mycompany.com --database erp_prod --user-id 12 --password "thepasswd" --geoloc --geoloc-country "FR" --geoloc-lang "fr"

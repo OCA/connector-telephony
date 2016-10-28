@@ -16,7 +16,7 @@
 #  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 """
- Name lookup in OpenERP for incoming and outgoing calls with an
+ Name lookup in Odoo for incoming and outgoing calls with an
  Asterisk IPBX
 
  This script is designed to be used as an AGI on an Asterisk IPBX...
@@ -32,12 +32,12 @@
  See my 2 sample wrappers "set_name_incoming_timeout.sh" and
  "set_name_outgoing_timeout.sh"
 
- It's probably a good idea to create a user in OpenERP dedicated to this task.
+ It's probably a good idea to create a user in Odoo dedicated to this task.
  This user only needs to be part of the group "Phone CallerID", which has
  read access on the 'res.partner' and other objects with phone numbers and
  names.
 
- Note that this script can be used without OpenERP, with just the
+ Note that this script can be used without Odoo, with just the
  geolocalisation feature : for that, don't use option --server ;
  only use --geoloc
 
@@ -45,14 +45,13 @@
 
  1) INCOMING CALLS
  When executed from the dialplan on an incoming phone call, it will
- lookup in OpenERP's partners and other objects with phone numbers
+ lookup in Odoo's partners and other objects with phone numbers
  (leads, employees, etc...), and, if it finds the phone number, it will
  get the corresponding name of the person and use this name as CallerID
  name for the incoming call.
 
  Requires the "base_phone" module
- available from https://code.launchpad.net/openerp-asterisk-connector
- for OpenERP version >= 7.0
+ available from https://github.com/OCA/connector-telephony
 
  Asterisk dialplan example :
 
@@ -65,7 +64,7 @@
 
  2) OUTGOING CALLS
  When executed from the dialplan on an outgoing call, it will
- lookup in OpenERP the name corresponding to the phone number
+ lookup in Odoo the name corresponding to the phone number
  that is called by the user and it will update the name of the
  callee on the screen of the phone of the caller.
 
@@ -79,9 +78,9 @@
  as parameter to the CONNECTEDLINE function.
 
  Here is the code that I used on the pre-process subroutine
- "openerp-out-call" of the Outgoing Call of my Xivo server :
+ "odoo-out-call" of the Outgoing Call of my Xivo server :
 
- [openerp-out-call]
+ [odoo-out-call]
  exten = s,1,AGI(/var/lib/asterisk/agi-bin/set_name_outgoing_timeout.sh)
  same = n,Set(CONNECTEDLINE(name,i)=${connectedlinename})
  same = n,Set(CONNECTEDLINE(name-pres,i)=allowed)
@@ -110,11 +109,11 @@ not_found_name = False
 options = [
     {'names': ('-s', '--server'), 'dest': 'server', 'type': 'string',
         'action': 'store', 'default': False,
-        'help': 'DNS or IP address of the OpenERP server. Default = none '
-        '(will not try to connect to OpenERP)'},
+        'help': 'DNS or IP address of the Odoo server. Default = none '
+        '(will not try to connect to Odoo)'},
     {'names': ('-p', '--port'), 'dest': 'port', 'type': 'int',
         'action': 'store', 'default': 8069,
-        'help': "Port of OpenERP's XML-RPC interface. Default = 8069"},
+        'help': "Port of Odoo's XML-RPC interface. Default = 8069"},
     {'names': ('-e', '--ssl'), 'dest': 'ssl',
         'help': "Use SSL connections instead of clear connections. "
         "Default = no, use clear XML-RPC or JSON-RPC",
@@ -124,31 +123,31 @@ options = [
         "Default = no, use XML-RPC",
         'action': 'store_true', 'default': False},
     {'names': ('-d', '--database'), 'dest': 'database', 'type': 'string',
-        'action': 'store', 'default': 'openerp',
-        'help': "OpenERP database name. Default = 'openerp'"},
+        'action': 'store', 'default': 'odoo',
+        'help': "Odoo database name. Default = 'odoo'"},
     {'names': ('-u', '--user-id'), 'dest': 'userid', 'type': 'int',
         'action': 'store', 'default': 2,
-        'help': "OpenERP user ID to use when connecting to OpenERP in "
+        'help': "Odoo user ID to use when connecting to Odoo in "
         "XML-RPC. Default = 2"},
     {'names': ('-t', '--username'), 'dest': 'username', 'type': 'string',
         'action': 'store', 'default': 'demo',
-        'help': "OpenERP username to use when connecting to OpenERP in "
+        'help': "Odoo username to use when connecting to Odoo in "
         "JSON-RPC. Default = demo"},
     {'names': ('-w', '--password'), 'dest': 'password', 'type': 'string',
         'action': 'store', 'default': 'demo',
-        'help': "Password of the OpenERP user. Default = 'demo'"},
+        'help': "Password of the Odoo user. Default = 'demo'"},
     {'names': ('-a', '--ascii'), 'dest': 'ascii',
         'action': 'store_true', 'default': False,
         'help': "Convert name from UTF-8 to ASCII. Default = no, keep UTF-8"},
     {'names': ('-n', '--notify'), 'dest': 'notify',
         'action': 'store_true', 'default': False,
-        'help': "Notify OpenERP users via a pop-up (requires the OpenERP "
+        'help': "Notify Odoo users via a pop-up (requires the Odoo "
         "module 'base_phone_popup'). If you use this option, you must pass "
-        "the logins of the OpenERP users to notify as argument to the "
+        "the logins of the Odoo users to notify as argument to the "
         "script. Default = no"},
     {'names': ('-g', '--geoloc'), 'dest': 'geoloc',
         'action': 'store_true', 'default': False,
-        'help': "Try to geolocate phone numbers unknown to OpenERP. This "
+        'help': "Try to geolocate phone numbers unknown to Odoo. This "
         "features requires the 'phonenumbers' Python lib. To install it, "
         "run 'sudo pip install phonenumbers' Default = no"},
     {'names': ('-l', '--geoloc-lang'), 'dest': 'lang', 'type': 'string',
@@ -267,7 +266,7 @@ def main(options, arguments):
     else:
         # If we already have a "True" caller ID name
         # i.e. not just digits, but a real name, then we don't try to
-        # connect to OpenERP or geoloc, we just keep it
+        # connect to Odoo or geoloc, we just keep it
         if (
                 stdinput.get('agi_calleridname') and
                 not stdinput.get('agi_calleridname').isdigit() and
@@ -309,12 +308,12 @@ def main(options, arguments):
         method = 'get_name_from_phone_number'
 
     res = False
-    # Yes, this script can be used without "-s openerp_server" !
+    # Yes, this script can be used without "-s odoo_server" !
     if options.server and options.jsonrpc:
         import odoorpc
         proto = options.ssl and 'jsonrpc+ssl' or 'jsonrpc'
         stdout_write(
-            'VERBOSE "Starting %s request on OpenERP %s:%d database '
+            'VERBOSE "Starting %s request on Odoo %s:%d database '
             '%s username %s"\n' % (
                 proto.upper(), options.server, options.port, options.database,
                 options.username))
@@ -329,11 +328,11 @@ def main(options, arguments):
             stdout_write('VERBOSE "Called method %s"\n' % method)
         except:
             stdout_write(
-                'VERBOSE "Could not connect to OpenERP in JSON-RPC"\n')
+                'VERBOSE "Could not connect to Odoo in JSON-RPC"\n')
     elif options.server:
         proto = options.ssl and 'https' or 'http'
         stdout_write(
-            'VERBOSE "Starting %s XML-RPC request on OpenERP %s:%d '
+            'VERBOSE "Starting %s XML-RPC request on Odoo %s:%d '
             'database %s user ID %d"\n' % (
                 proto, options.server, options.port, options.database,
                 options.userid))
@@ -351,7 +350,7 @@ def main(options, arguments):
                     'phone.common', method, phone_number)
             stdout_write('VERBOSE "Called method %s"\n' % method)
         except:
-            stdout_write('VERBOSE "Could not connect to OpenERP in XML-RPC"\n')
+            stdout_write('VERBOSE "Could not connect to Odoo in XML-RPC"\n')
         # To simulate a long execution of the XML-RPC request
         # import time
         # time.sleep(5)
@@ -361,16 +360,16 @@ def main(options, arguments):
         if len(res) > options.max_size:
             res = res[0:options.max_size]
     elif options.geoloc:
-        # if the number is not found in OpenERP, we try to geolocate
+        # if the number is not found in Odoo, we try to geolocate
         stdout_write(
             'VERBOSE "Trying to geolocate with country %s and lang %s"\n'
             % (options.country, options.lang))
         res = geolocate_phone_number(
             phone_number, options.country, options.lang)
     else:
-        # if the number is not found in OpenERP and geoloc is off,
+        # if the number is not found in Odoo and geoloc is off,
         # we put 'not_found_name' as Name
-        stdout_write('VERBOSE "Phone number not found in OpenERP"\n')
+        stdout_write('VERBOSE "Phone number not found in Odoo"\n')
         res = not_found_name
 
     # All SIP phones should support UTF-8...
@@ -391,8 +390,8 @@ if __name__ == '__main__':
     usage = "Usage: get_name_agi.py [options] login1 login2 login3 ..."
     epilog = "Script written by Alexis de Lattre. "
     "Published under the GNU AGPL licence."
-    description = "This is an AGI script that sends a query to OpenERP. "
-    "It can also be used without OpenERP as to geolocate phone numbers "
+    description = "This is an AGI script that sends a query to Odoo. "
+    "It can also be used without Odoo to geolocate phone numbers "
     "of incoming calls."
     parser = OptionParser(usage=usage, epilog=epilog, description=description)
     for option in options:
