@@ -7,7 +7,7 @@
 -->
 
 <odoo>
-<data>
+
 
 <record id="view_users_form" model="ir.ui.view">
     <field name="name">asterisk_click2dial.res.users.form</field>
@@ -47,5 +47,4 @@
 </record>
 
 
-</data>
 </odoo>

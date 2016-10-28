@@ -5,7 +5,7 @@
 -->
 
 <odoo>
-<data>
+
 
 <record id="view_asterisk_server_search" model="ir.ui.view">
     <field name="name">asterisk.server.search</field>
@@ -83,5 +83,4 @@
 <menuitem action="action_asterisk_server" id="act_menu_ast_server" parent="base_phone.menu_config_phone" sequence="50"/>
 
 
-</data>
 </odoo>
