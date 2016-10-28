@@ -29,7 +29,7 @@ class NumberNotFound(models.TransientModel):
     number_type = fields.Selection(selection=[
         ('phone', 'Fixed'),
         ('mobile', 'Mobile')
-    ], string='Fixed/Mobile', required=True)
+        ], string='Fixed/Mobile', required=True)
     to_update_partner_id = fields.Many2one(
         comodel_name='res.partner', string='Partner to Update',
         help="Partner on which the phone number will be written")
