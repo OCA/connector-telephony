@@ -2,51 +2,8 @@
 # © 2012-2016 Akretion (Alexis de Lattre <alexis.delattre@akretion.com>)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from openerp import models, fields, api, _
-from openerp.addons.base_phone.fields import Phone
-
-
-class CrmLead(models.Model):
-    _inherit = 'crm.lead'
-    _phone_name_sequence = 20
-
-    phone = Phone(country_field='country_id', partner_field='partner_id')
-    mobile = Phone(country_field='country_id', partner_field='partner_id')
-    fax = Phone(country_field='country_id', partner_field='partner_id')
-    phonecall_ids = fields.One2many(
-        'crm.phonecall', 'opportunity_id', string='Phone Calls')
-    phonecall_count = fields.Integer(
-        compute='_count_phonecalls', string='Number of Phonecalls',
-        readonly=True)
-
-    @api.multi
-    def name_get(self):
-        if self._context.get('callerid'):
-            res = []
-            for lead in self:
-                if lead.partner_name and lead.contact_name:
-                    name = u'%s (%s)' % (lead.contact_name, lead.partner_name)
-                elif lead.partner_name:
-                    name = lead.partner_name
-                elif lead.contact_name:
-                    name = lead.contact_name
-                else:
-                    name = lead.name
-                res.append((lead.id, name))
-            return res
-        else:
-            return super(CrmLead, self).name_get()
-
-    @api.multi
-    @api.depends('phonecall_ids')
-    def _count_phonecalls(self):
-        cpo = self.env['crm.phonecall']
-        for lead in self:
-            try:
-                lead.phonecall_count = cpo.search_count(
-                    [('opportunity_id', '=', lead.id)])
-            except:
-                lead.phonecall_count = 0
+from odoo import models, fields, api, _
+from odoo.addons.base_phone.fields import Phone
 
 
 class CrmPhonecall(models.Model):
@@ -134,52 +91,3 @@ class CrmPhonecall(models.Model):
             'context': ctx,
             }
         return action
-
-
-class ResPartner(models.Model):
-    _inherit = 'res.partner'
-
-    phonecall_ids = fields.One2many(
-        'crm.phonecall', 'partner_id', string='Phone Calls')
-    phonecall_count = fields.Integer(
-        compute='_count_phonecalls', string='Number of Phonecalls',
-        readonly=True)
-
-    @api.multi
-    @api.depends('phonecall_ids')
-    def _count_phonecalls(self):
-        cpo = self.env['crm.phonecall']
-        for partner in self:
-            try:
-                partner.phonecall_count = cpo.search_count(
-                    [('partner_id', 'child_of', partner.id)])
-            except:
-                partner.phonecall_count = 0
-
-
-class ResUsers(models.Model):
-    _inherit = "res.users"
-
-    # Field name starts with 'context_' to allow modification by the user
-    # in his preferences, cf server/openerp/addons/base/res/res_users.py
-    # in "def write()" of "class res_users(osv.osv)"
-    context_propose_creation_crm_call = fields.Boolean(
-        string='Propose to create a call in CRM after a click2dial',
-        default=True)
-
-
-class PhoneCommon(models.AbstractModel):
-    _inherit = 'phone.common'
-
-    @api.model
-    def click2dial(self, erp_number):
-        res = super(PhoneCommon, self).click2dial(erp_number)
-        if (
-                self.env.user.context_propose_creation_crm_call and
-                self.env.context.get('click2dial_model')
-                in ('res.partner', 'crm.lead')):
-            res.update({
-                'action_name': _('Create Call in CRM'),
-                'action_model': 'wizard.create.crm.phonecall',
-                })
-        return res
