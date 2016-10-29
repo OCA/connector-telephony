@@ -129,7 +129,11 @@ def write(self, vals):
             # Odoo generate a write() with the ID of the country as unicode !!!
             # example : vals = {u'country_id': u'9'}
             # So we have to convert it to an integer before browsing
-            if vals['country_id']:
+            try:
+                vals['country_id']
+            except:
+                continue
+            else:
                 vals['country_id'] = int(vals['country_id'])
             loc_vals = convert_all_phone_fields(
                 record, vals, fields_to_convert)
@@ -148,7 +152,11 @@ def create(self, vals):
         # Odoo generate a create() with the ID of the country as unicode !!!
         # example : vals = {u'country_id': u'9'}
         # So we have to convert it to an integer before browsing
-        if vals['country_id']:
+        try:
+            vals['country_id']
+        except:
+            continue
+        else:
             vals['country_id'] = int(vals['country_id'])
         vals = convert_all_phone_fields(self, vals, fields_to_convert)
     return original_create(self, vals)
