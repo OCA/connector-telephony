@@ -130,11 +130,9 @@ def write(self, vals):
             # example : vals = {u'country_id': u'9'}
             # So we have to convert it to an integer before browsing
             try:
-                vals['country_id']
+                vals['country_id'] = int(vals['country_id'])
             except:
                 pass
-            else:
-                vals['country_id'] = int(vals['country_id'])
             loc_vals = convert_all_phone_fields(
                 record, vals, fields_to_convert)
             original_write(record, loc_vals)
