@@ -3,12 +3,16 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from openerp import models, api
-from openerp.addons.base_phone.fields import Phone
+from .fields import Phone
 import logging
-# Lib for phone number reformating -> pip install phonenumbers
-import phonenumbers
 
 _logger = logging.getLogger(__name__)
+
+# Lib for phone number reformating -> pip install phonenumbers
+try:
+    import phonenumbers
+except ImportError:
+    _logger.debug('Cannot `import phonenumbers`.')
 
 
 class PhoneCommon(models.AbstractModel):
