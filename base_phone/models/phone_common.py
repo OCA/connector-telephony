@@ -3,7 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from openerp import models, api
-from .fields import Phone
+from .. import fields as Phone
 import logging
 
 _logger = logging.getLogger(__name__)
