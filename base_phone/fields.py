@@ -132,7 +132,7 @@ def write(self, vals):
             try:
                 vals['country_id']
             except:
-                continue
+                pass
             else:
                 vals['country_id'] = int(vals['country_id'])
             loc_vals = convert_all_phone_fields(
@@ -155,7 +155,7 @@ def create(self, vals):
         try:
             vals['country_id']
         except:
-            continue
+            pass
         else:
             vals['country_id'] = int(vals['country_id'])
         vals = convert_all_phone_fields(self, vals, fields_to_convert)
