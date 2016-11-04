@@ -7,12 +7,22 @@
 
 <templates id="template" xml:space="preserve">
 
-    <t t-name="FieldFax">
-        <t t-call="FieldEmail"/>
+    <t t-name="FieldFax" t-extend="FieldEmail">
+        <t t-jquery="span" t-operation="replace">
+            <t t-if="widget.get('effective_readonly')">
+                <a t-if="widget.clickable" class="o_form_uri o_text_overflow" href="#" target="_blank"/>
+                <span t-if="!widget.clickable" class="o_text_overflow"/>
+            </t>
+        </t>
     </t>
 
-    <t t-name="FieldPhone">
-        <t t-call="FieldFax"/>
+    <t t-name="FieldPhone" t-extend="FieldFax">
+        <t t-jquery="span" t-operation="replace">
+            <t t-if="widget.get('effective_readonly')">
+                <a t-if="widget.clickable" class="o_form_uri o_text_overflow" href="#" target="_blank"/>
+                <span t-if="!widget.clickable" class="o_text_overflow"/>
+            </t>
+        </t>
     </t>
 
 </templates>
