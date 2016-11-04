@@ -49,9 +49,9 @@ odoo.define('base_phone.phone_widget', function (require) {
                 if (phone_num && !this.options.dial_button_invisible) {
                     click2dial_text = _t('Dial');
                 }
-                this.$el.find('#click2dial').off('click');
-                this.$el.find('#click2dial')
+                this.$el.filter('#click2dial')
                     .text(click2dial_text)
+                    .attr('href', '#')
                     .on('click', function(ev) {
                         self.do_notify(
                                 _t('Click2dial started'),
