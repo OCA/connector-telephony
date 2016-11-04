@@ -19,15 +19,15 @@
 #
 ##############################################################################
 
-import odoo
+from odoo import http
 
 
-class BasePhoneController(odoo.http.Controller):
-    @odoo.http.route('/base_phone', type='json', auth='none')
-    def click2dial(self, req, phone_number, click2dial_model, click2dial_id):
-        res = req.session.model('phone.common').click2dial(
+class BasePhoneController(http.Controller):
+    @http.route('/base_phone/click2dial', type='json', auth='none')
+    def click2dial(self, phone_number, click2dial_model, click2dial_id):
+        res = http.request.env['phone.common'].click2dial(
             phone_number, {
                 'click2dial_model': click2dial_model,
                 'click2dial_id': click2dial_id,
-                })
+            })
         return res
