@@ -5,8 +5,7 @@
 odoo.define('asterisk_click2dial.click2dial', function (require) {
 "use strict";
 
-var UserMenu = require('web.UserMenu');
-var WebClient = require('web.WebClient');
+var SystrayMenu = require('web.SystrayMenu');
 var web_client = require('web.web_client');
 var Widget = require('web.Widget');
 var core = require('web.core');
@@ -14,12 +13,13 @@ var _t = core._t;
 
 var click2dial = {};
 
-click2dial.OpenCaller = Widget.extend({
+var click2dialOpenCaller = Widget.extend({
     template: 'asterisk_click2dial.OpenCaller',
+    events: {
+        'click': 'on_open_caller',
+    },
 
     start: function () {
-        this.$('#asterisk-open-caller').on(
-            'click', this.on_open_caller);
         this._super();
     },
 
@@ -56,9 +56,9 @@ click2dial.OpenCaller = Widget.extend({
 
             }
         else if (typeof r == 'object' && r.length == 3) {
-            self.do_notify( // Not working
+            self.do_notify(
                 _t('Success'),
-                _t('Moving to %s ID %d', r[0], r[1]),
+                _.str.sprintf(_t('Moving to %s ID %d'), r[0], r[1]),
                 false);
             var action = {
                 type: 'ir.actions.act_window',
@@ -82,17 +82,6 @@ click2dial.OpenCaller = Widget.extend({
    },
 });
 
-    /* TODO port to v10: update_promise doesn't existe in
-    odoo10/addons/web/static/src/js/widgets/user_menu.js
-    UserMenu.include({
-        do_update: function(){
-            this._super.apply(this, arguments);
-            this.update_promise.then(function() {
-                var asterisk_button = new click2dial.OpenCaller();
-                // attach the phone logo/button to the systray
-                asterisk_button.appendTo($('.oe_systray'));
-            });
-        },
-    });  */
+SystrayMenu.Items.push(click2dialOpenCaller);
 
 });
