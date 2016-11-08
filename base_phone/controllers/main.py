@@ -23,11 +23,9 @@ from odoo import http
 
 
 class BasePhoneController(http.Controller):
-    @http.route('/base_phone/click2dial', type='json', auth='none')
+    @http.route('/base_phone/click2dial', type='json', auth='user')
     def click2dial(self, phone_number, click2dial_model, click2dial_id):
-        res = http.request.env['phone.common'].click2dial(
-            phone_number, {
-                'click2dial_model': click2dial_model,
-                'click2dial_id': click2dial_id,
-            })
+        res = http.request.env['phone.common'].with_context(
+            click2dial_model=click2dial_model,
+            click2dial_id=click2dial_id).click2dial(phone_number)
         return res
