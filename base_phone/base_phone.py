@@ -56,8 +56,11 @@ class PhoneCommon(models.AbstractModel):
             countrycode = None
             if self._country_field:
                 if vals.get(self._country_field):
+                    # Warning: when we edit or create a partner from the
+                    # POS frontend vals[country_key] is a string !
                     country = self.pool['res.country'].browse(
-                        cr, uid, vals[self._country_field], context=context)
+                        cr, uid, int(vals[self._country_field]),
+                        context=context)
                     countrycode = country.code
                 elif ids:
                     rec = self.browse(cr, uid, ids[0], context=context)
@@ -67,7 +70,8 @@ class PhoneCommon(models.AbstractModel):
             elif self._partner_field:
                 if vals.get(self._partner_field):
                     partner = self.pool['res.partner'].browse(
-                        cr, uid, vals[self._partner_field], context=context)
+                        cr, uid, int(vals[self._partner_field]),
+                        context=context)
                     countrycode = partner.country_id and\
                         partner.country_id.code or None
                 elif ids:
