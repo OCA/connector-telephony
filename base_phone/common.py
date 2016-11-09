@@ -42,12 +42,16 @@ def convert_all_phone_fields(self, vals, fields_to_convert):
         country = False
         if country_key:
             if country_key in loc_vals:
-                country = self.env['res.country'].browse(vals[country_key])
+                # Warning: when we edit or create a partner from the
+                # POS frontend vals[country_key] is a string !
+                country = self.env['res.country'].browse(
+                    int(vals[country_key]))
             else:
                 country = self[country_key]
         if partner_key and not country:
             if partner_key in loc_vals:
-                partner = self.env['res.partner'].browse(vals[partner_key])
+                partner = self.env['res.partner'].browse(
+                    int(vals[partner_key]))
             else:
                 partner = self[partner_key]
             if partner:
