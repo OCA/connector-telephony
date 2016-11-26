@@ -167,12 +167,12 @@ msgstr ""
 #. module: asterisk_click2dial
 #: field:asterisk.server,create_uid:0
 msgid "Created by"
-msgstr ""
+msgstr "Aangemaakt door"
 
 #. module: asterisk_click2dial
 #: field:asterisk.server,create_date:0
 msgid "Created on"
-msgstr ""
+msgstr "Aangemaakt op"
 
 #. module: asterisk_click2dial
 #: selection:res.users,asterisk_chan_type:0
@@ -244,7 +244,7 @@ msgstr ""
 #. module: asterisk_click2dial
 #: field:asterisk.server,id:0
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: asterisk_click2dial
 #: help:asterisk.server,ip_address:0
@@ -261,12 +261,12 @@ msgstr ""
 #. module: asterisk_click2dial
 #: field:asterisk.server,write_uid:0
 msgid "Last Updated by"
-msgstr ""
+msgstr "Laatst bijgewerkt door"
 
 #. module: asterisk_click2dial
 #: field:asterisk.server,write_date:0
 msgid "Last Updated on"
-msgstr ""
+msgstr "Laatst bijgewerkt op"
 
 #. module: asterisk_click2dial
 #: selection:res.users,asterisk_chan_type:0

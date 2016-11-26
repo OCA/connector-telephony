@@ -108,7 +108,7 @@ msgstr ""
 #. module: base_phone
 #: selection:reformat.all.phonenumbers,state:0
 msgid "Done"
-msgstr ""
+msgstr "Izvršeno"
 
 #. module: base_phone
 #: selection:reformat.all.phonenumbers,state:0
@@ -282,7 +282,7 @@ msgstr ""
 #. module: base_phone
 #: field:reformat.all.phonenumbers,state:0
 msgid "State"
-msgstr ""
+msgstr "Status"
 
 #. module: base_phone
 #: model:ir.ui.menu,name:base_phone.menu_config_phone

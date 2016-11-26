@@ -80,13 +80,13 @@ msgstr ""
 #: field:number.not.found,create_uid:0
 #: field:reformat.all.phonenumbers,create_uid:0
 msgid "Created by"
-msgstr ""
+msgstr "Vytvořil(a)"
 
 #. module: base_phone
 #: field:number.not.found,create_date:0
 #: field:reformat.all.phonenumbers,create_date:0
 msgid "Created on"
-msgstr ""
+msgstr "Vytvořeno"
 
 #. module: base_phone
 #: field:number.not.found,current_partner_mobile:0
@@ -150,7 +150,7 @@ msgstr ""
 #: field:base.phone.installed,id:0 field:number.not.found,id:0
 #: field:phone.common,id:0 field:reformat.all.phonenumbers,id:0
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: base_phone
 #: help:res.company,number_of_digits_to_match_from_end:0
@@ -168,13 +168,13 @@ msgstr ""
 #: field:number.not.found,write_uid:0
 #: field:reformat.all.phonenumbers,write_uid:0
 msgid "Last Updated by"
-msgstr ""
+msgstr "Naposled upraveno"
 
 #. module: base_phone
 #: field:number.not.found,write_date:0
 #: field:reformat.all.phonenumbers,write_date:0
 msgid "Last Updated on"
-msgstr ""
+msgstr "Naposled upraveno"
 
 #. module: base_phone
 #: selection:number.not.found,number_type:0

@@ -30,7 +30,7 @@ msgstr ""
 #. module: asterisk_click2dial
 #: field:asterisk.server,active:0
 msgid "Active"
-msgstr ""
+msgstr "Attivo"
 
 #. module: asterisk_click2dial
 #: field:asterisk.server,alert_info:0
@@ -156,7 +156,7 @@ msgstr ""
 #: code:addons/asterisk_click2dial/asterisk_click2dial.py:227
 #, python-format
 msgid "Connection Test Failed!"
-msgstr ""
+msgstr "Test connessione Fallito!"
 
 #. module: asterisk_click2dial
 #: code:addons/asterisk_click2dial/asterisk_click2dial.py:233
@@ -539,7 +539,7 @@ msgstr ""
 #. module: asterisk_click2dial
 #: model:ir.model,name:asterisk_click2dial.model_res_users
 msgid "Users"
-msgstr ""
+msgstr "Utenti"
 
 #. module: asterisk_click2dial
 #: field:asterisk.server,wait_time:0

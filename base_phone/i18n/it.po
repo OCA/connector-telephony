@@ -108,12 +108,12 @@ msgstr ""
 #. module: base_phone
 #: selection:reformat.all.phonenumbers,state:0
 msgid "Done"
-msgstr ""
+msgstr "Completato"
 
 #. module: base_phone
 #: selection:reformat.all.phonenumbers,state:0
 msgid "Draft"
-msgstr ""
+msgstr "Bozza"
 
 #. module: base_phone
 #: field:number.not.found,e164_number:0
@@ -282,7 +282,7 @@ msgstr ""
 #. module: base_phone
 #: field:reformat.all.phonenumbers,state:0
 msgid "State"
-msgstr ""
+msgstr "Stato"
 
 #. module: base_phone
 #: model:ir.ui.menu,name:base_phone.menu_config_phone
