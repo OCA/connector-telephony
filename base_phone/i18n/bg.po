@@ -111,12 +111,12 @@ msgstr ""
 #: model:ir.model.fields,field_description:base_phone.field_phone_common_display_name
 #: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers_display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Име за Показване"
 
 #. module: base_phone
 #: selection:reformat.all.phonenumbers,state:0
 msgid "Done"
-msgstr ""
+msgstr "Готово"
 
 #. module: base_phone
 #: selection:reformat.all.phonenumbers,state:0

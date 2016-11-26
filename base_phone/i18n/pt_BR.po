@@ -25,7 +25,7 @@ msgstr ""
 #. module: base_phone
 #: model:ir.ui.view,arch_db:base_phone.reformat_all_phonenumbers_form
 msgid "Cancel"
-msgstr ""
+msgstr "Cancelar"
 
 #. module: base_phone
 #: code:addons/base_phone/base_phone.py:122
@@ -121,7 +121,7 @@ msgstr ""
 #. module: base_phone
 #: selection:reformat.all.phonenumbers,state:0
 msgid "Draft"
-msgstr ""
+msgstr "Rascunho"
 
 #. module: base_phone
 #: model:ir.model.fields,field_description:base_phone.field_number_not_found_e164_number
@@ -229,7 +229,7 @@ msgstr ""
 #. module: base_phone
 #: model:ir.model,name:base_phone.model_res_partner
 msgid "Partner"
-msgstr ""
+msgstr "Parceiro"
 
 #. module: base_phone
 #: model:ir.model.fields,help:base_phone.field_number_not_found_to_update_partner_id
@@ -295,7 +295,7 @@ msgstr ""
 #. module: base_phone
 #: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers_state
 msgid "State"
-msgstr ""
+msgstr "Estado"
 
 #. module: base_phone
 #: model:ir.ui.menu,name:base_phone.menu_config_phone

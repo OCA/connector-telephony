@@ -25,7 +25,7 @@ msgstr ""
 #. module: base_phone
 #: model:ir.ui.view,arch_db:base_phone.reformat_all_phonenumbers_form
 msgid "Cancel"
-msgstr ""
+msgstr "取消"
 
 #. module: base_phone
 #: code:addons/base_phone/base_phone.py:122
@@ -111,7 +111,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:base_phone.field_phone_common_display_name
 #: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers_display_name
 msgid "Display Name"
-msgstr ""
+msgstr "显示名称"
 
 #. module: base_phone
 #: selection:reformat.all.phonenumbers,state:0
@@ -175,7 +175,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:base_phone.field_phone_common___last_update
 #: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers___last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "最后修改时间"
 
 #. module: base_phone
 #: model:ir.model.fields,field_description:base_phone.field_number_not_found_write_uid

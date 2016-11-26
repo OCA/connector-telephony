@@ -80,13 +80,13 @@ msgstr ""
 #: model:ir.model.fields,field_description:base_phone.field_number_not_found_create_uid
 #: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers_create_uid
 msgid "Created by"
-msgstr ""
+msgstr "Creado por"
 
 #. module: base_phone
 #: model:ir.model.fields,field_description:base_phone.field_number_not_found_create_date
 #: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers_create_date
 msgid "Created on"
-msgstr ""
+msgstr "Creado en"
 
 #. module: base_phone
 #: model:ir.model.fields,field_description:base_phone.field_number_not_found_current_partner_mobile
@@ -111,7 +111,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:base_phone.field_phone_common_display_name
 #: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers_display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Mostrar nombre"
 
 #. module: base_phone
 #: selection:reformat.all.phonenumbers,state:0
@@ -155,7 +155,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:base_phone.field_phone_common_id
 #: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers_id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: base_phone
 #: model:ir.model.fields,help:base_phone.field_res_company_number_of_digits_to_match_from_end
@@ -175,19 +175,19 @@ msgstr ""
 #: model:ir.model.fields,field_description:base_phone.field_phone_common___last_update
 #: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers___last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Modificada por última vez"
 
 #. module: base_phone
 #: model:ir.model.fields,field_description:base_phone.field_number_not_found_write_uid
 #: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers_write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "Última actualización realizada por"
 
 #. module: base_phone
 #: model:ir.model.fields,field_description:base_phone.field_number_not_found_write_date
 #: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers_write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "Ultima actualizacion en"
 
 #. module: base_phone
 #: selection:number.not.found,number_type:0
