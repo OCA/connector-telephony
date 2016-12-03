@@ -30,7 +30,7 @@ msgstr ""
 #. module: asterisk_click2dial
 #: field:asterisk.server,active:0
 msgid "Active"
-msgstr ""
+msgstr "Aktiv"
 
 #. module: asterisk_click2dial
 #: field:asterisk.server,alert_info:0
