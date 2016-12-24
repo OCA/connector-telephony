@@ -10,12 +10,12 @@ msgstr ""
 "POT-Creation-Date: 2015-11-01 04:07+0000\n"
 "PO-Revision-Date: 2015-10-12 18:36+0000\n"
 "Last-Translator: <>\n"
-"Language-Team: Slovak (http://www.transifex.com/oca/OCA-connector-telephony-8-0/language/sk/)\n"
+"Language-Team: Spanish (Paraguay) (http://www.transifex.com/oca/OCA-connector-telephony-8-0/language/es_PY/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: sk\n"
-"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+"Language: es_PY\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: asterisk_click2dial
 #: field:asterisk.server,login:0
@@ -30,7 +30,7 @@ msgstr ""
 #. module: asterisk_click2dial
 #: field:asterisk.server,active:0
 msgid "Active"
-msgstr "Aktívne"
+msgstr ""
 
 #. module: asterisk_click2dial
 #: field:asterisk.server,alert_info:0
@@ -167,12 +167,12 @@ msgstr ""
 #. module: asterisk_click2dial
 #: field:asterisk.server,create_uid:0
 msgid "Created by"
-msgstr "Vytvoril"
+msgstr "Creado por"
 
 #. module: asterisk_click2dial
 #: field:asterisk.server,create_date:0
 msgid "Created on"
-msgstr "Vytvorené"
+msgstr "Creado en"
 
 #. module: asterisk_click2dial
 #: selection:res.users,asterisk_chan_type:0
@@ -261,12 +261,12 @@ msgstr ""
 #. module: asterisk_click2dial
 #: field:asterisk.server,write_uid:0
 msgid "Last Updated by"
-msgstr "Naposledy upravoval"
+msgstr "Ultima actualización por"
 
 #. module: asterisk_click2dial
 #: field:asterisk.server,write_date:0
 msgid "Last Updated on"
-msgstr "Naposledy upravované"
+msgstr "Ultima actualización en"
 
 #. module: asterisk_click2dial
 #: selection:res.users,asterisk_chan_type:0

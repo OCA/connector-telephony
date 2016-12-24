@@ -1,0 +1,28 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * crm_claim_phone
+# 
+# Translators:
+msgid ""
+msgstr ""
+"Project-Id-Version: connector-telephony (8.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-11-01 04:07+0000\n"
+"PO-Revision-Date: 2015-10-12 18:36+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: Slovak (http://www.transifex.com/oca/OCA-connector-telephony-8-0/language/sk/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: sk\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+
+#. module: crm_claim_phone
+#: model:ir.model,name:crm_claim_phone.model_crm_claim
+msgid "Claim"
+msgstr "Reklamácia"
+
+#. module: crm_claim_phone
+#: view:crm.claim:crm_claim_phone.crm_case_claims_form_view
+msgid "phone"
+msgstr ""
