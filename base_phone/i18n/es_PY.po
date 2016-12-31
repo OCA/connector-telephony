@@ -25,7 +25,7 @@ msgstr ""
 #. module: base_phone
 #: view:reformat.all.phonenumbers:base_phone.reformat_all_phonenumbers_form
 msgid "Cancel"
-msgstr ""
+msgstr "Cancelar"
 
 #. module: base_phone
 #: code:addons/base_phone/base_phone.py:112

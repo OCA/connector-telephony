@@ -58,7 +58,7 @@ msgstr ""
 #. module: base_phone
 #: model:ir.model,name:base_phone.model_res_company
 msgid "Companies"
-msgstr ""
+msgstr "Bedrijven"
 
 #. module: base_phone
 #: code:addons/base_phone/wizard/number_not_found.py:87
@@ -216,7 +216,7 @@ msgstr ""
 #. module: base_phone
 #: model:ir.model,name:base_phone.model_res_partner
 msgid "Partner"
-msgstr ""
+msgstr "Relatie"
 
 #. module: base_phone
 #: help:number.not.found,to_update_partner_id:0

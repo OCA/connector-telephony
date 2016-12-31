@@ -57,7 +57,7 @@ msgstr ""
 #. module: crm_phone
 #: field:wizard.create.crm.phonecall,create_uid:0
 msgid "Created by"
-msgstr ""
+msgstr "Creado por"
 
 #. module: crm_phone
 #: field:wizard.create.crm.phonecall,create_date:0
@@ -88,12 +88,12 @@ msgstr "ID"
 #. module: crm_phone
 #: field:wizard.create.crm.phonecall,write_uid:0
 msgid "Last Updated by"
-msgstr ""
+msgstr "Ultima actualización por"
 
 #. module: crm_phone
 #: field:wizard.create.crm.phonecall,write_date:0
 msgid "Last Updated on"
-msgstr ""
+msgstr "Ultima actualización en"
 
 #. module: crm_phone
 #: help:number.not.found,to_update_lead_id:0
