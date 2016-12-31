@@ -229,7 +229,7 @@ msgstr ""
 #. module: base_phone
 #: model:ir.model,name:base_phone.model_res_partner
 msgid "Partner"
-msgstr ""
+msgstr "Företag"
 
 #. module: base_phone
 #: model:ir.model.fields,help:base_phone.field_number_not_found_to_update_partner_id

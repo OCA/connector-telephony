@@ -80,7 +80,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:base_phone.field_number_not_found_create_uid
 #: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers_create_uid
 msgid "Created by"
-msgstr ""
+msgstr "Creado por"
 
 #. module: base_phone
 #: model:ir.model.fields,field_description:base_phone.field_number_not_found_create_date
@@ -181,13 +181,13 @@ msgstr ""
 #: model:ir.model.fields,field_description:base_phone.field_number_not_found_write_uid
 #: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers_write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "Ultima actualización por"
 
 #. module: base_phone
 #: model:ir.model.fields,field_description:base_phone.field_number_not_found_write_date
 #: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers_write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "Ultima actualización en"
 
 #. module: base_phone
 #: selection:number.not.found,number_type:0
@@ -229,7 +229,7 @@ msgstr ""
 #. module: base_phone
 #: model:ir.model,name:base_phone.model_res_partner
 msgid "Partner"
-msgstr ""
+msgstr "Empresa"
 
 #. module: base_phone
 #: model:ir.model.fields,help:base_phone.field_number_not_found_to_update_partner_id
