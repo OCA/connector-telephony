@@ -116,7 +116,7 @@ msgstr "Anzeigename"
 #. module: base_phone
 #: selection:reformat.all.phonenumbers,state:0
 msgid "Done"
-msgstr ""
+msgstr "Erledigt"
 
 #. module: base_phone
 #: selection:reformat.all.phonenumbers,state:0

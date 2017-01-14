@@ -116,7 +116,7 @@ msgstr "Nome para Mostrar"
 #. module: base_phone
 #: selection:reformat.all.phonenumbers,state:0
 msgid "Done"
-msgstr ""
+msgstr "Feito"
 
 #. module: base_phone
 #: selection:reformat.all.phonenumbers,state:0
