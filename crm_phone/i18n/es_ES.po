@@ -10,12 +10,12 @@ msgstr ""
 "POT-Creation-Date: 2015-11-01 04:07+0000\n"
 "PO-Revision-Date: 2015-10-12 18:37+0000\n"
 "Last-Translator: <>\n"
-"Language-Team: Arabic (http://www.transifex.com/oca/OCA-connector-telephony-8-0/language/ar/)\n"
+"Language-Team: Spanish (Spain) (http://www.transifex.com/oca/OCA-connector-telephony-8-0/language/es_ES/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: ar\n"
-"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+"Language: es_ES\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: crm_phone
 #: view:wizard.create.crm.phonecall:crm_phone.create_crm_phonecall_view
@@ -57,12 +57,12 @@ msgstr ""
 #. module: crm_phone
 #: field:wizard.create.crm.phonecall,create_uid:0
 msgid "Created by"
-msgstr "أنشئ بواسطة"
+msgstr "Creado por"
 
 #. module: crm_phone
 #: field:wizard.create.crm.phonecall,create_date:0
 msgid "Created on"
-msgstr "أنشئ في"
+msgstr "Creado en"
 
 #. module: crm_phone
 #: field:number.not.found,current_lead_mobile:0
@@ -83,17 +83,17 @@ msgstr ""
 #. module: crm_phone
 #: field:wizard.create.crm.phonecall,id:0
 msgid "ID"
-msgstr "المعرف"
+msgstr "ID"
 
 #. module: crm_phone
 #: field:wizard.create.crm.phonecall,write_uid:0
 msgid "Last Updated by"
-msgstr "آخر تحديث بواسطة"
+msgstr "Última actualización por"
 
 #. module: crm_phone
 #: field:wizard.create.crm.phonecall,write_date:0
 msgid "Last Updated on"
-msgstr "آخر تحديث في"
+msgstr "Última actualización en"
 
 #. module: crm_phone
 #: help:number.not.found,to_update_lead_id:0
@@ -151,7 +151,7 @@ msgstr ""
 #. module: crm_phone
 #: model:ir.model,name:crm_phone.model_res_users
 msgid "Users"
-msgstr "المستخدمون"
+msgstr "Usuarios"
 
 #. module: crm_phone
 #: view:wizard.create.crm.phonecall:crm_phone.create_crm_phonecall_view

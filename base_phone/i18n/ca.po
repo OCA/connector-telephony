@@ -282,7 +282,7 @@ msgstr ""
 #. module: base_phone
 #: field:reformat.all.phonenumbers,state:0
 msgid "State"
-msgstr ""
+msgstr "Estat"
 
 #. module: base_phone
 #: model:ir.ui.menu,name:base_phone.menu_config_phone

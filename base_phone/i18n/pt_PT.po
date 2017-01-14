@@ -108,7 +108,7 @@ msgstr ""
 #. module: base_phone
 #: selection:reformat.all.phonenumbers,state:0
 msgid "Done"
-msgstr ""
+msgstr "Concluído"
 
 #. module: base_phone
 #: selection:reformat.all.phonenumbers,state:0

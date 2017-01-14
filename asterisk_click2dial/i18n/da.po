@@ -539,7 +539,7 @@ msgstr ""
 #. module: asterisk_click2dial
 #: model:ir.model,name:asterisk_click2dial.model_res_users
 msgid "Users"
-msgstr ""
+msgstr "Brugere"
 
 #. module: asterisk_click2dial
 #: field:asterisk.server,wait_time:0
