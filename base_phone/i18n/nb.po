@@ -250,7 +250,7 @@ msgstr ""
 #. module: base_phone
 #: model:ir.ui.view,arch_db:base_phone.view_company_form
 msgid "Phone"
-msgstr ""
+msgstr "Telefon"
 
 #. module: base_phone
 #: model:res.groups,name:base_phone.group_callerid
