@@ -134,7 +134,7 @@ msgstr ""
 #: code:addons/base_phone/wizard/number_not_found.py:101
 #, python-format
 msgid "Error:"
-msgstr ""
+msgstr "Virhe:"
 
 #. module: base_phone
 #: selection:number.not.found,number_type:0

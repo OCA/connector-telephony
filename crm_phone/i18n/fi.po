@@ -78,7 +78,7 @@ msgstr ""
 #: code:addons/crm_phone/wizard/number_not_found.py:69
 #, python-format
 msgid "Error:"
-msgstr ""
+msgstr "Virhe:"
 
 #. module: crm_phone
 #: field:wizard.create.crm.phonecall,id:0

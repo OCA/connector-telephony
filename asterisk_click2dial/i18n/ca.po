@@ -30,7 +30,7 @@ msgstr ""
 #. module: asterisk_click2dial
 #: field:asterisk.server,active:0
 msgid "Active"
-msgstr ""
+msgstr "Actiu"
 
 #. module: asterisk_click2dial
 #: field:asterisk.server,alert_info:0
@@ -145,7 +145,7 @@ msgstr ""
 #. module: asterisk_click2dial
 #: field:asterisk.server,company_id:0
 msgid "Company"
-msgstr ""
+msgstr "Empresa"
 
 #. module: asterisk_click2dial
 #: help:asterisk.server,company_id:0
@@ -539,7 +539,7 @@ msgstr ""
 #. module: asterisk_click2dial
 #: model:ir.model,name:asterisk_click2dial.model_res_users
 msgid "Users"
-msgstr ""
+msgstr "Usuaris"
 
 #. module: asterisk_click2dial
 #: field:asterisk.server,wait_time:0

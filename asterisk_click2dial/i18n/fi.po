@@ -30,7 +30,7 @@ msgstr ""
 #. module: asterisk_click2dial
 #: field:asterisk.server,active:0
 msgid "Active"
-msgstr ""
+msgstr "Aktiivinen"
 
 #. module: asterisk_click2dial
 #: field:asterisk.server,alert_info:0
@@ -145,7 +145,7 @@ msgstr ""
 #. module: asterisk_click2dial
 #: field:asterisk.server,company_id:0
 msgid "Company"
-msgstr ""
+msgstr "Yritys"
 
 #. module: asterisk_click2dial
 #: help:asterisk.server,company_id:0
@@ -211,7 +211,7 @@ msgstr ""
 #: code:addons/asterisk_click2dial/asterisk_click2dial.py:456
 #, python-format
 msgid "Error:"
-msgstr ""
+msgstr "Virhe:"
 
 #. module: asterisk_click2dial
 #: field:asterisk.server,extension_priority:0
