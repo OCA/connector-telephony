@@ -8,7 +8,8 @@ class TestPhone(TransactionCase):
 
     def test_phone(self):
         company = self.env.ref('base.main_company')
-        company.country_id = self.env.ref('base.fr').id
+        fr_country_id = self.env.ref('base.fr').id
+        company.country_id = fr_country_id
         rpo = self.env['res.partner']
         # Create an existing partner without country
         partner1 = rpo.create({
@@ -40,7 +41,7 @@ class TestPhone(TransactionCase):
         # Write on an existing partner with country at the same time
         agrolait.write({
             'fax': '04 72 89 32 43',
-            'country_id': self.env.ref('base.fr').id,
+            'country_id': fr_country_id,
             })
         self.assertEquals(agrolait.fax, u'+33 4 72 89 32 43')
         # Write an invalid phone number
@@ -52,3 +53,14 @@ class TestPhone(TransactionCase):
         self.assertEquals(name, 'Pierre Paillet')
         name2 = pco.get_name_from_phone_number('0041216191010')
         self.assertEquals(name2, u'Joël Grand-Guillaume (Camptocamp)')
+        # Test against the POS bug
+        # https://github.com/OCA/connector-telephony/issues/113
+        # When we edit/create a partner from the POS,
+        # the country_id key in create(vals) is given as a string !
+        partnerpos = rpo.create({
+            'name': u'POS customer',
+            'phone': '04-72-08-87-42',
+            'country_id': str(fr_country_id),
+            })
+        self.assertEquals(partnerpos.phone, u'+33 4 72 08 87 42')
+        self.assertEquals(partnerpos.country_id.id, fr_country_id)

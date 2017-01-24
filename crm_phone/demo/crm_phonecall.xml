@@ -1,6 +1,5 @@
 <?xml version="1.0"?>
-<odoo>
-<data noupdate="1">
+<odoo noupdate="1">
 
 
 <record id="crm_phonecall1" model="crm.phonecall">
@@ -55,5 +54,4 @@
 
 
 
-</data>
 </odoo>
