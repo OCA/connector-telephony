@@ -24,19 +24,18 @@ Available addons
 ----------------
 addon | version | summary
 --- | --- | ---
+[asterisk_click2dial](asterisk_click2dial/) | 10.0.1.0.0 | Asterisk-Odoo connector
 [base_phone](base_phone/) | 10.0.0.1.0 | Validate phone numbers
+[crm_phone](crm_phone/) | 10.0.1.0.0 | Validate phone numbers in CRM
+[event_phone](event_phone/) | 10.0.1.0.0 | Validate phone numbers in Events
+[hr_phone](hr_phone/) | 10.0.1.0.0 | Validate phone numbers in HR
+[hr_recruitment_phone](hr_recruitment_phone/) | 10.0.1.0.0 | Validate phone numbers in HR Recruitment
 
 Unported addons
 ---------------
 addon | version | summary
 --- | --- | ---
-[asterisk_click2dial](asterisk_click2dial/) | 9.0.1.0.0 (unported) | Asterisk-Odoo connector
 [base_phone_popup](base_phone_popup/) | 9.0.1.0.0 (unported) | Pop-up the related form view to the user on incoming calls
-[crm_claim_phone](crm_claim_phone/) | 8.0.0.1.0 (unported) | Validate phone numbers in CRM Claims
-[crm_phone](crm_phone/) | 9.0.1.0.0 (unported) | Validate phone numbers in CRM
-[event_phone](event_phone/) | 9.0.1.0.0 (unported) | Validate phone numbers in Events
-[hr_phone](hr_phone/) | 9.0.1.0.0 (unported) | Validate phone numbers in HR
-[hr_recruitment_phone](hr_recruitment_phone/) | 9.0.1.0.0 (unported) | Validate phone numbers in HR Recruitment
 [ovh_telephony_connector](ovh_telephony_connector/) | 9.0.0.1.0 (unported) | OVH-Odoo telephony connector (click2call)
 
 [//]: # (end addons)
