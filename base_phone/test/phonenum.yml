@@ -51,7 +51,7 @@
 -
   Check country_id come from contact us form from website_crm module
 -
-  !python {model: phone.common}: |
+  !python {model: res.partner}: |
     vals = self._generic_reformat_phonenumbers(cr, uid, [], {
         'country_id': u'74', 'phone': u'0155667788'
     }, context=context)
