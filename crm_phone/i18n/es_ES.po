@@ -11,12 +11,12 @@ msgstr ""
 "POT-Creation-Date: 2017-01-25 03:36+0000\n"
 "PO-Revision-Date: 2017-01-25 03:36+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
-"Language-Team: French (https://www.transifex.com/oca/teams/23907/fr/)\n"
+"Language-Team: Spanish (Spain) (https://www.transifex.com/oca/teams/23907/es_ES/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: fr\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Language: es_ES\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: crm_phone
 #: model:ir.ui.view,arch_db:crm_phone.create_crm_phonecall_view
@@ -43,7 +43,7 @@ msgstr ""
 #. module: crm_phone
 #: model:ir.model.fields,field_description:crm_phone.field_crm_phonecall_company_id
 msgid "Company"
-msgstr "Société"
+msgstr ""
 
 #. module: crm_phone
 #: model:ir.model.fields,field_description:crm_phone.field_crm_phonecall_partner_id
@@ -64,13 +64,13 @@ msgstr ""
 #. module: crm_phone
 #: model:ir.ui.view,arch_db:crm_phone.number_not_found_form
 msgid "Create Lead with this Number"
-msgstr "Créer une piste avec ce numéro"
+msgstr ""
 
 #. module: crm_phone
 #: code:addons/crm_phone/wizard/number_not_found.py:30
 #, python-format
 msgid "Create New Lead"
-msgstr "Créer une nouvelle piste"
+msgstr ""
 
 #. module: crm_phone
 #: model:ir.ui.view,arch_db:crm_phone.create_crm_phonecall_view
@@ -80,29 +80,29 @@ msgstr ""
 #. module: crm_phone
 #: model:ir.ui.view,arch_db:crm_phone.number_not_found_form
 msgid "Create or Update a Lead"
-msgstr "Créer ou mettre à jour une piste"
+msgstr ""
 
 #. module: crm_phone
 #: model:ir.model.fields,field_description:crm_phone.field_crm_phonecall_create_uid
 #: model:ir.model.fields,field_description:crm_phone.field_wizard_create_crm_phonecall_create_uid
 msgid "Created by"
-msgstr "Créé par"
+msgstr "Creado por"
 
 #. module: crm_phone
 #: model:ir.model.fields,field_description:crm_phone.field_crm_phonecall_create_date
 #: model:ir.model.fields,field_description:crm_phone.field_wizard_create_crm_phonecall_create_date
 msgid "Created on"
-msgstr "Date"
+msgstr "Creado en"
 
 #. module: crm_phone
 #: model:ir.model.fields,field_description:crm_phone.field_number_not_found_current_lead_mobile
 msgid "Current Mobile"
-msgstr "Portable actuel"
+msgstr ""
 
 #. module: crm_phone
 #: model:ir.model.fields,field_description:crm_phone.field_number_not_found_current_lead_phone
 msgid "Current Phone"
-msgstr "Téléphone actuel"
+msgstr ""
 
 #. module: crm_phone
 #: model:ir.model.fields,field_description:crm_phone.field_crm_phonecall_date
@@ -124,7 +124,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:crm_phone.field_crm_phonecall_display_name
 #: model:ir.model.fields,field_description:crm_phone.field_wizard_create_crm_phonecall_display_name
 msgid "Display Name"
-msgstr "Nom à afficher"
+msgstr ""
 
 #. module: crm_phone
 #: model:ir.ui.view,arch_db:crm_phone.crm_phonecall_search
@@ -158,41 +158,41 @@ msgstr ""
 #: model:ir.model.fields,field_description:crm_phone.field_crm_phonecall___last_update
 #: model:ir.model.fields,field_description:crm_phone.field_wizard_create_crm_phonecall___last_update
 msgid "Last Modified on"
-msgstr "Dernière modification le"
+msgstr ""
 
 #. module: crm_phone
 #: model:ir.model.fields,field_description:crm_phone.field_crm_phonecall_write_uid
 #: model:ir.model.fields,field_description:crm_phone.field_wizard_create_crm_phonecall_write_uid
 msgid "Last Updated by"
-msgstr "Dernière mise à jour par"
+msgstr "Última actualización por"
 
 #. module: crm_phone
 #: model:ir.model.fields,field_description:crm_phone.field_crm_phonecall_write_date
 #: model:ir.model.fields,field_description:crm_phone.field_wizard_create_crm_phonecall_write_date
 msgid "Last Updated on"
-msgstr "Dernière mise à jour le"
+msgstr "Última actualización en"
 
 #. module: crm_phone
 #: model:ir.model.fields,help:crm_phone.field_number_not_found_to_update_lead_id
 msgid "Lead on which the phone number will be written"
-msgstr "Piste sur laquelle le numéro de téléphone sera écrit"
+msgstr ""
 
 #. module: crm_phone
 #: model:ir.model.fields,field_description:crm_phone.field_number_not_found_to_update_lead_id
 msgid "Lead to Update"
-msgstr "Piste à mettre à jour"
+msgstr ""
 
 #. module: crm_phone
 #: model:ir.model,name:crm_phone.model_crm_lead
 #: model:ir.model.fields,field_description:crm_phone.field_crm_phonecall_opportunity_id
 msgid "Lead/Opportunity"
-msgstr "Piste/opportunité"
+msgstr ""
 
 #. module: crm_phone
 #: code:addons/crm_phone/wizard/number_not_found.py:53
 #, python-format
 msgid "Lead: %s"
-msgstr "Piste : %s"
+msgstr ""
 
 #. module: crm_phone
 #: model:ir.actions.act_window,name:crm_phone.crm_phonecall_action_done
@@ -208,7 +208,7 @@ msgstr ""
 #. module: crm_phone
 #: model:ir.model.fields,field_description:crm_phone.field_crm_phonecall_partner_mobile
 msgid "Mobile"
-msgstr "Portable"
+msgstr ""
 
 #. module: crm_phone
 #: model:ir.ui.view,arch_db:crm_phone.crm_phonecall_search
@@ -238,7 +238,7 @@ msgstr ""
 #. module: crm_phone
 #: model:ir.model,name:crm_phone.model_number_not_found
 msgid "Number not found"
-msgstr "Numéro introuvable"
+msgstr ""
 
 #. module: crm_phone
 #: model:ir.model.fields,field_description:crm_phone.field_crm_lead_phonecall_count
@@ -257,12 +257,12 @@ msgstr ""
 #: model:ir.model,name:crm_phone.model_res_partner
 #: model:ir.ui.view,arch_db:crm_phone.crm_phonecall_search
 msgid "Partner"
-msgstr "Partenaire"
+msgstr ""
 
 #. module: crm_phone
 #: model:ir.model.fields,field_description:crm_phone.field_crm_phonecall_partner_phone
 msgid "Phone"
-msgstr "Téléphone"
+msgstr ""
 
 #. module: crm_phone
 #: code:addons/crm_phone/models/crm_phonecall.py:87
@@ -330,12 +330,12 @@ msgstr ""
 #: code:addons/crm_phone/wizard/number_not_found.py:50
 #, python-format
 msgid "Select the Lead to Update."
-msgstr "Sélectionnez la piste à mettre à jour."
+msgstr ""
 
 #. module: crm_phone
 #: model:ir.ui.view,arch_db:crm_phone.crm_phonecall_search
 msgid "State"
-msgstr "État"
+msgstr ""
 
 #. module: crm_phone
 #: model:ir.model.fields,field_description:crm_phone.field_crm_phonecall_state
@@ -379,12 +379,12 @@ msgstr ""
 #. module: crm_phone
 #: model:ir.ui.view,arch_db:crm_phone.number_not_found_form
 msgid "Update Lead with this Number"
-msgstr "Mettre à jour la piste avec ce numéro"
+msgstr ""
 
 #. module: crm_phone
 #: model:ir.model,name:crm_phone.model_res_users
 msgid "Users"
-msgstr "Utilisateurs"
+msgstr ""
 
 #. module: crm_phone
 #: model:ir.ui.view,arch_db:crm_phone.create_crm_phonecall_view
@@ -399,7 +399,7 @@ msgstr ""
 #. module: crm_phone
 #: model:ir.model,name:crm_phone.model_phone_common
 msgid "phone.common"
-msgstr "phone.common"
+msgstr ""
 
 #. module: crm_phone
 #: model:ir.model,name:crm_phone.model_wizard_create_crm_phonecall
