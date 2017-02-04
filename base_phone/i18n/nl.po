@@ -53,7 +53,7 @@ msgstr ""
 #: model:ir.ui.view,arch_db:base_phone.number_not_found_form
 #: model:ir.ui.view,arch_db:base_phone.reformat_all_phonenumbers_form
 msgid "Close"
-msgstr ""
+msgstr "Sluiten"
 
 #. module: base_phone
 #: model:ir.model,name:base_phone.model_res_company
