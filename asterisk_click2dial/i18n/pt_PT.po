@@ -471,7 +471,7 @@ msgstr ""
 #: code:addons/asterisk_click2dial/static/src/js/asterisk_click2dial.js:44
 #, python-format
 msgid "Success"
-msgstr ""
+msgstr "Sucesso"
 
 #. module: asterisk_click2dial
 #: help:asterisk.server,port:0

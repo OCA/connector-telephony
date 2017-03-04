@@ -139,7 +139,7 @@ msgstr ""
 #. module: base_phone
 #: selection:number.not.found,number_type:0
 msgid "Fixed"
-msgstr ""
+msgstr "Feste Zuweisung"
 
 #. module: base_phone
 #: field:number.not.found,number_type:0
