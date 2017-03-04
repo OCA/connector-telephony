@@ -137,7 +137,7 @@ msgstr ""
 #: code:addons/base_phone/wizard/number_not_found.py:99
 #, python-format
 msgid "Error"
-msgstr ""
+msgstr "Erro"
 
 #. module: base_phone
 #: selection:number.not.found,number_type:0
