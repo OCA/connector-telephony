@@ -6,7 +6,7 @@
 
 
 import logging
-from openerp import models, fields
+from odoo import models, fields
 
 
 _logger = logging.getLogger('gateway')
@@ -25,8 +25,8 @@ class ServerAction(models.Model):
              "will be the field providing the correct mobile number.")
     sms = fields.Char('SMS', size=160, translate=True)
     sms_server = fields.Many2one(
-        'sms.gateway', string='SMS Server',
+        comodel_name='sms.gateway', string='SMS Server',
         help='Select the SMS Gateway configuration to use with this action.')
     sms_template_id = fields.Many2one(
-        'email.template', string='SMS Template',
+        comodel_name='email.template', string='SMS Template',
         help='Select the SMS Template configuration to use with this action.')

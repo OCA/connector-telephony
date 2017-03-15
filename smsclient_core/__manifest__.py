@@ -7,14 +7,12 @@
 
 {
     "name": "SMS Client Core",
-    "version": "8.0.1",
+    "version": "10.0.1.0.0",
     "depends": ["base",
                 "email_template",
                 'base_phone',
-                'server_environment',
+                'keychain',
                 ],
-    "author": "Julius Network Solutions,SYLEAM,OpenERP SA,Akretion,"
-              "Odoo Community Association (OCA)",
     'images': [
         'images/sms.jpeg',
         'images/gateway.jpeg',
@@ -33,11 +31,11 @@ Sending SMSs very easily, individually or collectively.
         "security/groups.xml",
         "security/ir.model.access.csv",
         "security/ir.rule.csv",
-        "sms_gateway_view.xml",
-        "serveraction_view.xml",
-        "sms_gateway_data.xml",
+        "views/sms_gateway_view.xml",
+        "views/serveraction_view.xml",
+        "views/sms_gateway_data.xml",
         "wizard/mass_sms_view.xml",
-        "smstemplate_view.xml"
+        "views/smstemplate_view.xml"
     ],
     "installable": True,
 }

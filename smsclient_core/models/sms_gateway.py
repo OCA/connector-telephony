@@ -8,8 +8,8 @@
 
 import logging
 
-from openerp import models, fields, api, _
-from openerp.addons.server_environment import serv_config
+from odoo import models, fields, api, _
+from odoo.addons.server_environment import serv_config
 
 _logger = logging.getLogger(__name__)
 

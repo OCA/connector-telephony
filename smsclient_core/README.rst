@@ -18,6 +18,7 @@ Configuration
 
 To configure this module, you need to:
 
+* Configure Keychain key
 * Configure your provider account
 
 Usage
@@ -26,12 +27,8 @@ Usage
 To use this module, you need to:
 
 * got to partner menu
-* select on or multiple partner
+* select one or multiple partner
 * go to more and will found some wizards to send sms
-
-
-Known issues / Roadmap
-======================
 
 
 Bug Tracker
