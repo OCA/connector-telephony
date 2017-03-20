@@ -82,8 +82,8 @@ class SmsSms(models.Model):
     @api.multi
     def _send_http_ovh(self):
         self.ensure_one()
-        params = self._prepare_http_ovh().items()
-        r = requests.get(self.gateway_id.url, params=params)
+        params = self._prepare_http_ovh()
+        r = requests.get(self.gateway_id.url, params=params.items())
         params['password'] = '*****'
         _logger.debug("Call OVH API : %s params %s",
                       self.gateway_id.url, params)
