@@ -23,7 +23,7 @@ class ServerAction(models.Model):
         help="Field to be used to fetch the mobile number, e.g. you select"
              " the invoice model and `object.invoice_address_id.mobile` "
              "will be the field providing the correct mobile number.")
-    sms = fields.Char('SMS', size=160, translate=True)
+    sms = fields.Char(string='SMS', size=160, translate=True)
     sms_server = fields.Many2one(
         comodel_name='sms.gateway', string='SMS Server',
         help='Select the SMS Gateway configuration to use with this action.')

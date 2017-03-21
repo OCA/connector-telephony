@@ -7,9 +7,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 import logging
-
 from odoo import models, fields, api, _
-from odoo.addons.server_environment import serv_config
 
 _logger = logging.getLogger(__name__)
 
@@ -26,6 +24,17 @@ CLASSES_LIST = [
     ('2', 'SIM'),
     ('3', 'Toolkit')
 ]
+
+
+class SmsAccount(models.Model):
+    _inherit = 'keychain.account'
+
+    namespace = fields.Selection(
+        selection=[('SMS_Gateway', 'SMS Account')]
+    )
+
+    def _sms_init_data(self):
+        return {'url':"", 'login_provider': "", 'password_provider': ""}
 
 
 class SMSClient(models.Model):
@@ -50,7 +59,7 @@ class SMSClient(models.Model):
                 for key in config_vals:
                     sms_provider[key] = config_vals[key]
 
-    name = fields.Char('Gateway Name', required=True)
+    name = fields.Char(string='Gateway Name', required=True)
     url = fields.Char(
         string='Gateway URL', compute='_get_provider_conf',
         help='Base url for message')
@@ -58,13 +67,13 @@ class SMSClient(models.Model):
     method = fields.Selection(
         string='API Method',
         selection='get_method')
-    state = fields.Selection([
+    state = fields.Selection(selection=[
         ('new', 'Not Verified'),
         ('waiting', 'Waiting for Verification'),
         ('confirm', 'Verified'),
-        ], 'Gateway Status', index=True, readonly=True, default='new')
+        ], string='Gateway Status', index=True, readonly=True, default='new')
     user_ids = fields.Many2many(
-        'res.users',
+        comodel_name='res.users',
         string='Users Allowed')
     sms_account = fields.Char(compute='_get_provider_conf')
     sms_account_visible = fields.Boolean(default=False)
@@ -86,7 +95,7 @@ class SMSClient(models.Model):
              "is dropped.")
     validity_visible = fields.Boolean(default=False)
     classes = fields.Selection(
-        CLASSES_LIST, 'Class',
+        selection=CLASSES_LIST, string='Class',
         default='1',
         help='The SMS class: flash(0),phone display(1),SIM(2),toolkit(3)')
     classes_visible = fields.Boolean(default=False)
@@ -95,13 +104,13 @@ class SMSClient(models.Model):
         help='The time -in minute(s)- to wait before sending the message.')
     deferred_visible = fields.Boolean(default=False)
     priority = fields.Selection(
-        PRIORITY_LIST, string='Priority', default='3',
+        selection=PRIORITY_LIST, string='Priority', default='3',
         help='The priority of the message')
     priority_visible = fields.Boolean(default=False)
-    coding = fields.Selection([
+    coding = fields.Selection(selection=[
         ('1', '7 bit'),
         ('2', 'Unicode')
-        ], 'Coding',
+        ], string='Coding',
         help='The SMS coding: 1 for 7 bit (160 chracters max'
              'lenght) or 2 for unicode (70 characters max'
              'lenght)',
@@ -118,7 +127,7 @@ class SMSClient(models.Model):
     char_limit = fields.Boolean('Character Limit', default=True)
     char_limit_visible = fields.Boolean(default=False)
     default_gateway = fields.Boolean(default=False)
-    company_id = fields.Many2one('res.company')
+    company_id = fields.Many2one(comodel_name='res.company')
 
     @api.onchange('method')
     def onchange_method(self):
@@ -168,33 +177,33 @@ class SmsSms(models.Model):
         readonly=True,
         states={'draft': [('readonly', False)]})
     gateway_id = fields.Many2one(
-        'sms.gateway',
-        'SMS Gateway',
+        comodel_name='sms.gateway',
+        string='SMS Gateway',
         readonly=True,
         states={'draft': [('readonly', False)]})
-    state = fields.Selection([
+    state = fields.Selection(selection=[
         ('draft', 'Queued'),
         ('sent', 'Sent'),
         ('cancel', 'Cancel'),
         ('error', 'Error'),
-        ], 'Message Status',
+        ], string='Message Status',
         select=True,
         readonly=True,
         default='draft')
     error = fields.Text(
-        'Last Error',
+        string='Last Error',
         size=256,
         readonly=True,
         states={'draft': [('readonly', False)]})
     validity = fields.Integer(
-        'Validity',
+        string='Validity',
         readonly=True,
         states={'draft': [('readonly', False)]},
         help='The maximum time -in minute(s)- before the message is dropped.')
     classes = fields.Selection(
+        selection=CLASSES_LIST,
         readonly=True,
         states={'draft': [('readonly', False)]},
-        selection=CLASSES_LIST,
         help='The sms class: flash(0), phone display(1), SIM(2), toolkit(3)')
     deferred = fields.Integer(
         readonly=True,
@@ -217,7 +226,7 @@ class SmsSms(models.Model):
         states={'draft': [('readonly', False)]},
         help='An optional tag')
     nostop = fields.Boolean(
-        'NoStop',
+        string='NoStop',
         readonly=True,
         states={'draft': [('readonly', False)]},
         help='Do not display STOP clause in the message, this requires that'
@@ -228,7 +237,7 @@ class SmsSms(models.Model):
         states={'draft': [('readonly', False)]},
         string='Partner')
     company_id = fields.Many2one(
-        'res.company',
+        comodel_name='res.company',
         readonly=True,
         states={'draft': [('readonly', False)]})
 
