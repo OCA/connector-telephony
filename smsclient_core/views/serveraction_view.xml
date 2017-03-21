@@ -1,6 +1,5 @@
 <?xml version="1.0"?>
-<openerp>
-    <data>
+<odoo>
         <record model="ir.ui.view" id="view_server_statistics_graph">
             <field name="name">ir.actions.server.form.inherit</field>
             <field name="model">ir.actions.server</field>
@@ -18,5 +17,4 @@
                 </page>
             </field>
         </record>
-    </data>
-</openerp>
+</odoo>

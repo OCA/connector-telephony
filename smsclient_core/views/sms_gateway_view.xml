@@ -1,6 +1,5 @@
 <?xml version="1.0"?>
-<openerp>
-    <data>
+<odoo>
 
         <!-- ************************************************************** -->
         <!-- ** SMS Gateway list ****************************************** -->
@@ -161,5 +160,4 @@
                     res_model="sms.sms"
                     src_model="sms.gateway"/>
 
-    </data>
-</openerp>
+</odoo>

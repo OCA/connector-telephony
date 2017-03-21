@@ -8,6 +8,7 @@
 
 import logging
 from odoo import models, fields, api, _
+from functools import wraps
 
 _logger = logging.getLogger(__name__)
 
@@ -25,18 +26,6 @@ CLASSES_LIST = [
     ('3', 'Toolkit')
 ]
 
-
-class SmsAccount(models.Model):
-    _inherit = 'keychain.account'
-
-    namespace = fields.Selection(
-        selection=[('SMS_Gateway', 'SMS Account')]
-    )
-
-    def _sms_init_data(self):
-        return {'url':"", 'login_provider': "", 'password_provider': ""}
-
-
 class SMSClient(models.Model):
     _name = 'sms.gateway'
     _description = 'SMS Client'
@@ -46,18 +35,31 @@ class SMSClient(models.Model):
         return []
 
     @api.multi
-    def _get_provider_conf(self):
-        for sms_provider in self:
-            global_section_name = 'sms_provider'
-            config_vals = {}
-            if serv_config.has_section(global_section_name):
-                config_vals.update(serv_config.items(global_section_name))
-                custom_section_name = '.'.join((global_section_name,
-                                                sms_provider.name))
-                if serv_config.has_section(custom_section_name):
-                    config_vals.update(serv_config.items(custom_section_name))
-                for key in config_vals:
-                    sms_provider[key] = config_vals[key]
+    def _provider_get_provider_conf(self):
+        for rec in self:
+            keychain = rec.env['keychain.account']
+            if rec._check_permissions:
+                retrieve = keychain.suspend_security().retrieve
+            else:
+                retrieve = keychain.retrieve
+            accounts = retrieve(
+                [['namespace', '=', 'SMS_Gateway%s' % rec.provider_type]])
+
+            return accounts[0]
+
+    # @api.multi
+    # def _get_provider_conf(self):
+    #     for sms_provider in self:
+    #         global_section_name = 'sms_provider'
+    #         config_vals = {}
+    #         if serv_config.has_section(global_section_name):
+    #             config_vals.update(serv_config.items(global_section_name))
+    #             custom_section_name = '.'.join((global_section_name,
+    #                                             sms_provider.name))
+    #             if serv_config.has_section(custom_section_name):
+    #                 config_vals.update(serv_config.items(custom_section_name))
+    #             for key in config_vals:
+    #                 sms_provider[key] = config_vals[key]
 
     name = fields.Char(string='Gateway Name', required=True)
     url = fields.Char(

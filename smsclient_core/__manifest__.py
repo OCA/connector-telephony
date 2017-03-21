@@ -9,7 +9,7 @@
     "name": "SMS Client Core",
     "version": "10.0.1.0.0",
     "depends": ["base",
-                "email_template",
+                "mail",
                 'base_phone',
                 'keychain',
                 ],
