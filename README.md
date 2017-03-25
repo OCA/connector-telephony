@@ -20,6 +20,7 @@ To know more about the OpenERP-Asterisk connector, refer to the documentation
 http://www.akretion.com/en/products-and-services/openerp-asterisk-voip-connector
 
 [//]: # (addons)
+
 Available addons
 ----------------
 addon | version | summary
