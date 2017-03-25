@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: connector-telephony (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-14 02:09+0000\n"
-"PO-Revision-Date: 2015-10-14 11:26+0000\n"
+"POT-Creation-Date: 2015-11-01 04:07+0000\n"
+"PO-Revision-Date: 2017-03-24 18:23+0000\n"
 "Last-Translator: Enrique Zanardi <ezanardi@atlantux.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/oca/OCA-connector-telephony-8-0/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -126,12 +126,12 @@ msgstr "Número no encontrado"
 #: code:addons/crm_phone/wizard/create_crm_phonecall.py:65
 #, python-format
 msgid "Phone Call"
-msgstr ""
+msgstr "Llamada"
 
 #. module: crm_phone
 #: model:ir.model,name:crm_phone.model_crm_phonecall
 msgid "Phonecall"
-msgstr ""
+msgstr "Llamada telefónica"
 
 #. module: crm_phone
 #: field:res.users,context_propose_creation_crm_call:0

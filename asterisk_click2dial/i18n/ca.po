@@ -156,7 +156,7 @@ msgstr ""
 #: code:addons/asterisk_click2dial/asterisk_click2dial.py:227
 #, python-format
 msgid "Connection Test Failed!"
-msgstr ""
+msgstr "El test de connexió ha fallat!"
 
 #. module: asterisk_click2dial
 #: code:addons/asterisk_click2dial/asterisk_click2dial.py:233
@@ -404,7 +404,7 @@ msgstr ""
 #: field:res.users,resource:0
 #, python-format
 msgid "Resource Name"
-msgstr ""
+msgstr "Nom del recurs "
 
 #. module: asterisk_click2dial
 #: help:res.users,resource:0
