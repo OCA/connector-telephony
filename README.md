@@ -33,6 +33,7 @@ addon | version | summary
 [hr_phone](hr_phone/) | 9.0.1.0.0 | Validate phone numbers in HR
 [hr_recruitment_phone](hr_recruitment_phone/) | 9.0.1.0.0 | Validate phone numbers in HR Recruitment
 
+
 Unported addons
 ---------------
 addon | version | summary
