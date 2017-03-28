@@ -1,8 +1,9 @@
 .. image:: https://img.shields.io/badge/licence-AGPL--3-blue.svg
     :alt: License: AGPL-3
 
+===============
 SMS client OVH
-===========
+===============
 
 This module provide OVH fields to create OVH gateway.
 
@@ -11,16 +12,13 @@ Usage
 
 To use this module, you need to:
 
-* go to gateway configuration and select OVH http in method
+* go to settings > technical > telephony >gateway configuration and select OVH http in method
+* go to settings > technical > keychain and set your credentials
 
 For further information, please visit:
 
 * https://www.odoo.com/forum/help-1
 
-Known issues / Roadmap
-======================
-
-* ...
 
 Bug Tracker
 ===========
@@ -37,8 +35,9 @@ Credits
 Contributors
 ------------
 
-* Valentin Chemiere <valentin.chemiere@akretion.com>
+* Valentin Chemiere
 * Yvan Party <yvan@julius.fr>
+* MonsieurB <monsieurb@saaslys.com>
 
 Maintainer
 ----------

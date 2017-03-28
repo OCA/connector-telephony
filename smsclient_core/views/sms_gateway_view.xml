@@ -19,17 +19,9 @@
                         <notebook colspan="4">
                             <page string="General">
                                 <group col="4">
-                                    <field name="url" colspan="4" attrs="{'invisible': [('url_visible', '=', False),]}"/>
-                                    <field name="url_visible" invisible="1"/>
-                                    <field name="sms_account" attrs="{'invisible': [('sms_account_visible', '=', False),]}"/>
-                                    <field name="sms_account_visible" invisible="1"/>
-                                    <field name="login_provider" attrs="{'invisible': [('login_provider_visible', '=', False),]}"/>
-                                    <field name="login_provider_visible" invisible="1"/>
-                                    <field name="password_provider" attrs="{'invisible': [('password_provider_visible', '=', False),]}"/>
-                                    <field name="password_provider_visible" invisible="1"/>
-                                    <field name="from_provider" attrs="{'invisible': [('from_provider_visible', '=', False),]}"/>
-                                    <field name="from_provider_visible" invisible="1"/>
                                     <field name="state"/>
+                                    <field name="from_provider"/>
+                                    <field name="url"/>
                                 </group>
                             </page>
                             <page string="Permission">
@@ -40,24 +32,16 @@
                             <page string="Additional option">
                                 <group>
                                     <group>
-                                        <field name="validity" attrs="{'invisible': [('validity_visible', '=', False),]}"/>
-                                        <field name="validity_visible" invisible="1"/>
-                                        <field name="classes" attrs="{'invisible': [('classes_visible', '=', False),]}"/>
-                                        <field name="classes_visible" invisible="1"/>
-                                        <field name="deferred" attrs="{'invisible': [('deferred_visible', '=', False),]}"/>
-                                        <field name="deferred_visible" invisible="1"/>
-                                        <field name="nostop" attrs="{'invisible': [('nostop_visible', '=', False),]}"/>
-                                        <field name="nostop_visible" invisible="1"/>
+                                        <field name="validity" />
+                                        <field name="classes"/>
+                                        <field name="deferred" />
+                                        <field name="nostop" />
                                     </group>
                                     <group>
-                                        <field name="priority" attrs="{'invisible': [('priority_visible', '=', False),]}"/>
-                                        <field name="priority_visible" invisible="1"/>
-                                        <field name="coding" attrs="{'invisible': [('coding_visible', '=', False),]}"/>
-                                        <field name="coding_visible" invisible="1"/>
-                                        <field name="tag" attrs="{'invisible': [('tag_visible', '=', False),]}"/>
-                                        <field name="tag_visible" invisible="1"/>
-                                        <field name="char_limit" attrs="{'invisible': [('char_limit_visible', '=', False),]}"/>
-                                        <field name="char_limit_visible" invisible="1"/>
+                                        <field name="priority" />
+                                        <field name="coding"/>
+                                        <field name="tag"/>
+                                        <field name="char_limit"/>
                                     </group>
                                 </group>
                             </page>
@@ -74,7 +58,6 @@
                 <tree string="SMS Gateways">
                     <field name="name"/>
                     <field name="method"/>
-                    <field name="url"/>
                 </tree>
             </field>
         </record>

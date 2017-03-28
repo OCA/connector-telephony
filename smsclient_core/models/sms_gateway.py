@@ -8,7 +8,7 @@
 
 import logging
 from odoo import models, fields, api, _
-from functools import wraps
+from odoo.exceptions import UserError
 
 _logger = logging.getLogger(__name__)
 
@@ -26,6 +26,7 @@ CLASSES_LIST = [
     ('3', 'Toolkit')
 ]
 
+
 class SMSClient(models.Model):
     _name = 'sms.gateway'
     _description = 'SMS Client'
@@ -34,41 +35,13 @@ class SMSClient(models.Model):
     def get_method(self):
         return []
 
-    @api.multi
-    def _provider_get_provider_conf(self):
-        for rec in self:
-            keychain = rec.env['keychain.account']
-            if rec._check_permissions:
-                retrieve = keychain.suspend_security().retrieve
-            else:
-                retrieve = keychain.retrieve
-            accounts = retrieve(
-                [['namespace', '=', 'SMS_Gateway%s' % rec.provider_type]])
-
-            return accounts[0]
-
-    # @api.multi
-    # def _get_provider_conf(self):
-    #     for sms_provider in self:
-    #         global_section_name = 'sms_provider'
-    #         config_vals = {}
-    #         if serv_config.has_section(global_section_name):
-    #             config_vals.update(serv_config.items(global_section_name))
-    #             custom_section_name = '.'.join((global_section_name,
-    #                                             sms_provider.name))
-    #             if serv_config.has_section(custom_section_name):
-    #                 config_vals.update(serv_config.items(custom_section_name))
-    #             for key in config_vals:
-    #                 sms_provider[key] = config_vals[key]
-
     name = fields.Char(string='Gateway Name', required=True)
-    url = fields.Char(
-        string='Gateway URL', compute='_get_provider_conf',
-        help='Base url for message')
-    url_visible = fields.Boolean(default=False)
+    from_provider = fields.Char(string="From")
     method = fields.Selection(
         string='API Method',
         selection='get_method')
+    url = fields.Char(
+        string='Gateway URL', help='Base url for message')
     state = fields.Selection(selection=[
         ('new', 'Not Verified'),
         ('waiting', 'Waiting for Verification'),
@@ -77,16 +50,7 @@ class SMSClient(models.Model):
     user_ids = fields.Many2many(
         comodel_name='res.users',
         string='Users Allowed')
-    sms_account = fields.Char(compute='_get_provider_conf')
-    sms_account_visible = fields.Boolean(default=False)
-    login_provider = fields.Char(compute='_get_provider_conf')
-    login_provider_visible = fields.Boolean(default=False)
-    password_provider = fields.Char(compute='_get_provider_conf')
-    password_provider_visible = fields.Boolean(default=False)
-    from_provider = fields.Char(compute='_get_provider_conf')
-    from_provider_visible = fields.Boolean(default=False)
     code = fields.Char('Verification Code')
-    code_visible = fields.Boolean(default=False)
     body = fields.Text(
         string='Message',
         help="The message text that will be send along with the"
@@ -95,12 +59,10 @@ class SMSClient(models.Model):
         default=10,
         help="The maximum time - in minute(s) - before the message "
              "is dropped.")
-    validity_visible = fields.Boolean(default=False)
     classes = fields.Selection(
         selection=CLASSES_LIST, string='Class',
         default='1',
         help='The SMS class: flash(0),phone display(1),SIM(2),toolkit(3)')
-    classes_visible = fields.Boolean(default=False)
     deferred = fields.Integer(
         default=0,
         help='The time -in minute(s)- to wait before sending the message.')
@@ -108,7 +70,6 @@ class SMSClient(models.Model):
     priority = fields.Selection(
         selection=PRIORITY_LIST, string='Priority', default='3',
         help='The priority of the message')
-    priority_visible = fields.Boolean(default=False)
     coding = fields.Selection(selection=[
         ('1', '7 bit'),
         ('2', 'Unicode')
@@ -118,35 +79,14 @@ class SMSClient(models.Model):
              'lenght)',
         default='1'
     )
-    coding_visible = fields.Boolean(default=False)
     tag = fields.Char('Tag', help='an optional tag')
-    tag_visible = fields.Boolean(default=False)
     nostop = fields.Boolean(
         default=True,
         help='Do not display STOP clause in the message, this requires that '
              'this is not an advertising message.')
-    nostop_visible = fields.Boolean(default=False)
     char_limit = fields.Boolean('Character Limit', default=True)
-    char_limit_visible = fields.Boolean(default=False)
     default_gateway = fields.Boolean(default=False)
     company_id = fields.Many2one(comodel_name='res.company')
-
-    @api.onchange('method')
-    def onchange_method(self):
-        if not self.method:
-            self.url_visible = False
-            self.sms_account_visible = False
-            self.login_provider_visible = False
-            self.password_provider_visible = False
-            self.from_provider_visible = False
-            self.validity_visible = False
-            self.classes_visible = False
-            self.deferred_visible = False
-            self.nostop_visible = False
-            self.priority_visible = False
-            self.coding_visible = False
-            self.tag_visible = False
-            self.char_limit_visible = False
 
     @api.multi
     def _check_permissions(self):
@@ -189,7 +129,6 @@ class SmsSms(models.Model):
         ('cancel', 'Cancel'),
         ('error', 'Error'),
         ], string='Message Status',
-        select=True,
         readonly=True,
         default='draft')
     error = fields.Text(
@@ -243,6 +182,11 @@ class SmsSms(models.Model):
         readonly=True,
         states={'draft': [('readonly', False)]})
 
+    @api.model
+    def _convert_to_e164(self, erp_number):
+        to_dial_number = erp_number.replace(u'\xa0', u' ')
+        return to_dial_number
+
     @api.onchange('partner_id')
     def onchange_partner_id(self):
         self.mobile = self.partner_id.mobile
@@ -250,13 +194,19 @@ class SmsSms(models.Model):
     @api.multi
     def send(self):
         for sms in self:
+            if not sms.gateway_id._check_permissions():
+                sms.write(
+                    {'error': 'no permission on gateway', 'state': 'error'})
+                sms._cr.commit()
+                return False
             if sms.gateway_id.char_limit and len(sms.message) > 160:
                 sms.write({
                     'state': 'error',
                     'error': _('Size of SMS should not be more then 160 char'),
                     })
             if not hasattr(sms, "_send_%s" % sms.gateway_id.method):
-                raise NotImplemented
+                        #may not exist the gateway
+                raise UserError(_("No method gateway selected"))
             else:
                 try:
                     with sms._cr.savepoint():

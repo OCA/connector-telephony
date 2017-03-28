@@ -28,5 +28,5 @@ class ServerAction(models.Model):
         comodel_name='sms.gateway', string='SMS Server',
         help='Select the SMS Gateway configuration to use with this action.')
     sms_template_id = fields.Many2one(
-        comodel_name='email.template', string='SMS Template',
+        comodel_name='mail.template', string='SMS Template',
         help='Select the SMS Template configuration to use with this action.')
