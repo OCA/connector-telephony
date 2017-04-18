@@ -1,0 +1,4 @@
+id,name,model_id:id,groups:id,perm_read,perm_write,perm_create,perm_unlink,domain_force
+edit_access_sms_gateway,Edit Access Sms Gateway,model_sms_gateway,,False,True,True,True,"[('company_id','=', user.company_id.id)]"
+read_access_sms_gateway,Read Access Sms Gateway,model_sms_gateway,,True,False,False,False,"['|', '|', ('company_id','=', user.company_id.id),('company_id','child_of',[user.company_id.id]),('company_id','=',user.company_id.parent_id.id)]"
+edit_access_sms,Edit Access Sms,model_sms_sms,,True,True,True,True,"[('company_id','=', user.company_id.id)]"
