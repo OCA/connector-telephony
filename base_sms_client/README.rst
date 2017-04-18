@@ -1,33 +1,42 @@
 .. image:: https://img.shields.io/badge/licence-AGPL--3-blue.svg
     :alt: License: AGPL-3
 
-===============
-SMS client OVH
+SMS client core
 ===============
 
-This module provide OVH fields to create OVH gateway.
+This module provides base function to send sms. It is not meant to work alone and needs a least one provider module.
+
+Installation
+============
+
+To install this module, you need to:
+
+* Install a provider module after
+
+Configuration
+=============
+
+To configure this module, you need to:
+
+* Configure Keychain key
+* Configure your provider account
 
 Usage
 =====
 
 To use this module, you need to:
 
-* go to settings > technical > telephony >gateway configuration and select OVH http in method
-* go to settings > technical > keychain and set your credentials
-
-For further information, please visit:
-
-* https://www.odoo.com/forum/help-1
+ * go to partner menu
+ * select one or multiple partner
+ * go to more and will found some wizards to send sms
 
 
 Bug Tracker
 ===========
 
-Bugs are tracked on `GitHub Issues <https://github.com/OCA/{project_repo}/issues>`_.
+Bugs are tracked on `GitHub Issues <https://github.com/OCA/base_sms_client/issues>`_.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us smashing it by providing a detailed and welcomed feedback
-`here <https://github.com/OCA/{project_repo}/issues/new?body=module:%20{module_name}%0Aversion:%20{version}%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
-
 
 Credits
 =======
@@ -35,9 +44,8 @@ Credits
 Contributors
 ------------
 
-* Valentin Chemiere
+* Valentin Chemiere <valentin.chemiere@akretion.com>
 * Yvan Party <yvan@julius.fr>
-* MonsieurB <monsieurb@saaslys.com>
 
 Maintainer
 ----------

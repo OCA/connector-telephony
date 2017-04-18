@@ -4,12 +4,7 @@
 # Copyright (C) 2015 Valentin Chemiere <valentin.chemiere@akretion.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-
-import logging
 from odoo import models, fields
-
-
-_logger = logging.getLogger('gateway')
 
 
 class ServerAction(models.Model):
@@ -24,7 +19,7 @@ class ServerAction(models.Model):
              " the invoice model and `object.invoice_address_id.mobile` "
              "will be the field providing the correct mobile number.")
     sms = fields.Char(string='SMS', size=160, translate=True)
-    sms_server = fields.Many2one(
+    sms_server_id = fields.Many2one(
         comodel_name='sms.gateway', string='SMS Server',
         help='Select the SMS Gateway configuration to use with this action.')
     sms_template_id = fields.Many2one(

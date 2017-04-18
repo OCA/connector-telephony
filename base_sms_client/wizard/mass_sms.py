@@ -7,8 +7,8 @@
 from odoo import models, fields, api
 
 
-class WizardSendSms(models.TransientModel):
-    _name = 'wizard.send.sms'
+class WizardMassSms(models.TransientModel):
+    _name = 'wizard.mass.sms'
 
     @api.model
     def _default_get_gateway(self):
@@ -18,6 +18,37 @@ class WizardSendSms(models.TransientModel):
     def _default_get_partner(self):
         if self._context.get('active_model') == 'res.partner':
             return self._context.get('active_ids')
+
+    gateway_id = fields.Many2one(
+        'sms.gateway',
+        required=True,
+        default=_default_get_gateway)
+    message = fields.Text(required=True)
+    validity = fields.Integer(
+        help='The maximum time -in minute(s)- before the message is dropped')
+    classes = fields.Selection([
+        ('0', 'Flash'),
+        ('1', 'Phone display'),
+        ('2', 'SIM'),
+        ('3', 'Toolkit'),
+    ], help='The sms class: flash(0),phone display(1),SIM(2),toolkit(3)')
+    deferred = fields.Integer(
+        help='The time -in minute(s)- to wait before sending the message')
+    priority = fields.Selection([
+        ('0', '0'),
+        ('1', '1'),
+        ('2', '2'),
+        ('3', '3')
+    ], help='The priority of the message')
+    coding = fields.Selection([
+        ('1', '7 bit'),
+        ('2', 'Unicode')
+        ], help='The sms coding: 1 for 7 bit or 2 for unicode')
+    tag = fields.Char(size=256, help='An optional tag')
+    nostop = fields.Boolean(
+        help='Do not display STOP clause in the message, this requires that '
+             'this is not an advertising message')
+    partner_ids = fields.Many2many('res.partner', default=_default_get_partner)
 
     @api.onchange('gateway_id')
     def onchange_gateway_mass(self):
@@ -49,34 +80,3 @@ class WizardSendSms(models.TransientModel):
         for partner in partner_obj.browse(self._context.get('active_ids')):
             vals = self._prepare_sms_vals(partner)
             sms_obj.create(vals)
-
-    gateway_id = fields.Many2one(
-        'sms.gateway',
-        required=True,
-        default=_default_get_gateway)
-    message = fields.Text(required=True)
-    validity = fields.Integer(
-        help='The maximum time -in minute(s)- before the message is dropped')
-    classes = fields.Selection([
-        ('0', 'Flash'),
-        ('1', 'Phone display'),
-        ('2', 'SIM'),
-        ('3', 'Toolkit'),
-        ], help='The sms class: flash(0),phone display(1),SIM(2),toolkit(3)')
-    deferred = fields.Integer(
-        help='The time -in minute(s)- to wait before sending the message')
-    priority = fields.Selection([
-        ('0', '0'),
-        ('1', '1'),
-        ('2', '2'),
-        ('3', '3')
-        ], help='The priority of the message')
-    coding = fields.Selection([
-        ('1', '7 bit'),
-        ('2', 'Unicode')
-        ], help='The sms coding: 1 for 7 bit or 2 for unicode')
-    tag = fields.Char(size=256, help='An optional tag')
-    nostop = fields.Boolean(
-        help='Do not display STOP clause in the message, this requires that '
-             'this is not an advertising message')
-    partner_ids = fields.Many2many('res.partner', default=_default_get_partner)

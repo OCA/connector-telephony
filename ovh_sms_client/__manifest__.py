@@ -3,15 +3,15 @@
 # Copyright (C) 2015 Sébastien BEAU <sebastien.beau@akretion.com>
 
 {
-    'name': 'SMS Client OVH',
+    'name': 'OVH SMS Client',
     'version': '10.0.1.0.0',
-    'depends': ['base',
-                'mail',
-                'smsclient_core',
+    'license': 'AGPL-3',
+    'depends': ['mail',
+                'base_sms_client',
                 'base_suspend_security',
                 'keychain',
                 ],
-    'author': 'Julius Network Solutions,SYLEAM,OpenERP SA,'
+    'author': 'Julius Network Solutions,SYLEAM,'
               'Odoo Community Association (OCA),Akretion',
     'images': [
         'images/sms.jpeg',
@@ -22,11 +22,6 @@
     ],
     'website': 'http://julius.fr',
     'category': 'Tools',
-    'demo': [],
-    'data': [
-    ],
-    'active': False,
+    'data': ['data/keychain.xml'],
     'installable': True,
 }
-
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

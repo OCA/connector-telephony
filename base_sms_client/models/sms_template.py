@@ -8,7 +8,7 @@
 from odoo import models, fields
 
 
-class mail_template(models.Model):
+class MailTemplate(models.Model):
     _inherit = "mail.template"
 
     sms_template = fields.Boolean('SMS Template')

@@ -5,10 +5,11 @@
             <field name="interval_number">1</field>
             <field name="interval_type">minutes</field>
             <field name="numbercall">-1</field>
-            <field eval="False" name="doall"/>
-            <field eval="'sms.gateway'" name="model"/>
-            <field eval="'_run_send_sms'" name="function"/>
-            <field eval="'()'" name="args"/>
-            <field name="active" eval="False"/>
+            <field name="doall">False</field>
+            <field name="model">sms.gateway</field>
+            <field name="function">_run_send_sms</field>
+            <field name="args">()</field>
+            <field name="active">False</field>
         </record>
+
 </odoo>
