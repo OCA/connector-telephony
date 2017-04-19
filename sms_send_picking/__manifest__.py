@@ -4,17 +4,17 @@
 
 {
     'name': 'Sms Send Picking',
-    'version': '8.0.1',
+    'version': '10.0.1.0.0',
     'author': 'Akretion, Odoo Community Association (OCA)',
     'website': 'www.akretion.com',
     'license': 'AGPL-3',
     'category': 'Phone',
     'depends': [
         'stock',
-        'smsclient_core',
+        'base_sms_client',
     ],
     'data': [
-        'cron.xml'
+        'data/cron.xml'
     ],
     'installable': True,
     'application': False,
