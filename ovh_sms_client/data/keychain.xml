@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <record id="keychain_ovh" model="keychain.account">
+        <field name="name">Ovh sms default</field>
+        <field name="namespace">ovh_provider</field>
+        <field name="technical_name">ovh_default_account</field>
+    </record>
+
+</odoo>
