@@ -20,16 +20,20 @@ To know more about the OpenERP-Asterisk connector, refer to the documentation
 http://www.akretion.com/en/products-and-services/openerp-asterisk-voip-connector
 
 [//]: # (addons)
+
 Available addons
 ----------------
 addon | version | summary
 --- | --- | ---
 [asterisk_click2dial](asterisk_click2dial/) | 10.0.1.0.0 | Asterisk-Odoo connector
 [base_phone](base_phone/) | 10.0.0.1.0 | Validate phone numbers
+[base_sms_client](base_sms_client/) | 10.0.1.0.0 | Sending SMSs very easily, individually or collectively.
 [crm_phone](crm_phone/) | 10.0.1.0.0 | Validate phone numbers in CRM
 [event_phone](event_phone/) | 10.0.1.0.0 | Validate phone numbers in Events
 [hr_phone](hr_phone/) | 10.0.1.0.0 | Validate phone numbers in HR
 [hr_recruitment_phone](hr_recruitment_phone/) | 10.0.1.0.0 | Validate phone numbers in HR Recruitment
+[ovh_sms_client](ovh_sms_client/) | 10.0.1.0.0 | OVH SMS Client
+
 
 Unported addons
 ---------------
