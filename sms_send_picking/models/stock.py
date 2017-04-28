@@ -14,7 +14,7 @@ class StockPicking(models.Model):
 
     availability_sent_by_sms = fields.Boolean(default=False)
 
-    #TODO use a templating instead
+    # TODO use a templating instead
     @api.model
     def _prepare_availability_by_sms_notification(self):
         gateway = self.env['sms.gateway'].search([
@@ -48,7 +48,8 @@ class StockPicking(models.Model):
         pickings = self.env['stock.picking'].search(domain)
         total = len(pickings)
         for idx, picking in enumerate(pickings):
-            _logger.debug('Send Sms for picking %s, progress %s/%s', picking, idx, total)
+            _logger.debug('Send Sms for picking %s, progress %s/%s', picking,
+                          idx, total)
             vals = picking._prepare_availability_by_sms_notification()
             self.env['sms.sms'].create(vals)
             picking.write({'availability_sent_by_sms': True})
