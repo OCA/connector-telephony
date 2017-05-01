@@ -121,7 +121,7 @@ msgstr ""
 #. module: base_phone
 #: selection:reformat.all.phonenumbers,state:0
 msgid "Draft"
-msgstr ""
+msgstr "ドラフト"
 
 #. module: base_phone
 #: model:ir.model.fields,field_description:base_phone.field_number_not_found_e164_number
