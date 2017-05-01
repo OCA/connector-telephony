@@ -1,410 +1,600 @@
-# Catalan translation for openerp-gateway
-# Copyright (c) 2012 Rosetta Contributors and Canonical Ltd 2012
-# This file is distributed under the same license as the openerp-gateway package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2012.
-#
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * base_sms_client
+# 
+# Translators:
+# OCA Transbot <transbot@odoo-community.org>, 2017
 msgid ""
 msgstr ""
-"Project-Id-Version: openerp-gateway\n"
-"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-09-10 10:24+0000\n"
-"PO-Revision-Date: 2012-02-25 17:41+0000\n"
-"Last-Translator: Jordi Esteve (www.zikzakmedia.com) "
-"<jesteve@zikzakmedia.com>\n"
-"Language-Team: Catalan <ca@li.org>\n"
+"Project-Id-Version: Odoo Server 10.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-04-27 02:37+0000\n"
+"PO-Revision-Date: 2017-04-27 02:37+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
+"Language-Team: Catalan (https://www.transifex.com/oca/teams/23907/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-02-26 05:17+0000\n"
-"X-Generator: Launchpad (build 14860)\n"
+"Content-Transfer-Encoding: \n"
+"Language: ca\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#. module: gateway
-#: selection:sms.gateway,method:0
-msgid "SMPP Method"
-msgstr "Mètode SMPP"
+#. module: base_sms_client
+#: selection:sms.abstract,coding:0 selection:sms.gateway,coding:0
+#: selection:sms.sms,coding:0 selection:wizard.mass.sms,coding:0
+msgid "7 bit"
+msgstr ""
 
-#. module: gateway
-#: field:sms.gateway,property_ids:0
-msgid "Parameters"
-msgstr "Paràmetres"
+#. module: base_sms_client
+#: model:ir.model.fields,field_description:base_sms_client.field_sms_gateway_method
+msgid "API Method"
+msgstr "Mètode API"
 
-#. module: gateway
-#: field:sms.gateway,url:0
+#. module: base_sms_client
+#: model:ir.ui.view,arch_db:base_sms_client.sms_gateway_form
+msgid "Access Permission"
+msgstr "Permís d'accés"
+
+#. module: base_sms_client
+#: model:ir.ui.view,arch_db:base_sms_client.sms_gateway_form
+#: model:ir.ui.view,arch_db:base_sms_client.view_wizard_mass_sms
+msgid "Additional option"
+msgstr ""
+
+#. module: base_sms_client
+#: model:ir.model.fields,help:base_sms_client.field_wizard_mass_sms_tag
+msgid "An optional tag"
+msgstr ""
+
+#. module: base_sms_client
+#: model:ir.model.fields,help:base_sms_client.field_sms_gateway_url
+msgid "Base url for message"
+msgstr "URL base pel missatge"
+
+#. module: base_sms_client
+#: model:ir.ui.view,arch_db:base_sms_client.sms_sms_form
+#: model:ir.ui.view,arch_db:base_sms_client.sms_sms_tree
+#: model:ir.ui.view,arch_db:base_sms_client.view_wizard_mass_sms
+#: selection:sms.sms,state:0
+msgid "Cancel"
+msgstr "Cancel·la"
+
+#. module: base_sms_client
+#: model:ir.model.fields,field_description:base_sms_client.field_sms_abstract_char_limit
+#: model:ir.model.fields,field_description:base_sms_client.field_sms_gateway_char_limit
+#: model:ir.model.fields,field_description:base_sms_client.field_sms_sms_char_limit
+msgid "Character Limit"
+msgstr ""
+
+#. module: base_sms_client
+#: model:ir.model.fields,field_description:base_sms_client.field_sms_abstract_classes
+#: model:ir.model.fields,field_description:base_sms_client.field_sms_gateway_classes
+#: model:ir.model.fields,field_description:base_sms_client.field_sms_sms_classes
+msgid "Class"
+msgstr ""
+
+#. module: base_sms_client
+#: model:ir.model.fields,field_description:base_sms_client.field_wizard_mass_sms_classes
+msgid "Classes"
+msgstr ""
+
+#. module: base_sms_client
+#: model:ir.model.fields,field_description:base_sms_client.field_sms_abstract_coding
+#: model:ir.model.fields,field_description:base_sms_client.field_sms_gateway_coding
+#: model:ir.model.fields,field_description:base_sms_client.field_sms_sms_coding
+#: model:ir.model.fields,field_description:base_sms_client.field_wizard_mass_sms_coding
+msgid "Coding"
+msgstr ""
+
+#. module: base_sms_client
+#: model:ir.model.fields,field_description:base_sms_client.field_sms_abstract_company_id
+#: model:ir.model.fields,field_description:base_sms_client.field_sms_gateway_company_id
+#: model:ir.model.fields,field_description:base_sms_client.field_sms_sms_company_id
+msgid "Company id"
+msgstr ""
+
+#. module: base_sms_client
+#: model:ir.model.fields,field_description:base_sms_client.field_sms_gateway_create_uid
+#: model:ir.model.fields,field_description:base_sms_client.field_sms_sms_create_uid
+#: model:ir.model.fields,field_description:base_sms_client.field_wizard_mass_sms_create_uid
+msgid "Created by"
+msgstr "Creat per"
+
+#. module: base_sms_client
+#: model:ir.model.fields,field_description:base_sms_client.field_sms_gateway_create_date
+#: model:ir.model.fields,field_description:base_sms_client.field_sms_sms_create_date
+#: model:ir.model.fields,field_description:base_sms_client.field_wizard_mass_sms_create_date
+msgid "Created on"
+msgstr "Creat el"
+
+#. module: base_sms_client
+#: model:ir.model.fields,field_description:base_sms_client.field_sms_abstract_default_gateway
+#: model:ir.model.fields,field_description:base_sms_client.field_sms_gateway_default_gateway
+#: model:ir.model.fields,field_description:base_sms_client.field_sms_sms_default_gateway
+msgid "Default gateway"
+msgstr ""
+
+#. module: base_sms_client
+#: model:ir.model.fields,field_description:base_sms_client.field_sms_abstract_deferred
+#: model:ir.model.fields,field_description:base_sms_client.field_sms_gateway_deferred
+#: model:ir.model.fields,field_description:base_sms_client.field_sms_sms_deferred
+#: model:ir.model.fields,field_description:base_sms_client.field_wizard_mass_sms_deferred
+msgid "Deferred"
+msgstr ""
+
+#. module: base_sms_client
+#: model:ir.model.fields,field_description:base_sms_client.field_sms_abstract_display_name
+#: model:ir.model.fields,field_description:base_sms_client.field_sms_gateway_display_name
+#: model:ir.model.fields,field_description:base_sms_client.field_sms_sms_display_name
+#: model:ir.model.fields,field_description:base_sms_client.field_wizard_mass_sms_display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: base_sms_client
+#: model:ir.model.fields,help:base_sms_client.field_wizard_mass_sms_nostop
+msgid ""
+"Do not display STOP clause in the message, this requires that this is not an"
+" advertising message"
+msgstr ""
+
+#. module: base_sms_client
+#: model:ir.model.fields,help:base_sms_client.field_sms_abstract_nostop
+#: model:ir.model.fields,help:base_sms_client.field_sms_gateway_nostop
+#: model:ir.model.fields,help:base_sms_client.field_sms_sms_nostop
+msgid ""
+"Do not display STOP clause in the message, this requires that this is not an"
+" advertising message."
+msgstr ""
+
+#. module: base_sms_client
+#: model:ir.model,name:base_sms_client.model_mail_template
+msgid "Email Templates"
+msgstr ""
+
+#. module: base_sms_client
+#: selection:sms.sms,state:0
+msgid "Error"
+msgstr "Error"
+
+#. module: base_sms_client
+#: model:ir.model.fields,help:base_sms_client.field_ir_act_server_mobile
+msgid ""
+"Field to be used to fetch the mobile number, e.g. you select the invoice "
+"model and `object.invoice_address_id.mobile` will be the field providing the"
+" correct mobile number."
+msgstr ""
+
+#. module: base_sms_client
+#: selection:sms.abstract,classes:0 selection:sms.gateway,classes:0
+#: selection:sms.sms,classes:0 selection:wizard.mass.sms,classes:0
+msgid "Flash"
+msgstr ""
+
+#. module: base_sms_client
+#: model:ir.model.fields,field_description:base_sms_client.field_sms_gateway_from_provider
+msgid "From"
+msgstr ""
+
+#. module: base_sms_client
+#: model:ir.ui.view,arch_db:base_sms_client.view_wizard_mass_sms
+msgid "Gateway"
+msgstr ""
+
+#. module: base_sms_client
+#: model:ir.model.fields,field_description:base_sms_client.field_sms_gateway_name
+msgid "Gateway Name"
+msgstr "Nom passarel·la"
+
+#. module: base_sms_client
+#: model:ir.model.fields,field_description:base_sms_client.field_sms_gateway_state
+msgid "Gateway Status"
+msgstr "Estat passarel·la"
+
+#. module: base_sms_client
+#: model:ir.model.fields,field_description:base_sms_client.field_sms_gateway_url
 msgid "Gateway URL"
 msgstr "URL de la passarel·la"
 
-#. module: gateway
-#: field:sms.gateway.history,sms:0
-msgid "SMS"
-msgstr "SMS"
+#. module: base_sms_client
+#: model:ir.model.fields,field_description:base_sms_client.field_wizard_mass_sms_gateway_id
+msgid "Gateway id"
+msgstr ""
 
-#. module: gateway
-#: field:ir.actions.server,sms_server:0
-msgid "SMS Server"
-msgstr "Servidor SMS"
+#. module: base_sms_client
+#: model:ir.ui.view,arch_db:base_sms_client.sms_gateway_form
+msgid "General"
+msgstr "General"
 
-#. module: gateway
-#: field:sms.sms,msg:0
-msgid "SMS Text"
-msgstr "Text del SMS"
+#. module: base_sms_client
+#: model:ir.model.fields,field_description:base_sms_client.field_sms_abstract_id
+#: model:ir.model.fields,field_description:base_sms_client.field_sms_gateway_id
+#: model:ir.model.fields,field_description:base_sms_client.field_sms_sms_id
+#: model:ir.model.fields,field_description:base_sms_client.field_wizard_mass_sms_id
+msgid "ID"
+msgstr "ID"
 
-#. module: gateway
-#: code:addons/gateway/wizard/verifycode.py:43
+#. module: base_sms_client
+#: model:ir.model.fields,field_description:base_sms_client.field_sms_sms_error
+#: model:ir.ui.view,arch_db:base_sms_client.sms_sms_form
+msgid "Last Error"
+msgstr "Últim error"
+
+#. module: base_sms_client
+#: model:ir.model.fields,field_description:base_sms_client.field_sms_abstract___last_update
+#: model:ir.model.fields,field_description:base_sms_client.field_sms_gateway___last_update
+#: model:ir.model.fields,field_description:base_sms_client.field_sms_sms___last_update
+#: model:ir.model.fields,field_description:base_sms_client.field_wizard_mass_sms___last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: base_sms_client
+#: model:ir.model.fields,field_description:base_sms_client.field_sms_gateway_write_uid
+#: model:ir.model.fields,field_description:base_sms_client.field_sms_sms_write_uid
+#: model:ir.model.fields,field_description:base_sms_client.field_wizard_mass_sms_write_uid
+msgid "Last Updated by"
+msgstr "Darrera Actualització per"
+
+#. module: base_sms_client
+#: model:ir.model.fields,field_description:base_sms_client.field_sms_gateway_write_date
+#: model:ir.model.fields,field_description:base_sms_client.field_sms_sms_write_date
+#: model:ir.model.fields,field_description:base_sms_client.field_wizard_mass_sms_write_date
+msgid "Last Updated on"
+msgstr "Darrera Actualització el"
+
+#. module: base_sms_client
+#: model:ir.model.fields,field_description:base_sms_client.field_sms_abstract_body
+#: model:ir.model.fields,field_description:base_sms_client.field_sms_gateway_body
+#: model:ir.model.fields,field_description:base_sms_client.field_sms_sms_body
+#: model:ir.model.fields,field_description:base_sms_client.field_sms_sms_message
+#: model:ir.model.fields,field_description:base_sms_client.field_wizard_mass_sms_message
+#: model:ir.ui.view,arch_db:base_sms_client.view_wizard_mass_sms
+msgid "Message"
+msgstr "Missatge"
+
+#. module: base_sms_client
+#: model:ir.model.fields,field_description:base_sms_client.field_sms_sms_state
+msgid "Message Status"
+msgstr "Estat del missatge"
+
+#. module: base_sms_client
+#: model:ir.ui.view,arch_db:base_sms_client.sms_gateway_form
+msgid "Method"
+msgstr ""
+
+#. module: base_sms_client
+#: model:ir.model.fields,field_description:base_sms_client.field_sms_sms_mobile
+msgid "Mobile"
+msgstr ""
+
+#. module: base_sms_client
+#: model:ir.model.fields,field_description:base_sms_client.field_ir_act_server_mobile
+msgid "Mobile No"
+msgstr "Núm. mòbil"
+
+#. module: base_sms_client
+#: model:ir.ui.view,arch_db:base_sms_client.sms_gateway_form
+msgid "Name"
+msgstr ""
+
+#. module: base_sms_client
+#: code:addons/base_sms_client/models/sms_sms.py:66
 #, python-format
-msgid "Gateway already verified!"
-msgstr "La passarel·la ja està verificada!"
+msgid "No method gateway selected "
+msgstr ""
 
-#. module: gateway
-#: field:sms.sms,name:0
-msgid "SMS Request"
-msgstr "Petició SMS"
+#. module: base_sms_client
+#: model:ir.model.fields,field_description:base_sms_client.field_sms_abstract_nostop
+#: model:ir.model.fields,field_description:base_sms_client.field_sms_gateway_nostop
+#: model:ir.model.fields,field_description:base_sms_client.field_sms_sms_nostop
+#: model:ir.model.fields,field_description:base_sms_client.field_wizard_mass_sms_nostop
+msgid "Nostop"
+msgstr ""
 
-#. module: gateway
-#: wizard_view:sms.gateway.code.send,init:0
-#: wizard_button:sms.gateway.code.send,init,send:0
-msgid "Send Code"
-msgstr "Envia codi"
-
-#. module: gateway
-#: field:sms.gateway.parms,value:0
-msgid "Property value"
-msgstr "Valor propietat"
-
-#. module: gateway
-#: selection:sms.gateway.parms,type:0
-#: view:sms.sms:0
-msgid "SMS Message"
-msgstr "Missatge SMS"
-
-#. module: gateway
+#. module: base_sms_client
 #: selection:sms.gateway,state:0
 msgid "Not Verified"
 msgstr "No verificat"
 
-#. module: gateway
-#: help:sms.gateway.parms,type:0
-msgid "If parameter concern a value to substitute, indicate it"
-msgstr "Si el paràmetre es refereix a un valor a substituir, indiqueu-lo."
-
-#. module: gateway
-#: selection:sms.sms,state:0
-msgid "Sent"
-msgstr "Enviat"
-
-#. module: gateway
-#: help:sms.gateway.code.verify,init,code:0
-msgid "Enter the verification code that you get in your verification sms"
+#. module: base_sms_client
+#: selection:sms.gateway,method:0
+msgid "OVH HTTP"
 msgstr ""
-"Introduïu el codi de verificació que heu rebut en el vostre SMS de "
-"verificació."
 
-#. module: gateway
-#: model:ir.model,name:gateway.model_sms_gateway
-msgid "SMS Client"
-msgstr "Client SMS"
+#. module: base_sms_client
+#: model:ir.model.fields,field_description:base_sms_client.field_sms_sms_partner_id
+msgid "Partner"
+msgstr ""
 
-#. module: gateway
-#: model:ir.actions.wizard,name:gateway.sms_gateway_send_code
-msgid "Send Verification Code"
-msgstr "Envia codi de verificació"
+#. module: base_sms_client
+#: model:ir.model.fields,field_description:base_sms_client.field_wizard_mass_sms_partner_ids
+msgid "Partner ids"
+msgstr ""
 
-#. module: gateway
-#: field:sms.gateway.history,name:0
-msgid "Description"
-msgstr "Descripció"
-
-#. module: gateway
-#: view:sms.gateway:0
+#. module: base_sms_client
+#: model:ir.ui.view,arch_db:base_sms_client.sms_gateway_form
 msgid "Permission"
 msgstr "Permís"
 
-#. module: gateway
-#: help:sms.gateway.parms,value:0
-msgid "Value associate on the property for the URL"
-msgstr "Valor associat a la propietat per la URL."
-
-#. module: gateway
-#: field:sms.gateway,code:0
-#: wizard_field:sms.gateway.code.verify,init,code:0
-msgid "Verification Code"
-msgstr "Codi de verificació"
-
-#. module: gateway
-#: code:addons/gateway/wizard/sendcode.py:54
-#, python-format
-msgid "Verification Failed. Please check the Server Configuration!"
-msgstr "Ha fallat la verificació. Comproveu la configuració del servidor!"
-
-#. module: gateway
-#: code:addons/gateway/gateway.py:72
-#, python-format
-msgid "This method is not implemented (%s)"
-msgstr "Aquest mètode no està implementat (%s)"
-
-#. module: gateway
-#: help:sms.gateway.code.send,init,smsto:0
-msgid ""
-"Enter the Mobile No on which you want to receive the Verification Code"
-msgstr "Introduïu el Nº de móbil a on voleu rebre el codi de verificació."
-
-#. module: gateway
-#: code:addons/gateway/gateway.py:114
-#, python-format
-msgid "SMS Sent"
-msgstr "SMS enviat"
-
-#. module: gateway
-#: selection:sms.gateway.parms,type:0
-msgid "Recipient No"
-msgstr "Nº recepció"
-
-#. module: gateway
-#: field:sms.gateway.history,date_create:0
-#: field:sms.sms,date_create:0
-msgid "Date"
-msgstr "Data"
-
-#. module: gateway
-#: selection:sms.gateway,state:0
-msgid "Waiting for Verification"
-msgstr "Esperant verificació"
-
-#. module: gateway
-#: model:ir.model,name:gateway.model_sms_gateway_parms
-msgid "SMS Client Properties"
-msgstr "Propietats client SMS"
-
-#. module: gateway
-#: selection:sms.gateway.parms,type:0
-msgid "Password"
-msgstr "﻿Contrasenya"
-
-#. module: gateway
-#: field:sms.gateway,users_id:0
-msgid "Users Allowed"
-msgstr "Usuaris permesos"
-
-#. module: gateway
-#: help:sms.gateway.parms,name:0
-msgid "Name of the property whom appear on the URL"
-msgstr "Nom de la propietat que apareix a la URL."
-
-#. module: gateway
-#: selection:sms.gateway.parms,type:0
-msgid "User"
-msgstr "Usuari"
-
-#. module: gateway
-#: field:sms.gateway.history,user_id:0
-msgid "Username"
-msgstr "Nom d'usuari"
-
-#. module: gateway
-#: model:ir.actions.act_window,name:gateway.act_sms_gateway_2_sms_queue
-#: model:ir.actions.act_window,name:gateway.action_sms.sms_tree
-#: model:ir.ui.menu,name:gateway.menu_gateway_administration_sms_server_queue
-#: view:sms.sms:0
-msgid "Message Queue"
-msgstr "Cua de missatges"
-
-#. module: gateway
-#: view:sms.gateway.history:0
-#: view:sms.sms:0
-msgid "Gateway History"
-msgstr "Historial de la passarel·la"
-
-#. module: gateway
-#: model:ir.model,name:gateway.model_ir_actions_server
-msgid "ir.actions.server"
-msgstr "ir.accions.servidor"
-
-#. module: gateway
-#: help:ir.actions.server,sms_server:0
-msgid "Select the SMS Gateway configuration to use with this action"
+#. module: base_sms_client
+#: selection:sms.abstract,classes:0 selection:sms.gateway,classes:0
+#: selection:sms.sms,classes:0 selection:wizard.mass.sms,classes:0
+msgid "Phone display"
 msgstr ""
-"Seleccioneu la configuració de la passarel·la SMS que s'utilitzarà amb "
-"aquesta acció."
 
-#. module: gateway
-#: help:sms.gateway,body:0
-msgid ""
-"The message text that will be send along with the email which is send "
-"through this server"
+#. module: base_sms_client
+#: model:ir.model.fields,field_description:base_sms_client.field_sms_abstract_priority
+#: model:ir.model.fields,field_description:base_sms_client.field_sms_gateway_priority
+#: model:ir.model.fields,field_description:base_sms_client.field_sms_sms_priority
+#: model:ir.model.fields,field_description:base_sms_client.field_wizard_mass_sms_priority
+msgid "Priority"
 msgstr ""
-"El text del missatge que serà enviat junt amb l'Email que és enviat "
-"mitjançant aquest servidor."
 
-#. module: gateway
-#: wizard_button:sms.gateway.code.send,init,end:0
-#: wizard_button:sms.gateway.code.verify,init,end:0
-msgid "Cancel"
-msgstr "Cancel·la"
-
-#. module: gateway
-#: view:sms.gateway:0
-msgid "Access Permission"
-msgstr "Permís d'accés"
-
-#. module: gateway
-#: help:sms.gateway,url:0
-msgid "Base url for message"
-msgstr "URL base pel missatge"
-
-#. module: gateway
-#: wizard_field:sms.gateway.code.send,init,smsto:0
-#: field:sms.gateway.history,to:0
-#: field:sms.sms,mobile:0
-msgid "Mobile No"
-msgstr "Núm. mòbil"
-
-#. module: gateway
-#: code:addons/gateway/gateway.py:72
-#: code:addons/gateway/wizard/sendcode.py:54
-#: code:addons/gateway/wizard/verifycode.py:43
-#: code:addons/gateway/wizard/verifycode.py:48
-#: selection:sms.sms,state:0
-#, python-format
-msgid "Error"
-msgstr "Error"
-
-#. module: gateway
-#: model:ir.actions.act_window,name:gateway.act_sms_gateway_2_sms_history
-msgid "SMS History"
-msgstr "Historial SMS"
-
-#. module: gateway
-#: code:addons/gateway/wizard/verifycode.py:48
-#, python-format
-msgid "Verification failed. Invalid Verification Code!"
-msgstr "Ha fallat la verificació. Codi de verificació invàlid!"
-
-#. module: gateway
+#. module: base_sms_client
 #: selection:sms.sms,state:0
 msgid "Queued"
 msgstr "En cua"
 
-#. module: gateway
-#: model:ir.ui.menu,name:gateway.menu_gateway_administration_sms_server
-msgid "Gateway List"
-msgstr "Llista passarel·la"
+#. module: base_sms_client
+#: model:ir.ui.view,arch_db:base_sms_client.sms_sms_form
+#: model:ir.ui.view,arch_db:base_sms_client.sms_sms_tree
+msgid "Retry"
+msgstr ""
 
-#. module: gateway
-#: field:sms.gateway,history_line:0
-msgid "History"
-msgstr "Historial"
+#. module: base_sms_client
+#: selection:sms.abstract,classes:0 selection:sms.gateway,classes:0
+#: selection:sms.sms,classes:0 selection:wizard.mass.sms,classes:0
+msgid "SIM"
+msgstr ""
 
-#. module: gateway
-#: field:sms.gateway,method:0
-#: field:sms.gateway.parms,type:0
-msgid "API Method"
-msgstr "Mètode API"
+#. module: base_sms_client
+#: model:ir.model,name:base_sms_client.model_sms_sms
+#: model:ir.model.fields,field_description:base_sms_client.field_ir_act_server_sms
+#: model:ir.ui.view,arch_db:base_sms_client.view_server_statistics_graph
+msgid "SMS"
+msgstr "SMS"
 
-#. module: gateway
-#: field:sms.gateway,state:0
-msgid "Gateway Status"
-msgstr "Estat passarel·la"
+#. module: base_sms_client
+#: model:res.groups,name:base_sms_client.group_sms_user
+msgid "SMS / User"
+msgstr ""
 
-#. module: gateway
-#: code:addons/gateway/gateway.py:69
-#, python-format
-msgid "Permission Error!"
-msgstr "Error dels permisos!"
+#. module: base_sms_client
+#: model:ir.model,name:base_sms_client.model_sms_abstract
+msgid "SMS Abstract Model"
+msgstr ""
 
-#. module: gateway
-#: wizard_view:sms.gateway.code.verify,init:0
-#: wizard_button:sms.gateway.code.verify,init,check:0
-msgid "Verify Code"
-msgstr "Verifica codi"
+#. module: base_sms_client
+#: model:ir.model,name:base_sms_client.model_sms_gateway
+msgid "SMS Client"
+msgstr "Client SMS"
 
-#. module: gateway
-#: selection:sms.gateway.parms,type:0
-msgid "Sender Name"
-msgstr "Nom del remitent"
+#. module: base_sms_client
+#: model:ir.actions.act_window,name:base_sms_client.action_sms_gateway_tree
+#: model:ir.model.fields,field_description:base_sms_client.field_email_template_preview_gateway_id
+#: model:ir.model.fields,field_description:base_sms_client.field_mail_template_gateway_id
+#: model:ir.model.fields,field_description:base_sms_client.field_sms_sms_gateway_id
+#: model:ir.ui.menu,name:base_sms_client.menu_gateway_administration_sms_server
+#: model:ir.ui.view,arch_db:base_sms_client.sms_gateway_form
+msgid "SMS Gateway"
+msgstr "Passarel·la SMS"
 
-#. module: gateway
-#: view:sms.gateway:0
-msgid "Gateway Parameters"
-msgstr "Paràmetres passarel·la"
+#. module: base_sms_client
+#: model:ir.ui.view,arch_db:base_sms_client.view_wizard_mass_sms
+msgid "SMS Gateway - Sens SMS"
+msgstr ""
 
-#. module: gateway
+#. module: base_sms_client
+#: model:ir.ui.view,arch_db:base_sms_client.sms_gateway_tree
+msgid "SMS Gateways"
+msgstr ""
+
+#. module: base_sms_client
+#: model:ir.ui.menu,name:base_sms_client.menu_gateway_administration_sms
+#: model:ir.ui.view,arch_db:base_sms_client.sms_sms_form
+msgid "SMS Message"
+msgstr "Missatge SMS"
+
+#. module: base_sms_client
+#: model:ir.model.fields,field_description:base_sms_client.field_ir_act_server_sms_server_id
+msgid "SMS Server"
+msgstr "Servidor SMS"
+
+#. module: base_sms_client
+#: model:ir.model.fields,field_description:base_sms_client.field_email_template_preview_sms_template
+#: model:ir.model.fields,field_description:base_sms_client.field_ir_act_server_sms_template_id
+#: model:ir.model.fields,field_description:base_sms_client.field_mail_template_sms_template
+msgid "SMS Template"
+msgstr ""
+
+#. module: base_sms_client
+#: model:ir.model.fields,help:base_sms_client.field_ir_act_server_sms_server_id
+msgid "Select the SMS Gateway configuration to use with this action."
+msgstr ""
+
+#. module: base_sms_client
+#: model:ir.model.fields,help:base_sms_client.field_ir_act_server_sms_template_id
+msgid "Select the SMS Template configuration to use with this action."
+msgstr ""
+
+#. module: base_sms_client
+#: model:ir.ui.view,arch_db:base_sms_client.sms_sms_form
+#: model:ir.ui.view,arch_db:base_sms_client.sms_sms_tree
+msgid "Send"
+msgstr ""
+
+#. module: base_sms_client
+#: model:ir.ui.view,arch_db:base_sms_client.view_wizard_mass_sms
+msgid "Send SMS"
+msgstr ""
+
+#. module: base_sms_client
+#: model:ir.actions.act_window,name:base_sms_client.action_wizard_mass_sms
+msgid "Send an SMS"
+msgstr ""
+
+#. module: base_sms_client
 #: selection:sms.sms,state:0
-msgid "Waiting"
-msgstr "En espera"
+msgid "Sent"
+msgstr "Enviat"
 
-#. module: gateway
-#: view:sms.gateway:0
-msgid "General"
-msgstr "General"
-
-#. module: gateway
-#: selection:sms.gateway,method:0
-msgid "HTTP Method"
-msgstr "Mètode HTTP"
-
-#. module: gateway
-#: model:ir.actions.wizard,name:gateway.sms_gateway_verify_code
-msgid "Verify SMS Gateway"
-msgstr "Verifica passarel·la SMS"
-
-#. module: gateway
-#: model:ir.model,name:gateway.model_sms_gateway_history
-msgid "SMS Client History"
-msgstr "Historial client SMS"
-
-#. module: gateway
-#: model:ir.model,name:gateway.model_sms.sms
-msgid "SMS Queue"
-msgstr "Cua SMS"
-
-#. module: gateway
-#: code:addons/gateway/gateway.py:69
+#. module: base_sms_client
+#: code:addons/base_sms_client/models/sms_sms.py:89
 #, python-format
-msgid "You have no permission to access %s "
-msgstr "No teniu permisos per accedir %s "
+msgid "Size of SMS should not be more than %s characters "
+msgstr ""
 
-#. module: gateway
-#: model:ir.actions.act_window,name:gateway.action_sms_gateway_history_tree
-#: model:ir.ui.menu,name:gateway.menu_gateway_administration_sms_server_history
-msgid "SMS Gateway History"
-msgstr "Historial passarel·la SMS"
+#. module: base_sms_client
+#: model:ir.actions.act_window,name:base_sms_client.action_sms_sms_tree
+#: model:ir.ui.view,arch_db:base_sms_client.sms_sms_form
+#: model:ir.ui.view,arch_db:base_sms_client.sms_sms_tree
+msgid "Sms"
+msgstr ""
 
-#. module: gateway
+#. module: base_sms_client
+#: model:ir.actions.act_window,name:base_sms_client.act_sms_gateway_2_sms
+msgid "Sms Message"
+msgstr ""
+
+#. module: base_sms_client
+#: model:ir.model.fields,field_description:base_sms_client.field_sms_abstract_tag
+#: model:ir.model.fields,field_description:base_sms_client.field_sms_gateway_tag
+#: model:ir.model.fields,field_description:base_sms_client.field_sms_sms_tag
+#: model:ir.model.fields,field_description:base_sms_client.field_wizard_mass_sms_tag
+msgid "Tag"
+msgstr ""
+
+#. module: base_sms_client
+#: model:ir.model.fields,help:base_sms_client.field_sms_abstract_classes
+#: model:ir.model.fields,help:base_sms_client.field_sms_gateway_classes
+#: model:ir.model.fields,help:base_sms_client.field_sms_sms_classes
+msgid "The SMS class"
+msgstr ""
+
+#. module: base_sms_client
+#: model:ir.model.fields,help:base_sms_client.field_sms_abstract_coding
+#: model:ir.model.fields,help:base_sms_client.field_sms_gateway_coding
+#: model:ir.model.fields,help:base_sms_client.field_sms_sms_coding
+msgid ""
+"The SMS coding: 1 for 7 bit (160 chracters maxlength) or 2 for unicode (70 "
+"characters maxlength)"
+msgstr ""
+
+#. module: base_sms_client
+#: model:ir.model.fields,help:base_sms_client.field_sms_abstract_validity
+#: model:ir.model.fields,help:base_sms_client.field_sms_gateway_validity
+#: model:ir.model.fields,help:base_sms_client.field_sms_sms_validity
+msgid "The maximum time - in minute(s) - before the message is dropped."
+msgstr ""
+
+#. module: base_sms_client
+#: model:ir.model.fields,help:base_sms_client.field_wizard_mass_sms_validity
+msgid "The maximum time -in minute(s)- before the message is dropped"
+msgstr ""
+
+#. module: base_sms_client
+#: model:ir.model.fields,help:base_sms_client.field_sms_abstract_body
+#: model:ir.model.fields,help:base_sms_client.field_sms_gateway_body
+#: model:ir.model.fields,help:base_sms_client.field_sms_sms_body
+msgid ""
+"The message text that will be send along with the email which is send "
+"through this server."
+msgstr ""
+
+#. module: base_sms_client
+#: model:ir.model.fields,help:base_sms_client.field_sms_abstract_priority
+#: model:ir.model.fields,help:base_sms_client.field_sms_gateway_priority
+#: model:ir.model.fields,help:base_sms_client.field_sms_sms_priority
+#: model:ir.model.fields,help:base_sms_client.field_wizard_mass_sms_priority
+msgid "The priority of the message"
+msgstr ""
+
+#. module: base_sms_client
+#: model:ir.model.fields,help:base_sms_client.field_wizard_mass_sms_classes
+msgid "The sms class: flash(0),phone display(1),SIM(2),toolkit(3)"
+msgstr ""
+
+#. module: base_sms_client
+#: model:ir.model.fields,help:base_sms_client.field_wizard_mass_sms_coding
+msgid "The sms coding: 1 for 7 bit or 2 for unicode"
+msgstr ""
+
+#. module: base_sms_client
+#: model:ir.model.fields,help:base_sms_client.field_wizard_mass_sms_deferred
+msgid "The time -in minute(s)- to wait before sending the message"
+msgstr ""
+
+#. module: base_sms_client
+#: model:ir.model.fields,help:base_sms_client.field_sms_abstract_deferred
+#: model:ir.model.fields,help:base_sms_client.field_sms_gateway_deferred
+#: model:ir.model.fields,help:base_sms_client.field_sms_sms_deferred
+msgid "The time -in minute(s)- to wait before sending the message."
+msgstr ""
+
+#. module: base_sms_client
+#: model:ir.model.fields,field_description:base_sms_client.field_email_template_preview_mobile_to
+#: model:ir.model.fields,field_description:base_sms_client.field_mail_template_mobile_to
+msgid "To (Mobile)"
+msgstr ""
+
+#. module: base_sms_client
+#: selection:sms.abstract,classes:0 selection:sms.gateway,classes:0
+#: selection:sms.sms,classes:0 selection:wizard.mass.sms,classes:0
+msgid "Toolkit"
+msgstr ""
+
+#. module: base_sms_client
+#: selection:sms.abstract,coding:0 selection:sms.gateway,coding:0
+#: selection:sms.sms,coding:0 selection:wizard.mass.sms,coding:0
+msgid "Unicode"
+msgstr ""
+
+#. module: base_sms_client
+#: model:ir.model.fields,field_description:base_sms_client.field_sms_gateway_user_ids
+msgid "Users Allowed to use the gateway"
+msgstr ""
+
+#. module: base_sms_client
+#: model:ir.model.fields,field_description:base_sms_client.field_sms_abstract_validity
+#: model:ir.model.fields,field_description:base_sms_client.field_sms_gateway_validity
+#: model:ir.model.fields,field_description:base_sms_client.field_sms_sms_validity
+#: model:ir.model.fields,field_description:base_sms_client.field_wizard_mass_sms_validity
+msgid "Validity"
+msgstr ""
+
+#. module: base_sms_client
+#: model:ir.model.fields,field_description:base_sms_client.field_sms_abstract_code
+#: model:ir.model.fields,field_description:base_sms_client.field_sms_gateway_code
+#: model:ir.model.fields,field_description:base_sms_client.field_sms_sms_code
+msgid "Verification Code"
+msgstr "Codi de verificació"
+
+#. module: base_sms_client
 #: selection:sms.gateway,state:0
 msgid "Verified"
 msgstr "Verificat"
 
-#. module: gateway
-#: field:sms.gateway,name:0
-msgid "Gateway Name"
-msgstr "Nom passarel·la"
+#. module: base_sms_client
+#: selection:sms.gateway,state:0
+msgid "Waiting for Verification"
+msgstr "Esperant verificació"
 
-#. module: gateway
-#: view:sms.sms:0
-#: field:sms.sms,error:0
-msgid "Last Error"
-msgstr "Últim error"
+#. module: base_sms_client
+#: model:ir.model.fields,help:base_sms_client.field_sms_abstract_tag
+#: model:ir.model.fields,help:base_sms_client.field_sms_gateway_tag
+#: model:ir.model.fields,help:base_sms_client.field_sms_sms_tag
+msgid "an optional tag"
+msgstr ""
 
-#. module: gateway
-#: field:sms.gateway,body:0
-msgid "Message"
-msgstr "Missatge"
+#. module: base_sms_client
+#: model:ir.model,name:base_sms_client.model_ir_actions_server
+msgid "ir.actions.server"
+msgstr "ir.accions.servidor"
 
-#. module: gateway
-#: field:sms.sms,state:0
-msgid "Message Status"
-msgstr "Estat del missatge"
+#. module: base_sms_client
+#: model:ir.ui.view,arch_db:base_sms_client.view_wizard_mass_sms
+msgid "or"
+msgstr ""
 
-#. module: gateway
-#: field:sms.gateway.parms,name:0
-msgid "Property name"
-msgstr "Nom de la propietat"
-
-#. module: gateway
-#: model:ir.actions.act_window,name:gateway.action_sms_gateway_tree
-#: model:ir.ui.menu,name:gateway.menu_gateway_administration_server
-#: view:sms.gateway:0
-#: field:sms.gateway.history,gateway_id:0
-#: field:sms.gateway.parms,gateway_id:0
-#: field:sms.sms,gateway_id:0
-msgid "SMS Gateway"
-msgstr "Passarel·la SMS"
+#. module: base_sms_client
+#: model:ir.model,name:base_sms_client.model_wizard_mass_sms
+msgid "wizard.mass.sms"
+msgstr ""

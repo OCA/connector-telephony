@@ -11,12 +11,12 @@ msgstr ""
 "POT-Creation-Date: 2017-04-27 02:37+0000\n"
 "PO-Revision-Date: 2017-04-27 02:37+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
-"Language-Team: French (https://www.transifex.com/oca/teams/23907/fr/)\n"
+"Language-Team: Spanish (Spain) (https://www.transifex.com/oca/teams/23907/es_ES/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: fr\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Language: es_ES\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: base_sms_client
 #: selection:sms.abstract,coding:0 selection:sms.gateway,coding:0
@@ -27,12 +27,12 @@ msgstr ""
 #. module: base_sms_client
 #: model:ir.model.fields,field_description:base_sms_client.field_sms_gateway_method
 msgid "API Method"
-msgstr "Méthode de l'API"
+msgstr ""
 
 #. module: base_sms_client
 #: model:ir.ui.view,arch_db:base_sms_client.sms_gateway_form
 msgid "Access Permission"
-msgstr "Droit d'accès"
+msgstr ""
 
 #. module: base_sms_client
 #: model:ir.ui.view,arch_db:base_sms_client.sms_gateway_form
@@ -48,7 +48,7 @@ msgstr ""
 #. module: base_sms_client
 #: model:ir.model.fields,help:base_sms_client.field_sms_gateway_url
 msgid "Base url for message"
-msgstr "Adresse de base pour le message"
+msgstr ""
 
 #. module: base_sms_client
 #: model:ir.ui.view,arch_db:base_sms_client.sms_sms_form
@@ -56,7 +56,7 @@ msgstr "Adresse de base pour le message"
 #: model:ir.ui.view,arch_db:base_sms_client.view_wizard_mass_sms
 #: selection:sms.sms,state:0
 msgid "Cancel"
-msgstr "Annuler"
+msgstr "Cancelar"
 
 #. module: base_sms_client
 #: model:ir.model.fields,field_description:base_sms_client.field_sms_abstract_char_limit
@@ -97,14 +97,14 @@ msgstr ""
 #: model:ir.model.fields,field_description:base_sms_client.field_sms_sms_create_uid
 #: model:ir.model.fields,field_description:base_sms_client.field_wizard_mass_sms_create_uid
 msgid "Created by"
-msgstr "Créé par"
+msgstr "Creado por"
 
 #. module: base_sms_client
 #: model:ir.model.fields,field_description:base_sms_client.field_sms_gateway_create_date
 #: model:ir.model.fields,field_description:base_sms_client.field_sms_sms_create_date
 #: model:ir.model.fields,field_description:base_sms_client.field_wizard_mass_sms_create_date
 msgid "Created on"
-msgstr "Date"
+msgstr "Creado en"
 
 #. module: base_sms_client
 #: model:ir.model.fields,field_description:base_sms_client.field_sms_abstract_default_gateway
@@ -127,7 +127,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:base_sms_client.field_sms_sms_display_name
 #: model:ir.model.fields,field_description:base_sms_client.field_wizard_mass_sms_display_name
 msgid "Display Name"
-msgstr "Nom à afficher"
+msgstr ""
 
 #. module: base_sms_client
 #: model:ir.model.fields,help:base_sms_client.field_wizard_mass_sms_nostop
@@ -153,7 +153,7 @@ msgstr ""
 #. module: base_sms_client
 #: selection:sms.sms,state:0
 msgid "Error"
-msgstr "Erreur"
+msgstr ""
 
 #. module: base_sms_client
 #: model:ir.model.fields,help:base_sms_client.field_ir_act_server_mobile
@@ -182,17 +182,17 @@ msgstr ""
 #. module: base_sms_client
 #: model:ir.model.fields,field_description:base_sms_client.field_sms_gateway_name
 msgid "Gateway Name"
-msgstr "Nom de la passerelle"
+msgstr ""
 
 #. module: base_sms_client
 #: model:ir.model.fields,field_description:base_sms_client.field_sms_gateway_state
 msgid "Gateway Status"
-msgstr "État de la passerelle"
+msgstr ""
 
 #. module: base_sms_client
 #: model:ir.model.fields,field_description:base_sms_client.field_sms_gateway_url
 msgid "Gateway URL"
-msgstr "URL de la passerelle"
+msgstr ""
 
 #. module: base_sms_client
 #: model:ir.model.fields,field_description:base_sms_client.field_wizard_mass_sms_gateway_id
@@ -202,7 +202,7 @@ msgstr ""
 #. module: base_sms_client
 #: model:ir.ui.view,arch_db:base_sms_client.sms_gateway_form
 msgid "General"
-msgstr "Générale"
+msgstr ""
 
 #. module: base_sms_client
 #: model:ir.model.fields,field_description:base_sms_client.field_sms_abstract_id
@@ -216,7 +216,7 @@ msgstr "ID"
 #: model:ir.model.fields,field_description:base_sms_client.field_sms_sms_error
 #: model:ir.ui.view,arch_db:base_sms_client.sms_sms_form
 msgid "Last Error"
-msgstr "Dernière erreur"
+msgstr ""
 
 #. module: base_sms_client
 #: model:ir.model.fields,field_description:base_sms_client.field_sms_abstract___last_update
@@ -224,21 +224,21 @@ msgstr "Dernière erreur"
 #: model:ir.model.fields,field_description:base_sms_client.field_sms_sms___last_update
 #: model:ir.model.fields,field_description:base_sms_client.field_wizard_mass_sms___last_update
 msgid "Last Modified on"
-msgstr "Dernière modification le"
+msgstr ""
 
 #. module: base_sms_client
 #: model:ir.model.fields,field_description:base_sms_client.field_sms_gateway_write_uid
 #: model:ir.model.fields,field_description:base_sms_client.field_sms_sms_write_uid
 #: model:ir.model.fields,field_description:base_sms_client.field_wizard_mass_sms_write_uid
 msgid "Last Updated by"
-msgstr "Dernière mise à jour par"
+msgstr "Última actualización por"
 
 #. module: base_sms_client
 #: model:ir.model.fields,field_description:base_sms_client.field_sms_gateway_write_date
 #: model:ir.model.fields,field_description:base_sms_client.field_sms_sms_write_date
 #: model:ir.model.fields,field_description:base_sms_client.field_wizard_mass_sms_write_date
 msgid "Last Updated on"
-msgstr "Dernière mise à jour le"
+msgstr "Última actualización en"
 
 #. module: base_sms_client
 #: model:ir.model.fields,field_description:base_sms_client.field_sms_abstract_body
@@ -248,12 +248,12 @@ msgstr "Dernière mise à jour le"
 #: model:ir.model.fields,field_description:base_sms_client.field_wizard_mass_sms_message
 #: model:ir.ui.view,arch_db:base_sms_client.view_wizard_mass_sms
 msgid "Message"
-msgstr "Message"
+msgstr ""
 
 #. module: base_sms_client
 #: model:ir.model.fields,field_description:base_sms_client.field_sms_sms_state
 msgid "Message Status"
-msgstr "État du message"
+msgstr ""
 
 #. module: base_sms_client
 #: model:ir.ui.view,arch_db:base_sms_client.sms_gateway_form
@@ -263,12 +263,12 @@ msgstr ""
 #. module: base_sms_client
 #: model:ir.model.fields,field_description:base_sms_client.field_sms_sms_mobile
 msgid "Mobile"
-msgstr "Portable"
+msgstr ""
 
 #. module: base_sms_client
 #: model:ir.model.fields,field_description:base_sms_client.field_ir_act_server_mobile
 msgid "Mobile No"
-msgstr "N° de portable"
+msgstr ""
 
 #. module: base_sms_client
 #: model:ir.ui.view,arch_db:base_sms_client.sms_gateway_form
@@ -292,7 +292,7 @@ msgstr ""
 #. module: base_sms_client
 #: selection:sms.gateway,state:0
 msgid "Not Verified"
-msgstr "Non vérifié"
+msgstr ""
 
 #. module: base_sms_client
 #: selection:sms.gateway,method:0
@@ -302,7 +302,7 @@ msgstr ""
 #. module: base_sms_client
 #: model:ir.model.fields,field_description:base_sms_client.field_sms_sms_partner_id
 msgid "Partner"
-msgstr "Partenaire"
+msgstr ""
 
 #. module: base_sms_client
 #: model:ir.model.fields,field_description:base_sms_client.field_wizard_mass_sms_partner_ids
@@ -312,7 +312,7 @@ msgstr ""
 #. module: base_sms_client
 #: model:ir.ui.view,arch_db:base_sms_client.sms_gateway_form
 msgid "Permission"
-msgstr "Permission"
+msgstr ""
 
 #. module: base_sms_client
 #: selection:sms.abstract,classes:0 selection:sms.gateway,classes:0
@@ -331,7 +331,7 @@ msgstr ""
 #. module: base_sms_client
 #: selection:sms.sms,state:0
 msgid "Queued"
-msgstr "En file d'attente"
+msgstr ""
 
 #. module: base_sms_client
 #: model:ir.ui.view,arch_db:base_sms_client.sms_sms_form
@@ -350,7 +350,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:base_sms_client.field_ir_act_server_sms
 #: model:ir.ui.view,arch_db:base_sms_client.view_server_statistics_graph
 msgid "SMS"
-msgstr "SMS"
+msgstr ""
 
 #. module: base_sms_client
 #: model:res.groups,name:base_sms_client.group_sms_user
@@ -365,7 +365,7 @@ msgstr ""
 #. module: base_sms_client
 #: model:ir.model,name:base_sms_client.model_sms_gateway
 msgid "SMS Client"
-msgstr "Client SMS"
+msgstr ""
 
 #. module: base_sms_client
 #: model:ir.actions.act_window,name:base_sms_client.action_sms_gateway_tree
@@ -375,7 +375,7 @@ msgstr "Client SMS"
 #: model:ir.ui.menu,name:base_sms_client.menu_gateway_administration_sms_server
 #: model:ir.ui.view,arch_db:base_sms_client.sms_gateway_form
 msgid "SMS Gateway"
-msgstr "Passerelle SMS"
+msgstr ""
 
 #. module: base_sms_client
 #: model:ir.ui.view,arch_db:base_sms_client.view_wizard_mass_sms
@@ -391,12 +391,12 @@ msgstr ""
 #: model:ir.ui.menu,name:base_sms_client.menu_gateway_administration_sms
 #: model:ir.ui.view,arch_db:base_sms_client.sms_sms_form
 msgid "SMS Message"
-msgstr "Message SMS"
+msgstr ""
 
 #. module: base_sms_client
 #: model:ir.model.fields,field_description:base_sms_client.field_ir_act_server_sms_server_id
 msgid "SMS Server"
-msgstr "Serveur de SMS"
+msgstr ""
 
 #. module: base_sms_client
 #: model:ir.model.fields,field_description:base_sms_client.field_email_template_preview_sms_template
@@ -434,7 +434,7 @@ msgstr ""
 #. module: base_sms_client
 #: selection:sms.sms,state:0
 msgid "Sent"
-msgstr "Envoyer"
+msgstr ""
 
 #. module: base_sms_client
 #: code:addons/base_sms_client/models/sms_sms.py:89
@@ -565,17 +565,17 @@ msgstr ""
 #: model:ir.model.fields,field_description:base_sms_client.field_sms_gateway_code
 #: model:ir.model.fields,field_description:base_sms_client.field_sms_sms_code
 msgid "Verification Code"
-msgstr "Code de vérifcation"
+msgstr ""
 
 #. module: base_sms_client
 #: selection:sms.gateway,state:0
 msgid "Verified"
-msgstr "Vérifié"
+msgstr ""
 
 #. module: base_sms_client
 #: selection:sms.gateway,state:0
 msgid "Waiting for Verification"
-msgstr "En attente de vérification"
+msgstr ""
 
 #. module: base_sms_client
 #: model:ir.model.fields,help:base_sms_client.field_sms_abstract_tag
@@ -587,7 +587,7 @@ msgstr ""
 #. module: base_sms_client
 #: model:ir.model,name:base_sms_client.model_ir_actions_server
 msgid "ir.actions.server"
-msgstr "ir.actions.server"
+msgstr ""
 
 #. module: base_sms_client
 #: model:ir.ui.view,arch_db:base_sms_client.view_wizard_mass_sms

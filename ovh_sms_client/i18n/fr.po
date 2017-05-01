@@ -1,0 +1,34 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * ovh_sms_client
+# 
+# Translators:
+# OCA Transbot <transbot@odoo-community.org>, 2017
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-04-27 02:37+0000\n"
+"PO-Revision-Date: 2017-04-27 02:37+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
+"Language-Team: French (https://www.transifex.com/oca/teams/23907/fr/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: fr\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#. module: ovh_sms_client
+#: model:ir.model,name:ovh_sms_client.model_sms_sms
+msgid "SMS"
+msgstr "SMS"
+
+#. module: ovh_sms_client
+#: model:ir.model,name:ovh_sms_client.model_sms_gateway
+msgid "SMS Client"
+msgstr "Client SMS"
+
+#. module: ovh_sms_client
+#: model:ir.model,name:ovh_sms_client.model_keychain_account
+msgid "keychain.account"
+msgstr ""
