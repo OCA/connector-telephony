@@ -368,7 +368,7 @@ msgstr ""
 #. module: asterisk_click2dial
 #: field:asterisk.server,port:0
 msgid "Port"
-msgstr ""
+msgstr "Port"
 
 #. module: asterisk_click2dial
 #: help:asterisk.server,out_prefix:0

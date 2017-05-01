@@ -145,7 +145,7 @@ msgstr ""
 #. module: asterisk_click2dial
 #: field:asterisk.server,company_id:0
 msgid "Company"
-msgstr ""
+msgstr "Companie"
 
 #. module: asterisk_click2dial
 #: help:asterisk.server,company_id:0

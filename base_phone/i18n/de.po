@@ -179,7 +179,7 @@ msgstr "Zuletzt aktualisiert am"
 #. module: base_phone
 #: selection:number.not.found,number_type:0
 msgid "Mobile"
-msgstr ""
+msgstr "Mobil"
 
 #. module: base_phone
 #: view:number.not.found:base_phone.number_not_found_form
@@ -237,7 +237,7 @@ msgstr ""
 #. module: base_phone
 #: view:res.company:base_phone.view_company_form
 msgid "Phone"
-msgstr ""
+msgstr "Telefon"
 
 #. module: base_phone
 #: model:res.groups,name:base_phone.group_callerid

@@ -108,7 +108,7 @@ msgstr ""
 #. module: crm_phone
 #: model:ir.model,name:crm_phone.model_crm_lead
 msgid "Lead/Opportunity"
-msgstr ""
+msgstr "Lead/Chance"
 
 #. module: crm_phone
 #: code:addons/crm_phone/wizard/number_not_found.py:75
@@ -130,7 +130,7 @@ msgstr ""
 #. module: crm_phone
 #: model:ir.model,name:crm_phone.model_crm_phonecall
 msgid "Phonecall"
-msgstr ""
+msgstr "Anruf"
 
 #. module: crm_phone
 #: field:res.users,context_propose_creation_crm_call:0

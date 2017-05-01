@@ -113,7 +113,7 @@ msgstr ""
 #. module: base_phone
 #: selection:reformat.all.phonenumbers,state:0
 msgid "Draft"
-msgstr ""
+msgstr "Esborrany"
 
 #. module: base_phone
 #: field:number.not.found,e164_number:0
@@ -139,7 +139,7 @@ msgstr ""
 #. module: base_phone
 #: selection:number.not.found,number_type:0
 msgid "Fixed"
-msgstr ""
+msgstr "Fix "
 
 #. module: base_phone
 #: field:number.not.found,number_type:0

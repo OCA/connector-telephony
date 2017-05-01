@@ -113,7 +113,7 @@ msgstr "Concluído"
 #. module: base_phone
 #: selection:reformat.all.phonenumbers,state:0
 msgid "Draft"
-msgstr ""
+msgstr "Rascunho"
 
 #. module: base_phone
 #: field:number.not.found,e164_number:0
