@@ -130,7 +130,7 @@ msgstr ""
 #. module: crm_phone
 #: model:ir.model,name:crm_phone.model_crm_phonecall
 msgid "Phonecall"
-msgstr ""
+msgstr "Chiamata telefonica"
 
 #. module: crm_phone
 #: field:res.users,context_propose_creation_crm_call:0
