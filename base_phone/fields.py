@@ -108,8 +108,8 @@ def get_phone_fields(self, vals):
             fields_to_convert.append(key)
     return fields_to_convert
 
-original_write = models.Model.write
-original_create = models.Model.create
+original_write = models.BaseModel.write
+original_create = models.BaseModel.create
 
 
 @api.multi
@@ -133,5 +133,5 @@ def create(self, vals):
         vals = convert_all_phone_fields(self, vals, fields_to_convert)
     return original_create(self, vals)
 
-models.Model.write = write
-models.Model.create = create
+models.BaseModel.write = write
+models.BaseModel.create = create
