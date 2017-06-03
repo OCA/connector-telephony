@@ -125,7 +125,7 @@ msgstr ""
 #: code:addons/crm_phone/wizard/create_crm_phonecall.py:65
 #, python-format
 msgid "Phone Call"
-msgstr ""
+msgstr "Telefonanruf"
 
 #. module: crm_phone
 #: model:ir.model,name:crm_phone.model_crm_phonecall
