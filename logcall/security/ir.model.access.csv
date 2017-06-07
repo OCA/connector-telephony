@@ -1,0 +1,8 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+phone_system_integration_phone_common_read,Read access on phone.common for phone system integration and call logging,model_phone_common,group_phone_system_integration,1,0,0,0
+phone_system_integration_crm_phonecall_create,Create access on crm.phonecall for phone system integration and call logging,model_crm_phonecall,group_phone_system_integration,1,1,1,0
+phone_system_integration_ir_attachment_create,Create access on ir.attachment for phone system integration and call logging,base.model_ir_attachment,group_phone_system_integration,1,1,1,0
+phone_system_integration_mail.message_create,Create access on mail.message for phone system integration and call logging,mail.model_mail_message,group_phone_system_integration,1,1,1,0
+phone_system_integration_mail.message_create,Create access on mail.followers for phone system integration and call logging,mail.model_mail_followers,group_phone_system_integration,1,1,1,0
+phone_system_integration_res_partner_write,Write access on res.partner for phone system integration and call logging,base.model_res_partner,group_phone_system_integration,1,1,0,0
+phone_system_integration_crm_lead_write,Write access on crm.lead for phone system integration and call logging,sale_crm.model_crm_lead,group_phone_system_integration,1,1,0,0

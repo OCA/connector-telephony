@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+ir_model_access_freeswitch_server_phone_integration,Read access on freeswitch.server,freeswitch_click2dial.model_freeswitch_server,logcall.group_phone_system_integration,1,0,0,0

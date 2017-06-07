@@ -61,6 +61,30 @@ class PhoneCommon(models.AbstractModel):
             callerid = False
         return callerid
 
+    @api.model
+    def incall_notify_by_extension(self, number, extension_list):
+        assert isinstance(extension_list, list), \
+            'extension_list must be a list'
+        res = self.get_record_from_phone_number(number)
+        users = self.env['res.users'].search(
+            [('internal_number', 'in', extension_list)])
+        logger.debug(
+            'Notify incoming call from number %s to users %s'
+            % (number, users.ids))
+        action = self._prepare_incall_pop_action(res, number)
+        if action:
+            for user in users:
+                if user.context_incall_popup:
+                    self.sudo(user.id).env['action.request'].notify(action)
+                    logger.debug(
+                        'This action has been sent to user ID %d: %s'
+                        % (user.id, action))
+        if res:
+            callerid = res[2]
+        else:
+            callerid = False
+        return callerid
+
 
 class ResUsers(models.Model):
     _inherit = 'res.users'

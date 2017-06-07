@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+phone_system_integration_res_partner_write,Write access on res.partner for phone system integration and call logging,base.model_res_partner,logcall.group_phone_system_integration,1,1,0,0
