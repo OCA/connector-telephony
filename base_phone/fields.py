@@ -117,6 +117,12 @@ def write(self, vals):
     fields_to_convert = get_phone_fields(self, vals)
     if fields_to_convert:
         for record in self:
+            # When updating a partner in the frontend of the POS
+            # Odoo generate a write() with the ID of the country as unicode !!!
+            # example : vals = {u'country_id': u'9'}
+            # So we have to convert it to an integer before browsing
+            if vals['country_id']:
+                vals['country_id'] = int(vals['country_id'])
             loc_vals = convert_all_phone_fields(
                 record, vals, fields_to_convert)
             original_write(record, loc_vals)
@@ -130,6 +136,12 @@ def write(self, vals):
 def create(self, vals):
     fields_to_convert = get_phone_fields(self, vals)
     if fields_to_convert:
+        # When creating a partner in the frontend of the POS
+        # Odoo generate a create() with the ID of the country as unicode !!!
+        # example : vals = {u'country_id': u'9'}
+        # So we have to convert it to an integer before browsing
+        if vals['country_id']:
+            vals['country_id'] = int(vals['country_id'])
         vals = convert_all_phone_fields(self, vals, fields_to_convert)
     return original_create(self, vals)
 
