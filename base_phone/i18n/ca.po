@@ -179,7 +179,7 @@ msgstr "Darrera Actualització el"
 #. module: base_phone
 #: selection:number.not.found,number_type:0
 msgid "Mobile"
-msgstr ""
+msgstr "Mòbil "
 
 #. module: base_phone
 #: view:number.not.found:base_phone.number_not_found_form
