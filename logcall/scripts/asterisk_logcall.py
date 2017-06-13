@@ -4,6 +4,7 @@
 #  (c) 2016 credativ Ltd (<http://credativ.co.uk>).
 #  (c) 2016 Trever L. Adams
 # License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
+# flake8: noqa: E501
 
 """
  Log a call and recording within Asterisk
@@ -43,7 +44,8 @@ EOF
 
 """
 
-__author__ = "Craig Gowing <craig.gowing@credativ.co.uk> & Alexis de Lattre <alexis.delattre@akretion.com>"
+__author__ = """Craig Gowing <craig.gowing@credativ.co.uk> &
+                Alexis de Lattre <alexis.delattre@akretion.com>"""
 __date__ = "February 2016"
 __version__ = "0.2"
 
@@ -183,6 +185,7 @@ def main(options, arguments):
             stdout_write('VERBOSE "Could not connect to OpenERP in XML-RPC"\n')
 
     return True
+
 
 if __name__ == '__main__':
     usage = "Usage: asterisk_logcall.py [options] login1 login2 login3 ..."

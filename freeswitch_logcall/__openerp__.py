@@ -10,7 +10,7 @@
     'category': 'Phone',
     'license': 'AGPL-3',
     'summary': 'Necessary bridge between log-call and FreeSWITCH Click2dial',
-    'author': "Trever L. Adams",
+    'author': "Trever L. Adams,Odoo Community Association (OCA)",
     'website': '',
     'depends': ['logcall', 'freeswitch_click2dial'],
     'data': [

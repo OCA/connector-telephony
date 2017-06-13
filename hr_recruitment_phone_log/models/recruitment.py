@@ -19,12 +19,12 @@ class HrApplicant(models.Model):
     phonecall_ids = fields.One2many('crm.phonecall', 'hr_applicant_id',
                                     string='Phone Calls')
     phonecall_count = fields.Integer(
-        compute='_count_phonecalls', string='Number of Phonecalls',
+        compute='_compute_count_phonecalls', string='Number of Phonecalls',
         readonly=True)
 
     @api.multi
     @api.depends('phonecall_ids')
-    def _count_phonecalls(self):
+    def _compute_count_phonecalls(self):
         cpo = self.env['crm.phonecall']
         for applicant in self:
             try:

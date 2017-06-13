@@ -15,7 +15,8 @@ class AsteriskServer(models.Model):
 
     ucp_url = fields.Char(
         string='Script to download FreeSWITCH recordings', required=False,
-        default="https://localhost/cgi-bin/get_recording.pl?file={odoo_filename}",
+        default="https://localhost/cgi-bin/get_recording.pl?"
+        "file={odoo_filename}",
         help="Macros allowed: {odoo_type} (inbound, outbound), {odoo_src}"
         "(source phone number}, {odoo_dst} (destination number), "
         "{odoo_duration} (length of call), {odoo_start} (start time of call "
@@ -26,9 +27,9 @@ class AsteriskServer(models.Model):
         help='Number of seconds to subtract from new call start and add to '
         'new call end, for call merging, to compensate for system/database '
         'load and time drift between Asterisk server and Odoo/Odoo database '
-        'server(s). 5 seconds is likely a good start. Above 10 seconds you get '
-        'into the realm where you may have distinct calls confused. 20 - 30 '
-        'seconds begins to guarantee this. It is best to keep this low '
+        'server(s). 5 seconds is likely a good start. Above 10 seconds you '
+        'get into the realm where you may have distinct calls confused. 20 - '
+        '30 seconds begins to guarantee this. It is best to keep this low '
         'and use a method to keep time synced.',
         default=5)
 

@@ -146,6 +146,7 @@ class PhoneCommon(models.AbstractModel):
 
         if odoo_filename and not attach_id:
             base_url = self._get_ucp_url(users[0])
+            fixed_uuid = odoo_uniqueid.replace('.', '_')
             ir_attachment_data = {
                 'res_model': 'crm.phonecall',
                 'res_id': phonecall_id.id,
@@ -159,7 +160,7 @@ class PhoneCommon(models.AbstractModel):
                                        odoo_dst=odoo_dst,
                                        odoo_duration=odoo_duration,
                                        odoo_start=odoo_start,
-                                       odoo_uniqueid=odoo_uniqueid.replace('.', '_'),
+                                       odoo_uniqueid=fixed_uuid,
                                        odoo_filename=odoo_filename),
                 'datas_fname': odoo_filename,
             }
