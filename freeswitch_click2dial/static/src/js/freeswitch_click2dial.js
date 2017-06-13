@@ -32,14 +32,12 @@ click2dial.OpenCaller = Widget.extend({
                 _t('Failure'),
                 _t('Problem in the connection to FreeSWITCH'),
                 false);
-        }
-        else if (typeof r == 'string' && isNaN(r)) {
+        } else if (typeof r == 'string' && isNaN(r)) {
              self.do_warn(
                 r,
                 _t('The calling number is not a phone number!'),
                 false);
-        }
-        else if (typeof r == 'string') {
+        } else if (typeof r == 'string') {
              var action = {
                 name: _t('Number Not Found'),
                 type: 'ir.actions.act_window',
@@ -47,13 +45,13 @@ click2dial.OpenCaller = Widget.extend({
                 view_mode: 'form',
                 views: [[false, 'form']],
                 target: 'new',
-                context: {'default_calling_number': r},
+                context: {'default_calling_number': r}
              };
             web_client.action_manager.do_action(action);
 
-            }
-        else if (typeof r == 'object' && r.length == 3) {
-            self.do_notify( // Not working
+        } else if (typeof r == 'object' && r.length == 3) {
+            // self.do_notify Not working
+            self.do_notify(
                 _t('Success'),
                 _t('Moving to %s ID %d', r[0], r[1]),
                 false);
@@ -71,12 +69,12 @@ click2dial.OpenCaller = Widget.extend({
                 If you want to use target: 'current', with web/enterprise,
                 you have to reload the Web page just after */
                 target: 'current',
-                context: {},
+                context: {}
             };
             web_client.action_manager.do_action(action);
         }
     });
-   },
+   }
 });
 
     UserMenu.include({
@@ -87,7 +85,7 @@ click2dial.OpenCaller = Widget.extend({
                 // attach the phone logo/button to the systray
                 freeswitch_button.appendTo($('.oe_systray'));
             });
-        },
+        }
     });
 
 });

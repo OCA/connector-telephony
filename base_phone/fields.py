@@ -7,10 +7,14 @@
 
 from openerp import api, fields, models
 from operator import attrgetter
-import phonenumbers
 import logging
 
 _logger = logging.getLogger(__name__)
+
+try:
+    import phonenumbers
+except (ImportError, IOError) as err:
+    _logger.debug(err)
 
 
 class Phone(fields.Char):
@@ -108,6 +112,7 @@ def get_phone_fields(self, vals):
             fields_to_convert.append(key)
     return fields_to_convert
 
+
 original_write = models.BaseModel.write
 original_create = models.BaseModel.create
 
@@ -132,6 +137,7 @@ def create(self, vals):
     if fields_to_convert:
         vals = convert_all_phone_fields(self, vals, fields_to_convert)
     return original_create(self, vals)
+
 
 models.BaseModel.write = write
 models.BaseModel.create = create

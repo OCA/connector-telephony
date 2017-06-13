@@ -76,11 +76,11 @@ class AsteriskServer(models.Model):
         'context', 'alert_info', 'login', 'password')
     def _check_validity(self):
         for server in self:
-            out_prefix = ('Out prefix', server.out_prefix)
-            dialplan_context = ('Dialplan context', server.context)
-            alert_info = ('Alert-Info SIP header', server.alert_info)
-            login = ('AMI login', server.login)
-            password = ('AMI password', server.password)
+            out_prefix = (_('Out prefix'), server.out_prefix)
+            dialplan_context = (_('Dialplan context'), server.context)
+            alert_info = (_('Alert-Info SIP header'), server.alert_info)
+            login = (_('AMI login'), server.login)
+            password = (_('AMI password'), server.password)
 
             if out_prefix[1] and not out_prefix[1].isdigit():
                 raise ValidationError(

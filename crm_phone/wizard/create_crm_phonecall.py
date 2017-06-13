@@ -3,7 +3,12 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from openerp import models, api, _
-import phonenumbers
+import logging
+_logger = logging.getLogger(__name__)
+try:
+    import phonenumbers
+except (ImportError, IOError) as err:
+    _logger.debug(err)
 
 
 class WizardCreateCrmPhonecall(models.TransientModel):

@@ -5,9 +5,11 @@
 from openerp import models, fields, api, _
 from openerp.exceptions import UserError
 import logging
-import phonenumbers
-
 _logger = logging.getLogger(__name__)
+try:
+    import phonenumbers
+except (ImportError, IOError) as err:
+    _logger.debug(err)
 
 
 class NumberNotFound(models.TransientModel):

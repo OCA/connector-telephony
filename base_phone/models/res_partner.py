@@ -4,7 +4,7 @@
 
 
 from openerp import models, api
-from openerp.addons.base_phone import fields
+from .. import fields
 
 
 class ResPartner(models.Model):

@@ -31,8 +31,7 @@ var FieldPhone = formwidgets.FieldChar.extend({
                     raw_phone_num = phone_num.replace(/ /g, '');
                     raw_phone_num = raw_phone_num.replace(/-/g, '');
                     this.$el.find('a.oe_form_uri').attr('href', 'tel:' + raw_phone_num).text(phone_num);
-                }
-                else {
+                } else {
                     this.$el.find('a.oe_form_uri').attr('href', '').text('');
                 }
                 var click2dial_text = '';
@@ -64,7 +63,7 @@ var FieldPhone = formwidgets.FieldChar.extend({
                                     var context = {
                                         'click2dial_model': self.view.dataset.model,
                                         'click2dial_id': self.view.datarecord.id,
-                                        'phone_number': raw_phone_num,
+                                        'phone_number': raw_phone_num
                                         };
                                     var action = {
                                         name: r.action_name,
@@ -73,7 +72,7 @@ var FieldPhone = formwidgets.FieldChar.extend({
                                         view_mode: 'form',
                                         views: [[false, 'form']],
                                         target: 'new',
-                                        context: context,
+                                        context: context
                                         };
                                     web_client.action_manager.do_action(action);
                                 }
@@ -106,8 +105,7 @@ var FieldFax = formwidgets.FieldChar.extend({
                     var raw_fax_num = fax_num.replace(/ /g, '');
                     raw_fax_num = raw_fax_num.replace(/-/g, '');
                     this.$el.find('a').attr('href', 'fax:' + raw_fax_num).text(fax_num);
-                }
-                else {
+                } else {
                     this.$el.find('a').attr('href', '').text('');
                 }
             }

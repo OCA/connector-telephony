@@ -16,7 +16,7 @@ class CrmLead(models.Model):
     phonecall_ids = fields.One2many(
         'crm.phonecall', 'opportunity_id', string='Phone Calls')
     phonecall_count = fields.Integer(
-        compute='_count_phonecalls', string='Number of Phonecalls',
+        compute='_compute_count_phonecalls', string='Number of Phonecalls',
         readonly=True)
 
     @api.multi
@@ -39,7 +39,7 @@ class CrmLead(models.Model):
 
     @api.multi
     @api.depends('phonecall_ids')
-    def _count_phonecalls(self):
+    def _compute_count_phonecalls(self):
         cpo = self.env['crm.phonecall']
         for lead in self:
             try:
@@ -142,12 +142,12 @@ class ResPartner(models.Model):
     phonecall_ids = fields.One2many(
         'crm.phonecall', 'partner_id', string='Phone Calls')
     phonecall_count = fields.Integer(
-        compute='_count_phonecalls', string='Number of Phonecalls',
+        compute='_compute_count_phonecalls', string='Number of Phonecalls',
         readonly=True)
 
     @api.multi
     @api.depends('phonecall_ids')
-    def _count_phonecalls(self):
+    def _compute_count_phonecalls(self):
         cpo = self.env['crm.phonecall']
         for partner in self:
             try:

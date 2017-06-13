@@ -19,7 +19,8 @@ _logger = logging.getLogger(__name__)
 
 
 class FreeSWITCHServer(models.Model):
-    '''FreeSWITCH server object, stores the parameters of the FreeSWITCH Servers'''
+    '''FreeSWITCH server object, stores the parameters of the FreeSWITCH
+       Servers'''
     _name = "freeswitch.server"
     _description = "FreeSWITCH Servers"
     name = fields.Char(string='FreeSWITCH Server Name', required=True)
@@ -72,10 +73,10 @@ class FreeSWITCHServer(models.Model):
         'out_prefix', 'wait_time', 'port', 'context', 'alert_info', 'password')
     def _check_validity(self):
         for server in self:
-            out_prefix = ('Out prefix', server.out_prefix)
-            dialplan_context = ('Dialplan context', server.context)
-            alert_info = ('Alert-Info SIP header', server.alert_info)
-            password = ('Event Socket password', server.password)
+            out_prefix = (_('Out prefix'), server.out_prefix)
+            dialplan_context = (_('Dialplan context'), server.context)
+            alert_info = (_('Alert-Info SIP header'), server.alert_info)
+            password = (_('Event Socket password'), server.password)
 
             if out_prefix[1] and not out_prefix[1].isdigit():
                 raise ValidationError(
@@ -130,7 +131,7 @@ class FreeSWITCHServer(models.Model):
             fs_manager = ESL.ESLconnection(
                 str(fs_server.ip_address),
                 str(fs_server.port), str(fs_server.password))
-        except Exception, e:
+        except Exception as e:
             _logger.error(
                 "Error in the request to the FreeSWITCH Event Socket %s",
                 fs_server.ip_address)
@@ -148,7 +149,7 @@ class FreeSWITCHServer(models.Model):
             fs_manager = ESL.ESLconnection(
                 str(self.ip_address),
                 str(self.port), str(self.password))
-        except Exception, e:
+        except Exception as e:
             raise UserError(
                 _("Connection Test Failed! The error message is: %s" % e))
         finally:
@@ -159,7 +160,7 @@ class FreeSWITCHServer(models.Model):
                           "Password."))
                 else:
                     fs_manager.disconnect()
-            except Exception, e:
+            except Exception as e:
                 pass
         raise UserError(_(
             "Connection Test Successfull! Odoo can successfully login to "
@@ -190,7 +191,7 @@ class FreeSWITCHServer(models.Model):
                             calling_party_number = f['rows'][x]['dest']
                     else:
                         calling_party_number = f['rows'][x]['cid_num']
-        except Exception, e:
+        except Exception as e:
             _logger.error(
                 "Error in the Status request to FreeSWITCH server %s",
                 fs_server.ip_address)
@@ -398,7 +399,7 @@ class PhoneCommon(models.AbstractModel):
                 '\'' + self.get_name_from_phone_number(fs_number) + '\' ' + \
                 fs_number
             fs_manager.api('originate', dial_string.encode('utf-8'))
-        except Exception, e:
+        except Exception as e:
             _logger.error(
                 "Error in the Originate request to FreeSWITCH server %s",
                 fs_server.ip_address)

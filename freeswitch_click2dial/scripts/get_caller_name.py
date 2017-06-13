@@ -3,6 +3,7 @@
 # (c) 2010-2014 Alexis de Lattre <alexis.delattre@akretion.com>
 # (c) 2014-2016 Trever L. Adams <trever.adams@gmail.com>
 # License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
+# flake8: noqa: E501
 """
  Name lookup in OpenERP for incoming and outgoing calls with an
  FreeSWITCH system
@@ -36,9 +37,7 @@
  Notify should be the internal number of the called parties. This should be
  comma (,) delimited, not :_: delimited. It is up to you to format the
  extensions list appropriately. The persons who are at extensions in the
- notify list will receive a poppup if so configured and if they are logged in.
- The notify list actually shouldn't be in the cidlookup.conf, but should be
- used when doing notify (in an on answer hook for example).
+ notify list will receive a pop-up if so configured and if they are logged in.
 
  From the dialplan, do something like this <action application="set"
  data="effective_caller_id_name=${cidlookup(${caller_id_number})}"/>.
@@ -57,11 +56,10 @@
 """
 
 __author__ = "Trever Adams <trever.adams@gmail.com>"
-__date__ = "August 2016"
-__version__ = "0.5"
+__date__ = "June 2017"
+__version__ = "0.6"
 
 import sys
-sys.path.append('.')
 import xmlrpclib
 from cgi import parse_qs, escape
 import unicodedata
@@ -69,7 +67,7 @@ import unicodedata
 
 # Name that will be displayed if there is no match
 # and no geolocalisation
-not_found_name = "Not in OpenERP"
+not_found_name = "Not in Odoo"
 # Name used if name and number are both empty
 unknown_name = "unknown"
 
@@ -99,7 +97,7 @@ def geolocate_phone_number(number, my_country_code, lang):
     res = ''
 
     phonenum = phonenumbers.parse(number, my_country_code.upper())
-    city = phonenumbers.geocoder.description_for_number(phonenum, lang.lower())
+    city = geocoder.description_for_number(phonenum, lang.lower())
     country_code = phonenumbers.region_code_for_number(phonenum)
     # We don't display the country name when it's my own country
     if country_code == my_country_code.upper():
@@ -107,7 +105,7 @@ def geolocate_phone_number(number, my_country_code, lang):
             res = city
     else:
         # Convert country code to country name
-        country = phonenumbers.geocoder._region_display_name(
+        country = geocoder._region_display_name(
             country_code, lang.lower())
         if country and city:
             res = country + ' ' + city

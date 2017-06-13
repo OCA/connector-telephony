@@ -14,5 +14,5 @@ class FreeSWITCHClick2dialController(http.Controller):
         '/freeswitch_click2dial/get_record_from_my_channel/',
         type='json', auth='public')
     def get_record_from_my_channel(self, **kw):
-        res = http.request.env['freeswitch.server'].get_record_from_my_channel()
-        return res
+        FreeswitchServer = http.request.env['freeswitch.server']
+        return FreeswitchServer.get_record_from_my_channel()
