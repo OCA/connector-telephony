@@ -4,13 +4,14 @@
 # 
 # Translators:
 # OCA Transbot <transbot@odoo-community.org>, 2017
+# Ediz Duman <neps1192@gmail.com>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-25 03:36+0000\n"
-"PO-Revision-Date: 2017-01-25 03:36+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
+"POT-Creation-Date: 2017-05-01 16:29+0000\n"
+"PO-Revision-Date: 2017-05-01 16:29+0000\n"
+"Last-Translator: Ediz Duman <neps1192@gmail.com>, 2017\n"
 "Language-Team: Turkish (https://www.transifex.com/oca/teams/23907/tr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -31,7 +32,7 @@ msgstr ""
 #. module: asterisk_click2dial
 #: model:ir.model.fields,field_description:asterisk_click2dial.field_asterisk_server_active
 msgid "Active"
-msgstr ""
+msgstr "Etkin"
 
 #. module: asterisk_click2dial
 #: model:ir.model.fields,field_description:asterisk_click2dial.field_asterisk_server_alert_info
@@ -146,7 +147,7 @@ msgstr ""
 #. module: asterisk_click2dial
 #: model:ir.model.fields,field_description:asterisk_click2dial.field_asterisk_server_company_id
 msgid "Company"
-msgstr ""
+msgstr "Firma"
 
 #. module: asterisk_click2dial
 #: model:ir.model.fields,help:asterisk_click2dial.field_asterisk_server_company_id
@@ -195,7 +196,7 @@ msgstr ""
 #. module: asterisk_click2dial
 #: model:ir.model.fields,field_description:asterisk_click2dial.field_asterisk_server_display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Ad Görünümü"
 
 #. module: asterisk_click2dial
 #: model:ir.model.fields,field_description:asterisk_click2dial.field_asterisk_server_extension_priority
@@ -207,7 +208,7 @@ msgstr ""
 #: code:addons/asterisk_click2dial/static/src/js/asterisk_click2dial.js:35
 #, python-format
 msgid "Failure"
-msgstr ""
+msgstr "Başarısız"
 
 #. module: asterisk_click2dial
 #: selection:res.users,asterisk_chan_type:0
@@ -234,17 +235,17 @@ msgstr ""
 #. module: asterisk_click2dial
 #: model:ir.model.fields,field_description:asterisk_click2dial.field_asterisk_server___last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Son Değişiklik"
 
 #. module: asterisk_click2dial
 #: model:ir.model.fields,field_description:asterisk_click2dial.field_asterisk_server_write_uid
 msgid "Last Updated by"
-msgstr "Son güncelleyen"
+msgstr "Son Güncelleyen"
 
 #. module: asterisk_click2dial
 #: model:ir.model.fields,field_description:asterisk_click2dial.field_asterisk_server_write_date
 msgid "Last Updated on"
-msgstr "Son güncellendiği"
+msgstr "Son Güncellenme"
 
 #. module: asterisk_click2dial
 #: model:ir.model.fields,help:asterisk_click2dial.field_asterisk_server_login
@@ -300,7 +301,7 @@ msgstr ""
 #: code:addons/asterisk_click2dial/static/src/js/asterisk_click2dial.js:47
 #, python-format
 msgid "Number Not Found"
-msgstr "Numara bulunamadı"
+msgstr "Numara Bulunamadı"
 
 #. module: asterisk_click2dial
 #: code:addons/asterisk_click2dial/models/asterisk_server.py:88
@@ -437,7 +438,7 @@ msgstr ""
 #: code:addons/asterisk_click2dial/static/src/js/asterisk_click2dial.js:60
 #, python-format
 msgid "Success"
-msgstr ""
+msgstr "Başarılı"
 
 #. module: asterisk_click2dial
 #: model:ir.model.fields,help:asterisk_click2dial.field_asterisk_server_port
@@ -506,7 +507,7 @@ msgstr ""
 #. module: asterisk_click2dial
 #: model:ir.model,name:asterisk_click2dial.model_res_users
 msgid "Users"
-msgstr ""
+msgstr "Kullanıcılar"
 
 #. module: asterisk_click2dial
 #: model:ir.model.fields,field_description:asterisk_click2dial.field_asterisk_server_wait_time
@@ -541,7 +542,7 @@ msgstr ""
 #. module: asterisk_click2dial
 #: model:ir.model,name:asterisk_click2dial.model_phone_common
 msgid "phone.common"
-msgstr ""
+msgstr "phone.common"
 
 #. module: asterisk_click2dial
 #: model:ir.ui.view,arch_db:asterisk_click2dial.view_asterisk_server_form
