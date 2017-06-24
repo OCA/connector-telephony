@@ -259,6 +259,7 @@ class ResUsers(models.Model):
         help="Call Detail Record (CDR) account used for billing this user.")
     asterisk_chan_type = fields.Selection([
         ('SIP', 'SIP'),
+        ('PJSIP', 'PJSIP'),
         ('IAX2', 'IAX2'),
         ('DAHDI', 'DAHDI'),
         ('Zap', 'Zap'),
