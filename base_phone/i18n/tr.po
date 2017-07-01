@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-01 16:29+0000\n"
-"PO-Revision-Date: 2017-05-01 16:29+0000\n"
+"POT-Creation-Date: 2017-06-24 19:50+0000\n"
+"PO-Revision-Date: 2017-06-24 19:50+0000\n"
 "Last-Translator: Ediz Duman <neps1192@gmail.com>, 2016\n"
 "Language-Team: Turkish (https://www.transifex.com/oca/teams/23907/tr/)\n"
 "MIME-Version: 1.0\n"
@@ -144,6 +144,7 @@ msgid "ID"
 msgstr "ID"
 
 #. module: base_phone
+#: model:ir.model.fields,help:base_phone.field_base_config_settings_number_of_digits_to_match_from_end
 #: model:ir.model.fields,help:base_phone.field_res_company_number_of_digits_to_match_from_end
 msgid ""
 "In several situations, Odoo will have to find a Partner/Lead/Employee/... "
@@ -208,6 +209,7 @@ msgid "Number not found"
 msgstr "Numara bulunamadı"
 
 #. module: base_phone
+#: model:ir.model.fields,field_description:base_phone.field_base_config_settings_number_of_digits_to_match_from_end
 #: model:ir.model.fields,field_description:base_phone.field_res_company_number_of_digits_to_match_from_end
 msgid "Number of Digits To Match From End"
 msgstr "Sondan eşleştirilecek rakam adedi"
@@ -234,7 +236,7 @@ msgid "Partner: %s"
 msgstr "İş ortağı: %s"
 
 #. module: base_phone
-#: model:ir.ui.view,arch_db:base_phone.view_company_form
+#: model:ir.ui.view,arch_db:base_phone.view_general_configuration
 msgid "Phone"
 msgstr "Telefon"
 
@@ -330,6 +332,11 @@ msgstr "İş ortağını bu numara ile güncelle"
 #. module: base_phone
 #: model:ir.model,name:base_phone.model_base
 msgid "base"
+msgstr ""
+
+#. module: base_phone
+#: model:ir.model,name:base_phone.model_base_config_settings
+msgid "base.config.settings"
 msgstr ""
 
 #. module: base_phone
