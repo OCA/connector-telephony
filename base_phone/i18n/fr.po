@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: connector-telephony (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-01 04:07+0000\n"
-"PO-Revision-Date: 2017-02-10 21:41+0000\n"
-"Last-Translator: Alexis de Lattre <alexis@via.ecp.fr>\n"
+"POT-Creation-Date: 2017-06-24 19:57+0000\n"
+"PO-Revision-Date: 2017-06-24 19:59+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: French (http://www.transifex.com/oca/OCA-connector-telephony-8-0/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -29,7 +29,7 @@ msgid "Cancel"
 msgstr "Annuler"
 
 #. module: base_phone
-#: code:addons/base_phone/base_phone.py:112
+#: code:addons/base_phone/base_phone.py:120
 #, python-format
 msgid ""
 "Cannot reformat the phone number '%s' to international format. Error "
@@ -62,7 +62,7 @@ msgid "Companies"
 msgstr "Sociétés"
 
 #. module: base_phone
-#: code:addons/base_phone/wizard/number_not_found.py:87
+#: code:addons/base_phone/wizard/number_not_found.py:91
 #, python-format
 msgid "Create New Partner"
 msgstr "Créer un nouveau partenaire"
@@ -107,6 +107,13 @@ msgid "Dial"
 msgstr "Composer"
 
 #. module: base_phone
+#: field:base.phone.installed,display_name:0
+#: field:number.not.found,display_name:0 field:phone.common,display_name:0
+#: field:reformat.all.phonenumbers,display_name:0
+msgid "Display Name"
+msgstr "Nom affiché"
+
+#. module: base_phone
 #: selection:reformat.all.phonenumbers,state:0
 msgid "Done"
 msgstr "Terminé"
@@ -132,7 +139,7 @@ msgid "Email Preferences"
 msgstr "Préférences de messagerie électronique"
 
 #. module: base_phone
-#: code:addons/base_phone/wizard/number_not_found.py:101
+#: code:addons/base_phone/wizard/number_not_found.py:105
 #, python-format
 msgid "Error:"
 msgstr "Erreur :"
@@ -164,6 +171,13 @@ msgid ""
 " last digits of the phone number presented by the calling party. N is the "
 "value you should enter in this field."
 msgstr "In several situations, OpenERP will have to find a Partner/Lead/Employee/... from a phone number presented by the calling party. As the phone numbers presented by your phone operator may not always be displayed in a standard format, the best method to find the related Partner/Lead/Employee/... in OpenERP is to try to match the end of the phone number in OpenERP with the N last digits of the phone number presented by the calling party. N is the value you should enter in this field."
+
+#. module: base_phone
+#: field:base.phone.installed,__last_update:0
+#: field:number.not.found,__last_update:0 field:phone.common,__last_update:0
+#: field:reformat.all.phonenumbers,__last_update:0
+msgid "Last Modified on"
+msgstr "Dernière modification le"
 
 #. module: base_phone
 #: field:number.not.found,write_uid:0
@@ -230,7 +244,7 @@ msgid "Partner to Update"
 msgstr ""
 
 #. module: base_phone
-#: code:addons/base_phone/wizard/number_not_found.py:107
+#: code:addons/base_phone/wizard/number_not_found.py:111
 #, python-format
 msgid "Partner: %s"
 msgstr "Partenaire : %s"
@@ -275,7 +289,7 @@ msgid "Reformat all phone numbers"
 msgstr "Reformate tous les numéros de téléphone"
 
 #. module: base_phone
-#: code:addons/base_phone/wizard/number_not_found.py:102
+#: code:addons/base_phone/wizard/number_not_found.py:106
 #, python-format
 msgid "Select the Partner to Update."
 msgstr "Selectionnez le partenaire à mettre à jour."

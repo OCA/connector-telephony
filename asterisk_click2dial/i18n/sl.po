@@ -3,13 +3,13 @@
 # * asterisk_click2dial
 # 
 # Translators:
-# Matjaž Mozetič <m.mozetic@matmoz.si>, 2015
+# Matjaž Mozetič <m.mozetic@matmoz.si>, 2015,2017
 msgid ""
 msgstr ""
 "Project-Id-Version: connector-telephony (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-14 02:09+0000\n"
-"PO-Revision-Date: 2015-10-13 05:41+0000\n"
+"POT-Creation-Date: 2017-06-24 19:57+0000\n"
+"PO-Revision-Date: 2017-06-26 07:22+0000\n"
 "Last-Translator: Matjaž Mozetič <m.mozetic@matmoz.si>\n"
 "Language-Team: Slovenian (http://www.transifex.com/oca/OCA-connector-telephony-8-0/language/sl/)\n"
 "MIME-Version: 1.0\n"
@@ -116,7 +116,7 @@ msgid "Call Detail Record (CDR) account used for billing this user."
 msgstr "Call Detail Record (CDR) račun uporabljen pri obračunu za tega uporabnika."
 
 #. module: asterisk_click2dial
-#: code:addons/asterisk_click2dial/asterisk_click2dial.py:374
+#: code:addons/asterisk_click2dial/asterisk_click2dial.py:375
 #: field:res.users,callerid:0
 #, python-format
 msgid "Caller ID"
@@ -136,7 +136,7 @@ msgid ""
 msgstr "Ne morem pridobiti klicne številke iz Asterisk.\nNapaka: '%s'"
 
 #. module: asterisk_click2dial
-#: code:addons/asterisk_click2dial/asterisk_click2dial.py:457
+#: code:addons/asterisk_click2dial/asterisk_click2dial.py:458
 #, python-format
 msgid ""
 "Click to dial with Asterisk failed.\n"
@@ -191,6 +191,11 @@ msgid "Dialplan Parameters"
 msgstr "Parametri načrta klicanja"
 
 #. module: asterisk_click2dial
+#: field:asterisk.server,display_name:0
+msgid "Display Name"
+msgstr "Prikazni naziv"
+
+#. module: asterisk_click2dial
 #: constraint:asterisk.server:0 constraint:res.users:0
 msgid "Error message in raise"
 msgstr "Sproženo sporočilo o napaki"
@@ -206,10 +211,10 @@ msgstr "Sproženo sporočilo o napaki"
 #: code:addons/asterisk_click2dial/asterisk_click2dial.py:190
 #: code:addons/asterisk_click2dial/asterisk_click2dial.py:210
 #: code:addons/asterisk_click2dial/asterisk_click2dial.py:277
-#: code:addons/asterisk_click2dial/asterisk_click2dial.py:382
-#: code:addons/asterisk_click2dial/asterisk_click2dial.py:403
-#: code:addons/asterisk_click2dial/asterisk_click2dial.py:420
-#: code:addons/asterisk_click2dial/asterisk_click2dial.py:456
+#: code:addons/asterisk_click2dial/asterisk_click2dial.py:383
+#: code:addons/asterisk_click2dial/asterisk_click2dial.py:404
+#: code:addons/asterisk_click2dial/asterisk_click2dial.py:421
+#: code:addons/asterisk_click2dial/asterisk_click2dial.py:457
 #, python-format
 msgid "Error:"
 msgstr "Napaka:"
@@ -253,11 +258,16 @@ msgid "IP address or DNS name of the Asterisk server."
 msgstr "IP naslov ali DNS naziv Asterisk strežnika."
 
 #. module: asterisk_click2dial
-#: code:addons/asterisk_click2dial/asterisk_click2dial.py:373
+#: code:addons/asterisk_click2dial/asterisk_click2dial.py:374
 #: field:res.users,internal_number:0
 #, python-format
 msgid "Internal Number"
 msgstr "Interna številka"
+
+#. module: asterisk_click2dial
+#: field:asterisk.server,__last_update:0
+msgid "Last Modified on"
+msgstr "Zadnjič spremenjeno"
 
 #. module: asterisk_click2dial
 #: field:asterisk.server,write_uid:0
@@ -287,7 +297,7 @@ msgid "MGCP"
 msgstr "MGCP"
 
 #. module: asterisk_click2dial
-#: code:addons/asterisk_click2dial/asterisk_click2dial.py:404
+#: code:addons/asterisk_click2dial/asterisk_click2dial.py:405
 #, python-format
 msgid "Missing phone number"
 msgstr "Manjkajoča telefonska številka"
@@ -306,7 +316,7 @@ msgid "No Asterisk server configured for the company '%s'."
 msgstr "Za družbo '%s' ni nastavljenega Asterisk strežnika."
 
 #. module: asterisk_click2dial
-#: code:addons/asterisk_click2dial/asterisk_click2dial.py:421
+#: code:addons/asterisk_click2dial/asterisk_click2dial.py:422
 #, python-format
 msgid "No callerID configured for the current user"
 msgstr "Trenutni uporabnik nima nastavljenega ID klicatelja"
@@ -360,6 +370,11 @@ msgid "Out Prefix"
 msgstr "Izhodna predpona"
 
 #. module: asterisk_click2dial
+#: selection:res.users,asterisk_chan_type:0
+msgid "PJSIP"
+msgstr "PJSIP"
+
+#. module: asterisk_click2dial
 #: help:asterisk.server,password:0
 msgid ""
 "Password that OpenERP will use to communicate with the Asterisk Manager "
@@ -401,7 +416,7 @@ msgid ""
 msgstr "Težave pri zahtevkih iz OpenERP na Asterisk. Napaka: %s"
 
 #. module: asterisk_click2dial
-#: code:addons/asterisk_click2dial/asterisk_click2dial.py:372
+#: code:addons/asterisk_click2dial/asterisk_click2dial.py:373
 #: field:res.users,resource:0
 #, python-format
 msgid "Resource Name"
@@ -487,7 +502,7 @@ msgid "Test Connection to Asterisk"
 msgstr "Test povezave z Asterisk"
 
 #. module: asterisk_click2dial
-#: code:addons/asterisk_click2dial/asterisk_click2dial.py:383
+#: code:addons/asterisk_click2dial/asterisk_click2dial.py:384
 #, python-format
 msgid "The '%s' for the user '%s' should only have ASCII caracters"
 msgstr "'%s' za uporabnika '%s' bi moral vsebovati le ASCII znake"

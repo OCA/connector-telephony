@@ -3,14 +3,14 @@
 # * asterisk_click2dial
 # 
 # Translators:
-# Altinisik <aaltinisik@altinkaya.com.tr>, 2015
+# Ahmet Altinisik <aaltinisik@altinkaya.com.tr>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: connector-telephony (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-01 04:07+0000\n"
-"PO-Revision-Date: 2015-12-18 20:20+0000\n"
-"Last-Translator: Altinisik <aaltinisik@altinkaya.com.tr>\n"
+"POT-Creation-Date: 2017-06-24 19:57+0000\n"
+"PO-Revision-Date: 2017-06-24 19:59+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Turkish (http://www.transifex.com/oca/OCA-connector-telephony-8-0/language/tr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -116,7 +116,7 @@ msgid "Call Detail Record (CDR) account used for billing this user."
 msgstr "Call Detail Record (CDR) kullanıcının faturasının hesaplamak için kullanılan hesap."
 
 #. module: asterisk_click2dial
-#: code:addons/asterisk_click2dial/asterisk_click2dial.py:374
+#: code:addons/asterisk_click2dial/asterisk_click2dial.py:375
 #: field:res.users,callerid:0
 #, python-format
 msgid "Caller ID"
@@ -136,7 +136,7 @@ msgid ""
 msgstr "Arayan numara Asterisk sunucudan alınamadı.\nHata mesajı: '%s'"
 
 #. module: asterisk_click2dial
-#: code:addons/asterisk_click2dial/asterisk_click2dial.py:457
+#: code:addons/asterisk_click2dial/asterisk_click2dial.py:458
 #, python-format
 msgid ""
 "Click to dial with Asterisk failed.\n"
@@ -191,6 +191,11 @@ msgid "Dialplan Parameters"
 msgstr "Dialplan parametreleri"
 
 #. module: asterisk_click2dial
+#: field:asterisk.server,display_name:0
+msgid "Display Name"
+msgstr "Görünen İsim"
+
+#. module: asterisk_click2dial
 #: constraint:asterisk.server:0 constraint:res.users:0
 msgid "Error message in raise"
 msgstr "Çıkan hata mesajı"
@@ -206,10 +211,10 @@ msgstr "Çıkan hata mesajı"
 #: code:addons/asterisk_click2dial/asterisk_click2dial.py:190
 #: code:addons/asterisk_click2dial/asterisk_click2dial.py:210
 #: code:addons/asterisk_click2dial/asterisk_click2dial.py:277
-#: code:addons/asterisk_click2dial/asterisk_click2dial.py:382
-#: code:addons/asterisk_click2dial/asterisk_click2dial.py:403
-#: code:addons/asterisk_click2dial/asterisk_click2dial.py:420
-#: code:addons/asterisk_click2dial/asterisk_click2dial.py:456
+#: code:addons/asterisk_click2dial/asterisk_click2dial.py:383
+#: code:addons/asterisk_click2dial/asterisk_click2dial.py:404
+#: code:addons/asterisk_click2dial/asterisk_click2dial.py:421
+#: code:addons/asterisk_click2dial/asterisk_click2dial.py:457
 #, python-format
 msgid "Error:"
 msgstr "Hata:"
@@ -253,11 +258,16 @@ msgid "IP address or DNS name of the Asterisk server."
 msgstr "Asterisk sunucunun IP ya da DNS adı"
 
 #. module: asterisk_click2dial
-#: code:addons/asterisk_click2dial/asterisk_click2dial.py:373
+#: code:addons/asterisk_click2dial/asterisk_click2dial.py:374
 #: field:res.users,internal_number:0
 #, python-format
 msgid "Internal Number"
 msgstr "Dahili Numara"
+
+#. module: asterisk_click2dial
+#: field:asterisk.server,__last_update:0
+msgid "Last Modified on"
+msgstr "Son değişiklik"
 
 #. module: asterisk_click2dial
 #: field:asterisk.server,write_uid:0
@@ -287,7 +297,7 @@ msgid "MGCP"
 msgstr "MGCP"
 
 #. module: asterisk_click2dial
-#: code:addons/asterisk_click2dial/asterisk_click2dial.py:404
+#: code:addons/asterisk_click2dial/asterisk_click2dial.py:405
 #, python-format
 msgid "Missing phone number"
 msgstr "Kayıp telefon no"
@@ -306,7 +316,7 @@ msgid "No Asterisk server configured for the company '%s'."
 msgstr "Şirket '%s' için Asterisk sunucu tanımlanmamış"
 
 #. module: asterisk_click2dial
-#: code:addons/asterisk_click2dial/asterisk_click2dial.py:421
+#: code:addons/asterisk_click2dial/asterisk_click2dial.py:422
 #, python-format
 msgid "No callerID configured for the current user"
 msgstr "Kullanıcı için CallerID tanımlanmamış"
@@ -360,6 +370,11 @@ msgid "Out Prefix"
 msgstr "Çıkış ön eki (Prefix)"
 
 #. module: asterisk_click2dial
+#: selection:res.users,asterisk_chan_type:0
+msgid "PJSIP"
+msgstr ""
+
+#. module: asterisk_click2dial
 #: help:asterisk.server,password:0
 msgid ""
 "Password that OpenERP will use to communicate with the Asterisk Manager "
@@ -401,7 +416,7 @@ msgid ""
 msgstr "Odoo --> Asterisk isteğinde hata oluştu. Hata mesajı: %s"
 
 #. module: asterisk_click2dial
-#: code:addons/asterisk_click2dial/asterisk_click2dial.py:372
+#: code:addons/asterisk_click2dial/asterisk_click2dial.py:373
 #: field:res.users,resource:0
 #, python-format
 msgid "Resource Name"
@@ -487,7 +502,7 @@ msgid "Test Connection to Asterisk"
 msgstr "Asterisk bağlantısını dene"
 
 #. module: asterisk_click2dial
-#: code:addons/asterisk_click2dial/asterisk_click2dial.py:383
+#: code:addons/asterisk_click2dial/asterisk_click2dial.py:384
 #, python-format
 msgid "The '%s' for the user '%s' should only have ASCII caracters"
 msgstr "Kullanıcının '%s' sadece ASCII karakterlerden oluşabilir. Kullanıcı '%s' "

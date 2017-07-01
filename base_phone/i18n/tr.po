@@ -3,14 +3,14 @@
 # * base_phone
 # 
 # Translators:
-# Altinisik <aaltinisik@altinkaya.com.tr>, 2015
+# Ahmet Altinisik <aaltinisik@altinkaya.com.tr>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: connector-telephony (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-01 04:07+0000\n"
-"PO-Revision-Date: 2015-12-18 20:39+0000\n"
-"Last-Translator: Altinisik <aaltinisik@altinkaya.com.tr>\n"
+"POT-Creation-Date: 2017-06-24 19:57+0000\n"
+"PO-Revision-Date: 2017-06-24 19:59+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Turkish (http://www.transifex.com/oca/OCA-connector-telephony-8-0/language/tr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -29,7 +29,7 @@ msgid "Cancel"
 msgstr "İptal"
 
 #. module: base_phone
-#: code:addons/base_phone/base_phone.py:112
+#: code:addons/base_phone/base_phone.py:120
 #, python-format
 msgid ""
 "Cannot reformat the phone number '%s' to international format. Error "
@@ -62,7 +62,7 @@ msgid "Companies"
 msgstr "Şirketler"
 
 #. module: base_phone
-#: code:addons/base_phone/wizard/number_not_found.py:87
+#: code:addons/base_phone/wizard/number_not_found.py:91
 #, python-format
 msgid "Create New Partner"
 msgstr "Yeni iş ortağı oluştur"
@@ -107,6 +107,13 @@ msgid "Dial"
 msgstr "Çevir"
 
 #. module: base_phone
+#: field:base.phone.installed,display_name:0
+#: field:number.not.found,display_name:0 field:phone.common,display_name:0
+#: field:reformat.all.phonenumbers,display_name:0
+msgid "Display Name"
+msgstr "Görünen İsim"
+
+#. module: base_phone
 #: selection:reformat.all.phonenumbers,state:0
 msgid "Done"
 msgstr "Tamam"
@@ -132,7 +139,7 @@ msgid "Email Preferences"
 msgstr "E posta Seçenekleri"
 
 #. module: base_phone
-#: code:addons/base_phone/wizard/number_not_found.py:101
+#: code:addons/base_phone/wizard/number_not_found.py:105
 #, python-format
 msgid "Error:"
 msgstr "Hata:"
@@ -164,6 +171,13 @@ msgid ""
 " last digits of the phone number presented by the calling party. N is the "
 "value you should enter in this field."
 msgstr "Bir çok farklı durumda Odoo arayan numaradan bir İş ortağı/Çalışan vs bulmalıdır. Telefon numaraları servis sağlayıcılar tarafından farklı biçimlerde gönderilebildiği için en iyi yöntem telefon numarasının son N hanesi ile eşleşen kaydı bulmaktır. N bu alana girmeniz gereken değerdir."
+
+#. module: base_phone
+#: field:base.phone.installed,__last_update:0
+#: field:number.not.found,__last_update:0 field:phone.common,__last_update:0
+#: field:reformat.all.phonenumbers,__last_update:0
+msgid "Last Modified on"
+msgstr "Son değişiklik"
 
 #. module: base_phone
 #: field:number.not.found,write_uid:0
@@ -230,7 +244,7 @@ msgid "Partner to Update"
 msgstr "Güncellenecek iş ortağı"
 
 #. module: base_phone
-#: code:addons/base_phone/wizard/number_not_found.py:107
+#: code:addons/base_phone/wizard/number_not_found.py:111
 #, python-format
 msgid "Partner: %s"
 msgstr "iş ortağı: %s"
@@ -275,7 +289,7 @@ msgid "Reformat all phone numbers"
 msgstr "Bütün telefon numaralarını yeniden biçimlendir"
 
 #. module: base_phone
-#: code:addons/base_phone/wizard/number_not_found.py:102
+#: code:addons/base_phone/wizard/number_not_found.py:106
 #, python-format
 msgid "Select the Partner to Update."
 msgstr "Güncellenecek iş ortağını seçin."

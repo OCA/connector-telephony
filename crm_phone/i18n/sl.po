@@ -3,13 +3,13 @@
 # * crm_phone
 # 
 # Translators:
-# Matjaž Mozetič <m.mozetic@matmoz.si>, 2015
+# Matjaž Mozetič <m.mozetic@matmoz.si>, 2015,2017
 msgid ""
 msgstr ""
 "Project-Id-Version: connector-telephony (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-14 02:09+0000\n"
-"PO-Revision-Date: 2015-10-13 05:04+0000\n"
+"POT-Creation-Date: 2017-06-24 19:57+0000\n"
+"PO-Revision-Date: 2017-06-26 07:22+0000\n"
 "Last-Translator: Matjaž Mozetič <m.mozetic@matmoz.si>\n"
 "Language-Team: Slovenian (http://www.transifex.com/oca/OCA-connector-telephony-8-0/language/sl/)\n"
 "MIME-Version: 1.0\n"
@@ -19,9 +19,24 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);\n"
 
 #. module: crm_phone
+#: field:res.users,claim_count:0
+msgid "# Claims"
+msgstr "# Zahtevkov"
+
+#. module: crm_phone
+#: field:res.users,meeting_count:0
+msgid "# Meetings"
+msgstr "# sestankov"
+
+#. module: crm_phone
 #: view:wizard.create.crm.phonecall:crm_phone.create_crm_phonecall_view
 msgid "CRM phone call"
 msgstr "CRM telefonski klic"
+
+#. module: crm_phone
+#: help:res.users,speaker:0
+msgid "Check this box if this contact is a speaker."
+msgstr "Označite, če je stik govornik."
 
 #. module: crm_phone
 #: model:ir.actions.act_window,name:crm_phone.action_create_crm_phonecall
@@ -76,6 +91,11 @@ msgid "Current Phone"
 msgstr "Trenutna telefonska številka"
 
 #. module: crm_phone
+#: field:wizard.create.crm.phonecall,display_name:0
+msgid "Display Name"
+msgstr "Prikazni naziv"
+
+#. module: crm_phone
 #: code:addons/crm_phone/wizard/number_not_found.py:69
 #, python-format
 msgid "Error:"
@@ -87,6 +107,11 @@ msgid "ID"
 msgstr "ID"
 
 #. module: crm_phone
+#: field:wizard.create.crm.phonecall,__last_update:0
+msgid "Last Modified on"
+msgstr "Zadnjič spremenjeno"
+
+#. module: crm_phone
 #: field:wizard.create.crm.phonecall,write_uid:0
 msgid "Last Updated by"
 msgstr "Zadnji posodobil"
@@ -95,6 +120,11 @@ msgstr "Zadnji posodobil"
 #: field:wizard.create.crm.phonecall,write_date:0
 msgid "Last Updated on"
 msgstr "Zadnjič posodobljeno"
+
+#. module: crm_phone
+#: field:res.users,calendar_last_notif_ack:0
+msgid "Last notification marked as read from base Calendar"
+msgstr "Zadnje obvestilo iz osnovnega koledarja označeno kot prebrano"
 
 #. module: crm_phone
 #: help:number.not.found,to_update_lead_id:0
@@ -118,12 +148,27 @@ msgid "Lead: %s"
 msgstr "Indic: %s"
 
 #. module: crm_phone
+#: field:res.users,opportunity_ids:0
+msgid "Leads and Opportunities"
+msgstr "Indici in priložnosti"
+
+#. module: crm_phone
+#: field:res.users,meeting_ids:0
+msgid "Meetings"
+msgstr "Sestanki"
+
+#. module: crm_phone
 #: model:ir.model,name:crm_phone.model_number_not_found
 msgid "Number not found"
 msgstr "Številka ni najdena"
 
 #. module: crm_phone
-#: code:addons/crm_phone/wizard/create_crm_phonecall.py:65
+#: field:res.users,opportunity_count:0
+msgid "Opportunity"
+msgstr "Priložnost"
+
+#. module: crm_phone
+#: code:addons/crm_phone/wizard/create_crm_phonecall.py:72
 #, python-format
 msgid "Phone Call"
 msgstr "Telefonski klic"
@@ -132,6 +177,11 @@ msgstr "Telefonski klic"
 #: model:ir.model,name:crm_phone.model_crm_phonecall
 msgid "Phonecall"
 msgstr "Telefonski klic"
+
+#. module: crm_phone
+#: field:res.users,phonecall_count:0 field:res.users,phonecall_ids:0
+msgid "Phonecalls"
+msgstr "Telefonski klici"
 
 #. module: crm_phone
 #: field:res.users,context_propose_creation_crm_call:0
@@ -143,6 +193,11 @@ msgstr "Predlagaj ustvarjanje klica v CRM po click2dial"
 #, python-format
 msgid "Select the Lead to Update."
 msgstr "Izbira indica za posodobitev"
+
+#. module: crm_phone
+#: field:res.users,speaker:0
+msgid "Speaker"
+msgstr "Govornik"
 
 #. module: crm_phone
 #: view:number.not.found:crm_phone.number_not_found_form
