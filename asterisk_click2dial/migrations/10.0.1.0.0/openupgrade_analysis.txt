@@ -1,0 +1,3 @@
+---Fields in module 'asterisk_click2dial'---
+asterisk_click2dial / res.users                / asterisk_chan_type (selection): selection_keys is now '['DAHDI', 'H323', 'IAX2', 'MGCP', 'SCCP', 'SIP', 'Skinny', 'Zap', 'mISDN']' ('['DAHDI', 'H323', 'IAX2', 'MGCP', 'PJSIP', 'SCCP', 'SIP', 'Skinny', 'Zap', 'mISDN']')
+---XML records in module 'asterisk_click2dial'---
