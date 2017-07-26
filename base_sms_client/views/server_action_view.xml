@@ -1,19 +1,21 @@
 <?xml version="1.0"?>
-<odoo>
-    <record model="ir.ui.view" id="view_server_statistics_graph">
-        <field name="model">ir.actions.server</field>
-        <field name="inherit_id" ref="base.view_server_action_form"/>
-        <field name="arch" type="xml">
-            <page name="code" position="after" autofocus="autofocus">
-                <page string="SMS" name="sms" attrs="{'invisible': [('state', '!=', 'sms')]}">
-                    <group>
-                        <field name="sms"/>
-                        <field name="mobile"/>
-                        <field name="sms_server_id" invisible="1"/>
-                        <field name="sms_template_id" domain="[('sms_template','=',True)]" attrs="{'required':[('state','=','sms')]}"/>
-                    </group>
-                </page>
+<openerp>
+<data>
+<record model="ir.ui.view" id="view_server_statistics_graph">
+    <field name="model">ir.actions.server</field>
+    <field name="inherit_id" ref="base.view_server_action_form"/>
+    <field name="arch" type="xml">
+        <page name="code" position="after" autofocus="autofocus">
+            <page string="SMS" name="sms" attrs="{'invisible': [('state', '!=', 'sms')]}">
+                <group>
+                    <field name="sms"/>
+                    <field name="mobile"/>
+                    <field name="sms_server_id" invisible="1"/>
+                    <field name="sms_template_id" domain="[('sms_template','=',True)]" attrs="{'required':[('state','=','sms')]}"/>
+                </group>
             </page>
-        </field>
-    </record>
-</odoo>
+        </page>
+    </field>
+</record>
+</data>
+</openerp>

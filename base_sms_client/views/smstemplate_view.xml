@@ -1,17 +1,19 @@
 <?xml version="1.0"?>
-<odoo>
-    <record model="ir.ui.view" id="email_template_form">
-        <field name="name">mail.template.form</field>
-        <field name="model">mail.template</field>
-        <field name="inherit_id" ref="mail.email_template_form"/>
-        <field name="arch" type="xml">
-            <field name="email_to" position="after">
-                <field name="mobile_to"/>
-            </field>
-            <field name="lang" position="before">
-                <field name="sms_template"/>
-                <field name="gateway_id"/>
-            </field>
+<openerp>
+<data>
+<record model="ir.ui.view" id="email_template_form">
+    <field name="name">mail.template.form</field>
+    <field name="model">email.template</field>
+    <field name="inherit_id" ref="email_template.email_template_form"/>
+    <field name="arch" type="xml">
+        <field name="email_to" position="after">
+            <field name="mobile_to"/>
         </field>
-    </record>
-</odoo>
+        <field name="lang" position="before">
+            <field name="sms_template"/>
+            <field name="gateway_id"/>
+        </field>
+    </field>
+</record>
+</data>
+</openerp>

@@ -1,15 +1,15 @@
 # coding: utf-8
-# Copyright (C) 2015 Sébastien BEAU <sebastien.beau@akretion.com>
-# © 2011 SYLEAM (<http://syleam.fr/>)
-# © 2013 Julius Network Solutions SARL <contact@julius.fr>
+# Copyright 2015 Sébastien BEAU <sebastien.beau@akretion.com>
+# Copyright 2011 SYLEAM (<http://syleam.fr/>)
+# Copyright 2013 Julius Network Solutions SARL <contact@julius.fr>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 
 {
     "name": "Base Sms Client",
-    "version": "10.0.1.0.0",
+    "version": "8.0.1.0.0",
     'license': 'AGPL-3',
-    "depends": ['mail',
+    "depends": ['email_template',
                 'base_phone',
                 'keychain',
                 ],

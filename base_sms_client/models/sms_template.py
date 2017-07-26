@@ -5,11 +5,11 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 
-from odoo import models, fields
+from openerp import models, fields
 
 
 class MailTemplate(models.Model):
-    _inherit = "mail.template"
+    _inherit = "email.template"
 
     sms_template = fields.Boolean('SMS Template')
     mobile_to = fields.Char('To (Mobile)')

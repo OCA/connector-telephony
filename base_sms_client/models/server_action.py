@@ -4,7 +4,7 @@
 # Copyright (C) 2015 Valentin Chemiere <valentin.chemiere@akretion.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from odoo import models, fields
+from openerp import models, fields
 
 
 class ServerAction(models.Model):
@@ -23,5 +23,5 @@ class ServerAction(models.Model):
         comodel_name='sms.gateway', string='SMS Server',
         help='Select the SMS Gateway configuration to use with this action.')
     sms_template_id = fields.Many2one(
-        comodel_name='mail.template', string='SMS Template',
+        comodel_name='email.template', string='SMS Template',
         help='Select the SMS Template configuration to use with this action.')
