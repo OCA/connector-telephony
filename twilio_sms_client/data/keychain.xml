@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data noupdate="1">
+<record id="keychain_twilio" model="keychain.account">
+    <field name="name">Twilio sms default</field>
+    <field name="namespace">twilio_provider</field>
+    <field name="technical_name">twilio_default_account</field>
+</record>
+</data>
+</openerp>
