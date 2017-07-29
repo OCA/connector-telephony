@@ -70,4 +70,5 @@ def format(
         res = format_original(self, text, oldtag=oldtag)
     return res
 
+
 report_sxw.rml_parse.format = format
