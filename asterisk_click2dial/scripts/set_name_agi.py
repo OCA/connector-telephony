@@ -387,6 +387,7 @@ def main(options, arguments):
             stdout_write('SET CALLERID "%s"<%s>\n' % (res, phone_number))
     return True
 
+
 if __name__ == '__main__':
     usage = "Usage: set_name_agi.py [options] login1 login2 login3 ..."
     epilog = "Script written by Alexis de Lattre. "
