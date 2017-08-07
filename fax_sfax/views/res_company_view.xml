@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+    Copyright (C) 2014-2015 LasLabs [https://laslabs.com]
+    @author Dave Lasley <dave@laslabs.com>
+    The licence is in the file __openerp__.py
+-->
+
+<openerp>
+    <data>
+        
+        <record id="res_company_view_form" model="ir.ui.view">
+            <field name="name">res.company.view.form</field>
+            <field name="model">res.company</field>
+            <field name='inherit_id' ref='base_fax.res_company_view_form'/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='fax_adapter_ids']" position="before">
+                    <field name="sfax_adapter_ids">
+                        <form name="SFax Adapter">
+                            <group name="adapter">
+                                <field name="name"/>
+                                <field name="id" readonly="True"/>
+                            </group>
+                            <group name="Auth/Encryption">
+                                <field name="username"/>
+                                <field name="encrypt_key"/>
+                                <field name="vector"/>
+                            </group>
+                            <group name="App Specific">
+                                <field name="uri"/>
+                                <field name="api_key"/>
+                                <field name="token"/>
+                            </group>
+                        </form>
+                    </field>
+                </xpath>
+            </field>
+        </record>
+        
+    </data>
+</openerp>

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+    Copyright (C) 2014-2015 LasLabs [https://laslabs.com]
+    @author Dave Lasley <dave@laslabs.com>
+    The licence is in the file __openerp__.py
+-->
+
+<openerp>
+    <data>
+        
+        <record id="fax_payload_form" model="ir.ui.view">
+            <field name="name">Payload</field>
+            <field name="model">fax.payload</field>
+            <field name="arch" type="xml">
+                <form string="Fax Payload">
+                    <sheet>
+                        <h1>
+                            <field name="ref"/>
+                        </h1>
+                        <group>
+                            <field name="image_type"/>
+                            <field name="name"/>
+                            <field name="transmission_ids" readonly="True"/>
+                        </group>
+                        <notebook colspan="4">
+                            <page string="Pages" autofocus="autofocus">
+                                <field name="page_ids" mode="kanban">
+                                    <kanban>
+                                        <field name="name"/>
+                                        <field name="image_large" widget="image"/>
+                                        <templates>
+                                            <t t-name="kanban-box">
+                                                <div t-attf-class="oe_kanban_global_click">
+                                                    <a t-if="!read_only_mode" type="delete" class="fa fa-times pull-right"/>
+                                                    <div class="o_kanban_image">
+                                                        <img t-att-src="'data:image/png;base64,'+record.image_large.raw_value"/>
+                                                    </div>
+                                                    <div class="oe_kanban_details">
+                                                        <field name="name"/>
+                                                    </div>
+                                                </div>
+                                            </t>
+                                        </templates>
+                                    </kanban>
+                                    <form string="Page">
+                                        <sheet>
+                                            <group>
+                                                <field name="name"/>
+                                                <field name="image_xlarge" widget="image"/>
+                                            </group>
+                                        </sheet>
+                                    </form>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        
+        <record id="fax_payload_tree" model="ir.ui.view">
+            <field name="name">Payloads</field>
+            <field name="model">fax.payload</field>
+            <field name="arch" type="xml">
+                <tree string="Fax Payloads">
+                    <field name="ref"/>
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+        
+        <record id="fax_payload_action" model="ir.actions.act_window">
+            <field name="name">Payloads</field>
+            <field name="res_model">fax.payload</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        
+    </data>
+</openerp>
