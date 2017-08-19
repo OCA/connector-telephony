@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: connector-telephony (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-24 19:57+0000\n"
-"PO-Revision-Date: 2017-06-25 13:52+0000\n"
+"POT-Creation-Date: 2017-08-05 01:12+0000\n"
+"PO-Revision-Date: 2017-08-11 11:59+0000\n"
 "Last-Translator: liAnGjiA <liangjia@qq.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/oca/OCA-connector-telephony-8-0/language/zh_CN/)\n"
 "MIME-Version: 1.0\n"
@@ -29,7 +29,7 @@ msgid "Cancel"
 msgstr "取消"
 
 #. module: base_phone
-#: code:addons/base_phone/base_phone.py:120
+#: code:addons/base_phone/base_phone.py:121
 #, python-format
 msgid ""
 "Cannot reformat the phone number '%s' to international format. Error "
@@ -297,7 +297,7 @@ msgstr ""
 #. module: base_phone
 #: field:reformat.all.phonenumbers,state:0
 msgid "State"
-msgstr ""
+msgstr "状态"
 
 #. module: base_phone
 #: model:ir.ui.menu,name:base_phone.menu_config_phone
