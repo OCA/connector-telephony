@@ -295,7 +295,7 @@ msgstr ""
 #. module: base_phone
 #: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers_state
 msgid "State"
-msgstr ""
+msgstr "Județ"
 
 #. module: base_phone
 #: model:ir.ui.menu,name:base_phone.menu_config_phone
