@@ -96,8 +96,9 @@ class ResUsers(models.Model):
         if self.asterisk_server_id:
             ast_server = self.asterisk_server_id
         else:
-            asterisk_servers = self.env['asterisk.server'].search(
-                [('company_id', '=', self.company_id.id)])
+            asterisk_servers = self.env['asterisk.server'].search([
+                '|', ('company_id', '=', self.company_id.id),
+                ('company_id', '=', False)], order='company_id')
             # If the user doesn't have an asterisk server,
             # we take the first one of the user's company
             if not asterisk_servers:
