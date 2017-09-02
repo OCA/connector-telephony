@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: connector-telephony (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-24 19:57+0000\n"
+"POT-Creation-Date: 2017-08-19 01:29+0000\n"
 "PO-Revision-Date: 2015-10-12 18:37+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: Dutch (Netherlands) (http://www.transifex.com/oca/OCA-connector-telephony-8-0/language/nl_NL/)\n"
@@ -72,12 +72,12 @@ msgstr ""
 #. module: crm_phone
 #: field:wizard.create.crm.phonecall,create_uid:0
 msgid "Created by"
-msgstr ""
+msgstr "Aangemaakt door"
 
 #. module: crm_phone
 #: field:wizard.create.crm.phonecall,create_date:0
 msgid "Created on"
-msgstr ""
+msgstr "Aangemaakt op"
 
 #. module: crm_phone
 #: field:number.not.found,current_lead_mobile:0
@@ -113,12 +113,12 @@ msgstr "Laatst gewijzigd op"
 #. module: crm_phone
 #: field:wizard.create.crm.phonecall,write_uid:0
 msgid "Last Updated by"
-msgstr ""
+msgstr "Laatst bijgewerkt door"
 
 #. module: crm_phone
 #: field:wizard.create.crm.phonecall,write_date:0
 msgid "Last Updated on"
-msgstr ""
+msgstr "Laatst bijgewerkt op"
 
 #. module: crm_phone
 #: field:res.users,calendar_last_notif_ack:0

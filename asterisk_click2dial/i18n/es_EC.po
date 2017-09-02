@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: connector-telephony (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-24 19:57+0000\n"
-"PO-Revision-Date: 2017-06-24 19:59+0000\n"
+"POT-Creation-Date: 2017-08-19 01:29+0000\n"
+"PO-Revision-Date: 2017-08-21 07:23+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Spanish (Ecuador) (http://www.transifex.com/oca/OCA-connector-telephony-8-0/language/es_EC/)\n"
 "MIME-Version: 1.0\n"
@@ -30,7 +30,7 @@ msgstr ""
 #. module: asterisk_click2dial
 #: field:asterisk.server,active:0
 msgid "Active"
-msgstr ""
+msgstr "Activo"
 
 #. module: asterisk_click2dial
 #: field:asterisk.server,alert_info:0
