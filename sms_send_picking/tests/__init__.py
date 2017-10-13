@@ -1,0 +1,1 @@
+from . import test_sms_send_picking

@@ -15,8 +15,9 @@ class StockPicking(models.Model):
     availability_sent_by_sms = fields.Boolean(default=False)
 
     # TODO use a templating instead
-    @api.model
+    @api.multi
     def _prepare_availability_by_sms_notification(self):
+        self.ensure_one()
         gateway = self.env['sms.gateway'].search([
             ('default_gateway', '=', True)], limit=1)
         return {
@@ -37,20 +38,25 @@ class StockPicking(models.Model):
     @api.model
     def _get_send_picking_availability_by_sms_domain(self):
         return [
-            ('state', '=', 'assigned'),
+            ('state', '=', 'assigned'),  # assigned = available
             ('availability_sent_by_sms', '=', False),
             ('picking_type_id.code', '=', 'outgoing'),
-            ]
+        ]
 
     @api.model
     def _cron_send_picking_availability_by_sms(self):
         domain = self._get_send_picking_availability_by_sms_domain()
-        pickings = self.env['stock.picking'].search(domain)
+        pickings = self.search(domain)
         total = len(pickings)
         for idx, picking in enumerate(pickings):
             _logger.debug('Send Sms for picking %s, progress %s/%s', picking,
                           idx, total)
             vals = picking._prepare_availability_by_sms_notification()
+            if not vals['mobile']:
+                _logger.warning(
+                    _("SMS issue for picking %s : no mobile phone"
+                        % picking.id))
+                continue
             self.env['sms.sms'].create(vals)
             picking.write({'availability_sent_by_sms': True})
             picking._cr.commit()
