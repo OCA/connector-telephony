@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# © 2016 Akretion France (Alexis de Lattre <alexis.delattre@akretion.com>)
+# © 2016 Akretion France
 
 from openerp.tests.common import TransactionCase
 
