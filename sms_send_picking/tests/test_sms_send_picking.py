@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # © 2016 Akretion France
 
-from openerp.tests.common import TransactionCase
+from odoo.tests.common import TransactionCase
 
 
 class TestSmsSendPicking(TransactionCase):
