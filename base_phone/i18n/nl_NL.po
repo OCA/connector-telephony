@@ -58,7 +58,7 @@ msgstr ""
 #. module: base_phone
 #: model:ir.model,name:base_phone.model_res_company
 msgid "Companies"
-msgstr ""
+msgstr "Bedrijven"
 
 #. module: base_phone
 #: code:addons/base_phone/wizard/number_not_found.py:84
@@ -295,7 +295,7 @@ msgstr ""
 #. module: base_phone
 #: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers_state
 msgid "State"
-msgstr ""
+msgstr "Provincie"
 
 #. module: base_phone
 #: model:ir.ui.menu,name:base_phone.menu_config_phone
