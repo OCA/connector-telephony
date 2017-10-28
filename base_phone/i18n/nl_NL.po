@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: connector-telephony (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-08-19 01:29+0000\n"
-"PO-Revision-Date: 2017-08-29 08:01+0000\n"
+"PO-Revision-Date: 2017-09-22 16:59+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Dutch (Netherlands) (http://www.transifex.com/oca/OCA-connector-telephony-8-0/language/nl_NL/)\n"
 "MIME-Version: 1.0\n"
@@ -58,7 +58,7 @@ msgstr ""
 #. module: base_phone
 #: model:ir.model,name:base_phone.model_res_company
 msgid "Companies"
-msgstr ""
+msgstr "Bedrijven"
 
 #. module: base_phone
 #: code:addons/base_phone/wizard/number_not_found.py:91
@@ -296,7 +296,7 @@ msgstr ""
 #. module: base_phone
 #: field:reformat.all.phonenumbers,state:0
 msgid "State"
-msgstr ""
+msgstr "Provincie"
 
 #. module: base_phone
 #: model:ir.ui.menu,name:base_phone.menu_config_phone
