@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: connector-telephony (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-24 19:57+0000\n"
-"PO-Revision-Date: 2017-06-24 19:59+0000\n"
+"POT-Creation-Date: 2017-10-28 02:53+0000\n"
+"PO-Revision-Date: 2017-11-03 12:15+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Indonesian (http://www.transifex.com/oca/OCA-connector-telephony-8-0/language/id/)\n"
 "MIME-Version: 1.0\n"
@@ -28,7 +28,7 @@ msgid "Cancel"
 msgstr "Batalkan"
 
 #. module: base_phone
-#: code:addons/base_phone/base_phone.py:120
+#: code:addons/base_phone/base_phone.py:121
 #, python-format
 msgid ""
 "Cannot reformat the phone number '%s' to international format. Error "
@@ -120,7 +120,7 @@ msgstr ""
 #. module: base_phone
 #: selection:reformat.all.phonenumbers,state:0
 msgid "Draft"
-msgstr ""
+msgstr "Draf"
 
 #. module: base_phone
 #: field:number.not.found,e164_number:0
@@ -296,7 +296,7 @@ msgstr ""
 #. module: base_phone
 #: field:reformat.all.phonenumbers,state:0
 msgid "State"
-msgstr ""
+msgstr "Bagian"
 
 #. module: base_phone
 #: model:ir.ui.menu,name:base_phone.menu_config_phone
