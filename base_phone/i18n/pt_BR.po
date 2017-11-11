@@ -192,7 +192,7 @@ msgstr "Última atualização em"
 #. module: base_phone
 #: selection:number.not.found,number_type:0
 msgid "Mobile"
-msgstr ""
+msgstr "Móvel"
 
 #. module: base_phone
 #: model:ir.ui.view,arch_db:base_phone.number_not_found_form
