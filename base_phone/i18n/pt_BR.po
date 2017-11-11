@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: connector-telephony (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-19 01:29+0000\n"
-"PO-Revision-Date: 2017-08-21 07:21+0000\n"
+"POT-Creation-Date: 2017-11-04 02:39+0000\n"
+"PO-Revision-Date: 2017-11-07 22:30+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/oca/OCA-connector-telephony-8-0/language/pt_BR/)\n"
 "MIME-Version: 1.0\n"
@@ -193,7 +193,7 @@ msgstr "Última atualização em"
 #. module: base_phone
 #: selection:number.not.found,number_type:0
 msgid "Mobile"
-msgstr ""
+msgstr "Móvel"
 
 #. module: base_phone
 #: view:number.not.found:base_phone.number_not_found_form
