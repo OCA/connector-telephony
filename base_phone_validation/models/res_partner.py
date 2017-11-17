@@ -25,7 +25,8 @@ class ResPartner(models.Model):
         :raise ValidationError: if the given number is not validated.
         """
         number = phonenumbers.parse(phonenumber, self.country_id.code or None)
-        if not phonenumbers.is_valid_number(number):
+        if not phonenumbers.is_valid_number_for_region(
+                number, self.country_id.code):
             error_msg = u'\n'.join([
                 _(u'The number ({}) "{}" seems not valid for {}.').format(
                     fieldname, phonenumber, self.country_id.name
