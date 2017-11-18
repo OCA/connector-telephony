@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="iap_account_view_form_ovh" model="ir.ui.view">
+        <field name="name">iap.account.form.ovh</field>
+        <field name="model">iap.account</field>
+        <field name="inherit_id" ref="iap.iap_account_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='account']" position="after">
+                <group string="OVH configuration" name="ovh" attrs="{'invisible': [('service_name', '!=', 'ovh')]}">
+                    <field name="ovh_endpoint"/>
+                    <field name="ovh_application_key"/>
+                    <field name="ovh_application_secret"/>
+                    <field name="ovh_consumer_key"/>
+                    <field name="ovh_sms_account"/>
+                    <field name="ovh_sender"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>

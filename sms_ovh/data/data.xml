@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="ovh_iap_account" model="iap.account">
+            <field name="service_name">ovh</field>
+        </record>
+    </data>
+</odoo>

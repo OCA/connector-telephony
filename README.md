@@ -19,4 +19,8 @@ To know more about the OpenERP-Asterisk connector, refer to the documentation
  available on the Akretion website
 http://www.akretion.com/en/products-and-services/openerp-asterisk-voip-connector
 
-
+Available addons
+----------------
+addon | version | summary
+--- | --- | ---
+[sms_ovh](sms_ovh/) | 11.0.2.0.0 | OVH Sms Gateway
