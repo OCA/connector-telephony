@@ -1,37 +1,36 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# 	* base_phone_validation
+#	* base_phone_validation
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-11-21 18:20-0500\n"
-"PO-Revision-Date: 2017-11-21 18:20-0500\n"
-"Last-Translator: istvan Szalai <istvan.szalai@savoirfairelinux.com>\n"
+"POT-Creation-Date: 2017-11-21 23:19+0000\n"
+"PO-Revision-Date: 2017-11-21 23:19+0000\n"
+"Last-Translator: <>\n"
 "Language-Team: \n"
-"Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 1.8.7.1\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
 
 #. module: base_phone_validation
 #: model:ir.model,name:base_phone_validation.model_res_partner
 msgid "Partner"
-msgstr "Partnenaire"
+msgstr ""
 
 #. module: base_phone_validation
 #: code:addons/base_phone_validation/models/res_partner.py:35
 #: code:addons/base_phone_validation/models/res_partner.py:48
 #, python-format
 msgid "Please double check it."
-msgstr "S'il vous plaît vérifiez-le."
+msgstr ""
 
 #. module: base_phone_validation
 #: code:addons/base_phone_validation/models/res_partner.py:32
 #: code:addons/base_phone_validation/models/res_partner.py:45
 #, python-format
 msgid "The number ({}) \"{}\" seems not valid for {}."
-msgstr "Le numéro ({}) \"{}\" ne semble pas valide pour {}."
+msgstr ""
+
