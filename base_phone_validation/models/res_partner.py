@@ -36,7 +36,7 @@ class ResPartner(models.Model):
                 ])
                 raise ValidationError(error_msg)
 
-        else:
+        elif self.env.user.company_id.country_id:
             local_country = self.env.user.company_id.country_id.code
             number = phonenumbers.parse(
                 phonenumber, local_country)
