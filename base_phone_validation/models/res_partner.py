@@ -51,15 +51,18 @@ class ResPartner(models.Model):
 
     @api.constrains('phone', 'country_id')
     def _phone_number_validation(self):
-        if self.phone:
-            self._force_validation(self.phone, 'phone')
+        for rec in self:
+            if rec.phone:
+                rec._force_validation(rec.phone, 'phone')
 
     @api.constrains('fax', 'country_id')
     def _fax_number_validation(self):
-        if self.fax:
-            self._force_validation(self.fax, 'fax')
+        for rec in self:
+            if rec.fax:
+                rec._force_validation(rec.fax, 'fax')
 
     @api.constrains('mobile', 'country_id')
     def _mobile_number_validation(self):
-        if self.mobile:
-            self._force_validation(self.mobile, 'mobile')
+        for rec in self:
+            if rec.mobile:
+                rec._force_validation(rec.mobile, 'mobile')
