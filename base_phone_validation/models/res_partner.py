@@ -40,7 +40,8 @@ class ResPartner(models.Model):
             local_country = self.env.user.company_id.country_id.code
             number = phonenumbers.parse(
                 phonenumber, local_country)
-            if not phonenumbers.is_valid_number(number):
+            if not phonenumbers.is_valid_number_for_region(
+                    number, local_country):
                 error_msg = u'\n'.join([
                     _(u'The number ({}) "{}" seems not valid for {}.').format(
                         fieldname, phonenumber, local_country
