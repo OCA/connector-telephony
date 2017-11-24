@@ -37,14 +37,14 @@ class ResPartner(models.Model):
                 raise ValidationError(error_msg)
 
         elif self.env.user.company_id.country_id:
-            local_country = self.env.user.company_id.country_id.code
+            local_country = self.env.user.company_id.country_id
             number = phonenumbers.parse(
-                phonenumber, local_country)
+                phonenumber, local_country.code)
             if not phonenumbers.is_valid_number_for_region(
-                    number, local_country):
+                    number, local_country.code):
                 error_msg = u'\n'.join([
                     _(u'The number ({}) "{}" seems not valid for {}.').format(
-                        fieldname, phonenumber, local_country
+                        fieldname, phonenumber, local_country.name
                     ),
                     _(u'Please double check it.')
                 ])
