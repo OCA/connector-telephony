@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
 {
-    'name': 'OVH SMS Client',
-    'version': '2.0',
+    'name': 'OVH SMS Endpoint',
+    'version': '1.0',
     'license': 'AGPL-3',
     'depends': ['sms', ],
     'author': 'Florent de Labarre',

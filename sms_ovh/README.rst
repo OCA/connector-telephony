@@ -50,7 +50,9 @@ Usage
 
    raw_input("and press Enter to close...")
 
-* go to settings > technical > Sms Provider configuration and select OVH in provider.
+ * Install this module
+ * Go to Settings > Technical > Iap Account configuration and select OVH.
+ * Only use international phone number ex : +33123456789 (Install phone_validation module)
 
 
 Bug Tracker
@@ -66,9 +68,7 @@ Credits
 Contributors
 ------------
 
-* Valentin Chemiere
-* Yvan Party <yvan@julius.fr>
-* MonsieurB <monsieurb@saaslys.com>
+* Florent de Labarre
 
 Maintainer
 ----------

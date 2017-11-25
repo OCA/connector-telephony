@@ -1,9 +1,11 @@
 # coding: utf-8
 
 from odoo import api, models, fields, _
-from odoo.addons.iap.models.iap import InsufficientCreditError, AuthenticationError
+from odoo.addons.iap.models.iap import InsufficientCreditError
 from odoo.exceptions import UserError
 import re
+
+_logger = logging.getLogger(__name__)
 
 try:
     import ovh
