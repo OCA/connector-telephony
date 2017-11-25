@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: connector-telephony (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-19 01:29+0000\n"
-"PO-Revision-Date: 2017-08-21 07:20+0000\n"
+"POT-Creation-Date: 2017-11-11 02:20+0000\n"
+"PO-Revision-Date: 2017-11-23 23:27+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Romanian (http://www.transifex.com/oca/OCA-connector-telephony-8-0/language/ro/)\n"
 "MIME-Version: 1.0\n"
@@ -486,7 +486,7 @@ msgstr ""
 #: code:addons/asterisk_click2dial/static/src/js/asterisk_click2dial.js:44
 #, python-format
 msgid "Success"
-msgstr ""
+msgstr "Succes"
 
 #. module: asterisk_click2dial
 #: help:asterisk.server,port:0
