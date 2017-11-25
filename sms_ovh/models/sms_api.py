@@ -1,15 +1,17 @@
 # coding: utf-8
 
-from odoo import api, models, fields, _
+import re
+import logging
+
+from odoo import api, models, _
 from odoo.addons.iap.models.iap import InsufficientCreditError
 from odoo.exceptions import UserError
-import re
 
-_logger = logging.getLogger(__name__)
 
 try:
     import ovh
 except (ImportError, IOError) as err:
+    _logger = logging.getLogger(__name__)
     _logger.debug(err)
 
 
