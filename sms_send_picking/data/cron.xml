@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data noupdate="1">
+        <record id="ir_cron_send_sms_picking_action" model="ir.cron">
+            <field name="name">Auto Send SMS Picking Ready</field>
+            <field name="interval_number">5</field>
+            <field name="interval_type">minutes</field>
+            <field name="numbercall">-1</field>
+            <field name="doall">False</field>
+            <field name="model">stock.picking</field>
+            <field name="function">_cron_send_picking_availability_by_sms</field>
+            <field name="args">()</field>
+            <field name="active" eval="False"/>
+        </record>
+    </data>
+</openerp>
