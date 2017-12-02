@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-25 03:36+0000\n"
-"PO-Revision-Date: 2017-01-25 03:36+0000\n"
+"POT-Creation-Date: 2017-12-01 08:49+0000\n"
+"PO-Revision-Date: 2017-12-01 08:49+0000\n"
 "Last-Translator: Pedro M. Baeza <pedro.baeza@gmail.com>, 2017\n"
 "Language-Team: Spanish (https://www.transifex.com/oca/teams/23907/es/)\n"
 "MIME-Version: 1.0\n"
@@ -123,7 +123,7 @@ msgid "Call Detail Record (CDR) account used for billing this user."
 msgstr ""
 
 #. module: asterisk_click2dial
-#: code:addons/asterisk_click2dial/models/res_users.py:78
+#: code:addons/asterisk_click2dial/models/res_users.py:79
 #: model:ir.model.fields,field_description:asterisk_click2dial.field_res_users_callerid
 #, python-format
 msgid "Caller ID"
@@ -232,7 +232,7 @@ msgid "ID"
 msgstr "ID"
 
 #. module: asterisk_click2dial
-#: code:addons/asterisk_click2dial/models/res_users.py:77
+#: code:addons/asterisk_click2dial/models/res_users.py:78
 #: model:ir.model.fields,field_description:asterisk_click2dial.field_res_users_internal_number
 #, python-format
 msgid "Internal Number"
@@ -279,7 +279,7 @@ msgid "Moving to %s ID %d"
 msgstr ""
 
 #. module: asterisk_click2dial
-#: code:addons/asterisk_click2dial/models/res_users.py:104
+#: code:addons/asterisk_click2dial/models/res_users.py:106
 #, python-format
 msgid "No Asterisk server configured for the company '%s'."
 msgstr ""
@@ -333,6 +333,11 @@ msgid "Out Prefix"
 msgstr ""
 
 #. module: asterisk_click2dial
+#: selection:res.users,asterisk_chan_type:0
+msgid "PJSIP"
+msgstr ""
+
+#. module: asterisk_click2dial
 #: model:ir.model.fields,help:asterisk_click2dial.field_asterisk_server_password
 msgid ""
 "Password that Odoo will use to communicate with the Asterisk Manager "
@@ -375,7 +380,7 @@ msgid ""
 msgstr ""
 
 #. module: asterisk_click2dial
-#: code:addons/asterisk_click2dial/models/res_users.py:76
+#: code:addons/asterisk_click2dial/models/res_users.py:77
 #: model:ir.model.fields,field_description:asterisk_click2dial.field_res_users_resource
 #, python-format
 msgid "Resource Name"
@@ -463,7 +468,7 @@ msgid "Test Connection to Asterisk"
 msgstr ""
 
 #. module: asterisk_click2dial
-#: code:addons/asterisk_click2dial/models/res_users.py:85
+#: code:addons/asterisk_click2dial/models/res_users.py:86
 #, python-format
 msgid "The '%s' for the user '%s' should only have ASCII caracters"
 msgstr ""
