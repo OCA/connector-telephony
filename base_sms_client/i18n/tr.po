@@ -3,15 +3,15 @@
 # * base_sms_client
 # 
 # Translators:
-# OCA Transbot <transbot@odoo-community.org>, 2017
 # Ediz Duman <neps1192@gmail.com>, 2017
+# OCA Transbot <transbot@odoo-community.org>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-01 16:29+0000\n"
-"PO-Revision-Date: 2017-05-01 16:29+0000\n"
-"Last-Translator: Ediz Duman <neps1192@gmail.com>, 2017\n"
+"POT-Creation-Date: 2017-12-01 08:49+0000\n"
+"PO-Revision-Date: 2017-12-01 08:49+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
 "Language-Team: Turkish (https://www.transifex.com/oca/teams/23907/tr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -232,14 +232,14 @@ msgstr "Son Değişiklik"
 #: model:ir.model.fields,field_description:base_sms_client.field_sms_sms_write_uid
 #: model:ir.model.fields,field_description:base_sms_client.field_wizard_mass_sms_write_uid
 msgid "Last Updated by"
-msgstr "Son güncelleyen"
+msgstr "Son Güncelleyen"
 
 #. module: base_sms_client
 #: model:ir.model.fields,field_description:base_sms_client.field_sms_gateway_write_date
 #: model:ir.model.fields,field_description:base_sms_client.field_sms_sms_write_date
 #: model:ir.model.fields,field_description:base_sms_client.field_wizard_mass_sms_write_date
 msgid "Last Updated on"
-msgstr "Son güncellendiği"
+msgstr "Son Güncellenme"
 
 #. module: base_sms_client
 #: model:ir.model.fields,field_description:base_sms_client.field_sms_abstract_body
@@ -264,7 +264,7 @@ msgstr ""
 #. module: base_sms_client
 #: model:ir.model.fields,field_description:base_sms_client.field_sms_sms_mobile
 msgid "Mobile"
-msgstr "Cep"
+msgstr "Mobil"
 
 #. module: base_sms_client
 #: model:ir.model.fields,field_description:base_sms_client.field_ir_act_server_mobile
