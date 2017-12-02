@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: connector-telephony (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-24 19:57+0000\n"
-"PO-Revision-Date: 2017-06-24 19:59+0000\n"
+"POT-Creation-Date: 2017-11-25 02:54+0000\n"
+"PO-Revision-Date: 2017-11-30 01:10+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/oca/OCA-connector-telephony-8-0/language/pt_BR/)\n"
 "MIME-Version: 1.0\n"
@@ -170,12 +170,12 @@ msgstr "Oportunidade"
 #: code:addons/crm_phone/wizard/create_crm_phonecall.py:72
 #, python-format
 msgid "Phone Call"
-msgstr ""
+msgstr "Ligação Telefônica "
 
 #. module: crm_phone
 #: model:ir.model,name:crm_phone.model_crm_phonecall
 msgid "Phonecall"
-msgstr ""
+msgstr "Ligaçãotelefônica"
 
 #. module: crm_phone
 #: field:res.users,phonecall_count:0 field:res.users,phonecall_ids:0
