@@ -69,7 +69,6 @@ openerp.base_phone = function (instance) {
                                         res_model: r.action_model,
                                         view_mode: 'form',
                                         views: [[false, 'form']],
-                                        target: 'new',
                                         context: context,
                                         };
                                     instance.client.action_manager.do_action(action);
