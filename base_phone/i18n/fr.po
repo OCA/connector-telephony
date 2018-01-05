@@ -333,7 +333,7 @@ msgstr ""
 
 #. module: base_phone
 #: model:ir.model,name:base_phone.model_base_config_settings
-msgid "base.config.settings"
+msgid "res.config.settings"
 msgstr ""
 
 #. module: base_phone

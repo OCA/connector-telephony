@@ -6,7 +6,7 @@ from odoo import models, fields
 
 
 class BaseConfigSettings(models.TransientModel):
-    _inherit = 'base.config.settings'
+    _inherit = 'res.config.settings'
 
     number_of_digits_to_match_from_end = fields.Integer(
         related='company_id.number_of_digits_to_match_from_end')
