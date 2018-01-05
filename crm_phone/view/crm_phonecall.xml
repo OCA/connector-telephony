@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  © 2014-2016 Akretion (Alexis de Lattre <alexis.delattre@akretion.com>)
+  License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+-->
+
+<odoo>
+
+
+<record id="crm_phonecall_form" model="ir.ui.view">
+    <field name="name">crm.phonecall.form</field>
+    <field name="model">crm.phonecall</field>
+    <field name="arch" type="xml">
+        <form string="Phone Call">
+            <header>
+                <field name="state" widget="statusbar" clickable="True"/>
+            </header>
+            <sheet>
+                <div class="oe_button_box" name="button_box">
+                    <button class="oe_stat_button" type="object"
+                        name="schedule_another_call" icon="fa-phone"
+                        string="Schedule Another Call"/>
+                </div>
+                <div class="oe_title">
+                    <div class="oe_edit_only">
+                        <label for="name"/>
+                    </div>
+                    <h1><field name="name"/></h1>
+                </div>
+                <group name="main">
+                    <group name="left">
+                        <field name="date"/>
+                        <field name="user_id"/>
+                        <field name="partner_id"/>
+                        <field name="partner_phone"/>
+                        <field name="partner_mobile"/>
+                        <field name="opportunity_id"/>
+                    </group>
+                    <group name="right">
+                        <field name="direction"/>
+                        <field name="team_id" groups="base.group_multi_salesteams"/>
+                        <field name="company_id" groups="base.group_multi_company"/>
+                        <field name="priority" widget="priority"/>
+                    </group>
+                </group>
+                <group name="description" string="Description">
+                    <field name="description" nolabel="1"
+                        placeholder="Summary of the phone call..."/>
+                </group>
+            </sheet>
+            <div class="oe_chatter">
+                <field name="message_follower_ids" widget="mail_followers"/>
+                <field name="message_ids" widget="mail_thread"/>
+            </div>
+        </form>
+    </field>
+</record>
+
+<record id="crm_phonecall_tree" model="ir.ui.view">
+    <field name="name">crm.phonecall.tree</field>
+    <field name="model">crm.phonecall</field>
+    <field name="arch" type="xml">
+        <tree string="Phone Calls" editable="top">
+            <field name="date"/>
+            <field name="name"/>
+            <field name="partner_id"/>
+            <field name="opportunity_id"/>
+            <field name="user_id"/>
+            <field name="team_id" groups="base.group_multi_salesteams"/>
+            <field name="direction"/>
+            <field name="state"/>
+            <button name="schedule_another_call" type="object"
+                string="Schedule Another Call" icon="terp-call-start"/>
+        </tree>
+    </field>
+</record>
+
+<record id="crm_phonecall_calendar" model="ir.ui.view">
+    <field name="name">crm.phonecall.calendar</field>
+    <field name="model">crm.phonecall</field>
+    <field name="arch" type="xml">
+        <calendar string="Phone Calls" date_start="date" color="user_id">
+            <field name="name"/>
+            <field name="partner_id"/>
+        </calendar>
+    </field>
+</record>
+
+<record id="crm_phonecall_search" model="ir.ui.view">
+    <field name="name">crm.phonecall.search</field>
+    <field name="model">crm.phonecall</field>
+    <field name="arch" type="xml">
+        <search string="Search Phone Calls">
+            <field name="name" string="Phonecalls"/>
+            <field name="date"/>
+            <field name="user_id"/>
+            <field name="partner_id" operator="child_of"/>
+            <field name="opportunity_id"/>
+            <field name="team_id" groups="base.group_multi_salesteams"/>
+            <filter string="My Phonecalls" domain="[('user_id', '=', uid)]"/>
+            <filter string="My Team" domain="[('section_id.user_id', '=', uid)]"/>
+            <filter string="Unassigned" domain="[('user_id', '=', False)]"/>
+            <separator/>
+            <filter string="To Do" name="open" domain="[('state', '=', 'open')]"/>
+            <filter string="Held" name="done" domain="[('state', '=', 'done')]"/>
+            <separator/>
+            <filter string="Inbound" domain="[('direction', '=', 'inbound')]"/>
+            <filter string="Outbound" domain="[('direction', '=', 'outbound')]"/>
+            <group string="Group By" name="groupby">
+                <filter name="partner_groupby" string="Partner"
+                    context="{'group_by': 'partner_id'}"/>
+                <filter name="user_groupby" string="Responsible"
+                    context="{'group_by': 'user_id'}"/>
+                <filter name="team_groupby" string="Team"
+                    context="{'group_by': 'team_id'}"
+                    groups="base.group_multi_salesteams"/>
+                <filter name="date_groupby" string="Month"
+                    context="{'group_by': 'date'}"/>
+                <filter name="state_groupby" string="State"
+                    context="{'group_by': 'state'}"/>
+                <filter name="direction" string="Direction"
+                    context="{'group_by': 'direction'}"/>
+            </group>
+        </search>
+    </field>
+</record>
+
+<menuitem id="crm_phonecall_menu" name="Phone Calls"
+      parent="sales_team.menu_base_partner" sequence="7" groups="sales_team.group_sale_salesman"/>
+
+<record id="crm_phonecall_action" model="ir.actions.act_window">
+    <field name="name">Phone Calls</field>
+    <field name="res_model">crm.phonecall</field>
+    <field name="view_mode">tree,calendar,form</field>
+</record>
+
+<record id="crm_phonecall_action_done" model="ir.actions.act_window">
+    <field name="name">Logged Calls</field>
+    <field name="res_model">crm.phonecall</field>
+    <field name="view_mode">tree,calendar,form</field>
+    <field name="context">{'search_default_done': 1, 'default_state': 'done'}</field>
+</record>
+
+<menuitem id="crm_phonecall_menu_done" action="crm_phonecall_action_done"
+    parent="crm_phonecall_menu" sequence="10"/>
+
+<record id="crm_phonecall_action_open" model="ir.actions.act_window">
+    <field name="name">Scheduled Calls</field>
+    <field name="res_model">crm.phonecall</field>
+    <field name="view_mode">tree,calendar,form</field>
+    <field name="context">{'search_default_open': 1, 'default_state': 'open'}</field>
+</record>
+
+<menuitem id="crm_phonecall_menu_open" action="crm_phonecall_action_open"
+    parent="crm_phonecall_menu" sequence="20"/>
+
+
+</odoo>
