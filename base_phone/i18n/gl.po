@@ -512,7 +512,7 @@ msgstr ""
 
 #. module: base_phone
 #: model:ir.model,name:base_phone.model_ir_actions_report_xml
-msgid "ir.actions.report.xml"
+msgid "ir.actions.report"
 msgstr ""
 
 #. module: base_phone
