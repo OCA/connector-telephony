@@ -51,21 +51,21 @@ class PhoneCommon(models.AbstractModel):
                 channel,
                 context=ast_server.context,
                 extension=ast_number,
-                priority=unicode(ast_server.extension_priority),
-                timeout=unicode(ast_server.wait_time * 1000),
+                priority=str(ast_server.extension_priority),
+                timeout=str(ast_server.wait_time * 1000),
                 caller_id=user.callerid,
                 account=user.cdraccount,
                 variable=variable)
-        except Exception, e:
+        except Exception as e:
             _logger.error(
                 "Error in the Originate request to Asterisk server %s",
                 ast_server.ip_address)
             _logger.error(
-                "Here are the details of the error: '%s'", unicode(e))
+                "Here are the details of the error: '%s'", str(e))
             raise UserError(
                 _("Click to dial with Asterisk failed.\nHere is the error: "
                     "'%s'")
-                % unicode(e))
+                % str(e))
         finally:
             ast_manager.Logoff()
 

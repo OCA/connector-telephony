@@ -24,7 +24,7 @@ class ReformatAllPhonenumbers(models.TransientModel):
     def run_reformat_all_phonenumbers(self):
         self.ensure_one()
         logger.info('Starting to reformat all the phone numbers')
-        phonenumbers_not_reformatted = u''
+        phonenumbers_not_reformatted = ''
         phoneobjects = self.env['phone.common']._get_phone_models()
         for obj_dict in phoneobjects:
             fields = obj_dict['fields']
@@ -47,7 +47,7 @@ class ReformatAllPhonenumbers(models.TransientModel):
                 vals = {}
                 for field in fields:
                     vals[field] = entry[field]
-                if any([value for value in vals.values()]):
+                if any([value for value in list(vals.values())]):
                     entry.write(vals)
         if not phonenumbers_not_reformatted:
             phonenumbers_not_reformatted = \

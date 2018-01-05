@@ -61,7 +61,7 @@ class NumberNotFound(models.TransientModel):
                     res['number_type'] = 'mobile'
                 else:
                     res['number_type'] = 'phone'
-            except Exception, e:
+            except Exception as e:
                 _logger.error(
                     "Cannot reformat the phone number '%s': %s",
                     res['calling_number'], e)

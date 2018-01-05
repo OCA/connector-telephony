@@ -92,7 +92,7 @@
 
 """
 
-import xmlrpclib
+import xmlrpc.client
 import sys
 from optparse import OptionParser
 
@@ -221,7 +221,7 @@ def geolocate_phone_number(number, my_country_code, lang):
 def convert_to_ascii(my_unicode):
     '''Convert to ascii, with clever management of accents (é -> e, è -> e)'''
     import unicodedata
-    if isinstance(my_unicode, unicode):
+    if isinstance(my_unicode, str):
         my_unicode_with_ascii_chars_only = ''.join((
             char for char in unicodedata.normalize('NFD', my_unicode)
             if unicodedata.category(char) != 'Mn'))
@@ -257,7 +257,7 @@ def main(options, arguments):
             stdinput[variable] = value
     stderr_write("full AGI environnement :\n")
 
-    for variable in stdinput.keys():
+    for variable in list(stdinput.keys()):
         stderr_write("%s = %s\n" % (variable, stdinput.get(variable)))
 
     if options.outgoing:
@@ -336,7 +336,7 @@ def main(options, arguments):
             'database %s user ID %d"\n' % (
                 proto, options.server, options.port, options.database,
                 options.userid))
-        sock = xmlrpclib.ServerProxy(
+        sock = xmlrpc.client.ServerProxy(
             '%s://%s:%d/xmlrpc/object'
             % (proto, options.server, options.port))
         try:

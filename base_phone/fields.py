@@ -49,7 +49,7 @@ class Fax(fields.Char):
                 res_parse = phonenumbers.parse(res)
                 res = phonenumbers.format_number(
                     res_parse, phonenumbers.PhoneNumberFormat.INTERNATIONAL)
-                no_break_space = u'\u00A0'
+                no_break_space = '\u00A0'
                 res = res.replace(' ', no_break_space)
             except:
                 pass

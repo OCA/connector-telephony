@@ -137,7 +137,7 @@ class AsteriskServer(models.Model):
             ast_manager = Manager.Manager(
                 (ast_server.ip_address, ast_server.port),
                 ast_server.login, ast_server.password)
-        except Exception, e:
+        except Exception as e:
             _logger.error(
                 "Error in the request to the Asterisk Manager Interface %s",
                 ast_server.ip_address)
@@ -157,7 +157,7 @@ class AsteriskServer(models.Model):
                 (self.ip_address, self.port),
                 self.login,
                 self.password)
-        except Exception, e:
+        except Exception as e:
             raise UserError(
                 _("Connection Test Failed! The error message is: %s" % e))
         finally:
@@ -202,20 +202,20 @@ class AsteriskServer(models.Model):
             # pprint(list_chan)
             _logger.debug("Result of Status AMI request:")
             _logger.debug(pformat(list_chan))
-            for chan in list_chan.values():
+            for chan in list(list_chan.values()):
                 calling_party_number = self._get_calling_number_from_channel(
                     chan, user)
                 if calling_party_number:
                     break
-        except Exception, e:
+        except Exception as e:
             _logger.error(
                 "Error in the Status request to Asterisk server %s",
                 ast_server.ip_address)
             _logger.error(
-                "Here are the details of the error: '%s'", unicode(e))
+                "Here are the details of the error: '%s'", str(e))
             raise UserError(
                 _("Can't get calling number from  Asterisk.\nHere is the "
-                    "error: '%s'" % unicode(e)))
+                    "error: '%s'" % str(e)))
 
         finally:
             ast_manager.Logoff()

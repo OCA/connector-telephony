@@ -17,30 +17,30 @@ class TestCRMPhone(TransactionCase):
             'fax': '(0) 1 45 44 42 43',
             'country_id': self.env.ref('base.fr').id,
             })
-        self.assertEquals(lead1.mobile, u'+33 6 42 77 42 77')
-        self.assertEquals(lead1.fax, u'+33 1 45 44 42 43')
+        self.assertEqual(lead1.mobile, '+33 6 42 77 42 77')
+        self.assertEqual(lead1.fax, '+33 1 45 44 42 43')
         lead2 = clo.create({
-            'name': u'Automobile Odoo deployment',
-            'partner_name': u'Kia',
-            'contact_name': u'Mikaël Content',
+            'name': 'Automobile Odoo deployment',
+            'partner_name': 'Kia',
+            'contact_name': 'Mikaël Content',
             'country_id': self.env.ref('base.ch').id,
             'phone': '04 31 23 45 67',
             })
-        self.assertEquals(lead2.phone, u'+41 43 123 45 67')
+        self.assertEqual(lead2.phone, '+41 43 123 45 67')
         lead3 = clo.create({
             'name': 'Angela Strasse',
             'country_id': self.env.ref('base.de').id,
             })
         lead3.write({'phone': '08912345678'})
-        self.assertEquals(lead3.phone, u'+49 89 12345678')
+        self.assertEqual(lead3.phone, '+49 89 12345678')
         lead4 = clo.create({
             'name': 'Large Odoo deployment',
             'partner_id': self.env.ref('base.res_partner_2').id,
             })
         lead4.write({'mobile': '(0) 2-391-43-75'})
-        self.assertEquals(lead4.mobile, u'+32 2 391 43 75')
+        self.assertEqual(lead4.mobile, '+32 2 391 43 75')
         pco = self.env['phone.common']
         name = pco.get_name_from_phone_number('0642774277')
-        self.assertEquals(name, 'Jacques Toufaux (Ford)')
+        self.assertEqual(name, 'Jacques Toufaux (Ford)')
         name2 = pco.get_name_from_phone_number('0041431234567')
-        self.assertEquals(name2, u'Mikaël Content (Kia)')
+        self.assertEqual(name2, 'Mikaël Content (Kia)')

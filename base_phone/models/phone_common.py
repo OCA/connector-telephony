@@ -32,16 +32,16 @@ class PhoneCommon(models.AbstractModel):
         For example : ('res.partner', 42, u'Alexis de Lattre (Akretion)')
         '''
         _logger.debug(
-            u"Call get_name_from_phone_number with number = %s"
+            "Call get_name_from_phone_number with number = %s"
             % presented_number)
-        if not isinstance(presented_number, (str, unicode)):
+        if not isinstance(presented_number, str):
             _logger.warning(
-                u"Number '%s' should be a 'str' or 'unicode' but it is a '%s'"
+                "Number '%s' should be a 'str' or 'unicode' but it is a '%s'"
                 % (presented_number, type(presented_number)))
             return False
         if not presented_number.isdigit():
             _logger.warning(
-                u"Number '%s' should only contain digits." % presented_number)
+                "Number '%s' should only contain digits." % presented_number)
 
         nr_digits_to_match_from_end = \
             self.env.user.company_id.number_of_digits_to_match_from_end
@@ -67,7 +67,7 @@ class PhoneCommon(models.AbstractModel):
             res_obj = obj.search(domain)
             if len(res_obj) > 1:
                 _logger.warning(
-                    u"There are several %s (IDS = %s) with a phone number "
+                    "There are several %s (IDS = %s) with a phone number "
                     "ending with '%s'. Taking the first one.",
                     obj._name, res_obj.ids, end_number_to_match)
                 res_obj = res_obj[0]
@@ -75,19 +75,19 @@ class PhoneCommon(models.AbstractModel):
                 name = res_obj.name_get()[0][1]
                 res = (obj._name, res_obj.id, name)
                 _logger.debug(
-                    u"Answer get_record_from_phone_number: (%s, %d, %s)",
+                    "Answer get_record_from_phone_number: (%s, %d, %s)",
                     res[0], res[1], res[2])
                 return res
             else:
                 _logger.debug(
-                    u"No match on %s for end of phone number '%s'",
+                    "No match on %s for end of phone number '%s'",
                     obj._name, end_number_to_match)
         return False
 
     @api.model
     def _get_phone_models(self):
         phoneobj = []
-        for model_name in self.env.registry.keys():
+        for model_name in list(self.env.registry.keys()):
             senv = False
             try:
                 senv = self.with_context(callerid=True).env[model_name]

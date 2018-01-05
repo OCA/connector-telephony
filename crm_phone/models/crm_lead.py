@@ -25,7 +25,7 @@ class CrmLead(models.Model):
             res = []
             for lead in self:
                 if lead.partner_name and lead.contact_name:
-                    name = u'%s (%s)' % (lead.contact_name, lead.partner_name)
+                    name = '%s (%s)' % (lead.contact_name, lead.partner_name)
                 elif lead.partner_name:
                     name = lead.partner_name
                 elif lead.contact_name:
