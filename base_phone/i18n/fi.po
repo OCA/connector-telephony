@@ -759,33 +759,3 @@ msgstr ""
 #: model:ir.model,name:base_phone.model_wizard_ir_model_menu_create
 msgid "wizard.ir.model.menu.create"
 msgstr ""
-
-#. module: base_phone
-#: model:ir.model,name:base_phone.model_workflow
-msgid "workflow"
-msgstr ""
-
-#. module: base_phone
-#: model:ir.model,name:base_phone.model_workflow_activity
-msgid "workflow.activity"
-msgstr ""
-
-#. module: base_phone
-#: model:ir.model,name:base_phone.model_workflow_instance
-msgid "workflow.instance"
-msgstr ""
-
-#. module: base_phone
-#: model:ir.model,name:base_phone.model_workflow_transition
-msgid "workflow.transition"
-msgstr ""
-
-#. module: base_phone
-#: model:ir.model,name:base_phone.model_workflow_triggers
-msgid "workflow.triggers"
-msgstr ""
-
-#. module: base_phone
-#: model:ir.model,name:base_phone.model_workflow_workitem
-msgid "workflow.workitem"
-msgstr ""
