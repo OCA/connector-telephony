@@ -6,7 +6,7 @@ from odoo import models, fields, api, _
 from odoo.addons.base_phone.fields import Phone
 
 
-class CrmPhonecall(models.Model):
+class PhoneCall(models.Model):
     _name = 'crm.phonecall'
     _inherit = ['mail.thread']
     _order = "id desc"

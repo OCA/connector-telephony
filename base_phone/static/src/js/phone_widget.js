@@ -6,11 +6,11 @@ odoo.define('base_phone.phone_widget', function (require) {
     "use strict";
 
     var core = require('web.core');
-    var formwidgets = require('web.form_widgets');
+    var formwidgets = require('web.basic_fields');
     var web_client = require('web.web_client');
     var _t = core._t;
 
-    var FieldFax = formwidgets.FieldEmail.extend({
+    var FieldFax = basic_fields.FieldEmail.extend({
         template: 'FieldFax',
         prefix: 'fax',
         initialize_content: function() {
@@ -123,8 +123,8 @@ odoo.define('base_phone.phone_widget', function (require) {
     });
 
 
-    if (!core.list_widget_registry.get('phone')) {
-        core.list_widget_registry.add('field.phone', ColumnPhone);
+    if (!core.search_widget_registry.get('phone')) {
+        core.search_widget_registry.add('field.phone', ColumnPhone);
     }
 
 });

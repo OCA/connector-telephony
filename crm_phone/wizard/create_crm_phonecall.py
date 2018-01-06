@@ -12,7 +12,7 @@ except ImportError:
     logger.debug('Cannot import phonenumbers lib.')
 
 
-class WizardCreateCrmPhonecall(models.TransientModel):
+class WizardCreatePhoneCall(models.TransientModel):
     _name = "wizard.create.crm.phonecall"
 
     @api.multi
