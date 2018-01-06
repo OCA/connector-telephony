@@ -6,11 +6,11 @@ odoo.define('base_phone.phone_widget', function (require) {
     "use strict";
 
     var core = require('web.core');
-    var formwidgets = require('web.form_widgets');
+    var basic_fields = require('web.basic_fields');
     var web_client = require('web.web_client');
     var _t = core._t;
 
-    var FieldFax = formwidgets.FieldEmail.extend({
+    var FieldFax = basic_fields.FieldEmail.extend({
         template: 'FieldFax',
         prefix: 'fax',
         initialize_content: function() {
@@ -61,7 +61,11 @@ odoo.define('base_phone.phone_widget', function (require) {
                             'phone_number': phone_num,
                             'click2dial_model': self.view.dataset.model,
                             'click2dial_id': self.view.datarecord.id};
-                        self.rpc('/base_phone/click2dial', arg).done(function(r) {
+                        self._rpc({
+                            model: 'phone.common',
+                            method: 'click2dial', 
+                            args: [arg]
+                        }).then(function(r) {
                             // console.log('Click2dial r=%s', JSON.stringify(r));
                             if (r === false) {
                                 self.do_warn("Click2dial failed");
@@ -123,8 +127,8 @@ odoo.define('base_phone.phone_widget', function (require) {
     });
 
 
-    if (!core.list_widget_registry.get('phone')) {
-        core.list_widget_registry.add('field.phone', ColumnPhone);
+    if (!core.search_widget_registry.get('phone')) {
+        core.search_widget_registry.add('field.phone', ColumnPhone);
     }
 
 });
