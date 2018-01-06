@@ -166,12 +166,12 @@ msgid "Display Name"
 msgstr ""
 
 #. module: base_phone
-#: selection:reformat.all.phonenumbers,state:0
+#: selection:phone.reformatphonenumbers,state:0
 msgid "Done"
 msgstr ""
 
 #. module: base_phone
-#: selection:reformat.all.phonenumbers,state:0
+#: selection:phone.reformatphonenumbers,state:0
 msgid "Draft"
 msgstr "Rascunho"
 

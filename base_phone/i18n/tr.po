@@ -107,12 +107,12 @@ msgid "Display Name"
 msgstr "Ad Görünümü"
 
 #. module: base_phone
-#: selection:reformat.all.phonenumbers,state:0
+#: selection:phone.reformatphonenumbers,state:0
 msgid "Done"
 msgstr "Biten"
 
 #. module: base_phone
-#: selection:reformat.all.phonenumbers,state:0
+#: selection:phone.reformatphonenumbers,state:0
 msgid "Draft"
 msgstr "Taslak"
 
