@@ -9,7 +9,7 @@ logger = logging.getLogger(__name__)
 
 
 class ReformatAllPhonenumbers(models.TransientModel):
-    _name = "reformat.all.phonenumbers"
+    _name = "phone.reformatphonenumbers"
     _inherit = "res.config.installer"
     _description = "Reformat all phone numbers"
 

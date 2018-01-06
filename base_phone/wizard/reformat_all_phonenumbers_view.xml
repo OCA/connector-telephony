@@ -9,7 +9,7 @@
 
     <record id="reformat_all_phonenumbers_form" model="ir.ui.view">
         <field name="name">reformat_all_phonenumbers.form</field>
-        <field name="model">reformat.all.phonenumbers</field>
+        <field name="model">phone.reformatphonenumbers</field>
         <field name="arch" type="xml">
             <form string="Reformat all phone numbers">
                 <group name="main">
@@ -33,7 +33,7 @@
 
     <record id="reformat_all_phonenumbers_action" model="ir.actions.act_window">
         <field name="name">Reformat Phone Numbers</field>
-        <field name="res_model">reformat.all.phonenumbers</field>
+        <field name="res_model">phone.reformatphonenumbers</field>
         <field name="view_mode">form</field>
         <field name="target">new</field>
     </record>
