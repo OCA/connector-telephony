@@ -26,10 +26,14 @@ var click2dialOpenCaller = Widget.extend({
     on_open_caller: function (event) {
         event.stopPropagation();
         var self = this;
-        self.rpc('/asterisk_click2dial/get_record_from_my_channel', {}).done(function(r) {
-        // console.log('RESULT RPC r='+r);
-        // console.log('RESULT RPC type r='+typeof r);
-        // console.log('RESULT RPC isNaN r='+isNaN(r));
+        self._rpc({
+            model: 'asterisk.server',
+            method: 'get_record_from_my_channel',
+            args: []
+        }).then(function(r) {
+        console.log('RESULT RPC r='+r);
+        console.log('RESULT RPC type r='+typeof r);
+        console.log('RESULT RPC isNaN r='+isNaN(r));
         if (r === false) {
              self.do_warn(
                 _t('Failure'),
