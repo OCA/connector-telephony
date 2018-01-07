@@ -48,7 +48,6 @@ odoo.define('base_phone.phone_widget', function (require) {
         prefix: 'fax',
         formatType: 'phone',
         _renderReadonly: function() {
-            return $();
             var phone_num = this.get('value');
             if (phone_num) {
                 phone_num = phone_num.replace(/ /g, '').replace(/-/g, '');
