@@ -5,6 +5,7 @@
 odoo.define('asterisk_click2dial.click2dial', function (require) {
 "use strict";
 
+var ajax = require('web.ajax');
 var SystrayMenu = require('web.SystrayMenu');
 var web_client = require('web.web_client');
 var Widget = require('web.Widget');
@@ -26,11 +27,7 @@ var click2dialOpenCaller = Widget.extend({
     on_open_caller: function (event) {
         event.stopPropagation();
         var self = this;
-        self._rpc({
-            model: 'asterisk.server',
-            method: 'get_record_from_my_channel',
-            args: []
-        }).then(function(r) {
+        ajax.jsonRpc('/asterisk_click2dial/get_record_from_my_channel', 'call', {}).then(function(r) {
         console.log('RESULT RPC r='+r);
         console.log('RESULT RPC type r='+typeof r);
         console.log('RESULT RPC isNaN r='+isNaN(r));

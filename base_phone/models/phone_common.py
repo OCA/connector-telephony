@@ -130,12 +130,15 @@ class PhoneCommon(models.AbstractModel):
         _logger.debug('Number before reformat = %s' % erp_number)
         # erp_number are supposed to be in International format, so no need to
         # give a country code here
-        parsed_num = phonenumbers.parse(erp_number, None)
+        try:
+          parsed_num = phonenumbers.parse(erp_number, None)
+        except:
+          parsed_num = phonenumbers.parse(erp_number, region='US')
         country_code = self.env.user.company_id.country_id.code
         assert(country_code), 'Missing country on company'
         _logger.debug('Country code = %s' % country_code)
         to_dial_number = phonenumbers.format_out_of_country_calling_number(
             parsed_num, country_code.upper())
-        to_dial_number = str(to_dial_number).translate(None, ' -.()/')
+        to_dial_number = str(to_dial_number).translate(str.maketrans('','', ' -.()/'))
         _logger.debug('Number to be sent to phone system: %s' % to_dial_number)
         return to_dial_number

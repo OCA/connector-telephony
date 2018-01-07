@@ -43,17 +43,19 @@ class Fax(fields.Char):
     def convert_to_cache(self, value, record, validate=True):
         res = super(Fax, self).convert_to_cache(
             value, record, validate=validate)
-        # print 'db value', res
         if res:
             try:
-                res_parse = phonenumbers.parse(res)
+                res_parse = res
+                try:
+                  res_parse = phonenumbers.parse(res, None)
+                except:
+                  res_parse = phonenumbers.parse(res, region='US')
                 res = phonenumbers.format_number(
                     res_parse, phonenumbers.PhoneNumberFormat.INTERNATIONAL)
                 no_break_space = '\u00A0'
                 res = res.replace(' ', no_break_space)
-            except:
-                pass
-        # print 'cache value', res
+            except Exception as e:
+                _logger.error('Failed to validate phone number:', e)
         return res
 
 
