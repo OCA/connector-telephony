@@ -28,9 +28,9 @@ var click2dialOpenCaller = Widget.extend({
         event.stopPropagation();
         var self = this;
         ajax.jsonRpc('/asterisk_click2dial/get_record_from_my_channel', 'call', {}).then(function(r) {
-        console.log('RESULT RPC r='+r);
-        console.log('RESULT RPC type r='+typeof r);
-        console.log('RESULT RPC isNaN r='+isNaN(r));
+        // console.log('RESULT RPC r='+r);
+        // console.log('RESULT RPC type r='+typeof r);
+        // console.log('RESULT RPC isNaN r='+isNaN(r));
         if (r === false) {
              self.do_warn(
                 _t('Failure'),
