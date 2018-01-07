@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  © 2014-2016 Akretion (Alexis de Lattre <alexis.delattre@akretion.com>)
+  License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+-->
+
+<odoo>
+
+
+<record id="crm_case_form_view_leads" model="ir.ui.view">
+    <field name="name">crm_phone.crm_lead.form</field>
+    <field name="model">crm.lead</field>
+    <field name="inherit_id" ref="crm.crm_case_form_view_leads"/>
+    <field name="arch" type="xml">
+        <div name="button_box" position="inside">
+            <button class="oe_inline oe_stat_button" type="action"
+                name="%(crm_phone.crm_phonecall_action)d"
+                icon="fa-phone"
+                context="{'search_default_opportunity_id': active_id}">
+                <field string="Calls" name="phonecall_count" widget="statinfo"/>
+             </button>
+        </div>
+    </field>
+</record>
+
+<record id="crm_case_form_view_oppor" model="ir.ui.view">
+    <field name="name">crm_phone.case.view_opportuniy.form</field>
+    <field name="model">crm.lead</field>
+    <field name="inherit_id" ref="crm.crm_case_form_view_oppor"/>
+    <field name="arch" type="xml">
+        <div name="button_box" position="inside">
+            <button class="oe_inline oe_stat_button" type="action"
+                name="%(crm_phone.crm_phonecall_action)d"
+                icon="fa-phone"
+                context="{'search_default_opportunity_id': active_id}">
+                <field string="Calls" name="phonecall_count" widget="statinfo"/>
+             </button>
+        </div>
+    </field>
+</record>
+
+
+</odoo>

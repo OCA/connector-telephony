@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  © 2014-2017 Akretion (Alexis de Lattre <alexis.delattre@akretion.com>)
+  License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+-->
+
+<odoo>
+
+
+<record id="view_general_configuration" model="ir.ui.view">
+    <field name="name">base_phone.base.config.settings.form</field>
+    <field name="model">res.config.settings</field>
+    <field name="inherit_id" ref="base_setup.res_config_settings_view_form" />
+    <field name="arch" type="xml">
+        <xpath expr="." position="inside">
+            <group name="phone" string="Phone">
+                <label for="number_of_digits_to_match_from_end"/>
+                <div>
+                    <field name="number_of_digits_to_match_from_end" class="oe_inline"/>
+                </div>
+            </group>
+        </xpath>
+    </field>
+</record>
+
+
+</odoo>
