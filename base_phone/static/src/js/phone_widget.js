@@ -47,6 +47,14 @@ odoo.define('base_phone.phone_widget', function (require) {
         className: 'o_field_phone',
         prefix: 'fax',
         formatType: 'phone',
+        isValid: function() {
+          var value = this._getValue() || this.value;
+          let isValid = (!value || value === 'false') || value.replace && (/^\d{7,}$/).test(value.replace(/[\s()+\-\.]|ext/gi, ''));
+          return isValid
+        },
+        _getValue: function () {
+          return this.$input ? this.$input.val() : this.$el.text().replace(/^Dial: /, '')
+        },
         _renderReadonly: function() {
             var phone_num = this.get('value');
             if (phone_num) {
@@ -59,14 +67,6 @@ odoo.define('base_phone.phone_widget', function (require) {
 
     var FieldPhone = FieldFax.extend({
         prefix: 'tel',
-        isValid: function() {
-          var value = this._getValue() || this.value;
-          let isValid = (!value || value === 'false') || value.replace && (/^\d{7,}$/).test(value.replace(/[\s()+\-\.]|ext/gi, ''));
-          return isValid
-        },
-        _getValue: function () {
-          return this.$input ? this.$input.val() : this.$el.text().replace(/^Dial: /, '')
-        },
         _renderReadonly: function() {
             this._super();
             var self = this
