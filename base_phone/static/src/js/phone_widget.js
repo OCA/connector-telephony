@@ -81,7 +81,6 @@ odoo.define('base_phone.phone_widget', function (require) {
                             _t('Click2dial started'),
                             _t('Unhook your ringing phone'),
                             false);
-                    var specialData = self.record.specialData[this.name];
                     let model = self.model;
                     let id = self.recordData.id;
                     var arg = {
