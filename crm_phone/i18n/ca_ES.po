@@ -1,0 +1,229 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * crm_phone
+# 
+# Translators:
+msgid ""
+msgstr ""
+"Project-Id-Version: connector-telephony (8.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-12-02 03:08+0000\n"
+"PO-Revision-Date: 2015-10-12 18:37+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: Catalan (Spain) (http://www.transifex.com/oca/OCA-connector-telephony-8-0/language/ca_ES/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: ca_ES\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: crm_phone
+#: field:res.users,claim_count:0
+msgid "# Claims"
+msgstr ""
+
+#. module: crm_phone
+#: field:res.users,meeting_count:0
+msgid "# Meetings"
+msgstr ""
+
+#. module: crm_phone
+#: view:wizard.create.crm.phonecall:crm_phone.create_crm_phonecall_view
+msgid "CRM phone call"
+msgstr ""
+
+#. module: crm_phone
+#: help:res.users,speaker:0
+msgid "Check this box if this contact is a speaker."
+msgstr ""
+
+#. module: crm_phone
+#: model:ir.actions.act_window,name:crm_phone.action_create_crm_phonecall
+msgid "Create CRM phonecall"
+msgstr ""
+
+#. module: crm_phone
+#: code:addons/crm_phone/crm_phone.py:111
+#, python-format
+msgid "Create Call in CRM"
+msgstr ""
+
+#. module: crm_phone
+#: view:number.not.found:crm_phone.number_not_found_form
+msgid "Create Lead with this Number"
+msgstr ""
+
+#. module: crm_phone
+#: code:addons/crm_phone/wizard/number_not_found.py:49
+#, python-format
+msgid "Create New Lead"
+msgstr ""
+
+#. module: crm_phone
+#: view:wizard.create.crm.phonecall:crm_phone.create_crm_phonecall_view
+msgid "Create a phone call in the CRM ?"
+msgstr ""
+
+#. module: crm_phone
+#: view:number.not.found:crm_phone.number_not_found_form
+msgid "Create or Update a Lead"
+msgstr ""
+
+#. module: crm_phone
+#: field:wizard.create.crm.phonecall,create_uid:0
+msgid "Created by"
+msgstr "Creat per"
+
+#. module: crm_phone
+#: field:wizard.create.crm.phonecall,create_date:0
+msgid "Created on"
+msgstr "Creat a"
+
+#. module: crm_phone
+#: field:number.not.found,current_lead_mobile:0
+msgid "Current Mobile"
+msgstr ""
+
+#. module: crm_phone
+#: field:number.not.found,current_lead_phone:0
+msgid "Current Phone"
+msgstr ""
+
+#. module: crm_phone
+#: field:wizard.create.crm.phonecall,display_name:0
+msgid "Display Name"
+msgstr "Nom visible"
+
+#. module: crm_phone
+#: code:addons/crm_phone/wizard/number_not_found.py:69
+#, python-format
+msgid "Error:"
+msgstr ""
+
+#. module: crm_phone
+#: field:wizard.create.crm.phonecall,id:0
+msgid "ID"
+msgstr ""
+
+#. module: crm_phone
+#: field:wizard.create.crm.phonecall,__last_update:0
+msgid "Last Modified on"
+msgstr "Darrera modificació en"
+
+#. module: crm_phone
+#: field:wizard.create.crm.phonecall,write_uid:0
+msgid "Last Updated by"
+msgstr "Darrera actualització per"
+
+#. module: crm_phone
+#: field:wizard.create.crm.phonecall,write_date:0
+msgid "Last Updated on"
+msgstr "Darrera actualització el"
+
+#. module: crm_phone
+#: field:res.users,calendar_last_notif_ack:0
+msgid "Last notification marked as read from base Calendar"
+msgstr ""
+
+#. module: crm_phone
+#: help:number.not.found,to_update_lead_id:0
+msgid "Lead on which the phone number will be written"
+msgstr ""
+
+#. module: crm_phone
+#: field:number.not.found,to_update_lead_id:0
+msgid "Lead to Update"
+msgstr ""
+
+#. module: crm_phone
+#: model:ir.model,name:crm_phone.model_crm_lead
+msgid "Lead/Opportunity"
+msgstr ""
+
+#. module: crm_phone
+#: code:addons/crm_phone/wizard/number_not_found.py:75
+#, python-format
+msgid "Lead: %s"
+msgstr ""
+
+#. module: crm_phone
+#: field:res.users,opportunity_ids:0
+msgid "Leads and Opportunities"
+msgstr ""
+
+#. module: crm_phone
+#: field:res.users,meeting_ids:0
+msgid "Meetings"
+msgstr ""
+
+#. module: crm_phone
+#: model:ir.model,name:crm_phone.model_number_not_found
+msgid "Number not found"
+msgstr ""
+
+#. module: crm_phone
+#: field:res.users,opportunity_count:0
+msgid "Opportunity"
+msgstr ""
+
+#. module: crm_phone
+#: code:addons/crm_phone/wizard/create_crm_phonecall.py:72
+#, python-format
+msgid "Phone Call"
+msgstr ""
+
+#. module: crm_phone
+#: model:ir.model,name:crm_phone.model_crm_phonecall
+msgid "Phonecall"
+msgstr ""
+
+#. module: crm_phone
+#: field:res.users,phonecall_count:0 field:res.users,phonecall_ids:0
+msgid "Phonecalls"
+msgstr ""
+
+#. module: crm_phone
+#: field:res.users,context_propose_creation_crm_call:0
+msgid "Propose to create a call in CRM after a click2dial"
+msgstr ""
+
+#. module: crm_phone
+#: code:addons/crm_phone/wizard/number_not_found.py:70
+#, python-format
+msgid "Select the Lead to Update."
+msgstr ""
+
+#. module: crm_phone
+#: field:res.users,speaker:0
+msgid "Speaker"
+msgstr ""
+
+#. module: crm_phone
+#: view:number.not.found:crm_phone.number_not_found_form
+msgid "Update Lead with this Number"
+msgstr ""
+
+#. module: crm_phone
+#: model:ir.model,name:crm_phone.model_res_users
+msgid "Users"
+msgstr ""
+
+#. module: crm_phone
+#: view:wizard.create.crm.phonecall:crm_phone.create_crm_phonecall_view
+msgid "Yes"
+msgstr ""
+
+#. module: crm_phone
+#: view:crm.lead:crm_phone.crm_case_form_view_leads
+#: view:crm.lead:crm_phone.crm_case_form_view_oppor
+msgid "fax"
+msgstr ""
+
+#. module: crm_phone
+#: view:crm.lead:crm_phone.crm_case_form_view_leads
+#: view:crm.lead:crm_phone.crm_case_form_view_oppor
+#: view:crm.lead:crm_phone.crm_case_tree_view_leads
+#: view:crm.phonecall:crm_phone.crm_case_phone_form_view
+#: view:crm.phonecall:crm_phone.crm_case_phone_tree_view
+msgid "phone"
+msgstr ""
