@@ -40,7 +40,7 @@ class SmsSms(models.Model):
         params = {
             'smsAccount': keychain_data['sms_account'],
             'login': keychain_account['login'],
-            'password': keychain_account.get_password(),
+            'password': keychain_account._get_password(),
             'from': self.gateway_id.from_provider,
             'url': self.gateway_id.url,
             'to': self._convert_to_e164(self.mobile),
