@@ -32,7 +32,7 @@ addon | version | summary
 [event_phone](event_phone/) | 10.0.1.0.0 | Validate phone numbers in Events
 [hr_phone](hr_phone/) | 10.0.1.0.0 | Validate phone numbers in HR
 [hr_recruitment_phone](hr_recruitment_phone/) | 10.0.1.0.0 | Validate phone numbers in HR Recruitment
-[ovh_sms_client](ovh_sms_client/) | 10.0.1.0.0 | OVH SMS Client
+[ovh_sms_client](ovh_sms_client/) | 10.0.1.0.1 | OVH SMS Client
 [sms_send_picking](sms_send_picking/) | 10.0.1.0.0 | Sms Send Picking
 
 
