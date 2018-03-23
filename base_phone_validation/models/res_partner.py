@@ -54,12 +54,6 @@ class ResPartner(models.Model):
             if rec.phone:
                 rec._force_validation(rec.phone, 'phone')
 
-    @api.constrains('fax', 'country_id')
-    def _fax_number_validation(self):
-        for rec in self:
-            if rec.fax:
-                rec._force_validation(rec.fax, 'fax')
-
     @api.constrains('mobile', 'country_id')
     def _mobile_number_validation(self):
         for rec in self:
