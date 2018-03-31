@@ -5,13 +5,14 @@
 # Translators:
 # OCA Transbot <transbot@odoo-community.org>, 2017
 # Pedro M. Baeza <pedro.baeza@gmail.com>, 2017
+# enjolras <yo@miguelrevilla.com>, 2018
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-25 03:36+0000\n"
-"PO-Revision-Date: 2017-01-25 03:36+0000\n"
-"Last-Translator: Pedro M. Baeza <pedro.baeza@gmail.com>, 2017\n"
+"POT-Creation-Date: 2018-02-10 01:40+0000\n"
+"PO-Revision-Date: 2018-02-10 01:40+0000\n"
+"Last-Translator: enjolras <yo@miguelrevilla.com>, 2018\n"
 "Language-Team: Spanish (https://www.transifex.com/oca/teams/23907/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -22,24 +23,24 @@ msgstr ""
 #. module: crm_phone
 #: model:ir.ui.view,arch_db:crm_phone.create_crm_phonecall_view
 msgid "CRM phone call"
-msgstr ""
+msgstr "Llamada CRM"
 
 #. module: crm_phone
 #: model:ir.model.fields,field_description:crm_phone.field_crm_phonecall_name
 msgid "Call Summary"
-msgstr ""
+msgstr "Resumen de llamadas"
 
 #. module: crm_phone
 #: model:ir.ui.view,arch_db:crm_phone.crm_case_form_view_leads
 #: model:ir.ui.view,arch_db:crm_phone.crm_case_form_view_oppor
 #: model:ir.ui.view,arch_db:crm_phone.view_partner_form
 msgid "Calls"
-msgstr ""
+msgstr "Llamadas"
 
 #. module: crm_phone
 #: selection:crm.phonecall,state:0
 msgid "Cancelled"
-msgstr ""
+msgstr "Cancelada"
 
 #. module: crm_phone
 #: model:ir.model.fields,field_description:crm_phone.field_crm_phonecall_company_id
@@ -49,18 +50,18 @@ msgstr "Compañía"
 #. module: crm_phone
 #: model:ir.model.fields,field_description:crm_phone.field_crm_phonecall_partner_id
 msgid "Contact"
-msgstr ""
+msgstr "Contacto"
 
 #. module: crm_phone
 #: model:ir.actions.act_window,name:crm_phone.action_create_crm_phonecall
 msgid "Create CRM phonecall"
-msgstr ""
+msgstr "Crear llamada CRM"
 
 #. module: crm_phone
 #: code:addons/crm_phone/models/phone_common.py:19
 #, python-format
 msgid "Create Call in CRM"
-msgstr ""
+msgstr "Crear una llamada en CRM"
 
 #. module: crm_phone
 #: model:ir.ui.view,arch_db:crm_phone.number_not_found_form
@@ -108,18 +109,18 @@ msgstr "Teléfono actual"
 #. module: crm_phone
 #: model:ir.model.fields,field_description:crm_phone.field_crm_phonecall_date
 msgid "Date"
-msgstr ""
+msgstr "Fecha"
 
 #. module: crm_phone
 #: model:ir.model.fields,field_description:crm_phone.field_crm_phonecall_description
 #: model:ir.ui.view,arch_db:crm_phone.crm_phonecall_form
 msgid "Description"
-msgstr ""
+msgstr "Descripción"
 
 #. module: crm_phone
 #: model:ir.ui.view,arch_db:crm_phone.crm_phonecall_search
 msgid "Direction"
-msgstr ""
+msgstr "Dirección"
 
 #. module: crm_phone
 #: model:ir.model.fields,field_description:crm_phone.field_crm_phonecall_display_name
@@ -130,18 +131,18 @@ msgstr "Nombre mostrado"
 #. module: crm_phone
 #: model:ir.ui.view,arch_db:crm_phone.crm_phonecall_search
 msgid "Group By"
-msgstr ""
+msgstr "Agrupar por"
 
 #. module: crm_phone
 #: selection:crm.phonecall,state:0
 #: model:ir.ui.view,arch_db:crm_phone.crm_phonecall_search
 msgid "Held"
-msgstr ""
+msgstr "Retenido"
 
 #. module: crm_phone
 #: selection:crm.phonecall,priority:0
 msgid "High"
-msgstr ""
+msgstr "Alta"
 
 #. module: crm_phone
 #: model:ir.model.fields,field_description:crm_phone.field_crm_phonecall_id
@@ -153,7 +154,7 @@ msgstr "ID"
 #: selection:crm.phonecall,direction:0
 #: model:ir.ui.view,arch_db:crm_phone.crm_phonecall_search
 msgid "Inbound"
-msgstr ""
+msgstr "Entrante"
 
 #. module: crm_phone
 #: model:ir.model.fields,field_description:crm_phone.field_crm_phonecall___last_update
@@ -204,7 +205,7 @@ msgstr ""
 #. module: crm_phone
 #: selection:crm.phonecall,priority:0
 msgid "Low"
-msgstr ""
+msgstr "Baja"
 
 #. module: crm_phone
 #: model:ir.model.fields,field_description:crm_phone.field_crm_phonecall_partner_mobile
@@ -214,17 +215,17 @@ msgstr "Teléfono móvil"
 #. module: crm_phone
 #: model:ir.ui.view,arch_db:crm_phone.crm_phonecall_search
 msgid "Month"
-msgstr ""
+msgstr "Mes"
 
 #. module: crm_phone
 #: model:ir.ui.view,arch_db:crm_phone.crm_phonecall_search
 msgid "My Phonecalls"
-msgstr ""
+msgstr "Mis llamadas"
 
 #. module: crm_phone
 #: model:ir.ui.view,arch_db:crm_phone.crm_phonecall_search
 msgid "My Team"
-msgstr ""
+msgstr "Mi equipo"
 
 #. module: crm_phone
 #: model:ir.ui.view,arch_db:crm_phone.create_crm_phonecall_view
@@ -234,7 +235,7 @@ msgstr ""
 #. module: crm_phone
 #: selection:crm.phonecall,priority:0
 msgid "Normal"
-msgstr ""
+msgstr "Normal"
 
 #. module: crm_phone
 #: model:ir.model,name:crm_phone.model_number_not_found
@@ -246,13 +247,13 @@ msgstr "Número no encontrado"
 #: model:ir.model.fields,field_description:crm_phone.field_res_partner_phonecall_count
 #: model:ir.model.fields,field_description:crm_phone.field_res_users_phonecall_count
 msgid "Number of Phonecalls"
-msgstr ""
+msgstr "Número de llamadas"
 
 #. module: crm_phone
 #: selection:crm.phonecall,direction:0
 #: model:ir.ui.view,arch_db:crm_phone.crm_phonecall_search
 msgid "Outbound"
-msgstr ""
+msgstr "Saliente"
 
 #. module: crm_phone
 #: model:ir.model,name:crm_phone.model_res_partner
@@ -292,7 +293,7 @@ msgstr ""
 #. module: crm_phone
 #: model:ir.model.fields,field_description:crm_phone.field_crm_phonecall_priority
 msgid "Priority"
-msgstr ""
+msgstr "Prioridad"
 
 #. module: crm_phone
 #: model:ir.model.fields,field_description:crm_phone.field_res_users_context_propose_creation_crm_call
@@ -303,29 +304,29 @@ msgstr ""
 #: model:ir.model.fields,field_description:crm_phone.field_crm_phonecall_user_id
 #: model:ir.ui.view,arch_db:crm_phone.crm_phonecall_search
 msgid "Responsible"
-msgstr ""
+msgstr "Responsable"
 
 #. module: crm_phone
 #: model:ir.model.fields,field_description:crm_phone.field_crm_phonecall_team_id
 msgid "Sales Team"
-msgstr ""
+msgstr "Equipo de ventas"
 
 #. module: crm_phone
 #: model:ir.ui.view,arch_db:crm_phone.crm_phonecall_form
 #: model:ir.ui.view,arch_db:crm_phone.crm_phonecall_tree
 msgid "Schedule Another Call"
-msgstr ""
+msgstr "Programar otra llamada"
 
 #. module: crm_phone
 #: model:ir.actions.act_window,name:crm_phone.crm_phonecall_action_open
 #: model:ir.ui.menu,name:crm_phone.crm_phonecall_menu_open
 msgid "Scheduled Calls"
-msgstr ""
+msgstr "Llamadas programadas"
 
 #. module: crm_phone
 #: model:ir.ui.view,arch_db:crm_phone.crm_phonecall_search
 msgid "Search Phone Calls"
-msgstr ""
+msgstr "Buscar llamadas"
 
 #. module: crm_phone
 #: code:addons/crm_phone/wizard/number_not_found.py:50
@@ -341,17 +342,17 @@ msgstr "Estado"
 #. module: crm_phone
 #: model:ir.model.fields,field_description:crm_phone.field_crm_phonecall_state
 msgid "Status"
-msgstr ""
+msgstr "Estado"
 
 #. module: crm_phone
 #: model:ir.ui.view,arch_db:crm_phone.crm_phonecall_form
 msgid "Summary of the phone call..."
-msgstr ""
+msgstr "Resumen de la llamada..."
 
 #. module: crm_phone
 #: model:ir.ui.view,arch_db:crm_phone.crm_phonecall_search
 msgid "Team"
-msgstr ""
+msgstr "Equipo"
 
 #. module: crm_phone
 #: model:ir.model.fields,help:crm_phone.field_crm_phonecall_state
@@ -365,17 +366,17 @@ msgstr ""
 #: selection:crm.phonecall,state:0
 #: model:ir.ui.view,arch_db:crm_phone.crm_phonecall_search
 msgid "To Do"
-msgstr ""
+msgstr "Para hacer"
 
 #. module: crm_phone
 #: model:ir.model.fields,field_description:crm_phone.field_crm_phonecall_direction
 msgid "Type"
-msgstr ""
+msgstr "Tipo"
 
 #. module: crm_phone
 #: model:ir.ui.view,arch_db:crm_phone.crm_phonecall_search
 msgid "Unassigned"
-msgstr ""
+msgstr "Sin asignar"
 
 #. module: crm_phone
 #: model:ir.ui.view,arch_db:crm_phone.number_not_found_form
@@ -385,17 +386,17 @@ msgstr ""
 #. module: crm_phone
 #: model:ir.model,name:crm_phone.model_res_users
 msgid "Users"
-msgstr ""
+msgstr "Usuarios"
 
 #. module: crm_phone
 #: model:ir.ui.view,arch_db:crm_phone.create_crm_phonecall_view
 msgid "Yes"
-msgstr ""
+msgstr "Sí"
 
 #. module: crm_phone
 #: model:ir.model,name:crm_phone.model_crm_phonecall
 msgid "crm.phonecall"
-msgstr ""
+msgstr "crm.phonecall"
 
 #. module: crm_phone
 #: model:ir.model,name:crm_phone.model_phone_common
@@ -405,4 +406,4 @@ msgstr "phone.common"
 #. module: crm_phone
 #: model:ir.model,name:crm_phone.model_wizard_create_crm_phonecall
 msgid "wizard.create.crm.phonecall"
-msgstr ""
+msgstr "wizard.create.crm.phonecall"
