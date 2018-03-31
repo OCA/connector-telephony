@@ -1,9 +1,8 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# * ovh_sms_client
+# * hr_recruitment_phone
 # 
 # Translators:
-# OCA Transbot <transbot@odoo-community.org>, 2017
 # enjolras <yo@miguelrevilla.com>, 2018
 msgid ""
 msgstr ""
@@ -19,17 +18,7 @@ msgstr ""
 "Language: es\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#. module: ovh_sms_client
-#: model:ir.model,name:ovh_sms_client.model_sms_sms
-msgid "SMS"
-msgstr "SMS"
-
-#. module: ovh_sms_client
-#: model:ir.model,name:ovh_sms_client.model_sms_gateway
-msgid "SMS Client"
-msgstr "Cliente SMS"
-
-#. module: ovh_sms_client
-#: model:ir.model,name:ovh_sms_client.model_keychain_account
-msgid "keychain.account"
-msgstr "keychain.account"
+#. module: hr_recruitment_phone
+#: model:ir.model,name:hr_recruitment_phone.model_hr_applicant
+msgid "Applicant"
+msgstr "Solicitante"

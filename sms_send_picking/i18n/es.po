@@ -1,0 +1,41 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * sms_send_picking
+# 
+# Translators:
+# enjolras <yo@miguelrevilla.com>, 2018
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-02-10 01:41+0000\n"
+"PO-Revision-Date: 2018-02-10 01:41+0000\n"
+"Last-Translator: enjolras <yo@miguelrevilla.com>, 2018\n"
+"Language-Team: Spanish (https://www.transifex.com/oca/teams/23907/es/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: es\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: sms_send_picking
+#: model:ir.model.fields,field_description:sms_send_picking.field_stock_picking_availability_sent_by_sms
+msgid "Availability sent by sms"
+msgstr "Disponibilidad enviada por SMS"
+
+#. module: sms_send_picking
+#: code:addons/sms_send_picking/models/stock.py:57
+#, python-format
+msgid "SMS issue for picking %s : no mobile phone"
+msgstr ""
+
+#. module: sms_send_picking
+#: model:ir.model,name:sms_send_picking.model_stock_picking
+msgid "Transfer"
+msgstr "Transferir"
+
+#. module: sms_send_picking
+#: code:addons/sms_send_picking/models/stock.py:25
+#, python-format
+msgid "Your picking %s is ready to transfer."
+msgstr ""
