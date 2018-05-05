@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: connector-telephony (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-24 19:57+0000\n"
-"PO-Revision-Date: 2017-06-24 19:59+0000\n"
+"POT-Creation-Date: 2018-05-04 00:44+0000\n"
+"PO-Revision-Date: 2017-11-23 23:28+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: French (http://www.transifex.com/oca/OCA-connector-telephony-8-0/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -115,7 +115,7 @@ msgid "Call Detail Record (CDR) account used for billing this user."
 msgstr "Compte CDR utilisé pour facturer cet utilisateur (CDR = Journal d'appel détaillé)."
 
 #. module: asterisk_click2dial
-#: code:addons/asterisk_click2dial/asterisk_click2dial.py:375
+#: code:addons/asterisk_click2dial/asterisk_click2dial.py:382
 #: field:res.users,callerid:0
 #, python-format
 msgid "Caller ID"
@@ -127,7 +127,7 @@ msgid "Caller ID used for the calls initiated by this user."
 msgstr "'Caller ID' des appels passés par l'utilisateur."
 
 #. module: asterisk_click2dial
-#: code:addons/asterisk_click2dial/asterisk_click2dial.py:279
+#: code:addons/asterisk_click2dial/asterisk_click2dial.py:286
 #, python-format
 msgid ""
 "Can't get calling number from  Asterisk.\n"
@@ -135,7 +135,7 @@ msgid ""
 msgstr "Le numéro de l'appelant n'a pas pu être récupéré auprès d'Asterisk.\nVoilà l'erreur : '%s'"
 
 #. module: asterisk_click2dial
-#: code:addons/asterisk_click2dial/asterisk_click2dial.py:458
+#: code:addons/asterisk_click2dial/asterisk_click2dial.py:465
 #, python-format
 msgid ""
 "Click to dial with Asterisk failed.\n"
@@ -209,11 +209,11 @@ msgstr "Error message in raise"
 #: code:addons/asterisk_click2dial/asterisk_click2dial.py:184
 #: code:addons/asterisk_click2dial/asterisk_click2dial.py:190
 #: code:addons/asterisk_click2dial/asterisk_click2dial.py:210
-#: code:addons/asterisk_click2dial/asterisk_click2dial.py:277
-#: code:addons/asterisk_click2dial/asterisk_click2dial.py:383
-#: code:addons/asterisk_click2dial/asterisk_click2dial.py:404
-#: code:addons/asterisk_click2dial/asterisk_click2dial.py:421
-#: code:addons/asterisk_click2dial/asterisk_click2dial.py:457
+#: code:addons/asterisk_click2dial/asterisk_click2dial.py:284
+#: code:addons/asterisk_click2dial/asterisk_click2dial.py:390
+#: code:addons/asterisk_click2dial/asterisk_click2dial.py:411
+#: code:addons/asterisk_click2dial/asterisk_click2dial.py:428
+#: code:addons/asterisk_click2dial/asterisk_click2dial.py:464
 #, python-format
 msgid "Error:"
 msgstr "Erreur :"
@@ -257,7 +257,7 @@ msgid "IP address or DNS name of the Asterisk server."
 msgstr "Adresse IP ou DNS du serveur Asterisk."
 
 #. module: asterisk_click2dial
-#: code:addons/asterisk_click2dial/asterisk_click2dial.py:374
+#: code:addons/asterisk_click2dial/asterisk_click2dial.py:381
 #: field:res.users,internal_number:0
 #, python-format
 msgid "Internal Number"
@@ -296,7 +296,7 @@ msgid "MGCP"
 msgstr "MGCP"
 
 #. module: asterisk_click2dial
-#: code:addons/asterisk_click2dial/asterisk_click2dial.py:405
+#: code:addons/asterisk_click2dial/asterisk_click2dial.py:412
 #, python-format
 msgid "Missing phone number"
 msgstr "Numéro de téléphone manquant"
@@ -315,7 +315,7 @@ msgid "No Asterisk server configured for the company '%s'."
 msgstr "Aucun serveur Asterisk n'est associé à la société '%s'."
 
 #. module: asterisk_click2dial
-#: code:addons/asterisk_click2dial/asterisk_click2dial.py:422
+#: code:addons/asterisk_click2dial/asterisk_click2dial.py:429
 #, python-format
 msgid "No callerID configured for the current user"
 msgstr "Le callerID n'est pas configuré pour l'utilisateur courant"
@@ -415,7 +415,7 @@ msgid ""
 msgstr "Problème dans la requête d'OpenERP vers Asterisk. Voilà le message d'erreur : %s"
 
 #. module: asterisk_click2dial
-#: code:addons/asterisk_click2dial/asterisk_click2dial.py:373
+#: code:addons/asterisk_click2dial/asterisk_click2dial.py:380
 #: field:res.users,resource:0
 #, python-format
 msgid "Resource Name"
@@ -501,7 +501,7 @@ msgid "Test Connection to Asterisk"
 msgstr "Test de connexion à Asterisk"
 
 #. module: asterisk_click2dial
-#: code:addons/asterisk_click2dial/asterisk_click2dial.py:384
+#: code:addons/asterisk_click2dial/asterisk_click2dial.py:391
 #, python-format
 msgid "The '%s' for the user '%s' should only have ASCII caracters"
 msgstr "Le '%s' pour l'utilisateur '%s' ne devrait contenir que des caractères ASCII"
