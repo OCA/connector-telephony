@@ -1,7 +1,7 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * crm_phone
-# 
+#
 # Translators:
 msgid ""
 msgstr ""
@@ -10,16 +10,32 @@ msgstr ""
 "POT-Creation-Date: 2015-11-01 04:07+0000\n"
 "PO-Revision-Date: 2015-10-12 18:37+0000\n"
 "Last-Translator: <>\n"
-"Language-Team: Spanish (Costa Rica) (http://www.transifex.com/oca/OCA-connector-telephony-8-0/language/es_CR/)\n"
+"Language-Team: Spanish (Costa Rica) (http://www.transifex.com/oca/OCA-"
+"connector-telephony-8-0/language/es_CR/)\n"
+"Language: es_CR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: es_CR\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: crm_phone
+#: field:res.users,claim_count:0
+msgid "# Claims"
+msgstr ""
+
+#. module: crm_phone
+#: field:res.users,meeting_count:0
+msgid "# Meetings"
+msgstr ""
 
 #. module: crm_phone
 #: view:wizard.create.crm.phonecall:crm_phone.create_crm_phonecall_view
 msgid "CRM phone call"
+msgstr ""
+
+#. module: crm_phone
+#: help:res.users,speaker:0
+msgid "Check this box if this contact is a speaker."
 msgstr ""
 
 #. module: crm_phone
@@ -75,6 +91,11 @@ msgid "Current Phone"
 msgstr ""
 
 #. module: crm_phone
+#: field:wizard.create.crm.phonecall,display_name:0
+msgid "Display Name"
+msgstr ""
+
+#. module: crm_phone
 #: code:addons/crm_phone/wizard/number_not_found.py:69
 #, python-format
 msgid "Error:"
@@ -86,6 +107,12 @@ msgid "ID"
 msgstr "ID"
 
 #. module: crm_phone
+#: field:wizard.create.crm.phonecall,__last_update:0
+#, fuzzy
+msgid "Last Modified on"
+msgstr "Ultima actualización en"
+
+#. module: crm_phone
 #: field:wizard.create.crm.phonecall,write_uid:0
 msgid "Last Updated by"
 msgstr "Ultima actualización por"
@@ -94,6 +121,11 @@ msgstr "Ultima actualización por"
 #: field:wizard.create.crm.phonecall,write_date:0
 msgid "Last Updated on"
 msgstr "Ultima actualización en"
+
+#. module: crm_phone
+#: field:res.users,calendar_last_notif_ack:0
+msgid "Last notification marked as read from base Calendar"
+msgstr ""
 
 #. module: crm_phone
 #: help:number.not.found,to_update_lead_id:0
@@ -117,12 +149,27 @@ msgid "Lead: %s"
 msgstr ""
 
 #. module: crm_phone
+#: field:res.users,opportunity_ids:0
+msgid "Leads and Opportunities"
+msgstr ""
+
+#. module: crm_phone
+#: field:res.users,meeting_ids:0
+msgid "Meetings"
+msgstr ""
+
+#. module: crm_phone
 #: model:ir.model,name:crm_phone.model_number_not_found
 msgid "Number not found"
 msgstr ""
 
 #. module: crm_phone
-#: code:addons/crm_phone/wizard/create_crm_phonecall.py:65
+#: field:res.users,opportunity_count:0
+msgid "Opportunity"
+msgstr ""
+
+#. module: crm_phone
+#: code:addons/crm_phone/wizard/create_crm_phonecall.py:72
 #, python-format
 msgid "Phone Call"
 msgstr ""
@@ -130,6 +177,11 @@ msgstr ""
 #. module: crm_phone
 #: model:ir.model,name:crm_phone.model_crm_phonecall
 msgid "Phonecall"
+msgstr ""
+
+#. module: crm_phone
+#: field:res.users,phonecall_count:0 field:res.users,phonecall_ids:0
+msgid "Phonecalls"
 msgstr ""
 
 #. module: crm_phone
@@ -141,6 +193,11 @@ msgstr ""
 #: code:addons/crm_phone/wizard/number_not_found.py:70
 #, python-format
 msgid "Select the Lead to Update."
+msgstr ""
+
+#. module: crm_phone
+#: field:res.users,speaker:0
+msgid "Speaker"
 msgstr ""
 
 #. module: crm_phone
