@@ -1,7 +1,7 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * asterisk_click2dial
-# 
+#
 # Translators:
 msgid ""
 msgstr ""
@@ -10,11 +10,12 @@ msgstr ""
 "POT-Creation-Date: 2018-05-04 00:44+0000\n"
 "PO-Revision-Date: 2017-12-01 20:36+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
-"Language-Team: Italian (http://www.transifex.com/oca/OCA-connector-telephony-8-0/language/it/)\n"
+"Language-Team: Italian (http://www.transifex.com/oca/OCA-connector-"
+"telephony-8-0/language/it/)\n"
+"Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: it\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: asterisk_click2dial
@@ -93,8 +94,8 @@ msgstr ""
 #. module: asterisk_click2dial
 #: help:asterisk.server,context:0
 msgid ""
-"Asterisk dialplan context from which the calls will be made. Refer to "
-"/etc/asterisk/extensions.conf on your Asterisk server."
+"Asterisk dialplan context from which the calls will be made. Refer to /etc/"
+"asterisk/extensions.conf on your Asterisk server."
 msgstr ""
 
 #. module: asterisk_click2dial
@@ -395,8 +396,8 @@ msgstr ""
 #. module: asterisk_click2dial
 #: help:asterisk.server,extension_priority:0
 msgid ""
-"Priority of the extension in the Asterisk dialplan. Refer to "
-"/etc/asterisk/extensions.conf on your Asterisk server."
+"Priority of the extension in the Asterisk dialplan. Refer to /etc/asterisk/"
+"extensions.conf on your Asterisk server."
 msgstr ""
 
 #. module: asterisk_click2dial
@@ -491,8 +492,8 @@ msgstr "Riuscito"
 #. module: asterisk_click2dial
 #: help:asterisk.server,port:0
 msgid ""
-"TCP port on which the Asterisk Manager Interface listens. Defined in "
-"/etc/asterisk/manager.conf on Asterisk."
+"TCP port on which the Asterisk Manager Interface listens. Defined in /etc/"
+"asterisk/manager.conf on Asterisk."
 msgstr ""
 
 #. module: asterisk_click2dial

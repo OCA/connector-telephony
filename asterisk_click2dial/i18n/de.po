@@ -1,7 +1,7 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * asterisk_click2dial
-# 
+#
 # Translators:
 # Rudolf Schnapka <rs@techno-flex.de>, 2016
 msgid ""
@@ -11,11 +11,12 @@ msgstr ""
 "POT-Creation-Date: 2018-05-04 00:44+0000\n"
 "PO-Revision-Date: 2017-11-23 23:28+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
-"Language-Team: German (http://www.transifex.com/oca/OCA-connector-telephony-8-0/language/de/)\n"
+"Language-Team: German (http://www.transifex.com/oca/OCA-connector-"
+"telephony-8-0/language/de/)\n"
+"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: de\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: asterisk_click2dial
@@ -43,7 +44,9 @@ msgstr "Warn-Info SIP-Kopfdaten"
 msgid ""
 "Amount of time (in seconds) Asterisk will try to reach the user's phone "
 "before hanging up."
-msgstr "Dauer (in Sekunden), über die Asterisk vor dem Auflegen versucht, den Anschluss des Benutzers zu erreichen."
+msgstr ""
+"Dauer (in Sekunden), über die Asterisk vor dem Auflegen versucht, den "
+"Anschluss des Benutzers zu erreichen."
 
 #. module: asterisk_click2dial
 #: field:res.users,asterisk_chan_type:0
@@ -89,13 +92,15 @@ msgstr "Asterisk Server"
 msgid ""
 "Asterisk channel type, as used in the Asterisk dialplan. If the user has a "
 "regular IP phone, the channel type is 'SIP'."
-msgstr "Asterisk Kanal-Art, wie im Wählplan verwendet. Wenn der Benutzer ein normales IP-Telefon verwendet, ist die Kanal-Art 'SIP'."
+msgstr ""
+"Asterisk Kanal-Art, wie im Wählplan verwendet. Wenn der Benutzer ein "
+"normales IP-Telefon verwendet, ist die Kanal-Art 'SIP'."
 
 #. module: asterisk_click2dial
 #: help:asterisk.server,context:0
 msgid ""
-"Asterisk dialplan context from which the calls will be made. Refer to "
-"/etc/asterisk/extensions.conf on your Asterisk server."
+"Asterisk dialplan context from which the calls will be made. Refer to /etc/"
+"asterisk/extensions.conf on your Asterisk server."
 msgstr ""
 
 #. module: asterisk_click2dial
@@ -396,8 +401,8 @@ msgstr ""
 #. module: asterisk_click2dial
 #: help:asterisk.server,extension_priority:0
 msgid ""
-"Priority of the extension in the Asterisk dialplan. Refer to "
-"/etc/asterisk/extensions.conf on your Asterisk server."
+"Priority of the extension in the Asterisk dialplan. Refer to /etc/asterisk/"
+"extensions.conf on your Asterisk server."
 msgstr ""
 
 #. module: asterisk_click2dial
@@ -492,8 +497,8 @@ msgstr "Erfolg"
 #. module: asterisk_click2dial
 #: help:asterisk.server,port:0
 msgid ""
-"TCP port on which the Asterisk Manager Interface listens. Defined in "
-"/etc/asterisk/manager.conf on Asterisk."
+"TCP port on which the Asterisk Manager Interface listens. Defined in /etc/"
+"asterisk/manager.conf on Asterisk."
 msgstr ""
 
 #. module: asterisk_click2dial

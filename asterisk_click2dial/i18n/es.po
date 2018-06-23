@@ -1,7 +1,7 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * asterisk_click2dial
-# 
+#
 # Translators:
 # Antonio Trueba, 2016
 # Antonio Trueba, 2016
@@ -14,11 +14,12 @@ msgstr ""
 "POT-Creation-Date: 2018-05-04 00:44+0000\n"
 "PO-Revision-Date: 2018-03-16 18:06+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
-"Language-Team: Spanish (http://www.transifex.com/oca/OCA-connector-telephony-8-0/language/es/)\n"
+"Language-Team: Spanish (http://www.transifex.com/oca/OCA-connector-"
+"telephony-8-0/language/es/)\n"
+"Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: es\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: asterisk_click2dial
@@ -46,7 +47,9 @@ msgstr "Cabecera SIP Alert-Info"
 msgid ""
 "Amount of time (in seconds) Asterisk will try to reach the user's phone "
 "before hanging up."
-msgstr "Cantidad de tiempo (en segundos) Asterisk intentará llegar a el teléfono del usuario antes de colgar."
+msgstr ""
+"Cantidad de tiempo (en segundos) Asterisk intentará llegar a el teléfono del "
+"usuario antes de colgar."
 
 #. module: asterisk_click2dial
 #: field:res.users,asterisk_chan_type:0
@@ -92,21 +95,28 @@ msgstr "Servidores Asterisk"
 msgid ""
 "Asterisk channel type, as used in the Asterisk dialplan. If the user has a "
 "regular IP phone, the channel type is 'SIP'."
-msgstr "Tipo de canal de Asterisk, que se utiliza en el dialplan de Asterisk. Si el usuario tiene un teléfono IP, el tipo de canal es \"SIP\"."
+msgstr ""
+"Tipo de canal de Asterisk, que se utiliza en el dialplan de Asterisk. Si el "
+"usuario tiene un teléfono IP, el tipo de canal es \"SIP\"."
 
 #. module: asterisk_click2dial
 #: help:asterisk.server,context:0
 msgid ""
-"Asterisk dialplan context from which the calls will be made. Refer to "
-"/etc/asterisk/extensions.conf on your Asterisk server."
-msgstr "Contexto dialplan de Asterisk desde la que las llamadas se realizarán. Se refieren a /etc/asterisk/extensions.conf en el servidor Asterisk."
+"Asterisk dialplan context from which the calls will be made. Refer to /etc/"
+"asterisk/extensions.conf on your Asterisk server."
+msgstr ""
+"Contexto dialplan de Asterisk desde la que las llamadas se realizarán. Se "
+"refieren a /etc/asterisk/extensions.conf en el servidor Asterisk."
 
 #. module: asterisk_click2dial
 #: help:res.users,asterisk_server_id:0
 msgid ""
 "Asterisk server on which the user's phone is connected. If you leave this "
 "field empty, it will use the first Asterisk server of the user's company."
-msgstr "Servidor Asterisk al que está conectado el teléfono del usuario. Si deja este campo vacío, se usará el primer servidor Asterisk de la compañía del usuario."
+msgstr ""
+"Servidor Asterisk al que está conectado el teléfono del usuario. Si deja "
+"este campo vacío, se usará el primer servidor Asterisk de la compañía del "
+"usuario."
 
 #. module: asterisk_click2dial
 #: field:res.users,cdraccount:0
@@ -116,7 +126,9 @@ msgstr "Cuenta CDR"
 #. module: asterisk_click2dial
 #: help:res.users,cdraccount:0
 msgid "Call Detail Record (CDR) account used for billing this user."
-msgstr "Cuenta para registro de detalles de llamada (CDR) que se usará para contabilizar éste usuario."
+msgstr ""
+"Cuenta para registro de detalles de llamada (CDR) que se usará para "
+"contabilizar éste usuario."
 
 #. module: asterisk_click2dial
 #: code:addons/asterisk_click2dial/asterisk_click2dial.py:382
@@ -136,7 +148,9 @@ msgstr "ID llamada que utiliza para las llamadas iniciadas por este usuario."
 msgid ""
 "Can't get calling number from  Asterisk.\n"
 "Here is the error: '%s'"
-msgstr "No puedo obtener desde Asterisk el número del interlocutor.\nEl error es: '%s'"
+msgstr ""
+"No puedo obtener desde Asterisk el número del interlocutor.\n"
+"El error es: '%s'"
 
 #. module: asterisk_click2dial
 #: code:addons/asterisk_click2dial/asterisk_click2dial.py:465
@@ -144,7 +158,9 @@ msgstr "No puedo obtener desde Asterisk el número del interlocutor.\nEl error e
 msgid ""
 "Click to dial with Asterisk failed.\n"
 "Here is the error: '%s'"
-msgstr "Falló el 'click to dial' en Asterisk.\nEl error es: '%s'"
+msgstr ""
+"Falló el 'click to dial' en Asterisk.\n"
+"El error es: '%s'"
 
 #. module: asterisk_click2dial
 #: field:asterisk.server,company_id:0
@@ -292,7 +308,9 @@ msgstr "Local"
 msgid ""
 "Login that OpenERP will use to communicate with the Asterisk Manager "
 "Interface. Refer to /etc/asterisk/manager.conf on your Asterisk server."
-msgstr "Usuario que OpenERP utilizará para comunicarse con la interfaz de Asterisk Manager. Consulte /etc/asterisk/manager.conf en su servidor Asterisk."
+msgstr ""
+"Usuario que OpenERP utilizará para comunicarse con la interfaz de Asterisk "
+"Manager. Consulte /etc/asterisk/manager.conf en su servidor Asterisk."
 
 #. module: asterisk_click2dial
 #: selection:res.users,asterisk_chan_type:0
@@ -347,7 +365,9 @@ msgstr "Número no encontrado"
 #: code:addons/asterisk_click2dial/asterisk_click2dial.py:234
 #, python-format
 msgid "Odoo can successfully login to the Asterisk Manager Interface."
-msgstr "Odoo puede abrir sesión correctamente en la interfaz de gestión de Asterisk - AMI."
+msgstr ""
+"Odoo puede abrir sesión correctamente en la interfaz de gestión de Asterisk "
+"- AMI."
 
 #. module: asterisk_click2dial
 #: code:addons/asterisk_click2dial/asterisk_click2dial.py:113
@@ -365,7 +385,9 @@ msgstr "Abrir interlocutor"
 #. module: asterisk_click2dial
 #: view:res.users:asterisk_click2dial.view_users_form
 msgid "Optional Asterisk Parameters - for experts only, can be left empty"
-msgstr "Parámetros opcionales de Asterisk - sólo par expertos, puede dejarlos en blanco."
+msgstr ""
+"Parámetros opcionales de Asterisk - sólo par expertos, puede dejarlos en "
+"blanco."
 
 #. module: asterisk_click2dial
 #: field:asterisk.server,out_prefix:0
@@ -382,7 +404,10 @@ msgstr ""
 msgid ""
 "Password that OpenERP will use to communicate with the Asterisk Manager "
 "Interface. Refer to /etc/asterisk/manager.conf on your Asterisk server."
-msgstr "Contraseña que OpenERP utilizará para comunicarse con la interfaz de Asterisk Manager. Consulte /etc/asterisk/manager.conf en su servidor Asterisk."
+msgstr ""
+"Contraseña que OpenERP utilizará para comunicarse con la interfaz de "
+"Asterisk Manager. Consulte /etc/asterisk/manager.conf en su servidor "
+"Asterisk."
 
 #. module: asterisk_click2dial
 #: field:asterisk.server,port:0
@@ -394,14 +419,18 @@ msgstr "Puerto"
 msgid ""
 "Prefix to dial to make outgoing calls. If you don't use a prefix to make "
 "outgoing calls, leave empty."
-msgstr "Prefijo a marcar para hacer llamadas salientes. Si no usa un prefijo para hacer llamadas salientes, déjelo en blanco."
+msgstr ""
+"Prefijo a marcar para hacer llamadas salientes. Si no usa un prefijo para "
+"hacer llamadas salientes, déjelo en blanco."
 
 #. module: asterisk_click2dial
 #: help:asterisk.server,extension_priority:0
 msgid ""
-"Priority of the extension in the Asterisk dialplan. Refer to "
-"/etc/asterisk/extensions.conf on your Asterisk server."
-msgstr "Prioridad de la extensión en el dialplan de Asterisk. Se refieren a /etc/asterisk/extensions.conf en el servidor Asterisk."
+"Priority of the extension in the Asterisk dialplan. Refer to /etc/asterisk/"
+"extensions.conf on your Asterisk server."
+msgstr ""
+"Prioridad de la extensión en el dialplan de Asterisk. Se refieren a /etc/"
+"asterisk/extensions.conf en el servidor Asterisk."
 
 #. module: asterisk_click2dial
 #. openerp-web
@@ -416,7 +445,9 @@ msgstr "Problema en la conexión con Asterisk"
 msgid ""
 "Problem in the request from OpenERP to Asterisk. Here is the error message: "
 "%s"
-msgstr "Problema en la petición desde OpenERP a Asterisk. El mensaje de error es: '%s'"
+msgstr ""
+"Problema en la petición desde OpenERP a Asterisk. El mensaje de error es: "
+"'%s'"
 
 #. module: asterisk_click2dial
 #: code:addons/asterisk_click2dial/asterisk_click2dial.py:380
@@ -432,7 +463,12 @@ msgid ""
 "'Dial(SIP/phone1)' in your Asterisk dialplan to ring the SIP phone of this "
 "user, then the resource name for this user is 'phone1'.  For a SIP phone, "
 "the phone number is often used as resource name, but not always."
-msgstr "Nombre del recurso para el tipo de canal escogido. Por ejemplo, si usa 'Dial(SIP/tfno1)' en su plan de marcado Asterisk para llamar al teléfono SIP de este usuario, entonces el nombre del recurso para este usuario es 'tfno1'. Para un teléfono SIP, a menudo se usa el número de teléfono como nombre del recurso, pero no siempre."
+msgstr ""
+"Nombre del recurso para el tipo de canal escogido. Por ejemplo, si usa "
+"'Dial(SIP/tfno1)' en su plan de marcado Asterisk para llamar al teléfono SIP "
+"de este usuario, entonces el nombre del recurso para este usuario es "
+"'tfno1'. Para un teléfono SIP, a menudo se usa el número de teléfono como "
+"nombre del recurso, pero no siempre."
 
 #. module: asterisk_click2dial
 #: selection:res.users,asterisk_chan_type:0
@@ -456,7 +492,11 @@ msgid ""
 "feature. If empty, the Alert-Info header will not be added. You can use it "
 "to have a special ring tone for click2dial (a silent one !) or to activate "
 "auto-answer for example."
-msgstr "Define una cabecera Alert-Info en la petición SIP al teléfono IP del usuario para la característica click2dial. Si se deja en blanco, no se añadirá la cabecera Alert-Info. Puede usarlo para tener un tono de timbre especial para click2dial (¡que no suene!) o para activar la autorespuesta, por ejemplo."
+msgstr ""
+"Define una cabecera Alert-Info en la petición SIP al teléfono IP del usuario "
+"para la característica click2dial. Si se deja en blanco, no se añadirá la "
+"cabecera Alert-Info. Puede usarlo para tener un tono de timbre especial para "
+"click2dial (¡que no suene!) o para activar la autorespuesta, por ejemplo."
 
 #. module: asterisk_click2dial
 #: help:res.users,variable:0
@@ -464,7 +504,10 @@ msgid ""
 "Set a user-specific 'Variable' field in the Asterisk Manager Interface "
 "'originate' request for the click2dial feature. If you want to have several "
 "variable headers, separate them with '|'."
-msgstr "Define un campo 'Variable' específico del usuario en la petición 'originate' de la interfaz de gestión de Asterisk - AMI, para la característica click2dial. Si desea tener varias cabeceras variables, sepárelas con '|'."
+msgstr ""
+"Define un campo 'Variable' específico del usuario en la petición 'originate' "
+"de la interfaz de gestión de Asterisk - AMI, para la característica "
+"click2dial. Si desea tener varias cabeceras variables, sepárelas con '|'."
 
 #. module: asterisk_click2dial
 #: help:res.users,alert_info:0
@@ -473,7 +516,12 @@ msgid ""
 "the click2dial feature. If empty, the Alert-Info header will not be added. "
 "You can use it to have a special ring tone for click2dial (a silent one !) "
 "or to activate auto-answer for example."
-msgstr "Define una cabecera Alert-Info específica del usuario en la petición SIP al teléfono IP del usuario para la característica click2dial. Si se deja en blanco, no se añadirá la cabecera Alert-Info. Puede usarlo para tener un tono de timbre especial para click2dial (¡que no suene!) o para activar la autorespuesta, por ejemplo."
+msgstr ""
+"Define una cabecera Alert-Info específica del usuario en la petición SIP al "
+"teléfono IP del usuario para la característica click2dial. Si se deja en "
+"blanco, no se añadirá la cabecera Alert-Info. Puede usarlo para tener un "
+"tono de timbre especial para click2dial (¡que no suene!) o para activar la "
+"autorespuesta, por ejemplo."
 
 #. module: asterisk_click2dial
 #: selection:res.users,asterisk_chan_type:0
@@ -495,9 +543,11 @@ msgstr "Éxito"
 #. module: asterisk_click2dial
 #: help:asterisk.server,port:0
 msgid ""
-"TCP port on which the Asterisk Manager Interface listens. Defined in "
-"/etc/asterisk/manager.conf on Asterisk."
-msgstr "Puerto TCP en el que la interfaz de Asterisk Manager escucha. Se define en /etc/asterisk/manager.conf en Asterisk."
+"TCP port on which the Asterisk Manager Interface listens. Defined in /etc/"
+"asterisk/manager.conf on Asterisk."
+msgstr ""
+"Puerto TCP en el que la interfaz de Asterisk Manager escucha. Se define en /"
+"etc/asterisk/manager.conf en Asterisk."
 
 #. module: asterisk_click2dial
 #: view:asterisk.server:asterisk_click2dial.view_asterisk_server_form
@@ -514,7 +564,8 @@ msgstr "El '%s' para el usuario '%s' debería tener sólo caracteres ASCII"
 #: code:addons/asterisk_click2dial/asterisk_click2dial.py:138
 #, python-format
 msgid "The '%s' should only have ASCII caracters for the Asterisk server '%s'"
-msgstr "El '%s' debería tener sólo caracteres ASCII para el servidor Asterisk '%s'"
+msgstr ""
+"El '%s' debería tener sólo caracteres ASCII para el servidor Asterisk '%s'"
 
 #. module: asterisk_click2dial
 #: code:addons/asterisk_click2dial/asterisk_click2dial.py:122
@@ -522,7 +573,9 @@ msgstr "El '%s' debería tener sólo caracteres ASCII para el servidor Asterisk 
 msgid ""
 "The 'extension priority' must be a positive value for the Asterisk server "
 "'%s'"
-msgstr "La 'prioridad de la extensión' debe ser un numero positivo para el servidor Asterisk '%s'"
+msgstr ""
+"La 'prioridad de la extensión' debe ser un numero positivo para el servidor "
+"Asterisk '%s'"
 
 #. module: asterisk_click2dial
 #: help:asterisk.server,active:0
@@ -553,7 +606,9 @@ msgstr "Variable específica del usuario"
 #. module: asterisk_click2dial
 #: help:res.users,dial_suffix:0
 msgid "User-specific dial suffix such as aa=2wb for SCCP auto answer."
-msgstr "Sufijo de marcado específico del usuario, por ejemplo aa=2wb para auto respuesta con SCCP."
+msgstr ""
+"Sufijo de marcado específico del usuario, por ejemplo aa=2wb para auto "
+"respuesta con SCCP."
 
 #. module: asterisk_click2dial
 #: model:ir.model,name:asterisk_click2dial.model_res_users
@@ -571,14 +626,17 @@ msgstr "Tiempo de espera (seg)"
 msgid ""
 "You should set a 'Wait time' value between 1 and 120 seconds for the "
 "Asterisk server '%s'"
-msgstr "Debe definir un valor de 'tiempo de espera' entre 1 y 120 segundos para el servidor Asterisk '%s'"
+msgstr ""
+"Debe definir un valor de 'tiempo de espera' entre 1 y 120 segundos para el "
+"servidor Asterisk '%s'"
 
 #. module: asterisk_click2dial
 #: code:addons/asterisk_click2dial/asterisk_click2dial.py:127
 #, python-format
 msgid ""
 "You should set a TCP port between 1 and 65535 for the Asterisk server '%s'"
-msgstr "Debe definir un puerto TCP entre 1 y 65535 para el servidor Asterisk '%s'"
+msgstr ""
+"Debe definir un puerto TCP entre 1 y 65535 para el servidor Asterisk '%s'"
 
 #. module: asterisk_click2dial
 #: selection:res.users,asterisk_chan_type:0
