@@ -1,33 +1,27 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# * base_phone
+#	* base_phone
 #
-# Translators:
-# OCA Transbot <transbot@odoo-community.org>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-25 03:36+0000\n"
-"PO-Revision-Date: 2017-01-25 03:36+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2016\n"
-"Language-Team: Croatian (https://www.transifex.com/oca/teams/23907/hr/)\n"
-"Language: hr\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"Plural-Forms: \n"
 
 #. module: base_phone
 #: model:ir.model.fields,field_description:base_phone.field_number_not_found_calling_number
 msgid "Calling Number"
-msgstr "Pozivam broj"
+msgstr ""
 
 #. module: base_phone
 #: model:ir.ui.view,arch_db:base_phone.reformat_all_phonenumbers_form
 msgid "Cancel"
-msgstr "Odustani"
+msgstr ""
 
 #. module: base_phone
 #. openerp-web
@@ -47,12 +41,12 @@ msgstr ""
 #: model:ir.ui.view,arch_db:base_phone.number_not_found_form
 #: model:ir.ui.view,arch_db:base_phone.reformat_all_phonenumbers_form
 msgid "Close"
-msgstr "Zatvori"
+msgstr ""
 
 #. module: base_phone
 #: model:ir.model,name:base_phone.model_res_company
 msgid "Companies"
-msgstr "Poduzeća"
+msgstr ""
 
 #. module: base_phone
 #: code:addons/base_phone/wizard/number_not_found.py:81
@@ -146,14 +140,7 @@ msgstr ""
 #. module: base_phone
 #: model:ir.model.fields,help:base_phone.field_base_config_settings_number_of_digits_to_match_from_end
 #: model:ir.model.fields,help:base_phone.field_res_company_number_of_digits_to_match_from_end
-msgid ""
-"In several situations, Odoo will have to find a Partner/Lead/Employee/... "
-"from a phone number presented by the calling party. As the phone numbers "
-"presented by your phone operator may not always be displayed in a standard "
-"format, the best method to find the related Partner/Lead/Employee/... in "
-"Odoo is to try to match the end of the phone number in Odoo with the N last "
-"digits of the phone number presented by the calling party. N is the value "
-"you should enter in this field."
+msgid "In several situations, Odoo will have to find a Partner/Lead/Employee/... from a phone number presented by the calling party. As the phone numbers presented by your phone operator may not always be displayed in a standard format, the best method to find the related Partner/Lead/Employee/... in Odoo is to try to match the end of the phone number in Odoo with the N last digits of the phone number presented by the calling party. N is the value you should enter in this field."
 msgstr ""
 
 #. module: base_phone
@@ -247,9 +234,7 @@ msgstr ""
 
 #. module: base_phone
 #: model:ir.model.fields,help:base_phone.field_number_not_found_calling_number
-msgid ""
-"Phone number of calling party that has been obtained from the telephony "
-"server, in the format used by the telephony server (not E.164)."
+msgid "Phone number of calling party that has been obtained from the telephony server, in the format used by the telephony server (not E.164)."
 msgstr ""
 
 #. module: base_phone
@@ -299,15 +284,12 @@ msgstr ""
 
 #. module: base_phone
 #: sql_constraint:res.company:0
-msgid ""
-"The value of the field 'Number of Digits To Match From End' must be positive."
+msgid "The value of the field 'Number of Digits To Match From End' must be positive."
 msgstr ""
 
 #. module: base_phone
 #: model:ir.ui.view,arch_db:base_phone.reformat_all_phonenumbers_form
-msgid ""
-"This wizard reformats the phone, mobile and fax numbers of all partners in "
-"standard international format e.g. +33141981242"
+msgid "This wizard reformats the phone, mobile and fax numbers of all partners in standard international format e.g. +33141981242"
 msgstr ""
 
 #. module: base_phone
@@ -341,3 +323,4 @@ msgstr ""
 #: model:ir.model,name:base_phone.model_phone_common
 msgid "phone.common"
 msgstr ""
+
