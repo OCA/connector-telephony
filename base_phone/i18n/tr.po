@@ -1,7 +1,7 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * base_phone
-# 
+#
 # Translators:
 # Ahmet Altinisik <aaltinisik@altinkaya.com.tr>, 2015
 # Ahmet Altinisik <aaltinisik@altinkaya.com.tr>, 2015
@@ -12,11 +12,12 @@ msgstr ""
 "POT-Creation-Date: 2017-07-29 06:05+0000\n"
 "PO-Revision-Date: 2017-08-03 13:38+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
-"Language-Team: Turkish (http://www.transifex.com/oca/OCA-connector-telephony-8-0/language/tr/)\n"
+"Language-Team: Turkish (http://www.transifex.com/oca/OCA-connector-"
+"telephony-8-0/language/tr/)\n"
+"Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: tr\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #. module: base_phone
@@ -35,7 +36,8 @@ msgstr "İptal"
 msgid ""
 "Cannot reformat the phone number '%s' to international format. Error "
 "message: %s"
-msgstr "Telefon numarası '%s' uluslararası formata çevrilemedi. Hata mesajı: %s"
+msgstr ""
+"Telefon numarası '%s' uluslararası formata çevrilemedi. Hata mesajı: %s"
 
 #. module: base_phone
 #. openerp-web
@@ -164,14 +166,18 @@ msgstr "ID"
 #. module: base_phone
 #: help:res.company,number_of_digits_to_match_from_end:0
 msgid ""
-"In several situations, OpenERP will have to find a Partner/Lead/Employee/..."
-" from a phone number presented by the calling party. As the phone numbers "
+"In several situations, OpenERP will have to find a Partner/Lead/Employee/... "
+"from a phone number presented by the calling party. As the phone numbers "
 "presented by your phone operator may not always be displayed in a standard "
 "format, the best method to find the related Partner/Lead/Employee/... in "
-"OpenERP is to try to match the end of the phone number in OpenERP with the N"
-" last digits of the phone number presented by the calling party. N is the "
+"OpenERP is to try to match the end of the phone number in OpenERP with the N "
+"last digits of the phone number presented by the calling party. N is the "
 "value you should enter in this field."
-msgstr "Bir çok farklı durumda Odoo arayan numaradan bir İş ortağı/Çalışan vs bulmalıdır. Telefon numaraları servis sağlayıcılar tarafından farklı biçimlerde gönderilebildiği için en iyi yöntem telefon numarasının son N hanesi ile eşleşen kaydı bulmaktır. N bu alana girmeniz gereken değerdir."
+msgstr ""
+"Bir çok farklı durumda Odoo arayan numaradan bir İş ortağı/Çalışan vs "
+"bulmalıdır. Telefon numaraları servis sağlayıcılar tarafından farklı "
+"biçimlerde gönderilebildiği için en iyi yöntem telefon numarasının son N "
+"hanesi ile eşleşen kaydı bulmaktır. N bu alana girmeniz gereken değerdir."
 
 #. module: base_phone
 #: field:base.phone.installed,__last_update:0
@@ -265,7 +271,9 @@ msgstr "Telefon CallerID"
 msgid ""
 "Phone number of calling party that has been obtained from the telephony "
 "server, in the format used by the telephony server (not E.164)."
-msgstr "Sizi arayan numaranın telefon sunucusundan alınan telefon numarası (E.164 değil)"
+msgstr ""
+"Sizi arayan numaranın telefon sunucusundan alınan telefon numarası (E.164 "
+"değil)"
 
 #. module: base_phone
 #: field:reformat.all.phonenumbers,phonenumbers_not_reformatted:0
@@ -315,16 +323,19 @@ msgstr "Telefon Ayarları"
 #. module: base_phone
 #: sql_constraint:res.company:0
 msgid ""
-"The value of the field 'Number of Digits To Match From End' must be "
-"positive."
-msgstr "'Sondan eşleştirilecek rakam adedi' alanına sadece pozitif sayılar girilmelidir."
+"The value of the field 'Number of Digits To Match From End' must be positive."
+msgstr ""
+"'Sondan eşleştirilecek rakam adedi' alanına sadece pozitif sayılar "
+"girilmelidir."
 
 #. module: base_phone
 #: view:reformat.all.phonenumbers:base_phone.reformat_all_phonenumbers_form
 msgid ""
 "This wizard reformats the phone, mobile and fax numbers of all partners in "
 "standard international format e.g. +33141981242"
-msgstr "Bu sihirbaz Cep, sabit telefon ve faks numaralarını standart E.164 uluslararası biçime sokar."
+msgstr ""
+"Bu sihirbaz Cep, sabit telefon ve faks numaralarını standart E.164 "
+"uluslararası biçime sokar."
 
 #. module: base_phone
 #. openerp-web

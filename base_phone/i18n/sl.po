@@ -1,7 +1,7 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * base_phone
-# 
+#
 # Translators:
 # Matjaž Mozetič <m.mozetic@matmoz.si>, 2015
 msgid ""
@@ -11,12 +11,14 @@ msgstr ""
 "POT-Creation-Date: 2017-07-29 06:05+0000\n"
 "PO-Revision-Date: 2017-08-03 13:38+0000\n"
 "Last-Translator: Matjaž Mozetič <m.mozetic@matmoz.si>\n"
-"Language-Team: Slovenian (http://www.transifex.com/oca/OCA-connector-telephony-8-0/language/sl/)\n"
+"Language-Team: Slovenian (http://www.transifex.com/oca/OCA-connector-"
+"telephony-8-0/language/sl/)\n"
+"Language: sl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: sl\n"
-"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n"
+"%100==4 ? 2 : 3);\n"
 
 #. module: base_phone
 #: field:number.not.found,calling_number:0
@@ -34,7 +36,9 @@ msgstr "Preklic"
 msgid ""
 "Cannot reformat the phone number '%s' to international format. Error "
 "message: %s"
-msgstr "Ni mogoče pretvoriti telefonske številke '%s' v mednarodni format. Sporočilo o napaki: %s"
+msgstr ""
+"Ni mogoče pretvoriti telefonske številke '%s' v mednarodni format. Sporočilo "
+"o napaki: %s"
 
 #. module: base_phone
 #. openerp-web
@@ -163,14 +167,20 @@ msgstr "ID"
 #. module: base_phone
 #: help:res.company,number_of_digits_to_match_from_end:0
 msgid ""
-"In several situations, OpenERP will have to find a Partner/Lead/Employee/..."
-" from a phone number presented by the calling party. As the phone numbers "
+"In several situations, OpenERP will have to find a Partner/Lead/Employee/... "
+"from a phone number presented by the calling party. As the phone numbers "
 "presented by your phone operator may not always be displayed in a standard "
 "format, the best method to find the related Partner/Lead/Employee/... in "
-"OpenERP is to try to match the end of the phone number in OpenERP with the N"
-" last digits of the phone number presented by the calling party. N is the "
+"OpenERP is to try to match the end of the phone number in OpenERP with the N "
+"last digits of the phone number presented by the calling party. N is the "
 "value you should enter in this field."
-msgstr "V različnih situacijah bo OpenERP moral najti partnerja/indic/kader/ preko številke klicatelja. Ker telefonski operaterji telefonske številke klicateljev ne prikazujejo vedno v standardnem formatu, je najboljša metoda iskanja ustreznega partnerja/indica/kadra/... s primerjanjem končnega dela številke z zadnjimi N znaki telefonske številke klicatelja. N je vrednost, ki se vstavi v to polje."
+msgstr ""
+"V različnih situacijah bo OpenERP moral najti partnerja/indic/kader/ preko "
+"številke klicatelja. Ker telefonski operaterji telefonske številke "
+"klicateljev ne prikazujejo vedno v standardnem formatu, je najboljša metoda "
+"iskanja ustreznega partnerja/indica/kadra/... s primerjanjem končnega dela "
+"številke z zadnjimi N znaki telefonske številke klicatelja. N je vrednost, "
+"ki se vstavi v to polje."
 
 #. module: base_phone
 #: field:base.phone.installed,__last_update:0
@@ -264,7 +274,9 @@ msgstr "ID klicatelja"
 msgid ""
 "Phone number of calling party that has been obtained from the telephony "
 "server, in the format used by the telephony server (not E.164)."
-msgstr "Telefonska številka klicatelja, ki je bila pridobljena iz telefonskega strežnika v formatu strežnika (ne E.164)."
+msgstr ""
+"Telefonska številka klicatelja, ki je bila pridobljena iz telefonskega "
+"strežnika v formatu strežnika (ne E.164)."
 
 #. module: base_phone
 #: field:reformat.all.phonenumbers,phonenumbers_not_reformatted:0
@@ -314,16 +326,19 @@ msgstr "Nastavitve telefonije"
 #. module: base_phone
 #: sql_constraint:res.company:0
 msgid ""
-"The value of the field 'Number of Digits To Match From End' must be "
-"positive."
-msgstr "Vrednost polja 'Število znakov od konca številke za primerjavo' mora biti pozitivna."
+"The value of the field 'Number of Digits To Match From End' must be positive."
+msgstr ""
+"Vrednost polja 'Število znakov od konca številke za primerjavo' mora biti "
+"pozitivna."
 
 #. module: base_phone
 #: view:reformat.all.phonenumbers:base_phone.reformat_all_phonenumbers_form
 msgid ""
 "This wizard reformats the phone, mobile and fax numbers of all partners in "
 "standard international format e.g. +33141981242"
-msgstr "Čarovnik za pretvorbo telefonskih številk partnerjev v mednarodni format, npr, +33141981242"
+msgstr ""
+"Čarovnik za pretvorbo telefonskih številk partnerjev v mednarodni format, "
+"npr, +33141981242"
 
 #. module: base_phone
 #. openerp-web

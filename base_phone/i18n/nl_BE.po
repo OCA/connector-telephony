@@ -1,7 +1,7 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * base_phone
-# 
+#
 # Translators:
 msgid ""
 msgstr ""
@@ -10,11 +10,12 @@ msgstr ""
 "POT-Creation-Date: 2017-08-19 01:29+0000\n"
 "PO-Revision-Date: 2017-08-21 07:26+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
-"Language-Team: Dutch (Belgium) (http://www.transifex.com/oca/OCA-connector-telephony-8-0/language/nl_BE/)\n"
+"Language-Team: Dutch (Belgium) (http://www.transifex.com/oca/OCA-connector-"
+"telephony-8-0/language/nl_BE/)\n"
+"Language: nl_BE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: nl_BE\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: base_phone
@@ -162,12 +163,12 @@ msgstr "ID"
 #. module: base_phone
 #: help:res.company,number_of_digits_to_match_from_end:0
 msgid ""
-"In several situations, OpenERP will have to find a Partner/Lead/Employee/..."
-" from a phone number presented by the calling party. As the phone numbers "
+"In several situations, OpenERP will have to find a Partner/Lead/Employee/... "
+"from a phone number presented by the calling party. As the phone numbers "
 "presented by your phone operator may not always be displayed in a standard "
 "format, the best method to find the related Partner/Lead/Employee/... in "
-"OpenERP is to try to match the end of the phone number in OpenERP with the N"
-" last digits of the phone number presented by the calling party. N is the "
+"OpenERP is to try to match the end of the phone number in OpenERP with the N "
+"last digits of the phone number presented by the calling party. N is the "
 "value you should enter in this field."
 msgstr ""
 
@@ -313,8 +314,7 @@ msgstr ""
 #. module: base_phone
 #: sql_constraint:res.company:0
 msgid ""
-"The value of the field 'Number of Digits To Match From End' must be "
-"positive."
+"The value of the field 'Number of Digits To Match From End' must be positive."
 msgstr ""
 
 #. module: base_phone
