@@ -1,36 +1,31 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# * base_phone_popup
+#	* base_phone_popup
 #
-# Translators:
-# liAnGjiA <liangjia@qq.com>, 2017
 msgid ""
 msgstr ""
-"Project-Id-Version: connector-telephony (8.0)\n"
+"Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-24 19:57+0000\n"
-"PO-Revision-Date: 2017-06-25 13:51+0000\n"
-"Last-Translator: liAnGjiA <liangjia@qq.com>\n"
-"Language-Team: Chinese (China) (http://www.transifex.com/oca/OCA-connector-"
-"telephony-8-0/language/zh_CN/)\n"
-"Language: zh_CN\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Plural-Forms: \n"
 
 #. module: base_phone_popup
 #: code:addons/base_phone_popup/popup.py:49
 #, python-format
 msgid "Number Not Found"
-msgstr "号码不存在"
+msgstr ""
 
 #. module: base_phone_popup
 #: field:res.users,context_incall_popup:0
 msgid "Pop-up on Incoming Calls"
-msgstr "来电提醒"
+msgstr ""
 
 #. module: base_phone_popup
 #: model:ir.model,name:base_phone_popup.model_res_users
 msgid "Users"
-msgstr "用户"
+msgstr ""
+
