@@ -1,28 +1,22 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# * ovh_telephony_connector
+#	* ovh_telephony_connector
 #
-# Translators:
 msgid ""
 msgstr ""
-"Project-Id-Version: connector-telephony (8.0)\n"
+"Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-01 04:07+0000\n"
-"PO-Revision-Date: 2015-10-12 18:37+0000\n"
 "Last-Translator: <>\n"
-"Language-Team: Dutch (http://www.transifex.com/oca/OCA-connector-"
-"telephony-8-0/language/nl/)\n"
-"Language: nl\n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: \n"
 
 #. module: ovh_telephony_connector
 #: code:addons/ovh_telephony_connector/ovh_connector.py:99
 #, python-format
-msgid ""
-"Click to call to OVH failed.\n"
+msgid "Click to call to OVH failed.\n"
 "Here is the error: '%s'"
 msgstr ""
 
@@ -89,4 +83,5 @@ msgstr ""
 #. module: ovh_telephony_connector
 #: model:ir.model,name:ovh_telephony_connector.model_res_users
 msgid "Users"
-msgstr "Gebruikers"
+msgstr ""
+
