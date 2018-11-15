@@ -1,51 +1,36 @@
 /* Base phone module for Odoo
-   Copyright (C) 2013-2016 Alexis de Lattre <alexis@via.ecp.fr>
-   The licence is in the file __openerp__.py */
+   Copyright (C) 2013-2018 Akretion France
+   @author: Alexis de Lattre <alexis.delattre@akretion.com>
+   License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). */
 
-odoo.define('base_phone.phone_widget', function (require) {
+odoo.define('base_phone.updatedphone_widget', function (require) {
     "use strict";
 
+
     var core = require('web.core');
-    var formwidgets = require('web.form_widgets');
     var web_client = require('web.web_client');
+    var basicFields = require('web.basic_fields');
+    var InputField = basicFields.InputField;
+    var originalFieldPhone = basicFields.FieldPhone;
+    var fieldRegistry = require('web.field_registry');
+    var QWeb = core.qweb;
     var _t = core._t;
 
-    var FieldFax = formwidgets.FieldEmail.extend({
-        template: 'FieldFax',
-        prefix: 'fax',
-        initialize_content: function() {
-            this._super();
-            var $button = this.$el.find('button');
-            $button.click(this.on_button_clicked);
-            this.setupFocus($button);
-        },
-        render_value: function() {
-            this._super();
-            if (this.get("effective_readonly") && this.clickable) {
-                var phone_num = this.get('value');
-                if(phone_num) {
-                    phone_num = phone_num.replace(/ /g, '').replace(/-/g, '');
-                    this.$el.attr('href', this.prefix + ':' + phone_num);
-                }
-            }
-        },
-        on_button_clicked: function() {
-            location.href = this.prefix + ':' + this.get('value');
-        }
-    });
+    var updatedFieldPhone = originalFieldPhone.extend({
 
-    var FieldPhone = FieldFax.extend({
-        template: 'FieldPhone',
-        prefix: 'tel',
-        render_value: function() {
+/*        init: function () {
+            this._super.apply(this, arguments);
+            },  */
+
+        _renderReadonly: function() {
             this._super();
-            if (this.get("effective_readonly") && this.clickable) {
+            if (this.mode == "readonly") {
                 var self = this;
-                var phone_num = this.get('value');
-                if(phone_num) {
+                var phone_num = this.value;
+                /* if(phone_num) {
                     phone_num = phone_num.replace(/ /g, '').replace(/-/g, '');
-                }
-                var click2dial_text = '';
+                } */
+                /* var click2dial_text = '';
                 if (phone_num && !this.options.dial_button_invisible) {
                     click2dial_text = _t('Dial');
                 }
@@ -53,6 +38,9 @@ odoo.define('base_phone.phone_widget', function (require) {
                 this.$el.filter('#click2dial')
                     .text(click2dial_text)
                     .attr('href', '#')
+                } */
+                this.$el.filter('a[href^="tel:"]').off('click');
+                this.$el.filter('a[href^="tel:"]')
                     .on('click', function(ev) {
                         self.do_notify(
                                 _t('Click2dial started'),
@@ -60,10 +48,13 @@ odoo.define('base_phone.phone_widget', function (require) {
                                 false);
                         var arg = {
                             'phone_number': phone_num,
-                            'click2dial_model': self.view.dataset.model,
-                            'click2dial_id': self.view.datarecord.id};
-                        self.rpc('/base_phone/click2dial', arg).done(function(r) {
-                            // console.log('Click2dial r=%s', JSON.stringify(r));
+                            'click2dial_model': self.model,
+                            'click2dial_id': self.res_id};
+                        self._rpc({
+                                route: '/base_phone/click2dial',
+                                params: arg,
+                                }).done(function(r) {
+                            // TODO: check why it never goes in there
                             if (r === false) {
                                 self.do_warn("Click2dial failed");
                             } else if (typeof r === 'object') {
@@ -73,8 +64,8 @@ odoo.define('base_phone.phone_widget', function (require) {
                                         false);
                                 if (r.action_model) {
                                     var context = {
-                                        'click2dial_model': self.view.dataset.model,
-                                        'click2dial_id': self.view.datarecord.id,
+                                        'click2dial_model': self.model,
+                                        'click2dial_id': self.res_id,
                                         'phone_number': phone_num,
                                     };
                                     var action = {
@@ -86,7 +77,7 @@ odoo.define('base_phone.phone_widget', function (require) {
                                         target: 'new',
                                         context: context,
                                     };
-                                    web_client.action_manager.do_action(action);
+                                    this.do_action(action);
                                 }
                             }
                         });
@@ -96,6 +87,7 @@ odoo.define('base_phone.phone_widget', function (require) {
     });
 
     // To avoid conflicts, we check that widgets do not exist before using
+    /*
     if(!core.form_widget_registry.get('fax')){
         core.form_widget_registry.add('fax', FieldFax);
     }
@@ -103,29 +95,10 @@ odoo.define('base_phone.phone_widget', function (require) {
     if(!core.form_widget_registry.get('phone')){
         core.form_widget_registry.add('phone', FieldPhone);
     }
+    */
 
+fieldRegistry.add('phone', updatedFieldPhone);
 
-    var treewidgets = require('web.ListView');
-
-    var ColumnPhone = treewidgets.Column.extend({
-        // ability to add widget="phone" in TREE view
-        _format: function(row_data, options) {
-            var phone_num = row_data[this.id].value;
-            if (phone_num) {
-                var raw_phone_num = phone_num.replace(/ /g, '');
-                raw_phone_num = raw_phone_num.replace(/-/g, '');
-                return _.template("<a href='tel:<%-href%>'><%-text%></a>")({
-                    href: raw_phone_num,
-                    text: phone_num
-                });
-            }
-            return this._super(row_data, options);
-        }
-    });
-
-
-    if (!core.list_widget_registry.get('phone')) {
-        core.list_widget_registry.add('field.phone', ColumnPhone);
-    }
+return updatedFieldPhone;
 
 });
