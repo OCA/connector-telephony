@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
-# © 2010-2016 Akretion (Alexis de Lattre <alexis.delattre@akretion.com>)
+# Copyright 2010-2018 Akretion (Alexis de Lattre <alexis.delattre@akretion.com>)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo import models, api
-from .. import fields as phone_fields
 import logging
 _logger = logging.getLogger(__name__)
 
@@ -15,6 +14,7 @@ except ImportError:
 
 class PhoneCommon(models.AbstractModel):
     _name = 'phone.common'
+    _description = 'Common methods for phone features'
 
     @api.model
     def get_name_from_phone_number(self, presented_number):
@@ -29,19 +29,19 @@ class PhoneCommon(models.AbstractModel):
     @api.model
     def get_record_from_phone_number(self, presented_number):
         '''If it finds something, it returns (object name, ID, record name)
-        For example : ('res.partner', 42, u'Alexis de Lattre (Akretion)')
+        For example : ('res.partner', 42, 'Alexis de Lattre (Akretion)')
         '''
         _logger.debug(
-            u"Call get_name_from_phone_number with number = %s"
+            "Call get_name_from_phone_number with number = %s"
             % presented_number)
-        if not isinstance(presented_number, (str, unicode)):
+        if not isinstance(presented_number, str):
             _logger.warning(
-                u"Number '%s' should be a 'str' or 'unicode' but it is a '%s'"
+                "Number '%s' should be a 'str' but it is a '%s'"
                 % (presented_number, type(presented_number)))
             return False
         if not presented_number.isdigit():
             _logger.warning(
-                u"Number '%s' should only contain digits." % presented_number)
+                "Number '%s' should only contain digits." % presented_number)
 
         nr_digits_to_match_from_end = \
             self.env.user.company_id.number_of_digits_to_match_from_end
@@ -54,25 +54,30 @@ class PhoneCommon(models.AbstractModel):
         sorted_phonemodels = self._get_phone_models()
         for obj_dict in sorted_phonemodels:
             obj = obj_dict['object']
-            pg_search_number = str('%' + end_number_to_match)
+            pg_search_number = '%' + end_number_to_match
             _logger.debug(
                 "Will search phone and mobile numbers in %s ending with '%s'",
                 obj._name, end_number_to_match)
-            domain = []
+            sql = "SELECT id FROM %s WHERE " % obj._table
+            sql_where = []
+            sql_args = []
             for field in obj_dict['fields']:
-                domain.append((field, '=like', pg_search_number))
-            if len(domain) > 1:
-                domain = ['|'] * (len(domain) - 1) + domain
-            _logger.debug('searching on %s with domain=%s', obj._name, domain)
-            res_obj = obj.search(domain)
-            if len(res_obj) > 1:
+                sql_where.append("replace(%s, ' ', '') ilike %%s" % field)
+                sql_args.append(pg_search_number)
+            sql = sql + ' or '.join(sql_where)
+            _logger.debug("get_record_from_phone_number sql=%s", sql)
+            self._cr.execute(sql, tuple(sql_args))
+            res_sql = self._cr.fetchall()
+            #res_obj = obj.search(domain)
+            if len(res_sql) > 1:
                 _logger.warning(
                     u"There are several %s (IDS = %s) with a phone number "
                     "ending with '%s'. Taking the first one.",
                     obj._name, res_obj.ids, end_number_to_match)
-                res_obj = res_obj[0]
-            if res_obj:
-                name = res_obj.name_get()[0][1]
+            if res_sql:
+                obj_id = res_sql[0][0]
+                res_obj = obj.browse(obj_id)
+                name = res_obj.display_name
                 res = (obj._name, res_obj.id, name)
                 _logger.debug(
                     u"Answer get_record_from_phone_number: (%s, %d, %s)",
@@ -95,18 +100,19 @@ class PhoneCommon(models.AbstractModel):
                 continue
             if (
                     hasattr(senv, '_phone_name_sequence') and
-                    isinstance(senv._phone_name_sequence, int)):
-                phoneobj.append((senv, senv._phone_name_sequence))
+                    isinstance(senv._phone_name_sequence, int) and
+                    hasattr(senv, '_phone_name_fields') and
+                    isinstance(senv._phone_name_fields, list)):
+                cdict = {
+                    'object': senv,
+                    'fields': senv._phone_name_fields,
+                    }
+                phoneobj.append((senv._phone_name_sequence, cdict))
 
-        phoneobj_sorted = sorted(phoneobj, key=lambda element: element[1])
-
+        phoneobj_sorted = sorted(phoneobj, key=lambda element: element[0])
         res = []
-        for (obj, prio) in phoneobj_sorted:
-            entry = {'object': obj, 'fields': []}
-            for field in obj._fields:
-                if isinstance(obj._fields[field], phone_fields.Phone):
-                    entry['fields'].append(field)
-            res.append(entry)
+        for l in phoneobj_sorted:
+            res.append(l[1])
         # [{'fields': ['fax', 'phone', 'mobile'], 'object': res.partner()},
         #  {'fields': ['fax', 'phone', 'mobile'], 'object': crm.lead()}]
         return res
@@ -136,6 +142,7 @@ class PhoneCommon(models.AbstractModel):
         _logger.debug('Country code = %s' % country_code)
         to_dial_number = phonenumbers.format_out_of_country_calling_number(
             parsed_num, country_code.upper())
-        to_dial_number = str(to_dial_number).translate(None, ' -.()/')
+        to_dial_number = to_dial_number.translate(
+            to_dial_number.maketrans('', '', ' -.()/'))
         _logger.debug('Number to be sent to phone system: %s' % to_dial_number)
         return to_dial_number
