@@ -35,5 +35,5 @@
         "wizard/mass_sms_view.xml",
         "views/smstemplate_view.xml"
     ],
-    "installable": True,
+    "installable": False,
 }
