@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
-# © 2010-2016 Akretion (Alexis de Lattre <alexis.delattre@akretion.com>)
+# Copyright 2010-2018 Akretion France
+# @author: Alexis de Lattre <alexis.delattre@akretion.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import models, fields, api, _
+from odoo import api, fields, models, _
 from odoo.exceptions import UserError, ValidationError
 
 
@@ -69,7 +70,6 @@ class ResUsers(models.Model):
         "If you leave this field empty, it will use the first Asterisk "
         "server of the user's company.")
 
-    @api.multi
     @api.constrains('resource', 'internal_number', 'callerid')
     def _check_validity(self):
         for user in self:
@@ -88,7 +88,6 @@ class ResUsers(models.Model):
                             "ASCII caracters")
                             % (check_string[0], user.name))
 
-    @api.multi
     def get_asterisk_server_from_user(self):
         '''Returns an asterisk.server recordset'''
         self.ensure_one()
@@ -102,8 +101,8 @@ class ResUsers(models.Model):
             # If the user doesn't have an asterisk server,
             # we take the first one of the user's company
             if not asterisk_servers:
-                raise UserError(
-                    _("No Asterisk server configured for the company '%s'.")
+                raise UserError(_(
+                    "No Asterisk server configured for the company '%s'.")
                     % self.company_id.name)
             else:
                 ast_server = asterisk_servers[0]

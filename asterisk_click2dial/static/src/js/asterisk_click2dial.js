@@ -1,20 +1,23 @@
-/*  © 2014-2016 Akretion (Alexis de Lattre <alexis.delattre@akretion.com>)
-    © 2015-2016 Juris Malinens (port to v9)
+/*  Copyright 2014-2018 Akretion (Alexis de Lattre <alexis.delattre@akretion.com>)
+    Copyright 2015-2018 Juris Malinens (port to v9)
     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).   */
 
-odoo.define('asterisk_click2dial.click2dial', function (require) {
+odoo.define('asterisk_click2dial.systray.OpenCaller', function (require) {
 "use strict";
 
+var core = require('web.core');
 var SystrayMenu = require('web.SystrayMenu');
 var web_client = require('web.web_client');
 var Widget = require('web.Widget');
-var core = require('web.core');
+
 var _t = core._t;
 
 var click2dial = {};
 
-var click2dialOpenCaller = Widget.extend({
-    template: 'asterisk_click2dial.OpenCaller',
+
+var OpenCallerMenu = Widget.extend({
+    name: 'open_caller',
+    template: 'asterisk_click2dial.systray.OpenCaller',
     events: {
         'click': 'on_open_caller',
     },
@@ -26,7 +29,11 @@ var click2dialOpenCaller = Widget.extend({
     on_open_caller: function (event) {
         event.stopPropagation();
         var self = this;
-        self.rpc('/asterisk_click2dial/get_record_from_my_channel', {}).done(function(r) {
+        var context = this.getSession().user_context;
+        self._rpc({
+            route: '/asterisk_click2dial/get_record_from_my_channel',
+            params: {local_context: context, },
+            }).done(function(r) {
         // console.log('RESULT RPC r='+r);
         // console.log('RESULT RPC type r='+typeof r);
         // console.log('RESULT RPC isNaN r='+isNaN(r));
@@ -82,6 +89,8 @@ var click2dialOpenCaller = Widget.extend({
    },
 });
 
-SystrayMenu.Items.push(click2dialOpenCaller);
+SystrayMenu.Items.push(OpenCallerMenu);
+
+return OpenCallerMenu;
 
 });
