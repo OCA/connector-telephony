@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
-# © 2010-2016 Akretion (Alexis de Lattre <alexis.delattre@akretion.com>)
+# Copyright 2010-2018 Akretion (Alexis de Lattre <alexis.delattre@akretion.com>)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 {
-    'name': 'Asterisk Click2dial',
-    'version': '10.0.1.0.0',
+    'name': 'Asterisk connector',
+    'version': '12.0.1.0.0',
     'category': 'Phone',
     'license': 'AGPL-3',
     'summary': 'Asterisk-Odoo connector',
@@ -83,11 +83,11 @@ http://www.akretion.com/products-and-services/openerp-asterisk-voip-connector
         'views/asterisk_server.xml',
         'views/res_users.xml',
         'security/ir.model.access.csv',
-        'web_asterisk_click2dial.xml',
+        'security/asterisk_security.xml',
+        'views/web_asterisk_click2dial.xml',
         ],
     'demo': ['demo/asterisk_click2dial_demo.xml'],
-    'qweb': ['static/src/xml/*.xml'],
-    'css': ['static/src/css/*.css'],
+    'qweb': ['static/src/xml/asterisk_click2dial.xml'],
     'application': True,
     'installable': True,
 }
