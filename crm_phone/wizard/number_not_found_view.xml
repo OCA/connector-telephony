@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  © 2014-2016 Akretion (Alexis de Lattre <alexis.delattre@akretion.com>)
+  Copyright 2014-2018 Akretion France
+  @author: Alexis de Lattre <alexis.delattre@akretion.com>
   License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 -->
 
@@ -16,16 +17,19 @@
             <group name="lead" string="Create or Update a Lead"
                 colspan="1">
                 <button name="create_lead" colspan="2"
-                    string="Create Lead with this Number" type="object"
-                    class="oe_highlight"/>
+                    string="Create New Lead" type="object"
+                    groups="crm.group_use_lead" class="btn-primary"/>
+                <button name="create_opportunity" colspan="2"
+                    string="Create New Opportunity" type="object"
+                    class="btn-primary"/>
                 <field name="to_update_lead_id"/>
-                <field name="current_lead_phone"
+                <field name="current_lead_phone" string="Current Phone"
                     options="{'dial_button_invisible': True}"/>
-                <field name="current_lead_mobile"
+                <field name="current_lead_mobile" string="Current Mobile"
                     options="{'dial_button_invisible': True}"/>
                 <button name="update_lead" colspan="2"
-                    string="Update Lead with this Number" type="object"
-                    class="oe_highlight"/>
+                    string="Update Existing Lead/Opportunity" type="object"
+                    class="btn-primary"/>
             </group>
         </group>
     </field>
