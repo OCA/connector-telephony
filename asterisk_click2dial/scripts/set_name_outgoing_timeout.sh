@@ -11,7 +11,6 @@
 # incoming or outgoing phone call... and if the script get stucks, the
 # phone call will also get stucks !
 
-# For Debian Lenny and Ubuntu Lucid, you need to install the package "timeout"
 # For Ubuntu >= Maverick and Debian >= Squeeze, the "timeout" command is shipped
 # in the "coreutils" package
 
@@ -29,4 +28,4 @@
 
 PATH=/usr/local/sbin:/usr/local/bin:/var/lib/asterisk/agi-bin:/sbin:/bin:/usr/sbin:/usr/bin:/usr/share/asterisk/agi-bin:.
 
-timeout 2s set_name_agi.py --server odoo.mycompany.com --database erp_prod --user-id 12 --password "thepasswd" --outgoing --outgoing-agi-variable extension
+timeout 2s set_name_agi.py --jsonrpc --ssl --server odoo.mycompany.com --database erp_prod --username "asterisk" --password "thepasswd" --outgoing --outgoing-agi-variable extension
