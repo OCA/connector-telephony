@@ -1,6 +1,7 @@
 #! /usr/bin/python
 # -*- coding: utf-8 -*-
-#  © 2010-2018 Akretion (Alexis de Lattre <alexis.delattre@akretion.com>)
+#  Copyright 2010-2018 Akretion France
+#  @author: Alexis de Lattre <alexis.delattre@akretion.com>
 #
 #  This program is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Affero General Public License as
@@ -98,8 +99,8 @@ from optparse import OptionParser
 from asterisk import agi as agilib  # pip install pyst2
 
 __author__ = "Alexis de Lattre <alexis.delattre@akretion.com>"
-__date__ = "February 2018"
-__version__ = "0.6"
+__date__ = "November 2018"
+__version__ = "0.7"
 
 # Name that will be displayed if there is no match
 # and no geolocalisation. Set it to False if you don't want
@@ -113,8 +114,9 @@ options = [
         'help': 'DNS or IP address of the Odoo server. Default = none '
         '(will not try to connect to Odoo)'},
     {'names': ('-p', '--port'), 'dest': 'port', 'type': 'int',
-        'action': 'store', 'default': 8069,
-        'help': "Port of Odoo's XML-RPC interface. Default = 8069"},
+        'action': 'store', 'default': False,
+        'help': "Port of Odoo's webservice interface. Default = 443 when SSL is on, "
+        "8069 when SSL is off"},
     {'names': ('-e', '--ssl'), 'dest': 'ssl',
         'help': "Use SSL connections instead of clear connections. "
         "Default = no, use clear XML-RPC or JSON-RPC",
@@ -229,9 +231,11 @@ def main(options, arguments):
         # If we already have a "True" caller ID name
         # i.e. not just digits, but a real name, then we don't try to
         # connect to Odoo or geoloc, we just keep it
+        phone_chars = [str(d) for d in range(10)]
+        phone_chars += ['+']
         if (
                 agi.env.get('agi_calleridname') and
-                not agi.env['agi_calleridname'].isdigit() and
+                any([x not in phone_chars for x in agi.env['agi_calleridname']]) and
                 agi.env['agi_calleridname'].lower()
                 not in ['asterisk', 'unknown', 'anonymous'] and
                 not options.notify):
@@ -265,6 +269,15 @@ def main(options, arguments):
     else:
         method = 'get_name_from_phone_number'
 
+    if options.port:
+        port = options.port
+    # default port depends on protocol
+    else:
+        if options.ssl:
+            port = 443
+        else:
+            port = 8069
+
     res = False
     # Yes, this script can be used without "-s odoo_server" !
     if options.server and options.jsonrpc:
@@ -272,10 +285,10 @@ def main(options, arguments):
         proto = options.ssl and 'jsonrpc+ssl' or 'jsonrpc'
         agi.verbose(
             "Starting %s request on Odoo %s:%d database %s username %s" % (
-                proto.upper(), options.server, options.port, options.database,
+                proto.upper(), options.server, port, options.database,
                 options.username))
         try:
-            odoo = odoorpc.ODOO(options.server, proto, options.port)
+            odoo = odoorpc.ODOO(options.server, proto, port)
             odoo.login(options.database, options.username, options.password)
             if options.notify:
                 res = odoo.execute(
@@ -290,11 +303,10 @@ def main(options, arguments):
         agi.verbose(
             "Starting %s XML-RPC request on Odoo %s:%d "
             "database %s user ID %d" % (
-                proto, options.server, options.port, options.database,
+                proto, options.server, port, options.database,
                 options.userid))
         sock = xmlrpclib.ServerProxy(
-            '%s://%s:%d/xmlrpc/object'
-            % (proto, options.server, options.port))
+            '%s://%s:%d/xmlrpc/object' % (proto, options.server, port))
         try:
             if options.notify:
                 res = sock.execute(
