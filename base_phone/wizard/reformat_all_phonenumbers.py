@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-# © 2012-2016 Akretion (Alexis de Lattre <alexis.delattre@akretion.com>)
+# Copyright 2012-2018 Akretion France
+# @author: Alexis de Lattre <alexis.delattre@akretion.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo import models, fields, api
@@ -20,11 +21,10 @@ class ReformatAllPhonenumbers(models.TransientModel):
         ('done', 'Done'),
         ], string='State', default='draft')
 
-    @api.multi
     def run_reformat_all_phonenumbers(self):
         self.ensure_one()
         logger.info('Starting to reformat all the phone numbers')
-        phonenumbers_not_reformatted = u''
+        phonenumbers_not_reformatted = ''
         phoneobjects = self.env['phone.common']._get_phone_models()
         for obj_dict in phoneobjects:
             fields = obj_dict['fields']
@@ -37,7 +37,7 @@ class ReformatAllPhonenumbers(models.TransientModel):
                 # hr.employee inherits from 'resource.resource' and
                 # 'resource.resource' has an active field
                 # As I don't know how to detect such cases, I hardcode it here
-                # If you know a better solution, please tell me
+                # If you know a better solution, please submit a pull request
                 domain = ['|', ('active', '=', True), ('active', '=', False)]
             else:
                 domain = []
@@ -46,9 +46,16 @@ class ReformatAllPhonenumbers(models.TransientModel):
             for entry in all_entries:
                 vals = {}
                 for field in fields:
-                    vals[field] = entry[field]
-                if any([value for value in vals.values()]):
+                    if entry[field]:
+                        new_phone = entry.phone_format(entry[field])
+                        if new_phone != entry[field]:
+                            vals[field] = new_phone
+                if vals:
                     entry.write(vals)
+        # TODO: the warnings of the phone_format() methods are logged
+        # in the logfile... it would be great to get them and show them to
+        # the user... maybe via a rewrite of phone_format()
+        # with a raise_expcetion=True and catch the exception
         if not phonenumbers_not_reformatted:
             phonenumbers_not_reformatted = \
                 'All phone numbers have been reformatted successfully.'
