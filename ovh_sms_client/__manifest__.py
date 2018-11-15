@@ -23,5 +23,5 @@
     'website': 'http://julius.fr',
     'category': 'Tools',
     'data': ['data/keychain.xml'],
-    'installable': True,
+    'installable': False,
 }

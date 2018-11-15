@@ -1,7 +1,10 @@
 # -*- coding: utf-8 -*-
-# © 2016 Akretion France (Alexis de Lattre <alexis.delattre@akretion.com>)
+# Copyright 2016-2018 Akretion France
+# @author: Alexis de Lattre <alexis.delattre@akretion.com>
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from openerp.tests.common import TransactionCase
+
+from odoo.tests.common import TransactionCase
 
 
 class TestPhone(TransactionCase):
@@ -15,12 +18,12 @@ class TestPhone(TransactionCase):
         partner1 = rpo.create({
             'name': u'Pierre Paillet',
             'phone': '04-72-08-87-32',
-            'mobile':  '06.42.77.42.66',
+            'mobile': '06.42.77.42.66',
             'fax': '(0) 1 45 42 12 42',
             })
-        self.assertEquals(partner1.phone, u'+33 4 72 08 87 32')
-        self.assertEquals(partner1.mobile, u'+33 6 42 77 42 66')
-        self.assertEquals(partner1.fax, u'+33 1 45 42 12 42')
+        self.assertEquals(partner1.phone, u'+33 4 72 08 87 32')
+        self.assertEquals(partner1.mobile, u'+33 6 42 77 42 66')
+        self.assertEquals(partner1.fax, u'+33 1 45 42 12 42')
         # Create a partner with country
         self.env.ref('base.res_partner_12').country_id =\
             self.env.ref('base.ch').id

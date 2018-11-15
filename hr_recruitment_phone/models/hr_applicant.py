@@ -1,19 +1,27 @@
 # -*- coding: utf-8 -*-
-# © 2012-2016 Akretion (Alexis de Lattre <alexis.delattre@akretion.com>)
+# Copyright 2012-2018 Akretion France
+# @author: Alexis de Lattre <alexis.delattre@akretion.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import models, api
-from odoo.addons.base_phone.fields import Phone
+from odoo import api, models
 
 
 class HrApplicant(models.Model):
-    _inherit = 'hr.applicant'
+    _name = 'hr.applicant'
+    _inherit = ['hr.applicant', 'phone.validation.mixin']
     _phone_name_sequence = 50
+    _phone_name_fields = ['partner_phone', 'partner_mobile']
 
-    partner_phone = Phone(partner_field='partner_id')
-    partner_mobile = Phone(partner_field='partner_id')
+    @api.onchange('partner_phone')
+    def partner_phone_change(self):
+        if self.partner_phone:
+            self.partner_phone = self.phone_format(self.partner_phone)
 
-    @api.multi
+    @api.onchange('partner_mobile')
+    def partner_mobile_change(self):
+        if self.partner_mobile:
+            self.partner_mobile = self.phone_format(self.partner_mobile)
+
     def name_get(self):
         if self._context.get('callerid'):
             res = []

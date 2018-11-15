@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  © 2010-2016 Akretion (Alexis de Lattre <alexis.delattre@akretion.com>)
+  Copyright 2010-2018 Akretion (Alexis de Lattre <alexis.delattre@akretion.com>)
   License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 -->
 
@@ -42,7 +42,7 @@
                     <field name="password" password="True" />
                     <button name="test_ami_connection" type="object"
                         string="Test Connection to Asterisk"
-                        icon="gtk-network" colspan="2"/>
+                        class="btn-default" colspan="2"/>
                 </group>
                 <group name="dialplan" string="Dialplan Parameters">
                     <field name="context" />
@@ -52,7 +52,7 @@
                     <label for="wait_time"/>
                     <div>
                         <field name="wait_time" class="oe_inline"/>
-                        <label string=" seconds" class="oe_inline"/>
+                        <label string=" seconds" class="oe_inline" for="seconds"/>
                     </div>
                 </group>
             </sheet>

@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
-# © 2014-2016 Akretion (Alexis de Lattre <alexis.delattre@akretion.com>)
+# Copyright 2014-2018 Akretion France
+# @author: Alexis de Lattre <alexis.delattre@akretion.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 {
     'name': 'CRM Phone',
-    'version': '10.0.1.0.0',
+    'version': '12.0.1.0.0',
     'category': 'Phone',
     'license': 'AGPL-3',
     'summary': 'Validate phone numbers in CRM',
@@ -23,7 +24,7 @@ for any help or question about this module.
 """,
     'author': "Akretion,Odoo Community Association (OCA)",
     'website': 'http://www.akretion.com/',
-    'depends': ['base_phone', 'crm'],
+    'depends': ['base_phone', 'crm_phone_validation'],
     'external_dependencies': {'python': ['phonenumbers']},
     'conflicts': ['crm_voip'],
     'data': [

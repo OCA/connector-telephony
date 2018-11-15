@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  © 2010-2016 Akretion (Alexis de Lattre <alexis.delattre@akretion.com>)
+  Copyright 2010-2018 Akretion (Alexis de Lattre <alexis.delattre@akretion.com>)
   License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 -->
 
@@ -29,10 +29,6 @@
     <field name="resource">12</field>
     <field name="callerid">Demo user &lt;0141984212&gt;</field>
     <field name="asterisk_server_id" ref="demo_ast_server"/>
-</record>
-
-<record id="base.main_partner" model="res.partner">
-    <field name="country_id" ref="base.fr"/>
 </record>
 
 

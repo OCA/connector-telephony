@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-# © 2010-2016 Akretion (Alexis de Lattre <alexis.delattre@akretion.com>)
+# Copyright 2010-2018 Akretion France
+# @author: Alexis de Lattre <alexis.delattre@akretion.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo import models, fields, api, _
@@ -22,8 +23,7 @@ class AsteriskServer(models.Model):
     _description = "Asterisk Servers"
 
     name = fields.Char(string='Asterisk Server Name', required=True)
-    active = fields.Boolean(
-        string='Active', default=True)
+    active = fields.Boolean(string='Active', default=True)
     ip_address = fields.Char(
         string='Asterisk IP address or DNS', required=True)
     port = fields.Integer(
@@ -70,7 +70,6 @@ class AsteriskServer(models.Model):
             'asterisk.server'),
         help="Company who uses the Asterisk server.")
 
-    @api.multi
     @api.constrains(
         'out_prefix', 'wait_time', 'extension_priority', 'port',
         'context', 'alert_info', 'login', 'password')
@@ -83,30 +82,30 @@ class AsteriskServer(models.Model):
             password = ('AMI password', server.password)
 
             if out_prefix[1] and not out_prefix[1].isdigit():
-                raise ValidationError(
-                    _("Only use digits for the '%s' on the Asterisk server "
-                        "'%s'" % (out_prefix[0], server.name)))
+                raise ValidationError(_(
+                    "Only use digits for the '%s' on the Asterisk server "
+                    "'%s'" % (out_prefix[0], server.name)))
             if server.wait_time < 1 or server.wait_time > 120:
-                raise ValidationError(
-                    _("You should set a 'Wait time' value between 1 and 120 "
-                        "seconds for the Asterisk server '%s'" % server.name))
+                raise ValidationError(_(
+                    "You should set a 'Wait time' value between 1 and 120 "
+                    "seconds for the Asterisk server '%s'" % server.name))
             if server.extension_priority < 1:
-                raise ValidationError(
-                    _("The 'extension priority' must be a positive value for "
-                        "the Asterisk server '%s'" % server.name))
+                raise ValidationError(_(
+                    "The 'extension priority' must be a positive value for "
+                    "the Asterisk server '%s'" % server.name))
             if server.port > 65535 or server.port < 1:
-                raise ValidationError(
-                    _("You should set a TCP port between 1 and 65535 for the "
-                        "Asterisk server '%s'" % server.name))
+                raise ValidationError(_(
+                    "You should set a TCP port between 1 and 65535 for the "
+                    "Asterisk server '%s'" % server.name))
             for check_str in [dialplan_context, alert_info, login, password]:
                 if check_str[1]:
                     try:
                         check_str[1].encode('ascii')
                     except UnicodeEncodeError:
-                        raise ValidationError(
-                            _("The '%s' should only have ASCII caracters for "
-                                "the Asterisk server '%s'"
-                                % (check_str[0], server.name)))
+                        raise ValidationError(_(
+                            "The '%s' should only have ASCII caracters for "
+                            "the Asterisk server '%s'"
+                            % (check_str[0], server.name)))
 
     @api.model
     def _connect_to_asterisk(self):
@@ -119,13 +118,13 @@ class AsteriskServer(models.Model):
         ast_server = user.get_asterisk_server_from_user()
         # We check if the current user has a chan type
         if not user.asterisk_chan_type:
-            raise UserError(
-                _('No channel type configured for the current user.'))
+            raise UserError(_(
+                'No channel type configured for the current user.'))
 
         # We check if the current user has an internal number
         if not user.resource:
-            raise UserError(
-                _('No resource name configured for the current user'))
+            raise UserError(_(
+                'No resource name configured for the current user'))
 
         _logger.debug(
             "User's phone: %s/%s", user.asterisk_chan_type, user.resource)
@@ -137,18 +136,17 @@ class AsteriskServer(models.Model):
             ast_manager = Manager.Manager(
                 (ast_server.ip_address, ast_server.port),
                 ast_server.login, ast_server.password)
-        except Exception, e:
+        except Exception as e:
             _logger.error(
                 "Error in the request to the Asterisk Manager Interface %s",
                 ast_server.ip_address)
             _logger.error("Here is the error message: %s", e)
-            raise UserError(
-                _("Problem in the request from Odoo to Asterisk. "
-                  "Here is the error message: %s" % e))
+            raise UserError(_(
+                "Problem in the request from Odoo to Asterisk. "
+                "Here is the error message: %s" % e))
 
         return (user, ast_server, ast_manager)
 
-    @api.multi
     def test_ami_connection(self):
         self.ensure_one()
         ast_manager = False
@@ -157,9 +155,9 @@ class AsteriskServer(models.Model):
                 (self.ip_address, self.port),
                 self.login,
                 self.password)
-        except Exception, e:
-            raise UserError(
-                _("Connection Test Failed! The error message is: %s" % e))
+        except Exception as e:
+            raise UserError(_(
+                "Connection Test Failed! The error message is: %s" % e))
         finally:
             if ast_manager:
                 ast_manager.Logoff()
@@ -207,15 +205,15 @@ class AsteriskServer(models.Model):
                     chan, user)
                 if calling_party_number:
                     break
-        except Exception, e:
+        except Exception as e:
             _logger.error(
                 "Error in the Status request to Asterisk server %s",
                 ast_server.ip_address)
             _logger.error(
-                "Here are the details of the error: '%s'", unicode(e))
-            raise UserError(
-                _("Can't get calling number from  Asterisk.\nHere is the "
-                    "error: '%s'" % unicode(e)))
+                "Here are the details of the error: '%s'", str(e))
+            raise UserError(_(
+                "Can't get calling number from  Asterisk.\nHere is the "
+                "error: '%s'" % str(e)))
 
         finally:
             ast_manager.Logoff()
