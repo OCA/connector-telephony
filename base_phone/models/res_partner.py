@@ -1,22 +1,21 @@
 # -*- coding: utf-8 -*-
-# © 2016 Akretion (Alexis de Lattre <alexis.delattre@akretion.com>)
+# Copyright 2016-2018 Akretion France
+# @author: Alexis de Lattre <alexis.delattre@akretion.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 
-from odoo import models, api
-from .. import fields
+from odoo import models
 
 
 class ResPartner(models.Model):
-    _inherit = 'res.partner'
+    _name = 'res.partner'
+    # inherit on phone.validation.mixin (same as in crm_phone_validation,
+    # but base_phone only depends on phone_validation,
+    # not on crm_phone_validation)
+    _inherit = ['res.partner', 'phone.validation.mixin']
     _phone_name_sequence = 10
+    _phone_name_fields = ['phone', 'mobile']
 
-    phone = fields.Phone(country_field='country_id', partner_field='parent_id')
-    mobile = fields.Phone(
-        country_field='country_id', partner_field='parent_id')
-    fax = fields.Fax(country_field='country_id', partner_field='parent_id')
-
-    @api.multi
     def name_get(self):
         if self._context.get('callerid'):
             res = []
