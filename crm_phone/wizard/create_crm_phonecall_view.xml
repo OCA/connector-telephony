@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  © 2012-2016 Akretion (Alexis de Lattre <alexis.delattre@akretion.com>)
+  Copyright 2012-2018 Akretion France
+  @author: Alexis de Lattre <alexis.delattre@akretion.com>
   License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 -->
 
@@ -11,10 +12,12 @@
     <field name="name">create_crm_phonecall.view</field>
     <field name="model">wizard.create.crm.phonecall</field>
     <field name="arch" type="xml">
-        <form string="CRM phone call" version="7.0">
-            <label string="Create a phone call in the CRM ?"/>
+        <form string="CRM Phone Call">
+            <group name="main">
+                <label string="Create a phone call in the CRM ?" for="id"/>
+            </group>
             <footer>
-                <button name="button_create_outgoing_phonecall" string="Yes" type="object" class="oe_highlight"/>
+                <button name="button_create_outgoing_phonecall" string="Yes" type="object" class="btn-primary"/>
                 <button special="cancel" string="No" class="oe_link"/>
             </footer>
         </form>

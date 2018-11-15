@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-# © 2016 Akretion France (Alexis de Lattre <alexis.delattre@akretion.com>)
+# Copyright 2016-2018 Akretion France
+# @author: Alexis de Lattre <alexis.delattre@akretion.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 from odoo.tests.common import TransactionCase
@@ -14,11 +15,10 @@ class TestCRMPhone(TransactionCase):
             'partner_name': 'Ford',
             'contact_name': 'Jacques Toufaux',
             'mobile': '06.42.77.42.77',
-            'fax': '(0) 1 45 44 42 43',
             'country_id': self.env.ref('base.fr').id,
             })
-        self.assertEquals(lead1.mobile, u'+33 6 42 77 42 77')
-        self.assertEquals(lead1.fax, u'+33 1 45 44 42 43')
+        lead1._onchange_mobile_validation()
+        self.assertEquals(lead1.mobile, u'+33 6 42 77 42 77')
         lead2 = clo.create({
             'name': u'Automobile Odoo deployment',
             'partner_name': u'Kia',
@@ -26,19 +26,26 @@ class TestCRMPhone(TransactionCase):
             'country_id': self.env.ref('base.ch').id,
             'phone': '04 31 23 45 67',
             })
-        self.assertEquals(lead2.phone, u'+41 43 123 45 67')
+        lead2._onchange_phone_validation()
+        self.assertEquals(lead2.phone, u'+41 43 123 45 67')
         lead3 = clo.create({
             'name': 'Angela Strasse',
             'country_id': self.env.ref('base.de').id,
+            'phone': '08912345678',
             })
-        lead3.write({'phone': '08912345678'})
-        self.assertEquals(lead3.phone, u'+49 89 12345678')
+        lead3._onchange_phone_validation()
+        self.assertEquals(lead3.phone, u'+49 89 12345678')
+        partner4 = self.env['res.partner'].create({
+            'name': 'Belgian Guy',
+            'country_id': self.env.ref('base.be').id,
+            })
         lead4 = clo.create({
             'name': 'Large Odoo deployment',
-            'partner_id': self.env.ref('base.res_partner_2').id,
+            'partner_id': partner4.id,
+            'mobile': '(0) 2-391-43-75',
             })
-        lead4.write({'mobile': '(0) 2-391-43-75'})
-        self.assertEquals(lead4.mobile, u'+32 2 391 43 75')
+        lead4._onchange_mobile_validation()
+        self.assertEquals(lead4.mobile, u'+32 2 391 43 75')
         pco = self.env['phone.common']
         name = pco.get_name_from_phone_number('0642774277')
         self.assertEquals(name, 'Jacques Toufaux (Ford)')
