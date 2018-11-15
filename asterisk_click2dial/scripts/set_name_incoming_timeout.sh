@@ -11,7 +11,6 @@
 # incoming or outgoing phone call... and if the script get stucks, the
 # phone call will also get stucks !
 
-# For Debian Lenny and Ubuntu Lucid, you need to install the package "timeout"
 # For Ubuntu >= Maverick and Debian >= Squeeze, the "timeout" command is shipped
 # in the "coreutils" package
 
@@ -23,10 +22,6 @@
 # is extremely high, about 3 seconds ! I don't know if it's a bug
 # or if it will stay like that.
 
-# To test this script manually (i.e. outside of Asterisk), run :
-# echo "agi_callerid:0141401242"|set_name_incoming_timeout.sh
-# where 0141401242 is a phone number that could be presented by the calling party
-
 PATH=/usr/local/sbin:/usr/local/bin:/var/lib/asterisk/agi-bin:/sbin:/bin:/usr/sbin:/usr/bin:/usr/share/asterisk/agi-bin:.
 
-timeout 2s set_name_agi.py --server odoo.mycompany.com --database erp_prod --user-id 12 --password "thepasswd" --geoloc --geoloc-country "FR" --geoloc-lang "fr"
+timeout 2s set_name_agi.py --jsonrpc --ssl --server odoo.mycompany.com --database erp_prod --username "asterisk" --password "thepasswd"
