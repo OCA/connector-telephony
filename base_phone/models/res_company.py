@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
-# © 2016 Akretion (Alexis de Lattre <alexis.delattre@akretion.com>)
+# Copyright 2016-2018 Akretion France
+# @author: Alexis de Lattre <alexis.delattre@akretion.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo import models, fields
-from .. import fields as phone_fields
 
 
 class ResCompany(models.Model):
@@ -21,10 +21,6 @@ class ResCompany(models.Model):
         "Odoo with the N last digits of the phone number presented "
         "by the calling party. N is the value you should enter in this "
         "field.")
-    phone = phone_fields.Phone(
-        country_field='country_id', partner_field='partner_id')
-    fax = phone_fields.Fax(
-        country_field='country_id', partner_field='partner_id')
 
     _sql_constraints = [(
         'number_of_digits_to_match_from_end_positive',

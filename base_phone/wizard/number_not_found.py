@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
-# © 2010-2016 Akretion (Alexis de Lattre <alexis.delattre@akretion.com>)
+# Copyright 2010-2018 Akretion France
+# @author: Alexis de Lattre <alexis.delattre@akretion.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo import models, fields, api, _
-from .. import fields as phone_fields
 from odoo.exceptions import UserError
 import logging
 _logger = logging.getLogger(__name__)
@@ -33,12 +33,10 @@ class NumberNotFound(models.TransientModel):
     to_update_partner_id = fields.Many2one(
         comodel_name='res.partner', string='Partner to Update',
         help="Partner on which the phone number will be written")
-    current_partner_phone = phone_fields.Phone(
-        related='to_update_partner_id.phone', string='Current Phone',
-        readonly=True)
-    current_partner_mobile = phone_fields.Phone(
-        related='to_update_partner_id.mobile', string='Current Mobile',
-        readonly=True)
+    current_partner_phone = fields.Char(
+        related='to_update_partner_id.phone', string='Current Phone')
+    current_partner_mobile = fields.Char(
+        related='to_update_partner_id.mobile', string='Current Mobile')
 
     @api.model
     def default_get(self, fields_list):
@@ -61,14 +59,13 @@ class NumberNotFound(models.TransientModel):
                     res['number_type'] = 'mobile'
                 else:
                     res['number_type'] = 'phone'
-            except Exception, e:
+            except Exception as e:
                 _logger.error(
                     "Cannot reformat the phone number '%s': %s",
                     res['calling_number'], e)
                 pass
         return res
 
-    @api.multi
     def create_partner(self):
         '''Function called by the related button of the wizard'''
         wiz = self[0]
@@ -88,7 +85,6 @@ class NumberNotFound(models.TransientModel):
         }
         return action
 
-    @api.multi
     def update_partner(self):
         self.ensure_one()
         wiz = self[0]
