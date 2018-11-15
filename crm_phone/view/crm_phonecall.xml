@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  © 2014-2016 Akretion (Alexis de Lattre <alexis.delattre@akretion.com>)
+  Copyright 2014-2018 Akretion France
+  @author: Alexis de Lattre <alexis.delattre@akretion.com>
   License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 -->
 
@@ -32,13 +33,13 @@
                         <field name="date"/>
                         <field name="user_id"/>
                         <field name="partner_id"/>
-                        <field name="partner_phone"/>
-                        <field name="partner_mobile"/>
+                        <field name="partner_phone" widget="phone"/>
+                        <field name="partner_mobile" widget="phone"/>
                         <field name="opportunity_id"/>
                     </group>
                     <group name="right">
                         <field name="direction"/>
-                        <field name="team_id" groups="base.group_multi_salesteams"/>
+                        <field name="team_id"/>
                         <field name="company_id" groups="base.group_multi_company"/>
                         <field name="priority" widget="priority"/>
                     </group>
@@ -66,11 +67,11 @@
             <field name="partner_id"/>
             <field name="opportunity_id"/>
             <field name="user_id"/>
-            <field name="team_id" groups="base.group_multi_salesteams"/>
+            <field name="team_id"/>
             <field name="direction"/>
             <field name="state"/>
             <button name="schedule_another_call" type="object"
-                string="Schedule Another Call" icon="terp-call-start"/>
+                string="Schedule Another Call" icon="fa-calendar"/>
         </tree>
     </field>
 </record>
@@ -96,24 +97,23 @@
             <field name="user_id"/>
             <field name="partner_id" operator="child_of"/>
             <field name="opportunity_id"/>
-            <field name="team_id" groups="base.group_multi_salesteams"/>
-            <filter string="My Phonecalls" domain="[('user_id', '=', uid)]"/>
-            <filter string="My Team" domain="[('section_id.user_id', '=', uid)]"/>
-            <filter string="Unassigned" domain="[('user_id', '=', False)]"/>
+            <field name="team_id"/>
+            <filter name="my_calls" string="My Phonecalls" domain="[('user_id', '=', uid)]"/>
+            <filter name="my_team" string="My Team" domain="[('team_id.user_id', '=', uid)]"/>
+            <filter name="unassigned" string="Unassigned" domain="[('user_id', '=', False)]"/>
             <separator/>
             <filter string="To Do" name="open" domain="[('state', '=', 'open')]"/>
             <filter string="Held" name="done" domain="[('state', '=', 'done')]"/>
             <separator/>
-            <filter string="Inbound" domain="[('direction', '=', 'inbound')]"/>
-            <filter string="Outbound" domain="[('direction', '=', 'outbound')]"/>
+            <filter name="inbound" string="Inbound" domain="[('direction', '=', 'inbound')]"/>
+            <filter name="outbound" string="Outbound" domain="[('direction', '=', 'outbound')]"/>
             <group string="Group By" name="groupby">
                 <filter name="partner_groupby" string="Partner"
                     context="{'group_by': 'partner_id'}"/>
                 <filter name="user_groupby" string="Responsible"
                     context="{'group_by': 'user_id'}"/>
                 <filter name="team_groupby" string="Team"
-                    context="{'group_by': 'team_id'}"
-                    groups="base.group_multi_salesteams"/>
+                    context="{'group_by': 'team_id'}"/>
                 <filter name="date_groupby" string="Month"
                     context="{'group_by': 'date'}"/>
                 <filter name="state_groupby" string="State"
@@ -126,7 +126,7 @@
 </record>
 
 <menuitem id="crm_phonecall_menu" name="Phone Calls"
-      parent="sales_team.menu_base_partner" sequence="7" groups="sales_team.group_sale_salesman"/>
+      parent="crm.crm_menu_root" sequence="15" groups="sales_team.group_sale_salesman"/>
 
 <record id="crm_phonecall_action" model="ir.actions.act_window">
     <field name="name">Phone Calls</field>

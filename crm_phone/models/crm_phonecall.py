@@ -1,14 +1,14 @@
 # -*- coding: utf-8 -*-
-# © 2012-2016 Akretion (Alexis de Lattre <alexis.delattre@akretion.com>)
+# Copyright 2012-2018 Akretion France
+# @author: Alexis de Lattre <alexis.delattre@akretion.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import models, fields, api, _
-from odoo.addons.base_phone.fields import Phone
+from odoo import api, fields, models
 
 
 class CrmPhonecall(models.Model):
     _name = 'crm.phonecall'
-    _inherit = ['mail.thread']
+    _inherit = ['mail.thread', 'phone.validation.mixin']
     _order = "id desc"
 
     # Restore the object that existed in v8
@@ -28,11 +28,12 @@ class CrmPhonecall(models.Model):
         default=lambda self: self.env.user)
     team_id = fields.Many2one(
         'crm.team', string='Sales Team', track_visibility='onchange',
-        default=lambda self: self.env['crm.team']._get_default_team_id())
+        default=lambda self: self.env['crm.team'].sudo()._get_default_team_id(
+            user_id=self.env.uid))
     partner_id = fields.Many2one(
         'res.partner', string='Contact', ondelete='cascade')
-    partner_phone = Phone(string='Phone', partner_field='partner_id')
-    partner_mobile = Phone(string='Mobile', partner_field='partner_id')
+    partner_phone = fields.Char(string='Phone')
+    partner_mobile = fields.Char(string='Mobile')
     priority = fields.Selection([
         ('0', 'Low'),
         ('1', 'Normal'),
@@ -70,7 +71,16 @@ class CrmPhonecall(models.Model):
             self.team_id = self.opportunity_id.team_id.id
             self.partner_id = self.opportunity_id.partner_id.id
 
-    @api.multi
+    @api.onchange('partner_phone')
+    def onchange_partner_phone(self):
+        if self.partner_phone:
+            self.partner_phone = self.phone_format(self.partner_phone)
+
+    @api.onchange('partner_mobile')
+    def onchange_partner_mobile(self):
+        if self.partner_mobile:
+            self.partner_mobile = self.phone_format(self.partner_mobile)
+
     def schedule_another_call(self):
         self.ensure_one()
         cur_call = self[0]
@@ -83,11 +93,11 @@ class CrmPhonecall(models.Model):
             'default_partner_phone': cur_call.partner_phone,
             'default_partner_mobile': cur_call.partner_mobile,
         })
-        action = {
-            'name': _('Phone Call'),
-            'type': 'ir.actions.act_window',
-            'res_model': 'crm.phonecall',
+        action = self.env['ir.actions.act_window'].for_xml_id(
+            'crm_phone', 'crm_phonecall_action')
+        action.update({
             'view_mode': 'form,tree,calendar',
+            'views': False,
             'context': ctx,
-            }
+            })
         return action

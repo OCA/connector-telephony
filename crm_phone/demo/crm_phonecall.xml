@@ -8,7 +8,7 @@
     <field name="user_id" ref="base.user_root"/>
     <field name="name">Presentation of new product line</field>
     <field name="state">done</field>
-    <field name="partner_phone">+33442127812</field>
+    <field name="partner_phone">+33 4 42 12 78 12</field>
     <field name="direction">outbound</field>
 </record>
 
@@ -18,7 +18,7 @@
     <field name="user_id" ref="base.user_demo"/>
     <field name="name">Close the deal</field>
     <field name="state">open</field>
-    <field name="partner_phone">+33543137913</field>
+    <field name="partner_phone">+33 5 43 13 79 13</field>
     <field name="direction">outbound</field>
 </record>
 
@@ -28,7 +28,7 @@
     <field name="user_id" ref="base.user_demo"/>
     <field name="name">Lobby about our offer</field>
     <field name="state">open</field>
-    <field name="partner_phone">+33543137914</field>
+    <field name="partner_phone">+33 5 43 13 79 14</field>
     <field name="direction">outbound</field>
 </record>
 
@@ -38,7 +38,7 @@
     <field name="user_id" ref="base.user_root"/>
     <field name="name">Remote Demo of the software</field>
     <field name="state">open</field>
-    <field name="partner_phone">+33789320421</field>
+    <field name="partner_phone">+33 7 89 32 04 21</field>
     <field name="direction">outbound</field>
 </record>
 
@@ -48,10 +48,9 @@
     <field name="user_id" ref="base.user_demo"/>
     <field name="name">Asked training program</field>
     <field name="state">done</field>
-    <field name="partner_phone">+33389320442</field>
+    <field name="partner_phone">+33 3 89 32 04 42</field>
     <field name="direction">inbound</field>
 </record>
-
 
 
 </odoo>
