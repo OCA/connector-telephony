@@ -16,6 +16,6 @@
     'data': [
         'data/cron.xml'
     ],
-    'installable': True,
+    'installable': False,
     'application': False,
 }
