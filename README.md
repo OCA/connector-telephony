@@ -1,5 +1,5 @@
-[![Build Status](https://travis-ci.org/OCA/connector-telephony.svg?branch=12.0)](https://travis-ci.org/OCA/connector-telephony)
-[![Coverage Status](https://coveralls.io/repos/OCA/connector-telephony/badge.png?branch=12.0)](https://coveralls.io/r/OCA/connector-telephony?branch=12.0)
+[![Build Status](https://travis-ci.org/OCA/connector-telephony.svg?branch=11.0)](https://travis-ci.org/OCA/connector-telephony)
+[![Coverage Status](https://coveralls.io/repos/OCA/connector-telephony/badge.png?branch=11.0)](https://coveralls.io/r/OCA/connector-telephony?branch=11.0)
 
 # Odoo telephony connector
 

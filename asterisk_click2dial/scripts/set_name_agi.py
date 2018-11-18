@@ -115,8 +115,8 @@ options = [
         '(will not try to connect to Odoo)'},
     {'names': ('-p', '--port'), 'dest': 'port', 'type': 'int',
         'action': 'store', 'default': False,
-        'help': "Port of Odoo's webservice interface. Default = 443 when SSL is on, "
-        "8069 when SSL is off"},
+        'help': "Port of Odoo's webservice interface. "
+                "Default = 443 when SSL is on, 8069 when SSL is off"},
     {'names': ('-e', '--ssl'), 'dest': 'ssl',
         'help': "Use SSL connections instead of clear connections. "
         "Default = no, use clear XML-RPC or JSON-RPC",
@@ -235,7 +235,9 @@ def main(options, arguments):
         phone_chars += ['+']
         if (
                 agi.env.get('agi_calleridname') and
-                any([x not in phone_chars for x in agi.env['agi_calleridname']]) and
+                any([
+                    x not in phone_chars
+                    for x in agi.env['agi_calleridname']]) and
                 agi.env['agi_calleridname'].lower()
                 not in ['asterisk', 'unknown', 'anonymous'] and
                 not options.notify):
@@ -296,7 +298,7 @@ def main(options, arguments):
             else:
                 res = odoo.execute('phone.common', method, phone_number)
             agi.verbose("Called method %s" % method)
-        except:
+        except Exception:
             agi.verbose("Could not connect to Odoo in JSON-RPC")
     elif options.server:
         proto = options.ssl and 'https' or 'http'
@@ -317,7 +319,7 @@ def main(options, arguments):
                     options.database, options.userid, options.password,
                     'phone.common', method, phone_number)
             agi.verbose("Called method %s" % method)
-        except:
+        except Exception:
             agi.verbose("Could not connect to Odoo in XML-RPC")
         # To simulate a long execution of the XML-RPC request
         # import time

@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
-# Copyright 2014-2018 Akretion (Alexis de Lattre <alexis.delattre@akretion.com>)
+# Copyright 2014-2018 Akretion France
+# @author: Alexis de Lattre <alexis.delattre@akretion.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 {
     'name': 'HR Recruitment Phone',
-    'version': '12.0.1.0.0',
+    'version': '11.0.1.0.0',
     'category': 'Phone',
     'license': 'AGPL-3',
     'summary': 'Validate phone numbers in HR Recruitment',

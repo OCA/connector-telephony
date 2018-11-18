@@ -7,15 +7,10 @@
 
 <odoo>
 
-<template id="_assets_primary_variables" name="asterisk_click2dial assets"
-          inherit_id="web._assets_primary_variables">
-    <xpath expr="//link[last()]" position="after">
-        <link rel="stylesheet" type="text/scss" href="/asterisk_click2dial/static/src/scss/asterisk.scss"/>
-    </xpath>
-</template>
 
-<template id="assets_backend" name="mail assets" inherit_id="web.assets_backend">
+<template id="assets_backend" name="asterisk_click2dial assets" inherit_id="web.assets_backend">
     <xpath expr="." position="inside">
+        <link rel="stylesheet" href="/asterisk_click2dial/static/src/css/asterisk.css"/>
         <script type="text/javascript"
             src="/asterisk_click2dial/static/src/js/asterisk_click2dial.js"></script>
     </xpath>

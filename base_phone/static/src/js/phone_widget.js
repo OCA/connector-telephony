@@ -18,27 +18,16 @@ odoo.define('base_phone.updatedphone_widget', function (require) {
 
     var updatedFieldPhone = originalFieldPhone.extend({
 
-/*        init: function () {
-            this._super.apply(this, arguments);
-            },  */
+        /* Always enable phone link tel:, not only on small screens  */
+        _canCall: function () {
+            return true;
+        },
 
         _renderReadonly: function() {
             this._super();
             if (this.mode == "readonly") {
                 var self = this;
                 var phone_num = this.value;
-                /* if(phone_num) {
-                    phone_num = phone_num.replace(/ /g, '').replace(/-/g, '');
-                } */
-                /* var click2dial_text = '';
-                if (phone_num && !this.options.dial_button_invisible) {
-                    click2dial_text = _t('Dial');
-                }
-                this.$el.filter('#click2dial').off('click');
-                this.$el.filter('#click2dial')
-                    .text(click2dial_text)
-                    .attr('href', '#')
-                } */
                 this.$el.filter('a[href^="tel:"]').off('click');
                 this.$el.filter('a[href^="tel:"]')
                     .on('click', function(ev) {
@@ -86,16 +75,6 @@ odoo.define('base_phone.updatedphone_widget', function (require) {
         }
     });
 
-    // To avoid conflicts, we check that widgets do not exist before using
-    /*
-    if(!core.form_widget_registry.get('fax')){
-        core.form_widget_registry.add('fax', FieldFax);
-    }
-
-    if(!core.form_widget_registry.get('phone')){
-        core.form_widget_registry.add('phone', FieldPhone);
-    }
-    */
 
 fieldRegistry.add('phone', updatedFieldPhone);
 
