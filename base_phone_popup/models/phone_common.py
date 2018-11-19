@@ -52,7 +52,8 @@ class PhoneCommon(models.AbstractModel):
             message = _('Call from %s') % number
             action_link_name = res and res[2] or action['name']
             users.notify_info(
-                message, title, True, False, action, action_link_name)
+                message, title=title, sticky=True, action=action,
+                action_link_name=action_link_name)
             logger.debug(
                 'This action has been sent to users IDs %s: %s'
                 % (users.ids, action))

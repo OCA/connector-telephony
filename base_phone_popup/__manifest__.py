@@ -10,14 +10,6 @@
     'category': 'Phone',
     'license': 'AGPL-3',
     'summary': 'Show a pop-up on incoming calls',
-    'description': """
-Base Phone Pop-up
-=================
-
-When the user receives a phone call, Odoo will display a notification
-at the top-right of the screen that contains a link to the corresponding
-partner/lead/employee/... and a link to the *Number not found* wizard.
-""",
     'author': "Akretion,Odoo Community Association (OCA)",
     'website': 'http://www.akretion.com/',
     'depends': ['base_phone', 'web_notify'],
