@@ -20,5 +20,8 @@ msgstr ""
 
 #. module: event_phone
 #: model:ir.model,name:event_phone.model_event_registration
-msgid "Attendee"
-msgstr "Asistente"
+msgid "Event Registration"
+msgstr ""
+
+#~ msgid "Attendee"
+#~ msgstr "Asistente"
