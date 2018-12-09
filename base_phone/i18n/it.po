@@ -30,14 +30,14 @@ msgstr "Annulla"
 
 #. module: base_phone
 #. openerp-web
-#: code:addons/base_phone/static/src/js/phone_widget.js:57
+#: code:addons/base_phone/static/src/js/phone_widget.js:58
 #, python-format
 msgid "Click2dial started"
 msgstr ""
 
 #. module: base_phone
 #. openerp-web
-#: code:addons/base_phone/static/src/js/phone_widget.js:70
+#: code:addons/base_phone/static/src/js/phone_widget.js:71
 #, python-format
 msgid "Click2dial successfull"
 msgstr ""
@@ -197,7 +197,7 @@ msgstr ""
 
 #. module: base_phone
 #. openerp-web
-#: code:addons/base_phone/static/src/js/phone_widget.js:71
+#: code:addons/base_phone/static/src/js/phone_widget.js:72
 #, python-format
 msgid "Number dialed:"
 msgstr ""
@@ -311,7 +311,7 @@ msgstr ""
 
 #. module: base_phone
 #. openerp-web
-#: code:addons/base_phone/static/src/js/phone_widget.js:58
+#: code:addons/base_phone/static/src/js/phone_widget.js:59
 #, python-format
 msgid "Unhook your ringing phone"
 msgstr ""
