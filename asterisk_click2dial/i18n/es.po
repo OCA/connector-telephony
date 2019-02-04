@@ -12,15 +12,16 @@ msgstr ""
 "Project-Id-Version: connector-telephony (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-05-04 00:44+0000\n"
-"PO-Revision-Date: 2018-03-16 18:06+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
-"Language-Team: Spanish (http://www.transifex.com/oca/OCA-connector-"
-"telephony-8-0/language/es/)\n"
+"PO-Revision-Date: 2019-02-04 14:50+0000\n"
+"Last-Translator: Marta Vázquez Rodríguez <vazrodmar@gmail.com>\n"
+"Language-Team: Spanish (http://www.transifex.com/oca/"
+"OCA-connector-telephony-8-0/language/es/)\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 3.4\n"
 
 #. module: asterisk_click2dial
 #: field:asterisk.server,login:0
@@ -217,7 +218,7 @@ msgstr "Nombre mostrado"
 #. module: asterisk_click2dial
 #: constraint:asterisk.server:0 constraint:res.users:0
 msgid "Error message in raise"
-msgstr ""
+msgstr "Mensaje de error en la subida"
 
 #. module: asterisk_click2dial
 #: code:addons/asterisk_click2dial/asterisk_click2dial.py:111
@@ -328,7 +329,7 @@ msgstr "Falta el número de teléfono"
 #: code:addons/asterisk_click2dial/static/src/js/asterisk_click2dial.js:45
 #, python-format
 msgid "Moving to %s ID %d"
-msgstr ""
+msgstr "Moviendo a %s ID %d"
 
 #. module: asterisk_click2dial
 #: code:addons/asterisk_click2dial/asterisk_click2dial.py:164
@@ -340,7 +341,7 @@ msgstr "No hay servidores Asterisk configurados para la compañía '%s'."
 #: code:addons/asterisk_click2dial/asterisk_click2dial.py:429
 #, python-format
 msgid "No callerID configured for the current user"
-msgstr "No hay identificador de llamada configurado para el usuario actual."
+msgstr "No hay identificador de llamada configurado para el usuario actual"
 
 #. module: asterisk_click2dial
 #: code:addons/asterisk_click2dial/asterisk_click2dial.py:185
@@ -352,7 +353,7 @@ msgstr "Ningún tipo de canal configurado para el usuario actual."
 #: code:addons/asterisk_click2dial/asterisk_click2dial.py:191
 #, python-format
 msgid "No resource name configured for the current user"
-msgstr "No hay nombre de recurso configurado para el usuario actual."
+msgstr "No hay nombre de recurso configurado para el usuario actual"
 
 #. module: asterisk_click2dial
 #. openerp-web
@@ -387,7 +388,7 @@ msgstr "Abrir interlocutor"
 msgid "Optional Asterisk Parameters - for experts only, can be left empty"
 msgstr ""
 "Parámetros opcionales de Asterisk - sólo par expertos, puede dejarlos en "
-"blanco."
+"blanco"
 
 #. module: asterisk_click2dial
 #: field:asterisk.server,out_prefix:0
@@ -397,7 +398,7 @@ msgstr "Prefijo saliente"
 #. module: asterisk_click2dial
 #: selection:res.users,asterisk_chan_type:0
 msgid "PJSIP"
-msgstr ""
+msgstr "PJSIP"
 
 #. module: asterisk_click2dial
 #: help:asterisk.server,password:0
@@ -526,7 +527,7 @@ msgstr ""
 #. module: asterisk_click2dial
 #: selection:res.users,asterisk_chan_type:0
 msgid "Skinny"
-msgstr "Skinny"
+msgstr "'Skinny'"
 
 #. module: asterisk_click2dial
 #: view:res.users:asterisk_click2dial.view_users_form
@@ -641,9 +642,9 @@ msgstr ""
 #. module: asterisk_click2dial
 #: selection:res.users,asterisk_chan_type:0
 msgid "Zap"
-msgstr "Zap"
+msgstr "'Zap'"
 
 #. module: asterisk_click2dial
 #: selection:res.users,asterisk_chan_type:0
 msgid "mISDN"
-msgstr "mISDN"
+msgstr "'mISDN'"
