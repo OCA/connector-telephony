@@ -11,15 +11,16 @@ msgstr ""
 "Project-Id-Version: connector-telephony (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-07-29 06:05+0000\n"
-"PO-Revision-Date: 2017-08-03 13:38+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
-"Language-Team: Spanish (http://www.transifex.com/oca/OCA-connector-"
-"telephony-8-0/language/es/)\n"
+"PO-Revision-Date: 2019-02-04 14:50+0000\n"
+"Last-Translator: Marta Vázquez Rodríguez <vazrodmar@gmail.com>\n"
+"Language-Team: Spanish (http://www.transifex.com/oca/"
+"OCA-connector-telephony-8-0/language/es/)\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 3.4\n"
 
 #. module: base_phone
 #: field:number.not.found,calling_number:0
@@ -53,7 +54,7 @@ msgstr "Click2dial iniciado"
 #: code:addons/base_phone/static/src/js/phone_widget.js:58
 #, python-format
 msgid "Click2dial successfull"
-msgstr ""
+msgstr "Click2dial exitosa"
 
 #. module: base_phone
 #: view:number.not.found:base_phone.number_not_found_form
@@ -136,7 +137,7 @@ msgstr "Número E.164"
 #. module: base_phone
 #: help:number.not.found,e164_number:0
 msgid "E.164 equivalent of the calling number."
-msgstr "Equivalente E.164 del número que llama"
+msgstr "Equivalente E.164 del número que llama."
 
 #. module: base_phone
 #: view:res.users:base_phone.view_users_form_simple_modif
@@ -239,7 +240,7 @@ msgstr "Número no encontrado:"
 #. module: base_phone
 #: field:res.company,number_of_digits_to_match_from_end:0
 msgid "Number of Digits To Match From End"
-msgstr "Número de dígitos que coinciden al final."
+msgstr "Número de dígitos que coinciden al final"
 
 #. module: base_phone
 #: model:ir.model,name:base_phone.model_res_partner
@@ -279,7 +280,7 @@ msgid ""
 "server, in the format used by the telephony server (not E.164)."
 msgstr ""
 "Número de teléfono del interlocutor que ha sido obtenido desde el servidor "
-"de telefonía, en el formato usado por el servidor de telefonía (no E.164)"
+"de telefonía, en el formato usado por el servidor de telefonía (no E.164)."
 
 #. module: base_phone
 #: field:reformat.all.phonenumbers,phonenumbers_not_reformatted:0
@@ -307,7 +308,7 @@ msgstr "Reformatear todos los números de teléfono"
 #: code:addons/base_phone/wizard/number_not_found.py:106
 #, python-format
 msgid "Select the Partner to Update."
-msgstr "Escoja la empresa a actualizar"
+msgstr "Escoja la empresa a actualizar."
 
 #. module: base_phone
 #: field:reformat.all.phonenumbers,state:0
@@ -348,7 +349,7 @@ msgstr ""
 #: code:addons/base_phone/static/src/js/phone_widget.js:47
 #, python-format
 msgid "Unhook your ringing phone"
-msgstr "Descuelgue su teléfono que está sonando."
+msgstr "Descuelgue su teléfono que está sonando"
 
 #. module: base_phone
 #: view:number.not.found:base_phone.number_not_found_form
