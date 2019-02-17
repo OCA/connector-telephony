@@ -1,13 +1,11 @@
 # -*- coding: utf-8 -*-
-# © 2014-2016 Akretion (Alexis de Lattre <alexis.delattre@akretion.com>)
+# © 2014-2019 Akretion (Alexis de Lattre <alexis.delattre@akretion.com>) & K
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from openerp import models, fields, api, _
+from odoo import models, fields, api, _
 import logging
 
-
 logger = logging.getLogger(__name__)
-
 
 class PhoneCommon(models.AbstractModel):
     _inherit = 'phone.common'
@@ -39,31 +37,28 @@ class PhoneCommon(models.AbstractModel):
         return action
 
     @api.model
-    def incall_notify_by_login(self, number, login_list):
+    def incall_notify_by_login(self, uid, number, login_list):
         assert isinstance(login_list, list), 'login_list must be a list'
         res = self.get_record_from_phone_number(number)
         users = self.env['res.users'].search(
             [('login', 'in', login_list)])
         logger.debug(
-            'Notify incoming call from number %s to users %s'
+            '-----> Notify incoming call from number %s to users %s'
             % (number, users.ids))
         action = self._prepare_incall_pop_action(res, number)
         if action:
             for user in users:
                 if user.context_incall_popup:
-                    self.sudo(user.id).env['action.request'].notify(action)
-                    logger.debug(
-                        'This action has been sent to user ID %d: %s'
-                        % (user.id, action))
+#                    self.sudo(user.id).env['action.request'].notify(action)
+                    self.env['bus.bus'].sendone('%s_%d' % ("bpp", user.id), action)
+                    logger.debug('-----> user ID %d  action : %s  send by bus channel %s_%d' % (user.id, action, "bpp", user.id))
         if res:
             callerid = res[2]
         else:
             callerid = False
         return callerid
 
-
 class ResUsers(models.Model):
     _inherit = 'res.users'
 
-    context_incall_popup = fields.Boolean(
-        string='Pop-up on Incoming Calls', default=True)
+    context_incall_popup = fields.Boolean(string='Pop-up on Incoming Calls', default=True)

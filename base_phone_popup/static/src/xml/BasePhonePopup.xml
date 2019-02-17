@@ -1,0 +1,12 @@
+<t t-name="BasePhonePopup" >
+    <div id="act_req_id">
+    <div class="ex_button">
+        <div class="cancle_btn">
+            <button class="btn btn-danger">Cancle</button>
+        </div>
+        <div class="Add_btn">
+            <button class="btn btn-success">Add </button>
+        </div>
+    </div>
+    </div>
+</t>
