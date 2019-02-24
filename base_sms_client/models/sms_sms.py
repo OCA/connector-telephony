@@ -116,6 +116,7 @@ class SmsSms(models.Model):
                         sms.write({'state': 'sent', 'error': ''})
                 except Exception as e:
                     _logger.error('Failed to send sms %s', e)
+                    allsend_ok = False
                     sms.write({'error': e, 'state': 'error'})
                 sms._cr.commit()
         return allsend_ok
