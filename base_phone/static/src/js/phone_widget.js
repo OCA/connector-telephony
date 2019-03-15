@@ -34,7 +34,7 @@ odoo.define('base_phone.updatedphone_widget', function (require) {
             var self = this;
 
             // create our link
-            var dial = $('<a href="#" class="dial">📞 Dial</a>');
+            var dial = $('<a href="#" class="dial"><div class="label label-primary">☎ Dial</div></a>');
 
             // add a parent element
             // it's not possible to append to $el directly
@@ -53,7 +53,7 @@ odoo.define('base_phone.updatedphone_widget', function (require) {
         click2dial: function(phone_num) {
             var self = this;
             this.do_notify(
-                _t('Click2dial started'),
+                _.str.sprintf(_t('Click2dial to %s'), phone_num),
                 _t('Unhook your ringing phone'),
                 false);
             var params = {
@@ -65,13 +65,12 @@ odoo.define('base_phone.updatedphone_widget', function (require) {
                 params: params,
             }).then(function(r) {
                 console.log('successfull', r);
-                // TODO: check why it never goes in there
                 if (r === false) {
                     self.do_warn("Click2dial failed");
                 } else if (typeof r === 'object') {
                     self.do_notify(
                             _t('Click2dial successfull'),
-                            _t('Number dialed:') + ' ' + r.dialed_number,
+                            _.str.sprintf(_t('Number dialed: %s'), r.dialed_number),
                             false);
                     if (r.action_model) {
                         var action = {
@@ -83,7 +82,7 @@ odoo.define('base_phone.updatedphone_widget', function (require) {
                             target: 'new',
                             context: params,
                         };
-                        return this.do_action(action);
+                        return self.do_action(action);
                     }
                 }
             }, function (r) {
