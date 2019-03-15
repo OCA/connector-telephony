@@ -12,7 +12,14 @@ var Widget = require('web.Widget');
 
 var _t = core._t;
 
-var click2dial = {};
+var FieldPhone = require('base_phone.updatedphone_widget').FieldPhone;
+
+FieldPhone.include({
+    showDialButton: function () {
+        return true;
+    }
+});
+
 
 
 var OpenCallerMenu = Widget.extend({
@@ -22,10 +29,6 @@ var OpenCallerMenu = Widget.extend({
         'click': 'on_open_caller',
     },
 
-    start: function () {
-        this._super();
-    },
-
     on_open_caller: function (event) {
         event.stopPropagation();
         var self = this;
@@ -33,7 +36,7 @@ var OpenCallerMenu = Widget.extend({
         self._rpc({
             route: '/asterisk_click2dial/get_record_from_my_channel',
             params: {local_context: context, },
-            }).done(function(r) {
+            }).then(function(r) {
         // console.log('RESULT RPC r='+r);
         // console.log('RESULT RPC type r='+typeof r);
         // console.log('RESULT RPC isNaN r='+isNaN(r));
