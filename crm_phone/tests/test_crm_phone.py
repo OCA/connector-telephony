@@ -23,11 +23,13 @@ class TestCRMPhone(TransactionCase):
         self.assertEquals(partner1.phone, '+33 4 72 08 87 32')
         self.assertEquals(partner1.mobile, '+33 6 42 77 42 66')
         # Create a partner with country
-        self.env.ref('base.res_partner_12').country_id =\
-            self.env.ref('base.ch').id
+        parent_partner2 = rpo.create({
+            'name': 'C2C',
+            'country_id': self.env.ref('base.ch').id,
+            })
         partner2 = rpo.create({
             'name': 'Joël Grand-Guillaume',
-            'parent_id': self.env.ref('base.res_partner_12').id,
+            'parent_id': parent_partner2.id,
             'phone': '(0) 21 619 10 10',
             'mobile': '(0) 79 606 42 42',
             })
@@ -56,7 +58,7 @@ class TestCRMPhone(TransactionCase):
         name = pco.get_name_from_phone_number('0642774266')
         self.assertEquals(name, 'Pierre Paillet')
         name2 = pco.get_name_from_phone_number('0041216191010')
-        self.assertEquals(name2, 'Camptocamp, Joël Grand-Guillaume')
+        self.assertEquals(name2, 'C2C, Joël Grand-Guillaume')
         # Test against the POS bug
         # https://github.com/OCA/connector-telephony/issues/113
         # When we edit/create a partner from the POS,
