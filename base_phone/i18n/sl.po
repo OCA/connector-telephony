@@ -20,32 +20,33 @@ msgstr ""
 "%100==4 ? 2 : 3);\n"
 
 #. module: base_phone
-#: model:ir.model.fields,field_description:base_phone.field_number_not_found__calling_number
+#: model:ir.model.fields,field_description:base_phone.field_number_not_found_calling_number
 msgid "Calling Number"
 msgstr "Klicna številka"
 
 #. module: base_phone
-#: model_terms:ir.ui.view,arch_db:base_phone.reformat_all_phonenumbers_form
+#: model:ir.ui.view,arch_db:base_phone.reformat_all_phonenumbers_form
 msgid "Cancel"
 msgstr "Preklic"
 
 #. module: base_phone
 #. openerp-web
-#: code:addons/base_phone/static/src/js/phone_widget.js:35
-#, python-format
-msgid "Click2dial started"
-msgstr "Click2dial zagnan"
-
-#. module: base_phone
-#. openerp-web
-#: code:addons/base_phone/static/src/js/phone_widget.js:51
+#: code:addons/base_phone/static/src/js/phone_widget.js:72
 #, python-format
 msgid "Click2dial successfull"
 msgstr "Click2dial uspešen"
 
 #. module: base_phone
-#: model_terms:ir.ui.view,arch_db:base_phone.number_not_found_form
-#: model_terms:ir.ui.view,arch_db:base_phone.reformat_all_phonenumbers_form
+#. openerp-web
+#: code:addons/base_phone/static/src/js/phone_widget.js:56
+#, fuzzy, python-format
+#| msgid "Click2dial started"
+msgid "Click2dial to %s"
+msgstr "Click2dial zagnan"
+
+#. module: base_phone
+#: model:ir.ui.view,arch_db:base_phone.number_not_found_form
+#: model:ir.ui.view,arch_db:base_phone.reformat_all_phonenumbers_form
 msgid "Close"
 msgstr "Zaključi"
 
@@ -60,46 +61,41 @@ msgid "Companies"
 msgstr "Družbe"
 
 #. module: base_phone
-#: model:ir.model,name:base_phone.model_res_config_settings
-msgid "Config Settings"
-msgstr ""
-
-#. module: base_phone
 #: model:ir.model,name:base_phone.model_res_partner
 msgid "Contact"
 msgstr ""
 
 #. module: base_phone
 #: code:addons/base_phone/wizard/number_not_found.py:78
-#: model_terms:ir.ui.view,arch_db:base_phone.number_not_found_form
+#: model:ir.ui.view,arch_db:base_phone.number_not_found_form
 #, python-format
 msgid "Create New Partner"
 msgstr "Ustvari novega partnerja"
 
 #. module: base_phone
-#: model_terms:ir.ui.view,arch_db:base_phone.number_not_found_form
+#: model:ir.ui.view,arch_db:base_phone.number_not_found_form
 msgid "Create or Update a Partner"
 msgstr "Ustvari ali posodobi partnerja"
 
 #. module: base_phone
-#: model:ir.model.fields,field_description:base_phone.field_number_not_found__create_uid
-#: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers__create_uid
+#: model:ir.model.fields,field_description:base_phone.field_number_not_found_create_uid
+#: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers_create_uid
 msgid "Created by"
 msgstr "Ustvaril"
 
 #. module: base_phone
-#: model:ir.model.fields,field_description:base_phone.field_number_not_found__create_date
-#: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers__create_date
+#: model:ir.model.fields,field_description:base_phone.field_number_not_found_create_date
+#: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers_create_date
 msgid "Created on"
 msgstr "Ustvarjeno"
 
 #. module: base_phone
-#: model:ir.model.fields,field_description:base_phone.field_number_not_found__current_partner_mobile
+#: model:ir.model.fields,field_description:base_phone.field_number_not_found_current_partner_mobile
 msgid "Current Mobile"
 msgstr "Trenutna mobilna številka"
 
 #. module: base_phone
-#: model:ir.model.fields,field_description:base_phone.field_number_not_found__current_partner_phone
+#: model:ir.model.fields,field_description:base_phone.field_number_not_found_current_partner_phone
 msgid "Current Phone"
 msgstr "Trenutna telefonska številka"
 
@@ -111,9 +107,9 @@ msgid "Dial"
 msgstr "Kliči"
 
 #. module: base_phone
-#: model:ir.model.fields,field_description:base_phone.field_number_not_found__display_name
-#: model:ir.model.fields,field_description:base_phone.field_phone_common__display_name
-#: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers__display_name
+#: model:ir.model.fields,field_description:base_phone.field_number_not_found_display_name
+#: model:ir.model.fields,field_description:base_phone.field_phone_common_display_name
+#: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers_display_name
 msgid "Display Name"
 msgstr "Prikazni naziv"
 
@@ -128,12 +124,12 @@ msgid "Draft"
 msgstr "Osnutek"
 
 #. module: base_phone
-#: model:ir.model.fields,field_description:base_phone.field_number_not_found__e164_number
+#: model:ir.model.fields,field_description:base_phone.field_number_not_found_e164_number
 msgid "E.164 Number"
 msgstr "E.164 številka"
 
 #. module: base_phone
-#: model:ir.model.fields,help:base_phone.field_number_not_found__e164_number
+#: model:ir.model.fields,help:base_phone.field_number_not_found_e164_number
 msgid "E.164 equivalent of the calling number."
 msgstr "E.164 ekvivalent klicne številke."
 
@@ -143,20 +139,20 @@ msgid "Fixed"
 msgstr "Fiksni"
 
 #. module: base_phone
-#: model:ir.model.fields,field_description:base_phone.field_number_not_found__number_type
+#: model:ir.model.fields,field_description:base_phone.field_number_not_found_number_type
 msgid "Fixed/Mobile"
 msgstr "Fiksni/Mobilni"
 
 #. module: base_phone
-#: model:ir.model.fields,field_description:base_phone.field_number_not_found__id
-#: model:ir.model.fields,field_description:base_phone.field_phone_common__id
-#: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers__id
+#: model:ir.model.fields,field_description:base_phone.field_number_not_found_id
+#: model:ir.model.fields,field_description:base_phone.field_phone_common_id
+#: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers_id
 msgid "ID"
 msgstr "ID"
 
 #. module: base_phone
-#: model:ir.model.fields,help:base_phone.field_res_company__number_of_digits_to_match_from_end
-#: model:ir.model.fields,help:base_phone.field_res_config_settings__number_of_digits_to_match_from_end
+#: model:ir.model.fields,help:base_phone.field_res_company_number_of_digits_to_match_from_end
+#: model:ir.model.fields,help:base_phone.field_res_config_settings_number_of_digits_to_match_from_end
 msgid ""
 "In several situations, Odoo will have to find a Partner/Lead/Employee/... "
 "from a phone number presented by the calling party. As the phone numbers "
@@ -168,21 +164,21 @@ msgid ""
 msgstr ""
 
 #. module: base_phone
-#: model:ir.model.fields,field_description:base_phone.field_number_not_found____last_update
-#: model:ir.model.fields,field_description:base_phone.field_phone_common____last_update
-#: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers____last_update
+#: model:ir.model.fields,field_description:base_phone.field_number_not_found___last_update
+#: model:ir.model.fields,field_description:base_phone.field_phone_common___last_update
+#: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers___last_update
 msgid "Last Modified on"
 msgstr "Zadnjič spremenjeno"
 
 #. module: base_phone
-#: model:ir.model.fields,field_description:base_phone.field_number_not_found__write_uid
-#: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers__write_uid
+#: model:ir.model.fields,field_description:base_phone.field_number_not_found_write_uid
+#: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers_write_uid
 msgid "Last Updated by"
 msgstr "Zadnji posodobil"
 
 #. module: base_phone
-#: model:ir.model.fields,field_description:base_phone.field_number_not_found__write_date
-#: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers__write_date
+#: model:ir.model.fields,field_description:base_phone.field_number_not_found_write_date
+#: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers_write_date
 msgid "Last Updated on"
 msgstr "Zadnjič posodobljeno"
 
@@ -198,20 +194,21 @@ msgid "Mobile"
 msgstr "Mobilni telefon"
 
 #. module: base_phone
-#: model_terms:ir.ui.view,arch_db:base_phone.number_not_found_form
+#: model:ir.ui.view,arch_db:base_phone.number_not_found_form
 msgid "Number Not Found"
 msgstr "Številka ni najdena"
 
 #. module: base_phone
-#: model_terms:ir.ui.view,arch_db:base_phone.number_not_found_form
+#: model:ir.ui.view,arch_db:base_phone.number_not_found_form
 msgid "Number converted to international format:"
 msgstr "Številka pretvorjena v mednarodni format:"
 
 #. module: base_phone
 #. openerp-web
-#: code:addons/base_phone/static/src/js/phone_widget.js:52
-#, python-format
-msgid "Number dialed:"
+#: code:addons/base_phone/static/src/js/phone_widget.js:73
+#, fuzzy, python-format
+#| msgid "Number dialed:"
+msgid "Number dialed: %s"
 msgstr "Klicana številka:"
 
 #. module: base_phone
@@ -220,18 +217,18 @@ msgid "Number not found"
 msgstr "Številka ni najdena"
 
 #. module: base_phone
-#: model:ir.model.fields,field_description:base_phone.field_res_company__number_of_digits_to_match_from_end
-#: model:ir.model.fields,field_description:base_phone.field_res_config_settings__number_of_digits_to_match_from_end
+#: model:ir.model.fields,field_description:base_phone.field_res_company_number_of_digits_to_match_from_end
+#: model:ir.model.fields,field_description:base_phone.field_res_config_settings_number_of_digits_to_match_from_end
 msgid "Number of Digits To Match From End"
 msgstr "Število znakov od konca številke za primerjavo"
 
 #. module: base_phone
-#: model:ir.model.fields,help:base_phone.field_number_not_found__to_update_partner_id
+#: model:ir.model.fields,help:base_phone.field_number_not_found_to_update_partner_id
 msgid "Partner on which the phone number will be written"
 msgstr "Partner, pod katerega se bo zapisala telefonska številka"
 
 #. module: base_phone
-#: model:ir.model.fields,field_description:base_phone.field_number_not_found__to_update_partner_id
+#: model:ir.model.fields,field_description:base_phone.field_number_not_found_to_update_partner_id
 msgid "Partner to Update"
 msgstr "Partner za posodobitev"
 
@@ -242,7 +239,7 @@ msgid "Partner: %s"
 msgstr "Partner: %s"
 
 #. module: base_phone
-#: model_terms:ir.ui.view,arch_db:base_phone.res_config_settings_view_form
+#: model:ir.ui.view,arch_db:base_phone.res_config_settings_view_form
 msgid "Phone"
 msgstr "Telefon"
 
@@ -252,12 +249,7 @@ msgid "Phone CallerID"
 msgstr "ID klicatelja"
 
 #. module: base_phone
-#: model:ir.model,name:base_phone.model_phone_validation_mixin
-msgid "Phone Validation Mixin"
-msgstr ""
-
-#. module: base_phone
-#: model:ir.model.fields,help:base_phone.field_number_not_found__calling_number
+#: model:ir.model.fields,help:base_phone.field_number_not_found_calling_number
 msgid ""
 "Phone number of calling party that has been obtained from the telephony "
 "server, in the format used by the telephony server (not E.164)."
@@ -266,12 +258,12 @@ msgstr ""
 "strežnika v formatu strežnika (ne E.164)."
 
 #. module: base_phone
-#: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers__phonenumbers_not_reformatted
+#: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers_phonenumbers_not_reformatted
 msgid "Phone numbers that couldn't be reformatted"
 msgstr "Telefonske številke, ki niso bile pretvorjene"
 
 #. module: base_phone
-#: model_terms:ir.ui.view,arch_db:base_phone.reformat_all_phonenumbers_form
+#: model:ir.ui.view,arch_db:base_phone.reformat_all_phonenumbers_form
 msgid "Phone numbers that couldn't be reformatted:"
 msgstr "Telefonske številke, ki niso bile pretvorjene:"
 
@@ -283,7 +275,7 @@ msgstr "Pretvorba telefonskih številk"
 
 #. module: base_phone
 #: model:ir.model,name:base_phone.model_reformat_all_phonenumbers
-#: model_terms:ir.ui.view,arch_db:base_phone.reformat_all_phonenumbers_form
+#: model:ir.ui.view,arch_db:base_phone.reformat_all_phonenumbers_form
 msgid "Reformat all phone numbers"
 msgstr "Pretvorba vseh telefonskih številk"
 
@@ -294,19 +286,19 @@ msgid "Select the Partner to Update."
 msgstr "Izbira partnerja za posodobitev"
 
 #. module: base_phone
-#: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers__state
+#: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers_state
 msgid "State"
 msgstr "Stanje"
 
 #. module: base_phone
 #: model:ir.ui.menu,name:base_phone.menu_config_phone
-#: model_terms:ir.ui.view,arch_db:base_phone.view_users_form
+#: model:ir.ui.view,arch_db:base_phone.view_users_form
 msgid "Telephony"
 msgstr "Telefonija"
 
 #. module: base_phone
-#: model_terms:ir.ui.view,arch_db:base_phone.view_users_form
-#: model_terms:ir.ui.view,arch_db:base_phone.view_users_form_simple_modif
+#: model:ir.ui.view,arch_db:base_phone.view_users_form
+#: model:ir.ui.view,arch_db:base_phone.view_users_form_simple_modif
 msgid "Telephony Preferences"
 msgstr "Nastavitve telefonije"
 
@@ -319,7 +311,7 @@ msgstr ""
 "pozitivna."
 
 #. module: base_phone
-#: model_terms:ir.ui.view,arch_db:base_phone.reformat_all_phonenumbers_form
+#: model:ir.ui.view,arch_db:base_phone.reformat_all_phonenumbers_form
 #, fuzzy
 msgid ""
 "This wizard reformats the phone and mobile numbers of all partners in "
@@ -330,16 +322,26 @@ msgstr ""
 
 #. module: base_phone
 #. openerp-web
-#: code:addons/base_phone/static/src/js/phone_widget.js:36
+#: code:addons/base_phone/static/src/js/phone_widget.js:57
 #, python-format
 msgid "Unhook your ringing phone"
 msgstr "Dvigni slušalko pri zvonjenju"
 
 #. module: base_phone
-#: model_terms:ir.ui.view,arch_db:base_phone.number_not_found_form
+#: model:ir.ui.view,arch_db:base_phone.number_not_found_form
 #, fuzzy
 msgid "Update Existing Partner"
 msgstr "Ustvari ali posodobi partnerja"
+
+#. module: base_phone
+#: model:ir.model,name:base_phone.model_phone_validation_mixin
+msgid "phone.validation.mixin"
+msgstr ""
+
+#. module: base_phone
+#: model:ir.model,name:base_phone.model_res_config_settings
+msgid "res.config.settings"
+msgstr ""
 
 #~ msgid "Create Partner with this Number"
 #~ msgstr "Ustvari partnerja s to številko"
