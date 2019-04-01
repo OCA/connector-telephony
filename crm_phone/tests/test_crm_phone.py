@@ -37,18 +37,20 @@ class TestCRMPhone(TransactionCase):
         self.assertEquals(partner2.phone, '+41 21 619 10 10')
         self.assertEquals(partner2.mobile, '+41 79 606 42 42')
         # Write on an existing partner
-        agrolait = self.env.ref('base.res_partner_2')
-        self.assertEquals(agrolait.country_id, self.env.ref('base.be'))
-        agrolait.write({'phone': '(0) 2 391 43 74'})
-        agrolait._onchange_phone_validation()
-        self.assertEquals(agrolait.phone, '+32 2 391 43 74')
+        partner3 = rpo.create({
+            'name': 'Belgian corp',
+            'country_id': self.env.ref('base.be').id,
+            })
+        partner3.write({'phone': '(0) 2 391 43 74'})
+        partner3._onchange_phone_validation()
+        self.assertEquals(partner3.phone, '+32 2 391 43 74')
         # Write on an existing partner with country at the same time
-        agrolait.write({
+        partner3.write({
             'phone': '04 72 89 32 43',
             'country_id': fr_country_id,
             })
-        agrolait._onchange_phone_validation()
-        self.assertEquals(agrolait.phone, '+33 4 72 89 32 43')
+        partner3._onchange_phone_validation()
+        self.assertEquals(partner3.phone, '+33 4 72 89 32 43')
         # Test get_name_from_phone_number
         pco = self.env['phone.common']
         name = pco.get_name_from_phone_number('0642774266')
