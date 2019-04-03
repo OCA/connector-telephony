@@ -309,6 +309,7 @@ msgstr ""
 #. module: crm_phone
 #: model:ir.model.fields,field_description:crm_phone.field_crm_lead__phonecall_count
 #: model:ir.model.fields,field_description:crm_phone.field_res_partner__phonecall_count
+#: model:ir.model.fields,field_description:crm_phone.field_res_users__phonecall_count
 msgid "Number of Phonecalls"
 msgstr ""
 
@@ -363,6 +364,7 @@ msgstr ""
 #: model:ir.actions.act_window,name:crm_phone.crm_phonecall_action
 #: model:ir.model.fields,field_description:crm_phone.field_crm_lead__phonecall_ids
 #: model:ir.model.fields,field_description:crm_phone.field_res_partner__phonecall_ids
+#: model:ir.model.fields,field_description:crm_phone.field_res_users__phonecall_ids
 #: model:ir.ui.menu,name:crm_phone.crm_phonecall_menu
 #: model_terms:ir.ui.view,arch_db:crm_phone.crm_phonecall_calendar
 #: model_terms:ir.ui.view,arch_db:crm_phone.crm_phonecall_tree
