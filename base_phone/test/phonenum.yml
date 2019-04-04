@@ -23,7 +23,6 @@
 -
   !record {model: res.partner, id: partner3}:
     name: Jean Badphone
-    phone: 42
 -
   Check that valid phone numbers have been converted to E.164
 -
@@ -48,11 +47,3 @@
     assert name == 'Pierre Paillet', 'Wrong result for get_name_from_phone_number'
     name2 = self.get_name_from_phone_number(cr, uid, '0041216191010')
     assert name2 == u'Joël Grand-Guillaume (Camptocamp)', 'Wrong result for get_name_from_phone_number (partner2)'
--
-  Check country_id come from contact us form from website_crm module
--
-  !python {model: res.partner}: |
-    vals = self._generic_reformat_phonenumbers(cr, uid, [], {
-        'country_id': u'74', 'phone': u'0155667788'
-    }, context=context)
-    assert vals['phone'] == '+33155667788'
