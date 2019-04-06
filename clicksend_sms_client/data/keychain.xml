@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <record id="keychain_clicksend" model="keychain.account">
+        <field name="name">ClickSend sms default</field>
+        <field name="namespace">clicksend_provider</field>
+        <field name="technical_name">clicksend_default_account</field>
+    </record>
+
+</odoo>

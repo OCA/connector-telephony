@@ -13,6 +13,10 @@ class ServerAction(models.Model):
     """
     _inherit = 'ir.actions.server'
 
+    state = fields.Selection(selection_add=[
+        ('sms', 'Send SMS'),
+    ])
+
     mobile = fields.Char(
         string='Mobile No',
         help="Field to be used to fetch the mobile number, e.g. you select"

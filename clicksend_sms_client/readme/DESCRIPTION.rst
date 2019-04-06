@@ -1,0 +1,1 @@
+This module provides ClickSend fields to create a ClickSend gateway.

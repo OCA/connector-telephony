@@ -7,7 +7,7 @@
 
 {
     "name": "Base Sms Client",
-    "version": "10.0.1.0.0",
+    "version": "11.0.1.0.0",
     'license': 'AGPL-3',
     "depends": ['mail',
                 'base_phone',
@@ -35,5 +35,5 @@
         "wizard/mass_sms_view.xml",
         "views/smstemplate_view.xml"
     ],
-    "installable": False,
+    "installable": True,
 }
