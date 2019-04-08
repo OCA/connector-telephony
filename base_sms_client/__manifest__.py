@@ -12,6 +12,7 @@
     "depends": ['mail',
                 'base_phone',
                 'keychain',
+                'bus',
                 ],
     'author': 'Julius Network Solutions,SYLEAM,'
               'Odoo Community Association (OCA),Akretion',

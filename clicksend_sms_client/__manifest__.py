@@ -6,10 +6,7 @@
     'name': 'ClickSend SMS Client',
     'version': '11.0.1.0.1',
     'license': 'AGPL-3',
-    'depends': ['mail',
-                'base_sms_client',
-                'keychain',
-                ],
+    'depends': ['base_sms_client'],
     'author': 'Eficent,'
               'Odoo Community Association (OCA)',
     'website': 'https://github.com/OCA/connector-telephony',

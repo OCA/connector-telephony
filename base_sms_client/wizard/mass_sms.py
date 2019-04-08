@@ -4,7 +4,7 @@
 # Copyright (C) 2015 Valentin Chemiere <valentin.chemiere@akretion.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from odoo import models, fields, api
+from odoo import models, fields, api, _
 
 
 class WizardMassSms(models.TransientModel):
@@ -84,13 +84,18 @@ class WizardMassSms(models.TransientModel):
         for partner in self.partner_ids:
             vals = self._prepare_sms_vals(partner)
             sms_obj.create(vals)
-        src_model = self.env[self._context.get('active_model')]
-        if hasattr(src_model, 'message_follower_ids'):
-            rec = src_model.browse(self._context.get('active_id'))
-            rec.message_post(body=self.message)
-            self.env['bus.bus'].sendone(
-                'refresh', [self.env.cr.dbname, self._name, self._uid])
+            src_model = self.env[self._context.get('active_model')]
+            if hasattr(src_model, 'message_follower_ids'):
+                rec = src_model.browse(self._context.get('active_id'))
+                self.post_message(rec)
         return {'type': 'ir.actions.act_window_close'}
+
+    def post_message(self, rec):
+        channel = 'wizard.mass.sms'
+        message = _("SMS Message (%s) sent to %s" % (
+            self.message, ', '.join(self.partner_ids.mapped('name'))))
+        rec.message_post(body=message)
+        self.env['bus.bus'].sendone(channel, [])
 
     def redirect_to_sms_wizard(self, **kwargs):
         id = kwargs.get("id")

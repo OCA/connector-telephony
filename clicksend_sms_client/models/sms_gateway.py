@@ -7,7 +7,7 @@ from odoo import api, models, fields
 from ..models.keychain import CLICKSEND_KEYCHAIN_NAMESPACE
 import requests
 import logging
-from xml.etree.ElementTree import XML, fromstring, tostring
+from xml.etree.ElementTree import fromstring
 
 _logger = logging.getLogger(__name__)
 
@@ -23,9 +23,9 @@ class SmsClient(models.Model):
         for rec in self:
             keychain = rec.env['keychain.account']
             # TODO: implement suspend_security module
-            #if rec._check_permissions():
+            # if rec._check_permissions():
             #    retrieve = keychain.suspend_security().retrieve
-            #else:
+            # else:
             #    retrieve = keychain.retrieve
             retrieve = keychain.retrieve
             accounts = retrieve(
@@ -42,7 +42,7 @@ class SmsSms(models.Model):
         keychain_account = self.gateway_id._provider_get_provider_conf()
         params = {
             'username': keychain_account['login'],
-            'key': keychain_account.get_password(),
+            'key': keychain_account._get_password(),
             'senderid': self.gateway_id.from_provider,
             'url': self.gateway_id.url,
             'to': self._convert_to_e164(self.mobile),
