@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+    <t t-extend="mail.Chatter.Buttons">
+         <t t-jquery="button.o_chatter_button_schedule_activity" t-operation="after">
+             <button class="btn btn-sm btn-link o_chatter_button_send_sms"
+                     title="Send SMS" type="button">
+                 <i class="fa fa-clock"/> Send SMS
+             </button>
+         </t>
+    </t>
+
+</templates>

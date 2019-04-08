@@ -18,6 +18,11 @@ class WizardMassSms(models.TransientModel):
     def _default_get_partner(self):
         if self._context.get('active_model') == 'res.partner':
             return self._context.get('active_ids')
+        else:
+            rec = self.env[self._context.get('active_model')].browse(
+                self._context.get('active_id'))
+            if hasattr(rec, 'message_follower_ids'):
+                rec.message_follower_ids.mapped('partner_id')
 
     gateway_id = fields.Many2one(
         'sms.gateway',
@@ -76,7 +81,27 @@ class WizardMassSms(models.TransientModel):
     @api.multi
     def send(self):
         sms_obj = self.env['sms.sms']
-        partner_obj = self.env['res.partner']
-        for partner in partner_obj.browse(self._context.get('active_ids')):
+        for partner in self.partner_ids:
             vals = self._prepare_sms_vals(partner)
             sms_obj.create(vals)
+        src_model = self.env[self._context.get('active_model')]
+        if hasattr(src_model, 'message_follower_ids'):
+            rec = src_model.browse(self._context.get('active_id'))
+            rec.message_post(body=self.message)
+            self.env['bus.bus'].sendone(
+                'refresh', [self.env.cr.dbname, self._name, self._uid])
+        return {'type': 'ir.actions.act_window_close'}
+
+    def redirect_to_sms_wizard(self, **kwargs):
+        id = kwargs.get("id")
+        model = kwargs.get("model")
+        action = self.env['wizard.mass.sms'].action_wizard_mass_sms()
+        action['src_model'] = model
+        action['domain'] = [('res_id', '=', id)]
+        return action
+
+    @api.model
+    def action_wizard_mass_sms(self):
+        action = self.env.ref(
+            'base_sms_client.action_wizard_mass_sms').read()[0]
+        return action

@@ -63,8 +63,7 @@ class SmsSms(models.Model):
         params.update({
             'password': '*****',
             'to': '*****',
-            'smsAccount': '*****',
-            'login': '*****',
+            'username': '*****',
             })
         _logger.debug("Call ClickSend API : %s params %s",
                       params['url'], params)

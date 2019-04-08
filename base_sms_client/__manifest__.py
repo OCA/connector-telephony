@@ -33,7 +33,11 @@
         "views/server_action_view.xml",
         "data/sms_gateway_data.xml",
         "wizard/mass_sms_view.xml",
-        "views/smstemplate_view.xml"
+        "views/smstemplate_view.xml",
+        "static/src/xml/templates.xml",
+    ],
+    'qweb': [
+        'static/src/xml/inherit_chatter.xml',
     ],
     "installable": True,
 }
