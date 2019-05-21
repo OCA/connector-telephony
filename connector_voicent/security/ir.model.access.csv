@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_backend_voicent,access_backend_voicent,model_backend_voicent,base.group_user,1,1,1,0
+access_backend_voicent_call_line,access_backend_voicent_call_line,model_backend_voicent_call_line,base.group_user,1,1,1,0
+access_backend_voicent_time_line,access_backend_voicent_time_line,model_backend_voicent_time_line,base.group_user,1,0,1,0
