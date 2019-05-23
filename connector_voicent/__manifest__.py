@@ -5,8 +5,7 @@
     'version': '12.0.1.0.0',
     'category': 'Phone',
     'license': 'AGPL-3',
-    'summary': 'Voicent Connector',
-    'description': """
+    'summary': """
 Voicent Connector
 =========
 Usage:
