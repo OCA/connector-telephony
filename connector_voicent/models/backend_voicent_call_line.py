@@ -14,7 +14,7 @@ class BackendVoicentCallLine(models.Model):
     applies_on = fields.Selection(
         string=u'Applies on',
         selection=[],
-    )   
+    )
     voicent_app = fields.Char(
         string=u'Voicent App',
     )

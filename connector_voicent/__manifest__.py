@@ -1,20 +1,18 @@
 # @TODO: To use the right License.
-# @TODO: Description, Website, Contributros..etc, of this module to be adjusted later. 
+# @TODO: Description, Website, Contributros..etc.
 {
     'name': 'Voicent Connector',
     'version': '12.0.1.0.0',
     'category': 'Phone',
     'license': 'AGPL-3',
-    'summary': """
-Voicent Connector
-=========
-Usage:
-    Go to Connectors > Backends > Voicent Backends
-    Create a new Voicent Backend with the host and port
-    Create Call Lines to determine when (which stage in the process) calls are added to the queue
-    Create Time Line to determine when (what time) calls are made
-""",
-    'author': "Maxime Chambreuil, Youness MAAFI, Odoo Community Association (OCA)",
+    'summary': 'Automate phone calls based on stage changes',
+    'development_status': 'Stable',
+    'maintainers': [
+        'younessmaafi',
+        'max3903',
+    ],
+    'author': 'Maxime Chambreuil, Youness MAAFI,'
+              ' Odoo Community Association (OCA)',
     'website': 'http://opensourceintegrators.com',
     'depends': [
         'base',
