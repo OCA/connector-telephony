@@ -17,8 +17,6 @@
     'depends': [
         'base',
         'crm',
-        'base_phone',
-        'crm_phone_validation'
         ],
     'external_dependencies': {'python': ['phonenumbers']},
     'data': [
