@@ -3,7 +3,7 @@
 
 
 # Simple message
-from . import voicent
+import voicent
 
 
 v = voicent.Voicent()

@@ -16,9 +16,7 @@
     'website': 'http://opensourceintegrators.com',
     'depends': [
         'base',
-        'crm',
         ],
-    'external_dependencies': {'python': ['phonenumbers']},
     'data': [
         # Security
         'security/ir.model.access.csv',
