@@ -30,15 +30,12 @@ class WizardCreateCrmPhonecall(models.TransientModel):
             'default_direction': direction,
             'default_team_id': teams and teams[0].id or False,
         })
-        domain = False
         if self.env.context.get('click2dial_model') == 'res.partner':
             partner_id = self.env.context.get('click2dial_id')
             action_ctx['default_partner_id'] = partner_id
-            domain = [('partner_id', 'child_of', partner_id)]
         elif self.env.context.get('click2dial_model') == 'crm.lead':
             lead_id = self.env.context.get('click2dial_id')
             action_ctx['default_opportunity_id'] = lead_id
-            domain = [('opportunity_id', '=', lead_id)]
         parsed_num = phonenumbers.parse(self.env.context.get('phone_number'))
         number_type = phonenumbers.number_type(parsed_num)
         if number_type == 1:
@@ -50,8 +47,8 @@ class WizardCreateCrmPhonecall(models.TransientModel):
         action = self.env['ir.actions.act_window'].for_xml_id(
             'crm_phone', 'crm_phonecall_action')
         action.update({
-            'domain': domain,
             'view_mode': 'form,tree,calendar',
+            'views': False,
             'context': action_ctx,
             })
         return action
