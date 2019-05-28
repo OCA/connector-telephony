@@ -7,12 +7,18 @@ odoo.define('asterisk_click2dial.systray.OpenCaller', function (require) {
 
 var core = require('web.core');
 var SystrayMenu = require('web.SystrayMenu');
-var web_client = require('web.web_client');
 var Widget = require('web.Widget');
 
 var _t = core._t;
 
-var click2dial = {};
+var FieldPhone = require('base_phone.updatedphone_widget').FieldPhone;
+
+FieldPhone.include({
+    showDialButton: function () {
+        return true;
+    }
+});
+
 
 
 var OpenCallerMenu = Widget.extend({
@@ -22,10 +28,6 @@ var OpenCallerMenu = Widget.extend({
         'click': 'on_open_caller',
     },
 
-    start: function () {
-        this._super();
-    },
-
     on_open_caller: function (event) {
         event.stopPropagation();
         var self = this;
@@ -33,14 +35,14 @@ var OpenCallerMenu = Widget.extend({
         self._rpc({
             route: '/asterisk_click2dial/get_record_from_my_channel',
             params: {local_context: context, },
-            }).done(function(r) {
+            }).then(function(r) {
         // console.log('RESULT RPC r='+r);
         // console.log('RESULT RPC type r='+typeof r);
         // console.log('RESULT RPC isNaN r='+isNaN(r));
         if (r === false) {
              self.do_warn(
-                _t('Failure'),
-                _t('Problem in the connection to Asterisk'),
+                _t('IPBX error'),
+                _t('Calling party number not retreived from IPBX or IPBX unreachable by Odoo'),
                 false);
         }
         else if (typeof r == 'string' && isNaN(r)) {
@@ -59,13 +61,13 @@ var OpenCallerMenu = Widget.extend({
                 target: 'new',
                 context: {'default_calling_number': r},
              };
-            web_client.action_manager.do_action(action);
+            self.do_action(action);
 
             }
         else if (typeof r == 'object' && r.length == 3) {
             self.do_notify(
-                _t('Success'),
-                _.str.sprintf(_t('Moving to %s ID %d'), r[0], r[1]),
+                _.str.sprintf(_t("On the phone with '%s'"), r[2]),
+                _.str.sprintf(_t("Moving to form view of '%s' (%s ID %d)"), r[2], r[0], r[1]),
                 false);
             var action = {
                 type: 'ir.actions.act_window',
@@ -83,7 +85,7 @@ var OpenCallerMenu = Widget.extend({
                 target: 'current',
                 context: {},
             };
-            web_client.action_manager.do_action(action);
+            self.do_action(action);
         }
     });
    },
