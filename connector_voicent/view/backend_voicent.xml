@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="backend_voicent_tree_view" model="ir.ui.view">
+        <field name="name">backend.voicent.tree.view</field>
+        <field name="model">backend.voicent</field>
+        <field name="arch" type="xml">
+            <tree string="Voicent Backend">
+                <field name="host"/>
+                <field name="port"/>
+                <field name="next_call"/>
+            </tree>
+        </field>
+    </record>
+    
+    <record id="backend_voicent_form_view" model="ir.ui.view">
+        <field name="name">backend.voicent.form.view</field>
+        <field name="model">backend.voicent</field>
+        <field name="arch" type="xml">
+            <form string="Voicent Backend">
+                <sheet>
+                    <group>
+                        <field name="host"/>
+                        <field name="port"/>
+                    </group>
+                    <notebook>
+                        <page string="Call Lines">
+                            <field name="call_line_ids">
+                                <tree string="Call Lines" editable="top">
+                                    <field name="name"/>
+                                    <field name="applies_on"/>
+                                    <field name="voicent_app"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Call Times">
+                            <field name="time_line_ids">
+                                <tree string="Call Times" editable="top">
+                                    <field name="name"/>
+                                    <field name="time" widget="float_time"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    
+    <record id="backend_voicent_search_view" model="ir.ui.view">
+        <field name="name">backend.voicent.search.view</field>
+        <field name="model">backend.voicent</field>
+        <field name="arch" type="xml">
+            <search string="Voicent Backend">
+                <field name="host"/>
+                <field name="port"/>
+            </search>
+        </field>
+    </record>
+    
+    <record id="action_backend_voicent_act_window" model="ir.actions.act_window">
+        <field name="type">ir.actions.act_window</field>
+        <field name="name">Voicent Backend</field>
+        <field name="res_model">backend.voicent</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_type">form</field>
+        <field name="search_view_id" ref="backend_voicent_search_view"/>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Click to add new Voicent Backend
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="menu_voicent_root"
+              parent="connector.menu_connector_root"
+              name="Voicent"
+              sequence="10"
+              groups="connector.group_connector_manager"/>
+
+    <menuitem id="menu_voicent_backend_root"
+              parent="connector_voicent.menu_voicent_root"
+              name="Backends"
+              sequence="10"
+              action="action_backend_voicent_act_window"
+              groups="connector.group_connector_manager"/>
+    
+</odoo>
