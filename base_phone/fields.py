@@ -51,7 +51,7 @@ class Fax(fields.Char):
                     res_parse, phonenumbers.PhoneNumberFormat.INTERNATIONAL)
                 no_break_space = u'\u00A0'
                 res = res.replace(' ', no_break_space)
-            except:
+            except Exception:
                 pass
         # print 'cache value', res
         return res
