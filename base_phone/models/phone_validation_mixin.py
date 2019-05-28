@@ -13,6 +13,9 @@ class PhoneValidationMixin(models.AbstractModel):
     def _phone_get_country(self):
         if 'country_id' in self and self.country_id:
             return self.country_id
-        if 'partner_id' in self and self.partner_id and self.partner_id.country_id:
+        if (
+                'partner_id' in self and
+                self.partner_id and
+                self.partner_id.country_id):
             return self.partner_id.country_id
         return self.env.user.company_id.country_id
