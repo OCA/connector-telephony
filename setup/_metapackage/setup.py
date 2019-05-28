@@ -10,6 +10,7 @@ setuptools.setup(
     install_requires=[
         'odoo10-addon-asterisk_click2dial',
         'odoo10-addon-base_phone',
+        'odoo10-addon-base_phone_popup',
         'odoo10-addon-base_sms_client',
         'odoo10-addon-crm_phone',
         'odoo10-addon-event_phone',
