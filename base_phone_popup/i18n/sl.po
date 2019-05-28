@@ -1,6 +1,6 @@
 # Translation of OpenERP Server.
 # This file contains the translation of the following modules:
-#	* base_phone_popup
+# 	* base_phone_popup
 #
 # Matjaž Mozetič <m.mozetic@matmoz.si>, 2015.
 msgid ""
@@ -11,32 +11,35 @@ msgstr ""
 "PO-Revision-Date: 2015-04-05 09:23+0200\n"
 "Last-Translator: Matjaž Mozetič <m.mozetic@matmoz.si>\n"
 "Language-Team: Slovenian <translate@matmoz.si>\n"
+"Language: sl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
-"Language: sl\n"
 "X-Generator: Lokalize 1.5\n"
 
 #. module: base_phone_popup
-#: code:addons/base_phone_popup/popup.py:49
+#: code:addons/base_phone_popup/models/phone_common.py:52
 #, python-format
-msgid "Number Not Found"
-msgstr "Številka ni najdena"
+msgid "Call from %s"
+msgstr ""
 
 #. module: base_phone_popup
-#: field:res.users,context_incall_popup:0
-msgid "Pop-up on Incoming Calls"
+#: code:addons/base_phone_popup/models/phone_common.py:51
+#, fuzzy, python-format
+msgid "Incoming call"
 msgstr "Pojavno okno ob prejemu klicev"
 
 #. module: base_phone_popup
-#: model:ir.model,name:base_phone_popup.model_res_users
-msgid "Users"
-msgstr "Uporabniki"
+#: code:addons/base_phone_popup/models/phone_common.py:30
+#, python-format
+msgid "Number Not Found"
+msgstr "Številka ni najdena"
 
 #. module: base_phone_popup
 #: model:ir.model,name:base_phone_popup.model_phone_common
 msgid "phone.common"
 msgstr "phone.common"
 
-
+#~ msgid "Users"
+#~ msgstr "Uporabniki"

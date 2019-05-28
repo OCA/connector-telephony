@@ -1,16 +1,13 @@
-# Translation of OpenERP Server.
+# Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# 	* base_phone_popup
+#	* base_phone_popup
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: OpenERP Server 7.0\n"
+"Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-25 22:05+0000\n"
-"PO-Revision-Date: 2014-08-25 22:05+0000\n"
-"Last-Translator: Alexis de Lattre <alexis.delattre@akretion.com>\n"
+"Last-Translator: <>\n"
 "Language-Team: \n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -24,20 +21,18 @@ msgstr ""
 
 #. module: base_phone_popup
 #: code:addons/base_phone_popup/models/phone_common.py:51
-#, fuzzy, python-format
+#, python-format
 msgid "Incoming call"
-msgstr "Pop-up sur Appel Entrant"
+msgstr ""
 
 #. module: base_phone_popup
 #: code:addons/base_phone_popup/models/phone_common.py:30
 #, python-format
 msgid "Number Not Found"
-msgstr "Numéro introuvable"
+msgstr ""
 
 #. module: base_phone_popup
 #: model:ir.model,name:base_phone_popup.model_phone_common
 msgid "phone.common"
-msgstr "phone.common"
+msgstr ""
 
-#~ msgid "Users"
-#~ msgstr "Utilisateurs"
