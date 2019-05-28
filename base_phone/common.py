@@ -25,7 +25,7 @@ def convert_phone_field(value, country_code):
         new_value = phonenumbers.format_number(
             res_parse, phonenumbers.PhoneNumberFormat.E164)
         _logger.debug('new_value=%s', new_value)
-    except:
+    except Exception:
         _logger.error(
             "Cannot reformat the phone number '%s' to "
             "international format with region=%s",

@@ -17,7 +17,7 @@
     <field name="company_id" ref="base.main_company" />
 </record>
 
-<record id="base.user_root" model="res.users">
+<record id="base.user_admin" model="res.users">
     <field name="internal_number">11</field>
     <field name="resource">11</field>
     <field name="callerid">Administrator &lt;0141981242&gt;</field>
