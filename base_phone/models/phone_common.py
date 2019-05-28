@@ -1,5 +1,5 @@
-# -*- coding: utf-8 -*-
-# Copyright 2010-2018 Akretion (Alexis de Lattre <alexis.delattre@akretion.com>)
+# Copyright 2010-2018 Akretion France (http://www.akretion.com/)
+# @author: Alexis de Lattre <alexis.delattre@akretion.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo import models, api
@@ -68,12 +68,12 @@ class PhoneCommon(models.AbstractModel):
             _logger.debug("get_record_from_phone_number sql=%s", sql)
             self._cr.execute(sql, tuple(sql_args))
             res_sql = self._cr.fetchall()
-            #res_obj = obj.search(domain)
             if len(res_sql) > 1:
+                res_ids = [x[0] for x in res_sql]
                 _logger.warning(
                     u"There are several %s (IDS = %s) with a phone number "
                     "ending with '%s'. Taking the first one.",
-                    obj._name, res_obj.ids, end_number_to_match)
+                    obj._name, res_ids, end_number_to_match)
             if res_sql:
                 obj_id = res_sql[0][0]
                 res_obj = obj.browse(obj_id)
@@ -96,7 +96,7 @@ class PhoneCommon(models.AbstractModel):
             senv = False
             try:
                 senv = self.with_context(callerid=True).env[model_name]
-            except:
+            except Exception:
                 continue
             if (
                     hasattr(senv, '_phone_name_sequence') and

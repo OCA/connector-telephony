@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  Copyright 2014-2018 Akretion (Alexis de Lattre <alexis.delattre@akretion.com>)
+  Copyright 2014-2018 Akretion France (http://www.akretion.com/)
+  @author: Alexis de Lattre <alexis.delattre@akretion.com>
   License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 -->
 
@@ -12,13 +13,16 @@
     <field name="model">res.config.settings</field>
     <field name="inherit_id" ref="base_setup.res_config_settings_view_form" />
     <field name="arch" type="xml">
-        <xpath expr="//div[hasclass('settings')]" position="inside">
-            <div id="phone" string="Phone">
-                <h2>Phone</h2>
-                <div class="row mt16 o_settings_container">
-                    <label for="number_of_digits_to_match_from_end"/>
-                    <div>
-                        <field name="number_of_digits_to_match_from_end" class="oe_inline"/>
+        <xpath expr="//div[@name='integration']" position="after">
+            <h2>Phone</h2>
+            <div class="row mt16 o_settings_container" id="phone">
+                <div class="col-xs-12 col-md-12 o_setting_box">
+                    <div class="o_setting_left_pane"/>
+                    <div class="o_setting_right_pane">
+                        <div class="row mt16">
+                            <label for="number_of_digits_to_match_from_end" class="col-md-4 o_light_label"/>
+                            <field name="number_of_digits_to_match_from_end"/>
+                        </div>
                     </div>
                 </div>
             </div>
