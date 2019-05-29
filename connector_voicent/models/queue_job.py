@@ -12,3 +12,6 @@ class QueueJob(models.Model):
     state = fields.Selection(
         selection_add=[('waiting_voicent_status',
                         'Waiting Voicent Status')])
+    call_line_id = fields.Many2one(
+        'backend.voicent.call.line', 'Call Line',
+    )
