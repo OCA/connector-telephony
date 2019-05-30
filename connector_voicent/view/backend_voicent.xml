@@ -1,60 +1,62 @@
-
+<?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <record id="view_backend_voicent_tree" model="ir.ui.view">
-        <field name="name">view.backend.voicent.tree</field>
+    <record id="backend_voicent_tree_view" model="ir.ui.view">
+        <field name="name">backend.voicent.tree.view</field>
         <field name="model">backend.voicent</field>
-        <field name="mode">primary</field>
         <field name="arch" type="xml">
-            <tree string="Voicent Backend" create="1" delete="1" edit="1">
+            <tree string="Voicent Backend">
                 <field name="host"/>
                 <field name="port"/>
                 <field name="next_call"/>
+                <field name="is_active"/>
             </tree>
         </field>
     </record>
     
-    <record id="view_backend_voicent_form" model="ir.ui.view">
-        <field name="name">view.backend.voicent.form</field>
+    <record id="backend_voicent_form_view" model="ir.ui.view">
+        <field name="name">backend.voicent.form.view</field>
         <field name="model">backend.voicent</field>
-        <field name="mode">primary</field>
         <field name="arch" type="xml">
-            <form string="Voicent Backend" create="1" delete="1" edit="1">
-                <header>
-                </header>
+            <form string="Voicent Backend">
                 <sheet>
                     <group>
                         <field name="host"/>
                         <field name="port"/>
+                        <field name="is_active"/>
                     </group>
-                    <separator string="Call Lines"/>
-                    <field name="call_line_ids">
-                        <tree string="Call Lines" create="1" delete="1" edit="1" editable="top">
-                            <field name="name"/>
-                            <field name="applies_on"/>
-                            <field name="voicent_app"/>
-                        </tree>
-                    </field>
-                    <separator string="Call Times"/>
-                    <field name="time_line_ids">
-                        <tree string="Call Times" create="1" delete="1" edit="1" editable="top">
-                            <field name="name"/>
-                            <field name="time"/>
-                        </tree>
-                    </field>
+                    <notebook>
+                        <page string="Call Lines">
+                            <field name="call_line_ids">
+                                <tree string="Call Lines" editable="top">
+                                    <field name="name"/>
+                                    <field name="applies_on"/>
+                                    <field name="voicent_app"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Call Times">
+                            <field name="time_line_ids">
+                                <tree string="Call Times" editable="top">
+                                    <field name="name"/>
+                                    <field name="time" widget="float_time"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
                 </sheet>
             </form>
         </field>
     </record>
     
-    <record id="view_backend_voicent_search" model="ir.ui.view">
-        <field name="name">view.backend.voicent.search</field>
+    <record id="backend_voicent_search_view" model="ir.ui.view">
+        <field name="name">backend.voicent.search.view</field>
         <field name="model">backend.voicent</field>
-        <field name="mode">primary</field>
         <field name="arch" type="xml">
             <search string="Voicent Backend">
                 <field name="host"/>
                 <field name="port"/>
+                <field name="is_active"/>
             </search>
         </field>
     </record>
@@ -65,30 +67,25 @@
         <field name="res_model">backend.voicent</field>
         <field name="view_mode">tree,form</field>
         <field name="view_type">form</field>
-        <field name="search_view_id" ref="view_backend_voicent_search"/>
+        <field name="search_view_id" ref="backend_voicent_search_view"/>
         <field name="help" type="html">
             <p class="oe_view_nocontent_create">
                 Click to add new Voicent Backend
             </p>
         </field>
     </record>
-    
-    <record id="menu_connectors_root" model="ir.ui.menu" >
-        <field name="name">Connectors</field>
-        <field name="sequence" eval="10" />
-    </record>
 
-    <record id="menu_connectors_backends" model="ir.ui.menu" >
-        <field name="name">Backends</field>
-        <field name="sequence" eval="10" />
-        <field name="parent_id" ref="connector_voicent.menu_connectors_root" />
-    </record>
+    <menuitem id="menu_voicent_root"
+              parent="connector.menu_connector_root"
+              name="Voicent"
+              sequence="10"
+              groups="connector.group_connector_manager"/>
 
-    <record id="menu_backend_voicent" model="ir.ui.menu" >
-        <field name="name">Voicent Backends</field>
-        <field name="sequence" eval="10" />
-        <field name="action" ref="action_backend_voicent_act_window" />
-        <field name="parent_id" ref="connector_voicent.menu_connectors_backends" />
-    </record>
+    <menuitem id="menu_voicent_backend_root"
+              parent="connector_voicent.menu_voicent_root"
+              name="Backends"
+              sequence="10"
+              action="action_backend_voicent_act_window"
+              groups="connector.group_connector_manager"/>
     
 </odoo>
