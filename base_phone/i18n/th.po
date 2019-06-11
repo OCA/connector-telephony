@@ -30,16 +30,16 @@ msgstr "ยกเลิก"
 
 #. module: base_phone
 #. openerp-web
-#: code:addons/base_phone/static/src/js/phone_widget.js:46
+#: code:addons/base_phone/static/src/js/phone_widget.js:72
 #, python-format
-msgid "Click2dial started"
+msgid "Click2dial successfull"
 msgstr ""
 
 #. module: base_phone
 #. openerp-web
-#: code:addons/base_phone/static/src/js/phone_widget.js:62
+#: code:addons/base_phone/static/src/js/phone_widget.js:56
 #, python-format
-msgid "Click2dial successfull"
+msgid "Click2dial to %s"
 msgstr ""
 
 #. module: base_phone
@@ -208,9 +208,9 @@ msgstr ""
 
 #. module: base_phone
 #. openerp-web
-#: code:addons/base_phone/static/src/js/phone_widget.js:63
+#: code:addons/base_phone/static/src/js/phone_widget.js:73
 #, python-format
-msgid "Number dialed:"
+msgid "Number dialed: %s"
 msgstr ""
 
 #. module: base_phone
@@ -322,7 +322,7 @@ msgstr ""
 
 #. module: base_phone
 #. openerp-web
-#: code:addons/base_phone/static/src/js/phone_widget.js:47
+#: code:addons/base_phone/static/src/js/phone_widget.js:57
 #, python-format
 msgid "Unhook your ringing phone"
 msgstr ""

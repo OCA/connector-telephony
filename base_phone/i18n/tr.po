@@ -31,17 +31,18 @@ msgstr "İptal"
 
 #. module: base_phone
 #. openerp-web
-#: code:addons/base_phone/static/src/js/phone_widget.js:46
-#, python-format
-msgid "Click2dial started"
-msgstr "Tıkla çevir başlatıldı"
-
-#. module: base_phone
-#. openerp-web
-#: code:addons/base_phone/static/src/js/phone_widget.js:62
+#: code:addons/base_phone/static/src/js/phone_widget.js:72
 #, python-format
 msgid "Click2dial successfull"
 msgstr "Tıkla çevir başarılı"
+
+#. module: base_phone
+#. openerp-web
+#: code:addons/base_phone/static/src/js/phone_widget.js:56
+#, fuzzy, python-format
+#| msgid "Click2dial started"
+msgid "Click2dial to %s"
+msgstr "Tıkla çevir başlatıldı"
 
 #. module: base_phone
 #: model_terms:ir.ui.view,arch_db:base_phone.number_not_found_form
@@ -209,9 +210,10 @@ msgstr "Uluslarası biçime çevrilen numara:"
 
 #. module: base_phone
 #. openerp-web
-#: code:addons/base_phone/static/src/js/phone_widget.js:63
-#, python-format
-msgid "Number dialed:"
+#: code:addons/base_phone/static/src/js/phone_widget.js:73
+#, fuzzy, python-format
+#| msgid "Number dialed:"
+msgid "Number dialed: %s"
 msgstr "Aranan numara:"
 
 #. module: base_phone
@@ -330,7 +332,7 @@ msgstr ""
 
 #. module: base_phone
 #. openerp-web
-#: code:addons/base_phone/static/src/js/phone_widget.js:47
+#: code:addons/base_phone/static/src/js/phone_widget.js:57
 #, python-format
 msgid "Unhook your ringing phone"
 msgstr "Çalan telefonunuzu açın"
