@@ -47,6 +47,11 @@ msgid ""
 msgstr ""
 
 #. module: asterisk_click2dial
+#: model_terms:ir.ui.view,arch_db:asterisk_click2dial.view_asterisk_server_search
+msgid "Archived"
+msgstr ""
+
+#. module: asterisk_click2dial
 #: model:ir.model.fields,field_description:asterisk_click2dial.field_res_users__asterisk_chan_type
 msgid "Asterisk Channel Type"
 msgstr ""
@@ -126,6 +131,14 @@ msgstr ""
 #. module: asterisk_click2dial
 #: model:ir.model.fields,help:asterisk_click2dial.field_res_users__callerid
 msgid "Caller ID used for the calls initiated by this user."
+msgstr ""
+
+#. module: asterisk_click2dial
+#. openerp-web
+#: code:addons/asterisk_click2dial/static/src/js/asterisk_click2dial.js:45
+#, python-format
+msgid ""
+"Calling party number not retreived from IPBX or IPBX unreachable by Odoo"
 msgstr ""
 
 #. module: asterisk_click2dial
@@ -209,13 +222,6 @@ msgid "Extension Priority"
 msgstr ""
 
 #. module: asterisk_click2dial
-#. openerp-web
-#: code:addons/asterisk_click2dial/static/src/js/asterisk_click2dial.js:42
-#, python-format
-msgid "Failure"
-msgstr ""
-
-#. module: asterisk_click2dial
 #: selection:res.users,asterisk_chan_type:0
 msgid "H323"
 msgstr ""
@@ -229,6 +235,13 @@ msgstr ""
 #: model:ir.model.fields,field_description:asterisk_click2dial.field_asterisk_server__id
 msgid "ID"
 msgstr "Κωδικός"
+
+#. module: asterisk_click2dial
+#. openerp-web
+#: code:addons/asterisk_click2dial/static/src/js/asterisk_click2dial.js:44
+#, python-format
+msgid "IPBX error"
+msgstr ""
 
 #. module: asterisk_click2dial
 #: code:addons/asterisk_click2dial/models/res_users.py:78
@@ -272,9 +285,9 @@ msgstr ""
 
 #. module: asterisk_click2dial
 #. openerp-web
-#: code:addons/asterisk_click2dial/static/src/js/asterisk_click2dial.js:68
+#: code:addons/asterisk_click2dial/static/src/js/asterisk_click2dial.js:70
 #, python-format
-msgid "Moving to %s ID %d"
+msgid "Moving to form view of '%s' (%s ID %d)"
 msgstr ""
 
 #. module: asterisk_click2dial
@@ -303,9 +316,16 @@ msgstr ""
 
 #. module: asterisk_click2dial
 #. openerp-web
-#: code:addons/asterisk_click2dial/static/src/js/asterisk_click2dial.js:54
+#: code:addons/asterisk_click2dial/static/src/js/asterisk_click2dial.js:56
 #, python-format
 msgid "Number Not Found"
+msgstr ""
+
+#. module: asterisk_click2dial
+#. openerp-web
+#: code:addons/asterisk_click2dial/static/src/js/asterisk_click2dial.js:69
+#, python-format
+msgid "On the phone with '%s'"
 msgstr ""
 
 #. module: asterisk_click2dial
@@ -360,13 +380,6 @@ msgstr ""
 msgid ""
 "Priority of the extension in the Asterisk dialplan. Refer to /etc/asterisk/"
 "extensions.conf on your Asterisk server."
-msgstr ""
-
-#. module: asterisk_click2dial
-#. openerp-web
-#: code:addons/asterisk_click2dial/static/src/js/asterisk_click2dial.js:43
-#, python-format
-msgid "Problem in the connection to Asterisk"
 msgstr ""
 
 #. module: asterisk_click2dial
@@ -444,13 +457,6 @@ msgid "Standard Asterisk Parameters"
 msgstr ""
 
 #. module: asterisk_click2dial
-#. openerp-web
-#: code:addons/asterisk_click2dial/static/src/js/asterisk_click2dial.js:67
-#, python-format
-msgid "Success"
-msgstr ""
-
-#. module: asterisk_click2dial
 #: model:ir.model.fields,help:asterisk_click2dial.field_asterisk_server__port
 msgid ""
 "TCP port on which the Asterisk Manager Interface listens. Defined in /etc/"
@@ -484,7 +490,7 @@ msgstr ""
 
 #. module: asterisk_click2dial
 #. openerp-web
-#: code:addons/asterisk_click2dial/static/src/js/asterisk_click2dial.js:49
+#: code:addons/asterisk_click2dial/static/src/js/asterisk_click2dial.js:51
 #, python-format
 msgid "The calling number is not a phone number!"
 msgstr ""
