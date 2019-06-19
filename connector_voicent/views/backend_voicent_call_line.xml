@@ -1,0 +1,76 @@
+<odoo>
+
+    <record id="backend_voicent_call_line_tree_view" model="ir.ui.view">
+        <field name="name">backend.voicent.call.line.tree.view</field>
+        <field name="model">backend.voicent.call.line</field>
+        <field name="arch" type="xml">
+            <tree string="Voicent Backend Call Lines">
+                <field name="name"/>
+                <field name="applies_on"/>
+                <field name="msgtype"/>
+                <field name="msginfo"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="backend_voicent_call_line_form_view" model="ir.ui.view">
+        <field name="name">backend.voicent.call.line.form.view</field>
+        <field name="model">backend.voicent.call.line</field>
+        <field name="arch" type="xml">
+            <form string="Voicent Backend Call Line">
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="name" class="field_name" placeholder="Name of the call line..."/></h1>
+                    </div>
+                    <group>
+                        <group id="main-left">
+                            <field name="applies_on"/>
+                            <field name="msgtype"/>
+                            <field name="msginfo"/>
+                        </group>
+                        <group id="main-right">
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Contact Info">
+                            <field name="contact_ids">
+                                <tree string="Contacts">
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="name"/>
+                                    <field name="other"/>
+                                    <field name="field_domain"/>
+                                    <field name="default_value"/>
+                                </tree>
+                                <form>
+                                    <field name="name"/>
+                                    <group>
+                                        <group>
+                                            <field name="other"/>
+                                            <field name="field_domain"
+                                                   placeholder="partner_id.name or partner_id.phone"/>
+                                        </group>
+                                        <group>
+                                            <field name="sequence"/>
+                                            <field name="default_value"/>
+                                        </group>
+                                    </group>
+                                </form>
+                            </field>
+                        </page>
+                        <page string="Replies">
+                            <field name="reply_ids">
+                                <tree string="Replies" editable="top">
+                                    <field name="name"/>
+                                    <field name="reply_field" string="If"/>
+                                    <field name="reply_value" string="contains"/>
+                                    <field name="action_id" string="Then, execute"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+</odoo>

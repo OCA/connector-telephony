@@ -2,7 +2,7 @@
 <odoo>
 
     <record id="fetch_check_the_voicent_status" model="ir.cron">
-        <field name="name">Fetch check the Voicent status</field>
+        <field name="name">Voicent: Update the next call</field>
         <field name="model_id" ref="model_backend_voicent"/>
         <field eval="True" name="active"/>
         <field name="user_id" ref="base.user_root"/>
@@ -11,7 +11,7 @@
         <field name="numbercall">-1</field>
         <field eval="False" name="doall"/>
         <field name="state">code</field>
-        <field name="code">model._run_check_the_voicent_status()</field>
+        <field name="code">model._run_update_next_call()</field>
     </record>
 
 </odoo>
