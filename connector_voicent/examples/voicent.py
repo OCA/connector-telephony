@@ -4,16 +4,21 @@
 #
 # Documentation available at https://voicent.com/developer/docs/camp-api/
 
-import ntpath
-import requests
 import ast
+import csv
+import ntpath
+import os
+import requests
 
 
 class Voicent():
 
-    def __init__(self, host="localhost", port="8155"):
+    def __init__(self, host="localhost", port="8155", callerid="000000000",
+                 line="1"):
         self.host_ = host
         self.port_ = port
+        self.callerid_ = callerid
+        self.line_ = line
 
     def postToGateway(self, urlstr, params, files=None):
         url = "http://" + self.host_ + ":" + self.port_ + urlstr
@@ -22,11 +27,11 @@ class Voicent():
 
     def getReqId(self, rcstr):
         index1 = rcstr.find("[ReqId=")
-        if (index1 == -1):
+        if index1 == -1:
             return ""
         index1 += 7
         index2 = rcstr.find("]", index1)
-        if (index2 == -1):
+        if index2 == -1:
             return ""
         return rcstr[index1:index2]
 
@@ -132,9 +137,9 @@ class Voicent():
             'CAMP_NAME': 'Test',
             'listname': listname,
             'phonecols': 'Phone',
-            'lines': '4',
+            'lines': self.line_,
             'calldisps': '',
-            'callerid': '+18884728568',
+            'callerid': self.callerid_,
         }
         res = self.postToGateway(urlstr, params)
         return ast.literal_eval(res)
@@ -146,16 +151,17 @@ class Voicent():
             # Parameters for importing the campaign
             'importfile': ntpath.basename(filepath),
             'importfilepath': filepath,
+            'mergeopt': 'skip',
             # 'profile': 'Test',
             'mod': 'cus',
             'row1': 1,
-            'leadsrcname': 'Test',
+            'leadsrcname': 'Odoo Voicent Connector',
             # Parameters for running the campaign
-            'CAMP_NAME': 'Test',
+            'CAMP_NAME': 'Odoo Voicent Connector',
             'phonecols': 'Phone',
-            'lines': '4',
+            'lines': self.line_,
             'calldisps': '',
-            'callerid': '+18884728568',
+            'callerid': self.callerid_,
             # Parameters for Autodialer
             'msgtype': msgtype,
             'msginfo': msginfo,
@@ -166,22 +172,34 @@ class Voicent():
         res = self.postToGateway(urlstr, params, files)
         return ast.literal_eval(res)
 
-    def checkStatus(self, leadsrc_id):
+    def checkStatus(self, camp_id):
         urlstr = "/ocall/campapi"
         params = {
             'action': 'campstats',
-            'leadsrc_id': leadsrc_id
+            'camp_id': camp_id
         }
         res = self.postToGateway(urlstr, params)
         return ast.literal_eval(res)
 
-    def exportResult(self, camp_id, filename, extracols):
+    def exportResult(self, camp_id, filename, extracols=None):
         urlstr = "/ocall/campapi"
         params = {
             'action': 'exportcamp',
-            'camp_id_id': camp_id,
-            'f': filename,
+            'camp_id': camp_id,
+            'f': 'webapps/ROOT/assets/global/' + filename,
             'extracols': extracols
         }
-        res = self.postToGateway(urlstr, params)
-        return ast.literal_eval(res)
+        res = ast.literal_eval(self.postToGateway(urlstr, params))
+        if res.get('status') == 'OK':
+            url = 'http://' + self.host_ + ':' + self.port_ + \
+                  '/assets/global/' + filename
+            res2 = requests.get(url)
+            with open(filename, 'wb') as local_file:
+                local_file.write(res2.content)
+                local_file.close()
+            reader = csv.DictReader(open(filename, 'r'))
+            os.remove(filename)
+            for row in reader:
+                return row
+        else:
+            return res
