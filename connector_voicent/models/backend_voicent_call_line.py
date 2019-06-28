@@ -4,16 +4,16 @@
 
 from odoo import fields, models
 
-VOICENT_CONTACT_COLUMNS = [('First Name', 'First Name (Required)'),
-                           ('Last Name', 'Last Name'),
+VOICENT_CONTACT_COLUMNS = [('Assigned To', 'Assigned To'),
                            ('Business', 'Business'),
-                           ('Phone', 'Phone (Required)'),
-                           ('Email', 'Email'),
                            ('Category', 'Category'),
-                           ('Assigned To', 'Assigned To'),
                            ('Contact Status', 'Contact Status'),
+                           ('Email', 'Email'),
+                           ('First Name', 'First Name (Required)'),
+                           ('Last Name', 'Last Name'),
                            ('Lead Source', 'Lead Source'),
-                           ('Other', 'Other')]
+                           ('Other', 'Other'),
+                           ('Phone', 'Phone (Required)')]
 
 VOICENT_REPLY = [('availableagents', 'Available Agents'),
                  ('callback', 'Callback'),
