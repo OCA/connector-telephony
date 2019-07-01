@@ -35,12 +35,19 @@ This module allows you to connect Odoo with Voicent <https://www.voicent.com> an
 Usage
 =====
 
-To use this module, you need to:
-
 #. Go to Connectors > Backends > Voicent Backends
-#. Create a new Voicent Backend with the host and port
+#. Create a new Voicent Backend with the host, port, the caller ID and the number of lines
 #. Create Call Lines to determine when (which stage in the process) calls are added to the queue
+#. Create Contact Info to create the structure of the CSV file to send to Voicent
+#. Create Replies to determine what to do based on the replies (see example below)
 #. Create Time Line to determine when (what time) calls are made
+
+Known issues / Roadmap
+======================
+
+* On the backend, replace the 'Applies On' selection list with a Many2one to ir.model.fields
+* On the backend call line contact, use the domain widget to select the field
+* Update the voicent library on Pypi with examples/voicent.py
 
 Bug Tracker
 ===========
