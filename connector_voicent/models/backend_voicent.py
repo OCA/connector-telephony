@@ -68,7 +68,7 @@ class BackendVoicent(models.Model):
                     hour=int(cr_time_list[0].split(':')[0]),
                     minute=int(cr_time_list[0].split(':')[1]),
                     second=0) + timedelta(
-                    days=0)
+                    days=1)
             next_call_tz = timezone(self.env.context.get('tz') or
                                     self.env.user.tz).localize(next_call,
                                                                is_dst=False)
