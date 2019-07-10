@@ -33,19 +33,12 @@ class BackendVoicent(models.Model):
     @api.model
     def _run_update_next_call(self):
         """ This method is called from a cron job. """
-
         cr_time_list = []
         backends = self.search([('active', '=', True)])
         for backend in backends:
-            current_dt = datetime.now(timezone('UTC'))
-            user_tz = timezone(
-                self.env.context.get('tz') or self.env.user.tz or 'UTC')
-            dt_value = current_dt.astimezone(user_tz)
-            convt_dt_strf = dt_value.strftime(DEFAULT_SERVER_DATETIME_FORMAT)
-            convt_dt = datetime.strptime(
-                convt_dt_strf,
-                DEFAULT_SERVER_DATETIME_FORMAT)
-            current_time = convt_dt.strftime("%H:%M")
+            user_tz = timezone(self.env.context.get('tz') or
+                               self.env.user.tz or 'UTC')
+            current_time = datetime.now(user_tz).strftime("%H:%M")
             for time_line_rec in backend.time_line_ids:
                 hours, minutes = divmod(abs(time_line_rec.time) * 60, 60)
                 minutes = round(minutes)
@@ -58,22 +51,16 @@ class BackendVoicent(models.Model):
             next_call = False
             for time_entry in cr_time_list:
                 if time_entry > current_time:
-                    next_call = datetime.now().replace(
+                    next_call = datetime.now(user_tz).replace(
                         hour=int(time_entry.split(':')[0]),
                         minute=int(time_entry.split(':')[1]),
                         second=0)
                     break
             if not next_call:
-                next_call = datetime.now().replace(
+                next_call = datetime.now(user_tz).replace(
                     hour=int(cr_time_list[0].split(':')[0]),
                     minute=int(cr_time_list[0].split(':')[1]),
-                    second=0) + timedelta(
-                    days=1)
-            next_call_tz = timezone(self.env.context.get('tz') or
-                                    self.env.user.tz).localize(next_call,
-                                                               is_dst=False)
-            next_call_utc = next_call_tz.astimezone(timezone('UTC'))
-            next_call_utc = datetime.strptime(
-                fields.Datetime.to_string(next_call_utc),
+                    second=0) + timedelta(days=1)
+            next_call = next_call.astimezone(timezone('UTC'))
+            backend.next_call = next_call.strftime(
                 DEFAULT_SERVER_DATETIME_FORMAT)
-            backend.next_call = fields.Datetime.to_string(next_call_utc)
