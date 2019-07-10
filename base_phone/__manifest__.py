@@ -5,7 +5,7 @@
 
 {
     'name': 'Base Phone',
-    'version': '12.0.1.0.0',
+    'version': '12.0.1.0.1',
     'category': 'Phone',
     'license': 'AGPL-3',
     'summary': 'Validate phone numbers',
