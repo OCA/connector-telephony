@@ -115,8 +115,8 @@ options = [
         '(will not try to connect to Odoo)'},
     {'names': ('-p', '--port'), 'dest': 'port', 'type': 'int',
         'action': 'store', 'default': False,
-        'help': "Port of Odoo's webservice interface. Default = 443 when SSL is on, "
-        "8069 when SSL is off"},
+        'help': "Port of Odoo's webservice interface. Default = 443 when SSL "
+        "is on, 8069 when SSL is off"},
     {'names': ('-e', '--ssl'), 'dest': 'ssl',
         'help': "Use SSL connections instead of clear connections. "
         "Default = no, use clear XML-RPC or JSON-RPC",
@@ -206,7 +206,7 @@ def geolocate_phone_number(number, my_country_code, lang):
 def convert_to_ascii(my_unicode):
     '''Convert to ascii, with clever management of accents (é -> e, è -> e)'''
     import unicodedata
-    if isinstance(my_unicode, unicode):
+    if isinstance(my_unicode, unicode):  # noqa
         my_unicode_with_ascii_chars_only = ''.join((
             char for char in unicodedata.normalize('NFD', my_unicode)
             if unicodedata.category(char) != 'Mn'))
@@ -233,9 +233,9 @@ def main(options, arguments):
         # connect to Odoo or geoloc, we just keep it
         phone_chars = [str(d) for d in range(10)]
         phone_chars += ['+']
-        if (
-                agi.env.get('agi_calleridname') and
-                any([x not in phone_chars for x in agi.env['agi_calleridname']]) and
+        if (agi.env.get('agi_calleridname') and
+                any([x not in phone_chars for x in
+                     agi.env['agi_calleridname']]) and
                 agi.env['agi_calleridname'].lower()
                 not in ['asterisk', 'unknown', 'anonymous'] and
                 not options.notify):
