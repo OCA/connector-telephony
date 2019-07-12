@@ -4,16 +4,21 @@
 
 {
     'name': 'Voicent Connector',
-    'version': '12.0.1.0.0',
+    'version': '12.0.1.1.0',
     'category': 'Connector',
     'license': 'AGPL-3',
-    'summary': """Connect Odoo with Voicent""",
-    "author": "Open Source Integrators, "
-              "Odoo Community Association (OCA)",
-    "website": "https://github.com/OCA/connector-telephony",
+    'summary': 'Connect Odoo with Voicent',
+    'author': 'Open Source Integrators, '
+              'Odoo Community Association (OCA)',
+    'website': 'https://github.com/OCA/connector-telephony',
     'depends': [
         'connector',
     ],
+    'external_dependencies': {
+        'python': [
+            'voicent',
+        ],
+    },
     'data': [
         'security/ir.model.access.csv',
         'data/ir_cron.xml',
