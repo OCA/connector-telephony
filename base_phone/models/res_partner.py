@@ -4,7 +4,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 
-from odoo import models
+from odoo import models, api
 
 
 class ResPartner(models.Model):
@@ -28,3 +28,13 @@ class ResPartner(models.Model):
             return res
         else:
             return super(ResPartner, self).name_get()
+
+    @api.onchange('phone', 'country_id', 'company_id')
+    def _onchange_phone_validation(self):
+        if self.phone:
+            self.phone = self.phone_format(self.phone)
+
+    @api.onchange('mobile', 'country_id', 'company_id')
+    def _onchange_mobile_validation(self):
+        if self.mobile:
+            self.mobile = self.phone_format(self.mobile)
