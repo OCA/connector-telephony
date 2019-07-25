@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  Copyright 2014-2018 Akretion France (http://www.akretion.com/)
+  Copyright 2014-2019 Akretion France (http://www.akretion.com/)
   @author: Alexis de Lattre <alexis.delattre@akretion.com>
   License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 -->
@@ -13,15 +13,20 @@
     <field name="model">res.config.settings</field>
     <field name="inherit_id" ref="base_setup.res_config_settings_view_form" />
     <field name="arch" type="xml">
-        <xpath expr="//div[@name='integration']" position="after">
-            <h2>Phone</h2>
-            <div class="row mt16 o_settings_container" id="phone">
-                <div class="col-xs-12 col-md-12 o_setting_box">
-                    <div class="o_setting_left_pane"/>
-                    <div class="o_setting_right_pane">
-                        <div class="row mt16">
-                            <label for="number_of_digits_to_match_from_end" class="col-md-4 o_light_label"/>
-                            <field name="number_of_digits_to_match_from_end"/>
+        <xpath expr="//div[@id='multi_company']" position="after">
+            <div id="telephony">
+                <h2>Telephony</h2>
+                <div class="row mt16 o_settings_container" name="phone">
+                    <div class="col-12 col-lg-6 o_setting_box">
+                        <div class="o_setting_right_pane">
+                            <span class="o_form_label">Incoming calls</span>
+                            <div class="text-muted">
+                                Set how many digits must be identical from the end of the phone number to declare it as a match with a partner, a lead, an employee, a candidate, etc.
+                            </div>
+                            <div class="row mt16">
+                                <label for="number_of_digits_to_match_from_end" class="col-4 col-lg-4 o_light_label" string="Number of Digits"/>
+                                <field name="number_of_digits_to_match_from_end"/>
+                            </div>
                         </div>
                     </div>
                 </div>
