@@ -22,6 +22,11 @@ msgstr ""
 "X-Generator: Weblate 3.4\n"
 
 #. module: base_phone
+#: model_terms:ir.ui.view,arch_db:base_phone.res_config_settings_view_form
+msgid "<span class=\"o_form_label\">Incoming calls</span>"
+msgstr ""
+
+#. module: base_phone
 #: model:ir.model.fields,field_description:base_phone.field_number_not_found__calling_number
 msgid "Calling Number"
 msgstr "Número llamante"
@@ -231,6 +236,13 @@ msgid "Number not found"
 msgstr "Número no encontrado"
 
 #. module: base_phone
+#: model_terms:ir.ui.view,arch_db:base_phone.res_config_settings_view_form
+#, fuzzy
+#| msgid "Number of Digits To Match From End"
+msgid "Number of Digits"
+msgstr "Número de dígitos que coinciden al final"
+
+#. module: base_phone
 #: model:ir.model.fields,field_description:base_phone.field_res_company__number_of_digits_to_match_from_end
 #: model:ir.model.fields,field_description:base_phone.field_res_config_settings__number_of_digits_to_match_from_end
 msgid "Number of Digits To Match From End"
@@ -251,11 +263,6 @@ msgstr "Empresa a actualizar"
 #, python-format
 msgid "Partner: %s"
 msgstr "Empresa: %s"
-
-#. module: base_phone
-#: model_terms:ir.ui.view,arch_db:base_phone.res_config_settings_view_form
-msgid "Phone"
-msgstr "Teléfono"
 
 #. module: base_phone
 #: model:res.groups,name:base_phone.group_callerid
@@ -305,12 +312,20 @@ msgid "Select the Partner to Update."
 msgstr "Escoja la empresa a actualizar."
 
 #. module: base_phone
+#: model_terms:ir.ui.view,arch_db:base_phone.res_config_settings_view_form
+msgid ""
+"Set how many digits must be identical from the end of the phone number to "
+"declare it as a match with a partner, a lead, an employee, a candidate, etc."
+msgstr ""
+
+#. module: base_phone
 #: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers__state
 msgid "State"
 msgstr "Estado"
 
 #. module: base_phone
 #: model:ir.ui.menu,name:base_phone.menu_config_phone
+#: model_terms:ir.ui.view,arch_db:base_phone.res_config_settings_view_form
 #: model_terms:ir.ui.view,arch_db:base_phone.view_users_form
 msgid "Telephony"
 msgstr "Telefonía"
@@ -349,6 +364,9 @@ msgstr "Descuelgue su teléfono que está sonando"
 #: model_terms:ir.ui.view,arch_db:base_phone.number_not_found_form
 msgid "Update Existing Partner"
 msgstr "Actualizar empresa existente"
+
+#~ msgid "Phone"
+#~ msgstr "Teléfono"
 
 #~ msgid "Create Partner with this Number"
 #~ msgstr "Crear empresa con éste número"

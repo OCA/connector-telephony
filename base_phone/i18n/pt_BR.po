@@ -20,6 +20,11 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #. module: base_phone
+#: model_terms:ir.ui.view,arch_db:base_phone.res_config_settings_view_form
+msgid "<span class=\"o_form_label\">Incoming calls</span>"
+msgstr ""
+
+#. module: base_phone
 #: model:ir.model.fields,field_description:base_phone.field_number_not_found__calling_number
 msgid "Calling Number"
 msgstr ""
@@ -220,6 +225,11 @@ msgid "Number not found"
 msgstr ""
 
 #. module: base_phone
+#: model_terms:ir.ui.view,arch_db:base_phone.res_config_settings_view_form
+msgid "Number of Digits"
+msgstr ""
+
+#. module: base_phone
 #: model:ir.model.fields,field_description:base_phone.field_res_company__number_of_digits_to_match_from_end
 #: model:ir.model.fields,field_description:base_phone.field_res_config_settings__number_of_digits_to_match_from_end
 msgid "Number of Digits To Match From End"
@@ -239,11 +249,6 @@ msgstr ""
 #: code:addons/base_phone/wizard/number_not_found.py:96
 #, python-format
 msgid "Partner: %s"
-msgstr ""
-
-#. module: base_phone
-#: model_terms:ir.ui.view,arch_db:base_phone.res_config_settings_view_form
-msgid "Phone"
 msgstr ""
 
 #. module: base_phone
@@ -292,12 +297,20 @@ msgid "Select the Partner to Update."
 msgstr ""
 
 #. module: base_phone
+#: model_terms:ir.ui.view,arch_db:base_phone.res_config_settings_view_form
+msgid ""
+"Set how many digits must be identical from the end of the phone number to "
+"declare it as a match with a partner, a lead, an employee, a candidate, etc."
+msgstr ""
+
+#. module: base_phone
 #: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers__state
 msgid "State"
 msgstr ""
 
 #. module: base_phone
 #: model:ir.ui.menu,name:base_phone.menu_config_phone
+#: model_terms:ir.ui.view,arch_db:base_phone.res_config_settings_view_form
 #: model_terms:ir.ui.view,arch_db:base_phone.view_users_form
 msgid "Telephony"
 msgstr ""
