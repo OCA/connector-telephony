@@ -11,8 +11,8 @@ msgstr ""
 "POT-Creation-Date: 2016-11-09 09:55+0000\n"
 "PO-Revision-Date: 2019-09-02 17:23+0000\n"
 "Last-Translator: Rodrigo Macedo <rmsolucoeseminformatic4@gmail.com>\n"
-"Language-Team: Portuguese (Brazil) (https://www.transifex.com/oca/"
-"teams/23907/pt_BR/)\n"
+"Language-Team: Portuguese (Brazil) (https://www.transifex.com/oca/teams/"
+"23907/pt_BR/)\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -37,7 +37,7 @@ msgstr "Cancelar"
 
 #. module: base_phone
 #. openerp-web
-#: code:addons/base_phone/static/src/js/phone_widget.js:74
+#: code:addons/base_phone/static/src/js/phone_widget.js:72
 #, python-format
 msgid "Click2dial successfull"
 msgstr "Click2dial com sucesso"
@@ -172,9 +172,9 @@ msgid ""
 "digits of the phone number presented by the calling party. N is the value "
 "you should enter in this field."
 msgstr ""
-"Em várias situações, o Odoo precisará encontrar um Parceiro/Líder/"
-"Empregado/... a partir de um número de telefone apresentado pela parte que "
-"está chamando. Como os números de telefone apresentados pela operadora de "
+"Em várias situações, o Odoo precisará encontrar um Parceiro/Líder/Empregado/"
+"... a partir de um número de telefone apresentado pela parte que está "
+"chamando. Como os números de telefone apresentados pela operadora de "
 "telefonia nem sempre podem ser exibidos em um formato padrão, o melhor "
 "método para encontrar o Parceiro/Líder/Empregado/...relacionado no Odoo é "
 "tentar corresponder ao final do número de telefone no Odoo com os N últimos "
@@ -223,7 +223,7 @@ msgstr "Número convertido para formato internacional:"
 
 #. module: base_phone
 #. openerp-web
-#: code:addons/base_phone/static/src/js/phone_widget.js:75
+#: code:addons/base_phone/static/src/js/phone_widget.js:73
 #, python-format
 msgid "Number dialed: %s"
 msgstr "Número descado: %s"
