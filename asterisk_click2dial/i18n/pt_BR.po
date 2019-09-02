@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-12-01 08:49+0000\n"
-"PO-Revision-Date: 2019-09-02 17:23+0000\n"
+"PO-Revision-Date: 2019-09-02 21:23+0000\n"
 "Last-Translator: Rodrigo Macedo <rmsolucoeseminformatic4@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) (https://www.transifex.com/oca/teams/"
 "23907/pt_BR/)\n"
@@ -38,7 +38,7 @@ msgstr "Ativo"
 #. module: asterisk_click2dial
 #: model:ir.model.fields,field_description:asterisk_click2dial.field_asterisk_server__alert_info
 msgid "Alert-Info SIP Header"
-msgstr ""
+msgstr "Cabeçalho SIP de informações de alerta"
 
 #. module: asterisk_click2dial
 #: model:ir.model.fields,help:asterisk_click2dial.field_asterisk_server__wait_time
@@ -476,6 +476,9 @@ msgid ""
 "'originate' request for the click2dial feature. If you want to have several "
 "variable headers, separate them with '|'."
 msgstr ""
+"Defina um campo 'Variável' específico do usuário na solicitação 'originar' "
+"da Interface do Gerenciador do Asterisk para o recurso click2dial. Se você "
+"quiser ter vários cabeçalhos variáveis, separe-os com '|'."
 
 #. module: asterisk_click2dial
 #: model:ir.model.fields,help:asterisk_click2dial.field_res_users__alert_info
@@ -485,16 +488,21 @@ msgid ""
 "You can use it to have a special ring tone for click2dial (a silent one !) "
 "or to activate auto-answer for example."
 msgstr ""
+"Defina um cabeçalho de informações de alerta específicas do usuário na "
+"solicitação SIP para o telefone IP do usuário para o recurso click2dial. Se "
+"vazio, o cabeçalho Informações de alerta não será adicionado. Você pode usá-"
+"lo para ter um toque especial para o click2dial (silencioso!) Ou para ativar "
+"a resposta automática, por exemplo."
 
 #. module: asterisk_click2dial
 #: selection:res.users,asterisk_chan_type:0
 msgid "Skinny"
-msgstr "Skinny"
+msgstr "Magro"
 
 #. module: asterisk_click2dial
 #: model_terms:ir.ui.view,arch_db:asterisk_click2dial.view_users_form
 msgid "Standard Asterisk Parameters"
-msgstr ""
+msgstr "Parâmetros padrão do Asterisk"
 
 #. module: asterisk_click2dial
 #: model:ir.model.fields,help:asterisk_click2dial.field_asterisk_server__port
@@ -502,23 +510,25 @@ msgid ""
 "TCP port on which the Asterisk Manager Interface listens. Defined in /etc/"
 "asterisk/manager.conf on Asterisk."
 msgstr ""
+"Porta TCP na qual a Interface do Gerenciador do Asterisk atende. Definido em "
+"/etc/asterisk/manager.conf no Asterisk."
 
 #. module: asterisk_click2dial
 #: model_terms:ir.ui.view,arch_db:asterisk_click2dial.view_asterisk_server_form
 msgid "Test Connection to Asterisk"
-msgstr ""
+msgstr "Teste de Conexão para Asterisk"
 
 #. module: asterisk_click2dial
 #: code:addons/asterisk_click2dial/models/res_users.py:86
 #, python-format
 msgid "The '%s' for the user '%s' should only have ASCII caracters"
-msgstr ""
+msgstr "O '%s' para os usuários '%s' deve ter apenas caracteres ASCII"
 
 #. module: asterisk_click2dial
 #: code:addons/asterisk_click2dial/models/asterisk_server.py:108
 #, python-format
 msgid "The '%s' should only have ASCII caracters for the Asterisk server '%s'"
-msgstr ""
+msgstr "O '%s' deve ter apenas caracteres ASCII para o servidor Asterisk '%s'"
 
 #. module: asterisk_click2dial
 #: code:addons/asterisk_click2dial/models/asterisk_server.py:93
@@ -527,48 +537,52 @@ msgid ""
 "The 'extension priority' must be a positive value for the Asterisk server "
 "'%s'"
 msgstr ""
+"A 'prioridade da extensão' deve ser um valor positivo para o servidor "
+"Asterisk '%s'"
 
 #. module: asterisk_click2dial
 #. openerp-web
 #: code:addons/asterisk_click2dial/static/src/js/asterisk_click2dial.js:51
 #, python-format
 msgid "The calling number is not a phone number!"
-msgstr ""
+msgstr "O número de chamada não é um número de telefone!"
 
 #. module: asterisk_click2dial
 #: model:ir.model.fields,help:asterisk_click2dial.field_res_users__internal_number
 msgid "User's internal phone number."
-msgstr ""
+msgstr "Número de telefone interno do usuário."
 
 #. module: asterisk_click2dial
 #: model:ir.model.fields,field_description:asterisk_click2dial.field_res_users__alert_info
 msgid "User-specific Alert-Info SIP Header"
-msgstr ""
+msgstr "Cabeçalho SIP de informações de alerta específicas do usuário"
 
 #. module: asterisk_click2dial
 #: model:ir.model.fields,field_description:asterisk_click2dial.field_res_users__dial_suffix
 msgid "User-specific Dial Suffix"
-msgstr ""
+msgstr "Sufixo de discagem específico do usuário"
 
 #. module: asterisk_click2dial
 #: model:ir.model.fields,field_description:asterisk_click2dial.field_res_users__variable
 msgid "User-specific Variable"
-msgstr ""
+msgstr "Variável específica do usuário"
 
 #. module: asterisk_click2dial
 #: model:ir.model.fields,help:asterisk_click2dial.field_res_users__dial_suffix
 msgid "User-specific dial suffix such as aa=2wb for SCCP auto answer."
 msgstr ""
+"Sufixo de discagem específico do usuário, como aa=2wb para resposta "
+"automática do SCCP."
 
 #. module: asterisk_click2dial
 #: model:ir.model,name:asterisk_click2dial.model_res_users
 msgid "Users"
-msgstr ""
+msgstr "Usuários"
 
 #. module: asterisk_click2dial
 #: model:ir.model.fields,field_description:asterisk_click2dial.field_asterisk_server__wait_time
 msgid "Wait Time"
-msgstr ""
+msgstr "Tempo de espera"
 
 #. module: asterisk_click2dial
 #: code:addons/asterisk_click2dial/models/asterisk_server.py:89
@@ -577,6 +591,8 @@ msgid ""
 "You should set a 'Wait time' value between 1 and 120 seconds for the "
 "Asterisk server '%s'"
 msgstr ""
+"Você deve definir um valor de 'Tempo de espera' entre 1 e 120 segundos para "
+"o servidor Asterisk '%s'"
 
 #. module: asterisk_click2dial
 #: code:addons/asterisk_click2dial/models/asterisk_server.py:97
@@ -584,11 +600,12 @@ msgstr ""
 msgid ""
 "You should set a TCP port between 1 and 65535 for the Asterisk server '%s'"
 msgstr ""
+"Você deve definir uma porta TCP entre 1 e 65535 para o servidor Asterisk '%s'"
 
 #. module: asterisk_click2dial
 #: selection:res.users,asterisk_chan_type:0
 msgid "Zap"
-msgstr "Zap"
+msgstr "Apagar"
 
 #. module: asterisk_click2dial
 #: selection:res.users,asterisk_chan_type:0
@@ -598,4 +615,4 @@ msgstr "mISDN"
 #. module: asterisk_click2dial
 #: model_terms:ir.ui.view,arch_db:asterisk_click2dial.view_asterisk_server_form
 msgid "seconds"
-msgstr ""
+msgstr "segundos"
