@@ -18,5 +18,3 @@ Akretion (alexis.delattre \_at\_ akretion.com).
 To know more about the OpenERP-Asterisk connector, refer to the documentation
  available on the Akretion website
 http://www.akretion.com/en/products-and-services/openerp-asterisk-voip-connector
-
-
