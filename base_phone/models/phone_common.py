@@ -31,7 +31,7 @@ class PhoneCommon(models.AbstractModel):
         '''If it finds something, it returns (object name, ID, record name)
         For example : ('res.partner', 42, u'Alexis de Lattre (Akretion)')
         '''
-        _logger.debug(
+        _logger.info(
             u"Call get_name_from_phone_number with number = %s"
             % presented_number)
         if not isinstance(presented_number, (str, unicode)):
@@ -74,12 +74,12 @@ class PhoneCommon(models.AbstractModel):
             if res_obj:
                 name = res_obj.name_get()[0][1]
                 res = (obj._name, res_obj.id, name)
-                _logger.debug(
+                _logger.info(
                     u"Answer get_record_from_phone_number: (%s, %d, %s)",
                     res[0], res[1], res[2])
                 return res
             else:
-                _logger.debug(
+                _logger.info(
                     u"No match on %s for end of phone number '%s'",
                     obj._name, end_number_to_match)
         return False
