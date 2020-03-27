@@ -4,8 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 10.0\n"
+"Project-Id-Version: Odoo Server 12.0+e\n"
 "Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-03-27 10:06+0000\n"
+"PO-Revision-Date: 2020-03-27 10:06+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -22,119 +24,119 @@ msgid "7 bit"
 msgstr ""
 
 #. module: base_sms_client
-#: model:ir.model.fields,field_description:base_sms_client.field_sms_gateway_method
+#: model:ir.model.fields,field_description:base_sms_client.field_sms_gateway__method
 msgid "API Method"
 msgstr ""
 
 #. module: base_sms_client
-#: model:ir.ui.view,arch_db:base_sms_client.sms_gateway_form
+#: model_terms:ir.ui.view,arch_db:base_sms_client.sms_gateway_form
 msgid "Access Permission"
 msgstr ""
 
 #. module: base_sms_client
-#: model:ir.ui.view,arch_db:base_sms_client.sms_gateway_form
-#: model:ir.ui.view,arch_db:base_sms_client.view_wizard_mass_sms
+#: model_terms:ir.ui.view,arch_db:base_sms_client.sms_gateway_form
+#: model_terms:ir.ui.view,arch_db:base_sms_client.view_wizard_mass_sms
 msgid "Additional option"
 msgstr ""
 
 #. module: base_sms_client
-#: model:ir.model.fields,help:base_sms_client.field_wizard_mass_sms_tag
+#: model:ir.model.fields,help:base_sms_client.field_wizard_mass_sms__tag
 msgid "An optional tag"
 msgstr ""
 
 #. module: base_sms_client
-#: model:ir.model.fields,help:base_sms_client.field_sms_gateway_url
+#: model:ir.model.fields,help:base_sms_client.field_sms_gateway__url
 msgid "Base url for message"
 msgstr ""
 
 #. module: base_sms_client
-#: model:ir.ui.view,arch_db:base_sms_client.sms_sms_form
-#: model:ir.ui.view,arch_db:base_sms_client.sms_sms_tree
-#: model:ir.ui.view,arch_db:base_sms_client.view_wizard_mass_sms
+#: model_terms:ir.ui.view,arch_db:base_sms_client.sms_sms_form
+#: model_terms:ir.ui.view,arch_db:base_sms_client.sms_sms_tree
+#: model_terms:ir.ui.view,arch_db:base_sms_client.view_wizard_mass_sms
 #: selection:sms.sms,state:0
 msgid "Cancel"
 msgstr ""
 
 #. module: base_sms_client
-#: model:ir.model.fields,field_description:base_sms_client.field_sms_abstract_char_limit
-#: model:ir.model.fields,field_description:base_sms_client.field_sms_gateway_char_limit
-#: model:ir.model.fields,field_description:base_sms_client.field_sms_sms_char_limit
+#: model:ir.model.fields,field_description:base_sms_client.field_sms_abstract__char_limit
+#: model:ir.model.fields,field_description:base_sms_client.field_sms_gateway__char_limit
+#: model:ir.model.fields,field_description:base_sms_client.field_sms_sms__char_limit
 msgid "Character Limit"
 msgstr ""
 
 #. module: base_sms_client
-#: model:ir.model.fields,field_description:base_sms_client.field_sms_abstract_classes
-#: model:ir.model.fields,field_description:base_sms_client.field_sms_gateway_classes
-#: model:ir.model.fields,field_description:base_sms_client.field_sms_sms_classes
+#: model:ir.model.fields,field_description:base_sms_client.field_sms_abstract__classes
+#: model:ir.model.fields,field_description:base_sms_client.field_sms_gateway__classes
+#: model:ir.model.fields,field_description:base_sms_client.field_sms_sms__classes
 msgid "Class"
 msgstr ""
 
 #. module: base_sms_client
-#: model:ir.model.fields,field_description:base_sms_client.field_wizard_mass_sms_classes
+#: model:ir.model.fields,field_description:base_sms_client.field_wizard_mass_sms__classes
 msgid "Classes"
 msgstr ""
 
 #. module: base_sms_client
-#: model:ir.model.fields,field_description:base_sms_client.field_sms_abstract_coding
-#: model:ir.model.fields,field_description:base_sms_client.field_sms_gateway_coding
-#: model:ir.model.fields,field_description:base_sms_client.field_sms_sms_coding
-#: model:ir.model.fields,field_description:base_sms_client.field_wizard_mass_sms_coding
+#: model:ir.model.fields,field_description:base_sms_client.field_sms_abstract__coding
+#: model:ir.model.fields,field_description:base_sms_client.field_sms_gateway__coding
+#: model:ir.model.fields,field_description:base_sms_client.field_sms_sms__coding
+#: model:ir.model.fields,field_description:base_sms_client.field_wizard_mass_sms__coding
 msgid "Coding"
 msgstr ""
 
 #. module: base_sms_client
-#: model:ir.model.fields,field_description:base_sms_client.field_sms_abstract_company_id
-#: model:ir.model.fields,field_description:base_sms_client.field_sms_gateway_company_id
-#: model:ir.model.fields,field_description:base_sms_client.field_sms_sms_company_id
-msgid "Company id"
+#: model:ir.model.fields,field_description:base_sms_client.field_sms_abstract__company_id
+#: model:ir.model.fields,field_description:base_sms_client.field_sms_gateway__company_id
+#: model:ir.model.fields,field_description:base_sms_client.field_sms_sms__company_id
+msgid "Company"
 msgstr ""
 
 #. module: base_sms_client
-#: model:ir.model.fields,field_description:base_sms_client.field_sms_gateway_create_uid
-#: model:ir.model.fields,field_description:base_sms_client.field_sms_sms_create_uid
-#: model:ir.model.fields,field_description:base_sms_client.field_wizard_mass_sms_create_uid
+#: model:ir.model.fields,field_description:base_sms_client.field_sms_gateway__create_uid
+#: model:ir.model.fields,field_description:base_sms_client.field_sms_sms__create_uid
+#: model:ir.model.fields,field_description:base_sms_client.field_wizard_mass_sms__create_uid
 msgid "Created by"
 msgstr ""
 
 #. module: base_sms_client
-#: model:ir.model.fields,field_description:base_sms_client.field_sms_gateway_create_date
-#: model:ir.model.fields,field_description:base_sms_client.field_sms_sms_create_date
-#: model:ir.model.fields,field_description:base_sms_client.field_wizard_mass_sms_create_date
+#: model:ir.model.fields,field_description:base_sms_client.field_sms_gateway__create_date
+#: model:ir.model.fields,field_description:base_sms_client.field_sms_sms__create_date
+#: model:ir.model.fields,field_description:base_sms_client.field_wizard_mass_sms__create_date
 msgid "Created on"
 msgstr ""
 
 #. module: base_sms_client
-#: model:ir.model.fields,field_description:base_sms_client.field_sms_abstract_default_gateway
-#: model:ir.model.fields,field_description:base_sms_client.field_sms_gateway_default_gateway
-#: model:ir.model.fields,field_description:base_sms_client.field_sms_sms_default_gateway
-msgid "Default gateway"
+#: model:ir.model.fields,field_description:base_sms_client.field_sms_abstract__default_gateway
+#: model:ir.model.fields,field_description:base_sms_client.field_sms_gateway__default_gateway
+#: model:ir.model.fields,field_description:base_sms_client.field_sms_sms__default_gateway
+msgid "Default Gateway"
 msgstr ""
 
 #. module: base_sms_client
-#: model:ir.model.fields,field_description:base_sms_client.field_sms_abstract_deferred
-#: model:ir.model.fields,field_description:base_sms_client.field_sms_gateway_deferred
-#: model:ir.model.fields,field_description:base_sms_client.field_sms_sms_deferred
-#: model:ir.model.fields,field_description:base_sms_client.field_wizard_mass_sms_deferred
+#: model:ir.model.fields,field_description:base_sms_client.field_sms_abstract__deferred
+#: model:ir.model.fields,field_description:base_sms_client.field_sms_gateway__deferred
+#: model:ir.model.fields,field_description:base_sms_client.field_sms_sms__deferred
+#: model:ir.model.fields,field_description:base_sms_client.field_wizard_mass_sms__deferred
 msgid "Deferred"
 msgstr ""
 
 #. module: base_sms_client
-#: model:ir.model.fields,field_description:base_sms_client.field_sms_abstract_display_name
-#: model:ir.model.fields,field_description:base_sms_client.field_sms_gateway_display_name
-#: model:ir.model.fields,field_description:base_sms_client.field_sms_sms_display_name
-#: model:ir.model.fields,field_description:base_sms_client.field_wizard_mass_sms_display_name
+#: model:ir.model.fields,field_description:base_sms_client.field_sms_abstract__display_name
+#: model:ir.model.fields,field_description:base_sms_client.field_sms_gateway__display_name
+#: model:ir.model.fields,field_description:base_sms_client.field_sms_sms__display_name
+#: model:ir.model.fields,field_description:base_sms_client.field_wizard_mass_sms__display_name
 msgid "Display Name"
 msgstr ""
 
 #. module: base_sms_client
-#: model:ir.model.fields,help:base_sms_client.field_wizard_mass_sms_nostop
+#: model:ir.model.fields,help:base_sms_client.field_wizard_mass_sms__nostop
 msgid "Do not display STOP clause in the message, this requires that this is not an advertising message"
 msgstr ""
 
 #. module: base_sms_client
-#: model:ir.model.fields,help:base_sms_client.field_sms_abstract_nostop
-#: model:ir.model.fields,help:base_sms_client.field_sms_gateway_nostop
-#: model:ir.model.fields,help:base_sms_client.field_sms_sms_nostop
+#: model:ir.model.fields,help:base_sms_client.field_sms_abstract__nostop
+#: model:ir.model.fields,help:base_sms_client.field_sms_gateway__nostop
+#: model:ir.model.fields,help:base_sms_client.field_sms_sms__nostop
 msgid "Do not display STOP clause in the message, this requires that this is not an advertising message."
 msgstr ""
 
@@ -149,7 +151,7 @@ msgid "Error"
 msgstr ""
 
 #. module: base_sms_client
-#: model:ir.model.fields,help:base_sms_client.field_ir_act_server_mobile
+#: model:ir.model.fields,help:base_sms_client.field_ir_actions_server__mobile
 msgid "Field to be used to fetch the mobile number, e.g. you select the invoice model and `object.invoice_address_id.mobile` will be the field providing the correct mobile number."
 msgstr ""
 
@@ -162,122 +164,118 @@ msgid "Flash"
 msgstr ""
 
 #. module: base_sms_client
-#: model:ir.model.fields,field_description:base_sms_client.field_sms_gateway_from_provider
+#: model:ir.model.fields,field_description:base_sms_client.field_sms_gateway__from_provider
 msgid "From"
 msgstr ""
 
 #. module: base_sms_client
-#: model:ir.ui.view,arch_db:base_sms_client.view_wizard_mass_sms
+#: model:ir.model.fields,field_description:base_sms_client.field_wizard_mass_sms__gateway_id
+#: model_terms:ir.ui.view,arch_db:base_sms_client.view_wizard_mass_sms
 msgid "Gateway"
 msgstr ""
 
 #. module: base_sms_client
-#: model:ir.model.fields,field_description:base_sms_client.field_sms_gateway_name
+#: model:ir.model.fields,field_description:base_sms_client.field_sms_gateway__name
 msgid "Gateway Name"
 msgstr ""
 
 #. module: base_sms_client
-#: model:ir.model.fields,field_description:base_sms_client.field_sms_gateway_state
+#: model:ir.model.fields,field_description:base_sms_client.field_sms_gateway__state
 msgid "Gateway Status"
 msgstr ""
 
 #. module: base_sms_client
-#: model:ir.model.fields,field_description:base_sms_client.field_sms_gateway_url
+#: model:ir.model.fields,field_description:base_sms_client.field_sms_gateway__url
 msgid "Gateway URL"
 msgstr ""
 
 #. module: base_sms_client
-#: model:ir.model.fields,field_description:base_sms_client.field_wizard_mass_sms_gateway_id
-msgid "Gateway id"
-msgstr ""
-
-#. module: base_sms_client
-#: model:ir.ui.view,arch_db:base_sms_client.sms_gateway_form
+#: model_terms:ir.ui.view,arch_db:base_sms_client.sms_gateway_form
 msgid "General"
 msgstr ""
 
 #. module: base_sms_client
-#: model:ir.model.fields,field_description:base_sms_client.field_sms_abstract_id
-#: model:ir.model.fields,field_description:base_sms_client.field_sms_gateway_id
-#: model:ir.model.fields,field_description:base_sms_client.field_sms_sms_id
-#: model:ir.model.fields,field_description:base_sms_client.field_wizard_mass_sms_id
+#: model:ir.model.fields,field_description:base_sms_client.field_sms_abstract__id
+#: model:ir.model.fields,field_description:base_sms_client.field_sms_gateway__id
+#: model:ir.model.fields,field_description:base_sms_client.field_sms_sms__id
+#: model:ir.model.fields,field_description:base_sms_client.field_wizard_mass_sms__id
 msgid "ID"
 msgstr ""
 
 #. module: base_sms_client
-#: model:ir.model.fields,field_description:base_sms_client.field_sms_sms_error
-#: model:ir.ui.view,arch_db:base_sms_client.sms_sms_form
+#: model:ir.model.fields,field_description:base_sms_client.field_sms_sms__error
+#: model_terms:ir.ui.view,arch_db:base_sms_client.sms_sms_form
 msgid "Last Error"
 msgstr ""
 
 #. module: base_sms_client
-#: model:ir.model.fields,field_description:base_sms_client.field_sms_abstract___last_update
-#: model:ir.model.fields,field_description:base_sms_client.field_sms_gateway___last_update
-#: model:ir.model.fields,field_description:base_sms_client.field_sms_sms___last_update
-#: model:ir.model.fields,field_description:base_sms_client.field_wizard_mass_sms___last_update
+#: model:ir.model.fields,field_description:base_sms_client.field_sms_abstract____last_update
+#: model:ir.model.fields,field_description:base_sms_client.field_sms_gateway____last_update
+#: model:ir.model.fields,field_description:base_sms_client.field_sms_sms____last_update
+#: model:ir.model.fields,field_description:base_sms_client.field_wizard_mass_sms____last_update
 msgid "Last Modified on"
 msgstr ""
 
 #. module: base_sms_client
-#: model:ir.model.fields,field_description:base_sms_client.field_sms_gateway_write_uid
-#: model:ir.model.fields,field_description:base_sms_client.field_sms_sms_write_uid
-#: model:ir.model.fields,field_description:base_sms_client.field_wizard_mass_sms_write_uid
+#: model:ir.model.fields,field_description:base_sms_client.field_sms_gateway__write_uid
+#: model:ir.model.fields,field_description:base_sms_client.field_sms_sms__write_uid
+#: model:ir.model.fields,field_description:base_sms_client.field_wizard_mass_sms__write_uid
 msgid "Last Updated by"
 msgstr ""
 
 #. module: base_sms_client
-#: model:ir.model.fields,field_description:base_sms_client.field_sms_gateway_write_date
-#: model:ir.model.fields,field_description:base_sms_client.field_sms_sms_write_date
-#: model:ir.model.fields,field_description:base_sms_client.field_wizard_mass_sms_write_date
+#: model:ir.model.fields,field_description:base_sms_client.field_sms_gateway__write_date
+#: model:ir.model.fields,field_description:base_sms_client.field_sms_sms__write_date
+#: model:ir.model.fields,field_description:base_sms_client.field_wizard_mass_sms__write_date
 msgid "Last Updated on"
 msgstr ""
 
 #. module: base_sms_client
-#: model:ir.model.fields,field_description:base_sms_client.field_sms_abstract_body
-#: model:ir.model.fields,field_description:base_sms_client.field_sms_gateway_body
-#: model:ir.model.fields,field_description:base_sms_client.field_sms_sms_body
-#: model:ir.model.fields,field_description:base_sms_client.field_sms_sms_message
-#: model:ir.model.fields,field_description:base_sms_client.field_wizard_mass_sms_message
-#: model:ir.ui.view,arch_db:base_sms_client.view_wizard_mass_sms
+#: model:ir.model.fields,field_description:base_sms_client.field_sms_abstract__body
+#: model:ir.model.fields,field_description:base_sms_client.field_sms_gateway__body
+#: model:ir.model.fields,field_description:base_sms_client.field_sms_sms__body
+#: model:ir.model.fields,field_description:base_sms_client.field_sms_sms__message
+#: model:ir.model.fields,field_description:base_sms_client.field_wizard_mass_sms__message
+#: model_terms:ir.ui.view,arch_db:base_sms_client.view_wizard_mass_sms
 msgid "Message"
 msgstr ""
 
 #. module: base_sms_client
-#: model:ir.model.fields,field_description:base_sms_client.field_sms_sms_state
+#: model:ir.model.fields,field_description:base_sms_client.field_sms_sms__state
 msgid "Message Status"
 msgstr ""
 
 #. module: base_sms_client
-#: model:ir.ui.view,arch_db:base_sms_client.sms_gateway_form
+#: model_terms:ir.ui.view,arch_db:base_sms_client.sms_gateway_form
 msgid "Method"
 msgstr ""
 
 #. module: base_sms_client
-#: model:ir.model.fields,field_description:base_sms_client.field_sms_sms_mobile
+#: model:ir.model.fields,field_description:base_sms_client.field_sms_sms__mobile
 msgid "Mobile"
 msgstr ""
 
 #. module: base_sms_client
-#: model:ir.model.fields,field_description:base_sms_client.field_ir_act_server_mobile
+#: model:ir.model.fields,field_description:base_sms_client.field_ir_actions_server__mobile
 msgid "Mobile No"
 msgstr ""
 
 #. module: base_sms_client
-#: model:ir.ui.view,arch_db:base_sms_client.sms_gateway_form
+#: model_terms:ir.ui.view,arch_db:base_sms_client.sms_gateway_form
 msgid "Name"
 msgstr ""
 
 #. module: base_sms_client
-#: code:addons/base_sms_client/models/sms_sms.py:66
+#: code:addons/base_sms_client/models/sms_sms.py:65
 #, python-format
 msgid "No method gateway selected "
 msgstr ""
 
 #. module: base_sms_client
-#: model:ir.model.fields,field_description:base_sms_client.field_sms_abstract_nostop
-#: model:ir.model.fields,field_description:base_sms_client.field_sms_gateway_nostop
-#: model:ir.model.fields,field_description:base_sms_client.field_sms_sms_nostop
-#: model:ir.model.fields,field_description:base_sms_client.field_wizard_mass_sms_nostop
+#: model:ir.model.fields,field_description:base_sms_client.field_sms_abstract__nostop
+#: model:ir.model.fields,field_description:base_sms_client.field_sms_gateway__nostop
+#: model:ir.model.fields,field_description:base_sms_client.field_sms_sms__nostop
+#: model:ir.model.fields,field_description:base_sms_client.field_wizard_mass_sms__nostop
 msgid "Nostop"
 msgstr ""
 
@@ -287,22 +285,13 @@ msgid "Not Verified"
 msgstr ""
 
 #. module: base_sms_client
-#: selection:sms.gateway,method:0
-msgid "OVH HTTP"
-msgstr ""
-
-#. module: base_sms_client
-#: model:ir.model.fields,field_description:base_sms_client.field_sms_sms_partner_id
+#: model:ir.model.fields,field_description:base_sms_client.field_sms_sms__partner_id
+#: model:ir.model.fields,field_description:base_sms_client.field_wizard_mass_sms__partner_ids
 msgid "Partner"
 msgstr ""
 
 #. module: base_sms_client
-#: model:ir.model.fields,field_description:base_sms_client.field_wizard_mass_sms_partner_ids
-msgid "Partner ids"
-msgstr ""
-
-#. module: base_sms_client
-#: model:ir.ui.view,arch_db:base_sms_client.sms_gateway_form
+#: model_terms:ir.ui.view,arch_db:base_sms_client.sms_gateway_form
 msgid "Permission"
 msgstr ""
 
@@ -315,10 +304,10 @@ msgid "Phone display"
 msgstr ""
 
 #. module: base_sms_client
-#: model:ir.model.fields,field_description:base_sms_client.field_sms_abstract_priority
-#: model:ir.model.fields,field_description:base_sms_client.field_sms_gateway_priority
-#: model:ir.model.fields,field_description:base_sms_client.field_sms_sms_priority
-#: model:ir.model.fields,field_description:base_sms_client.field_wizard_mass_sms_priority
+#: model:ir.model.fields,field_description:base_sms_client.field_sms_abstract__priority
+#: model:ir.model.fields,field_description:base_sms_client.field_sms_gateway__priority
+#: model:ir.model.fields,field_description:base_sms_client.field_sms_sms__priority
+#: model:ir.model.fields,field_description:base_sms_client.field_wizard_mass_sms__priority
 msgid "Priority"
 msgstr ""
 
@@ -328,8 +317,8 @@ msgid "Queued"
 msgstr ""
 
 #. module: base_sms_client
-#: model:ir.ui.view,arch_db:base_sms_client.sms_sms_form
-#: model:ir.ui.view,arch_db:base_sms_client.sms_sms_tree
+#: model_terms:ir.ui.view,arch_db:base_sms_client.sms_sms_form
+#: model_terms:ir.ui.view,arch_db:base_sms_client.sms_sms_tree
 msgid "Retry"
 msgstr ""
 
@@ -343,8 +332,8 @@ msgstr ""
 
 #. module: base_sms_client
 #: model:ir.model,name:base_sms_client.model_sms_sms
-#: model:ir.model.fields,field_description:base_sms_client.field_ir_act_server_sms
-#: model:ir.ui.view,arch_db:base_sms_client.view_server_statistics_graph
+#: model:ir.model.fields,field_description:base_sms_client.field_ir_actions_server__sms
+#: model_terms:ir.ui.view,arch_db:base_sms_client.view_server_statistics_graph
 msgid "SMS"
 msgstr ""
 
@@ -365,60 +354,63 @@ msgstr ""
 
 #. module: base_sms_client
 #: model:ir.actions.act_window,name:base_sms_client.action_sms_gateway_tree
-#: model:ir.model.fields,field_description:base_sms_client.field_email_template_preview_gateway_id
-#: model:ir.model.fields,field_description:base_sms_client.field_mail_template_gateway_id
-#: model:ir.model.fields,field_description:base_sms_client.field_sms_sms_gateway_id
+#: model:ir.model.fields,field_description:base_sms_client.field_email_template_preview__gateway_id
+#: model:ir.model.fields,field_description:base_sms_client.field_mail_template__gateway_id
+#: model:ir.model.fields,field_description:base_sms_client.field_sms_sms__gateway_id
 #: model:ir.ui.menu,name:base_sms_client.menu_gateway_administration_sms_server
-#: model:ir.ui.view,arch_db:base_sms_client.sms_gateway_form
+#: model_terms:ir.ui.view,arch_db:base_sms_client.sms_gateway_form
 msgid "SMS Gateway"
 msgstr ""
 
 #. module: base_sms_client
-#: model:ir.ui.view,arch_db:base_sms_client.view_wizard_mass_sms
+#: model_terms:ir.ui.view,arch_db:base_sms_client.view_wizard_mass_sms
 msgid "SMS Gateway - Sens SMS"
 msgstr ""
 
 #. module: base_sms_client
-#: model:ir.ui.view,arch_db:base_sms_client.sms_gateway_tree
+#: model_terms:ir.ui.view,arch_db:base_sms_client.sms_gateway_tree
 msgid "SMS Gateways"
 msgstr ""
 
 #. module: base_sms_client
 #: model:ir.ui.menu,name:base_sms_client.menu_gateway_administration_sms
-#: model:ir.ui.view,arch_db:base_sms_client.sms_sms_form
+#: model_terms:ir.ui.view,arch_db:base_sms_client.sms_sms_form
 msgid "SMS Message"
 msgstr ""
 
 #. module: base_sms_client
-#: model:ir.model.fields,field_description:base_sms_client.field_ir_act_server_sms_server_id
+#: model:ir.model.fields,field_description:base_sms_client.field_ir_actions_server__sms_server_id
 msgid "SMS Server"
 msgstr ""
 
 #. module: base_sms_client
-#: model:ir.model.fields,field_description:base_sms_client.field_email_template_preview_sms_template
-#: model:ir.model.fields,field_description:base_sms_client.field_ir_act_server_sms_template_id
-#: model:ir.model.fields,field_description:base_sms_client.field_mail_template_sms_template
+#: model:ir.model.fields,field_description:base_sms_client.field_email_template_preview__sms_template
+#: model:ir.model.fields,field_description:base_sms_client.field_ir_actions_server__sms_template_id
+#: model:ir.model.fields,field_description:base_sms_client.field_mail_template__sms_template
 msgid "SMS Template"
 msgstr ""
 
 #. module: base_sms_client
-#: model:ir.model.fields,help:base_sms_client.field_ir_act_server_sms_server_id
+#: model:ir.model.fields,help:base_sms_client.field_ir_actions_server__sms_server_id
 msgid "Select the SMS Gateway configuration to use with this action."
 msgstr ""
 
 #. module: base_sms_client
-#: model:ir.model.fields,help:base_sms_client.field_ir_act_server_sms_template_id
+#: model:ir.model.fields,help:base_sms_client.field_ir_actions_server__sms_template_id
 msgid "Select the SMS Template configuration to use with this action."
 msgstr ""
 
 #. module: base_sms_client
-#: model:ir.ui.view,arch_db:base_sms_client.sms_sms_form
-#: model:ir.ui.view,arch_db:base_sms_client.sms_sms_tree
+#: model_terms:ir.ui.view,arch_db:base_sms_client.sms_sms_form
+#: model_terms:ir.ui.view,arch_db:base_sms_client.sms_sms_tree
 msgid "Send"
 msgstr ""
 
 #. module: base_sms_client
-#: model:ir.ui.view,arch_db:base_sms_client.view_wizard_mass_sms
+#: model:ir.actions.server,name:base_sms_client.ir_cron_crm_action_ir_actions_server
+#: model:ir.cron,cron_name:base_sms_client.ir_cron_crm_action
+#: model:ir.cron,name:base_sms_client.ir_cron_crm_action
+#: model_terms:ir.ui.view,arch_db:base_sms_client.view_wizard_mass_sms
 msgid "Send SMS"
 msgstr ""
 
@@ -433,15 +425,20 @@ msgid "Sent"
 msgstr ""
 
 #. module: base_sms_client
-#: code:addons/base_sms_client/models/sms_sms.py:89
+#: model:ir.model,name:base_sms_client.model_ir_actions_server
+msgid "Server Action"
+msgstr ""
+
+#. module: base_sms_client
+#: code:addons/base_sms_client/models/sms_sms.py:87
 #, python-format
 msgid "Size of SMS should not be more than %s characters "
 msgstr ""
 
 #. module: base_sms_client
 #: model:ir.actions.act_window,name:base_sms_client.action_sms_sms_tree
-#: model:ir.ui.view,arch_db:base_sms_client.sms_sms_form
-#: model:ir.ui.view,arch_db:base_sms_client.sms_sms_tree
+#: model_terms:ir.ui.view,arch_db:base_sms_client.sms_sms_form
+#: model_terms:ir.ui.view,arch_db:base_sms_client.sms_sms_tree
 msgid "Sms"
 msgstr ""
 
@@ -451,79 +448,79 @@ msgid "Sms Message"
 msgstr ""
 
 #. module: base_sms_client
-#: model:ir.model.fields,field_description:base_sms_client.field_sms_abstract_tag
-#: model:ir.model.fields,field_description:base_sms_client.field_sms_gateway_tag
-#: model:ir.model.fields,field_description:base_sms_client.field_sms_sms_tag
-#: model:ir.model.fields,field_description:base_sms_client.field_wizard_mass_sms_tag
+#: model:ir.model.fields,field_description:base_sms_client.field_sms_abstract__tag
+#: model:ir.model.fields,field_description:base_sms_client.field_sms_gateway__tag
+#: model:ir.model.fields,field_description:base_sms_client.field_sms_sms__tag
+#: model:ir.model.fields,field_description:base_sms_client.field_wizard_mass_sms__tag
 msgid "Tag"
 msgstr ""
 
 #. module: base_sms_client
-#: model:ir.model.fields,help:base_sms_client.field_sms_abstract_classes
-#: model:ir.model.fields,help:base_sms_client.field_sms_gateway_classes
-#: model:ir.model.fields,help:base_sms_client.field_sms_sms_classes
+#: model:ir.model.fields,help:base_sms_client.field_sms_abstract__classes
+#: model:ir.model.fields,help:base_sms_client.field_sms_gateway__classes
+#: model:ir.model.fields,help:base_sms_client.field_sms_sms__classes
 msgid "The SMS class"
 msgstr ""
 
 #. module: base_sms_client
-#: model:ir.model.fields,help:base_sms_client.field_sms_abstract_coding
-#: model:ir.model.fields,help:base_sms_client.field_sms_gateway_coding
-#: model:ir.model.fields,help:base_sms_client.field_sms_sms_coding
+#: model:ir.model.fields,help:base_sms_client.field_sms_abstract__coding
+#: model:ir.model.fields,help:base_sms_client.field_sms_gateway__coding
+#: model:ir.model.fields,help:base_sms_client.field_sms_sms__coding
 msgid "The SMS coding: 1 for 7 bit (160 chracters maxlength) or 2 for unicode (70 characters maxlength)"
 msgstr ""
 
 #. module: base_sms_client
-#: model:ir.model.fields,help:base_sms_client.field_sms_abstract_validity
-#: model:ir.model.fields,help:base_sms_client.field_sms_gateway_validity
-#: model:ir.model.fields,help:base_sms_client.field_sms_sms_validity
+#: model:ir.model.fields,help:base_sms_client.field_sms_abstract__validity
+#: model:ir.model.fields,help:base_sms_client.field_sms_gateway__validity
+#: model:ir.model.fields,help:base_sms_client.field_sms_sms__validity
 msgid "The maximum time - in minute(s) - before the message is dropped."
 msgstr ""
 
 #. module: base_sms_client
-#: model:ir.model.fields,help:base_sms_client.field_wizard_mass_sms_validity
+#: model:ir.model.fields,help:base_sms_client.field_wizard_mass_sms__validity
 msgid "The maximum time -in minute(s)- before the message is dropped"
 msgstr ""
 
 #. module: base_sms_client
-#: model:ir.model.fields,help:base_sms_client.field_sms_abstract_body
-#: model:ir.model.fields,help:base_sms_client.field_sms_gateway_body
-#: model:ir.model.fields,help:base_sms_client.field_sms_sms_body
+#: model:ir.model.fields,help:base_sms_client.field_sms_abstract__body
+#: model:ir.model.fields,help:base_sms_client.field_sms_gateway__body
+#: model:ir.model.fields,help:base_sms_client.field_sms_sms__body
 msgid "The message text that will be send along with the email which is send through this server."
 msgstr ""
 
 #. module: base_sms_client
-#: model:ir.model.fields,help:base_sms_client.field_sms_abstract_priority
-#: model:ir.model.fields,help:base_sms_client.field_sms_gateway_priority
-#: model:ir.model.fields,help:base_sms_client.field_sms_sms_priority
-#: model:ir.model.fields,help:base_sms_client.field_wizard_mass_sms_priority
+#: model:ir.model.fields,help:base_sms_client.field_sms_abstract__priority
+#: model:ir.model.fields,help:base_sms_client.field_sms_gateway__priority
+#: model:ir.model.fields,help:base_sms_client.field_sms_sms__priority
+#: model:ir.model.fields,help:base_sms_client.field_wizard_mass_sms__priority
 msgid "The priority of the message"
 msgstr ""
 
 #. module: base_sms_client
-#: model:ir.model.fields,help:base_sms_client.field_wizard_mass_sms_classes
+#: model:ir.model.fields,help:base_sms_client.field_wizard_mass_sms__classes
 msgid "The sms class: flash(0),phone display(1),SIM(2),toolkit(3)"
 msgstr ""
 
 #. module: base_sms_client
-#: model:ir.model.fields,help:base_sms_client.field_wizard_mass_sms_coding
+#: model:ir.model.fields,help:base_sms_client.field_wizard_mass_sms__coding
 msgid "The sms coding: 1 for 7 bit or 2 for unicode"
 msgstr ""
 
 #. module: base_sms_client
-#: model:ir.model.fields,help:base_sms_client.field_wizard_mass_sms_deferred
+#: model:ir.model.fields,help:base_sms_client.field_wizard_mass_sms__deferred
 msgid "The time -in minute(s)- to wait before sending the message"
 msgstr ""
 
 #. module: base_sms_client
-#: model:ir.model.fields,help:base_sms_client.field_sms_abstract_deferred
-#: model:ir.model.fields,help:base_sms_client.field_sms_gateway_deferred
-#: model:ir.model.fields,help:base_sms_client.field_sms_sms_deferred
+#: model:ir.model.fields,help:base_sms_client.field_sms_abstract__deferred
+#: model:ir.model.fields,help:base_sms_client.field_sms_gateway__deferred
+#: model:ir.model.fields,help:base_sms_client.field_sms_sms__deferred
 msgid "The time -in minute(s)- to wait before sending the message."
 msgstr ""
 
 #. module: base_sms_client
-#: model:ir.model.fields,field_description:base_sms_client.field_email_template_preview_mobile_to
-#: model:ir.model.fields,field_description:base_sms_client.field_mail_template_mobile_to
+#: model:ir.model.fields,field_description:base_sms_client.field_email_template_preview__mobile_to
+#: model:ir.model.fields,field_description:base_sms_client.field_mail_template__mobile_to
 msgid "To (Mobile)"
 msgstr ""
 
@@ -544,22 +541,22 @@ msgid "Unicode"
 msgstr ""
 
 #. module: base_sms_client
-#: model:ir.model.fields,field_description:base_sms_client.field_sms_gateway_user_ids
+#: model:ir.model.fields,field_description:base_sms_client.field_sms_gateway__user_ids
 msgid "Users Allowed to use the gateway"
 msgstr ""
 
 #. module: base_sms_client
-#: model:ir.model.fields,field_description:base_sms_client.field_sms_abstract_validity
-#: model:ir.model.fields,field_description:base_sms_client.field_sms_gateway_validity
-#: model:ir.model.fields,field_description:base_sms_client.field_sms_sms_validity
-#: model:ir.model.fields,field_description:base_sms_client.field_wizard_mass_sms_validity
+#: model:ir.model.fields,field_description:base_sms_client.field_sms_abstract__validity
+#: model:ir.model.fields,field_description:base_sms_client.field_sms_gateway__validity
+#: model:ir.model.fields,field_description:base_sms_client.field_sms_sms__validity
+#: model:ir.model.fields,field_description:base_sms_client.field_wizard_mass_sms__validity
 msgid "Validity"
 msgstr ""
 
 #. module: base_sms_client
-#: model:ir.model.fields,field_description:base_sms_client.field_sms_abstract_code
-#: model:ir.model.fields,field_description:base_sms_client.field_sms_gateway_code
-#: model:ir.model.fields,field_description:base_sms_client.field_sms_sms_code
+#: model:ir.model.fields,field_description:base_sms_client.field_sms_abstract__code
+#: model:ir.model.fields,field_description:base_sms_client.field_sms_gateway__code
+#: model:ir.model.fields,field_description:base_sms_client.field_sms_sms__code
 msgid "Verification Code"
 msgstr ""
 
@@ -574,19 +571,14 @@ msgid "Waiting for Verification"
 msgstr ""
 
 #. module: base_sms_client
-#: model:ir.model.fields,help:base_sms_client.field_sms_abstract_tag
-#: model:ir.model.fields,help:base_sms_client.field_sms_gateway_tag
-#: model:ir.model.fields,help:base_sms_client.field_sms_sms_tag
+#: model:ir.model.fields,help:base_sms_client.field_sms_abstract__tag
+#: model:ir.model.fields,help:base_sms_client.field_sms_gateway__tag
+#: model:ir.model.fields,help:base_sms_client.field_sms_sms__tag
 msgid "an optional tag"
 msgstr ""
 
 #. module: base_sms_client
-#: model:ir.model,name:base_sms_client.model_ir_actions_server
-msgid "ir.actions.server"
-msgstr ""
-
-#. module: base_sms_client
-#: model:ir.ui.view,arch_db:base_sms_client.view_wizard_mass_sms
+#: model_terms:ir.ui.view,arch_db:base_sms_client.view_wizard_mass_sms
 msgid "or"
 msgstr ""
 
@@ -594,4 +586,3 @@ msgstr ""
 #: model:ir.model,name:base_sms_client.model_wizard_mass_sms
 msgid "wizard.mass.sms"
 msgstr ""
-

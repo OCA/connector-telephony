@@ -1,4 +1,3 @@
-# coding: utf-8
 # Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>).
 # Copyright (C) 2013 Julius Network Solutions SARL <contact@julius.fr>
 # Copyright (C) 2015 Valentin Chemiere <valentin.chemiere@akretion.com>
@@ -9,6 +8,7 @@ from odoo import models, fields, api
 
 class WizardMassSms(models.TransientModel):
     _name = 'wizard.mass.sms'
+    _description = 'Wizard Mass Sms'
 
     @api.model
     def _default_get_gateway(self):
