@@ -10,7 +10,6 @@
     'license': 'AGPL-3',
     "depends": ['mail',
                 'base_phone',
-                'keychain',
                 ],
     'author': 'Julius Network Solutions,SYLEAM,'
               'Odoo Community Association (OCA),Akretion',

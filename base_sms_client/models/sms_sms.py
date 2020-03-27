@@ -63,7 +63,6 @@ class SmsSms(models.Model):
             self.write({
                 'state': 'error',
                 'error': _("No method gateway selected ")})
-            self._cr.commit()
             return False
 
     @api.multi
