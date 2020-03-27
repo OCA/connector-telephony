@@ -74,7 +74,6 @@ class SmsSms(models.Model):
         else:
             self.write(
                 {'error': 'no permission on gateway', 'state': 'error'})
-            self._cr.commit()
             return False
 
     @api.multi
@@ -88,7 +87,6 @@ class SmsSms(models.Model):
                 'error': _("Size of SMS should not be more than %s "
                            "characters ") % self.sms.gateway_id.char_limit
             })
-            self._cr.commit()
             return False
 
     @api.multi
@@ -116,7 +114,6 @@ class SmsSms(models.Model):
                 except Exception as e:
                     _logger.error('Failed to send sms %s', e)
                     sms.write({'error': e, 'state': 'error'})
-                sms._cr.commit()
         return allsend_ok
 
     @api.multi
