@@ -71,6 +71,7 @@ class WizardMassSms(models.TransientModel):
             'nostop': self.nostop,
             'partner_id': partner.id,
             'mobile': partner.mobile,
+            'company_id': self.env.user.company_id.id,
         }
 
     @api.multi
