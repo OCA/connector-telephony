@@ -1,4 +1,3 @@
-# coding: utf-8
 # Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>).
 # Copyright (C) 2011 SYLEAM (<http://syleam.fr/>)
 # Copyright (C) 2013 Julius Network Solutions SARL <contact@julius.fr>

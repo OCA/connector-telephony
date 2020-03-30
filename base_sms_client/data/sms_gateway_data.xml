@@ -6,10 +6,10 @@
             <field name="interval_type">minutes</field>
             <field name="numbercall">-1</field>
             <field name="doall">False</field>
-            <field name="model">sms.gateway</field>
-            <field name="function">_run_send_sms</field>
-            <field name="args">()</field>
+            <field name="model_id" ref="model_sms_gateway"/>
+            <field name="code">model._run_send_sms()</field>
             <field name="active">False</field>
+            <field name="state">code</field>
         </record>
 
 </odoo>
