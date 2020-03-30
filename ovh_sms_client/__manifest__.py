@@ -1,10 +1,9 @@
-# -*- coding: utf-8 -*-
 #    Copyright (C) 2013 Julius Network Solutions SARL <contact@julius.fr>
 # Copyright (C) 2015 Sébastien BEAU <sebastien.beau@akretion.com>
 
 {
     'name': 'OVH SMS Client',
-    'version': '10.0.1.0.1',
+    'version': '12.0.1.0.0',
     'license': 'AGPL-3',
     'depends': ['mail',
                 'base_sms_client',
@@ -23,5 +22,5 @@
     'website': 'http://julius.fr',
     'category': 'Tools',
     'data': ['data/keychain.xml'],
-    'installable': False,
+    'installable': True,
 }
