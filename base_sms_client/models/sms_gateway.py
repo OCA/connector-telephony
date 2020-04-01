@@ -84,9 +84,9 @@ class SmsGateway(models.Model):
         string='Users Allowed to use the gateway')
 
     @api.multi
-    def _check_permissions(self):
+    def _check_permissions(self, user):
         self.ensure_one()
-        if self.env.uid not in self.sudo().user_ids.ids:
+        if user.id not in self.sudo().user_ids.ids:
             return False
         return True
 

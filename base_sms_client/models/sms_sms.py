@@ -69,7 +69,8 @@ class SmsSms(models.Model):
     @api.multi
     def _check_gateway_permission(self):
         self.ensure_one()
-        if self.gateway_id._check_permissions():
+        user = self.create_uid
+        if self.gateway_id._check_permissions(user):
             return True
         else:
             self.write(
