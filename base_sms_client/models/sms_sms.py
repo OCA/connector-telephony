@@ -97,7 +97,7 @@ class SmsSms(models.Model):
                 allsend_ok = False
                 sms_check = False
                 continue
-            if not sms.gateway_id._check_permissions():
+            if not sms._check_gateway_permission():
                 allsend_ok = False
                 sms_check = False
                 continue
