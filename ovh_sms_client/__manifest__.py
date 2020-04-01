@@ -7,7 +7,6 @@
     'license': 'AGPL-3',
     'depends': ['mail',
                 'base_sms_client',
-                'base_suspend_security',
                 'keychain',
                 ],
     'author': 'Julius Network Solutions,SYLEAM,'

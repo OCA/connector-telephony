@@ -19,10 +19,7 @@ class SmsClient(models.Model):
     def _provider_get_provider_conf(self):
         for rec in self:
             keychain = rec.env['keychain.account']
-            if rec._check_permissions():
-                retrieve = keychain.suspend_security().retrieve
-            else:
-                retrieve = keychain.retrieve
+            retrieve = keychain.retrieve
             accounts = retrieve(
                 [['namespace', '=', OVH_KEYCHAIN_NAMESPACE]])
             return accounts[0]
