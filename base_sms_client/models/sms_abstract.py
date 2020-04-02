@@ -28,6 +28,7 @@ class SmsAbstract(models.AbstractModel):
 
     code = fields.Char('Verification Code')
     body = fields.Text(
+        string='Message Body',
         help="The message text that will be send along with the"
              " email which is send through this server.")
     classes = fields.Selection(
@@ -60,4 +61,9 @@ class SmsAbstract(models.AbstractModel):
 
     char_limit = fields.Integer(string='Character Limit', default=160)
     default_gateway = fields.Boolean()
-    company_id = fields.Many2one(comodel_name='res.company')
+    company_id = fields.Many2one(
+        comodel_name='res.company',
+        default=lambda self: self.env['res.company']._company_default_get(
+            'sms.abstract'
+        ),
+    )

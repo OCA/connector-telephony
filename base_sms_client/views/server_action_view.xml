@@ -4,16 +4,11 @@
         <field name="model">ir.actions.server</field>
         <field name="inherit_id" ref="base.view_server_action_form"/>
         <field name="arch" type="xml">
-            <page name="code" position="after" autofocus="autofocus">
-                <page string="SMS" name="sms" attrs="{'invisible': [('state', '!=', 'sms')]}">
-                    <group>
-                        <field name="sms"/>
-                        <field name="mobile"/>
-                        <field name="sms_server_id" invisible="1"/>
-                        <field name="sms_template_id" domain="[('sms_template','=',True)]" attrs="{'required':[('state','=','sms')]}"/>
-                    </group>
-                </page>
-            </page>
+            <xpath expr="//field[@name='state']" position="after">
+                <field name="sms_template_id"
+                       domain="[('model_id', '=', model_id)]"
+                       attrs="{'required':[('state','=','sms')], 'invisible': [('state', '!=', 'sms')]}"/>
+            </xpath>
         </field>
     </record>
 </odoo>

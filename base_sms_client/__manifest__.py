@@ -11,8 +11,11 @@
     "depends": ['mail',
                 'base_phone',
                 ],
-    'author': 'Julius Network Solutions,SYLEAM,'
-              'Odoo Community Association (OCA),Akretion',
+    'author': 'Julius Network Solutions,'
+              'SYLEAM,'
+              'Akretion,'
+              'ACSONE SA/NV,'
+              'Odoo Community Association (OCA)',
     'images': [
         'images/sms.jpeg',
         'images/gateway.jpeg',
@@ -27,12 +30,14 @@
         "data/ir_cron.xml",
         "security/groups.xml",
         "security/ir.model.access.csv",
+        "security/sms_template.xml",
         "security/ir.rule.csv",
+        "wizards/mass_sms_view.xml",
+        "wizards/sms_template_preview.xml",
         "views/sms_gateway_view.xml",
         "views/sms_sms_view.xml",
         "views/server_action_view.xml",
         "views/sms_template_view.xml",
-        "wizard/mass_sms_view.xml",
     ],
     "installable": True,
 }

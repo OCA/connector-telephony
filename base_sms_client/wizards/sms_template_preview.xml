@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2020 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<odoo>
+
+    <record model="ir.ui.view" id="sms_template_preview_form_view">
+        <field name="name">sms_template.preview.form (in base_sms_client)
+        </field>
+        <field name="model">sms_template.preview</field>
+        <field name="arch" type="xml">
+            <form string="Email Preview">
+                <field name="model_id" invisible="1"/>
+                <h3>Preview of
+                    <field name="name" readonly="1" nolabel="1"
+                           class="oe_inline"/>
+                </h3>
+                Choose an example
+                <field name="model_id" class="oe_inline" readonly="1"/>
+                record:
+                <field name="res_id" class="oe_inline"
+                       style="margin-left: 8px;"/>
+                <group>
+                    <field name="partner_ids" widget="many2many_tags"
+                           readonly="1"/>
+                    <field name="mobile" readonly="1"/>
+                </group>
+                <field name="message" widget="text" readonly="1"
+                       nolabel="1"/>
+                <field name="gateway_id" readonly="1"/>
+                <footer>
+                    <button string="Discard" class="btn-secondary"
+                            special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="wizard_sms_template_preview" model="ir.actions.act_window">
+        <field name="name">SMS Preview</field>
+        <field name="res_model">sms_template.preview</field>
+        <field name="src_model">sms.template</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="sms_template_preview_form_view"/>
+        <field name="target">new</field>
+        <field name="context">{'template_id':active_id}</field>
+    </record>
+
+
+</odoo>

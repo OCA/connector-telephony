@@ -20,6 +20,7 @@ class SmsSms(models.Model):
         size=256,
         required=True,
         readonly=True,
+        translate=False,
         states={'draft': [('readonly', False)]})
     mobile = fields.Char(
         required=True,

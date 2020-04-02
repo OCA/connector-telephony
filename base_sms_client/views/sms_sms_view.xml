@@ -4,7 +4,7 @@
     <record model="ir.ui.view" id="sms_sms_tree">
         <field name="model">sms.sms</field>
         <field name="arch" type="xml">
-            <tree string="Sms">
+            <tree string="SMS">
                 <field name="create_date"/>
                 <field name="mobile"/>
                 <field name="message"/>
@@ -20,12 +20,12 @@
     <record model="ir.ui.view" id="sms_sms_form">
         <field name="model">sms.sms</field>
         <field name="arch" type="xml">
-            <form string="Sms">
+            <form string="SMS">
                 <header>
                     <button string="Send" states="draft" type="object" name="send"/>
                     <button string="Retry" states="error" type="object" name="retry"/>
                     <button string="Cancel" states="draft,error" type="object" name="cancel"/>
-                    <field name="state" widget="statusbar" statusbar_visible="draft,send"/>
+                    <field name="state" widget="statusbar"/>
                 </header>
                 <sheet>
                     <label for="partner_id" class="oe_edit_only"/>
@@ -47,7 +47,7 @@
     </record>
 
     <record model="ir.actions.act_window" id="action_sms_sms_tree">
-        <field name="name">Sms</field>
+        <field name="name">SMS</field>
         <field name="res_model">sms.sms</field>
         <field name="view_type">form</field>
         <field name="view_mode">form,tree</field>

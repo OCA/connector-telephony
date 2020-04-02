@@ -75,7 +75,7 @@
     <act_window context="{'gateway_id': active_id}"
                 domain="[('gateway_id', '=', active_id)]"
                 id="act_sms_gateway_2_sms"
-                name="Sms Message"
+                name="SMS Message"
                 res_model="sms.sms"
                 src_model="sms.gateway"/>
 </odoo>
