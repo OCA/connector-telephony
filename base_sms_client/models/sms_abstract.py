@@ -62,4 +62,3 @@ class SmsAbstract(models.AbstractModel):
     char_limit = fields.Integer(string='Character Limit', default=160)
     default_gateway = fields.Boolean()
     company_id = fields.Many2one(comodel_name='res.company')
-
