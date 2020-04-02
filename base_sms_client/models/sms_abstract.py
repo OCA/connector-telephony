@@ -28,7 +28,6 @@ class SmsAbstract(models.AbstractModel):
 
     code = fields.Char('Verification Code')
     body = fields.Text(
-        string='Message',
         help="The message text that will be send along with the"
              " email which is send through this server.")
     classes = fields.Selection(
