@@ -72,65 +72,6 @@
               parent="base_phone.menu_config_phone"
               action="action_sms_gateway_tree"/>
 
-    <record model="ir.ui.view" id="sms_sms_tree">
-        <field name="model">sms.sms</field>
-        <field name="arch" type="xml">
-            <tree string="Sms">
-                <field name="create_date"/>
-                <field name="mobile"/>
-                <field name="message"/>
-                <field name="state"/>
-                <field name="gateway_id"/>
-                <button string="Send" states="draft" type="object" name="send"/>
-                <button string="Retry" states="error" type="object" name="retry"/>
-                <button string="Cancel" states="draft,error" type="object" name="cancel"/>
-            </tree>
-        </field>
-    </record>
-
-    <record model="ir.ui.view" id="sms_sms_form">
-        <field name="model">sms.sms</field>
-        <field name="arch" type="xml">
-            <form string="Sms">
-                <header>
-                    <button string="Send" states="draft" type="object" name="send"/>
-                    <button string="Retry" states="error" type="object" name="retry"/>
-                    <button string="Cancel" states="draft,error" type="object" name="cancel"/>
-                    <field name="state" widget="statusbar" statusbar_visible="draft,send"/>
-                </header>
-                <sheet>
-                    <label for="partner_id" class="oe_edit_only"/>
-                    <h1><field name="partner_id"/></h1>
-                    <label for="mobile" class="oe_edit_only"/>
-                    <h1><field name="mobile"/></h1>
-                    <group col="4">
-                        <field name="create_date" readonly="True"/>
-                        <field name="gateway_id" colspan="2"/>
-                        <field name="company_id" groups="base.group_multi_company"/>
-                        <separator string="SMS Message" colspan="4"/>
-                        <field name="message" colspan="4" nolabel="1"/>
-                        <separator string="Last Error" colspan="4"/>
-                        <field name="error" colspan="4" nolabel="1"/>
-                    </group>
-                </sheet>
-            </form>
-        </field>
-    </record>
-
-    <record model="ir.actions.act_window" id="action_sms_sms_tree">
-        <field name="name">Sms</field>
-        <field name="res_model">sms.sms</field>
-        <field name="view_type">form</field>
-        <field name="view_mode">form,tree</field>
-        <field name="view_id" ref="sms_sms_tree" />
-    </record>
-
-    <menuitem name="SMS Message"
-              id="menu_gateway_administration_sms"
-              sequence="110"
-              parent="base_phone.menu_config_phone"
-              action="action_sms_sms_tree"/>
-
     <act_window context="{'gateway_id': active_id}"
                 domain="[('gateway_id', '=', active_id)]"
                 id="act_sms_gateway_2_sms"

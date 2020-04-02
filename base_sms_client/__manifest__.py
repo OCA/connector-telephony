@@ -24,14 +24,15 @@
     "website": "https://github.com/OCA/connector-telephony",
     "category": "Phone",
     "data": [
+        "data/ir_cron.xml",
         "security/groups.xml",
         "security/ir.model.access.csv",
         "security/ir.rule.csv",
         "views/sms_gateway_view.xml",
+        "views/sms_sms_view.xml",
         "views/server_action_view.xml",
-        "data/sms_gateway_data.xml",
+        "views/sms_template_view.xml",
         "wizard/mass_sms_view.xml",
-        "views/smstemplate_view.xml"
     ],
     "installable": True,
 }
