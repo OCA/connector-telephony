@@ -61,8 +61,10 @@ odoo.define('base_phone.updatedphone_widget', function (require) {
                 'click2dial_model': this.model,
                 'click2dial_id': this.res_id};
             return this._rpc({
-                route: '/base_phone/click2dial',
-                params: params,
+                model: 'phone.common',
+                context: params,
+                method: 'click2dial',
+                args: [phone_num]
             }).then(function(r) {
                 console.log('successfull', r);
                 if (r === false) {
