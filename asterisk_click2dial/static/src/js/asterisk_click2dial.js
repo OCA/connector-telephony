@@ -67,7 +67,7 @@ var OpenCallerMenu = Widget.extend({
         else if (typeof r == 'object' && r.length == 3) {
             self.do_notify(
                 _.str.sprintf(_t("On the phone with '%s'"), r[2]),
-                _.str.sprintf(_t("Moving to form view of '%s' (%s ID %d)"), r[2], r[0], r[1]),
+                _.str.sprintf(_t("Moving to form view of %s (%s ID %d)"), r[2], r[0], r[1]),
                 false);
             var action = {
                 type: 'ir.actions.act_window',
