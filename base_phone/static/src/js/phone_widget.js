@@ -56,6 +56,10 @@ odoo.define('base_phone.updatedphone_widget', function (require) {
                 _.str.sprintf(_t('Click2dial to %s'), phone_num),
                 _t('Unhook your ringing phone'),
                 false);
+            var orig_location = window.location.href;
+            var reset_location = function () {
+                window.location.href = orig_location;
+            };
             var params = {
                 'phone_number': phone_num,
                 'click2dial_model': this.model,
@@ -69,6 +73,7 @@ odoo.define('base_phone.updatedphone_widget', function (require) {
                 console.log('successfull', r);
                 if (r === false) {
                     self.do_warn("Click2dial failed");
+                    reset_location();
                 } else if (typeof r === 'object') {
                     self.do_notify(
                             _t('Click2dial successfull'),
@@ -85,11 +90,12 @@ odoo.define('base_phone.updatedphone_widget', function (require) {
                             context: params,
                         };
                         return self.do_action(action);
-                    }
+                    } else reset_location();
                 }
             }, function (r) {
                 console.log('on error');
                 self.do_warn("Click2dial failed");
+                reset_location();
             });
         }
     });
