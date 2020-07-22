@@ -352,6 +352,7 @@ msgstr "N'utilisez que des chiffres pour le '%s' du serveur Asterisk '%s'"
 #. module: asterisk_click2dial
 #. openerp-web
 #: code:addons/asterisk_click2dial/static/src/xml/asterisk_click2dial.xml:12
+#: code:addons/asterisk_click2dial/static/src/xml/asterisk_click2dial.xml:13
 #, python-format
 msgid "Open Caller"
 msgstr "Ouvrir l'appelant"
