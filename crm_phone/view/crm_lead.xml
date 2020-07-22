@@ -36,7 +36,7 @@
             <button class="oe_inline oe_stat_button" type="action"
                 name="%(crm_phone.crm_phonecall_action)d"
                 icon="fa-phone"
-                context="{'search_default_opportunity_id': active_id}">
+                context="{'search_default_opportunity_id': id}">
                 <field string="Calls" name="phonecall_count" widget="statinfo"/>
              </button>
         </div>
