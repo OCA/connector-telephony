@@ -36,7 +36,7 @@ msgstr "إلغاء"
 
 #. module: base_phone
 #. openerp-web
-#: code:addons/base_phone/static/src/js/phone_widget.js:72
+#: code:addons/base_phone/static/src/js/phone_widget.js:74
 #, python-format
 msgid "Click2dial successfull"
 msgstr ""
@@ -214,7 +214,7 @@ msgstr ""
 
 #. module: base_phone
 #. openerp-web
-#: code:addons/base_phone/static/src/js/phone_widget.js:73
+#: code:addons/base_phone/static/src/js/phone_widget.js:75
 #, python-format
 msgid "Number dialed: %s"
 msgstr ""

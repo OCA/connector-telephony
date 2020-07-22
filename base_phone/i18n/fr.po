@@ -35,7 +35,7 @@ msgstr "Annuler"
 
 #. module: base_phone
 #. openerp-web
-#: code:addons/base_phone/static/src/js/phone_widget.js:72
+#: code:addons/base_phone/static/src/js/phone_widget.js:74
 #, python-format
 msgid "Click2dial successfull"
 msgstr "Click2dial réussi"
@@ -214,7 +214,7 @@ msgstr "Numéro converti au format international :"
 
 #. module: base_phone
 #. openerp-web
-#: code:addons/base_phone/static/src/js/phone_widget.js:73
+#: code:addons/base_phone/static/src/js/phone_widget.js:75
 #, fuzzy, python-format
 #| msgid "Number dialed:"
 msgid "Number dialed: %s"
