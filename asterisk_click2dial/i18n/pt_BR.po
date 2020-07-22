@@ -11,8 +11,8 @@ msgstr ""
 "POT-Creation-Date: 2017-12-01 08:49+0000\n"
 "PO-Revision-Date: 2019-09-02 21:23+0000\n"
 "Last-Translator: Rodrigo Macedo <rmsolucoeseminformatic4@gmail.com>\n"
-"Language-Team: Portuguese (Brazil) (https://www.transifex.com/oca/teams/"
-"23907/pt_BR/)\n"
+"Language-Team: Portuguese (Brazil) (https://www.transifex.com/oca/"
+"teams/23907/pt_BR/)\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -358,6 +358,7 @@ msgstr "Use apenas dígitos para o '%s' no servidor Asterisk '%s'"
 #. module: asterisk_click2dial
 #. openerp-web
 #: code:addons/asterisk_click2dial/static/src/xml/asterisk_click2dial.xml:12
+#: code:addons/asterisk_click2dial/static/src/xml/asterisk_click2dial.xml:13
 #, python-format
 msgid "Open Caller"
 msgstr "Abrir chamador"
@@ -510,8 +511,8 @@ msgid ""
 "TCP port on which the Asterisk Manager Interface listens. Defined in /etc/"
 "asterisk/manager.conf on Asterisk."
 msgstr ""
-"Porta TCP na qual a Interface do Gerenciador do Asterisk atende. Definido em "
-"/etc/asterisk/manager.conf no Asterisk."
+"Porta TCP na qual a Interface do Gerenciador do Asterisk atende. Definido "
+"em /etc/asterisk/manager.conf no Asterisk."
 
 #. module: asterisk_click2dial
 #: model_terms:ir.ui.view,arch_db:asterisk_click2dial.view_asterisk_server_form
