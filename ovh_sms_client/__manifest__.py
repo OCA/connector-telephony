@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 #    Copyright (C) 2013 Julius Network Solutions SARL <contact@julius.fr>
 # Copyright (C) 2015 Sébastien BEAU <sebastien.beau@akretion.com>
 
@@ -23,5 +22,5 @@
     'website': 'http://julius.fr',
     'category': 'Tools',
     'data': ['data/keychain.xml'],
-    'installable': False,
+    'installable': True,
 }

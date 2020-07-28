@@ -1,4 +1,3 @@
-# coding: utf-8
 # Copyright (C) 2015 Sébastien BEAU <sebastien.beau@akretion.com>
 # Valentin CHEMIERE <valentin.chemiere@akretion.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
@@ -60,14 +59,14 @@ class SmsSms(models.Model):
 
     @api.model
     def _convert_to_e164(self, erp_number):
-        to_dial_number = erp_number.replace(u'\xa0', u'')
+        to_dial_number = erp_number.replace('\xa0', '')
         return to_dial_number
 
     @api.multi
     def _send_http_ovh(self):
         self.ensure_one()
         params = self._prepare_http_ovh()
-        r = requests.get(params['url'], params=params.items())
+        r = requests.get(params['url'], params=list(params.items()))
         params.update({
             'password': '*****',
             'to': '*****',

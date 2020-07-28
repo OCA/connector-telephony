@@ -1,4 +1,3 @@
-# coding: utf-8
 # Copyright (C) 2015 Sébastien BEAU <sebastien.beau@akretion.com>
 # © 2011 SYLEAM (<http://syleam.fr/>)
 # © 2013 Julius Network Solutions SARL <contact@julius.fr>
@@ -35,5 +34,5 @@
         "wizard/mass_sms_view.xml",
         "views/smstemplate_view.xml"
     ],
-    "installable": False,
+    "installable": True,
 }

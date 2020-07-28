@@ -36,6 +36,7 @@ Contributors
 * Valentin Chemiere
 * Yvan Party <yvan@julius.fr>
 * MonsieurB <monsieurb@saaslys.com>
+* Quentin Theuret <contact@kerpeo.com>
 
 Maintainer
 ----------

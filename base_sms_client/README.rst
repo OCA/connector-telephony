@@ -46,6 +46,7 @@ Contributors
 
 * Valentin Chemiere <valentin.chemiere@akretion.com>
 * Yvan Party <yvan@julius.fr>
+* Quentin Theuret <contact@kerpeo.com>
 
 Maintainer
 ----------
