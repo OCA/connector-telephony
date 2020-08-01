@@ -46,9 +46,11 @@ odoo.define("base_phone.updatedphone_widget", function(require) {
             this.$el = parent;
 
             var phone_num = this.value;
+            /* eslint-disable no-unused-vars */
             dial.click(function(evt) {
                 self.click2dial(phone_num);
             });
+            /* eslint-enable no-unused-vars */
         },
         click2dial: function(phone_num) {
             var self = this;
@@ -68,6 +70,7 @@ odoo.define("base_phone.updatedphone_widget", function(require) {
                 method: "click2dial",
                 args: [phone_num],
             }).then(
+                /* eslint-disable no-unused-vars */
                 function(r) {
                     console.log("successfull", r);
                     if (r === false) {
@@ -96,6 +99,7 @@ odoo.define("base_phone.updatedphone_widget", function(require) {
                     console.log("on error");
                     self.do_warn("Click2dial failed");
                 }
+                /* eslint-enable no-unused-vars */
             );
         },
     });

@@ -72,7 +72,8 @@ class PhoneCommon(models.AbstractModel):
             for field in obj_dict["fields"]:
                 sql_where.append("replace(%s, ' ', '') ilike %%s" % field)
                 sql_args.append(pg_search_number)
-            sql = sql + " or ".join(sql_where)
+            # sql = sql + " or ".join(sql_where)
+            sql = u"%s or %s", sql, tuple(sql_where)
             _logger.debug("get_record_from_phone_number sql=%s", sql)
             self._cr.execute(sql, tuple(sql_args))
             res_sql = self._cr.fetchall()
@@ -128,8 +129,8 @@ class PhoneCommon(models.AbstractModel):
 
         phoneobj_sorted = sorted(phoneobj, key=lambda element: element[0])
         res = []
-        for l in phoneobj_sorted:
-            res.append(l[1])
+        for lambd in phoneobj_sorted:
+            res.append(lambd[1])
         # [{'fields': ['fax', 'phone', 'mobile'], 'object': res.partner()},
         #  {'fields': ['fax', 'phone', 'mobile'], 'object': crm.lead()}]
         return res
