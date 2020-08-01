@@ -12,6 +12,7 @@ addons:
   apt:
     packages:
       - expect-dev # provides unbuffer utility
+      - python-lxml
 
 stages:
   - linting
@@ -22,7 +23,8 @@ jobs:
     - stage: linting
       name: "pre-commit"
       before_install:
-      install: pip install pre-commit
+      install:
+        - pip install pre-commit
       script: pre-commit run --all --show-diff-on-failure --verbose --color always
       after_success:
     - stage: test
@@ -41,6 +43,7 @@ install:
     ${HOME}/maintainer-quality-tools
   - export PATH=${HOME}/maintainer-quality-tools/travis:${PATH}
   - travis_install_nightly
+  - pip install -r $TRAVIS_BUILD_DIR/base_phone/requirements.txt
 
 script:
   - travis_run_tests
