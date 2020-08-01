@@ -1,24 +1,17 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# * base_phone
+# 	* base_phone
 #
-# Translators:
-# OCA Transbot <transbot@odoo-community.org>, 2016
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 10.0\n"
+"Project-Id-Version: Odoo Server 13.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-09 09:55+0000\n"
-"PO-Revision-Date: 2019-09-02 17:23+0000\n"
-"Last-Translator: Rodrigo Macedo <rmsolucoeseminformatic4@gmail.com>\n"
-"Language-Team: Portuguese (Brazil) (https://www.transifex.com/oca/"
-"teams/23907/pt_BR/)\n"
-"Language: pt_BR\n"
+"Last-Translator: \n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 3.8\n"
+"Plural-Forms: \n"
 
 #. module: base_phone
 #: model_terms:ir.ui.view,arch_db:base_phone.res_config_settings_view_form
@@ -28,137 +21,137 @@ msgstr ""
 #. module: base_phone
 #: model:ir.model.fields,field_description:base_phone.field_number_not_found__calling_number
 msgid "Calling Number"
-msgstr "Número Chamante"
+msgstr ""
 
 #. module: base_phone
 #: model_terms:ir.ui.view,arch_db:base_phone.reformat_all_phonenumbers_form
 msgid "Cancel"
-msgstr "Cancelar"
+msgstr ""
 
 #. module: base_phone
 #. openerp-web
-#: code:addons/base_phone/static/src/js/phone_widget.js:74
+#: code:addons/base_phone/static/src/js/phone_widget.js:0
 #, python-format
 msgid "Click2dial successfull"
-msgstr "Click2dial com sucesso"
+msgstr ""
 
 #. module: base_phone
 #. openerp-web
-#: code:addons/base_phone/static/src/js/phone_widget.js:56
+#: code:addons/base_phone/static/src/js/phone_widget.js:0
 #, python-format
 msgid "Click2dial to %s"
-msgstr "Click2dial para %s"
+msgstr ""
 
 #. module: base_phone
 #: model_terms:ir.ui.view,arch_db:base_phone.number_not_found_form
 #: model_terms:ir.ui.view,arch_db:base_phone.reformat_all_phonenumbers_form
 msgid "Close"
-msgstr "Fechar"
+msgstr ""
 
 #. module: base_phone
 #: model:ir.model,name:base_phone.model_phone_common
 msgid "Common methods for phone features"
-msgstr "Métodos comuns para recursos do telefone"
+msgstr ""
 
 #. module: base_phone
 #: model:ir.model,name:base_phone.model_res_company
 msgid "Companies"
-msgstr "Empresas"
+msgstr ""
 
 #. module: base_phone
 #: model:ir.model,name:base_phone.model_res_config_settings
 msgid "Config Settings"
-msgstr "Configurações de Ajuste"
+msgstr ""
 
 #. module: base_phone
 #: model:ir.model,name:base_phone.model_res_partner
 msgid "Contact"
-msgstr "Contato"
+msgstr ""
 
 #. module: base_phone
-#: code:addons/base_phone/wizard/number_not_found.py:78
+#: code:addons/base_phone/wizard/number_not_found.py:0
 #: model_terms:ir.ui.view,arch_db:base_phone.number_not_found_form
 #, python-format
 msgid "Create New Partner"
-msgstr "Criar Novo Parceiro"
+msgstr ""
 
 #. module: base_phone
 #: model_terms:ir.ui.view,arch_db:base_phone.number_not_found_form
 msgid "Create or Update a Partner"
-msgstr "Criar ou Atualizar um Parceiro"
+msgstr ""
 
 #. module: base_phone
 #: model:ir.model.fields,field_description:base_phone.field_number_not_found__create_uid
 #: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers__create_uid
 msgid "Created by"
-msgstr "Criado por"
+msgstr ""
 
 #. module: base_phone
 #: model:ir.model.fields,field_description:base_phone.field_number_not_found__create_date
 #: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers__create_date
 msgid "Created on"
-msgstr "Criado em"
+msgstr ""
 
 #. module: base_phone
 #: model:ir.model.fields,field_description:base_phone.field_number_not_found__current_partner_mobile
 msgid "Current Mobile"
-msgstr "Móvel Atual"
+msgstr ""
 
 #. module: base_phone
 #: model:ir.model.fields,field_description:base_phone.field_number_not_found__current_partner_phone
 msgid "Current Phone"
-msgstr "Telefone Atual"
+msgstr ""
 
 #. module: base_phone
 #. openerp-web
-#: code:addons/base_phone/static/src/xml/phone.xml:12
+#: code:addons/base_phone/static/src/xml/phone.xml:0
 #, python-format
 msgid "Dial"
-msgstr "Discar"
+msgstr ""
 
 #. module: base_phone
 #: model:ir.model.fields,field_description:base_phone.field_number_not_found__display_name
 #: model:ir.model.fields,field_description:base_phone.field_phone_common__display_name
 #: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers__display_name
 msgid "Display Name"
-msgstr "Exibir Nome"
+msgstr ""
 
 #. module: base_phone
-#: selection:reformat.all.phonenumbers,state:0
+#: model:ir.model.fields.selection,name:base_phone.selection__reformat_all_phonenumbers__state__done
 msgid "Done"
-msgstr "Feito"
+msgstr ""
 
 #. module: base_phone
-#: selection:reformat.all.phonenumbers,state:0
+#: model:ir.model.fields.selection,name:base_phone.selection__reformat_all_phonenumbers__state__draft
 msgid "Draft"
-msgstr "Rascunho"
+msgstr ""
 
 #. module: base_phone
 #: model:ir.model.fields,field_description:base_phone.field_number_not_found__e164_number
 msgid "E.164 Number"
-msgstr "Número E.164"
+msgstr ""
 
 #. module: base_phone
 #: model:ir.model.fields,help:base_phone.field_number_not_found__e164_number
 msgid "E.164 equivalent of the calling number."
-msgstr "E.164 equivalente do número de chamada."
+msgstr ""
 
 #. module: base_phone
-#: selection:number.not.found,number_type:0
+#: model:ir.model.fields.selection,name:base_phone.selection__number_not_found__number_type__phone
 msgid "Fixed"
-msgstr "FIxo"
+msgstr ""
 
 #. module: base_phone
 #: model:ir.model.fields,field_description:base_phone.field_number_not_found__number_type
 msgid "Fixed/Mobile"
-msgstr "Fixo/Móvel"
+msgstr ""
 
 #. module: base_phone
 #: model:ir.model.fields,field_description:base_phone.field_number_not_found__id
 #: model:ir.model.fields,field_description:base_phone.field_phone_common__id
 #: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers__id
 msgid "ID"
-msgstr "Identificação"
+msgstr ""
 
 #. module: base_phone
 #: model:ir.model.fields,help:base_phone.field_res_company__number_of_digits_to_match_from_end
@@ -172,66 +165,58 @@ msgid ""
 "digits of the phone number presented by the calling party. N is the value "
 "you should enter in this field."
 msgstr ""
-"Em várias situações, o Odoo precisará encontrar um Parceiro/Líder/"
-"Empregado/... a partir de um número de telefone apresentado pela parte que "
-"está chamando. Como os números de telefone apresentados pela operadora de "
-"telefonia nem sempre podem ser exibidos em um formato padrão, o melhor "
-"método para encontrar o Parceiro/Líder/Empregado/...relacionado no Odoo é "
-"tentar corresponder ao final do número de telefone no Odoo com os N últimos "
-"dígitos do número de telefone apresentados pela parte que está chamando. N é "
-"o valor que você deve inserir neste campo."
 
 #. module: base_phone
 #: model:ir.model.fields,field_description:base_phone.field_number_not_found____last_update
 #: model:ir.model.fields,field_description:base_phone.field_phone_common____last_update
 #: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers____last_update
 msgid "Last Modified on"
-msgstr "Última Modificação no"
+msgstr ""
 
 #. module: base_phone
 #: model:ir.model.fields,field_description:base_phone.field_number_not_found__write_uid
 #: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers__write_uid
 msgid "Last Updated by"
-msgstr "Última atualização por"
+msgstr ""
 
 #. module: base_phone
 #: model:ir.model.fields,field_description:base_phone.field_number_not_found__write_date
 #: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers__write_date
 msgid "Last Updated on"
-msgstr "Última atualização em"
+msgstr ""
 
 #. module: base_phone
-#: code:addons/base_phone/wizard/number_not_found.py:48
+#: code:addons/base_phone/wizard/number_not_found.py:0
 #, python-format
 msgid "Missing country on company %s"
-msgstr "País ausente na empresa %s"
+msgstr ""
 
 #. module: base_phone
-#: selection:number.not.found,number_type:0
+#: model:ir.model.fields.selection,name:base_phone.selection__number_not_found__number_type__mobile
 msgid "Mobile"
-msgstr "Celular"
+msgstr ""
 
 #. module: base_phone
 #: model_terms:ir.ui.view,arch_db:base_phone.number_not_found_form
 msgid "Number Not Found"
-msgstr "Número Não Encontrado"
+msgstr ""
 
 #. module: base_phone
 #: model_terms:ir.ui.view,arch_db:base_phone.number_not_found_form
 msgid "Number converted to international format:"
-msgstr "Número convertido para formato internacional:"
+msgstr ""
 
 #. module: base_phone
 #. openerp-web
-#: code:addons/base_phone/static/src/js/phone_widget.js:75
+#: code:addons/base_phone/static/src/js/phone_widget.js:0
 #, python-format
 msgid "Number dialed: %s"
-msgstr "Número descado: %s"
+msgstr ""
 
 #. module: base_phone
 #: model:ir.model,name:base_phone.model_number_not_found
 msgid "Number not found"
-msgstr "Número não encontrado"
+msgstr ""
 
 #. module: base_phone
 #: model_terms:ir.ui.view,arch_db:base_phone.res_config_settings_view_form
@@ -242,33 +227,33 @@ msgstr ""
 #: model:ir.model.fields,field_description:base_phone.field_res_company__number_of_digits_to_match_from_end
 #: model:ir.model.fields,field_description:base_phone.field_res_config_settings__number_of_digits_to_match_from_end
 msgid "Number of Digits To Match From End"
-msgstr "Número de dígitos a serem correspondidos do final"
+msgstr ""
 
 #. module: base_phone
 #: model:ir.model.fields,help:base_phone.field_number_not_found__to_update_partner_id
 msgid "Partner on which the phone number will be written"
-msgstr "Parceiro no qual o número de telefone será gravado"
+msgstr ""
 
 #. module: base_phone
 #: model:ir.model.fields,field_description:base_phone.field_number_not_found__to_update_partner_id
 msgid "Partner to Update"
-msgstr "Parceiro a Atualizar"
+msgstr ""
 
 #. module: base_phone
-#: code:addons/base_phone/wizard/number_not_found.py:96
+#: code:addons/base_phone/wizard/number_not_found.py:0
 #, python-format
 msgid "Partner: %s"
-msgstr "Parceiro: %s"
+msgstr ""
 
 #. module: base_phone
 #: model:res.groups,name:base_phone.group_callerid
 msgid "Phone CallerID"
-msgstr "Identificação de chamadas telefônicas"
+msgstr ""
 
 #. module: base_phone
 #: model:ir.model,name:base_phone.model_phone_validation_mixin
 msgid "Phone Validation Mixin"
-msgstr "Validação por telefone"
+msgstr ""
 
 #. module: base_phone
 #: model:ir.model.fields,help:base_phone.field_number_not_found__calling_number
@@ -276,36 +261,34 @@ msgid ""
 "Phone number of calling party that has been obtained from the telephony "
 "server, in the format used by the telephony server (not E.164)."
 msgstr ""
-"Número de telefone do chamador que foi obtido do servidor de telefonia, no "
-"formato usado pelo servidor de telefonia (não E.164)."
 
 #. module: base_phone
 #: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers__phonenumbers_not_reformatted
 msgid "Phone numbers that couldn't be reformatted"
-msgstr "Números de telefone que não puderam ser reformatados"
+msgstr ""
 
 #. module: base_phone
 #: model_terms:ir.ui.view,arch_db:base_phone.reformat_all_phonenumbers_form
 msgid "Phone numbers that couldn't be reformatted:"
-msgstr "Números de telefone que não puderam ser reformatados:"
+msgstr ""
 
 #. module: base_phone
 #: model:ir.actions.act_window,name:base_phone.reformat_all_phonenumbers_action
 #: model:ir.ui.menu,name:base_phone.reformat_all_phonenumbers_menu
 msgid "Reformat Phone Numbers"
-msgstr "Formatar números de telefone"
+msgstr ""
 
 #. module: base_phone
 #: model:ir.model,name:base_phone.model_reformat_all_phonenumbers
 #: model_terms:ir.ui.view,arch_db:base_phone.reformat_all_phonenumbers_form
 msgid "Reformat all phone numbers"
-msgstr "Formatar todos os números de telefone"
+msgstr ""
 
 #. module: base_phone
-#: code:addons/base_phone/wizard/number_not_found.py:92
+#: code:addons/base_phone/wizard/number_not_found.py:0
 #, python-format
 msgid "Select the Partner to Update."
-msgstr "Escolha o Parceiro a Atualizar."
+msgstr ""
 
 #. module: base_phone
 #: model_terms:ir.ui.view,arch_db:base_phone.res_config_settings_view_form
@@ -317,28 +300,27 @@ msgstr ""
 #. module: base_phone
 #: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers__state
 msgid "State"
-msgstr "Estado"
+msgstr ""
 
 #. module: base_phone
 #: model:ir.ui.menu,name:base_phone.menu_config_phone
 #: model_terms:ir.ui.view,arch_db:base_phone.res_config_settings_view_form
 #: model_terms:ir.ui.view,arch_db:base_phone.view_users_form
 msgid "Telephony"
-msgstr "Telefonia"
+msgstr ""
 
 #. module: base_phone
 #: model_terms:ir.ui.view,arch_db:base_phone.view_users_form
 #: model_terms:ir.ui.view,arch_db:base_phone.view_users_form_simple_modif
 msgid "Telephony Preferences"
-msgstr "Preferências de telefonia"
+msgstr ""
 
 #. module: base_phone
-#: sql_constraint:res.company:0
+#: model:ir.model.constraint,message:base_phone.constraint_res_company_number_of_digits_to_match_from_end_positive
 msgid ""
-"The value of the field 'Number of Digits To Match From End' must be positive."
+"The value of the field 'Number of Digits To Match From End' must be "
+"positive."
 msgstr ""
-"O valor do campo 'Número de dígitos que coincidem no final' deve ser "
-"positivo."
 
 #. module: base_phone
 #: model_terms:ir.ui.view,arch_db:base_phone.reformat_all_phonenumbers_form
@@ -346,17 +328,15 @@ msgid ""
 "This wizard reformats the phone and mobile numbers of all partners in "
 "standard international format e.g. +33 1 41 98 12 42"
 msgstr ""
-"Este assistente reformata números de telefones fixos, móveis e de fax de "
-"todas as empresas no formato padrão internacional, por exemplo, +33141981242"
 
 #. module: base_phone
 #. openerp-web
-#: code:addons/base_phone/static/src/js/phone_widget.js:57
+#: code:addons/base_phone/static/src/js/phone_widget.js:0
 #, python-format
 msgid "Unhook your ringing phone"
-msgstr "Atenda o telefone que está tocando"
+msgstr ""
 
 #. module: base_phone
 #: model_terms:ir.ui.view,arch_db:base_phone.number_not_found_form
 msgid "Update Existing Partner"
-msgstr "Atualizar Empresa existente"
+msgstr ""
