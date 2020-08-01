@@ -1,5 +1,6 @@
 # Copyright 2014-2018 Akretion France
 # @author: Alexis de Lattre <alexis@via.ecp.fr>
+# @migration from 12.0 to 13.0: Christophe Langenberg <Christophe@Langenberg.be>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 {
