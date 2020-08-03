@@ -18,7 +18,7 @@ class ReformatAllPhonenumbers(models.TransientModel):
         string="Phone numbers that couldn't be reformatted"
     )
     state = fields.Selection(
-        [("draft", "Draft"), ("done", "Done"),], string="State", default="draft"
+        [("draft", "Draft"), ("done", "Done")], string="State", default="draft"
     )
 
     def run_reformat_all_phonenumbers(self):

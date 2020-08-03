@@ -129,8 +129,8 @@ class PhoneCommon(models.AbstractModel):
 
         phoneobj_sorted = sorted(phoneobj, key=lambda element: element[0])
         res = []
-        for l in phoneobj_sorted:
-            res.append(l[1])
+        for lambd in phoneobj_sorted:
+            res.append(lambd[1])
         # [{'fields': ['fax', 'phone', 'mobile'], 'object': res.partner()},
         #  {'fields': ['fax', 'phone', 'mobile'], 'object': crm.lead()}]
         return res
