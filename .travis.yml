@@ -22,7 +22,7 @@ jobs:
     - stage: linting
       name: "pre-commit"
       before_install:
-      install: pip install pre-commit -r $HOME/connector-telephony/base_phone/requirements.txt
+      install: pip install pre-commit -r /home/travis/build/mimusica/connector-telephony/base_phone/requirements.txt
       script: pre-commit run --all --show-diff-on-failure --verbose --color always
       after_success:
     - stage: test
