@@ -46,9 +46,11 @@ odoo.define("base_phone.updatedphone_widget", function(require) {
             this.$el = parent;
 
             var phone_num = this.value;
+            /* eslint-disable */
             dial.click(function(evt) {
                 self.click2dial(phone_num);
             });
+            /* eslint-enable */
         },
         click2dial: function(phone_num) {
             var self = this;
