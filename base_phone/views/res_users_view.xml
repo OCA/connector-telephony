@@ -14,7 +14,7 @@
                 <page string="Telephony" name="phone" invisible="1">
                     <!-- Empty page, which will be used by other phone modules -->
                     <group name="phone-preferences" string="Telephony Preferences">
-                </group>
+                    </group>
                 </page>
             </notebook>
         </field>
