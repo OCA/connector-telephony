@@ -7,6 +7,10 @@ cache:
 python:
   - "3.6"
 
+# installing module dependencies
+install:
+  - pip install -r $HOME/base_phone/requirements.txt
+
 addons:
   postgresql: "9.6"
   apt:

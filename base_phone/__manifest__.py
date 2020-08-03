@@ -12,7 +12,7 @@
     "author": "Akretion,Odoo Community Association (OCA)",
     "website": "http://www.akretion.com/",
     "depends": ["phone_validation", "base_setup"],
-    "external_dependencies": {"python": ['phonenumbers']},
+    "external_dependencies": {"python": ["phonenumbers"]},
     "data": [
         "security/phone_security.xml",
         "security/ir.model.access.csv",
