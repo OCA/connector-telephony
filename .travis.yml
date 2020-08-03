@@ -28,9 +28,15 @@ jobs:
       script: pre-commit run --all --show-diff-on-failure --verbose --color always
       after_success:
     - stage: test
+      install:
+        - pip install -r
+          /home/travis/build/mimusica/connector-telephony/base_phone/requirements.txt
       env:
         - TESTS="1" ODOO_REPO="odoo/odoo" MAKEPOT="1"
     - stage: test
+      install:
+        - pip install -r
+          /home/travis/build/mimusica/connector-telephony/base_phone/requirements.txt
       env:
         - TESTS="1" ODOO_REPO="OCA/OCB"
 
