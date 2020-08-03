@@ -43,10 +43,8 @@ install:
     ${HOME}/maintainer-quality-tools
   - export PATH=${HOME}/maintainer-quality-tools/travis:${PATH}
   - travis_install_nightly
-  - ln -s ${TRAVIS_BUILD_DIR}/server_environment_files_sample
-    ${TRAVIS_BUILD_DIR}/server_environment_files
   - pip install -r
-    /home/travis/build/mimusica/connector-telephony/base_phone/requirements.txt
+    $TRAVIS_BUILD_DIR/connector-telephony/base_phone/requirements.txt
 
 script:
   - travis_run_tests
