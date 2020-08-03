@@ -12,6 +12,7 @@ addons:
   apt:
     packages:
       - expect-dev # provides unbuffer utility
+      - python-lxml
 
 stages:
   - linting
@@ -23,8 +24,7 @@ jobs:
       name: "pre-commit"
       before_install:
       install:
-        - pip install pre-commit -r
-          /home/travis/build/mimusica/connector-telephony/base_phone/requirements.txt
+        - pip install pre-commit
       script: pre-commit run --all --show-diff-on-failure --verbose --color always
       after_success:
     - stage: test
@@ -49,6 +49,7 @@ install:
     ${HOME}/maintainer-quality-tools
   - export PATH=${HOME}/maintainer-quality-tools/travis:${PATH}
   - travis_install_nightly
+  - ln -s ${TRAVIS_BUILD_DIR}/server_environment_files_sample ${TRAVIS_BUILD_DIR}/server_environment_files
 
 script:
   - travis_run_tests
