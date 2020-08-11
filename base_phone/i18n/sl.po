@@ -9,15 +9,16 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-06-24 19:50+0000\n"
-"PO-Revision-Date: 2017-06-24 19:50+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2016\n"
+"PO-Revision-Date: 2020-08-11 15:00+0000\n"
+"Last-Translator: Matjaz Mozetic <matjaz@matmoz.si>\n"
 "Language-Team: Slovenian (https://www.transifex.com/oca/teams/23907/sl/)\n"
 "Language: sl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n"
-"%100==4 ? 2 : 3);\n"
+"Plural-Forms: nplurals=4; plural=n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || "
+"n%100==4 ? 2 : 3;\n"
+"X-Generator: Weblate 3.10\n"
 
 #. module: base_phone
 #: model_terms:ir.ui.view,arch_db:base_phone.res_config_settings_view_form
@@ -44,10 +45,9 @@ msgstr "Click2dial uspešen"
 #. module: base_phone
 #. openerp-web
 #: code:addons/base_phone/static/src/js/phone_widget.js:56
-#, fuzzy, python-format
-#| msgid "Click2dial started"
+#, python-format
 msgid "Click2dial to %s"
-msgstr "Click2dial zagnan"
+msgstr "Klik za klic %s"
 
 #. module: base_phone
 #: model_terms:ir.ui.view,arch_db:base_phone.number_not_found_form
@@ -216,10 +216,9 @@ msgstr "Številka pretvorjena v mednarodni format:"
 #. module: base_phone
 #. openerp-web
 #: code:addons/base_phone/static/src/js/phone_widget.js:75
-#, fuzzy, python-format
-#| msgid "Number dialed:"
+#, python-format
 msgid "Number dialed: %s"
-msgstr "Klicana številka:"
+msgstr "Klicana številka: %s"
 
 #. module: base_phone
 #: model:ir.model,name:base_phone.model_number_not_found
@@ -228,10 +227,8 @@ msgstr "Številka ni najdena"
 
 #. module: base_phone
 #: model_terms:ir.ui.view,arch_db:base_phone.res_config_settings_view_form
-#, fuzzy
-#| msgid "Number of Digits To Match From End"
 msgid "Number of Digits"
-msgstr "Število znakov od konca številke za primerjavo"
+msgstr "Število znakov"
 
 #. module: base_phone
 #: model:ir.model.fields,field_description:base_phone.field_res_company__number_of_digits_to_match_from_end
@@ -300,7 +297,7 @@ msgstr "Pretvorba vseh telefonskih številk"
 #: code:addons/base_phone/wizard/number_not_found.py:92
 #, python-format
 msgid "Select the Partner to Update."
-msgstr "Izbira partnerja za posodobitev"
+msgstr "Izbira partnerja za posodobitev."
 
 #. module: base_phone
 #: model_terms:ir.ui.view,arch_db:base_phone.res_config_settings_view_form
@@ -337,7 +334,6 @@ msgstr ""
 
 #. module: base_phone
 #: model_terms:ir.ui.view,arch_db:base_phone.reformat_all_phonenumbers_form
-#, fuzzy
 msgid ""
 "This wizard reformats the phone and mobile numbers of all partners in "
 "standard international format e.g. +33 1 41 98 12 42"
@@ -354,9 +350,8 @@ msgstr "Dvigni slušalko pri zvonjenju"
 
 #. module: base_phone
 #: model_terms:ir.ui.view,arch_db:base_phone.number_not_found_form
-#, fuzzy
 msgid "Update Existing Partner"
-msgstr "Ustvari ali posodobi partnerja"
+msgstr "Posodobi obstoječega partnerja"
 
 #~ msgid "Phone"
 #~ msgstr "Telefon"
