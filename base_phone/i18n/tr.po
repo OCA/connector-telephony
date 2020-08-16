@@ -45,7 +45,6 @@ msgstr "Tıkla çevir başarılı"
 #. openerp-web
 #: code:addons/base_phone/static/src/js/phone_widget.js:56
 #, fuzzy, python-format
-#| msgid "Click2dial started"
 msgid "Click2dial to %s"
 msgstr "Tıkla çevir başlatıldı"
 
@@ -217,7 +216,6 @@ msgstr "Uluslarası biçime çevrilen numara:"
 #. openerp-web
 #: code:addons/base_phone/static/src/js/phone_widget.js:75
 #, fuzzy, python-format
-#| msgid "Number dialed:"
 msgid "Number dialed: %s"
 msgstr "Aranan numara:"
 
@@ -229,7 +227,6 @@ msgstr "Numara bulunamadı"
 #. module: base_phone
 #: model_terms:ir.ui.view,arch_db:base_phone.res_config_settings_view_form
 #, fuzzy
-#| msgid "Number of Digits To Match From End"
 msgid "Number of Digits"
 msgstr "Sondan eşleştirilecek rakam adedi"
 

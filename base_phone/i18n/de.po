@@ -44,7 +44,6 @@ msgstr "Click2dial erfolgreich"
 #. openerp-web
 #: code:addons/base_phone/static/src/js/phone_widget.js:56
 #, fuzzy, python-format
-#| msgid "Click2dial started"
 msgid "Click2dial to %s"
 msgstr "Click2dial gestartet"
 
@@ -222,7 +221,6 @@ msgstr "Nummer in internationales Format umgewandelt:"
 #. openerp-web
 #: code:addons/base_phone/static/src/js/phone_widget.js:75
 #, fuzzy, python-format
-#| msgid "Number dialed:"
 msgid "Number dialed: %s"
 msgstr "Gewählte Nummer:"
 
@@ -234,7 +232,6 @@ msgstr "Nummer nicht gefunden"
 #. module: base_phone
 #: model_terms:ir.ui.view,arch_db:base_phone.res_config_settings_view_form
 #, fuzzy
-#| msgid "Number of Digits To Match From End"
 msgid "Number of Digits"
 msgstr "Anzahl der übereinstimmenden Stellen vom Ende her"
 
