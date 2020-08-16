@@ -301,7 +301,6 @@ msgstr "Numéro de téléphone manquant"
 #. openerp-web
 #: code:addons/asterisk_click2dial/static/src/js/asterisk_click2dial.js:70
 #, fuzzy, python-format
-#| msgid "Moving to %s ID %d"
 msgid "Moving to form view of '%s' (%s ID %d)"
 msgstr "Moving to %s ID %d"
 
