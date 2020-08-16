@@ -40,7 +40,6 @@ msgstr "Click2dial uspešen"
 #. openerp-web
 #: code:addons/base_phone/static/src/js/phone_widget.js:56
 #, fuzzy, python-format
-#| msgid "Click2dial started"
 msgid "Click2dial to %s"
 msgstr "Click2dial zagnan"
 
@@ -207,7 +206,6 @@ msgstr "Številka pretvorjena v mednarodni format:"
 #. openerp-web
 #: code:addons/base_phone/static/src/js/phone_widget.js:73
 #, fuzzy, python-format
-#| msgid "Number dialed:"
 msgid "Number dialed: %s"
 msgstr "Klicana številka:"
 

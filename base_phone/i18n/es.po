@@ -41,7 +41,6 @@ msgstr "Click2dial satisfactorio"
 #. openerp-web
 #: code:addons/base_phone/static/src/js/phone_widget.js:56
 #, fuzzy, python-format
-#| msgid "Click2dial started"
 msgid "Click2dial to %s"
 msgstr "Click2dial iniciado"
 
@@ -215,7 +214,6 @@ msgstr "Número convertido a formato internacional:"
 #. openerp-web
 #: code:addons/base_phone/static/src/js/phone_widget.js:73
 #, fuzzy, python-format
-#| msgid "Number dialed:"
 msgid "Number dialed: %s"
 msgstr "Número marcado:"
 
