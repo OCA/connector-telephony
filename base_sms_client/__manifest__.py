@@ -27,6 +27,7 @@
     "website": "https://github.com/OCA/connector-telephony",
     "category": "Phone",
     "data": [
+        'wizards/sms_compose_message.xml',
         "data/ir_cron.xml",
         "security/groups.xml",
         "security/ir.model.access.csv",

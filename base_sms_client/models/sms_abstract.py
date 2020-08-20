@@ -25,8 +25,7 @@ CLASSES_LIST = [
 class SmsAbstract(models.AbstractModel):
     _name = 'sms.abstract'
     _description = 'SMS Abstract Model'
-
-    mobile = fields.Char(required=True)
+    mobile = fields.Char()
     gateway_id = fields.Many2one(
         comodel_name='sms.gateway',
         string='SMS Gateway'

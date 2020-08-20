@@ -4,7 +4,7 @@
 # Copyright 2020 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from odoo import api, fields, models
+from odoo import api, fields, models, _
 
 from odoo.tools import pycompat
 
@@ -15,6 +15,7 @@ class SmsTemplate(models.Model):
     _inherit = ["mail.template", "sms.abstract"]
     _description = 'Sms Template'
 
+    mobile = fields.Char(required=True)
     message = fields.Text(translate=True)
 
     @api.multi
@@ -102,3 +103,27 @@ class SmsTemplate(models.Model):
         if force_send:
             sms.send(raise_exception=raise_exception)
         return sms.ids
+
+    @api.multi
+    def create_action(self):
+        act_window_model = self.env['ir.actions.act_window']
+        view = self.env.ref('base_sms_client.sms_compose_message_form_view')
+        for template in self:
+            button_name = _('Send SMS (%s)') % template.name
+            action = act_window_model.create(
+                {
+                    'name': button_name,
+                    'type': 'ir.actions.act_window',
+                    'res_model': 'sms.compose.message',
+                    'src_model': template.model_id.model,
+                    'view_type': 'form',
+                    'context': "{'default_template_id' : %d, "
+                    "'default_use_template': True}" % (template.id),
+                    'view_mode': 'form,tree',
+                    'view_id': view.id,
+                    'target': 'new',
+                    'binding_model_id': template.model_id.id,
+                }
+            )
+            template.write({'ref_ir_act_window': action.id})
+        return True

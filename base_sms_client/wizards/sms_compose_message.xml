@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2020 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<odoo>
+
+    <record model="ir.ui.view" id="sms_compose_message_form_view">
+        <field name="model">sms.compose.message</field>
+        <field name="arch" type="xml">
+            <form string="Sms Compose Message">
+                <group>
+                    <field name="model" invisible="1"/>
+                    <field name="res_id" invisible="1"/>
+                    <field name="mobile"/>
+                    <field name="partner_id"/>
+                </group>
+                <group>
+                    <field name="message"/>
+                </group>
+                <group>
+                    <group><field name="gateway_id"/></group>
+                    <group>
+                        <field name="template_id"/>
+                    </group>
+                </group>
+                <footer>
+                    <button name="send_sms"
+                            string="Send"
+                            class="btn-primary"
+                            type="object"/>
+                    <button string="Cancel"
+                            class="btn-default"
+                            special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+</odoo>

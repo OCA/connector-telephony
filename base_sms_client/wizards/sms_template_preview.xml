@@ -10,7 +10,6 @@
         <field name="model">sms_template.preview</field>
         <field name="arch" type="xml">
             <form string="Email Preview">
-                <field name="model_id" invisible="1"/>
                 <h3>Preview of
                     <field name="name" readonly="1" nolabel="1"
                            class="oe_inline"/>
@@ -21,8 +20,7 @@
                 <field name="res_id" class="oe_inline"
                        style="margin-left: 8px;"/>
                 <group>
-                    <field name="partner_ids" widget="many2many_tags"
-                           readonly="1"/>
+                    <field name="partner_id" readonly="1"/>
                     <field name="mobile" readonly="1"/>
                 </group>
                 <field name="message" widget="text" readonly="1"
