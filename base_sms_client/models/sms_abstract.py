@@ -26,11 +26,12 @@ class SmsAbstract(models.AbstractModel):
     _name = 'sms.abstract'
     _description = 'SMS Abstract Model'
 
+    mobile = fields.Char(required=True)
+    gateway_id = fields.Many2one(
+        comodel_name='sms.gateway',
+        string='SMS Gateway'
+    )
     code = fields.Char('Verification Code')
-    body = fields.Text(
-        string='Message Body',
-        help="The message text that will be send along with the"
-             " email which is send through this server.")
     classes = fields.Selection(
         selection=CLASSES_LIST, string='Class',
         default='1',

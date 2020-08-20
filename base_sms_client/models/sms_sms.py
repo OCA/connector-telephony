@@ -14,7 +14,8 @@ class SmsSms(models.Model):
     _name = 'sms.sms'
     _description = 'SMS'
     _rec_name = 'mobile'
-    _inherit = 'sms.abstract'
+    _inherits = {'mail.message': 'mail_message_id'}
+    _inherit = ['sms.abstract']
 
     message = fields.Text(
         size=256,
@@ -111,14 +112,33 @@ class SmsSms(models.Model):
                     with sms._cr.savepoint():
                         getattr(sms, "_send_%s" % sms.gateway_id.method)()
                         sms.write({'state': 'sent', 'error': ''})
+                        if (
+                            sms.mail_message_id
+                            and sms.mail_message_id.notification_ids
+                        ):
+                            sms.mail_message_id.notification_ids.sudo().write(
+                                {'email_status': 'sent'}
+                            )
                 except Exception as e:
                     _logger.error('Failed to send sms %s', e)
                     sms.write({'error': e, 'state': 'error'})
+                    if (
+                        sms.mail_message_id
+                        and sms.mail_message_id.notification_ids
+                    ):
+                        sms.mail_message_id.notification_ids.sudo().write(
+                            {'email_status': 'exception', 'failure_reason': e}
+                        )
         return allsend_ok
 
     @api.multi
     def cancel(self):
         self.write({'state': 'cancel'})
+        for rec in self:
+            if rec.mail_message_id and rec.mail_message_id.notification_ids:
+                rec.mail_message_id.notification_ids.sudo().write(
+                    {'email_status': 'canceled'}
+                )
 
     @api.multi
     def retry(self):

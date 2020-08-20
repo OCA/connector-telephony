@@ -12,7 +12,7 @@ from odoo.tools import pycompat
 class SmsTemplate(models.Model):
 
     _name = 'sms.template'
-    _inherit = ["mail.template", "sms.sms"]
+    _inherit = ["mail.template", "sms.abstract"]
     _description = 'Sms Template'
 
     message = fields.Text(translate=True)

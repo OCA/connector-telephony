@@ -72,6 +72,14 @@ class WizardMassSms(models.TransientModel):
             'partner_id': partner.id,
             'mobile': partner.mobile,
             'company_id': self.env.user.company_id.id,
+            # mail.message values
+            'body': self.message,
+            'partner_ids': [(6, 0, partner.ids)],
+            'needaction_partner_ids': [(6, 0, partner.ids)],
+            'model': partner._name,
+            'res_id': partner.id,
+            'record_name': partner.name,
+            'message_type': 'sms',
         }
 
     @api.multi
