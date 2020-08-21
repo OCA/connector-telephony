@@ -64,11 +64,23 @@ class SmsTemplate(models.Model):
             # update values for all res_ids
             for res_id in template_res_ids:
                 values = results[res_id]
+                partner_ids = values['partner_ids']
+                partner_id = (
+                    partner_ids[0]
+                    if partner_ids and isinstance(partner_ids, list)
+                    else False
+                )
                 values.update(
                     gateway_id=template.gateway_id.id or False,
                     auto_delete=template.auto_delete,
+                    partner_id=partner_id,
+                    # mail.message values
+                    body=values['message'],
+                    partner_ids=[(6, 0, partner_ids)],
+                    needaction_partner_ids=[(6, 0, partner_ids)],
                     model=template.model,
                     res_id=res_id or False,
+                    message_type='sms',
                 )
 
         return results
@@ -77,29 +89,9 @@ class SmsTemplate(models.Model):
     def send_sms(
         self, res_id, force_send=False, raise_exception=False, sms_values=None
     ):
-        mobiles = []
         self.ensure_one()
-        sms_model = self.env['sms.sms']
-        partner_model = self.env['res.partner']
-        vals_list = []
         generated_sms = self.generate_sms(res_id)
-        for value in generated_sms.values():
-            value.update(sms_values or {})
-            if 'mobile' in value and not value.get('mobile'):
-                value.pop('mobile')
-            for partner_id in value.get('partner_ids', list()):
-                vals = value.copy()
-                mobile = partner_model.browse(partner_id).mobile
-                vals.update({'partner_id': partner_id, 'mobile': mobile})
-                vals_list.append(vals)
-                mobiles.append(mobile)
-            if 'mobile' in value:
-                for mobile in value['mobile'].split(','):
-                    if mobile not in mobiles:
-                        vals = value.copy()
-                        vals.update({'mobile': mobile})
-                        vals_list.append(vals)
-        sms = sms_model.create(vals_list)
+        sms = self.env['sms.sms'].create(list(generated_sms.values()))
         if force_send:
             sms.send(raise_exception=raise_exception)
         return sms.ids
