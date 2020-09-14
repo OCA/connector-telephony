@@ -16,6 +16,7 @@ setuptools.setup(
         'odoo12-addon-event_phone',
         'odoo12-addon-hr_phone',
         'odoo12-addon-hr_recruitment_phone',
+        'odoo12-addon-sms_ovh_http',
     ],
     classifiers=[
         'Programming Language :: Python',
