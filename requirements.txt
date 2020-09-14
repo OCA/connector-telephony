@@ -2,3 +2,4 @@ phonenumbers
 py-Asterisk
 Voicent-Python
 SOAPpy
+requests-mock
