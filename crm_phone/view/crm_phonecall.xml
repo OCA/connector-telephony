@@ -60,7 +60,7 @@
     <field name="name">crm.phonecall.tree</field>
     <field name="model">crm.phonecall</field>
     <field name="arch" type="xml">
-        <tree string="Phone Calls" editable="top">
+        <tree string="Phone Calls">
             <field name="date"/>
             <field name="name"/>
             <field name="partner_id"/>
@@ -70,7 +70,7 @@
             <field name="direction"/>
             <field name="state"/>
             <button name="schedule_another_call" type="object"
-                string="Schedule Another Call" icon="terp-call-start"/>
+                string="Schedule Another Call" icon="fa fa-arrow-circle-right"/>
         </tree>
     </field>
 </record>
