@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2020 KMEE
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<odoo>
+
+    <record model="ir.ui.view" id="iap_account_form_view">
+        <field name="name">iap.account.form (in sms_nexmo)</field>
+        <field name="model">iap.account</field>
+        <field name="inherit_id" ref="iap.iap_account_view_form"/>
+        <field name="arch" type="xml">
+            <field name="account_token" position="after">
+                <field name="key"/>
+                <field name="secret"/>
+            </field>
+        </field>
+    </record>
+
+
+</odoo>
