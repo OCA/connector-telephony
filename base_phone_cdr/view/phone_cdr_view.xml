@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_phone_cdr_form" model="ir.ui.view">
+        <field name="name">view.phone.cdr.form</field>
+        <field name="model">phone.cdr</field>
+        <field name="arch" type="xml">
+            <form string="Phone CDR" edit="false" create="false" delete="false">
+                <sheet>
+                    <group cols="4">
+                        <field name="guid" />
+                        <field name="inbound_flag" />
+                        <field name="call_start_time" />
+                        <field name="call_connect_time" />
+                        <field name="ring_time" />
+                        <field name="caller_id" />
+                        <field name="caller_id_name" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    
+    <record id="view_phone_cdr_tree" model="ir.ui.view">
+        <field name="name">view.phone.cdr.tree</field>
+        <field name="model">phone.cdr</field>
+        <field name="arch" type="xml">
+            <tree edit="false" create="false" delete="false">
+                        <field name="guid" />
+                        <field name="inbound_flag" />
+                        <field name="call_start_time" />
+                        <field name="call_connect_time" />
+                        <field name="ring_time" />
+                        <field name="caller_id" />
+                        <field name="caller_id_name" />
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="phone_cdr_view_action">
+        <field name="name">Phone Records</field>
+        <field name="view_id" ref="view_phone_cdr_tree"/>
+        <field name="res_model">phone.cdr</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+</odoo>

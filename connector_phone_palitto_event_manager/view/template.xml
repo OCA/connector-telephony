@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <template id="assets_backend" name="web_widget_color assets" inherit_id="web.assets_backend">
+        <xpath expr="." position="inside">
+            <script type="text/javascript" src="/connector_phone_palitto_event_manager/static/src/js/widget.js"></script>
+        </xpath>
+    </template>
+
+</odoo>

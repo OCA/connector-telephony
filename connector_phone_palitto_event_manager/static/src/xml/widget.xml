@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates>
+    <t t-name="OutGoingNotification" t-extend="Notification">
+        <t t-jquery=".o_notification_title > t" t-operation="replace">
+            <span t-attf-class="link2event eid_{{widget.eid}}">
+                <t t-esc="widget.title"/>
+            </span>
+        </t>
+        <t t-jquery=".o_notification_content" t-operation="append">
+            <br/>
+            <br/>
+            <button type="button" class="btn btn-primary link2event oe_highlight oe_form oe_button">
+                <span>OK</span>
+            </button>
+            <button type="button" class="btn btn-link link2recall">Cancel</button>
+        </t>
+    </t>
+    <t t-name="IncomingNotification" t-extend="Notification">
+        <t t-jquery=".o_notification_title > t" t-operation="replace">
+            <span t-attf-class="link2event eid_{{widget.eid}}">
+                <t t-esc="widget.title"/>
+            </span>
+        </t>
+        <t t-jquery=".o_notification_content" t-operation="append">
+            <br/>
+            <br/>
+            <button type="button" class="btn btn-primary link2event oe_highlight oe_form oe_button">
+                <span>Open Contact</span>
+            </button>
+            <button type="button" class="btn btn-link link2recall">Cancel</button>
+        </t>
+    </t>
+    <t t-name="FieldColor">
+        <span t-attf-class="oe_form_field {{widget.widget_class}}" t-att-style="widget.attrs.style">
+            <input type="text" t-att-id="widget.id_for_label" t-att-tabindex="widget.attrs.tabindex" t-att-autofocus="widget.attrs.autofocus" t-att-placeholder="widget.attrs.placeholder" t-att-maxlength="widget.field.size" t-att-value="widget.value or ''" class="o_input" t-if="widget.mode !== 'readonly'"/>
+            <t t-else="">
+                
+            </t>
+        </span>
+    </t>
+</templates>
