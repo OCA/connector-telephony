@@ -26,3 +26,10 @@ class PhoneCDR(models.Model):
                             string='Compute ring time')
     caller_id = fields.Char('Caller ID')
     caller_id_name = fields.Char('Caller ID Name')
+    state = fields.Selection([('offering', 'Offering'),
+                              ('connected', 'Connected'),
+                              ('missed', 'Missed'),
+                              ('on_hold', 'On Hold'),
+                              ('completed', 'Completed')],
+                              string="Status",
+                              default='offering')
