@@ -5,7 +5,8 @@
     'depends': ['base_phone_popup','web_notify'],
     'data': [
         'view/phone_cdr_view.xml',
-        'security/ir.model.access.csv'
+        'security/ir.model.access.csv',
+        'view/res_users_view.xml'
     ],
     'qweb': [
         'static/src/xml/widget.xml',

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_users_form" model="ir.ui.view">
+        <field name="name">base_phone.res.users.telephony_tab</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='preferences']" position="before">
+                <group name="phone-preferences" string="Telephony Preferences">
+                    <field name="related_phone"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>

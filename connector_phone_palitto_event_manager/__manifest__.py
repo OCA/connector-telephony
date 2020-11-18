@@ -2,7 +2,7 @@
     'name': "connector Phone Palitto Event Manager",
     'category': "web",
     'version': "12.0.1.0.1",
-    'depends': ['web', 'base_phone_popup','web_notify'],
+    'depends': ['base_phone_cdr'],
     'data': [
         'view/template.xml'
     ],
