@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from odoo import api, models, _
 from odoo.addons.web.controllers.main import clean_action
 import logging

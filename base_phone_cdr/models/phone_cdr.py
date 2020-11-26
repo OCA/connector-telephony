@@ -30,6 +30,7 @@ class PhoneCDR(models.Model):
     call_connect_time = fields.Datetime('Call connect time')
     ring_time = fields.Datetime(compute="_compute_ring_time",
                             string='Compute ring time')
+    talk_time = fields.Datetime('Talk Time')
     caller_id = fields.Char('Caller ID')
     caller_id_name = fields.Char('Caller ID Name')
     caller_id2 = fields.Char('Caller ID')
