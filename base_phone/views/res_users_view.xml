@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+  Copyright 2010-2018 Akretion France
+  @author: Alexis de Lattre <alexis.delattre@akretion.com>
+  License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+-->
+<odoo>
+    <record id="view_users_form" model="ir.ui.view">
+        <field name="name">base_phone.res.users.telephony_tab</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form" />
+        <field name="arch" type="xml">
+            <notebook position="inside">
+                <page string="Telephony" name="phone" invisible="1">
+                    <!-- Empty page, which will be used by other phone modules -->
+                    <group name="phone-preferences" string="Telephony Preferences">
+                    </group>
+                </page>
+            </notebook>
+        </field>
+    </record>
+    <record id="view_users_form_simple_modif" model="ir.ui.view">
+        <field name="name">base_phone.user_preferences.view</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form_simple_modif" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='email']" position="after">
+                <group name="phone" string="Telephony Preferences" invisible="1">
+                <!-- Empty group, that is used by other phone modules -->
+            </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>
