@@ -8,7 +8,10 @@ from odoo import fields, models
 class IapAccount(models.Model):
     _inherit = "iap.account"
 
-    provider = fields.Selection(selection_add=[("sms_ovh_http", "SMS OVH http")])
+    provider = fields.Selection(
+        selection_add=[("sms_ovh_http", "SMS OVH http")],
+        ondelete={"sms_ovh_http": "cascade"},
+    )
     sms_ovh_http_account = fields.Char(string="Account")
     sms_ovh_http_login = fields.Char(string="Login")
     sms_ovh_http_password = fields.Char(string="Password")
