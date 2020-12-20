@@ -45,3 +45,25 @@ class SendSmsCase(SavepointCase):
                     "login": ["bar"],
                 },
             )
+
+    def test_partner_message_sms(self):
+        with requests_mock.Mocker() as m:
+            m.get(OVH_HTTP_ENDPOINT, text="OK")
+            partner = self.env["res.partner"].create(
+                {"name": "FOO", "mobile": "+3360707070707"}
+            )
+            partner._message_sms("Alpha Bravo Charlie")
+            self.assertEqual(len(m.request_history), 1)
+            params = m.request_history[0].qs
+            self.assertEqual(
+                params,
+                {
+                    "nostop": ["1"],
+                    "from": ["+33642424242"],
+                    "password": ["secret"],
+                    "message": ["alpha bravo charlie"],
+                    "to": ["+3360707070707"],
+                    "smsaccount": ["foo"],
+                    "login": ["bar"],
+                },
+            )
