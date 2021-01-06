@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-
-    <menuitem id="phone_cdr_"
-              name="Phone Records"
-              parent="crm.crm_menu_report"
-              action="base_phone_cdr.phone_cdr_view_action"/>
-
+    <menuitem
+        id="phone_cdr_"
+        name="Phone Records"
+        parent="crm.crm_menu_report"
+        action="base_phone_cdr.phone_cdr_view_action"
+    />
 </odoo>
