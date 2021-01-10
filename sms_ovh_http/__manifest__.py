@@ -15,7 +15,10 @@
     "installable": True,
     "external_dependencies": {"python": [], "bin": []},
     "depends": ["base_phone", "sms", "iap_alternative_provider"],
-    "data": ["views/iap_account_view.xml"],
+    "data": [
+        "views/iap_account_view.xml",
+        "views/sms_sms_view.xml",
+    ],
     "demo": [],
     "qweb": [],
 }
