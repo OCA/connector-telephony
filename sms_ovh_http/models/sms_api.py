@@ -28,7 +28,11 @@ class SmsApi(models.AbstractModel):
     def _get_sms_account(self):
         return self.env["iap.account"].get("sms")
 
-    def _send_sms_with_ovh_http(self, number, message):
+    def _send_sms_with_ovh_http(self, number, message, sms_id):
+        # Try to return same error code like odoo
+        # list is here: self.IAP_TO_SMS_STATE
+        if not number:
+            return "wrong_number_format"
         account = self._get_sms_account()
         r = requests.get(
             OVH_HTTP_ENDPOINT,
@@ -36,17 +40,25 @@ class SmsApi(models.AbstractModel):
         )
         response = r.text
         if response[0:2] != "OK":
-            raise ValueError(response)
+            self.env["sms.sms"].browse(sms_id).error_detail = response
+            return "server_error"
+        return "success"
 
     def _is_sent_with_ovh(self):
         return self._get_sms_account().provider == "sms_ovh_http"
 
     @api.model
-    def _send_sms(self, number, message):
+    def _send_sms(self, numbers, message):
         if self._is_sent_with_ovh():
-            self._send_sms_with_ovh_http(number, message)
+            # This method seem to be deprecated (no odoo code use it)
+            # as OVH do not support it we do not support it
+            # Note: if you want to implement it becarefull just looping
+            # on the list of number is not the right way to do it.
+            # If you have an error, you will send and send again the same
+            # message
+            raise NotImplementedError
         else:
-            return super()._send_sms(number, message)
+            return super()._send_sms(numbers, message)
 
     @api.model
     def _send_sms_batch(self, messages):
@@ -55,7 +67,9 @@ class SmsApi(models.AbstractModel):
                 # we already have inherited the split_batch method on sms.sms
                 # so this case shouldsnot append
                 raise UserError(_("Batch sending is not support with OVH"))
-            self._send_sms(messages[0]["number"], messages[0]["content"])
-            return [{"state": "success", "credit": 0, "res_id": messages[0]["res_id"]}]
+            state = self._send_sms_with_ovh_http(
+                messages[0]["number"], messages[0]["content"], messages[0]["res_id"]
+            )
+            return [{"state": state, "credit": 0, "res_id": messages[0]["res_id"]}]
         else:
             return super()._send_sms_batch(messages)
