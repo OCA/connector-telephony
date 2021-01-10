@@ -30,7 +30,15 @@ class SendSmsCase(SavepointCase):
     def test_sending_sms(self):
         with requests_mock.Mocker() as m:
             m.get(OVH_HTTP_ENDPOINT, text="OK")
-            self.env["sms.api"]._send_sms("+3360707070707", "Alpha Bravo Charlie")
+            self.env["sms.api"]._send_sms_batch(
+                [
+                    {
+                        "number": "+3360707070707",
+                        "content": "Alpha Bravo Charlie",
+                        "res_id": 42,
+                    }
+                ]
+            )
             self.assertEqual(len(m.request_history), 1)
             params = m.request_history[0].qs
             self.assertEqual(
