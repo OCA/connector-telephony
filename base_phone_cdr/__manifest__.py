@@ -4,8 +4,8 @@
     "name": "Base Phone CDR",
     "category": "web",
     "version": "12.0.1.0.0",
-    "author": "Serpent Consulting Services Pvt. Ltd., Odoo Community Association (OCA)",
-    "depends": ["base_phone_popup", "web_notify"],
+    "author": "Open Source Integrators, Odoo Community Association (OCA)",
+    "depends": ["base_phone_popup"],
     "data": [
         "view/phone_cdr_view.xml",
         "security/ir.model.access.csv",
