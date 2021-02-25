@@ -157,6 +157,7 @@ class SmsSms(models.Model):
     _name = 'sms.sms'
     _description = 'SMS'
     _rec_name = 'mobile'
+    _order = 'id desc'
 
     message = fields.Text(
         size=256,

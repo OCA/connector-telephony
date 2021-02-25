@@ -26,7 +26,7 @@
                                     <field name="sms_account_visible" invisible="1"/>
                                     <field name="login_provider" attrs="{'invisible': [('login_provider_visible', '=', False),]}"/>
                                     <field name="login_provider_visible" invisible="1"/>
-                                    <field name="password_provider" attrs="{'invisible': [('password_provider_visible', '=', False),]}"/>
+                                    <field name="password_provider" attrs="{'invisible': [('password_provider_visible', '=', False)]}"/>
                                     <field name="password_provider_visible" invisible="1"/>
                                     <field name="from_provider" attrs="{'invisible': [('from_provider_visible', '=', False),]}"/>
                                     <field name="from_provider_visible" invisible="1"/>

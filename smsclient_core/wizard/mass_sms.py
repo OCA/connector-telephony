@@ -68,7 +68,7 @@ class WizardSendSms(models.TransientModel):
     gateway_id = fields.Many2one(
         'sms.gateway',
         required=True,
-        default=_default_get_gateway)
+        default=lambda self: self._default_get_gateway())
     message = fields.Text(required=True)
     validity = fields.Integer(
         help='The maximum time -in minute(s)- before the message is dropped')
@@ -94,4 +94,5 @@ class WizardSendSms(models.TransientModel):
     nostop = fields.Boolean(
         help='Do not display STOP clause in the message, this requires that '
              'this is not an advertising message')
-    partner_ids = fields.Many2many('res.partner', default=_default_get_partner)
+    partner_ids = fields.Many2many(
+        'res.partner', default=lambda self: self._default_get_partner())
