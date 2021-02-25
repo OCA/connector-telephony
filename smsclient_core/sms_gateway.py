@@ -251,8 +251,9 @@ class SmsSms(models.Model):
                     with sms._cr.savepoint():
                         getattr(sms, "_send_%s" % sms.gateway_id.method)()
                         sms.write({'state': 'sent', 'error': ''})
+                        _logger.info('SMS ID %d sent', sms.id)
                 except Exception, e:
-                    _logger.error('Failed to send sms %s', e)
+                    _logger.error('Failed to send SMS ID %d. Error: %s', sms.id, e)
                     sms.write({'error': e, 'state': 'error'})
                 sms._cr.commit()
         return True

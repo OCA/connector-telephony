@@ -83,7 +83,6 @@
         <record model="ir.actions.act_window" id="action_sms_gateway_tree">
             <field name="name">SMS Gateway</field>
             <field name="res_model">sms.gateway</field>
-            <field name="view_type">form</field>
             <field name="view_mode">form,tree</field>
             <field name="view_id" ref="sms_gateway_tree" />
         </record>
@@ -143,7 +142,6 @@
         <record model="ir.actions.act_window" id="action_sms_sms_tree">
             <field name="name">Sms</field>
             <field name="res_model">sms.sms</field>
-            <field name="view_type">form</field>
             <field name="view_mode">form,tree</field>
             <field name="view_id" ref="sms_sms_tree" />
         </record>

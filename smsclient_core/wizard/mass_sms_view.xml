@@ -50,6 +50,7 @@
             view_mode="form"
             target="new"
             key2="client_action_multi"
-            id="action_wizard_send_sms" />
+	    id="action_wizard_send_sms"
+	    groups="smsclient_core.group_sms_user" />
     </data>
 </openerp>

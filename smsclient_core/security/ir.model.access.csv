@@ -1,4 +1,3 @@
 "id","name","model_id:id","group_id:id","perm_read","perm_write","perm_create","perm_unlink"
 "access_sms_gateway_global","sms.gateway Global","model_sms_gateway",,1,0,0,0
-"access_sms_sms_global","sms.sms Global","model_sms_sms",,1,0,0,0
 "access_sms_sms_user","sms.sms User","model_sms_sms","group_sms_user",1,1,1,1
