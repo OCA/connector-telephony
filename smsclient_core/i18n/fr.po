@@ -51,7 +51,7 @@ msgstr "Texte du SMS"
 #: code:addons/gateway/wizard/verifycode.py:43
 #, python-format
 msgid "Gateway already verified!"
-msgstr "Cette passerelle a déjà été vérifié"
+msgstr "Cette passerelle a déjà été vérifiée"
 
 #. module: gateway
 #: field:sms.sms,name:0
@@ -83,12 +83,12 @@ msgstr "Non vérifié"
 #. module: gateway
 #: help:sms.gateway.parms,type:0
 msgid "If parameter concern a value to substitute, indicate it"
-msgstr "Si le paramètre concerne une valeur à substituer, indiquer le"
+msgstr "Si le paramètre concerne une valeur à substituer, indiquez-le"
 
 #. module: gateway
 #: selection:sms.sms,state:0
 msgid "Sent"
-msgstr "Envoyer"
+msgstr "Envoyé"
 
 #. module: gateway
 #: help:sms.gateway.code.verify,init,code:0
@@ -120,7 +120,7 @@ msgstr "Permission"
 #. module: gateway
 #: help:sms.gateway.parms,value:0
 msgid "Value associate on the property for the URL"
-msgstr "Valeur associé à la propriété pour l'adresse"
+msgstr "Valeur associée à la propriété pour l'adresse"
 
 #. module: gateway
 #: field:sms.gateway,code:0
@@ -133,7 +133,7 @@ msgstr "Code de vérifcation"
 #, python-format
 msgid "Verification Failed. Please check the Server Configuration!"
 msgstr ""
-"Échec de vérification. Merci de vérifier le serveur de configuration!"
+"Échec de la vérification. Merci de vérifier la configuration du serveur !"
 
 #. module: gateway
 #: code:addons/gateway/gateway.py:72
@@ -179,7 +179,7 @@ msgstr "Propriétés du client SMS"
 #. module: gateway
 #: selection:sms.gateway.parms,type:0
 msgid "Password"
-msgstr "Mot de Passe"
+msgstr "Mot de passe"
 
 #. module: gateway
 #: field:sms.gateway,users_id:0
@@ -232,7 +232,7 @@ msgstr ""
 msgid ""
 "The message text that will be send along with the email which is send "
 "through this server"
-msgstr "Le message texte qui sera envoyé avec l'email envoyé par ce serveur"
+msgstr "Le texte du message qui sera envoyé avec l'email envoyé par ce serveur"
 
 #. module: gateway
 #: wizard_button:sms.gateway.code.send,init,end:0
@@ -276,7 +276,7 @@ msgstr "Historique des SMS"
 #: code:addons/gateway/wizard/verifycode.py:48
 #, python-format
 msgid "Verification failed. Invalid Verification Code!"
-msgstr "Échec de vérification. Code de vérification non valide!"
+msgstr "Échec de vérification. Code de vérification non valide !"
 
 #. module: gateway
 #: selection:sms.sms,state:0
