@@ -60,8 +60,7 @@ class WizardSendSms(models.TransientModel):
     @api.multi
     def send(self):
         sms_obj = self.env['sms.sms']
-        partner_obj = self.env['res.partner']
-        for partner in partner_obj.browse(self._context.get('active_ids')):
+        for partner in self.partner_ids:
             vals = self._prepare_sms_vals(partner)
             sms_obj.create(vals)
 
