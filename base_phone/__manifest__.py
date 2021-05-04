@@ -10,7 +10,7 @@
     "license": "AGPL-3",
     "summary": "Validate phone numbers",
     "author": "Akretion,Odoo Community Association (OCA)",
-    "website": "http://www.akretion.com/",
+    "website": "https://github.com/OCA/connector-telephony",
     "depends": ["phone_validation", "base_setup"],
     "external_dependencies": {"python": ["phonenumbers"]},
     "data": [
