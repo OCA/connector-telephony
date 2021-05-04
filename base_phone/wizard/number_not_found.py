@@ -74,7 +74,6 @@ class NumberNotFound(models.TransientModel):
                     res["calling_number"],
                     e,
                 )
-                pass
         return res
 
     def create_partner(self):
