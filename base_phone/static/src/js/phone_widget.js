@@ -3,7 +3,7 @@
    @author: Alexis de Lattre <alexis.delattre@akretion.com>
    License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). */
 
-odoo.define("base_phone.updatedphone_widget", function(require) {
+odoo.define("base_phone.updatedphone_widget", function (require) {
     "use strict";
 
     var core = require("web.core");
@@ -12,16 +12,16 @@ odoo.define("base_phone.updatedphone_widget", function(require) {
 
     FieldPhone.include({
         /* Always enable phone link tel:, not only on small screens  */
-        _canCall: function() {
+        _canCall: function () {
             return true;
         },
-        showDialButton: function() {
+        showDialButton: function () {
             // Must be inherited by ipbx specific modules
             // and set to true
             return false;
         },
 
-        _renderReadonly: function() {
+        _renderReadonly: function () {
             // Create a link to trigger action on server
             // this link will be after the <a href="tel:">
             this._super();
@@ -47,12 +47,12 @@ odoo.define("base_phone.updatedphone_widget", function(require) {
 
             var phone_num = this.value;
             /* eslint-disable no-unused-vars */
-            dial.click(function(evt) {
+            dial.click(function (evt) {
                 self.click2dial(phone_num);
             });
             /* eslint-enable no-unused-vars */
         },
-        click2dial: function(phone_num) {
+        click2dial: function (phone_num) {
             var self = this;
             this.do_notify(
                 _.str.sprintf(_t("Click2dial to %s"), phone_num),
@@ -71,7 +71,7 @@ odoo.define("base_phone.updatedphone_widget", function(require) {
                 args: [phone_num],
             }).then(
                 /* eslint-disable no-unused-vars */
-                function(r) {
+                function (r) {
                     console.log("successfull", r);
                     if (r === false) {
                         self.do_warn("Click2dial failed");
@@ -95,7 +95,7 @@ odoo.define("base_phone.updatedphone_widget", function(require) {
                         }
                     }
                 },
-                function(r) {
+                function (r) {
                     console.log("on error");
                     self.do_warn("Click2dial failed");
                 }
