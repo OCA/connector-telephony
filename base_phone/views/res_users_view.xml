@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <!--
-  Copyright 2010-2018 Akretion France
+  Copyright 2010-2021 Akretion France (http://www.akretion.com/)
   @author: Alexis de Lattre <alexis.delattre@akretion.com>
   License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 -->
@@ -24,11 +24,16 @@
         <field name="model">res.users</field>
         <field name="inherit_id" ref="base.view_users_form_simple_modif" />
         <field name="arch" type="xml">
-            <xpath expr="//field[@name='email']" position="after">
-                <group name="phone" string="Telephony Preferences" invisible="1">
-                <!-- Empty group, that is used by other phone modules -->
+            <group name="signature" position="before">
+                <group name="phone" invisible="1">
+                    <!-- Empty group, that is used by other phone modules
+                         We set it as invisible even if it is empty.
+                         That way, we can add a field in this group in crm_phone
+                         and have that field invisible. It is inherited by
+                         the module asterisk_click2dial to set it to invisible=0
+                    -->
+                </group>
             </group>
-            </xpath>
         </field>
     </record>
 </odoo>

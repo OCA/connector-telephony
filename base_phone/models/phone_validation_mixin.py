@@ -1,4 +1,4 @@
-# Copyright 2018 Akretion France
+# Copyright 2018-2021 Akretion France (http://www.akretion.com/)
 # @author: Alexis de Lattre <alexis.delattre@akretion.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
@@ -14,4 +14,4 @@ class PhoneValidationMixin(models.AbstractModel):
             return self.country_id
         if "partner_id" in self and self.partner_id and self.partner_id.country_id:
             return self.partner_id.country_id
-        return self.env.user.company_id.country_id
+        return self.env.company.country_id
