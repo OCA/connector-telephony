@@ -1,4 +1,4 @@
-# Copyright 2012-2019 Akretion France (http://www.akretion.com/)
+# Copyright 2012-2021 Akretion France (http://www.akretion.com/)
 # @author: Alexis de Lattre <alexis.delattre@akretion.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
@@ -34,16 +34,7 @@ class ReformatAllPhonenumbers(models.TransientModel):
                 obj._name,
                 fields,
             )
-            # search if this object has an 'active' field
-            if obj._fields.get("active") or obj._name == "hr.employee":
-                # hr.employee inherits from 'resource.resource' and
-                # 'resource.resource' has an active field
-                # As I don't know how to detect such cases, I hardcode it here
-                # If you know a better solution, please submit a pull request
-                domain = ["|", ("active", "=", True), ("active", "=", False)]
-            else:
-                domain = []
-            all_entries = obj.search(domain)
+            all_entries = obj.with_context(active_test=False).search([])
 
             for entry in all_entries:
                 vals = {}
