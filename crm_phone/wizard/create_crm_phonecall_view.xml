@@ -13,9 +13,7 @@
     <field name="model">wizard.create.crm.phonecall</field>
     <field name="arch" type="xml">
         <form string="CRM Phone Call">
-            <group name="main">
-                <label string="Create a phone call in the CRM ?" for="id"/>
-            </group>
+            <div>Create a phone call in the CRM ?</div>
             <footer>
                 <button name="button_create_outgoing_phonecall" string="Yes" type="object" class="btn-primary"/>
                 <button special="cancel" string="No" class="oe_link"/>
