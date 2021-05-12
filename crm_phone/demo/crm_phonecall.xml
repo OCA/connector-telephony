@@ -1,11 +1,11 @@
-<?xml version="1.0"?>
+<?xml version="1.0" ?>
 <odoo noupdate="1">
 
 
 <record id="crm_phonecall1" model="crm.phonecall">
-    <field name="date" eval="time.strftime('%Y-%m-01 11:42:12')"/>
-    <field name="partner_id" ref="base.res_partner_1"/>
-    <field name="user_id" ref="base.user_root"/>
+    <field name="date" eval="time.strftime('%Y-%m-01 11:42:12')" />
+    <field name="partner_id" ref="base.res_partner_1" />
+    <field name="user_id" ref="base.user_root" />
     <field name="name">Presentation of new product line</field>
     <field name="state">done</field>
     <field name="partner_phone">+33 4 42 12 78 12</field>
@@ -13,9 +13,9 @@
 </record>
 
 <record id="crm_phonecall2" model="crm.phonecall">
-    <field name="date" eval="time.strftime('%Y-%m-28 09:12:42')"/>
-    <field name="partner_id" ref="base.res_partner_2"/>
-    <field name="user_id" ref="base.user_demo"/>
+    <field name="date" eval="time.strftime('%Y-%m-28 09:12:42')" />
+    <field name="partner_id" ref="base.res_partner_2" />
+    <field name="user_id" ref="base.user_demo" />
     <field name="name">Close the deal</field>
     <field name="state">open</field>
     <field name="partner_phone">+33 5 43 13 79 13</field>
@@ -23,9 +23,9 @@
 </record>
 
 <record id="crm_phonecall3" model="crm.phonecall">
-    <field name="date" eval="time.strftime('%Y-%m-27 09:45:42')"/>
-    <field name="partner_id" ref="base.res_partner_address_3"/>
-    <field name="user_id" ref="base.user_demo"/>
+    <field name="date" eval="time.strftime('%Y-%m-27 09:45:42')" />
+    <field name="partner_id" ref="base.res_partner_address_3" />
+    <field name="user_id" ref="base.user_demo" />
     <field name="name">Lobby about our offer</field>
     <field name="state">open</field>
     <field name="partner_phone">+33 5 43 13 79 14</field>
@@ -33,9 +33,9 @@
 </record>
 
 <record id="crm_phonecall4" model="crm.phonecall">
-    <field name="date" eval="time.strftime('%Y-%m-26 09:45:42')"/>
-    <field name="opportunity_id" ref="crm.crm_case_2"/>
-    <field name="user_id" ref="base.user_root"/>
+    <field name="date" eval="time.strftime('%Y-%m-26 09:45:42')" />
+    <field name="opportunity_id" ref="crm.crm_case_2" />
+    <field name="user_id" ref="base.user_root" />
     <field name="name">Remote Demo of the software</field>
     <field name="state">open</field>
     <field name="partner_phone">+33 7 89 32 04 21</field>
@@ -43,9 +43,9 @@
 </record>
 
 <record id="crm_phonecall5" model="crm.phonecall">
-    <field name="date" eval="time.strftime('%Y-%m-02 09:45:42')"/>
-    <field name="opportunity_id" ref="crm.crm_case_1"/>
-    <field name="user_id" ref="base.user_demo"/>
+    <field name="date" eval="time.strftime('%Y-%m-02 09:45:42')" />
+    <field name="opportunity_id" ref="crm.crm_case_1" />
+    <field name="user_id" ref="base.user_demo" />
     <field name="name">Asked training program</field>
     <field name="state">done</field>
     <field name="partner_phone">+33 3 89 32 04 42</field>
