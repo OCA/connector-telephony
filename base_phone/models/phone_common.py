@@ -1,4 +1,4 @@
-# Copyright 2010-2018 Akretion France (http://www.akretion.com/)
+# Copyright 2010-2021 Akretion France (http://www.akretion.com/)
 # @author: Alexis de Lattre <alexis.delattre@akretion.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
@@ -48,7 +48,7 @@ class PhoneCommon(models.AbstractModel):
             )
 
         nr_digits_to_match_from_end = (
-            self.env.user.company_id.number_of_digits_to_match_from_end
+            self.env.company.number_of_digits_to_match_from_end
         )
         if len(presented_number) >= nr_digits_to_match_from_end:
             end_number_to_match = presented_number[
@@ -72,15 +72,16 @@ class PhoneCommon(models.AbstractModel):
             for field in obj_dict["fields"]:
                 sql_where.append("replace(%s, ' ', '') ilike %%s" % field)
                 sql_args.append(pg_search_number)
-            # sql = sql + " or ".join(sql_where)
-            sql = u"%s or %s", sql, tuple(sql_where)
-            _logger.debug("get_record_from_phone_number sql=%s", sql)
+            sql += " or ".join(sql_where)
+            _logger.debug(
+                "get_record_from_phone_number sql=%s sql_args=%s", sql, sql_args
+            )
             self._cr.execute(sql, tuple(sql_args))
             res_sql = self._cr.fetchall()
             if len(res_sql) > 1:
                 res_ids = [x[0] for x in res_sql]
                 _logger.warning(
-                    u"There are several %s (IDS = %s) with a phone number "
+                    "There are several %s (IDS = %s) with a phone number "
                     "ending with '%s'. Taking the first one.",
                     obj._name,
                     res_ids,
@@ -89,10 +90,12 @@ class PhoneCommon(models.AbstractModel):
             if res_sql:
                 obj_id = res_sql[0][0]
                 res_obj = obj.browse(obj_id)
-                name = res_obj.display_name
+                # Use name_get()[0][1] instead of display_name
+                # to take the context into account with the callerid key
+                name = res_obj.name_get()[0][1]
                 res = (obj._name, res_obj.id, name)
                 _logger.debug(
-                    u"Answer get_record_from_phone_number: (%s, %d, %s)",
+                    "Answer get_record_from_phone_number: (%s, %d, %s)",
                     res[0],
                     res[1],
                     res[2],
@@ -100,7 +103,7 @@ class PhoneCommon(models.AbstractModel):
                 return res
             else:
                 _logger.debug(
-                    u"No match on %s for end of phone number '%s'",
+                    "No match on %s for end of phone number '%s'",
                     obj._name,
                     end_number_to_match,
                 )
@@ -131,8 +134,8 @@ class PhoneCommon(models.AbstractModel):
         res = []
         for lambd in phoneobj_sorted:
             res.append(lambd[1])
-        # [{'fields': ['fax', 'phone', 'mobile'], 'object': res.partner()},
-        #  {'fields': ['fax', 'phone', 'mobile'], 'object': crm.lead()}]
+        # [{'fields': ['phone', 'mobile'], 'object': res.partner()},
+        #  {'fields': ['phone', 'mobile'], 'object': crm.lead()}]
         return res
 
     @api.model
@@ -155,7 +158,7 @@ class PhoneCommon(models.AbstractModel):
         # erp_number are supposed to be in International format, so no need to
         # give a country code here
         parsed_num = phonenumbers.parse(erp_number, None)
-        country_code = self.env.user.company_id.country_id.code
+        country_code = self.env.company.country_id.code
         assert country_code, "Missing country on company"
         _logger.debug("Country code = %s" % country_code)
         to_dial_number = phonenumbers.format_out_of_country_calling_number(
