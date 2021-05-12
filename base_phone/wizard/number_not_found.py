@@ -1,4 +1,4 @@
-# Copyright 2010-2018 Akretion France
+# Copyright 2010-2021 Akretion France (http://www.akretion.com/)
 # @author: Alexis de Lattre <alexis.delattre@akretion.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
@@ -49,15 +49,15 @@ class NumberNotFound(models.TransientModel):
 
     @api.model
     def default_get(self, fields_list):
-        res = super(NumberNotFound, self).default_get(fields_list)
+        res = super().default_get(fields_list)
         if not res:
             res = {}
         if res.get("calling_number"):
-            if not self.env.user.company_id.country_id:
+            if not self.env.company.country_id:
                 raise UserError(
-                    _("Missing country on company %s" % self.env.user.company_id.name)
+                    _("Missing country on company %s" % self.env.company.display_name)
                 )
-            country_code = self.env.user.company_id.country_id.code
+            country_code = self.env.company.country_id.code
             try:
                 parsed_num = phonenumbers.parse(res["calling_number"], country_code)
                 res["e164_number"] = phonenumbers.format_number(
@@ -78,12 +78,12 @@ class NumberNotFound(models.TransientModel):
 
     def create_partner(self):
         """Function called by the related button of the wizard"""
-        wiz = self[0]
-        parsed_num = phonenumbers.parse(wiz.e164_number, None)
+        self.ensure_one()
+        parsed_num = phonenumbers.parse(self.e164_number, None)
         phonenumbers.number_type(parsed_num)
 
         context = dict(self._context or {})
-        context.update({"default_%s" % wiz.number_type: wiz.e164_number})
+        context["default_%s" % self.number_type] = self.e164_number
         action = {
             "name": _("Create New Partner"),
             "view_mode": "form,tree,kanban",
@@ -96,19 +96,19 @@ class NumberNotFound(models.TransientModel):
         return action
 
     def update_partner(self):
+        """Function called by the related button of the wizard"""
         self.ensure_one()
-        wiz = self[0]
-        if not wiz.to_update_partner_id:
+        if not self.to_update_partner_id:
             raise UserError(_("Select the Partner to Update."))
-        wiz.to_update_partner_id.write({wiz.number_type: wiz.e164_number})
+        self.to_update_partner_id.write({self.number_type: self.e164_number})
         action = {
-            "name": _("Partner: %s" % wiz.to_update_partner_id.name),
+            "name": _("Partner: %s" % self.to_update_partner_id.name),
             "type": "ir.actions.act_window",
             "res_model": "res.partner",
             "view_mode": "form,tree,kanban",
             "nodestroy": False,
             "target": "current",
-            "res_id": wiz.to_update_partner_id.id,
+            "res_id": self.to_update_partner_id.id,
             "context": self._context,
         }
         return action
