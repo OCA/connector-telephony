@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  Copyright 2016-2018 Akretion France
+  Copyright 2014-2021 Akretion France (http://www.akretion.com/)
   @author: Alexis de Lattre <alexis.delattre@akretion.com>
   License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 -->
@@ -8,17 +8,16 @@
 <odoo>
 
 
-<record id="view_partner_form" model="ir.ui.view">
-    <field name="name">phonecall.res.partner.form</field>
-    <field name="model">res.partner</field>
-    <field name="inherit_id" ref="base.view_partner_form"/>
-    <field name="groups_id" eval="[(4, ref('sales_team.group_sale_salesman')), (4, ref('base.group_partner_manager'))]"/>
+<record id="crm_lead_view_form" model="ir.ui.view">
+    <field name="name">crm_phone.crm_lead.form</field>
+    <field name="model">crm.lead</field>
+    <field name="inherit_id" ref="crm.crm_lead_view_form"/>
     <field name="arch" type="xml">
         <div name="button_box" position="inside">
             <button class="oe_inline oe_stat_button" type="action"
                 name="%(crm_phone.crm_phonecall_action)d"
                 icon="fa-phone"
-                context="{'search_default_partner_id': active_id}">
+                context="{'search_default_opportunity_id': active_id}">
                 <field string="Calls" name="phonecall_count" widget="statinfo"/>
              </button>
         </div>

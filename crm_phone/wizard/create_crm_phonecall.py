@@ -1,5 +1,4 @@
-# -*- coding: utf-8 -*-
-# Copyright 2012-2018 Akretion France
+# Copyright 2012-2021 Akretion France (http://www.akretion.com/)
 # @author: Alexis de Lattre <alexis.delattre@akretion.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
@@ -44,8 +43,7 @@ class WizardCreateCrmPhonecall(models.TransientModel):
         else:
             action_ctx['default_partner_phone'] =\
                 self.env.context.get('phone_number')
-        action = self.env['ir.actions.act_window'].for_xml_id(
-            'crm_phone', 'crm_phonecall_action')
+        action = self.env.ref('crm_phone.crm_phonecall_action').sudo().read()[0]
         action.update({
             'view_mode': 'form,tree,calendar',
             'views': False,

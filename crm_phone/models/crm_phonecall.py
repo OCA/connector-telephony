@@ -1,5 +1,4 @@
-# -*- coding: utf-8 -*-
-# Copyright 2012-2018 Akretion France
+# Copyright 2012-2021 Akretion France (http://www.akretion.com/)
 # @author: Alexis de Lattre <alexis.delattre@akretion.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
@@ -8,26 +7,26 @@ from odoo import api, fields, models
 
 class CrmPhonecall(models.Model):
     _name = 'crm.phonecall'
-    _inherit = ['mail.thread', 'phone.validation.mixin']
+    _description = 'Phone Call'
+    _inherit = ['mail.thread', 'mail.activity.mixin', 'phone.validation.mixin']
     _order = "id desc"
 
     # Restore the object that existed in v8
     # and doesn't exist in v9 community any more
     name = fields.Char(
-        string='Call Summary', required=True, track_visibility='onchange')
+        string='Call Summary', required=True, tracking=True)
     date = fields.Datetime(
-        string='Date', track_visibility='onchange', copy=False,
+        string='Date', tracking=True, copy=False,
         default=lambda self: fields.Datetime.now())
     description = fields.Text(string='Description', copy=False)
     company_id = fields.Many2one(
         'res.company', string='Company',
-        default=lambda self: self.env['res.company']._company_default_get(
-            'crm.phonecall'))
+        default=lambda self: self.env.company)
     user_id = fields.Many2one(
-        'res.users', string='Responsible', track_visibility='onchange',
+        'res.users', string='Responsible', tracking=True,
         default=lambda self: self.env.user)
     team_id = fields.Many2one(
-        'crm.team', string='Sales Team', track_visibility='onchange',
+        'crm.team', string='Sales Team', tracking=True,
         default=lambda self: self.env['crm.team'].sudo()._get_default_team_id(
             user_id=self.env.uid))
     partner_id = fields.Many2one(
@@ -38,16 +37,16 @@ class CrmPhonecall(models.Model):
         ('0', 'Low'),
         ('1', 'Normal'),
         ('2', 'High')
-        ], string='Priority', track_visibility='onchange', default='1')
+        ], string='Priority', tracking=True, default='1')
     opportunity_id = fields.Many2one(
         'crm.lead', string='Lead/Opportunity',
-        ondelete='cascade', track_visibility='onchange')
+        ondelete='cascade', tracking=True)
     state = fields.Selection([
         ('open', 'To Do'),
         ('done', 'Held'),
         ('cancel', 'Cancelled'),
         ], string='Status', default='open', copy=False, required=True,
-        track_visibility='onchange',
+        tracking=True,
         help='The status is set to Confirmed, when a case is created.\n'
         'When the call is over, the status is set to Held.\n'
         'If the call is not applicable anymore, the status can be set to '
@@ -83,18 +82,17 @@ class CrmPhonecall(models.Model):
 
     def schedule_another_call(self):
         self.ensure_one()
-        cur_call = self[0]
         ctx = self._context.copy()
         ctx.update({
             'default_date': False,
-            'default_partner_id': cur_call.partner_id.id,
-            'default_opportunity_id': cur_call.opportunity_id.id,
+            'default_partner_id': self.partner_id.id,
+            'default_opportunity_id': self.opportunity_id.id,
             'default_direction': 'outbound',
-            'default_partner_phone': cur_call.partner_phone,
-            'default_partner_mobile': cur_call.partner_mobile,
+            'default_partner_phone': self.partner_phone,
+            'default_partner_mobile': self.partner_mobile,
         })
-        action = self.env['ir.actions.act_window'].for_xml_id(
-            'crm_phone', 'crm_phonecall_action')
+        action = self.env.ref(
+            'crm_phone.crm_phonecall_action').sudo().read()[0]
         action.update({
             'view_mode': 'form,tree,calendar',
             'views': False,
