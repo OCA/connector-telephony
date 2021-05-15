@@ -5,85 +5,31 @@
 from odoo.tests.common import TransactionCase
 
 
-class TestCRMPhone(TransactionCase):
-    def test_phone(self):
-        company = self.env.ref("base.main_company")
-        fr_country_id = self.env.ref("base.fr").id
-        company.country_id = fr_country_id
-        rpo = self.env["res.partner"]
-        # Create an existing partner without country
-        partner1 = rpo.create(
+class TestCrmPhone(TransactionCase):
+    def setUp(self):
+        super(TestCrmPhone, self).setUp()
+        self.fr_country_id = self.env.ref("base.fr").id
+        self.phco = self.env["phone.common"]
+        self.env.company.write({"country_id": self.fr_country_id})
+        self.lead_akretion = self.env["crm.lead"].create(
             {
-                "name": "Pierre Paillet",
-                "phone": "04-72-08-87-32",
-                "mobile": "06.42.77.42.66",
+                "name": "Deployment at Akretion France",
+                "partner_name": "Akretion France",
+                "country_id": self.fr_country_id,
+                "phone": "+33 4 78 42 42 42",
             }
         )
-        partner1._onchange_phone_validation()
-        partner1._onchange_mobile_validation()
-        self.assertEqual(partner1.phone, "+33 4 72 08 87 32")
-        self.assertEqual(partner1.mobile, "+33 6 42 77 42 66")
-        # Create a partner with country
-        parent_partner2 = rpo.create(
-            {
-                "name": "C2C",
-                "country_id": self.env.ref("base.ch").id,
-            }
-        )
-        partner2 = rpo.create(
-            {
-                "name": "Joël Grand-Guillaume",
-                "parent_id": parent_partner2.id,
-                "phone": "(0) 21 619 10 10",
-                "mobile": "(0) 79 606 42 42",
-            }
-        )
-        partner2._onchange_phone_validation()
-        partner2._onchange_mobile_validation()
-        self.assertEqual(partner2.country_id, self.env.ref("base.ch"))
-        self.assertEqual(partner2.phone, "+41 21 619 10 10")
-        self.assertEqual(partner2.mobile, "+41 79 606 42 42")
-        # Write on an existing partner
-        partner3 = rpo.create(
-            {
-                "name": "Belgian corp",
-                "country_id": self.env.ref("base.be").id,
-            }
-        )
-        partner3.write({"phone": "(0) 2 391 43 74"})
-        partner3._onchange_phone_validation()
-        self.assertEqual(partner3.phone, "+32 2 391 43 74")
-        # Write on an existing partner with country at the same time
-        partner3.write(
-            {
-                "phone": "04 72 89 32 43",
-                "country_id": fr_country_id,
-            }
-        )
-        partner3._onchange_phone_validation()
-        self.assertEqual(partner3.phone, "+33 4 72 89 32 43")
-        # Test get_name_from_phone_number
-        pco = self.env["phone.common"]
-        name = pco.get_name_from_phone_number("0642774266")
-        self.assertEqual(name, "Pierre Paillet")
-        name2 = pco.get_name_from_phone_number("0041216191010")
-        self.assertEqual(name2, "C2C, Joël Grand-Guillaume")
-        # Test against the POS bug
-        # https://github.com/OCA/connector-telephony/issues/113
-        # When we edit/create a partner from the POS,
-        # the country_id key in create(vals) is given as a string !
-        partnerpos = rpo.create(
-            {
-                "name": "POS customer",
-                "phone": "04-72-08-87-42",
-                "country_id": str(fr_country_id),
-            }
-        )
-        partnerpos._onchange_phone_validation()
-        self.assertEqual(partnerpos.phone, "+33 4 72 08 87 42")
-        self.assertEqual(partnerpos.country_id.id, fr_country_id)
 
-    def test_crm_phone(self):
+    def test_lookup(self):
+        res = self.phco.get_record_from_phone_number("0478424242")
+        self.assertIsInstance(res, tuple)
+        self.assertEqual(res[0], "crm.lead")
+        self.assertEqual(res[1], self.lead_akretion.id)
+        self.assertEqual(
+            res[2], self.lead_akretion.with_context(callerid=True).name_get()[0][1]
+        )
+
+    def test_crm_phone_formatting(self):
         clo = self.env["crm.lead"]
         lead1 = clo.create(
             {
@@ -91,7 +37,7 @@ class TestCRMPhone(TransactionCase):
                 "partner_name": "Ford",
                 "contact_name": "Jacques Toufaux",
                 "mobile": "06.42.77.42.77",
-                "country_id": self.env.ref("base.fr").id,
+                "country_id": self.fr_country_id,
             }
         )
         lead1._onchange_mobile_validation()
