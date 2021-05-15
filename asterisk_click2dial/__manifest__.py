@@ -4,7 +4,7 @@
 
 {
     'name': 'Asterisk connector',
-    'version': '12.0.1.0.1',
+    'version': '12.0.1.0.2',
     'category': 'Phone',
     'license': 'AGPL-3',
     'summary': 'Asterisk-Odoo connector',
