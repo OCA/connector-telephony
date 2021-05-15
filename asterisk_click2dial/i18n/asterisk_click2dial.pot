@@ -127,7 +127,7 @@ msgid "Calling party number not retreived from IPBX or IPBX unreachable by Odoo"
 msgstr ""
 
 #. module: asterisk_click2dial
-#: code:addons/asterisk_click2dial/models/asterisk_server.py:216
+#: code:addons/asterisk_click2dial/models/asterisk_server.py:217
 #, python-format
 msgid "Can't get calling number from  Asterisk.\n"
 "Here is the error: '%s'"
