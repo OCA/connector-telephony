@@ -4,19 +4,19 @@
 
 
 {
-    'name': 'Event Phone',
-    'version': '14.0.1.0.0',
-    'category': 'Phone',
-    'license': 'AGPL-3',
-    'summary': 'Validate phone numbers in Events',
-    'author': "Akretion,Odoo Community Association (OCA)",
-    'maintainers': ['alexis-via'],
-    'website': 'https://github.com/OCA/connector-telephony',
-    'depends': ['base_phone', 'event'],
-    'data': [
-        'security/ir.model.access.csv',
-        'views/hr_registration.xml',
-        ],
-    'installable': True,
-    'auto_install': True,
+    "name": "Event Phone",
+    "version": "14.0.1.0.0",
+    "category": "Phone",
+    "license": "AGPL-3",
+    "summary": "Validate phone numbers in Events",
+    "author": "Akretion,Odoo Community Association (OCA)",
+    "maintainers": ["alexis-via"],
+    "website": "https://github.com/OCA/connector-telephony",
+    "depends": ["base_phone", "event"],
+    "data": [
+        "security/ir.model.access.csv",
+        "views/hr_registration.xml",
+    ],
+    "installable": True,
+    "auto_install": True,
 }
