@@ -1,5 +1,4 @@
-# -*- coding: utf-8 -*-
-# Copyright 2012-2018 Akretion France
+# Copyright 2012-2021 Akretion France (http://www.akretion.com/)
 # @author: Alexis de Lattre <alexis.delattre@akretion.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
@@ -27,12 +26,12 @@ class HrApplicant(models.Model):
             res = []
             for appl in self:
                 if appl.partner_id:
-                    name = u'%s (%s)' % (appl.partner_id.name, appl.name)
+                    name = '%s (%s)' % (appl.partner_id.name, appl.name)
                 elif appl.partner_name:
-                    name = u'%s (%s)' % (appl.partner_name, appl.name)
+                    name = '%s (%s)' % (appl.partner_name, appl.name)
                 else:
                     name = appl.name
                 res.append((appl.id, name))
             return res
         else:
-            return super(HrApplicant, self).name_get()
+            return super().name_get()
