@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  Copyright 2010-2018 Akretion (Alexis de Lattre <alexis.delattre@akretion.com>)
+  Copyright 2010-2021 Akretion France (http://www.akretion.com/)
+  @author: Alexis de Lattre <alexis.delattre@akretion.com>
   License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 -->
 
@@ -26,13 +27,7 @@
     <field name="arch" type="xml">
         <form string="Asterisk Servers">
             <sheet>
-                <div class="oe_button_box" name="button_box">
-                    <button name="toggle_active" type="object"
-                        class="oe_stat_button" icon="fa-archive">
-                        <field name="active" widget="boolean_button"
-                            options='{"terminology": "archive"}'/>
-                    </button>
-                </div>
+                <widget name="web_ribbon" title="Archived" bg_color="bg-danger" attrs="{'invisible': [('active', '=', True)]}"/>
                 <div class="oe_title">
                     <label for="name" string="Server Name" class="oe_edit_only"/>
                     <h1>
@@ -42,6 +37,7 @@
                 <group name="main">
                     <field name="company_id"
                         groups="base.group_multi_company"/>
+                    <field name="active" invisible="1"/>
                 </group>
                 <group name="ami" string="Asterisk Manager Interface">
                     <field name="ip_address" />
@@ -60,7 +56,7 @@
                     <label for="wait_time"/>
                     <div>
                         <field name="wait_time" class="oe_inline"/>
-                        <label string=" seconds" class="oe_inline" for="seconds"/>
+                         seconds
                     </div>
                 </group>
             </sheet>
