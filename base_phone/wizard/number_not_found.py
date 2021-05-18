@@ -89,7 +89,6 @@ class NumberNotFound(models.TransientModel):
             "view_mode": "form,tree,kanban",
             "res_model": "res.partner",
             "type": "ir.actions.act_window",
-            "nodestroy": False,
             "target": "current",
             "context": context,
         }
@@ -106,7 +105,6 @@ class NumberNotFound(models.TransientModel):
             "type": "ir.actions.act_window",
             "res_model": "res.partner",
             "view_mode": "form,tree,kanban",
-            "nodestroy": False,
             "target": "current",
             "res_id": self.to_update_partner_id.id,
             "context": self._context,
