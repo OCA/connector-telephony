@@ -1,5 +1,4 @@
-# -*- coding: utf-8 -*-
-# Copyright 2010-2018 Akretion France
+# Copyright 2010-2021 Akretion France (http://www.akretion.com/)
 # @author: Alexis de Lattre <alexis.delattre@akretion.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
@@ -14,7 +13,7 @@ class PhoneCommon(models.AbstractModel):
 
     @api.model
     def click2dial(self, erp_number):
-        res = super(PhoneCommon, self).click2dial(erp_number)
+        res = super().click2dial(erp_number)
         if not erp_number:
             raise UserError(_('Missing phone number'))
 
@@ -32,7 +31,7 @@ class PhoneCommon(models.AbstractModel):
             raise UserError(_('No callerID configured for the current user'))
 
         variable = []
-        if user.asterisk_chan_type == 'SIP':
+        if user.asterisk_chan_type in ('SIP', 'PJSIP'):
             # We can only have one alert-info header in a SIP request
             if user.alert_info:
                 variable.append(
