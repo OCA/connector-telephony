@@ -1,5 +1,4 @@
-# -*- coding: utf-8 -*-
-# Copyright 2010-2018 Akretion France
+# Copyright 2010-2021 Akretion France (http://www.akretion.com/)
 # @author: Alexis de Lattre <alexis.delattre@akretion.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
@@ -27,8 +26,8 @@ class ResUsers(models.Model):
         string='CDR Account',
         help="Call Detail Record (CDR) account used for billing this user.")
     asterisk_chan_type = fields.Selection([
-        ('SIP', 'SIP'),
         ('PJSIP', 'PJSIP'),
+        ('SIP', 'SIP'),
         ('IAX2', 'IAX2'),
         ('DAHDI', 'DAHDI'),
         ('Zap', 'Zap'),
@@ -41,13 +40,13 @@ class ResUsers(models.Model):
         # _get_calling_number() when trying to identify the
         # channel of the user, so it's better not to propose it
         # ('Local', 'Local'),
-        ], string='Asterisk Channel Type', default='SIP',
+        ], string='Asterisk Channel Type', default='PJSIP',
         help="Asterisk channel type, as used in the Asterisk dialplan. "
-        "If the user has a regular IP phone, the channel type is 'SIP'.")
+        "If the user has a regular IP phone, the channel type is probably 'PJSIP'.")
     resource = fields.Char(
         string='Resource Name', copy=False,
         help="Resource name for the channel type selected. For example, "
-        "if you use 'Dial(SIP/phone1)' in your Asterisk dialplan to ring "
+        "if you use 'Dial(PJSIP/phone1)' in your Asterisk dialplan to ring "
         "the SIP phone of this user, then the resource name for this user "
         "is 'phone1'.  For a SIP phone, the phone number is often used as "
         "resource name, but not always.")
@@ -95,15 +94,13 @@ class ResUsers(models.Model):
         if self.asterisk_server_id:
             ast_server = self.asterisk_server_id
         else:
-            asterisk_servers = self.env['asterisk.server'].search([
+            ast_server = self.env['asterisk.server'].search([
                 '|', ('company_id', '=', self.company_id.id),
-                ('company_id', '=', False)], order='company_id')
+                ('company_id', '=', False)], order='company_id', limit=1)
             # If the user doesn't have an asterisk server,
             # we take the first one of the user's company
-            if not asterisk_servers:
+            if not ast_server:
                 raise UserError(_(
                     "No Asterisk server configured for the company '%s'.")
-                    % self.company_id.name)
-            else:
-                ast_server = asterisk_servers[0]
+                    % self.company_id.display_name)
         return ast_server
