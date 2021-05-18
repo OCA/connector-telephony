@@ -1,5 +1,4 @@
-# -*- coding: utf-8 -*-
-# Copyright 2010-2018 Akretion France
+# Copyright 2010-2021 Akretion France (http://www.akretion.com/)
 # @author: Alexis de Lattre <alexis.delattre@akretion.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
@@ -66,8 +65,7 @@ class AsteriskServer(models.Model):
         "for example.")
     company_id = fields.Many2one(
         'res.company', string='Company',
-        default=lambda self: self.env['res.company']._company_default_get(
-            'asterisk.server'),
+        default=lambda self: self.env.company,
         help="Company who uses the Asterisk server.")
 
     @api.constrains(
