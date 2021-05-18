@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+callerid_res_partner_read,Read access on res.partner,base.model_res_partner,group_callerid,1,0,0,0
+reformat_all_phone_number_access,Reformat All phone number access,model_reformat_all_phonenumbers,base.group_system,1,1,1,1
+access_partner_not_found,Access Partner not found wizard,model_number_not_found,base.group_partner_manager,1,1,1,1

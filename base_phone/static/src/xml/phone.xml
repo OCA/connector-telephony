@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+  Copyright (C) 2013-2018 Akretion France
+  @author: Alexis de Lattre <alexis.delattre@akretion.com>
+  License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+-->
+<templates>
+    <t t-name="base_phone.dial">
+        <span class="float-right">
+            <a
+                href="#"
+                target="_blank"
+                class="fa fa-lg fa-phone"
+                aria-label="Dial"
+                title="Dial"
+            />
+        </span>
+    </t>
+</templates>
