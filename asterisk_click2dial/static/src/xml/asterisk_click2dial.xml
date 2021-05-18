@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  Copyright 2014-2018 Akretion (Alexis de Lattre <alexis.delattre@akretion.com>)
+  Copyright 2014-2021 Akretion France (http://www.akretion.com/)
+  @author: Alexis de Lattre <alexis.delattre@akretion.com>
   License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 -->
 
@@ -15,13 +16,9 @@
         </li>
     </t>
 
-    <!-- Add Dial button in phone widget for click2dial feature -->
-    <!--
-    <t t-extend="FieldPhone">
-        <t t-jquery="a.o_form_uri" t-operation="after">
-            <a t-if="widget.clickable" id="click2dial" href="#" class="oe_bold"/>
-        </t>
-    </t>
+    <!-- The Dial button in the phone widget for click2dial feature
+         is now defined in the base_phone module but disabled.
+         In this module, we enable it via an inherit of JS method showDialButton
     -->
 
 </template>
