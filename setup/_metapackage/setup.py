@@ -9,6 +9,7 @@ setuptools.setup(
     version=version,
     install_requires=[
         'odoo14-addon-base_phone',
+        'odoo14-addon-crm_phone',
     ],
     classifiers=[
         'Programming Language :: Python',
