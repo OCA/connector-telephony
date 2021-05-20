@@ -20,6 +20,7 @@ Available addons
 addon | version | summary
 --- | --- | ---
 [base_phone](base_phone/) | 14.0.1.0.0 | Validate phone numbers
+[crm_phone](crm_phone/) | 14.0.1.0.0 | Improve phone support in CRM
 
 [//]: # (end addons)
 
