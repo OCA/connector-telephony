@@ -4,43 +4,32 @@
 from datetime import datetime, timedelta
 
 from odoo.tests.common import TransactionCase
-from odoo.tools import DEFAULT_SERVER_DATE_FORMAT
 
 
 class TestSmsPurge(TransactionCase):
     def setUp(self):
         super(TestSmsPurge, self).setUp()
         self.sms_sms = self.env["sms.sms"]
-
-        sms_30_days_ago = datetime.now() - timedelta(days=30)
-        sms_61_days_ago = datetime.now() - timedelta(days=61)
-        sms_91_days_ago = datetime.now() - timedelta(days=91)
-
-        sms_30_days_ago = sms_30_days_ago.strftime(DEFAULT_SERVER_DATE_FORMAT)
-        sms_61_days_ago = sms_61_days_ago.strftime(DEFAULT_SERVER_DATE_FORMAT)
-        sms_91_days_ago = sms_91_days_ago.strftime(DEFAULT_SERVER_DATE_FORMAT)
-
         self.sms1 = self.sms_sms.create(
             {
                 "state": "sent",
-                "write_date": sms_30_days_ago,
+                "write_date": datetime.now() - timedelta(days=30),
             }
         )
         self.sms2 = self.sms_sms.create(
             {
                 "state": "sent",
-                "write_date": sms_61_days_ago,
+                "write_date": datetime.now() - timedelta(days=61),
             }
         )
         self.sms3 = self.sms_sms.create(
             {
                 "state": "sent",
-                "write_date": sms_91_days_ago,
+                "write_date": datetime.now() - timedelta(days=91),
             }
         )
 
     def test_sms_purge(self):
-
         self.sms_sms._purge(120)
         self.assertEqual(len(self.sms_sms.search([])), 3)
 

@@ -4,7 +4,6 @@
 from datetime import datetime, timedelta
 
 from odoo import api, models
-from odoo.tools import DEFAULT_SERVER_DATE_FORMAT
 
 
 class SmsSms(models.Model):
@@ -12,10 +11,9 @@ class SmsSms(models.Model):
 
     @api.model
     def _purge(self, days):
-
-        purge_day = datetime.now() - timedelta(days=days)
-        purge_day = purge_day.strftime(DEFAULT_SERVER_DATE_FORMAT)
-        sms = self.env["sms.sms"].search([("write_date", "<=", purge_day)])
+        sms = self.env["sms.sms"].search(
+            [("write_date", "<=", datetime.now() - timedelta(days=days))]
+        )
         sms.with_context(force_unlink=True).unlink()
 
     def unlink(self):
