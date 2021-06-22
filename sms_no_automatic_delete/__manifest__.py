@@ -3,7 +3,7 @@
 {
     "name": "No automatic deletion of SMS",
     "summary": "Avoid automatic delete of sended sms",
-    "author": "Akretion",
+    "author": "Akretion,Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/connector-telephony",
     "license": "AGPL-3",
     "category": "",
