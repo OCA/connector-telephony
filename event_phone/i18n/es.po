@@ -19,8 +19,23 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: event_phone
+#: model:ir.model.fields,field_description:event_phone.field_event_registration__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: event_phone
 #: model:ir.model,name:event_phone.model_event_registration
 msgid "Event Registration"
+msgstr ""
+
+#. module: event_phone
+#: model:ir.model.fields,field_description:event_phone.field_event_registration__id
+msgid "ID"
+msgstr ""
+
+#. module: event_phone
+#: model:ir.model.fields,field_description:event_phone.field_event_registration____last_update
+msgid "Last Modified on"
 msgstr ""
 
 #~ msgid "Attendee"
