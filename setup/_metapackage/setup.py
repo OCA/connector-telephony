@@ -11,6 +11,7 @@ setuptools.setup(
         'odoo14-addon-base_phone',
         'odoo14-addon-crm_phone',
         'odoo14-addon-event_phone',
+        'odoo14-addon-sms_no_automatic_delete',
     ],
     classifiers=[
         'Programming Language :: Python',
