@@ -25,6 +25,26 @@ msgid "Action Needed"
 msgstr ""
 
 #. module: crm_phone
+#: model:ir.model.fields,field_description:crm_phone.field_crm_phonecall__activity_ids
+msgid "Activities"
+msgstr ""
+
+#. module: crm_phone
+#: model:ir.model.fields,field_description:crm_phone.field_crm_phonecall__activity_exception_decoration
+msgid "Activity Exception Decoration"
+msgstr ""
+
+#. module: crm_phone
+#: model:ir.model.fields,field_description:crm_phone.field_crm_phonecall__activity_state
+msgid "Activity State"
+msgstr ""
+
+#. module: crm_phone
+#: model:ir.model.fields,field_description:crm_phone.field_crm_phonecall__activity_type_icon
+msgid "Activity Type Icon"
+msgstr ""
+
+#. module: crm_phone
 #: model:ir.model.fields,field_description:crm_phone.field_crm_phonecall__message_attachment_count
 msgid "Attachment Count"
 msgstr ""
@@ -41,14 +61,13 @@ msgid "Call Summary"
 msgstr "Çağrı Özeti"
 
 #. module: crm_phone
-#: model_terms:ir.ui.view,arch_db:crm_phone.crm_case_form_view_leads
-#: model_terms:ir.ui.view,arch_db:crm_phone.crm_case_form_view_oppor
+#: model_terms:ir.ui.view,arch_db:crm_phone.crm_lead_view_form
 #: model_terms:ir.ui.view,arch_db:crm_phone.view_partner_form
 msgid "Calls"
 msgstr "Çağrılar"
 
 #. module: crm_phone
-#: selection:crm.phonecall,state:0
+#: model:ir.model.fields.selection,name:crm_phone.selection__crm_phonecall__state__cancel
 msgid "Cancelled"
 msgstr "İptalEdilen"
 
@@ -74,7 +93,7 @@ msgid "Create CRM phonecall"
 msgstr "CRM telefon çağrısı oluştur"
 
 #. module: crm_phone
-#: code:addons/crm_phone/models/phone_common.py:20
+#: code:addons/crm_phone/models/phone_common.py:0
 #, python-format
 msgid "Create Call in CRM"
 msgstr "CRM'de Çağrı Oluşturma"
@@ -139,7 +158,12 @@ msgid "Direction"
 msgstr ""
 
 #. module: crm_phone
+#: model:ir.model.fields,field_description:crm_phone.field_crm_lead__display_name
 #: model:ir.model.fields,field_description:crm_phone.field_crm_phonecall__display_name
+#: model:ir.model.fields,field_description:crm_phone.field_number_not_found__display_name
+#: model:ir.model.fields,field_description:crm_phone.field_phone_common__display_name
+#: model:ir.model.fields,field_description:crm_phone.field_res_partner__display_name
+#: model:ir.model.fields,field_description:crm_phone.field_res_users__display_name
 #: model:ir.model.fields,field_description:crm_phone.field_wizard_create_crm_phonecall__display_name
 msgid "Display Name"
 msgstr "Ad Görünümü"
@@ -160,44 +184,61 @@ msgid "Followers (Partners)"
 msgstr ""
 
 #. module: crm_phone
+#: model:ir.model.fields,help:crm_phone.field_crm_phonecall__activity_type_icon
+msgid "Font awesome icon e.g. fa-tasks"
+msgstr ""
+
+#. module: crm_phone
 #: model_terms:ir.ui.view,arch_db:crm_phone.crm_phonecall_search
 msgid "Group By"
 msgstr "Grupla"
 
 #. module: crm_phone
-#: selection:crm.phonecall,state:0
+#: model:ir.model.fields.selection,name:crm_phone.selection__crm_phonecall__state__done
 #: model_terms:ir.ui.view,arch_db:crm_phone.crm_phonecall_search
 msgid "Held"
 msgstr "Bekletilen"
 
 #. module: crm_phone
-#: selection:crm.phonecall,priority:0
+#: model:ir.model.fields.selection,name:crm_phone.selection__crm_phonecall__priority__2
 msgid "High"
 msgstr "Yüksek"
 
 #. module: crm_phone
+#: model:ir.model.fields,field_description:crm_phone.field_crm_lead__id
 #: model:ir.model.fields,field_description:crm_phone.field_crm_phonecall__id
+#: model:ir.model.fields,field_description:crm_phone.field_number_not_found__id
+#: model:ir.model.fields,field_description:crm_phone.field_phone_common__id
+#: model:ir.model.fields,field_description:crm_phone.field_res_partner__id
+#: model:ir.model.fields,field_description:crm_phone.field_res_users__id
 #: model:ir.model.fields,field_description:crm_phone.field_wizard_create_crm_phonecall__id
 msgid "ID"
 msgstr "ID"
 
 #. module: crm_phone
-#: model:ir.model.fields,help:crm_phone.field_crm_phonecall__message_unread
-msgid "If checked new messages require your attention."
+#: model:ir.model.fields,field_description:crm_phone.field_crm_phonecall__activity_exception_icon
+msgid "Icon"
+msgstr ""
+
+#. module: crm_phone
+#: model:ir.model.fields,help:crm_phone.field_crm_phonecall__activity_exception_icon
+msgid "Icon to indicate an exception activity."
 msgstr ""
 
 #. module: crm_phone
 #: model:ir.model.fields,help:crm_phone.field_crm_phonecall__message_needaction
+#: model:ir.model.fields,help:crm_phone.field_crm_phonecall__message_unread
 msgid "If checked, new messages require your attention."
 msgstr ""
 
 #. module: crm_phone
 #: model:ir.model.fields,help:crm_phone.field_crm_phonecall__message_has_error
+#: model:ir.model.fields,help:crm_phone.field_crm_phonecall__message_has_sms_error
 msgid "If checked, some messages have a delivery error."
 msgstr ""
 
 #. module: crm_phone
-#: selection:crm.phonecall,direction:0
+#: model:ir.model.fields.selection,name:crm_phone.selection__crm_phonecall__direction__inbound
 #: model_terms:ir.ui.view,arch_db:crm_phone.crm_phonecall_search
 msgid "Inbound"
 msgstr "Gelen"
@@ -208,7 +249,12 @@ msgid "Is Follower"
 msgstr ""
 
 #. module: crm_phone
+#: model:ir.model.fields,field_description:crm_phone.field_crm_lead____last_update
 #: model:ir.model.fields,field_description:crm_phone.field_crm_phonecall____last_update
+#: model:ir.model.fields,field_description:crm_phone.field_number_not_found____last_update
+#: model:ir.model.fields,field_description:crm_phone.field_phone_common____last_update
+#: model:ir.model.fields,field_description:crm_phone.field_res_partner____last_update
+#: model:ir.model.fields,field_description:crm_phone.field_res_users____last_update
 #: model:ir.model.fields,field_description:crm_phone.field_wizard_create_crm_phonecall____last_update
 msgid "Last Modified on"
 msgstr "Son Değişiklik"
@@ -249,7 +295,7 @@ msgid "Logged Calls"
 msgstr "Günlük Çağrılar"
 
 #. module: crm_phone
-#: selection:crm.phonecall,priority:0
+#: model:ir.model.fields.selection,name:crm_phone.selection__crm_phonecall__priority__0
 msgid "Low"
 msgstr "Düşük"
 
@@ -271,7 +317,6 @@ msgstr ""
 #. module: crm_phone
 #: model:ir.model.fields,field_description:crm_phone.field_crm_phonecall__partner_mobile
 #: model:ir.model.fields,field_description:crm_phone.field_number_not_found__current_lead_mobile
-#: model_terms:ir.ui.view,arch_db:crm_phone.crm_case_form_view_oppor
 msgid "Mobile"
 msgstr "Mobil"
 
@@ -279,6 +324,11 @@ msgstr "Mobil"
 #: model_terms:ir.ui.view,arch_db:crm_phone.crm_phonecall_search
 msgid "Month"
 msgstr "Ay"
+
+#. module: crm_phone
+#: model:ir.model.fields,field_description:crm_phone.field_crm_phonecall__my_activity_date_deadline
+msgid "My Activity Deadline"
+msgstr ""
 
 #. module: crm_phone
 #: model_terms:ir.ui.view,arch_db:crm_phone.crm_phonecall_search
@@ -291,12 +341,27 @@ msgid "My Team"
 msgstr "Benim Ekibim"
 
 #. module: crm_phone
+#: model:ir.model.fields,field_description:crm_phone.field_crm_phonecall__activity_date_deadline
+msgid "Next Activity Deadline"
+msgstr ""
+
+#. module: crm_phone
+#: model:ir.model.fields,field_description:crm_phone.field_crm_phonecall__activity_summary
+msgid "Next Activity Summary"
+msgstr ""
+
+#. module: crm_phone
+#: model:ir.model.fields,field_description:crm_phone.field_crm_phonecall__activity_type_id
+msgid "Next Activity Type"
+msgstr ""
+
+#. module: crm_phone
 #: model_terms:ir.ui.view,arch_db:crm_phone.create_crm_phonecall_view
 msgid "No"
 msgstr "Yok"
 
 #. module: crm_phone
-#: selection:crm.phonecall,priority:0
+#: model:ir.model.fields.selection,name:crm_phone.selection__crm_phonecall__priority__1
 msgid "Normal"
 msgstr "Normal"
 
@@ -320,9 +385,8 @@ msgstr "Telefon Görüşme Sayıları"
 
 #. module: crm_phone
 #: model:ir.model.fields,field_description:crm_phone.field_crm_phonecall__message_has_error_counter
-#, fuzzy
-msgid "Number of error"
-msgstr "Numara bulunamadı"
+msgid "Number of errors"
+msgstr ""
 
 #. module: crm_phone
 #: model:ir.model.fields,help:crm_phone.field_crm_phonecall__message_needaction_counter
@@ -341,7 +405,7 @@ msgid "Number of unread messages"
 msgstr "Telefon Görüşme Sayıları"
 
 #. module: crm_phone
-#: selection:crm.phonecall,direction:0
+#: model:ir.model.fields.selection,name:crm_phone.selection__crm_phonecall__direction__outbound
 #: model_terms:ir.ui.view,arch_db:crm_phone.crm_phonecall_search
 msgid "Outbound"
 msgstr "Giden"
@@ -352,18 +416,13 @@ msgid "Partner"
 msgstr "İş Ortağı"
 
 #. module: crm_phone
-#: model:ir.model.fields,field_description:crm_phone.field_crm_lead__partner_address_mobile
-#, fuzzy
-msgid "Partner Contact Mobile"
-msgstr "Kayıtlı Mobil"
-
-#. module: crm_phone
 #: model:ir.model.fields,field_description:crm_phone.field_crm_phonecall__partner_phone
 #: model:ir.model.fields,field_description:crm_phone.field_number_not_found__current_lead_phone
 msgid "Phone"
 msgstr "Telefon"
 
 #. module: crm_phone
+#: model:ir.model,name:crm_phone.model_crm_phonecall
 #: model_terms:ir.ui.view,arch_db:crm_phone.crm_phonecall_form
 msgid "Phone Call"
 msgstr "Telefon Çağrışı"
@@ -407,6 +466,16 @@ msgid "Responsible"
 msgstr "Sorumlu"
 
 #. module: crm_phone
+#: model:ir.model.fields,field_description:crm_phone.field_crm_phonecall__activity_user_id
+msgid "Responsible User"
+msgstr ""
+
+#. module: crm_phone
+#: model:ir.model.fields,field_description:crm_phone.field_crm_phonecall__message_has_sms_error
+msgid "SMS Delivery error"
+msgstr ""
+
+#. module: crm_phone
 #: model:ir.model.fields,field_description:crm_phone.field_crm_phonecall__team_id
 msgid "Sales Team"
 msgstr "Satış Ekibi"
@@ -429,7 +498,7 @@ msgid "Search Phone Calls"
 msgstr "Arama Telefon Çağrıları"
 
 #. module: crm_phone
-#: code:addons/crm_phone/wizard/number_not_found.py:59
+#: code:addons/crm_phone/wizard/number_not_found.py:0
 #, python-format
 msgid "Select the Lead or Opportunity to Update."
 msgstr ""
@@ -443,6 +512,15 @@ msgstr "Durumu"
 #: model:ir.model.fields,field_description:crm_phone.field_crm_phonecall__state
 msgid "Status"
 msgstr "Durumu"
+
+#. module: crm_phone
+#: model:ir.model.fields,help:crm_phone.field_crm_phonecall__activity_state
+msgid ""
+"Status based on activities\n"
+"Overdue: Due date is already passed\n"
+"Today: Activity date is today\n"
+"Planned: Future activities."
+msgstr ""
 
 #. module: crm_phone
 #: model_terms:ir.ui.view,arch_db:crm_phone.crm_phonecall_form
@@ -463,7 +541,7 @@ msgid ""
 msgstr ""
 
 #. module: crm_phone
-#: selection:crm.phonecall,state:0
+#: model:ir.model.fields.selection,name:crm_phone.selection__crm_phonecall__state__open
 #: model_terms:ir.ui.view,arch_db:crm_phone.crm_phonecall_search
 msgid "To Do"
 msgstr "Yapılacak"
@@ -472,6 +550,11 @@ msgstr "Yapılacak"
 #: model:ir.model.fields,field_description:crm_phone.field_crm_phonecall__direction
 msgid "Type"
 msgstr "Tür"
+
+#. module: crm_phone
+#: model:ir.model.fields,help:crm_phone.field_crm_phonecall__activity_exception_decoration
+msgid "Type of the exception activity on record."
+msgstr ""
 
 #. module: crm_phone
 #: model_terms:ir.ui.view,arch_db:crm_phone.crm_phonecall_search
@@ -514,10 +597,16 @@ msgstr ""
 msgid "Yes"
 msgstr "Evet"
 
-#. module: crm_phone
-#: model:ir.model,name:crm_phone.model_crm_phonecall
-msgid "crm.phonecall"
-msgstr "crm.phonecall"
+#, fuzzy
+#~ msgid "Number of error"
+#~ msgstr "Numara bulunamadı"
+
+#, fuzzy
+#~ msgid "Partner Contact Mobile"
+#~ msgstr "Kayıtlı Mobil"
+
+#~ msgid "crm.phonecall"
+#~ msgstr "crm.phonecall"
 
 #~ msgid "Create Lead with this Number"
 #~ msgstr "Bu Numarayla Aday Oluştur"
