@@ -10,6 +10,17 @@ class SmsSms(models.Model):
     _inherit = "sms.sms"
 
     @api.model
+    def _postprocess_iap_sent_sms(
+        self, iap_results, failure_reason=None, delete_all=False
+    ):
+        # Update state of the sms as "sent" when they are sent.
+        ids = [item["res_id"] for item in iap_results if item["state"] == "success"]
+        self.browse(ids).write({"state": "sent"})
+        return super()._postprocess_iap_sent_sms(
+            iap_results, failure_reason=failure_reason, delete_all=delete_all
+        )
+
+    @api.model
     def _purge(self, days):
         sms = self.env["sms.sms"].search(
             [("write_date", "<=", datetime.now() - timedelta(days=days))]
