@@ -7,14 +7,15 @@ import requests
 from odoo import api, models
 
 
-class Clickatell(models.AbstractModel):
-    """Clickatell SDK to send SMS"""
+class Clickatell(object):
+    # _name = "clickatell.sdk"
+    # _description = "Clickatell SDK to send SMS"
 
-    def __init__(self, auth):
+    def __init__(self, key):
         self.headers = {
             "Content-Type": "application/json",
             "Accept": "application/json",
-            "Authorization": auth,
+            "Authorization": key,
         }
 
     def send_message(self, params):
