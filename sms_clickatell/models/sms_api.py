@@ -10,27 +10,6 @@ from odoo import api, models
 _logger = logging.getLogger(__name__)
 
 
-class Clickatell(object):
-    # _name = "clickatell.sdk"
-    """Clickatell SDK to send SMS"""
-
-    def __init__(self, key):
-        self.headers = {
-            "Content-Type": "application/json",
-            "Accept": "application/json",
-            "Authorization": key,
-        }
-
-    def send_message(self, params):
-        values = json.dumps({"messages": [params]})
-        request = requests.post(
-            "https://platform.clickatell.com/v1/message",
-            data=values,
-            headers=self.headers,
-        )
-        return request.json()
-
-
 class SmsApi(models.AbstractModel):
 
     _inherit = "sms.api"
@@ -39,11 +18,10 @@ class SmsApi(models.AbstractModel):
     def _contact_iap(self, local_endpoint, params):
 
         account = self.env["iap.account"].get("sms.clickatell")
-        params["key"] = account.key
         headers = {
             "Content-Type": "application/json",
             "Accept": "application/json",
-            "Authorization": key,
+            "Authorization": account.key,
         }
 
         if local_endpoint == "/iap/message_send":
@@ -70,7 +48,8 @@ class SmsApi(models.AbstractModel):
 
             :return: return of /iap/sms/1/send controller which is a list of dict [{
                 'res_id': integer: ID of sms.sms,
-                'state':  string: 'insufficient_credit' or 'wrong_number_format' or 'success',
+                'state':  string: 'insufficient_credit' or
+                        'wrong_number_format' or 'success',
                 'credit': integer: number of credits spent to send this SMS,
             }]
 
@@ -87,8 +66,6 @@ class SmsApi(models.AbstractModel):
 
         values = json.dumps({"messages": messages})
         request = requests.post(
-            "https://platform.clickatell.com/v1/message",
-            data=values,
-            headers=self.headers,
+            "https://platform.clickatell.com/v1/message", data=values, headers=headers,
         )
         return request.json()
