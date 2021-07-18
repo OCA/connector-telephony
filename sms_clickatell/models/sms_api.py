@@ -42,8 +42,6 @@ class SmsApi(models.AbstractModel):
 
         values = json.dumps({"messages": messages})
         request = requests.post(
-            "https://platform.clickatell.com/v1/message",
-            data=values,
-            headers=headers,
+            "https://platform.clickatell.com/v1/message", data=values, headers=headers
         )
         return request.json()
