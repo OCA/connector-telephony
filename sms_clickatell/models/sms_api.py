@@ -21,7 +21,7 @@ class SmsApi(models.AbstractModel):
         headers = {
             "Content-Type": "application/json",
             "Accept": "application/json",
-            "Authorization": account.key,
+            "Authorization": "VexvYSkCRPS_kQAghQUYOg==",
         }
 
         if local_endpoint == "/iap/message_send":
@@ -44,4 +44,4 @@ class SmsApi(models.AbstractModel):
         request = requests.post(
             "https://platform.clickatell.com/v1/message", data=values, headers=headers
         )
-        return request.json()
+        return  # request.json()
