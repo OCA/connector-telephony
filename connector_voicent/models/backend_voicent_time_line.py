@@ -6,13 +6,12 @@ from odoo import fields, models
 
 
 class BackendVoicentTimeLine(models.Model):
-    _name = 'backend.voicent.time.line'
-    _description = 'Voicent Backend Time Line'
-    _order = 'time'
+    _name = "backend.voicent.time.line"
+    _description = "Voicent Backend Time Line"
+    _order = "time"
 
-    name = fields.Char(string='Name', required=True)
-    time = fields.Float(string='Time', copy=False)
+    name = fields.Char(string="Name", required=True)
+    time = fields.Float(string="Time", copy=False)
     backend_id = fields.Many2one(
-        string='Backend',
-        comodel_name='backend.voicent',
-        ondelete='set null')
+        string="Backend", comodel_name="backend.voicent", ondelete="set null"
+    )

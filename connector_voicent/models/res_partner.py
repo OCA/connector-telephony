@@ -6,6 +6,6 @@ from odoo import fields, models
 
 
 class ResPartner(models.Model):
-    _inherit = 'res.partner'
+    _inherit = "res.partner"
 
-    can_call = fields.Boolean(string='Accepts Voicent Calls', default=True)
+    can_call = fields.Boolean(string="Accepts Voicent Calls", default=True)
