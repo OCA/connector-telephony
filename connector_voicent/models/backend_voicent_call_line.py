@@ -1,4 +1,4 @@
-# Copyright (C) 2019 Open Source Integrators
+# Copyright (C) 2021 Open Source Integrators
 # <https://www.opensourceintegrators.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
@@ -63,7 +63,7 @@ class BackendVoicentCallLine(models.Model):
     _description = "Voicent Backend Call Line"
 
     name = fields.Char(string="Name", required=True)
-    sequence = fields.Integer(string="Sequence", default=0)
+    sequence = fields.Integer(string="Sequence")
     applies_on = fields.Selection(string="Applies on", selection=[])
     msgtype = fields.Selection(MSGTYPE, string="Message Type", required=True)
     msginfo = fields.Char(string="Message Info")
@@ -87,7 +87,7 @@ class BackendVoicentCallLineContact(models.Model):
         VOICENT_CONTACT_COLUMNS, string="Voicent Field", required=True
     )
     other = fields.Char(string="Other")
-    sequence = fields.Integer(string="Sequence", default=0)
+    sequence = fields.Integer(string="Sequence")
     field_domain = fields.Char(string="Odoo Field", required=True)
     default_value = fields.Char(string="Default Value", required=True)
     line_id = fields.Many2one(

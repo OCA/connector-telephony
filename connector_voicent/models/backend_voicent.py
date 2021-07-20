@@ -1,4 +1,4 @@
-# Copyright (C) 2019 Open Source Integrators
+# Copyright (C) 2021 Open Source Integrators
 # <https://www.opensourceintegrators.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
@@ -37,7 +37,7 @@ class BackendVoicent(models.Model):
     @api.model
     def _run_update_next_call(self):
         """ This method is called from a cron job. """
-        cr_time_list = []
+        cr_time_list = ["00:00"]
         backends = self.search([("active", "=", True)])
         for backend in backends:
             user_tz = timezone(self.env.context.get("tz") or self.env.user.tz or "UTC")

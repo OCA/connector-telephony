@@ -1,3 +1,4 @@
 # generated from manifests external_dependencies
-phonenumbers
-voicent
+phonenumbers==8.12.27
+requests==2.26.0
+voicent-python==1.0
