@@ -23,6 +23,7 @@ addon | version | summary
 [crm_phone](crm_phone/) | 14.0.1.0.0 | Improve phone support in CRM
 [event_phone](event_phone/) | 14.0.1.0.0 | Validate phone numbers in Events
 [hr_phone](hr_phone/) | 14.0.1.0.0 | Validate phone numbers in HR
+[hr_recruitment_phone](hr_recruitment_phone/) | 14.0.1.0.0 | Validate phone numbers in HR Recruitment
 [sms_no_automatic_delete](sms_no_automatic_delete/) | 14.0.1.1.0 | Avoid automatic delete of sended sms
 
 [//]: # (end addons)
