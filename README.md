@@ -23,24 +23,24 @@ http://www.akretion.com/en/products-and-services/openerp-asterisk-voip-connector
 
 Available addons
 ----------------
-addon | version | summary
---- | --- | ---
-[asterisk_click2dial](asterisk_click2dial/) | 10.0.1.0.0 | Asterisk-Odoo connector
-[base_phone](base_phone/) | 10.0.0.1.0 | Validate phone numbers
-[base_phone_popup](base_phone_popup/) | 10.0.1.0.0 | Show a pop-up on incoming calls
-[base_sms_client](base_sms_client/) | 10.0.1.0.0 | Sending SMSs very easily, individually or collectively.
-[crm_phone](crm_phone/) | 10.0.1.0.0 | Validate phone numbers in CRM
-[event_phone](event_phone/) | 10.0.1.0.0 | Validate phone numbers in Events
-[hr_phone](hr_phone/) | 10.0.1.0.0 | Validate phone numbers in HR
-[hr_recruitment_phone](hr_recruitment_phone/) | 10.0.1.0.0 | Validate phone numbers in HR Recruitment
-[ovh_sms_client](ovh_sms_client/) | 10.0.1.0.1 | OVH SMS Client
-[sms_send_picking](sms_send_picking/) | 10.0.1.0.0 | Sms Send Picking
+addon | version | maintainers | summary
+--- | --- | --- | ---
+[asterisk_click2dial](asterisk_click2dial/) | 10.0.1.0.0 |  | Asterisk-Odoo connector
+[base_phone](base_phone/) | 10.0.0.1.0 |  | Validate phone numbers
+[base_phone_popup](base_phone_popup/) | 10.0.1.0.0 |  | Show a pop-up on incoming calls
+[base_sms_client](base_sms_client/) | 10.0.1.0.0 |  | Sending SMSs very easily, individually or collectively.
+[crm_phone](crm_phone/) | 10.0.1.0.0 |  | Validate phone numbers in CRM
+[event_phone](event_phone/) | 10.0.1.0.0 |  | Validate phone numbers in Events
+[hr_phone](hr_phone/) | 10.0.1.0.0 |  | Validate phone numbers in HR
+[hr_recruitment_phone](hr_recruitment_phone/) | 10.0.1.0.0 |  | Validate phone numbers in HR Recruitment
+[ovh_sms_client](ovh_sms_client/) | 10.0.1.0.1 |  | OVH SMS Client
+[sms_send_picking](sms_send_picking/) | 10.0.1.0.0 |  | Sms Send Picking
 
 
 Unported addons
 ---------------
-addon | version | summary
---- | --- | ---
-[ovh_telephony_connector](ovh_telephony_connector/) | 9.0.0.1.0 (unported) | OVH-Odoo telephony connector (click2call)
+addon | version | maintainers | summary
+--- | --- | --- | ---
+[ovh_telephony_connector](ovh_telephony_connector/) | 9.0.0.1.0 (unported) |  | OVH-Odoo telephony connector (click2call)
 
 [//]: # (end addons)
