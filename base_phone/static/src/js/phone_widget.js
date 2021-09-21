@@ -33,7 +33,7 @@ odoo.define("base_phone.updatedphone_widget", function (require) {
 
             // Create our link
             var dial = $(
-                '<a href="#" class="dial"><div class="label label-primary">☎ Dial</div></a>'
+                '<a href="javascript:void(0)" class="dial"><div class="label label-primary">☎ Dial</div></a>'
             );
 
             // Add a parent element
