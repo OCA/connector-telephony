@@ -158,11 +158,8 @@ class AsteriskServer(models.Model):
         """
         user = self.env.user
         ast_server = user.get_asterisk_server_from_user()
-        # We check if the current user has a chan type
         if not user.asterisk_chan_type:
             raise UserError(_("No channel type configured for the current user."))
-
-        # We check if the current user has an internal number
         if not user.resource:
             raise UserError(_("No resource name configured for the current user"))
 
@@ -212,8 +209,10 @@ class AsteriskServer(models.Model):
 
     @api.model
     def _get_calling_number_from_channel(self, chan, user):
-        """Method designed to be inherited to work with
-        very old or very new versions of Asterisk"""
+        """
+        Method designed to be inherited to work with
+        very old or very new versions of Asterisk
+        """
         sip_account = user.asterisk_chan_type + "/" + user.resource
         internal_number = user.internal_number
         # 4 = Ring
