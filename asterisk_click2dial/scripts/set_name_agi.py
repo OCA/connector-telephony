@@ -1,5 +1,5 @@
-#! /usr/bin/python
-#  Copyright 2010-2018 Akretion France
+#! /usr/bin/python3
+#  Copyright 2010-2021 Akretion France
 #  @author: Alexis de Lattre <alexis.delattre@akretion.com>
 #
 #  This program is free software: you can redistribute it and/or modify
@@ -22,7 +22,7 @@
  This script is designed to be used as an AGI on an Asterisk IPBX...
  BUT I advise you to use a wrapper around this script to control the
  execution time. Why ? Because if the script takes too much time to
- execute or get stucks (in the XML-RPC request for example), then the
+ execute or get stucks (in the JSON-RPC request for example), then the
  incoming phone call will also get stucks and you will miss a call !
  The simplest solution I found is to use the "timeout" shell command to
  call this script, for example :
@@ -92,172 +92,25 @@
 
 """
 
-import sys
-from optparse import OptionParser
+import argparse
+import unicodedata
 
-import xmlrpclib
-from asterisk import agi as agilib  # pip install pyst2
+import odoorpc  # pip3 install odoorpc
+from asterisk import agi as agilib  # pip3 install pyst2
 
 __author__ = "Alexis de Lattre <alexis.delattre@akretion.com>"
-__date__ = "November 2018"
-__version__ = "0.7"
+__date__ = "November 2021"
+__version__ = "1.0"
 
 # Name that will be displayed if there is no match
 # and no geolocalisation. Set it to False if you don't want
 # to have a 'not_found_name' when nothing is found
 not_found_name = False
 
-# Define command line options
-options = [
-    {
-        "names": ("-s", "--server"),
-        "dest": "server",
-        "type": "string",
-        "action": "store",
-        "default": False,
-        "help": "DNS or IP address of the Odoo server. Default = none "
-        "(will not try to connect to Odoo)",
-    },
-    {
-        "names": ("-p", "--port"),
-        "dest": "port",
-        "type": "int",
-        "action": "store",
-        "default": False,
-        "help": "Port of Odoo's webservice interface. Default = 443 when SSL "
-        "is on, 8069 when SSL is off",
-    },
-    {
-        "names": ("-e", "--ssl"),
-        "dest": "ssl",
-        "help": "Use SSL connections instead of clear connections. "
-        "Default = no, use clear XML-RPC or JSON-RPC",
-        "action": "store_true",
-        "default": False,
-    },
-    {
-        "names": ("-j", "--jsonrpc"),
-        "dest": "jsonrpc",
-        "help": "Use JSON-RPC instead of the default protocol XML-RPC. "
-        "Default = no, use XML-RPC",
-        "action": "store_true",
-        "default": False,
-    },
-    {
-        "names": ("-d", "--database"),
-        "dest": "database",
-        "type": "string",
-        "action": "store",
-        "default": "odoo",
-        "help": "Odoo database name. Default = 'odoo'",
-    },
-    {
-        "names": ("-u", "--user-id"),
-        "dest": "userid",
-        "type": "int",
-        "action": "store",
-        "default": 2,
-        "help": "Odoo user ID to use when connecting to Odoo in "
-        "XML-RPC. Default = 2",
-    },
-    {
-        "names": ("-t", "--username"),
-        "dest": "username",
-        "type": "string",
-        "action": "store",
-        "default": "demo",
-        "help": "Odoo username to use when connecting to Odoo in "
-        "JSON-RPC. Default = demo",
-    },
-    {
-        "names": ("-w", "--password"),
-        "dest": "password",
-        "type": "string",
-        "action": "store",
-        "default": "demo",
-        "help": "Password of the Odoo user. Default = 'demo'",
-    },
-    {
-        "names": ("-a", "--ascii"),
-        "dest": "ascii",
-        "action": "store_true",
-        "default": False,
-        "help": "Convert name from UTF-8 to ASCII. Default = no, keep UTF-8",
-    },
-    {
-        "names": ("-n", "--notify"),
-        "dest": "notify",
-        "action": "store_true",
-        "default": False,
-        "help": "Notify Odoo users via a pop-up (requires the Odoo "
-        "module 'base_phone_popup'). If you use this option, you must pass "
-        "the logins of the Odoo users to notify as argument to the "
-        "script. Default = no",
-    },
-    {
-        "names": ("-g", "--geoloc"),
-        "dest": "geoloc",
-        "action": "store_true",
-        "default": False,
-        "help": "Try to geolocate phone numbers unknown to Odoo. This "
-        "features requires the 'phonenumbers' Python lib. To install it, "
-        "run 'sudo pip install phonenumbers' Default = no",
-    },
-    {
-        "names": ("-l", "--geoloc-lang"),
-        "dest": "lang",
-        "type": "string",
-        "action": "store",
-        "default": "en",
-        "help": "Language in which the name of the country and city name "
-        "will be displayed by the geolocalisation database. Use the 2 "
-        "letters ISO code of the language. Default = 'en'",
-    },
-    {
-        "names": ("-c", "--geoloc-country"),
-        "dest": "country",
-        "type": "string",
-        "action": "store",
-        "default": "FR",
-        "help": "2 letters ISO code for your country e.g. 'FR' for France. "
-        "This will be used by the geolocalisation system to parse the phone "
-        "number of the calling party. Default = 'FR'",
-    },
-    {
-        "names": ("-o", "--outgoing"),
-        "dest": "outgoing",
-        "action": "store_true",
-        "default": False,
-        "help": "Update the Connected Line ID name on outgoing calls via a "
-        "call to the Asterisk function CONNECTEDLINE(), instead of updating "
-        "the Caller ID name on incoming calls. Default = no.",
-    },
-    {
-        "names": ("-i", "--outgoing-agi-variable"),
-        "dest": "outgoing_agi_var",
-        "type": "string",
-        "action": "store",
-        "default": "extension",
-        "help": "Enter the name of the AGI variable (without the 'agi_' "
-        "prefix) from which the script will get the phone number dialed by "
-        "the user on outgoing calls. For example, with Xivo, you should "
-        "specify 'dnid' as the AGI variable. Default = 'extension'",
-    },
-    {
-        "names": ("-m", "--max-size"),
-        "dest": "max_size",
-        "type": "int",
-        "action": "store",
-        "default": 40,
-        "help": "If the name has more characters this maximum size, cut it "
-        "to this maximum size. Default = 40",
-    },
-]
-
 
 def geolocate_phone_number(number, my_country_code, lang):
     import phonenumbers
-    import phonenumbers.geocoder  # Takes an enormous amount of time...
+    import phonenumbers.geocoder  # Takes quite some time
 
     res = ""
     phonenum = phonenumbers.parse(number, my_country_code.upper())
@@ -271,7 +124,7 @@ def geolocate_phone_number(number, my_country_code, lang):
         # Convert country code to country name
         country = phonenumbers.geocoder._region_display_name(country_code, lang.lower())
         if country and city:
-            res = country + " " + city
+            res = "%s %s" % (country, city)
         elif country and not city:
             res = country
     return res
@@ -279,30 +132,65 @@ def geolocate_phone_number(number, my_country_code, lang):
 
 def convert_to_ascii(my_unicode):
     """Convert to ascii, with clever management of accents (é -> e, è -> e)"""
-    import unicodedata
 
-    if isinstance(my_unicode, unicode):  # noqa
+    if isinstance(my_unicode, str):
         my_unicode_with_ascii_chars_only = "".join(
             char
             for char in unicodedata.normalize("NFD", my_unicode)
             if unicodedata.category(char) != "Mn"
         )
         return str(my_unicode_with_ascii_chars_only)
-    # If the argument is already of string type, return it with the same value
-    elif isinstance(my_unicode, str):
-        return my_unicode
     else:
         return False
 
 
-def main(options, arguments):
-    # print 'options = %s' % options
-    # print 'arguments = %s' % arguments
+def get_callerid_from_odoo(agi, phone_number):
+    if args.notify and not args.login_list:
+        agi.verbose(
+            "When using the notify option, you must give arguments " "to the script"
+        )
+        exit(0)
 
+    if args.notify:
+        method = "incall_notify_by_login"
+    else:
+        method = "get_name_from_phone_number"
+
+    if args.port:
+        port = args.port
+    else:  # default port depends on protocol
+        if args.ssl:
+            port = 443
+        else:
+            port = 8069
+
+    proto = args.ssl and "jsonrpc+ssl" or "jsonrpc"
+    agi.verbose(
+        "Starting %s request on Odoo %s:%d database %s login %s"
+        % (proto.upper(), args.server, port, args.database, args.username)
+    )
+    res = False
+    try:
+        odoo = odoorpc.ODOO(args.server, proto, port)
+        odoo.login(args.database, args.username, args.password)
+        if args.notify:
+            res = odoo.execute("phone.common", method, phone_number, args.login_list)
+        else:
+            res = odoo.execute("phone.common", method, phone_number)
+        agi.verbose("Called method %s" % method)
+    except Exception as e:
+        agi.verbose("Could not connect to Odoo in JSON-RPC. Error %s" % e)
+
+    # Function to limit the size of the name
+    if res and len(res) > args.max_size:
+        res = res[0 : args.max_size]
+    return res
+
+
+def main(args):
     agi = agilib.AGI()
-
-    if options.outgoing:
-        phone_number = agi.env["agi_%s" % options.outgoing_agi_var]
+    if args.outgoing:
+        phone_number = agi.env["agi_%s" % args.outgoing_agi_var]
         agi.verbose("Dialed phone number is %s" % phone_number)
     else:
         # If we already have a "True" caller ID name
@@ -315,7 +203,7 @@ def main(options, arguments):
             and any([x not in phone_chars for x in agi.env["agi_calleridname"]])
             and agi.env["agi_calleridname"].lower()
             not in ["asterisk", "unknown", "anonymous"]
-            and not options.notify
+            and not args.notify
         ):
             agi.verbose("Incoming CallerID name is %s" % agi.env["agi_calleridname"])
             agi.verbose("As it is a real name, we do not change it")
@@ -334,127 +222,173 @@ def main(options, arguments):
 
     agi.verbose("Phone number = %s" % phone_number)
 
-    if options.notify and not arguments:
-        agi.verbose(
-            "When using the notify option, you must give arguments " "to the script"
-        )
-        exit(0)
-
-    if options.notify:
-        method = "incall_notify_by_login"
-    else:
-        method = "get_name_from_phone_number"
-
-    if options.port:
-        port = options.port
-    # default port depends on protocol
-    else:
-        if options.ssl:
-            port = 443
-        else:
-            port = 8069
-
     res = False
-    # Yes, this script can be used without "-s odoo_server" !
-    if options.server and options.jsonrpc:
-        import odoorpc
-
-        proto = options.ssl and "jsonrpc+ssl" or "jsonrpc"
-        agi.verbose(
-            "Starting %s request on Odoo %s:%d database %s username %s"
-            % (proto.upper(), options.server, port, options.database, options.username)
-        )
-        try:
-            odoo = odoorpc.ODOO(options.server, proto, port)
-            odoo.login(options.database, options.username, options.password)
-            if options.notify:
-                res = odoo.execute("phone.common", method, phone_number, arguments)
-            else:
-                res = odoo.execute("phone.common", method, phone_number)
-            agi.verbose("Called method %s" % method)
-        except:
-            agi.verbose("Could not connect to Odoo in JSON-RPC")
-    elif options.server:
-        proto = options.ssl and "https" or "http"
-        agi.verbose(
-            "Starting %s XML-RPC request on Odoo %s:%d "
-            "database %s user ID %d"
-            % (proto, options.server, port, options.database, options.userid)
-        )
-        sock = xmlrpclib.ServerProxy(
-            "%s://%s:%d/xmlrpc/object" % (proto, options.server, port)
-        )
-        try:
-            if options.notify:
-                res = sock.execute(
-                    options.database,
-                    options.userid,
-                    options.password,
-                    "phone.common",
-                    method,
-                    phone_number,
-                    arguments,
-                )
-            else:
-                res = sock.execute(
-                    options.database,
-                    options.userid,
-                    options.password,
-                    "phone.common",
-                    method,
-                    phone_number,
-                )
-            agi.verbose("Called method %s" % method)
-        except:
-            agi.verbose("Could not connect to Odoo in XML-RPC")
-        # To simulate a long execution of the XML-RPC request
-        # import time
-        # time.sleep(5)
+    # This script can be used without "-s odoo_server" !
+    if args.server:
+        res = get_callerid_from_odoo(agi, phone_number)
 
     # Function to limit the size of the name
-    if res:
-        if len(res) > options.max_size:
-            res = res[0 : options.max_size]
-    elif options.geoloc:
-        # if the number is not found in Odoo, we try to geolocate
-        agi.verbose(
-            "Trying to geolocate with country %s and lang %s"
-            % (options.country, options.lang)
-        )
-        res = geolocate_phone_number(phone_number, options.country, options.lang)
-    else:
-        # if the number is not found in Odoo and geoloc is off,
-        # we put 'not_found_name' as Name
-        agi.verbose("Phone number not found in Odoo")
-        res = not_found_name
+    if not res:
+        if args.geoloc:
+            # if the number is not found in Odoo, we try to geolocate
+            agi.verbose(
+                "Trying to geolocate with country %s and lang %s"
+                % (args.country, args.lang)
+            )
+            res = geolocate_phone_number(phone_number, args.country, args.lang)
+        else:
+            # if the number is not found in Odoo and geoloc is off,
+            # we put 'not_found_name' as Name
+            agi.verbose("Phone number not found in Odoo")
+            res = not_found_name
 
     # All SIP phones should support UTF-8...
     # but in case you have analog phones over TDM
     # or buggy phones, you should use the command line option --ascii
-    if options.ascii:
+    if args.ascii:
         res = convert_to_ascii(res)
 
     agi.verbose("Name = %s" % res)
     if res:
-        if options.outgoing:
+        if args.outgoing:
             agi.set_variable("connectedlinename", res)
         else:
             agi.set_callerid('"%s"<%s>' % (res, phone_number))
-    return True
 
 
 if __name__ == "__main__":
     usage = "Usage: get_name_agi.py [options] login1 login2 login3 ..."
-    epilog = "Script written by Alexis de Lattre. "
-    "Published under the GNU AGPL licence."
-    description = "This is an AGI script that sends a query to Odoo. "
-    "It can also be used without Odoo to geolocate phone numbers "
-    "of incoming calls."
-    parser = OptionParser(usage=usage, epilog=epilog, description=description)
-    for option in options:
-        param = option["names"]
-        del option["names"]
-        parser.add_option(*param, **option)
-    options, arguments = parser.parse_args()
-    sys.argv[:] = arguments
-    main(options, arguments)
+    epilog = """
+    Script written by Alexis de Lattre. Published under the GNU AGPL licence.
+    """
+    description = """
+    This is an AGI script that sends a query to Odoo. It can also be used without
+    Odoo to geolocate phone numbers of incoming calls.
+    """
+    parser = argparse.ArgumentParser(
+        usage=usage, epilog=epilog, description=description
+    )
+    parser.add_argument(
+        "-s",
+        "--server",
+        dest="server",
+        help="DNS or IP address of the Odoo server. Default = none "
+        "(will not try to connect to Odoo)",
+    )
+    parser.add_argument(
+        "-p",
+        "--port",
+        dest="port",
+        type=int,
+        help="Port of Odoo's webservice interface. Default = 443 when SSL "
+        "is on, 8069 when SSL is off",
+    )
+    parser.add_argument(
+        "-e",
+        "--ssl",
+        dest="ssl",
+        action="store_true",
+        help="Use SSL connections instead of clear connections. "
+        "Default = no, use clear JSON-RPC",
+    )
+    parser.add_argument(
+        "-d",
+        "--database",
+        dest="database",
+        default="odoo",
+        help="Odoo database name. Default = 'odoo'",
+    )
+    parser.add_argument(
+        "-t",
+        "--username",
+        dest="username",
+        default="demo",
+        help="Odoo login to use. Default = demo",
+    )
+    parser.add_argument(
+        "-w",
+        "--password",
+        dest="password",
+        default="demo",
+        help="Password of the Odoo user. Default = 'demo'",
+    )
+    parser.add_argument(
+        "-a",
+        "--ascii",
+        dest="ascii",
+        action="store_true",
+        help="Convert name from UTF-8 to ASCII. Default = no, keep UTF-8",
+    )
+    parser.add_argument(
+        "-n",
+        "--notify",
+        dest="notify",
+        action="store_true",
+        help="Notify Odoo users via a pop-up (requires the Odoo "
+        "module 'base_phone_popup'). If you use this option, you must pass "
+        "the logins of the Odoo users to notify as argument to the "
+        "script. Default = no",
+    )
+    parser.add_argument(
+        "-g",
+        "--geoloc",
+        dest="geoloc",
+        action="store_true",
+        help="Try to geolocate phone numbers unknown to Odoo. This "
+        "features requires the 'phonenumbers' Python lib. To install it, "
+        "run 'sudo pip install phonenumbers' Default = no",
+    )
+    parser.add_argument(
+        "-l",
+        "--geoloc-lang",
+        dest="lang",
+        default="en",
+        help="Language in which the name of the country and city name "
+        "will be displayed by the geolocalisation database. Use the 2 "
+        "letters ISO code of the language. Default = 'en'",
+    )
+    parser.add_argument(
+        "-c",
+        "--geoloc-country",
+        dest="country",
+        default="FR",
+        help="2 letters ISO code for your country e.g. 'FR' for France. "
+        "This will be used by the geolocalisation system to parse the phone "
+        "number of the calling party. Default = 'FR'",
+    )
+    parser.add_argument(
+        "-o",
+        "--outgoing",
+        dest="outgoing",
+        action="store_true",
+        help="Update the Connected Line ID name on outgoing calls via a "
+        "call to the Asterisk function CONNECTEDLINE(), instead of updating "
+        "the Caller ID name on incoming calls. Default = no.",
+    )
+    parser.add_argument(
+        "-i",
+        "--outgoing-agi-variable",
+        dest="outgoing_agi_var",
+        default="extension",
+        help="Enter the name of the AGI variable (without the 'agi_' "
+        "prefix) from which the script will get the phone number dialed by "
+        "the user on outgoing calls. For example, with Xivo, you should "
+        "specify 'dnid' as the AGI variable. Default = 'extension'",
+    )
+    parser.add_argument(
+        "-m",
+        "--max-size",
+        dest="max_size",
+        type=int,
+        default=40,
+        help="If the name has more characters this maximum size, cut it "
+        "to this maximum size. Default = 40",
+    )
+    parser.add_argument(
+        "login_list",
+        nargs="*",
+        help="List of odoo logins (required only when using the --notify option",
+    )
+
+    args = parser.parse_args()
+    main(args)
