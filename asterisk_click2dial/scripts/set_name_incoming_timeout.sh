@@ -24,4 +24,4 @@
 
 PATH=/usr/local/sbin:/usr/local/bin:/var/lib/asterisk/agi-bin:/sbin:/bin:/usr/sbin:/usr/bin:/usr/share/asterisk/agi-bin:.
 
-timeout 2s set_name_agi.py --jsonrpc --ssl --server odoo.mycompany.com --database erp_prod --username "asterisk" --password "thepasswd"
+timeout 2s set_name_agi.py --ssl --server odoo.mycompany.com --database erp_prod --username "asterisk" --password "thepasswd"
