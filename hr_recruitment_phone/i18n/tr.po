@@ -22,3 +22,18 @@ msgstr ""
 #: model:ir.model,name:hr_recruitment_phone.model_hr_applicant
 msgid "Applicant"
 msgstr "Başvuran"
+
+#. module: hr_recruitment_phone
+#: model:ir.model.fields,field_description:hr_recruitment_phone.field_hr_applicant__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: hr_recruitment_phone
+#: model:ir.model.fields,field_description:hr_recruitment_phone.field_hr_applicant__id
+msgid "ID"
+msgstr ""
+
+#. module: hr_recruitment_phone
+#: model:ir.model.fields,field_description:hr_recruitment_phone.field_hr_applicant____last_update
+msgid "Last Modified on"
+msgstr ""
