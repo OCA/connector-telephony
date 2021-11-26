@@ -8,6 +8,7 @@ setuptools.setup(
     description="Meta package for oca-connector-telephony Odoo addons",
     version=version,
     install_requires=[
+        'odoo14-addon-asterisk_click2dial',
         'odoo14-addon-base_phone',
         'odoo14-addon-crm_phone',
         'odoo14-addon-event_phone',
