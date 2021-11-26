@@ -1,0 +1,561 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * asterisk_click2dial
+#
+# Translators:
+# OCA Transbot <transbot@odoo-community.org>, 2017
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-12-01 08:49+0000\n"
+"PO-Revision-Date: 2017-12-01 08:49+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
+"Language-Team: Bulgarian (https://www.transifex.com/oca/teams/23907/bg/)\n"
+"Language: bg\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: asterisk_click2dial
+#: model:ir.model.fields,field_description:asterisk_click2dial.field_asterisk_server__login
+msgid "AMI Login"
+msgstr ""
+
+#. module: asterisk_click2dial
+#: model:ir.model.fields,field_description:asterisk_click2dial.field_asterisk_server__password
+msgid "AMI Password"
+msgstr ""
+
+#. module: asterisk_click2dial
+#: model:ir.model.fields,field_description:asterisk_click2dial.field_asterisk_server__active
+msgid "Active"
+msgstr ""
+
+#. module: asterisk_click2dial
+#: model:ir.model.fields,field_description:asterisk_click2dial.field_asterisk_server__alert_info
+msgid "Alert-Info SIP Header"
+msgstr ""
+
+#. module: asterisk_click2dial
+#: model:ir.model.fields,help:asterisk_click2dial.field_asterisk_server__wait_time
+msgid ""
+"Amount of time (in seconds) Asterisk will try to reach the user's phone "
+"before hanging up."
+msgstr ""
+
+#. module: asterisk_click2dial
+#: model_terms:ir.ui.view,arch_db:asterisk_click2dial.view_asterisk_server_search
+msgid "Archived"
+msgstr ""
+
+#. module: asterisk_click2dial
+#: model:ir.model.fields,field_description:asterisk_click2dial.field_res_users__asterisk_chan_type
+msgid "Asterisk Channel Type"
+msgstr ""
+
+#. module: asterisk_click2dial
+#: model:ir.model.fields,field_description:asterisk_click2dial.field_asterisk_server__ip_address
+msgid "Asterisk IP address or DNS"
+msgstr ""
+
+#. module: asterisk_click2dial
+#: model_terms:ir.ui.view,arch_db:asterisk_click2dial.view_asterisk_server_form
+msgid "Asterisk Manager Interface"
+msgstr ""
+
+#. module: asterisk_click2dial
+#: model:ir.model.fields,field_description:asterisk_click2dial.field_res_users__asterisk_server_id
+msgid "Asterisk Server"
+msgstr ""
+
+#. module: asterisk_click2dial
+#: model:ir.model.fields,field_description:asterisk_click2dial.field_asterisk_server__name
+msgid "Asterisk Server Name"
+msgstr ""
+
+#. module: asterisk_click2dial
+#: model_terms:ir.ui.view,arch_db:asterisk_click2dial.view_asterisk_server_search
+msgid "Asterisk Server Search"
+msgstr ""
+
+#. module: asterisk_click2dial
+#: model:ir.actions.act_window,name:asterisk_click2dial.action_asterisk_server
+#: model:ir.model,name:asterisk_click2dial.model_asterisk_server
+#: model:ir.ui.menu,name:asterisk_click2dial.act_menu_ast_server
+#: model_terms:ir.ui.view,arch_db:asterisk_click2dial.view_asterisk_server_form
+#: model_terms:ir.ui.view,arch_db:asterisk_click2dial.view_asterisk_server_tree
+msgid "Asterisk Servers"
+msgstr ""
+
+#. module: asterisk_click2dial
+#: model:ir.model.fields,help:asterisk_click2dial.field_res_users__asterisk_chan_type
+msgid ""
+"Asterisk channel type, as used in the Asterisk dialplan. If the user has a "
+"regular IP phone, the channel type is 'SIP'."
+msgstr ""
+
+#. module: asterisk_click2dial
+#: model:ir.model.fields,help:asterisk_click2dial.field_asterisk_server__context
+msgid ""
+"Asterisk dialplan context from which the calls will be made. Refer to /etc/"
+"asterisk/extensions.conf on your Asterisk server."
+msgstr ""
+
+#. module: asterisk_click2dial
+#: model:ir.model.fields,help:asterisk_click2dial.field_res_users__asterisk_server_id
+msgid ""
+"Asterisk server on which the user's phone is connected. If you leave this "
+"field empty, it will use the first Asterisk server of the user's company."
+msgstr ""
+
+#. module: asterisk_click2dial
+#: model:ir.model.fields,field_description:asterisk_click2dial.field_res_users__cdraccount
+msgid "CDR Account"
+msgstr ""
+
+#. module: asterisk_click2dial
+#: model:ir.model.fields,help:asterisk_click2dial.field_res_users__cdraccount
+msgid "Call Detail Record (CDR) account used for billing this user."
+msgstr ""
+
+#. module: asterisk_click2dial
+#: code:addons/asterisk_click2dial/models/res_users.py:79
+#: model:ir.model.fields,field_description:asterisk_click2dial.field_res_users__callerid
+#, python-format
+msgid "Caller ID"
+msgstr "Идентификатор на звъняващия"
+
+#. module: asterisk_click2dial
+#: model:ir.model.fields,help:asterisk_click2dial.field_res_users__callerid
+msgid "Caller ID used for the calls initiated by this user."
+msgstr ""
+
+#. module: asterisk_click2dial
+#. openerp-web
+#: code:addons/asterisk_click2dial/static/src/js/asterisk_click2dial.js:45
+#, python-format
+msgid ""
+"Calling party number not retreived from IPBX or IPBX unreachable by Odoo"
+msgstr ""
+
+#. module: asterisk_click2dial
+#: code:addons/asterisk_click2dial/models/asterisk_server.py:216
+#, python-format
+msgid ""
+"Can't get calling number from  Asterisk.\n"
+"Here is the error: '%s'"
+msgstr ""
+
+#. module: asterisk_click2dial
+#: code:addons/asterisk_click2dial/models/phone_common.py:66
+#, python-format
+msgid ""
+"Click to dial with Asterisk failed.\n"
+"Here is the error: '%s'"
+msgstr ""
+
+#. module: asterisk_click2dial
+#: model:ir.model,name:asterisk_click2dial.model_phone_common
+msgid "Common methods for phone features"
+msgstr ""
+
+#. module: asterisk_click2dial
+#: model:ir.model.fields,field_description:asterisk_click2dial.field_asterisk_server__company_id
+msgid "Company"
+msgstr "Фирма"
+
+#. module: asterisk_click2dial
+#: model:ir.model.fields,help:asterisk_click2dial.field_asterisk_server__company_id
+msgid "Company who uses the Asterisk server."
+msgstr ""
+
+#. module: asterisk_click2dial
+#: code:addons/asterisk_click2dial/models/asterisk_server.py:159
+#, python-format
+msgid "Connection Test Failed! The error message is: %s"
+msgstr ""
+
+#. module: asterisk_click2dial
+#: code:addons/asterisk_click2dial/models/asterisk_server.py:164
+#, python-format
+msgid ""
+"Connection Test Successfull! Odoo can successfully login to the Asterisk "
+"Manager Interface."
+msgstr ""
+
+#. module: asterisk_click2dial
+#: model:ir.model.fields,field_description:asterisk_click2dial.field_asterisk_server__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: asterisk_click2dial
+#: model:ir.model.fields,field_description:asterisk_click2dial.field_asterisk_server__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: asterisk_click2dial
+#: selection:res.users,asterisk_chan_type:0
+msgid "DAHDI"
+msgstr ""
+
+#. module: asterisk_click2dial
+#: model:ir.model.fields,field_description:asterisk_click2dial.field_asterisk_server__context
+msgid "Dialplan Context"
+msgstr ""
+
+#. module: asterisk_click2dial
+#: model_terms:ir.ui.view,arch_db:asterisk_click2dial.view_asterisk_server_form
+msgid "Dialplan Parameters"
+msgstr ""
+
+#. module: asterisk_click2dial
+#: model:ir.model.fields,field_description:asterisk_click2dial.field_asterisk_server__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: asterisk_click2dial
+#: model:ir.model.fields,field_description:asterisk_click2dial.field_asterisk_server__extension_priority
+msgid "Extension Priority"
+msgstr ""
+
+#. module: asterisk_click2dial
+#: selection:res.users,asterisk_chan_type:0
+msgid "H323"
+msgstr ""
+
+#. module: asterisk_click2dial
+#: selection:res.users,asterisk_chan_type:0
+msgid "IAX2"
+msgstr ""
+
+#. module: asterisk_click2dial
+#: model:ir.model.fields,field_description:asterisk_click2dial.field_asterisk_server__id
+msgid "ID"
+msgstr ""
+
+#. module: asterisk_click2dial
+#. openerp-web
+#: code:addons/asterisk_click2dial/static/src/js/asterisk_click2dial.js:44
+#, python-format
+msgid "IPBX error"
+msgstr ""
+
+#. module: asterisk_click2dial
+#: code:addons/asterisk_click2dial/models/res_users.py:78
+#: model:ir.model.fields,field_description:asterisk_click2dial.field_res_users__internal_number
+#, python-format
+msgid "Internal Number"
+msgstr ""
+
+#. module: asterisk_click2dial
+#: model:ir.model.fields,field_description:asterisk_click2dial.field_asterisk_server____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: asterisk_click2dial
+#: model:ir.model.fields,field_description:asterisk_click2dial.field_asterisk_server__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: asterisk_click2dial
+#: model:ir.model.fields,field_description:asterisk_click2dial.field_asterisk_server__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: asterisk_click2dial
+#: model:ir.model.fields,help:asterisk_click2dial.field_asterisk_server__login
+msgid ""
+"Login that Odoo will use to communicate with the Asterisk Manager Interface. "
+"Refer to /etc/asterisk/manager.conf on your Asterisk server."
+msgstr ""
+
+#. module: asterisk_click2dial
+#: selection:res.users,asterisk_chan_type:0
+msgid "MGCP"
+msgstr ""
+
+#. module: asterisk_click2dial
+#: code:addons/asterisk_click2dial/models/phone_common.py:19
+#, python-format
+msgid "Missing phone number"
+msgstr ""
+
+#. module: asterisk_click2dial
+#. openerp-web
+#: code:addons/asterisk_click2dial/static/src/js/asterisk_click2dial.js:70
+#, python-format
+msgid "Moving to form view of %s (%s ID %d)"
+msgstr ""
+
+#. module: asterisk_click2dial
+#: code:addons/asterisk_click2dial/models/res_users.py:104
+#, python-format
+msgid "No Asterisk server configured for the company '%s'."
+msgstr ""
+
+#. module: asterisk_click2dial
+#: code:addons/asterisk_click2dial/models/phone_common.py:32
+#, python-format
+msgid "No callerID configured for the current user"
+msgstr ""
+
+#. module: asterisk_click2dial
+#: code:addons/asterisk_click2dial/models/asterisk_server.py:121
+#, python-format
+msgid "No channel type configured for the current user."
+msgstr ""
+
+#. module: asterisk_click2dial
+#: code:addons/asterisk_click2dial/models/asterisk_server.py:126
+#, python-format
+msgid "No resource name configured for the current user"
+msgstr ""
+
+#. module: asterisk_click2dial
+#. openerp-web
+#: code:addons/asterisk_click2dial/static/src/js/asterisk_click2dial.js:56
+#, python-format
+msgid "Number Not Found"
+msgstr ""
+
+#. module: asterisk_click2dial
+#. openerp-web
+#: code:addons/asterisk_click2dial/static/src/js/asterisk_click2dial.js:69
+#, python-format
+msgid "On the phone with '%s'"
+msgstr ""
+
+#. module: asterisk_click2dial
+#: code:addons/asterisk_click2dial/models/asterisk_server.py:87
+#, python-format
+msgid "Only use digits for the '%s' on the Asterisk server '%s'"
+msgstr ""
+
+#. module: asterisk_click2dial
+#. openerp-web
+#: code:addons/asterisk_click2dial/static/src/xml/asterisk_click2dial.xml:12
+#: code:addons/asterisk_click2dial/static/src/xml/asterisk_click2dial.xml:13
+#, python-format
+msgid "Open Caller"
+msgstr ""
+
+#. module: asterisk_click2dial
+#: model_terms:ir.ui.view,arch_db:asterisk_click2dial.view_users_form
+msgid "Optional Asterisk Parameters - for experts only, can be left empty"
+msgstr ""
+
+#. module: asterisk_click2dial
+#: model:ir.model.fields,field_description:asterisk_click2dial.field_asterisk_server__out_prefix
+msgid "Out Prefix"
+msgstr ""
+
+#. module: asterisk_click2dial
+#: selection:res.users,asterisk_chan_type:0
+msgid "PJSIP"
+msgstr ""
+
+#. module: asterisk_click2dial
+#: model:ir.model.fields,help:asterisk_click2dial.field_asterisk_server__password
+msgid ""
+"Password that Odoo will use to communicate with the Asterisk Manager "
+"Interface. Refer to /etc/asterisk/manager.conf on your Asterisk server."
+msgstr ""
+
+#. module: asterisk_click2dial
+#: model:ir.model.fields,field_description:asterisk_click2dial.field_asterisk_server__port
+msgid "Port"
+msgstr "Порт"
+
+#. module: asterisk_click2dial
+#: model:ir.model.fields,help:asterisk_click2dial.field_asterisk_server__out_prefix
+msgid ""
+"Prefix to dial to make outgoing calls. If you don't use a prefix to make "
+"outgoing calls, leave empty."
+msgstr ""
+
+#. module: asterisk_click2dial
+#: model:ir.model.fields,help:asterisk_click2dial.field_asterisk_server__extension_priority
+msgid ""
+"Priority of the extension in the Asterisk dialplan. Refer to /etc/asterisk/"
+"extensions.conf on your Asterisk server."
+msgstr ""
+
+#. module: asterisk_click2dial
+#: code:addons/asterisk_click2dial/models/asterisk_server.py:144
+#, python-format
+msgid ""
+"Problem in the request from Odoo to Asterisk. Here is the error message: %s"
+msgstr ""
+
+#. module: asterisk_click2dial
+#: code:addons/asterisk_click2dial/models/res_users.py:77
+#: model:ir.model.fields,field_description:asterisk_click2dial.field_res_users__resource
+#, python-format
+msgid "Resource Name"
+msgstr ""
+
+#. module: asterisk_click2dial
+#: model:ir.model.fields,help:asterisk_click2dial.field_res_users__resource
+msgid ""
+"Resource name for the channel type selected. For example, if you use "
+"'Dial(SIP/phone1)' in your Asterisk dialplan to ring the SIP phone of this "
+"user, then the resource name for this user is 'phone1'.  For a SIP phone, "
+"the phone number is often used as resource name, but not always."
+msgstr ""
+
+#. module: asterisk_click2dial
+#: selection:res.users,asterisk_chan_type:0
+msgid "SCCP"
+msgstr ""
+
+#. module: asterisk_click2dial
+#: selection:res.users,asterisk_chan_type:0
+msgid "SIP"
+msgstr ""
+
+#. module: asterisk_click2dial
+#: model_terms:ir.ui.view,arch_db:asterisk_click2dial.view_asterisk_server_form
+msgid "Server Name"
+msgstr ""
+
+#. module: asterisk_click2dial
+#: model:ir.model.fields,help:asterisk_click2dial.field_asterisk_server__alert_info
+msgid ""
+"Set Alert-Info header in SIP request to user's IP Phone for the click2dial "
+"feature. If empty, the Alert-Info header will not be added. You can use it "
+"to have a special ring tone for click2dial (a silent one !) or to activate "
+"auto-answer for example."
+msgstr ""
+
+#. module: asterisk_click2dial
+#: model:ir.model.fields,help:asterisk_click2dial.field_res_users__variable
+msgid ""
+"Set a user-specific 'Variable' field in the Asterisk Manager Interface "
+"'originate' request for the click2dial feature. If you want to have several "
+"variable headers, separate them with '|'."
+msgstr ""
+
+#. module: asterisk_click2dial
+#: model:ir.model.fields,help:asterisk_click2dial.field_res_users__alert_info
+msgid ""
+"Set a user-specific Alert-Info header in SIP request to user's IP Phone for "
+"the click2dial feature. If empty, the Alert-Info header will not be added. "
+"You can use it to have a special ring tone for click2dial (a silent one !) "
+"or to activate auto-answer for example."
+msgstr ""
+
+#. module: asterisk_click2dial
+#: selection:res.users,asterisk_chan_type:0
+msgid "Skinny"
+msgstr ""
+
+#. module: asterisk_click2dial
+#: model_terms:ir.ui.view,arch_db:asterisk_click2dial.view_users_form
+msgid "Standard Asterisk Parameters"
+msgstr ""
+
+#. module: asterisk_click2dial
+#: model:ir.model.fields,help:asterisk_click2dial.field_asterisk_server__port
+msgid ""
+"TCP port on which the Asterisk Manager Interface listens. Defined in /etc/"
+"asterisk/manager.conf on Asterisk."
+msgstr ""
+
+#. module: asterisk_click2dial
+#: model_terms:ir.ui.view,arch_db:asterisk_click2dial.view_asterisk_server_form
+msgid "Test Connection to Asterisk"
+msgstr ""
+
+#. module: asterisk_click2dial
+#: code:addons/asterisk_click2dial/models/res_users.py:86
+#, python-format
+msgid "The '%s' for the user '%s' should only have ASCII caracters"
+msgstr ""
+
+#. module: asterisk_click2dial
+#: code:addons/asterisk_click2dial/models/asterisk_server.py:108
+#, python-format
+msgid "The '%s' should only have ASCII caracters for the Asterisk server '%s'"
+msgstr ""
+
+#. module: asterisk_click2dial
+#: code:addons/asterisk_click2dial/models/asterisk_server.py:93
+#, python-format
+msgid ""
+"The 'extension priority' must be a positive value for the Asterisk server "
+"'%s'"
+msgstr ""
+
+#. module: asterisk_click2dial
+#. openerp-web
+#: code:addons/asterisk_click2dial/static/src/js/asterisk_click2dial.js:51
+#, python-format
+msgid "The calling number is not a phone number!"
+msgstr ""
+
+#. module: asterisk_click2dial
+#: model:ir.model.fields,help:asterisk_click2dial.field_res_users__internal_number
+msgid "User's internal phone number."
+msgstr ""
+
+#. module: asterisk_click2dial
+#: model:ir.model.fields,field_description:asterisk_click2dial.field_res_users__alert_info
+msgid "User-specific Alert-Info SIP Header"
+msgstr ""
+
+#. module: asterisk_click2dial
+#: model:ir.model.fields,field_description:asterisk_click2dial.field_res_users__dial_suffix
+msgid "User-specific Dial Suffix"
+msgstr ""
+
+#. module: asterisk_click2dial
+#: model:ir.model.fields,field_description:asterisk_click2dial.field_res_users__variable
+msgid "User-specific Variable"
+msgstr ""
+
+#. module: asterisk_click2dial
+#: model:ir.model.fields,help:asterisk_click2dial.field_res_users__dial_suffix
+msgid "User-specific dial suffix such as aa=2wb for SCCP auto answer."
+msgstr ""
+
+#. module: asterisk_click2dial
+#: model:ir.model,name:asterisk_click2dial.model_res_users
+msgid "Users"
+msgstr ""
+
+#. module: asterisk_click2dial
+#: model:ir.model.fields,field_description:asterisk_click2dial.field_asterisk_server__wait_time
+msgid "Wait Time"
+msgstr ""
+
+#. module: asterisk_click2dial
+#: code:addons/asterisk_click2dial/models/asterisk_server.py:89
+#, python-format
+msgid ""
+"You should set a 'Wait time' value between 1 and 120 seconds for the "
+"Asterisk server '%s'"
+msgstr ""
+
+#. module: asterisk_click2dial
+#: code:addons/asterisk_click2dial/models/asterisk_server.py:97
+#, python-format
+msgid ""
+"You should set a TCP port between 1 and 65535 for the Asterisk server '%s'"
+msgstr ""
+
+#. module: asterisk_click2dial
+#: selection:res.users,asterisk_chan_type:0
+msgid "Zap"
+msgstr ""
+
+#. module: asterisk_click2dial
+#: selection:res.users,asterisk_chan_type:0
+msgid "mISDN"
+msgstr ""
+
+#. module: asterisk_click2dial
+#: model_terms:ir.ui.view,arch_db:asterisk_click2dial.view_asterisk_server_form
+msgid "seconds"
+msgstr ""
