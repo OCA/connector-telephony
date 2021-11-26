@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+  Copyright 2014-2021 Akretion France (http://www.akretion.com/)
+  @author: Alexis de Lattre <alexis.delattre@akretion.com>
+  License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+-->
+<odoo>
+
+<template
+        id="_assets_primary_variables"
+        name="asterisk_click2dial assets"
+        inherit_id="web._assets_primary_variables"
+    >
+    <xpath expr="//link[last()]" position="after">
+        <link
+                rel="stylesheet"
+                type="text/scss"
+                href="/asterisk_click2dial/static/src/scss/asterisk.scss"
+            />
+    </xpath>
+</template>
+
+<template id="assets_backend" name="mail assets" inherit_id="web.assets_backend">
+    <xpath expr="." position="inside">
+        <script
+                type="text/javascript"
+                src="/asterisk_click2dial/static/src/js/asterisk_click2dial.js"
+            />
+    </xpath>
+</template>
+
+</odoo>
