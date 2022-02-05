@@ -68,7 +68,7 @@
     <field name="name">crm.phonecall.tree</field>
     <field name="model">crm.phonecall</field>
     <field name="arch" type="xml">
-        <tree string="Phone Calls" editable="top">
+        <tree string="Phone Calls" editable="top" multi_edit="1">
             <field name="date" />
             <field name="name" />
             <field name="partner_id" />
