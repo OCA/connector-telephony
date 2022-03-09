@@ -14,6 +14,7 @@ setuptools.setup(
         'odoo14-addon-event_phone',
         'odoo14-addon-hr_phone',
         'odoo14-addon-hr_recruitment_phone',
+        'odoo14-addon-sms_no_alter_body',
         'odoo14-addon-sms_no_automatic_delete',
     ],
     classifiers=[
