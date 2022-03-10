@@ -23,13 +23,14 @@ class WizardCreateCrmPhonecall(models.TransientModel):
         return self._create_open_crm_phonecall("outbound")
 
     @api.model
-    def _create_open_crm_phonecall(self, direction="outbound"):
+    def _create_open_crm_phonecall(self, direction="outbound", state="done"):
         teams = self.env["crm.team"].search([("member_ids", "in", self._uid)])
         action_ctx = self.env.context.copy()
         action_ctx.update(
             {
                 "default_direction": direction,
                 "default_team_id": teams and teams[0].id or False,
+                "default_state": state,
             }
         )
         if self.env.context.get("click2dial_model") == "res.partner":
