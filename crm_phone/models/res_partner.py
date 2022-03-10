@@ -15,9 +15,9 @@ class ResPartner(models.Model):
 
     @api.depends("phonecall_ids")
     def _compute_phonecall_count(self):
-        rg_res = self.env["crm.phonecall"].read_group(
-            [("partner_id", "in", self.ids)], ["partner_id"], ["partner_id"]
-        )
-        mapped_data = {x["partner_id"][0]: x["partner_id_count"] for x in rg_res}
         for partner in self:
-            partner.phonecall_count = mapped_data.get(partner.id, 0)
+            partner.phonecall_count = self.env["crm.phonecall"].search_count(
+                [
+                    ("partner_id", "child_of", partner.id),
+                ]
+            )
