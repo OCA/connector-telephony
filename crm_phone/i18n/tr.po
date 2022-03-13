@@ -143,6 +143,7 @@ msgstr "Kayıtlı Telefon"
 
 #. module: crm_phone
 #: model:ir.model.fields,field_description:crm_phone.field_crm_phonecall__date
+#: model_terms:ir.ui.view,arch_db:crm_phone.crm_phonecall_search
 msgid "Date"
 msgstr "Tarih"
 
@@ -315,15 +316,15 @@ msgid "Messages"
 msgstr ""
 
 #. module: crm_phone
+#: model_terms:ir.ui.view,arch_db:crm_phone.crm_phonecall_form
+msgid "Minutes of the phone call..."
+msgstr ""
+
+#. module: crm_phone
 #: model:ir.model.fields,field_description:crm_phone.field_crm_phonecall__partner_mobile
 #: model:ir.model.fields,field_description:crm_phone.field_number_not_found__current_lead_mobile
 msgid "Mobile"
 msgstr "Mobil"
-
-#. module: crm_phone
-#: model_terms:ir.ui.view,arch_db:crm_phone.crm_phonecall_search
-msgid "Month"
-msgstr "Ay"
 
 #. module: crm_phone
 #: model:ir.model.fields,field_description:crm_phone.field_crm_phonecall__my_activity_date_deadline
@@ -523,11 +524,6 @@ msgid ""
 msgstr ""
 
 #. module: crm_phone
-#: model_terms:ir.ui.view,arch_db:crm_phone.crm_phonecall_form
-msgid "Summary of the phone call..."
-msgstr ""
-
-#. module: crm_phone
 #: model_terms:ir.ui.view,arch_db:crm_phone.crm_phonecall_search
 msgid "Team"
 msgstr "Ekib"
@@ -596,6 +592,9 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:crm_phone.create_crm_phonecall_view
 msgid "Yes"
 msgstr "Evet"
+
+#~ msgid "Month"
+#~ msgstr "Ay"
 
 #, fuzzy
 #~ msgid "Number of error"
