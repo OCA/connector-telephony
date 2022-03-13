@@ -4,7 +4,7 @@
 
 {
     "name": "CRM Phone",
-    "version": "14.0.1.0.1",
+    "version": "14.0.1.1.0",
     "category": "Phone",
     "license": "AGPL-3",
     "summary": "Improve phone support in CRM",
