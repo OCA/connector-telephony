@@ -28,6 +28,7 @@ addon | version | maintainers | summary
 [hr_recruitment_phone](hr_recruitment_phone/) | 14.0.1.0.0 | [![alexis-via](https://github.com/alexis-via.png?size=30px)](https://github.com/alexis-via) | Validate phone numbers in HR Recruitment
 [sms_no_alter_body](sms_no_alter_body/) | 14.0.1.0.0 |  | Avoid sms formatting between html and text
 [sms_no_automatic_delete](sms_no_automatic_delete/) | 14.0.1.1.0 |  | Avoid automatic delete of sended sms
+[sms_ovh_http](sms_ovh_http/) | 14.0.1.0.0 | [![sebastienbeau](https://github.com/sebastienbeau.png?size=30px)](https://github.com/sebastienbeau) | Send sms using ovh http API
 
 [//]: # (end addons)
 
