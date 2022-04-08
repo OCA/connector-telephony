@@ -1,12 +1,12 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* sms_ovh_http
+# 	* sms_ovh_http
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 12.0\n"
+"Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: <>\n"
+"Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -16,6 +16,24 @@ msgstr ""
 #. module: sms_ovh_http
 #: model:ir.model.fields,field_description:sms_ovh_http.field_iap_account__sms_ovh_http_account
 msgid "Account"
+msgstr ""
+
+#. module: sms_ovh_http
+#: code:addons/sms_ovh_http/models/sms_api.py:0
+#, python-format
+msgid "Batch sending is not support with OVH"
+msgstr ""
+
+#. module: sms_ovh_http
+#: model:ir.model.fields,field_description:sms_ovh_http.field_iap_account__display_name
+#: model:ir.model.fields,field_description:sms_ovh_http.field_sms_api__display_name
+#: model:ir.model.fields,field_description:sms_ovh_http.field_sms_sms__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: sms_ovh_http
+#: model:ir.model.fields,field_description:sms_ovh_http.field_sms_sms__error_detail
+msgid "Error Detail"
 msgstr ""
 
 #. module: sms_ovh_http
@@ -29,6 +47,20 @@ msgid "IAP Account"
 msgstr ""
 
 #. module: sms_ovh_http
+#: model:ir.model.fields,field_description:sms_ovh_http.field_iap_account__id
+#: model:ir.model.fields,field_description:sms_ovh_http.field_sms_api__id
+#: model:ir.model.fields,field_description:sms_ovh_http.field_sms_sms__id
+msgid "ID"
+msgstr ""
+
+#. module: sms_ovh_http
+#: model:ir.model.fields,field_description:sms_ovh_http.field_iap_account____last_update
+#: model:ir.model.fields,field_description:sms_ovh_http.field_sms_api____last_update
+#: model:ir.model.fields,field_description:sms_ovh_http.field_sms_sms____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: sms_ovh_http
 #: model:ir.model.fields,field_description:sms_ovh_http.field_iap_account__sms_ovh_http_login
 msgid "Login"
 msgstr ""
@@ -39,8 +71,8 @@ msgid "OVH account"
 msgstr ""
 
 #. module: sms_ovh_http
-#: selection:iap.account,provider:0
-msgid "Odoo IAP"
+#: model:ir.model,name:sms_ovh_http.model_sms_sms
+msgid "Outgoing SMS"
 msgstr ""
 
 #. module: sms_ovh_http
@@ -59,7 +91,6 @@ msgid "SMS API"
 msgstr ""
 
 #. module: sms_ovh_http
-#: selection:iap.account,provider:0
+#: model:ir.model.fields.selection,name:sms_ovh_http.selection__iap_account__provider__sms_ovh_http
 msgid "SMS OVH http"
 msgstr ""
-
