@@ -16,6 +16,7 @@ setuptools.setup(
         'odoo14-addon-hr_recruitment_phone',
         'odoo14-addon-sms_no_alter_body',
         'odoo14-addon-sms_no_automatic_delete',
+        'odoo14-addon-sms_ovh_http',
     ],
     classifiers=[
         'Programming Language :: Python',
