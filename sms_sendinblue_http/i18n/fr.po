@@ -1,0 +1,192 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* sms_sendinblue_http
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 15.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: sms_sendinblue_http
+#: model:ir.model.fields,field_description:sms_sendinblue_http.field_iap_account__sms_sendinblue_http_api_key
+msgid "API KEY"
+msgstr "API KEY"
+
+#. module: sms_sendinblue_http
+#: code:addons/sms_sendinblue_http/models/sms_api.py:0
+#: model:ir.model.fields.selection,name:sms_sendinblue_http.selection__mail_notification__failure_type__sms_sendinblue_account_under_validation
+#: model:ir.model.fields.selection,name:sms_sendinblue_http.selection__sms_sms__failure_type__sms_sendinblue_account_under_validation
+#, python-format
+msgid "Account under validation"
+msgstr "Compte en cours de validation"
+
+#. module: sms_sendinblue_http
+#: code:addons/sms_sendinblue_http/models/sms_api.py:0
+#, python-format
+msgid "Batch sending is not implemented by this module sms_sendinblue_http"
+msgstr ""
+"L'envoi par lot n'est pas implémenté par ce module: sms_sendinblue_http"
+
+#. module: sms_sendinblue_http
+#: code:addons/sms_sendinblue_http/models/sms_api.py:0
+#: model:ir.model.fields.selection,name:sms_sendinblue_http.selection__mail_notification__failure_type__sms_sendinblue_campaign_processing
+#: model:ir.model.fields.selection,name:sms_sendinblue_http.selection__sms_sms__failure_type__sms_sendinblue_campaign_processing
+#, python-format
+msgid "Campaign processing"
+msgstr "Campagne en cours"
+
+#. module: sms_sendinblue_http
+#: code:addons/sms_sendinblue_http/models/sms_api.py:0
+#: model:ir.model.fields.selection,name:sms_sendinblue_http.selection__mail_notification__failure_type__sms_sendinblue_campaign_sent
+#: model:ir.model.fields.selection,name:sms_sendinblue_http.selection__sms_sms__failure_type__sms_sendinblue_campaign_sent
+#, python-format
+msgid "Campaign sent"
+msgstr "Campagne envoyé"
+
+#. module: sms_sendinblue_http
+#: code:addons/sms_sendinblue_http/models/sms_api.py:0
+#: model:ir.model.fields.selection,name:sms_sendinblue_http.selection__mail_notification__failure_type__sms_sendinblue_document_not_found
+#: model:ir.model.fields.selection,name:sms_sendinblue_http.selection__sms_sms__failure_type__sms_sendinblue_document_not_found
+#, python-format
+msgid "Document not found"
+msgstr "Document non trouvé"
+
+#. module: sms_sendinblue_http
+#: code:addons/sms_sendinblue_http/models/sms_api.py:0
+#: model:ir.model.fields.selection,name:sms_sendinblue_http.selection__mail_notification__failure_type__sms_sendinblue_duplicate_request
+#: model:ir.model.fields.selection,name:sms_sendinblue_http.selection__sms_sms__failure_type__sms_sendinblue_duplicate_request
+#, python-format
+msgid "Duplacate request"
+msgstr "Requête en double"
+
+#. module: sms_sendinblue_http
+#: code:addons/sms_sendinblue_http/models/sms_api.py:0
+#: model:ir.model.fields.selection,name:sms_sendinblue_http.selection__mail_notification__failure_type__sms_sendinblue_duplicate_parameter
+#: model:ir.model.fields.selection,name:sms_sendinblue_http.selection__sms_sms__failure_type__sms_sendinblue_duplicate_parameter
+#, python-format
+msgid "Duplicate parameter"
+msgstr "Paramètre en double"
+
+#. module: sms_sendinblue_http
+#: model:ir.model.fields,field_description:sms_sendinblue_http.field_sms_sms__error_detail
+msgid "Error Detail"
+msgstr "Détail de l'erreur"
+
+#. module: sms_sendinblue_http
+#: model:ir.model.fields,field_description:sms_sendinblue_http.field_iap_account__sms_sendinblue_http_from
+msgid "Expeditor"
+msgstr "Expéditeur"
+
+#. module: sms_sendinblue_http
+#: model:ir.model.fields,field_description:sms_sendinblue_http.field_sms_sms__failure_type
+msgid "Failure Type"
+msgstr "Type d'échec"
+
+#. module: sms_sendinblue_http
+#: model:ir.model.fields,field_description:sms_sendinblue_http.field_mail_notification__failure_type
+msgid "Failure type"
+msgstr "Type d'échec"
+
+#. module: sms_sendinblue_http
+#: model:ir.model,name:sms_sendinblue_http.model_iap_account
+msgid "IAP Account"
+msgstr "Comptes IAP"
+
+#. module: sms_sendinblue_http
+#: code:addons/sms_sendinblue_http/models/sms_api.py:0
+#: model:ir.model.fields.selection,name:sms_sendinblue_http.selection__mail_notification__failure_type__sms_sendinblue_invalid_parameter
+#: model:ir.model.fields.selection,name:sms_sendinblue_http.selection__sms_sms__failure_type__sms_sendinblue_invalid_parameter
+#, python-format
+msgid "Invalid parameter"
+msgstr "Paramètre invalide"
+
+#. module: sms_sendinblue_http
+#: model:ir.model,name:sms_sendinblue_http.model_mail_notification
+msgid "Message Notifications"
+msgstr "Notifications par message"
+
+#. module: sms_sendinblue_http
+#: code:addons/sms_sendinblue_http/models/sms_api.py:0
+#: model:ir.model.fields.selection,name:sms_sendinblue_http.selection__mail_notification__failure_type__sms_sendinblue_method_not_allowed
+#: model:ir.model.fields.selection,name:sms_sendinblue_http.selection__sms_sms__failure_type__sms_sendinblue_method_not_allowed
+#, python-format
+msgid "Method not allowed"
+msgstr "Méthode non permise"
+
+#. module: sms_sendinblue_http
+#: code:addons/sms_sendinblue_http/models/sms_api.py:0
+#: model:ir.model.fields.selection,name:sms_sendinblue_http.selection__mail_notification__failure_type__sms_sendinblue_missing_parameter
+#: model:ir.model.fields.selection,name:sms_sendinblue_http.selection__sms_sms__failure_type__sms_sendinblue_missing_parameter
+#, python-format
+msgid "Missing parameter"
+msgstr "Paramètre manquant"
+
+#. module: sms_sendinblue_http
+#: code:addons/sms_sendinblue_http/models/sms_api.py:0
+#: model:ir.model.fields.selection,name:sms_sendinblue_http.selection__mail_notification__failure_type__sms_sendinblue_not_acceptable
+#: model:ir.model.fields.selection,name:sms_sendinblue_http.selection__sms_sms__failure_type__sms_sendinblue_not_acceptable
+#, python-format
+msgid "Not acceptable"
+msgstr "Refusé"
+
+#. module: sms_sendinblue_http
+#: code:addons/sms_sendinblue_http/models/sms_api.py:0
+#: model:ir.model.fields.selection,name:sms_sendinblue_http.selection__mail_notification__failure_type__sms_sendinblue_out_of_range
+#: model:ir.model.fields.selection,name:sms_sendinblue_http.selection__sms_sms__failure_type__sms_sendinblue_out_of_range
+#, python-format
+msgid "Out of range"
+msgstr "Hors limite"
+
+#. module: sms_sendinblue_http
+#: model:ir.model,name:sms_sendinblue_http.model_sms_sms
+msgid "Outgoing SMS"
+msgstr "SMS Sortant"
+
+#. module: sms_sendinblue_http
+#: code:addons/sms_sendinblue_http/models/sms_api.py:0
+#: model:ir.model.fields.selection,name:sms_sendinblue_http.selection__mail_notification__failure_type__sms_sendinblue_permission_denied
+#: model:ir.model.fields.selection,name:sms_sendinblue_http.selection__sms_sms__failure_type__sms_sendinblue_permission_denied
+#, python-format
+msgid "Permission denied"
+msgstr "Permission refusée"
+
+#. module: sms_sendinblue_http
+#: model:ir.model.fields,field_description:sms_sendinblue_http.field_iap_account__provider
+msgid "Provider"
+msgstr "Fournisseur"
+
+#. module: sms_sendinblue_http
+#: code:addons/sms_sendinblue_http/models/sms_api.py:0
+#: model:ir.model.fields.selection,name:sms_sendinblue_http.selection__mail_notification__failure_type__sms_sendinblue_reseller_permission_denied
+#: model:ir.model.fields.selection,name:sms_sendinblue_http.selection__sms_sms__failure_type__sms_sendinblue_reseller_permission_denied
+#, python-format
+msgid "Reseller permission denied"
+msgstr "Permission refusée pour le revendeur"
+
+#. module: sms_sendinblue_http
+#: model:ir.model,name:sms_sendinblue_http.model_sms_api
+msgid "SMS API"
+msgstr "API SMS"
+
+#. module: sms_sendinblue_http
+#: model:ir.model.fields.selection,name:sms_sendinblue_http.selection__iap_account__provider__sms_sendinblue_http
+msgid "SMS Sendinblue"
+msgstr "SMS Sendinblue"
+
+#. module: sms_sendinblue_http
+#: model_terms:ir.ui.view,arch_db:sms_sendinblue_http.iap_account_view_form
+msgid "SMS Sendinblue settings"
+msgstr "Paramètres SMS Sendinblue"
+
+#. module: sms_sendinblue_http
+#: code:addons/sms_sendinblue_http/models/sms_api.py:0
+#, python-format
+msgid "Unauthorized Sendinblue account."
+msgstr "Compte sendinblue non authorisé."
