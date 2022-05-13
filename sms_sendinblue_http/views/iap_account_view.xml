@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+    Copyright 2022 Moka Tourisme (https://www.mokatourisme.fr).
+    @author Pierre Verkest <pierreverkest84@gmail.com>
+    License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+-->
+<odoo>
+    <record id="iap_account_view_form" model="ir.ui.view">
+        <field name="model">iap.account</field>
+        <field name="inherit_id" ref="iap.iap_account_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='account']" position="after">
+                <group
+                    string="SMS Sendinblue settings"
+                    name="sendinblue"
+                    attrs="{'invisible': [('provider', '!=', 'sms_sendinblue_http')]}"
+                >
+                    <field name="sms_sendinblue_http_api_key" password="True" />
+                    <field name="sms_sendinblue_http_from" />
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>
