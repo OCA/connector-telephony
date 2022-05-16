@@ -20,17 +20,6 @@ class IapAccount(models.Model):
             return "sms"
         return super()._get_service_from_provider()
 
-    @property
-    def _server_env_fields(self):
-        res = super()._server_env_fields
-        res.update(
-            {
-                "sms_sendinblue_http_api_key": {},
-                "sms_sendinblue_http_from": {},
-            }
-        )
-        return res
-
     @api.model
     def get_credits_url(self, service_name, base_url="", credit=0, trial=False):
         first_account = self.search([("service_name", "=", service_name)], limit=1)
