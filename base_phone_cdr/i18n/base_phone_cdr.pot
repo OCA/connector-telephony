@@ -1,0 +1,198 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* base_phone_cdr
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: base_phone_cdr
+#: model_terms:ir.ui.view,arch_db:base_phone_cdr.partner_view_cdr_records
+msgid "<span class=\"o_stat_text\">CDR</span>"
+msgstr ""
+
+#. module: base_phone_cdr
+#: model:ir.model.fields,field_description:base_phone_cdr.field_phone_cdr__guid
+msgid "Call GUID"
+msgstr ""
+
+#. module: base_phone_cdr
+#: model:ir.model.fields,field_description:base_phone_cdr.field_phone_cdr__inbound_flag
+msgid "Call Inbound flag"
+msgstr ""
+
+#. module: base_phone_cdr
+#: model:ir.model.fields,field_description:base_phone_cdr.field_phone_cdr__call_connect_time
+msgid "Call connect time"
+msgstr ""
+
+#. module: base_phone_cdr
+#: model:ir.model.fields,field_description:base_phone_cdr.field_phone_cdr__call_start_time
+msgid "Call start time"
+msgstr ""
+
+#. module: base_phone_cdr
+#: model:ir.model.fields,field_description:base_phone_cdr.field_phone_cdr__called_id
+msgid "Called ID"
+msgstr ""
+
+#. module: base_phone_cdr
+#: model:ir.model.fields,field_description:base_phone_cdr.field_phone_cdr__called_id_name
+msgid "Called ID Name"
+msgstr ""
+
+#. module: base_phone_cdr
+#: model:ir.model.fields,field_description:base_phone_cdr.field_phone_cdr__caller_id
+msgid "Caller ID"
+msgstr ""
+
+#. module: base_phone_cdr
+#: model:ir.model.fields,field_description:base_phone_cdr.field_phone_cdr__caller_id_name
+msgid "Caller ID Name"
+msgstr ""
+
+#. module: base_phone_cdr
+#: selection:phone.cdr,state:0
+msgid "Completed"
+msgstr ""
+
+#. module: base_phone_cdr
+#: model:ir.model.fields,field_description:base_phone_cdr.field_phone_cdr__ring_time
+msgid "Compute ring time"
+msgstr ""
+
+#. module: base_phone_cdr
+#: selection:phone.cdr,state:0
+msgid "Connected"
+msgstr ""
+
+#. module: base_phone_cdr
+#: model:ir.model,name:base_phone_cdr.model_res_partner
+msgid "Contact"
+msgstr ""
+
+#. module: base_phone_cdr
+#: model:ir.model.fields,field_description:base_phone_cdr.field_phone_cdr__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: base_phone_cdr
+#: model:ir.model.fields,field_description:base_phone_cdr.field_phone_cdr__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: base_phone_cdr
+#: model:ir.model.fields,field_description:base_phone_cdr.field_phone_cdr__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: base_phone_cdr
+#: model:ir.model.fields,field_description:base_phone_cdr.field_phone_cdr__id
+msgid "ID"
+msgstr ""
+
+#. module: base_phone_cdr
+#: selection:phone.cdr,inbound_flag:0
+msgid "Inbound"
+msgstr ""
+
+#. module: base_phone_cdr
+#: model:ir.model.fields,field_description:base_phone_cdr.field_phone_cdr____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: base_phone_cdr
+#: model:ir.model.fields,field_description:base_phone_cdr.field_phone_cdr__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: base_phone_cdr
+#: model:ir.model.fields,field_description:base_phone_cdr.field_phone_cdr__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: base_phone_cdr
+#: selection:phone.cdr,state:0
+msgid "Missed"
+msgstr ""
+
+#. module: base_phone_cdr
+#: model:ir.model.fields,field_description:base_phone_cdr.field_phone_cdr__user_id
+msgid "Odoo User"
+msgstr ""
+
+#. module: base_phone_cdr
+#: selection:phone.cdr,state:0
+msgid "Offering"
+msgstr ""
+
+#. module: base_phone_cdr
+#: selection:phone.cdr,state:0
+msgid "On Hold"
+msgstr ""
+
+#. module: base_phone_cdr
+#: selection:phone.cdr,inbound_flag:0
+msgid "Outbound"
+msgstr ""
+
+#. module: base_phone_cdr
+#: model:ir.model.fields,field_description:base_phone_cdr.field_phone_cdr__partner_id
+msgid "Partner"
+msgstr ""
+
+#. module: base_phone_cdr
+#: model:ir.model,name:base_phone_cdr.model_phone_cdr
+#: model_terms:ir.ui.view,arch_db:base_phone_cdr.view_phone_cdr_form
+#: model_terms:ir.ui.view,arch_db:base_phone_cdr.view_phone_cdr_pivot
+msgid "Phone CDR"
+msgstr ""
+
+#. module: base_phone_cdr
+#: model:ir.model.fields,field_description:base_phone_cdr.field_res_users__phone_password
+msgid "Phone Password"
+msgstr ""
+
+#. module: base_phone_cdr
+#: model:ir.actions.act_window,name:base_phone_cdr.phone_cdr_view_action
+msgid "Phone Records"
+msgstr ""
+
+#. module: base_phone_cdr
+#: model:ir.model.fields,field_description:base_phone_cdr.field_res_users__related_phone
+msgid "Related Phone"
+msgstr ""
+
+#. module: base_phone_cdr
+#: model:ir.model.fields,field_description:base_phone_cdr.field_phone_cdr__state
+msgid "Status"
+msgstr ""
+
+#. module: base_phone_cdr
+#: model:ir.model.fields,field_description:base_phone_cdr.field_phone_cdr__talk_time
+msgid "Talk Time"
+msgstr ""
+
+#. module: base_phone_cdr
+#: model_terms:ir.ui.view,arch_db:base_phone_cdr.view_users_form_telephony_tab
+msgid "Telephony Preferences"
+msgstr ""
+
+#. module: base_phone_cdr
+#: model:ir.model.fields,field_description:base_phone_cdr.field_res_partner__total_cdr_count
+#: model:ir.model.fields,field_description:base_phone_cdr.field_res_users__total_cdr_count
+msgid "Total CDR"
+msgstr ""
+
+#. module: base_phone_cdr
+#: model:ir.model,name:base_phone_cdr.model_res_users
+msgid "Users"
+msgstr ""
+
