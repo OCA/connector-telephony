@@ -10,6 +10,7 @@ setuptools.setup(
     install_requires=[
         'odoo12-addon-asterisk_click2dial',
         'odoo12-addon-base_phone',
+        'odoo12-addon-base_phone_cdr',
         'odoo12-addon-base_phone_popup',
         'odoo12-addon-connector_voicent',
         'odoo12-addon-crm_phone',
