@@ -1,22 +1,36 @@
-[![Build Status](https://travis-ci.org/OCA/connector-telephony.svg?branch=12.0)](https://travis-ci.org/OCA/connector-telephony)
-[![Coverage Status](https://coveralls.io/repos/OCA/connector-telephony/badge.png?branch=12.0)](https://coveralls.io/r/OCA/connector-telephony?branch=12.0)
 
-# Odoo telephony connector
+[![Runboat](https://img.shields.io/badge/runboat-Try%20me-875A7B.png)](https://runboat.odoo-community.org/builds?repo=OCA/connector-telephony&target_branch=12.0)
+[![Build Status](https://travis-ci.com/OCA/connector-telephony.svg?branch=12.0)](https://travis-ci.com/OCA/connector-telephony)
+[![codecov](https://codecov.io/gh/OCA/connector-telephony/branch/12.0/graph/badge.svg)](https://codecov.io/gh/OCA/connector-telephony)
+[![Translation Status](https://translation.odoo-community.org/widgets/connector-telephony-12-0/-/svg-badge.svg)](https://translation.odoo-community.org/engage/connector-telephony-12-0/?utm_source=widget)
 
-This projets aims at connecting Odoo to different phone systems. Phone systems currently supported are Asterisk (an OpenSource IPBX, cf [asterisk.org](http://www.asterisk.org/) and OVH (the centrex offer of OVH, cf the [OVH website](http://www.ovhtelecom.fr/telephonie/)).
+<!-- /!\ do not modify above this line -->
 
-This project provides:
-* a serie of modules (base\_phone, base\_phone\_popup,
-  crm\_phone, hr\_phone, event\_phone, etc...) that are independant from
-  the phone system and can be usefull on all Odoo installations.
-* several modules (asterisk\_click2dial, ovh\_telephony\_connector)
-  that are specific to a particular phone system.
+# VOIp and Telephony Addons
 
-The main maintainer of this project is Alexis de Lattre from
-Akretion (alexis.delattre \_at\_ akretion.com).
+None
 
-To know more about the OpenERP-Asterisk connector, refer to the documentation
- available on the Akretion website
-http://www.akretion.com/en/products-and-services/openerp-asterisk-voip-connector
+<!-- /!\ do not modify below this line -->
 
+<!-- prettier-ignore-start -->
 
+[//]: # (addons)
+
+This part will be replaced when running the oca-gen-addons-table script from OCA/maintainer-tools.
+
+[//]: # (end addons)
+
+<!-- prettier-ignore-end -->
+
+## Licenses
+
+This repository is licensed under [AGPL-3.0](LICENSE).
+
+However, each module can have a totally different license, as long as they adhere to Odoo Community Association (OCA)
+policy. Consult each module's `__manifest__.py` file, which contains a `license` key
+that explains its license.
+
+----
+OCA, or the [Odoo Community Association](http://odoo-community.org/), is a nonprofit
+organization whose mission is to support the collaborative development of Odoo features
+and promote its widespread use.
