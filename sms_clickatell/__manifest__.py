@@ -7,7 +7,7 @@
     "version": "13.0.1.0.0",
     "license": "AGPL-3",
     "author": "RPSJR, Odoo Community Association (OCA)",
-    "website": "https://github.com/oca/connector-telephony",
+    "website": "https://github.com/OCA/connector-telephony",
     "depends": ["sms", "iap"],  # Odoo SA.
     "data": ["views/iap_account.xml"],
     "demo": [],
