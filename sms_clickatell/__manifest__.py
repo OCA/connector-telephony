@@ -4,7 +4,7 @@
     "name": "SMS Clickatell",
     "summary": """
         Send SMS with Clickatell instead of Odoo SA IAP.""",
-    "version": "13.0.1.0.0",
+    "version": "14.0.1.0.0",
     "license": "AGPL-3",
     "author": "RPSJR, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/connector-telephony",
