@@ -221,6 +221,7 @@ class AsteriskServer(models.Model):
             chan.get("ConnectedLineNum") == internal_number
             or chan.get("EffectiveConnectedLineNum") == internal_number
             or sip_account in chan.get("BridgedChannel", "")
+            or sip_account in chan.get("Data", "")
         ):
             _logger.debug(
                 "Found a matching Event with channelstate = %s",
