@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="crm_phonecall_voztelecom" model="ir.ui.view">
+        <field name="name">crm_phonecall_VozTelecom</field>
+        <field name="model">crm.phonecall</field>
+        <field name="inherit_id" ref="crm_phonecall.crm_case_inbound_phone_tree_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='date']" position="after">
+                <field name="end_date"/>
+                <field name="duration" widget="timesheet_uom" sum="Total"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

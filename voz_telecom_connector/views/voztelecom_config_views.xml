@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <!--VozTelecom connector config tree-->
+    <record id="voztelecom_connector_config_tree" model="ir.ui.view">
+        <field name="name">VozTelecom Connector Config Tree</field>
+        <field name="model">voztelecom.config</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <!--VozTelecom connector config form-->
+    <record id="voztelecom_connector_config_form" model="ir.ui.view">
+        <field name="name">VozTelecom Connector Config Form</field>
+        <field name="model">voztelecom.config</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_title pr-0">
+                        <h1 class="d-flex flex-row justify-content-between">
+                            <field name="name" class="o_task_name text-truncate" placeholder="Nombre de configuracion"
+                                   default_focus="1"/>
+                            <field name="state" widget="state_selection" class="ml-auto"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <field name="api_token"/>
+                        <field name="callback_url"/>
+                        <button name="api_configuration" type="object" string="Configurar API"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!--VozTelecom connector config action for the menuitem-->
+    <record id="action_voztelecom_connector_config" model="ir.actions.act_window">
+        <field name="name">VozTelecom Connector</field>
+        <field name="res_model">voztelecom.config</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="voztelecom_connector_config_tree"/>
+    </record>
+
+    <!--VozTelecom connector config menuitem-->
+    <menuitem id="menu"
+              name="Configuracion conexion VozTelecom"
+              parent="base.menu_ir_property"
+              action="action_voztelecom_connector_config"/>
+</odoo>
