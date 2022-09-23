@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <data noupdate="1">
-        <record model="res.partner" id="voz_telecom_connector.voztelecom_admin">
+        <record model="res.partner" id="voztelecom_admin">
             <field name="name">VozTelecom</field>
-            <field name="image_1920" type="base64" file="voz_telecom_connector/static/description/icon.png"/>
+            <field
+                name="image_1920"
+                type="base64"
+                file="voz_telecom_connector/static/description/icon.png"
+            />
         </record>
     </data>
 </odoo>

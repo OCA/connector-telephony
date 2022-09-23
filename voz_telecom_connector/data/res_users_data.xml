@@ -4,13 +4,20 @@
         <record id="voz_telecom_user" model="res.users">
             <field name="login">voztelecom</field>
             <field name="password">voztelecom</field>
-            <field name="company_id" ref="base.main_company"/>
-            <field name="company_ids" eval="[(4, ref('base.main_company'))]"/>
-            <field name="groups_id" eval="[(6,0,[ref('base.group_user'),ref('base.group_erp_manager'),
-            ref('base.group_system'),ref('sales_team.group_sale_salesman_all_leads'),ref('base.group_no_one')])]"/>
-            <field name="partner_id" ref="voz_telecom_connector.voztelecom_admin"/>
+            <field name="company_id" ref="base.main_company" />
+            <field name="company_ids" eval="[(4, ref('base.main_company'))]" />
+            <field
+                name="groups_id"
+                eval="[(6,0,[ref('base.group_user'),ref('base.group_erp_manager'),
+            ref('base.group_system'),ref('sales_team.group_sale_salesman_all_leads'),ref('base.group_no_one')])]"
+            />
+            <field name="partner_id" ref="voz_telecom_connector.voztelecom_admin" />
             <field name="email">voztelecom@example.com</field>
-            <field name="image_1920" type="base64" file="voz_telecom_connector/static/description/icon.png"/>
+            <field
+                name="image_1920"
+                type="base64"
+                file="voz_telecom_connector/static/description/icon.png"
+            />
         </record>
     </data>
 </odoo>
