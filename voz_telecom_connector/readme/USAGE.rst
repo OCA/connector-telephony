@@ -5,4 +5,3 @@ Phonecalls will be registered in crm.phonecalls models, see
 To make a call, go to the desired contact and click the phone icon(only shown when there is a phone or mobile)
 
 When there is a phone call the confgured user will send a message to all users in the system with a link to the caller.
-

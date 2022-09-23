@@ -3,23 +3,34 @@
     <record id="res_partner_voztelecom" model="ir.ui.view">
         <field name="name">res_partner_VozTelecom</field>
         <field name="model">res.partner</field>
-        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="priority">100</field>
+        <field name="inherit_id" ref="base.view_partner_form" />
         <field name="arch" type="xml">
             <xpath expr="//field[@name='phone']" position="replace">
-                <label for="phone"/>
+                <label for="phone" />
                 <div class="o_row">
-                    <field name="phone"/>
-                    <button name="api_phone_call" attrs="{'invisible':[('phone','=',False)]}" class="btn-link mb-1 px-0"
-                            icon="fa-phone" type="object"/>
+                    <field name="phone" />
+                    <button
+                        name="api_phone_call"
+                        attrs="{'invisible':[('phone','=',False)]}"
+                        class="btn-link mb-1 px-0"
+                        icon="fa-phone"
+                        type="object"
+                    />
                 </div>
 
             </xpath>
             <xpath expr="//field[@name='mobile']" position="replace">
-                <label for="mobile"/>
+                <label for="mobile" />
                 <div class="o_row">
-                    <field name="mobile"/>
-                    <button class="btn-link mb-1 px-0" name="api_mobile_call"
-                            attrs="{'invisible':[('mobile','=',False)]}" icon="fa-phone" type="object"/>
+                    <field name="mobile" />
+                    <button
+                        class="btn-link mb-1 px-0"
+                        name="api_mobile_call"
+                        attrs="{'invisible':[('mobile','=',False)]}"
+                        icon="fa-phone"
+                        type="object"
+                    />
                 </div>
             </xpath>
         </field>
