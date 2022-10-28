@@ -36,7 +36,7 @@ class BackendVoicent(models.Model):
 
     @api.model
     def _run_update_next_call(self):
-        """ This method is called from a cron job. """
+        """This method is called from a cron job."""
         cr_time_list = ["00:00"]
         backends = self.search([("active", "=", True)])
         for backend in backends:
@@ -61,13 +61,10 @@ class BackendVoicent(models.Model):
                     )
                     break
             if not next_call:
-                next_call = (
-                    datetime.now(user_tz).replace(
-                        hour=int(cr_time_list[0].split(":")[0]),
-                        minute=int(cr_time_list[0].split(":")[1]),
-                        second=0,
-                    )
-                    + timedelta(days=1)
-                )
+                next_call = datetime.now(user_tz).replace(
+                    hour=int(cr_time_list[0].split(":")[0]),
+                    minute=int(cr_time_list[0].split(":")[1]),
+                    second=0,
+                ) + timedelta(days=1)
             next_call = next_call.astimezone(timezone("UTC"))
             backend.next_call = next_call.strftime(DEFAULT_SERVER_DATETIME_FORMAT)
