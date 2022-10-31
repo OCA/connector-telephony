@@ -15,7 +15,7 @@
     ],
     "external_dependencies": {
         "python": [
-            "voicent",
+            "Voicent-Python",
         ],
     },
     "data": [
