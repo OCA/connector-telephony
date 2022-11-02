@@ -104,7 +104,7 @@ class VozTelecomAPICallback(http.Controller):
                 ("phone_no_spaces", "ilike", response["displayedExternalNumber"]),
                 ("mobile_no_spaces", "ilike", response["displayedExternalNumber"]),
             ],
-            limit=1
+            limit=1,
         )
         partner_id = request.env["res.partner"].search(
             [
@@ -153,7 +153,7 @@ class VozTelecomAPICallback(http.Controller):
                             else response["extension"]
                         )
                 else:
-                    data['direction'] = 'out'
+                    data["direction"] = "out"
                     user_id.notify_default(
                         message="Llamada a "
                         + (caller.name or response["displayedNumber"])
