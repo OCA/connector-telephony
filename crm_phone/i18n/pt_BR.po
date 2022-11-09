@@ -141,6 +141,7 @@ msgstr ""
 
 #. module: crm_phone
 #: model:ir.model.fields,field_description:crm_phone.field_crm_phonecall__date
+#: model_terms:ir.ui.view,arch_db:crm_phone.crm_phonecall_search
 msgid "Date"
 msgstr ""
 
@@ -312,14 +313,14 @@ msgid "Messages"
 msgstr ""
 
 #. module: crm_phone
-#: model:ir.model.fields,field_description:crm_phone.field_crm_phonecall__partner_mobile
-#: model:ir.model.fields,field_description:crm_phone.field_number_not_found__current_lead_mobile
-msgid "Mobile"
+#: model_terms:ir.ui.view,arch_db:crm_phone.crm_phonecall_form
+msgid "Minutes of the phone call..."
 msgstr ""
 
 #. module: crm_phone
-#: model_terms:ir.ui.view,arch_db:crm_phone.crm_phonecall_search
-msgid "Month"
+#: model:ir.model.fields,field_description:crm_phone.field_crm_phonecall__partner_mobile
+#: model:ir.model.fields,field_description:crm_phone.field_number_not_found__current_lead_mobile
+msgid "Mobile"
 msgstr ""
 
 #. module: crm_phone
@@ -514,11 +515,6 @@ msgid ""
 "Overdue: Due date is already passed\n"
 "Today: Activity date is today\n"
 "Planned: Future activities."
-msgstr ""
-
-#. module: crm_phone
-#: model_terms:ir.ui.view,arch_db:crm_phone.crm_phonecall_form
-msgid "Summary of the phone call..."
 msgstr ""
 
 #. module: crm_phone

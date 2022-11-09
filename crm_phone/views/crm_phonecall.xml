@@ -51,7 +51,7 @@
                     <field
                             name="description"
                             nolabel="1"
-                            placeholder="Summary of the phone call..."
+                            placeholder="Minutes of the phone call..."
                         />
                 </group>
             </sheet>
@@ -68,15 +68,27 @@
     <field name="name">crm.phonecall.tree</field>
     <field name="model">crm.phonecall</field>
     <field name="arch" type="xml">
-        <tree string="Phone Calls" editable="top">
+        <tree string="Phone Calls" multi_edit="1">
             <field name="date" />
             <field name="name" />
             <field name="partner_id" />
-            <field name="opportunity_id" />
+            <field name="opportunity_id" optional="show" />
             <field name="user_id" />
-            <field name="team_id" />
-            <field name="direction" />
-            <field name="state" />
+            <field name="team_id" optional="show" />
+            <field
+                    name="direction"
+                    optional="show"
+                    widget="badge"
+                    decoration-danger="direction == 'outbound'"
+                    decoration-warning="direction == 'inbound'"
+                />
+            <field
+                    name="state"
+                    widget="badge"
+                    decoration-success="state == 'done'"
+                    decoration-info="state == 'open'"
+                    decoration-muted="state == 'cancel'"
+                />
             <button
                     name="schedule_another_call"
                     type="object"
@@ -125,6 +137,8 @@
                     domain="[('user_id', '=', False)]"
                 />
             <separator />
+            <filter name="date" string="Date" date="date" />
+            <separator />
             <filter string="To Do" name="open" domain="[('state', '=', 'open')]" />
             <filter string="Held" name="done" domain="[('state', '=', 'done')]" />
             <separator />
@@ -156,7 +170,7 @@
                     />
                 <filter
                         name="date_groupby"
-                        string="Month"
+                        string="Date"
                         context="{'group_by': 'date'}"
                     />
                 <filter
