@@ -52,10 +52,9 @@ class VozTelecomAPICallback(http.Controller):
                 )
             body = (
                 "<h2>Llamada entrante de "
-                + (caller.name or response["displayedNumber"])
-                + "</h2><a href='/web?#id="
-                + str(caller.id)
-                + "&model=res.partner'> Abrir cliente</a>"
+                + (caller.name or response['displayedNumber']) +
+                "</h2><a href='/web#id="+(str(caller.id or ""))+"&action="+str(request.env.ref('contacts.action_contacts').id)+
+                "&model=res.partner&view_type=form&cids=1'>"+("Abrir" if caller else "Crear")+" Cliente</a>"
             )
             if ch:
                 ch.message_post(
