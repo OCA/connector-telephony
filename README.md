@@ -1,6 +1,7 @@
 
 [![Runboat](https://img.shields.io/badge/runboat-Try%20me-875A7B.png)](https://runboat.odoo-community.org/builds?repo=OCA/connector-telephony&target_branch=14.0)
-[![Build Status](https://travis-ci.com/OCA/connector-telephony.svg?branch=14.0)](https://travis-ci.com/OCA/connector-telephony)
+[![Pre-commit Status](https://github.com/OCA/connector-telephony/actions/workflows/pre-commit.yml/badge.svg?branch=14.0)](https://github.com/OCA/connector-telephony/actions/workflows/pre-commit.yml?query=branch%3A14.0)
+[![Build Status](https://github.com/OCA/connector-telephony/actions/workflows/test.yml/badge.svg?branch=14.0)](https://github.com/OCA/connector-telephony/actions/workflows/test.yml?query=branch%3A14.0)
 [![codecov](https://codecov.io/gh/OCA/connector-telephony/branch/14.0/graph/badge.svg)](https://codecov.io/gh/OCA/connector-telephony)
 [![Translation Status](https://translation.odoo-community.org/widgets/connector-telephony-14-0/-/svg-badge.svg)](https://translation.odoo-community.org/engage/connector-telephony-14-0/?utm_source=widget)
 
@@ -8,7 +9,7 @@
 
 # connector-telephony
 
-TODO: add repo description.
+Tools for telephony services and phone number rendering
 
 <!-- /!\ do not modify below this line -->
 
