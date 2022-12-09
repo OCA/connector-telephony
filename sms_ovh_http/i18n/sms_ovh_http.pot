@@ -14,8 +14,13 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: sms_ovh_http
-#: model:ir.model.fields,field_description:sms_ovh_http.field_iap_account__sms_ovh_http_account
-msgid "Account"
+#: model:ir.model.fields,field_description:sms_ovh_http.field_iap_account__sms_ovh_http_login
+msgid "API User ID"
+msgstr ""
+
+#. module: sms_ovh_http
+#: model:ir.model.fields,field_description:sms_ovh_http.field_iap_account__sms_ovh_http_password
+msgid "API User Password"
 msgstr ""
 
 #. module: sms_ovh_http
@@ -34,11 +39,6 @@ msgstr ""
 #. module: sms_ovh_http
 #: model:ir.model.fields,field_description:sms_ovh_http.field_sms_sms__error_detail
 msgid "Error Detail"
-msgstr ""
-
-#. module: sms_ovh_http
-#: model:ir.model.fields,field_description:sms_ovh_http.field_iap_account__sms_ovh_http_from
-msgid "Expeditor Number"
 msgstr ""
 
 #. module: sms_ovh_http
@@ -61,11 +61,6 @@ msgid "Last Modified on"
 msgstr ""
 
 #. module: sms_ovh_http
-#: model:ir.model.fields,field_description:sms_ovh_http.field_iap_account__sms_ovh_http_login
-msgid "Login"
-msgstr ""
-
-#. module: sms_ovh_http
 #: model_terms:ir.ui.view,arch_db:sms_ovh_http.iap_account_view_form
 msgid "OVH account"
 msgstr ""
@@ -73,11 +68,6 @@ msgstr ""
 #. module: sms_ovh_http
 #: model:ir.model,name:sms_ovh_http.model_sms_sms
 msgid "Outgoing SMS"
-msgstr ""
-
-#. module: sms_ovh_http
-#: model:ir.model.fields,field_description:sms_ovh_http.field_iap_account__sms_ovh_http_password
-msgid "Password"
 msgstr ""
 
 #. module: sms_ovh_http
@@ -91,6 +81,16 @@ msgid "SMS API"
 msgstr ""
 
 #. module: sms_ovh_http
+#: model:ir.model.fields,field_description:sms_ovh_http.field_iap_account__sms_ovh_http_account
+msgid "SMS Account"
+msgstr ""
+
+#. module: sms_ovh_http
 #: model:ir.model.fields.selection,name:sms_ovh_http.selection__iap_account__provider__sms_ovh_http
 msgid "SMS OVH http"
+msgstr ""
+
+#. module: sms_ovh_http
+#: model:ir.model.fields,field_description:sms_ovh_http.field_iap_account__sms_ovh_http_from
+msgid "Sender Name"
 msgstr ""
