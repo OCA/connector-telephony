@@ -38,10 +38,22 @@ Configuration
 
 To configure this module, you need to:
 
-* Go to IAP menu
+* Go to settings > technical > IAP Account
 * Create a new account with **SMS OVH HTTP** as provider
-* Fill your account information
-* You can now send an sms
+* Fill your account information as follows:
+    * SMS Account
+        .. image:: https://raw.githubusercontent.com/OCA/connector-telephony/14.0/sms_ovh_http/sms_ovh_http/static/img/img.png
+           :alt: Location Tray
+           :width: 600 px
+    * API User ID / API User Password
+        .. image:: https://raw.githubusercontent.com/OCA/connector-telephony/14.0/sms_ovh_http/sms_ovh_http/static/img/img_1.png
+           :alt: Location Tray
+           :width: 600 px
+    * Sender name
+        .. image:: https://raw.githubusercontent.com/OCA/connector-telephony/14.0/sms_ovh_http/sms_ovh_http/static/img/img_2.png
+           :alt: Location Tray
+           :width: 600 px
+    * You can now send an sms!
 
 Bug Tracker
 ===========
