@@ -46,7 +46,7 @@ msgstr "Click2dial erfolgreich"
 #, fuzzy, python-format
 #| msgid "Click2dial started"
 msgid "Click2dial to %s"
-msgstr "Click2dial gestartet"
+msgstr ""
 
 #. module: base_phone
 #: model_terms:ir.ui.view,arch_db:base_phone.number_not_found_form
@@ -224,7 +224,7 @@ msgstr "Nummer in internationales Format umgewandelt:"
 #, fuzzy, python-format
 #| msgid "Number dialed:"
 msgid "Number dialed: %s"
-msgstr "Gewählte Nummer:"
+msgstr ""
 
 #. module: base_phone
 #: model:ir.model,name:base_phone.model_number_not_found
