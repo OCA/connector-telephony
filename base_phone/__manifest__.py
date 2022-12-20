@@ -5,7 +5,7 @@
 
 {
     "name": "Base Phone",
-    "version": "14.0.1.0.0",
+    "version": "15.0.1.0.0",
     "category": "Phone",
     "license": "AGPL-3",
     "summary": "Validate phone numbers",
@@ -21,8 +21,10 @@
         "views/res_users_view.xml",
         "wizard/reformat_all_phonenumbers_view.xml",
         "wizard/number_not_found_view.xml",
-        "views/web_phone.xml",
     ],
-    "qweb": ["static/src/xml/phone.xml"],
+    "assets": {
+        "web.assets_backend": ["/base_phone/static/src/js/phone_widget.js"],
+        "web.assets_qweb": ["/base_phone/static/src/xml/phone.xml"],
+    },
     "installable": True,
 }
