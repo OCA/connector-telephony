@@ -6,7 +6,9 @@ from odoo import api, fields, models
 
 
 class CrmLead(models.Model):
-    _inherit = "crm.lead"
+    _name = "crm.lead"
+    # inherit on phone.validation.mixin from base_phone
+    _inherit = ["crm.lead", "phone.validation.mixin"]
     _phone_name_sequence = 20
     _phone_name_fields = ["phone", "mobile"]
 

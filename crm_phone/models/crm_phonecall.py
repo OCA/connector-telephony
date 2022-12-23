@@ -15,15 +15,12 @@ class CrmPhonecall(models.Model):
     # and doesn't exist in v9 community any more
     name = fields.Char(string="Call Summary", required=True, tracking=True)
     date = fields.Datetime(
-        string="Date",
         tracking=True,
         copy=False,
         default=lambda self: fields.Datetime.now(),
     )
-    description = fields.Text(string="Description", copy=False)
-    company_id = fields.Many2one(
-        "res.company", string="Company", default=lambda self: self.env.company
-    )
+    description = fields.Text(copy=False)
+    company_id = fields.Many2one("res.company", default=lambda self: self.env.company)
     user_id = fields.Many2one(
         "res.users",
         string="Responsible",
@@ -43,7 +40,6 @@ class CrmPhonecall(models.Model):
     partner_mobile = fields.Char(string="Mobile")
     priority = fields.Selection(
         [("0", "Low"), ("1", "Normal"), ("2", "High")],
-        string="Priority",
         tracking=True,
         default="1",
     )
