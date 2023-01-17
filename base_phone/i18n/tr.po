@@ -47,7 +47,7 @@ msgstr "Tıkla çevir başarılı"
 #, fuzzy, python-format
 #| msgid "Click2dial started"
 msgid "Click2dial to %s"
-msgstr "Tıkla çevir başlatıldı"
+msgstr "Tıkla çevir başlatıldı %s"
 
 #. module: base_phone
 #: model_terms:ir.ui.view,arch_db:base_phone.number_not_found_form
@@ -219,7 +219,7 @@ msgstr "Uluslarası biçime çevrilen numara:"
 #, fuzzy, python-format
 #| msgid "Number dialed:"
 msgid "Number dialed: %s"
-msgstr "Aranan numara:"
+msgstr "Aranan numara: %s"
 
 #. module: base_phone
 #: model:ir.model,name:base_phone.model_number_not_found

@@ -47,7 +47,7 @@ msgstr "Click2dial uspešen"
 #, fuzzy, python-format
 #| msgid "Click2dial started"
 msgid "Click2dial to %s"
-msgstr "Click2dial zagnan"
+msgstr "Click2dial zagnan %s"
 
 #. module: base_phone
 #: model_terms:ir.ui.view,arch_db:base_phone.number_not_found_form
@@ -219,7 +219,7 @@ msgstr "Številka pretvorjena v mednarodni format:"
 #, fuzzy, python-format
 #| msgid "Number dialed:"
 msgid "Number dialed: %s"
-msgstr "Klicana številka:"
+msgstr "Klicana številka: %s"
 
 #. module: base_phone
 #: model:ir.model,name:base_phone.model_number_not_found
