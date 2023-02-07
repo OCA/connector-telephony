@@ -5,7 +5,7 @@
 {
     "name": "Sms OVH HTTP",
     "summary": "Send sms using ovh http API",
-    "version": "14.0.1.0.2",
+    "version": "14.0.1.0.3",
     "category": "SMS",
     "website": "https://github.com/OCA/connector-telephony",
     "author": "Akretion, Odoo Community Association (OCA)",
