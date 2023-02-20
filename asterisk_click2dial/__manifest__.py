@@ -12,7 +12,7 @@
     "maintainers": ["alexis-via"],
     "website": "https://github.com/OCA/connector-telephony",
     "depends": ["base_phone"],
-    "external_dependencies": {"python": ["Asterisk"]},
+    "external_dependencies": {"python": ["requests"]},
     "data": [
         "views/asterisk_server.xml",
         "views/res_users.xml",
