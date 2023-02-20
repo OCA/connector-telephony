@@ -5,17 +5,13 @@
 import logging
 from pprint import pformat
 
+import requests
+
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError, ValidationError
 
 _logger = logging.getLogger(__name__)
-
-try:
-    # pip install py-Asterisk
-    from Asterisk import Manager
-except ImportError:
-    _logger.debug("Cannot import Asterisk")
-    Manager = None
+TIMEOUT = 10
 
 
 class AsteriskServer(models.Model):
@@ -31,8 +27,8 @@ class AsteriskServer(models.Model):
         string="Port",
         required=True,
         default=5038,
-        help="TCP port on which the Asterisk Manager Interface listens. "
-        "Defined in /etc/asterisk/manager.conf on Asterisk.",
+        help="TCP port on which the Asterisk REST Interface listens. "
+        "Defined in /etc/asterisk/ari.conf on Asterisk.",
     )
     out_prefix = fields.Char(
         string="Out Prefix",
@@ -42,17 +38,17 @@ class AsteriskServer(models.Model):
         "leave empty.",
     )
     login = fields.Char(
-        string="AMI Login",
+        string="ARI Login",
         required=True,
         help="Login that Odoo will use to communicate with the "
-        "Asterisk Manager Interface. Refer to /etc/asterisk/manager.conf "
+        "Asterisk REST Interface. Refer to /etc/asterisk/ari.conf "
         "on your Asterisk server.",
     )
     password = fields.Char(
-        string="AMI Password",
+        string="ARI Password",
         required=True,
         help="Password that Odoo will use to communicate with the "
-        "Asterisk Manager Interface. Refer to /etc/asterisk/manager.conf "
+        "Asterisk REST Interface. Refer to /etc/asterisk/ari.conf "
         "on your Asterisk server.",
     )
     context = fields.Char(
@@ -106,8 +102,8 @@ class AsteriskServer(models.Model):
             out_prefix = ("Out prefix", server.out_prefix)
             dialplan_context = ("Dialplan context", server.context)
             alert_info = ("Alert-Info SIP header", server.alert_info)
-            login = ("AMI login", server.login)
-            password = ("AMI password", server.password)
+            login = ("ARI login", server.login)
+            password = ("ARI password", server.password)
 
             if out_prefix[1] and not out_prefix[1].isdigit():
                 raise ValidationError(
@@ -150,56 +146,25 @@ class AsteriskServer(models.Model):
                         )
 
     @api.model
-    def _connect_to_asterisk(self):
-        """
-        Open the connection to the Asterisk Manager
-        Returns an instance of the Asterisk Manager
-
-        """
+    def _get_connect_info(self, url_path):
         user = self.env.user
         ast_server = user.get_asterisk_server_from_user()
-        if not user.asterisk_chan_type:
-            raise UserError(_("No channel type configured for the current user."))
-        if not user.resource:
-            raise UserError(_("No resource name configured for the current user"))
+        auth = (ast_server.login, ast_server.password)
+        url = "http://%s:%s%s" % (ast_server.ip_address, ast_server.port, url_path)
+        return ast_server, auth, url
 
-        _logger.debug("User's phone: %s/%s", user.asterisk_chan_type, user.resource)
-        _logger.debug("Asterisk server: %s:%d", ast_server.ip_address, ast_server.port)
-
-        # Connect to the Asterisk Manager Interface
-        try:
-            ast_manager = Manager.Manager(
-                (ast_server.ip_address, ast_server.port),
-                ast_server.login,
-                ast_server.password,
-            )
-        except Exception as e:
-            _logger.error(
-                "Error in the request to the Asterisk Manager Interface %s",
-                ast_server.ip_address,
-            )
-            _logger.error("Here is the error message: %s", e)
-            raise UserError(
-                _(
-                    "Problem in the request from Odoo to Asterisk. "
-                    "Here is the error message: %s" % e
-                )
-            )
-
-        return (user, ast_server, ast_manager)
-
-    def test_ami_connection(self):
+    def test_ari_connection(self):
         self.ensure_one()
-        ast_manager = False
+        auth = (self.login, self.password)
+        url = "http://%s:%s/ari/asterisk/info" % (self.ip_address, self.port)
         try:
-            ast_manager = Manager.Manager(
-                (self.ip_address, self.port), self.login, self.password
-            )
+            res = requests.get(url, auth=auth, timeout=TIMEOUT)
         except Exception as e:
             raise UserError(_("Connection Test Failed! The error message is: %s" % e))
-        finally:
-            if ast_manager:
-                ast_manager.Logoff()
+        if res.status_code != 200:
+            raise UserError(
+                _("Connection Test Failed! HTTP error code: %s" % res.status_code)
+            )
         raise UserError(
             _(
                 "Connection Test Successfull! Odoo can successfully login to "
@@ -211,39 +176,42 @@ class AsteriskServer(models.Model):
     def _get_calling_number_from_channel(self, chan, user):
         """
         Method designed to be inherited to work with
-        very old or very new versions of Asterisk
+        very old or specific versions of Asterisk
         """
-        sip_account = user.asterisk_chan_type + "/" + user.resource
-        internal_number = user.internal_number
-        # 4 = Ring
-        # 6 = Up
-        if chan.get("ChannelState") in ("4", "6") and (
-            chan.get("ConnectedLineNum") == internal_number
-            or chan.get("EffectiveConnectedLineNum") == internal_number
-            or sip_account in chan.get("BridgedChannel", "")
+        sip_account = user.asterisk_chan_name
+        if chan.get("state") in ("Up", "Ringing") and sip_account in chan.get(
+            "name", ""
         ):
+            number = chan.get("connected", {}).get("number")
             _logger.debug(
-                "Found a matching Event with channelstate = %s",
-                chan.get("ChannelState"),
+                "Found a matching Event with channelstate = %s. Returning number %s",
+                chan.get("state"),
+                number,
             )
-            return chan.get("CallerIDNum")
-        # Compatibility with Asterisk 1.4
-        if chan.get("State") == "Up" and sip_account in chan.get("Link", ""):
-            _logger.debug("Found a matching Event in 'Up' state")
-            return chan.get("CallerIDNum")
+            return number
         return False
 
     @api.model
     def _get_calling_number(self):
-        user, ast_server, ast_manager = self._connect_to_asterisk()
+        ast_server, auth, url = self._get_connect_info("/ari/channels")
+        user = self.env.user
         calling_party_number = False
         try:
-            list_chan = ast_manager.Status()
-            # from pprint import pprint
-            # pprint(list_chan)
-            _logger.debug("Result of Status AMI request:")
+            res_req = requests.get(url, auth=auth, timeout=TIMEOUT)
+            if res_req.status_code != 200:
+                _logger.error(
+                    "ARI request on %s returned HTTP error code %s",
+                    url,
+                    res_req.status_code,
+                )
+                return False
+            list_chan = res_req.json()
+            from pprint import pprint
+
+            pprint(list_chan)
+            _logger.debug("Result of Status ARI request:")
             _logger.debug(pformat(list_chan))
-            for chan in list_chan.values():
+            for chan in list_chan:
                 calling_party_number = self._get_calling_number_from_channel(chan, user)
                 if calling_party_number:
                     break
@@ -259,9 +227,6 @@ class AsteriskServer(models.Model):
                     "error: '%s'" % str(e)
                 )
             )
-
-        finally:
-            ast_manager.Logoff()
 
         _logger.debug("Calling party number: '%s'", calling_party_number)
         return calling_party_number
