@@ -48,13 +48,13 @@
                     <field name="company_id" groups="base.group_multi_company" />
                     <field name="active" invisible="1" />
                 </group>
-                <group name="ami" string="Asterisk Manager Interface">
+                <group name="ami" string="Asterisk REST Interface">
                     <field name="ip_address" />
                     <field name="port" />
                     <field name="login" />
                     <field name="password" password="True" />
                     <button
-                            name="test_ami_connection"
+                            name="test_ari_connection"
                             type="object"
                             string="Test Connection to Asterisk"
                             class="btn-default"
