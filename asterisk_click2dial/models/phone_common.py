@@ -4,10 +4,13 @@
 
 import logging
 
+import requests
+
 from odoo import _, api, models
 from odoo.exceptions import UserError
 
 _logger = logging.getLogger(__name__)
+TIMEOUT = 10
 
 
 class PhoneCommon(models.AbstractModel):
@@ -19,9 +22,9 @@ class PhoneCommon(models.AbstractModel):
         if not erp_number:
             raise UserError(_("Missing phone number"))
 
-        user, ast_server, ast_manager = self.env[
-            "asterisk.server"
-        ]._connect_to_asterisk()
+        user = self.env.user
+        aso = self.env["asterisk.server"]
+        ast_server, auth, url = aso._get_connect_info("/ari/channels")
         ast_number = self.convert_to_dial_number(erp_number)
         # Add 'out prefix'
         if ast_server.out_prefix:
@@ -43,21 +46,24 @@ class PhoneCommon(models.AbstractModel):
             if user.variable:
                 for user_variable in user.variable.split("|"):
                     variable.append(user_variable.strip())
-        channel = "%s/%s" % (user.asterisk_chan_type, user.resource)
+        channel = user.asterisk_chan_name
         if user.dial_suffix:
             channel += "/%s" % user.dial_suffix
 
+        params = {
+            "endpoint": channel,
+            "extension": ast_number,
+            "context": ast_server.context,
+            "priority": str(ast_server.extension_priority),
+            "timeout": str(ast_server.wait_time),
+            "callerId": user.callerid,
+        }
+        # TODO set variable in body
+        # https://wiki.asterisk.org/wiki/display/AST/
+        # Asterisk+17+Channels+REST+API#Asterisk17ChannelsRESTAPI-originate
+
         try:
-            ast_manager.Originate(
-                channel,
-                context=ast_server.context,
-                extension=ast_number,
-                priority=str(ast_server.extension_priority),
-                timeout=str(ast_server.wait_time * 1000),
-                caller_id=user.callerid,
-                account=user.cdraccount,
-                variable=variable,
-            )
+            res_req = requests.post(url, auth=auth, params=params, timeout=TIMEOUT)
         except Exception as e:
             _logger.error(
                 "Error in the Originate request to Asterisk server %s",
@@ -65,11 +71,14 @@ class PhoneCommon(models.AbstractModel):
             )
             _logger.error("Here are the details of the error: '%s'", str(e))
             raise UserError(
-                _("Click to dial with Asterisk failed.\nHere is the error: " "'%s'")
+                _("Click to dial with Asterisk failed.\nHere is the error: '%s'")
                 % str(e)
             )
-        finally:
-            ast_manager.Logoff()
+        if res_req.status_code != 200:
+            raise UserError(
+                _("Click to dial with Asterisk failed.\nHTTP error code: %s.")
+                % res.status_code
+            )
 
         res["dialed_number"] = ast_number
         return res

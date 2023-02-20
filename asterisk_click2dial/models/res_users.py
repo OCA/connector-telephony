@@ -60,6 +60,11 @@ class ResUsers(models.Model):
         "is 'phone1'.  For a SIP phone, the phone number is often used as "
         "resource name, but not always.",
     )
+    asterisk_chan_name = fields.Char(
+        compute="_compute_asterisk_chan_name",
+        store=True,
+        string="Asterisk Channel Name",
+    )
     alert_info = fields.Char(
         string="User-specific Alert-Info SIP Header",
         help="Set a user-specific Alert-Info header in SIP request to "
@@ -103,6 +108,14 @@ class ResUsers(models.Model):
                             )
                             % (check_string[0], user.name)
                         )
+
+    @api.depends("asterisk_chan_type", "resource")
+    def _compute_asterisk_chan_name(self):
+        for user in self:
+            chan_name = False
+            if user.asterisk_chan_type and user.resource:
+                chan_name = "%s/%s" % (user.asterisk_chan_type, user.resource)
+            user.asterisk_chan_name = chan_name
 
     def get_asterisk_server_from_user(self):
         """Returns an asterisk.server recordset"""
