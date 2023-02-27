@@ -18,8 +18,25 @@ class TestEventPhone(TransactionCase):
     def test_lookup(self):
         res = self.phco.get_record_from_phone_number("0678727272")
         self.assertIsInstance(res, tuple)
-        self.assertEqual(res[0], "hr.employee")
-        self.assertEqual(res[1], self.test_record.id)
+        self.assertEqual(res[0], "res.partner")
+        self.assertEqual(res[1], self.test_record.work_contact_id.id)
         self.assertEqual(
             res[2], self.test_record.with_context(callerid=True).name_get()[0][1]
         )
+
+    def test_employee_phone_formatting(self):
+        empl_env = self.env["hr.employee"]
+        # Create a employee with country
+        empl = empl_env.create(
+            {
+                "name": "Joël Grand-Guillaume",
+                "country_id": self.env.ref("base.ch").id,
+                "mobile_phone": "(0) 21 619 10 10",
+                "emergency_phone": "(0) 79 606 42 42",
+            }
+        )
+        empl.emergency_phone_change()
+        empl.mobile_phone_change()
+        self.assertEqual(empl.country_id, self.env.ref("base.ch"))
+        self.assertEqual(empl.mobile_phone, "+41 21 619 10 10")
+        self.assertEqual(empl.emergency_phone, "+41 79 606 42 42")
