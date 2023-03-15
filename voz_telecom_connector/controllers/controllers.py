@@ -1,4 +1,4 @@
-# © 2022 CONINPE Consultores Informaticos: Telmo Suarez Venero <tsuarez@zertek.es>
+# © 2023 CONINPE Consultores Informaticos: Telmo Suarez Venero <tsuarez@zertek.es>
 # License AGPL-3.0 or later (http://gnu.org/license/agpl.html).
 import datetime
 import logging
