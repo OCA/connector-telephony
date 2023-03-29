@@ -8,7 +8,7 @@
     "license": "AGPL-3",
     "website": "https://github.com/OCA/connector-telephony",
     "category": "Connector",
-    "depends": ["crm_phone", "crm_phonecall", "web_notify"],
+    "depends": ["crm_phone", "web_notify"],
     "data": [
         "security/ir.model.access.csv",
         "views/voztelecom_config_views.xml",
