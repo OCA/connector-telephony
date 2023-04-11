@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-01-25 03:36+0000\n"
-"PO-Revision-Date: 2023-03-31 21:25+0000\n"
+"PO-Revision-Date: 2023-04-11 13:23+0000\n"
 "Last-Translator: Matjaz Mozetic <matjaz@luxim.si>\n"
 "Language-Team: Slovenian (https://www.transifex.com/oca/teams/23907/sl/)\n"
 "Language: sl\n"
@@ -288,7 +288,7 @@ msgstr "Indic, na katerega se bo zapisala telefonska številka"
 #: model:ir.model,name:crm_phone.model_crm_lead
 #: model:ir.model.fields,field_description:crm_phone.field_crm_phonecall__opportunity_id
 msgid "Lead/Opportunity"
-msgstr "Indic / priložnost"
+msgstr "Indic/priložnost"
 
 #. module: crm_phone
 #: model:ir.actions.act_window,name:crm_phone.crm_phonecall_action_done
