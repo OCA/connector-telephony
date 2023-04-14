@@ -18,13 +18,13 @@ msgstr ""
 
 #. module: asterisk_click2dial
 #: model:ir.model.fields,field_description:asterisk_click2dial.field_asterisk_server__login
-msgid "AMI Login"
-msgstr "AMI Login"
+msgid "ARI Login"
+msgstr ""
 
 #. module: asterisk_click2dial
 #: model:ir.model.fields,field_description:asterisk_click2dial.field_asterisk_server__password
-msgid "AMI Password"
-msgstr "AMI Constraseña"
+msgid "ARI Password"
+msgstr ""
 
 #. module: asterisk_click2dial
 #: model:ir.model.fields,field_description:asterisk_click2dial.field_asterisk_server__active
@@ -52,6 +52,11 @@ msgid "Archived"
 msgstr "Archivado"
 
 #. module: asterisk_click2dial
+#: model:ir.model.fields,field_description:asterisk_click2dial.field_res_users__asterisk_chan_name
+msgid "Asterisk Channel Name"
+msgstr ""
+
+#. module: asterisk_click2dial
 #: model:ir.model.fields,field_description:asterisk_click2dial.field_res_users__asterisk_chan_type
 msgid "Asterisk Channel Type"
 msgstr "Tipo de canal Asterisk"
@@ -63,9 +68,8 @@ msgstr "Direccion IP Asterisk o DNS"
 
 #. module: asterisk_click2dial
 #: model_terms:ir.ui.view,arch_db:asterisk_click2dial.view_asterisk_server_form
-#, fuzzy
-msgid "Asterisk Manager Interface"
-msgstr "Asterisk Manager Interface"
+msgid "Asterisk REST Interface"
+msgstr ""
 
 #. module: asterisk_click2dial
 #: model:ir.model.fields,field_description:asterisk_click2dial.field_res_users__asterisk_server_id
@@ -103,8 +107,8 @@ msgstr ""
 #. module: asterisk_click2dial
 #: model:ir.model.fields,help:asterisk_click2dial.field_asterisk_server__context
 msgid ""
-"Asterisk dialplan context from which the calls will be made. Refer to "
-"/etc/asterisk/extensions.conf on your Asterisk server."
+"Asterisk dialplan context from which the calls will be made. Refer to /etc/"
+"asterisk/extensions.conf on your Asterisk server."
 msgstr ""
 "El contexto del dialplan Asterisk desde el que las llamadas son originadas. "
 "Referencia ' /etc/asterisk/extensions.conf' en tu servidor Asterisk."
@@ -139,7 +143,8 @@ msgstr "ID de Llamada"
 #. module: asterisk_click2dial
 #: model:ir.model.fields,help:asterisk_click2dial.field_res_users__callerid
 msgid "Caller ID used for the calls initiated by this user."
-msgstr "El ID de Llamada es usado para las llamadas iniciadas por este usuario."
+msgstr ""
+"El ID de Llamada es usado para las llamadas iniciadas por este usuario."
 
 #. module: asterisk_click2dial
 #. openerp-web
@@ -166,6 +171,14 @@ msgstr ""
 #, python-format
 msgid ""
 "Click to dial with Asterisk failed.\n"
+"HTTP error code: %s."
+msgstr ""
+
+#. module: asterisk_click2dial
+#: code:addons/asterisk_click2dial/models/phone_common.py:0
+#, python-format
+msgid ""
+"Click to dial with Asterisk failed.\n"
 "Here is the error: '%s'"
 msgstr ""
 "Click to dial con Asterisk fallo. \n"
@@ -185,6 +198,12 @@ msgstr "Empresa"
 #: model:ir.model.fields,help:asterisk_click2dial.field_asterisk_server__company_id
 msgid "Company who uses the Asterisk server."
 msgstr "Empresa que usa el servidor Asterisk."
+
+#. module: asterisk_click2dial
+#: code:addons/asterisk_click2dial/models/asterisk_server.py:0
+#, python-format
+msgid "Connection Test Failed! HTTP error code: %s"
+msgstr ""
 
 #. module: asterisk_click2dial
 #: code:addons/asterisk_click2dial/models/asterisk_server.py:0
@@ -290,12 +309,9 @@ msgstr "Última actualización en"
 #. module: asterisk_click2dial
 #: model:ir.model.fields,help:asterisk_click2dial.field_asterisk_server__login
 msgid ""
-"Login that Odoo will use to communicate with the Asterisk Manager Interface."
-" Refer to /etc/asterisk/manager.conf on your Asterisk server."
+"Login that Odoo will use to communicate with the Asterisk REST Interface. "
+"Refer to /etc/asterisk/ari.conf on your Asterisk server."
 msgstr ""
-"Usuario que el sistema va a utilizar para comunicarse con Asterisk Manager "
-"Interface (AMI). Referencia: /etc/asterisk/manager.conf en tu servidor "
-"Asterisk."
 
 #. module: asterisk_click2dial
 #: model:ir.model.fields.selection,name:asterisk_click2dial.selection__res_users__asterisk_chan_type__mgcp
@@ -329,18 +345,6 @@ msgid "No callerID configured for the current user"
 msgstr "No existe ningún CallerID configurado para el usuario actual"
 
 #. module: asterisk_click2dial
-#: code:addons/asterisk_click2dial/models/asterisk_server.py:0
-#, python-format
-msgid "No channel type configured for the current user."
-msgstr "No existe ningún tipo de canal configurado para el usuario actual."
-
-#. module: asterisk_click2dial
-#: code:addons/asterisk_click2dial/models/asterisk_server.py:0
-#, python-format
-msgid "No resource name configured for the current user"
-msgstr "No existe ningún nombre de recurso configurado para el usuario actual"
-
-#. module: asterisk_click2dial
 #. openerp-web
 #: code:addons/asterisk_click2dial/static/src/js/asterisk_click2dial.js:0
 #, python-format
@@ -362,7 +366,6 @@ msgstr "Solamente use dígitos para el '%s' en el servidor Asterisk '%s'"
 
 #. module: asterisk_click2dial
 #. openerp-web
-#: code:addons/asterisk_click2dial/static/src/xml/asterisk_click2dial.xml:0
 #: code:addons/asterisk_click2dial/static/src/xml/asterisk_click2dial.xml:0
 #, python-format
 msgid "Open Caller"
@@ -388,12 +391,9 @@ msgstr "PJSIP"
 #. module: asterisk_click2dial
 #: model:ir.model.fields,help:asterisk_click2dial.field_asterisk_server__password
 msgid ""
-"Password that Odoo will use to communicate with the Asterisk Manager "
-"Interface. Refer to /etc/asterisk/manager.conf on your Asterisk server."
+"Password that Odoo will use to communicate with the Asterisk REST Interface. "
+"Refer to /etc/asterisk/ari.conf on your Asterisk server."
 msgstr ""
-"Contraseña que utilizará el sistema para comunicarse con el Asterisk Manager "
-"Interface (AMI). Refiera a /etc/asterisk/manager.conf  en su servidor "
-"Asterisk."
 
 #. module: asterisk_click2dial
 #: model:ir.model.fields,field_description:asterisk_click2dial.field_asterisk_server__port
@@ -412,20 +412,11 @@ msgstr ""
 #. module: asterisk_click2dial
 #: model:ir.model.fields,help:asterisk_click2dial.field_asterisk_server__extension_priority
 msgid ""
-"Priority of the extension in the Asterisk dialplan. Refer to "
-"/etc/asterisk/extensions.conf on your Asterisk server."
+"Priority of the extension in the Asterisk dialplan. Refer to /etc/asterisk/"
+"extensions.conf on your Asterisk server."
 msgstr ""
 "Prioridad de la extensión en el dialplan de Asterisk. Refiera a /etc/"
 "asterisk/extensions.conf en su servidor Asterisk."
-
-#. module: asterisk_click2dial
-#: code:addons/asterisk_click2dial/models/asterisk_server.py:0
-#, python-format
-msgid ""
-"Problem in the request from Odoo to Asterisk. Here is the error message: %s"
-msgstr ""
-"Problema en la solicitud del sistema a Asterisk. Este es el error retornado: "
-"%s"
 
 #. module: asterisk_click2dial
 #: code:addons/asterisk_click2dial/models/res_users.py:0
@@ -438,8 +429,8 @@ msgstr "Nombre del recurso"
 #: model:ir.model.fields,help:asterisk_click2dial.field_res_users__resource
 msgid ""
 "Resource name for the channel type selected. For example, if you use "
-"'Dial(PJSIP/phone1)' in your Asterisk dialplan to ring the SIP phone of this"
-" user, then the resource name for this user is 'phone1'.  For a SIP phone, "
+"'Dial(PJSIP/phone1)' in your Asterisk dialplan to ring the SIP phone of this "
+"user, then the resource name for this user is 'phone1'.  For a SIP phone, "
 "the phone number is often used as resource name, but not always."
 msgstr ""
 "Nombre del recurso para el tipo de canal seleccionado. Por ejemplo, si usted "
@@ -509,11 +500,9 @@ msgstr "Parametros estandar de Asterisk"
 #. module: asterisk_click2dial
 #: model:ir.model.fields,help:asterisk_click2dial.field_asterisk_server__port
 msgid ""
-"TCP port on which the Asterisk Manager Interface listens. Defined in "
-"/etc/asterisk/manager.conf on Asterisk."
+"TCP port on which the Asterisk REST Interface listens. Defined in /etc/"
+"asterisk/ari.conf on Asterisk."
 msgstr ""
-"Puerto TCP en el que Asterisk Manager Interface está escuchando. Definido en "
-"/etc/asterisk/manager.conf de Asterisk."
 
 #. module: asterisk_click2dial
 #: model_terms:ir.ui.view,arch_db:asterisk_click2dial.view_asterisk_server_form
@@ -617,3 +606,53 @@ msgstr "mISDN"
 #: model_terms:ir.ui.view,arch_db:asterisk_click2dial.view_asterisk_server_form
 msgid "seconds"
 msgstr "segundos"
+
+#~ msgid "AMI Login"
+#~ msgstr "AMI Login"
+
+#~ msgid "AMI Password"
+#~ msgstr "AMI Constraseña"
+
+#, fuzzy
+#~ msgid "Asterisk Manager Interface"
+#~ msgstr "Asterisk Manager Interface"
+
+#~ msgid ""
+#~ "Login that Odoo will use to communicate with the Asterisk Manager "
+#~ "Interface. Refer to /etc/asterisk/manager.conf on your Asterisk server."
+#~ msgstr ""
+#~ "Usuario que el sistema va a utilizar para comunicarse con Asterisk "
+#~ "Manager Interface (AMI). Referencia: /etc/asterisk/manager.conf en tu "
+#~ "servidor Asterisk."
+
+#, python-format
+#~ msgid "No channel type configured for the current user."
+#~ msgstr "No existe ningún tipo de canal configurado para el usuario actual."
+
+#, python-format
+#~ msgid "No resource name configured for the current user"
+#~ msgstr ""
+#~ "No existe ningún nombre de recurso configurado para el usuario actual"
+
+#~ msgid ""
+#~ "Password that Odoo will use to communicate with the Asterisk Manager "
+#~ "Interface. Refer to /etc/asterisk/manager.conf on your Asterisk server."
+#~ msgstr ""
+#~ "Contraseña que utilizará el sistema para comunicarse con el Asterisk "
+#~ "Manager Interface (AMI). Refiera a /etc/asterisk/manager.conf  en su "
+#~ "servidor Asterisk."
+
+#, python-format
+#~ msgid ""
+#~ "Problem in the request from Odoo to Asterisk. Here is the error message: "
+#~ "%s"
+#~ msgstr ""
+#~ "Problema en la solicitud del sistema a Asterisk. Este es el error "
+#~ "retornado: %s"
+
+#~ msgid ""
+#~ "TCP port on which the Asterisk Manager Interface listens. Defined in /etc/"
+#~ "asterisk/manager.conf on Asterisk."
+#~ msgstr ""
+#~ "Puerto TCP en el que Asterisk Manager Interface está escuchando. Definido "
+#~ "en /etc/asterisk/manager.conf de Asterisk."
