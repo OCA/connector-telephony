@@ -15,12 +15,12 @@ msgstr ""
 
 #. module: asterisk_click2dial
 #: model:ir.model.fields,field_description:asterisk_click2dial.field_asterisk_server__login
-msgid "AMI Login"
+msgid "ARI Login"
 msgstr ""
 
 #. module: asterisk_click2dial
 #: model:ir.model.fields,field_description:asterisk_click2dial.field_asterisk_server__password
-msgid "AMI Password"
+msgid "ARI Password"
 msgstr ""
 
 #. module: asterisk_click2dial
@@ -47,6 +47,11 @@ msgid "Archived"
 msgstr ""
 
 #. module: asterisk_click2dial
+#: model:ir.model.fields,field_description:asterisk_click2dial.field_res_users__asterisk_chan_name
+msgid "Asterisk Channel Name"
+msgstr ""
+
+#. module: asterisk_click2dial
 #: model:ir.model.fields,field_description:asterisk_click2dial.field_res_users__asterisk_chan_type
 msgid "Asterisk Channel Type"
 msgstr ""
@@ -58,7 +63,7 @@ msgstr ""
 
 #. module: asterisk_click2dial
 #: model_terms:ir.ui.view,arch_db:asterisk_click2dial.view_asterisk_server_form
-msgid "Asterisk Manager Interface"
+msgid "Asterisk REST Interface"
 msgstr ""
 
 #. module: asterisk_click2dial
@@ -149,6 +154,14 @@ msgstr ""
 #, python-format
 msgid ""
 "Click to dial with Asterisk failed.\n"
+"HTTP error code: %s."
+msgstr ""
+
+#. module: asterisk_click2dial
+#: code:addons/asterisk_click2dial/models/phone_common.py:0
+#, python-format
+msgid ""
+"Click to dial with Asterisk failed.\n"
 "Here is the error: '%s'"
 msgstr ""
 
@@ -165,6 +178,12 @@ msgstr ""
 #. module: asterisk_click2dial
 #: model:ir.model.fields,help:asterisk_click2dial.field_asterisk_server__company_id
 msgid "Company who uses the Asterisk server."
+msgstr ""
+
+#. module: asterisk_click2dial
+#: code:addons/asterisk_click2dial/models/asterisk_server.py:0
+#, python-format
+msgid "Connection Test Failed! HTTP error code: %s"
 msgstr ""
 
 #. module: asterisk_click2dial
@@ -269,8 +288,8 @@ msgstr ""
 #. module: asterisk_click2dial
 #: model:ir.model.fields,help:asterisk_click2dial.field_asterisk_server__login
 msgid ""
-"Login that Odoo will use to communicate with the Asterisk Manager Interface."
-" Refer to /etc/asterisk/manager.conf on your Asterisk server."
+"Login that Odoo will use to communicate with the Asterisk REST Interface. "
+"Refer to /etc/asterisk/ari.conf on your Asterisk server."
 msgstr ""
 
 #. module: asterisk_click2dial
@@ -301,18 +320,6 @@ msgstr ""
 #: code:addons/asterisk_click2dial/models/phone_common.py:0
 #, python-format
 msgid "No callerID configured for the current user"
-msgstr ""
-
-#. module: asterisk_click2dial
-#: code:addons/asterisk_click2dial/models/asterisk_server.py:0
-#, python-format
-msgid "No channel type configured for the current user."
-msgstr ""
-
-#. module: asterisk_click2dial
-#: code:addons/asterisk_click2dial/models/asterisk_server.py:0
-#, python-format
-msgid "No resource name configured for the current user"
 msgstr ""
 
 #. module: asterisk_click2dial
@@ -361,8 +368,8 @@ msgstr ""
 #. module: asterisk_click2dial
 #: model:ir.model.fields,help:asterisk_click2dial.field_asterisk_server__password
 msgid ""
-"Password that Odoo will use to communicate with the Asterisk Manager "
-"Interface. Refer to /etc/asterisk/manager.conf on your Asterisk server."
+"Password that Odoo will use to communicate with the Asterisk REST Interface."
+" Refer to /etc/asterisk/ari.conf on your Asterisk server."
 msgstr ""
 
 #. module: asterisk_click2dial
@@ -382,13 +389,6 @@ msgstr ""
 msgid ""
 "Priority of the extension in the Asterisk dialplan. Refer to "
 "/etc/asterisk/extensions.conf on your Asterisk server."
-msgstr ""
-
-#. module: asterisk_click2dial
-#: code:addons/asterisk_click2dial/models/asterisk_server.py:0
-#, python-format
-msgid ""
-"Problem in the request from Odoo to Asterisk. Here is the error message: %s"
 msgstr ""
 
 #. module: asterisk_click2dial
@@ -461,8 +461,8 @@ msgstr ""
 #. module: asterisk_click2dial
 #: model:ir.model.fields,help:asterisk_click2dial.field_asterisk_server__port
 msgid ""
-"TCP port on which the Asterisk Manager Interface listens. Defined in "
-"/etc/asterisk/manager.conf on Asterisk."
+"TCP port on which the Asterisk REST Interface listens. Defined in "
+"/etc/asterisk/ari.conf on Asterisk."
 msgstr ""
 
 #. module: asterisk_click2dial
