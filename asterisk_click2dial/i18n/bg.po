@@ -20,12 +20,12 @@ msgstr ""
 
 #. module: asterisk_click2dial
 #: model:ir.model.fields,field_description:asterisk_click2dial.field_asterisk_server__login
-msgid "AMI Login"
+msgid "ARI Login"
 msgstr ""
 
 #. module: asterisk_click2dial
 #: model:ir.model.fields,field_description:asterisk_click2dial.field_asterisk_server__password
-msgid "AMI Password"
+msgid "ARI Password"
 msgstr ""
 
 #. module: asterisk_click2dial
@@ -46,8 +46,14 @@ msgid ""
 msgstr ""
 
 #. module: asterisk_click2dial
+#: model_terms:ir.ui.view,arch_db:asterisk_click2dial.view_asterisk_server_form
 #: model_terms:ir.ui.view,arch_db:asterisk_click2dial.view_asterisk_server_search
 msgid "Archived"
+msgstr ""
+
+#. module: asterisk_click2dial
+#: model:ir.model.fields,field_description:asterisk_click2dial.field_res_users__asterisk_chan_name
+msgid "Asterisk Channel Name"
 msgstr ""
 
 #. module: asterisk_click2dial
@@ -62,7 +68,7 @@ msgstr ""
 
 #. module: asterisk_click2dial
 #: model_terms:ir.ui.view,arch_db:asterisk_click2dial.view_asterisk_server_form
-msgid "Asterisk Manager Interface"
+msgid "Asterisk REST Interface"
 msgstr ""
 
 #. module: asterisk_click2dial
@@ -93,7 +99,7 @@ msgstr ""
 #: model:ir.model.fields,help:asterisk_click2dial.field_res_users__asterisk_chan_type
 msgid ""
 "Asterisk channel type, as used in the Asterisk dialplan. If the user has a "
-"regular IP phone, the channel type is 'SIP'."
+"regular IP phone, the channel type is probably 'PJSIP'."
 msgstr ""
 
 #. module: asterisk_click2dial
@@ -121,7 +127,7 @@ msgid "Call Detail Record (CDR) account used for billing this user."
 msgstr ""
 
 #. module: asterisk_click2dial
-#: code:addons/asterisk_click2dial/models/res_users.py:79
+#: code:addons/asterisk_click2dial/models/res_users.py:0
 #: model:ir.model.fields,field_description:asterisk_click2dial.field_res_users__callerid
 #, python-format
 msgid "Caller ID"
@@ -134,14 +140,14 @@ msgstr ""
 
 #. module: asterisk_click2dial
 #. openerp-web
-#: code:addons/asterisk_click2dial/static/src/js/asterisk_click2dial.js:45
+#: code:addons/asterisk_click2dial/static/src/js/asterisk_click2dial.js:0
 #, python-format
 msgid ""
 "Calling party number not retreived from IPBX or IPBX unreachable by Odoo"
 msgstr ""
 
 #. module: asterisk_click2dial
-#: code:addons/asterisk_click2dial/models/asterisk_server.py:216
+#: code:addons/asterisk_click2dial/models/asterisk_server.py:0
 #, python-format
 msgid ""
 "Can't get calling number from  Asterisk.\n"
@@ -149,7 +155,15 @@ msgid ""
 msgstr ""
 
 #. module: asterisk_click2dial
-#: code:addons/asterisk_click2dial/models/phone_common.py:66
+#: code:addons/asterisk_click2dial/models/phone_common.py:0
+#, python-format
+msgid ""
+"Click to dial with Asterisk failed.\n"
+"HTTP error code: %s."
+msgstr ""
+
+#. module: asterisk_click2dial
+#: code:addons/asterisk_click2dial/models/phone_common.py:0
 #, python-format
 msgid ""
 "Click to dial with Asterisk failed.\n"
@@ -172,13 +186,19 @@ msgid "Company who uses the Asterisk server."
 msgstr ""
 
 #. module: asterisk_click2dial
-#: code:addons/asterisk_click2dial/models/asterisk_server.py:159
+#: code:addons/asterisk_click2dial/models/asterisk_server.py:0
+#, python-format
+msgid "Connection Test Failed! HTTP error code: %s"
+msgstr ""
+
+#. module: asterisk_click2dial
+#: code:addons/asterisk_click2dial/models/asterisk_server.py:0
 #, python-format
 msgid "Connection Test Failed! The error message is: %s"
 msgstr ""
 
 #. module: asterisk_click2dial
-#: code:addons/asterisk_click2dial/models/asterisk_server.py:164
+#: code:addons/asterisk_click2dial/models/asterisk_server.py:0
 #, python-format
 msgid ""
 "Connection Test Successfull! Odoo can successfully login to the Asterisk "
@@ -196,7 +216,7 @@ msgid "Created on"
 msgstr ""
 
 #. module: asterisk_click2dial
-#: selection:res.users,asterisk_chan_type:0
+#: model:ir.model.fields.selection,name:asterisk_click2dial.selection__res_users__asterisk_chan_type__dahdi
 msgid "DAHDI"
 msgstr ""
 
@@ -212,6 +232,8 @@ msgstr ""
 
 #. module: asterisk_click2dial
 #: model:ir.model.fields,field_description:asterisk_click2dial.field_asterisk_server__display_name
+#: model:ir.model.fields,field_description:asterisk_click2dial.field_phone_common__display_name
+#: model:ir.model.fields,field_description:asterisk_click2dial.field_res_users__display_name
 msgid "Display Name"
 msgstr ""
 
@@ -221,29 +243,31 @@ msgid "Extension Priority"
 msgstr ""
 
 #. module: asterisk_click2dial
-#: selection:res.users,asterisk_chan_type:0
+#: model:ir.model.fields.selection,name:asterisk_click2dial.selection__res_users__asterisk_chan_type__h323
 msgid "H323"
 msgstr ""
 
 #. module: asterisk_click2dial
-#: selection:res.users,asterisk_chan_type:0
+#: model:ir.model.fields.selection,name:asterisk_click2dial.selection__res_users__asterisk_chan_type__iax2
 msgid "IAX2"
 msgstr ""
 
 #. module: asterisk_click2dial
 #: model:ir.model.fields,field_description:asterisk_click2dial.field_asterisk_server__id
+#: model:ir.model.fields,field_description:asterisk_click2dial.field_phone_common__id
+#: model:ir.model.fields,field_description:asterisk_click2dial.field_res_users__id
 msgid "ID"
 msgstr ""
 
 #. module: asterisk_click2dial
 #. openerp-web
-#: code:addons/asterisk_click2dial/static/src/js/asterisk_click2dial.js:44
+#: code:addons/asterisk_click2dial/static/src/js/asterisk_click2dial.js:0
 #, python-format
 msgid "IPBX error"
 msgstr ""
 
 #. module: asterisk_click2dial
-#: code:addons/asterisk_click2dial/models/res_users.py:78
+#: code:addons/asterisk_click2dial/models/res_users.py:0
 #: model:ir.model.fields,field_description:asterisk_click2dial.field_res_users__internal_number
 #, python-format
 msgid "Internal Number"
@@ -251,6 +275,8 @@ msgstr ""
 
 #. module: asterisk_click2dial
 #: model:ir.model.fields,field_description:asterisk_click2dial.field_asterisk_server____last_update
+#: model:ir.model.fields,field_description:asterisk_click2dial.field_phone_common____last_update
+#: model:ir.model.fields,field_description:asterisk_click2dial.field_res_users____last_update
 msgid "Last Modified on"
 msgstr ""
 
@@ -267,76 +293,63 @@ msgstr ""
 #. module: asterisk_click2dial
 #: model:ir.model.fields,help:asterisk_click2dial.field_asterisk_server__login
 msgid ""
-"Login that Odoo will use to communicate with the Asterisk Manager Interface. "
-"Refer to /etc/asterisk/manager.conf on your Asterisk server."
+"Login that Odoo will use to communicate with the Asterisk REST Interface. "
+"Refer to /etc/asterisk/ari.conf on your Asterisk server."
 msgstr ""
 
 #. module: asterisk_click2dial
-#: selection:res.users,asterisk_chan_type:0
+#: model:ir.model.fields.selection,name:asterisk_click2dial.selection__res_users__asterisk_chan_type__mgcp
 msgid "MGCP"
 msgstr ""
 
 #. module: asterisk_click2dial
-#: code:addons/asterisk_click2dial/models/phone_common.py:19
+#: code:addons/asterisk_click2dial/models/phone_common.py:0
 #, python-format
 msgid "Missing phone number"
 msgstr ""
 
 #. module: asterisk_click2dial
 #. openerp-web
-#: code:addons/asterisk_click2dial/static/src/js/asterisk_click2dial.js:70
+#: code:addons/asterisk_click2dial/static/src/js/asterisk_click2dial.js:0
 #, python-format
 msgid "Moving to form view of %s (%s ID %d)"
 msgstr ""
 
 #. module: asterisk_click2dial
-#: code:addons/asterisk_click2dial/models/res_users.py:104
+#: code:addons/asterisk_click2dial/models/res_users.py:0
 #, python-format
 msgid "No Asterisk server configured for the company '%s'."
 msgstr ""
 
 #. module: asterisk_click2dial
-#: code:addons/asterisk_click2dial/models/phone_common.py:32
+#: code:addons/asterisk_click2dial/models/phone_common.py:0
 #, python-format
 msgid "No callerID configured for the current user"
 msgstr ""
 
 #. module: asterisk_click2dial
-#: code:addons/asterisk_click2dial/models/asterisk_server.py:121
-#, python-format
-msgid "No channel type configured for the current user."
-msgstr ""
-
-#. module: asterisk_click2dial
-#: code:addons/asterisk_click2dial/models/asterisk_server.py:126
-#, python-format
-msgid "No resource name configured for the current user"
-msgstr ""
-
-#. module: asterisk_click2dial
 #. openerp-web
-#: code:addons/asterisk_click2dial/static/src/js/asterisk_click2dial.js:56
+#: code:addons/asterisk_click2dial/static/src/js/asterisk_click2dial.js:0
 #, python-format
 msgid "Number Not Found"
 msgstr ""
 
 #. module: asterisk_click2dial
 #. openerp-web
-#: code:addons/asterisk_click2dial/static/src/js/asterisk_click2dial.js:69
+#: code:addons/asterisk_click2dial/static/src/js/asterisk_click2dial.js:0
 #, python-format
 msgid "On the phone with '%s'"
 msgstr ""
 
 #. module: asterisk_click2dial
-#: code:addons/asterisk_click2dial/models/asterisk_server.py:87
+#: code:addons/asterisk_click2dial/models/asterisk_server.py:0
 #, python-format
 msgid "Only use digits for the '%s' on the Asterisk server '%s'"
 msgstr ""
 
 #. module: asterisk_click2dial
 #. openerp-web
-#: code:addons/asterisk_click2dial/static/src/xml/asterisk_click2dial.xml:12
-#: code:addons/asterisk_click2dial/static/src/xml/asterisk_click2dial.xml:13
+#: code:addons/asterisk_click2dial/static/src/xml/asterisk_click2dial.xml:0
 #, python-format
 msgid "Open Caller"
 msgstr ""
@@ -352,15 +365,15 @@ msgid "Out Prefix"
 msgstr ""
 
 #. module: asterisk_click2dial
-#: selection:res.users,asterisk_chan_type:0
+#: model:ir.model.fields.selection,name:asterisk_click2dial.selection__res_users__asterisk_chan_type__pjsip
 msgid "PJSIP"
 msgstr ""
 
 #. module: asterisk_click2dial
 #: model:ir.model.fields,help:asterisk_click2dial.field_asterisk_server__password
 msgid ""
-"Password that Odoo will use to communicate with the Asterisk Manager "
-"Interface. Refer to /etc/asterisk/manager.conf on your Asterisk server."
+"Password that Odoo will use to communicate with the Asterisk REST Interface. "
+"Refer to /etc/asterisk/ari.conf on your Asterisk server."
 msgstr ""
 
 #. module: asterisk_click2dial
@@ -383,14 +396,7 @@ msgid ""
 msgstr ""
 
 #. module: asterisk_click2dial
-#: code:addons/asterisk_click2dial/models/asterisk_server.py:144
-#, python-format
-msgid ""
-"Problem in the request from Odoo to Asterisk. Here is the error message: %s"
-msgstr ""
-
-#. module: asterisk_click2dial
-#: code:addons/asterisk_click2dial/models/res_users.py:77
+#: code:addons/asterisk_click2dial/models/res_users.py:0
 #: model:ir.model.fields,field_description:asterisk_click2dial.field_res_users__resource
 #, python-format
 msgid "Resource Name"
@@ -400,18 +406,18 @@ msgstr ""
 #: model:ir.model.fields,help:asterisk_click2dial.field_res_users__resource
 msgid ""
 "Resource name for the channel type selected. For example, if you use "
-"'Dial(SIP/phone1)' in your Asterisk dialplan to ring the SIP phone of this "
+"'Dial(PJSIP/phone1)' in your Asterisk dialplan to ring the SIP phone of this "
 "user, then the resource name for this user is 'phone1'.  For a SIP phone, "
 "the phone number is often used as resource name, but not always."
 msgstr ""
 
 #. module: asterisk_click2dial
-#: selection:res.users,asterisk_chan_type:0
+#: model:ir.model.fields.selection,name:asterisk_click2dial.selection__res_users__asterisk_chan_type__sccp
 msgid "SCCP"
 msgstr ""
 
 #. module: asterisk_click2dial
-#: selection:res.users,asterisk_chan_type:0
+#: model:ir.model.fields.selection,name:asterisk_click2dial.selection__res_users__asterisk_chan_type__sip
 msgid "SIP"
 msgstr ""
 
@@ -447,7 +453,7 @@ msgid ""
 msgstr ""
 
 #. module: asterisk_click2dial
-#: selection:res.users,asterisk_chan_type:0
+#: model:ir.model.fields.selection,name:asterisk_click2dial.selection__res_users__asterisk_chan_type__skinny
 msgid "Skinny"
 msgstr ""
 
@@ -459,8 +465,8 @@ msgstr ""
 #. module: asterisk_click2dial
 #: model:ir.model.fields,help:asterisk_click2dial.field_asterisk_server__port
 msgid ""
-"TCP port on which the Asterisk Manager Interface listens. Defined in /etc/"
-"asterisk/manager.conf on Asterisk."
+"TCP port on which the Asterisk REST Interface listens. Defined in /etc/"
+"asterisk/ari.conf on Asterisk."
 msgstr ""
 
 #. module: asterisk_click2dial
@@ -469,19 +475,19 @@ msgid "Test Connection to Asterisk"
 msgstr ""
 
 #. module: asterisk_click2dial
-#: code:addons/asterisk_click2dial/models/res_users.py:86
+#: code:addons/asterisk_click2dial/models/res_users.py:0
 #, python-format
 msgid "The '%s' for the user '%s' should only have ASCII caracters"
 msgstr ""
 
 #. module: asterisk_click2dial
-#: code:addons/asterisk_click2dial/models/asterisk_server.py:108
+#: code:addons/asterisk_click2dial/models/asterisk_server.py:0
 #, python-format
 msgid "The '%s' should only have ASCII caracters for the Asterisk server '%s'"
 msgstr ""
 
 #. module: asterisk_click2dial
-#: code:addons/asterisk_click2dial/models/asterisk_server.py:93
+#: code:addons/asterisk_click2dial/models/asterisk_server.py:0
 #, python-format
 msgid ""
 "The 'extension priority' must be a positive value for the Asterisk server "
@@ -490,7 +496,7 @@ msgstr ""
 
 #. module: asterisk_click2dial
 #. openerp-web
-#: code:addons/asterisk_click2dial/static/src/js/asterisk_click2dial.js:51
+#: code:addons/asterisk_click2dial/static/src/js/asterisk_click2dial.js:0
 #, python-format
 msgid "The calling number is not a phone number!"
 msgstr ""
@@ -531,7 +537,7 @@ msgid "Wait Time"
 msgstr ""
 
 #. module: asterisk_click2dial
-#: code:addons/asterisk_click2dial/models/asterisk_server.py:89
+#: code:addons/asterisk_click2dial/models/asterisk_server.py:0
 #, python-format
 msgid ""
 "You should set a 'Wait time' value between 1 and 120 seconds for the "
@@ -539,19 +545,19 @@ msgid ""
 msgstr ""
 
 #. module: asterisk_click2dial
-#: code:addons/asterisk_click2dial/models/asterisk_server.py:97
+#: code:addons/asterisk_click2dial/models/asterisk_server.py:0
 #, python-format
 msgid ""
 "You should set a TCP port between 1 and 65535 for the Asterisk server '%s'"
 msgstr ""
 
 #. module: asterisk_click2dial
-#: selection:res.users,asterisk_chan_type:0
+#: model:ir.model.fields.selection,name:asterisk_click2dial.selection__res_users__asterisk_chan_type__zap
 msgid "Zap"
 msgstr ""
 
 #. module: asterisk_click2dial
-#: selection:res.users,asterisk_chan_type:0
+#: model:ir.model.fields.selection,name:asterisk_click2dial.selection__res_users__asterisk_chan_type__misdn
 msgid "mISDN"
 msgstr ""
 
