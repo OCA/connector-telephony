@@ -6,7 +6,7 @@ import logging
 
 import requests
 
-from odoo import _, api, models
+from odoo import _, api, exceptions, models
 from odoo.exceptions import UserError
 
 _logger = logging.getLogger(__name__)
@@ -70,7 +70,7 @@ class PhoneCommon(models.AbstractModel):
                 ast_server.ip_address,
             )
             _logger.error("Here are the details of the error: '%s'", str(e))
-            raise UserError(
+            raise UserError from exceptions(
                 _("Click to dial with Asterisk failed.\nHere is the error: '%s'")
                 % str(e)
             )

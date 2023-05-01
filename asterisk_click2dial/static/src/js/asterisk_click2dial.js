@@ -36,23 +36,20 @@ odoo.define("asterisk_click2dial.systray.OpenCaller", function (require) {
                 route: "/asterisk_click2dial/get_record_from_my_channel",
                 params: {local_context: context},
             }).then(function (r) {
-                // Console.log('RESULT RPC r='+r);
-                // console.log('RESULT RPC type r='+typeof r);
-                // console.log('RESULT RPC isNaN r='+isNaN(r));
                 if (r === false) {
-                    self.do_warn(
-                        _t("IPBX error"),
-                        _t(
+                    self.displayNotification({
+                        title: _t("IPBX error"),
+                        message: _t(
                             "Calling party number not retreived from IPBX or IPBX unreachable by Odoo"
                         ),
-                        false
-                    );
+                        type: "danger",
+                    });
                 } else if (typeof r === "string" && isNaN(r)) {
-                    self.do_warn(
-                        r,
-                        _t("The calling number is not a phone number!"),
-                        false
-                    );
+                    self.displayNotification({
+                        title: r,
+                        message: _t("The calling number is not a phone number!"),
+                        type: "danger",
+                    });
                 } else if (typeof r === "string") {
                     var action = {
                         name: _t("Number Not Found"),
@@ -65,16 +62,15 @@ odoo.define("asterisk_click2dial.systray.OpenCaller", function (require) {
                     };
                     self.do_action(action);
                 } else if (typeof r === "object" && r.length === 3) {
-                    self.do_notify(
-                        _.str.sprintf(_t("On the phone with '%s'"), r[2]),
-                        _.str.sprintf(
+                    self.displayNotification({
+                        title: _.str.sprintf(_t("On the phone with '%s'"), r[2]),
+                        message: _.str.sprintf(
                             _t("Moving to form view of %s (%s ID %d)"),
                             r[2],
                             r[0],
                             r[1]
                         ),
-                        false
-                    );
+                    });
                     var action = {
                         type: "ir.actions.act_window",
                         res_model: r[0],

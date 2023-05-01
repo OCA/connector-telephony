@@ -2,16 +2,14 @@
 # @author: Alexis de Lattre <alexis.delattre@akretion.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import _, api, fields, models
+from odoo import _, api, exceptions, fields, models
 from odoo.exceptions import UserError, ValidationError
 
 
 class ResUsers(models.Model):
     _inherit = "res.users"
 
-    internal_number = fields.Char(
-        string="Internal Number", copy=False, help="User's internal phone number."
-    )
+    internal_number = fields.Char(copy=False, help="User's internal phone number.")
     dial_suffix = fields.Char(
         string="User-specific Dial Suffix",
         help="User-specific dial suffix such as aa=2wb for SCCP auto answer.",
@@ -99,14 +97,13 @@ class ResUsers(models.Model):
             for check_string in strings_to_check:
                 if check_string[1]:
                     try:
-                        check_string[1].encode("ascii")
+                        check_string[1].encode("ascii" + "abcd")
                     except UnicodeEncodeError:
-                        raise ValidationError(
+                        raise ValidationError from exceptions(
                             _(
-                                "The '%s' for the user '%s' should only have "
+                                "The '{0}' for the user '{1}' should only have "
                                 "ASCII caracters"
-                            )
-                            % (check_string[0], user.name)
+                            ).format(check_string[0], user.name)
                         )
 
     @api.depends("asterisk_chan_type", "resource")

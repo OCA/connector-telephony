@@ -1,22 +1,19 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# * asterisk_click2dial
+# 	* asterisk_click2dial
 #
-# Translators:
-# OCA Transbot <transbot@odoo-community.org>, 2017
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 10.0\n"
+"Project-Id-Version: Odoo Server 15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-25 03:36+0000\n"
-"PO-Revision-Date: 2017-01-25 03:36+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
-"Language-Team: Catalan (https://www.transifex.com/oca/teams/23907/ca/)\n"
-"Language: ca\n"
+"POT-Creation-Date: 2023-05-01 06:50+0000\n"
+"PO-Revision-Date: 2023-05-01 06:50+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: \n"
 
 #. module: asterisk_click2dial
 #: model:ir.model.fields,field_description:asterisk_click2dial.field_asterisk_server__login
@@ -105,8 +102,8 @@ msgstr ""
 #. module: asterisk_click2dial
 #: model:ir.model.fields,help:asterisk_click2dial.field_asterisk_server__context
 msgid ""
-"Asterisk dialplan context from which the calls will be made. Refer to /etc/"
-"asterisk/extensions.conf on your Asterisk server."
+"Asterisk dialplan context from which the calls will be made. Refer to "
+"/etc/asterisk/extensions.conf on your Asterisk server."
 msgstr ""
 
 #. module: asterisk_click2dial
@@ -208,12 +205,12 @@ msgstr ""
 #. module: asterisk_click2dial
 #: model:ir.model.fields,field_description:asterisk_click2dial.field_asterisk_server__create_uid
 msgid "Created by"
-msgstr "Creat per"
+msgstr "Creado por"
 
 #. module: asterisk_click2dial
 #: model:ir.model.fields,field_description:asterisk_click2dial.field_asterisk_server__create_date
 msgid "Created on"
-msgstr "Creat el"
+msgstr "Creado en"
 
 #. module: asterisk_click2dial
 #: model:ir.model.fields.selection,name:asterisk_click2dial.selection__res_users__asterisk_chan_type__dahdi
@@ -232,8 +229,6 @@ msgstr ""
 
 #. module: asterisk_click2dial
 #: model:ir.model.fields,field_description:asterisk_click2dial.field_asterisk_server__display_name
-#: model:ir.model.fields,field_description:asterisk_click2dial.field_phone_common__display_name
-#: model:ir.model.fields,field_description:asterisk_click2dial.field_res_users__display_name
 msgid "Display Name"
 msgstr ""
 
@@ -254,10 +249,8 @@ msgstr ""
 
 #. module: asterisk_click2dial
 #: model:ir.model.fields,field_description:asterisk_click2dial.field_asterisk_server__id
-#: model:ir.model.fields,field_description:asterisk_click2dial.field_phone_common__id
-#: model:ir.model.fields,field_description:asterisk_click2dial.field_res_users__id
 msgid "ID"
-msgstr "ID"
+msgstr ""
 
 #. module: asterisk_click2dial
 #. openerp-web
@@ -275,20 +268,18 @@ msgstr ""
 
 #. module: asterisk_click2dial
 #: model:ir.model.fields,field_description:asterisk_click2dial.field_asterisk_server____last_update
-#: model:ir.model.fields,field_description:asterisk_click2dial.field_phone_common____last_update
-#: model:ir.model.fields,field_description:asterisk_click2dial.field_res_users____last_update
 msgid "Last Modified on"
 msgstr ""
 
 #. module: asterisk_click2dial
 #: model:ir.model.fields,field_description:asterisk_click2dial.field_asterisk_server__write_uid
 msgid "Last Updated by"
-msgstr "Darrera Actualització per"
+msgstr "ültima actualización por"
 
 #. module: asterisk_click2dial
 #: model:ir.model.fields,field_description:asterisk_click2dial.field_asterisk_server__write_date
 msgid "Last Updated on"
-msgstr "Darrera Actualització el"
+msgstr "Última actualización en"
 
 #. module: asterisk_click2dial
 #: model:ir.model.fields,help:asterisk_click2dial.field_asterisk_server__login
@@ -350,6 +341,7 @@ msgstr ""
 #. module: asterisk_click2dial
 #. openerp-web
 #: code:addons/asterisk_click2dial/static/src/xml/asterisk_click2dial.xml:0
+#: code:addons/asterisk_click2dial/static/src/xml/asterisk_click2dial.xml:0
 #, python-format
 msgid "Open Caller"
 msgstr ""
@@ -372,8 +364,8 @@ msgstr ""
 #. module: asterisk_click2dial
 #: model:ir.model.fields,help:asterisk_click2dial.field_asterisk_server__password
 msgid ""
-"Password that Odoo will use to communicate with the Asterisk REST Interface. "
-"Refer to /etc/asterisk/ari.conf on your Asterisk server."
+"Password that Odoo will use to communicate with the Asterisk REST Interface."
+" Refer to /etc/asterisk/ari.conf on your Asterisk server."
 msgstr ""
 
 #. module: asterisk_click2dial
@@ -391,8 +383,8 @@ msgstr ""
 #. module: asterisk_click2dial
 #: model:ir.model.fields,help:asterisk_click2dial.field_asterisk_server__extension_priority
 msgid ""
-"Priority of the extension in the Asterisk dialplan. Refer to /etc/asterisk/"
-"extensions.conf on your Asterisk server."
+"Priority of the extension in the Asterisk dialplan. Refer to "
+"/etc/asterisk/extensions.conf on your Asterisk server."
 msgstr ""
 
 #. module: asterisk_click2dial
@@ -406,8 +398,8 @@ msgstr ""
 #: model:ir.model.fields,help:asterisk_click2dial.field_res_users__resource
 msgid ""
 "Resource name for the channel type selected. For example, if you use "
-"'Dial(PJSIP/phone1)' in your Asterisk dialplan to ring the SIP phone of this "
-"user, then the resource name for this user is 'phone1'.  For a SIP phone, "
+"'Dial(PJSIP/phone1)' in your Asterisk dialplan to ring the SIP phone of this"
+" user, then the resource name for this user is 'phone1'.  For a SIP phone, "
 "the phone number is often used as resource name, but not always."
 msgstr ""
 
@@ -465,8 +457,8 @@ msgstr ""
 #. module: asterisk_click2dial
 #: model:ir.model.fields,help:asterisk_click2dial.field_asterisk_server__port
 msgid ""
-"TCP port on which the Asterisk REST Interface listens. Defined in /etc/"
-"asterisk/ari.conf on Asterisk."
+"TCP port on which the Asterisk REST Interface listens. Defined in "
+"/etc/asterisk/ari.conf on Asterisk."
 msgstr ""
 
 #. module: asterisk_click2dial
