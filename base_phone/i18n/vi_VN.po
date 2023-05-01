@@ -1,22 +1,19 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# * base_phone
+# 	* base_phone
 #
-# Translators:
 msgid ""
 msgstr ""
-"Project-Id-Version: connector-telephony (9.0)\n"
+"Project-Id-Version: Odoo Server 15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-21 10:30+0000\n"
-"PO-Revision-Date: 2016-05-19 12:41+0000\n"
-"Last-Translator: <>\n"
-"Language-Team: Vietnamese (http://www.transifex.com/oca/OCA-connector-"
-"telephony-9-0/language/vi/)\n"
-"Language: vi\n"
+"POT-Creation-Date: 2023-05-01 07:21+0000\n"
+"PO-Revision-Date: 2023-05-01 07:21+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Plural-Forms: \n"
 
 #. module: base_phone
 #: model_terms:ir.ui.view,arch_db:base_phone.res_config_settings_view_form
@@ -61,17 +58,17 @@ msgstr ""
 #. module: base_phone
 #: model:ir.model,name:base_phone.model_res_company
 msgid "Companies"
-msgstr ""
+msgstr "Công ty"
 
 #. module: base_phone
 #: model:ir.model,name:base_phone.model_res_config_settings
 msgid "Config Settings"
-msgstr ""
+msgstr "Thiết lập cấu hình"
 
 #. module: base_phone
 #: model:ir.model,name:base_phone.model_res_partner
 msgid "Contact"
-msgstr ""
+msgstr "Liên hệ"
 
 #. module: base_phone
 #: code:addons/base_phone/wizard/number_not_found.py:0
@@ -110,14 +107,13 @@ msgstr ""
 #. module: base_phone
 #. openerp-web
 #: code:addons/base_phone/static/src/xml/phone.xml:0
+#: code:addons/base_phone/static/src/xml/phone.xml:0
 #, python-format
 msgid "Dial"
 msgstr ""
 
 #. module: base_phone
 #: model:ir.model.fields,field_description:base_phone.field_number_not_found__display_name
-#: model:ir.model.fields,field_description:base_phone.field_phone_common__display_name
-#: model:ir.model.fields,field_description:base_phone.field_phone_validation_mixin__display_name
 #: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers__display_name
 #: model:ir.model.fields,field_description:base_phone.field_res_company__display_name
 #: model:ir.model.fields,field_description:base_phone.field_res_config_settings__display_name
@@ -157,8 +153,6 @@ msgstr ""
 
 #. module: base_phone
 #: model:ir.model.fields,field_description:base_phone.field_number_not_found__id
-#: model:ir.model.fields,field_description:base_phone.field_phone_common__id
-#: model:ir.model.fields,field_description:base_phone.field_phone_validation_mixin__id
 #: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers__id
 #: model:ir.model.fields,field_description:base_phone.field_res_company__id
 #: model:ir.model.fields,field_description:base_phone.field_res_config_settings__id
@@ -181,8 +175,6 @@ msgstr ""
 
 #. module: base_phone
 #: model:ir.model.fields,field_description:base_phone.field_number_not_found____last_update
-#: model:ir.model.fields,field_description:base_phone.field_phone_common____last_update
-#: model:ir.model.fields,field_description:base_phone.field_phone_validation_mixin____last_update
 #: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers____last_update
 #: model:ir.model.fields,field_description:base_phone.field_res_company____last_update
 #: model:ir.model.fields,field_description:base_phone.field_res_config_settings____last_update
@@ -334,7 +326,8 @@ msgstr ""
 #. module: base_phone
 #: model:ir.model.constraint,message:base_phone.constraint_res_company_number_of_digits_to_match_from_end_positive
 msgid ""
-"The value of the field 'Number of Digits To Match From End' must be positive."
+"The value of the field 'Number of Digits To Match From End' must be "
+"positive."
 msgstr ""
 
 #. module: base_phone

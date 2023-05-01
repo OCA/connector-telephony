@@ -1,24 +1,19 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# * base_phone
+# 	* base_phone
 #
-# Translators:
-# OCA Transbot <transbot@odoo-community.org>, 2016
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 10.0\n"
+"Project-Id-Version: Odoo Server 15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-09 09:55+0000\n"
-"PO-Revision-Date: 2019-09-02 17:23+0000\n"
-"Last-Translator: Rodrigo Macedo <rmsolucoeseminformatic4@gmail.com>\n"
-"Language-Team: Portuguese (Brazil) (https://www.transifex.com/oca/"
-"teams/23907/pt_BR/)\n"
-"Language: pt_BR\n"
+"POT-Creation-Date: 2023-05-01 07:18+0000\n"
+"PO-Revision-Date: 2023-05-01 07:18+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 3.8\n"
+"Plural-Forms: \n"
 
 #. module: base_phone
 #: model_terms:ir.ui.view,arch_db:base_phone.res_config_settings_view_form
@@ -68,7 +63,7 @@ msgstr "Empresas"
 #. module: base_phone
 #: model:ir.model,name:base_phone.model_res_config_settings
 msgid "Config Settings"
-msgstr "Configurações de Ajuste"
+msgstr "Configurações"
 
 #. module: base_phone
 #: model:ir.model,name:base_phone.model_res_partner
@@ -112,14 +107,13 @@ msgstr "Telefone Atual"
 #. module: base_phone
 #. openerp-web
 #: code:addons/base_phone/static/src/xml/phone.xml:0
+#: code:addons/base_phone/static/src/xml/phone.xml:0
 #, python-format
 msgid "Dial"
 msgstr "Discar"
 
 #. module: base_phone
 #: model:ir.model.fields,field_description:base_phone.field_number_not_found__display_name
-#: model:ir.model.fields,field_description:base_phone.field_phone_common__display_name
-#: model:ir.model.fields,field_description:base_phone.field_phone_validation_mixin__display_name
 #: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers__display_name
 #: model:ir.model.fields,field_description:base_phone.field_res_company__display_name
 #: model:ir.model.fields,field_description:base_phone.field_res_config_settings__display_name
@@ -159,8 +153,6 @@ msgstr "Fixo/Móvel"
 
 #. module: base_phone
 #: model:ir.model.fields,field_description:base_phone.field_number_not_found__id
-#: model:ir.model.fields,field_description:base_phone.field_phone_common__id
-#: model:ir.model.fields,field_description:base_phone.field_phone_validation_mixin__id
 #: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers__id
 #: model:ir.model.fields,field_description:base_phone.field_res_company__id
 #: model:ir.model.fields,field_description:base_phone.field_res_config_settings__id
@@ -180,19 +172,17 @@ msgid ""
 "digits of the phone number presented by the calling party. N is the value "
 "you should enter in this field."
 msgstr ""
-"Em várias situações, o Odoo precisará encontrar um Parceiro/Líder/"
-"Empregado/... a partir de um número de telefone apresentado pela parte que "
-"está chamando. Como os números de telefone apresentados pela operadora de "
-"telefonia nem sempre podem ser exibidos em um formato padrão, o melhor "
-"método para encontrar o Parceiro/Líder/Empregado/...relacionado no Odoo é "
-"tentar corresponder ao final do número de telefone no Odoo com os N últimos "
-"dígitos do número de telefone apresentados pela parte que está chamando. N é "
-"o valor que você deve inserir neste campo."
+"Em várias situações, o Odoo precisará encontrar um "
+"Parceiro/Líder/Empregado/... a partir de um número de telefone apresentado "
+"pela parte que está chamando. Como os números de telefone apresentados pela "
+"operadora de telefonia nem sempre podem ser exibidos em um formato padrão, o"
+" melhor método para encontrar o Parceiro/Líder/Empregado/...relacionado no "
+"Odoo é tentar corresponder ao final do número de telefone no Odoo com os N "
+"últimos dígitos do número de telefone apresentados pela parte que está "
+"chamando. N é o valor que você deve inserir neste campo."
 
 #. module: base_phone
 #: model:ir.model.fields,field_description:base_phone.field_number_not_found____last_update
-#: model:ir.model.fields,field_description:base_phone.field_phone_common____last_update
-#: model:ir.model.fields,field_description:base_phone.field_phone_validation_mixin____last_update
 #: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers____last_update
 #: model:ir.model.fields,field_description:base_phone.field_res_company____last_update
 #: model:ir.model.fields,field_description:base_phone.field_res_config_settings____last_update
@@ -346,7 +336,8 @@ msgstr "Preferências de telefonia"
 #. module: base_phone
 #: model:ir.model.constraint,message:base_phone.constraint_res_company_number_of_digits_to_match_from_end_positive
 msgid ""
-"The value of the field 'Number of Digits To Match From End' must be positive."
+"The value of the field 'Number of Digits To Match From End' must be "
+"positive."
 msgstr ""
 "O valor do campo 'Número de dígitos que coincidem no final' deve ser "
 "positivo."

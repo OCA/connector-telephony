@@ -1,22 +1,19 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# * base_phone
+# 	* base_phone
 #
-# Translators:
-# OCA Transbot <transbot@odoo-community.org>, 2016
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 10.0\n"
+"Project-Id-Version: Odoo Server 15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-24 19:50+0000\n"
-"PO-Revision-Date: 2017-06-24 19:50+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2016\n"
-"Language-Team: German (https://www.transifex.com/oca/teams/23907/de/)\n"
-"Language: de\n"
+"POT-Creation-Date: 2023-05-01 07:17+0000\n"
+"PO-Revision-Date: 2023-05-01 07:17+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: \n"
 
 #. module: base_phone
 #: model_terms:ir.ui.view,arch_db:base_phone.res_config_settings_view_form
@@ -43,9 +40,9 @@ msgstr "Click2dial erfolgreich"
 #. module: base_phone
 #. openerp-web
 #: code:addons/base_phone/static/src/js/phone_widget.js:0
-#, fuzzy, python-format
+#, python-format
 msgid "Click2dial to %s"
-msgstr "Click2dial gestartet"
+msgstr ""
 
 #. module: base_phone
 #: model_terms:ir.ui.view,arch_db:base_phone.number_not_found_form
@@ -66,12 +63,12 @@ msgstr "Unternehmen"
 #. module: base_phone
 #: model:ir.model,name:base_phone.model_res_config_settings
 msgid "Config Settings"
-msgstr ""
+msgstr "Konfigurationseinstellungen"
 
 #. module: base_phone
 #: model:ir.model,name:base_phone.model_res_partner
 msgid "Contact"
-msgstr ""
+msgstr "Kontakt"
 
 #. module: base_phone
 #: code:addons/base_phone/wizard/number_not_found.py:0
@@ -110,14 +107,13 @@ msgstr "Aktuelle Telefonnummer"
 #. module: base_phone
 #. openerp-web
 #: code:addons/base_phone/static/src/xml/phone.xml:0
+#: code:addons/base_phone/static/src/xml/phone.xml:0
 #, python-format
 msgid "Dial"
 msgstr "Wählen"
 
 #. module: base_phone
 #: model:ir.model.fields,field_description:base_phone.field_number_not_found__display_name
-#: model:ir.model.fields,field_description:base_phone.field_phone_common__display_name
-#: model:ir.model.fields,field_description:base_phone.field_phone_validation_mixin__display_name
 #: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers__display_name
 #: model:ir.model.fields,field_description:base_phone.field_res_company__display_name
 #: model:ir.model.fields,field_description:base_phone.field_res_config_settings__display_name
@@ -157,14 +153,12 @@ msgstr "Festnetz/Mobil"
 
 #. module: base_phone
 #: model:ir.model.fields,field_description:base_phone.field_number_not_found__id
-#: model:ir.model.fields,field_description:base_phone.field_phone_common__id
-#: model:ir.model.fields,field_description:base_phone.field_phone_validation_mixin__id
 #: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers__id
 #: model:ir.model.fields,field_description:base_phone.field_res_company__id
 #: model:ir.model.fields,field_description:base_phone.field_res_config_settings__id
 #: model:ir.model.fields,field_description:base_phone.field_res_partner__id
 msgid "ID"
-msgstr "ID"
+msgstr ""
 
 #. module: base_phone
 #: model:ir.model.fields,help:base_phone.field_res_company__number_of_digits_to_match_from_end
@@ -187,8 +181,6 @@ msgstr ""
 
 #. module: base_phone
 #: model:ir.model.fields,field_description:base_phone.field_number_not_found____last_update
-#: model:ir.model.fields,field_description:base_phone.field_phone_common____last_update
-#: model:ir.model.fields,field_description:base_phone.field_phone_validation_mixin____last_update
 #: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers____last_update
 #: model:ir.model.fields,field_description:base_phone.field_res_company____last_update
 #: model:ir.model.fields,field_description:base_phone.field_res_config_settings____last_update
@@ -232,9 +224,9 @@ msgstr "Nummer in internationales Format umgewandelt:"
 #. module: base_phone
 #. openerp-web
 #: code:addons/base_phone/static/src/js/phone_widget.js:0
-#, fuzzy, python-format
+#, python-format
 msgid "Number dialed: %s"
-msgstr "Gewählte Nummer:"
+msgstr ""
 
 #. module: base_phone
 #: model:ir.model,name:base_phone.model_number_not_found
@@ -243,7 +235,6 @@ msgstr "Nummer nicht gefunden"
 
 #. module: base_phone
 #: model_terms:ir.ui.view,arch_db:base_phone.res_config_settings_view_form
-#, fuzzy
 msgid "Number of Digits"
 msgstr "Anzahl der übereinstimmenden Stellen vom Ende her"
 
@@ -267,7 +258,7 @@ msgstr "Zu aktualisierender Partner"
 #: code:addons/base_phone/wizard/number_not_found.py:0
 #, python-format
 msgid "Partner: %s"
-msgstr "Partner: %s"
+msgstr ""
 
 #. module: base_phone
 #: model:res.groups,name:base_phone.group_callerid
@@ -285,8 +276,8 @@ msgid ""
 "Phone number of calling party that has been obtained from the telephony "
 "server, in the format used by the telephony server (not E.164)."
 msgstr ""
-"Telefonnummer des Anrufers der vom Telefonieserver erhalten wurde, im Format "
-"des Telefonieservers (nicht E.164)."
+"Telefonnummer des Anrufers der vom Telefonieserver erhalten wurde, im Format"
+" des Telefonieservers (nicht E.164)."
 
 #. module: base_phone
 #: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers__phonenumbers_not_reformatted
@@ -343,14 +334,14 @@ msgstr "Telefonie Einstellungen"
 #. module: base_phone
 #: model:ir.model.constraint,message:base_phone.constraint_res_company_number_of_digits_to_match_from_end_positive
 msgid ""
-"The value of the field 'Number of Digits To Match From End' must be positive."
+"The value of the field 'Number of Digits To Match From End' must be "
+"positive."
 msgstr ""
-"Der Wert des Feldes 'Anzahl der übereinstimmenden Stellen vom Ende her' muss "
-"positiv sein"
+"Der Wert des Feldes 'Anzahl der übereinstimmenden Stellen vom Ende her' muss"
+" positiv sein"
 
 #. module: base_phone
 #: model_terms:ir.ui.view,arch_db:base_phone.reformat_all_phonenumbers_form
-#, fuzzy
 msgid ""
 "This wizard reformats the phone and mobile numbers of all partners in "
 "standard international format e.g. +33 1 41 98 12 42"
@@ -367,21 +358,5 @@ msgstr "Nimm das klingelde Telefon ab"
 
 #. module: base_phone
 #: model_terms:ir.ui.view,arch_db:base_phone.number_not_found_form
-#, fuzzy
 msgid "Update Existing Partner"
 msgstr "Einen Partner anlegen oder aktualisieren"
-
-#~ msgid "Phone"
-#~ msgstr "Telefon"
-
-#~ msgid "Create Partner with this Number"
-#~ msgstr "Erstelle Partner mit dieser Nummer"
-
-#~ msgid "Partner"
-#~ msgstr "Partner"
-
-#~ msgid "Update Partner with this Number"
-#~ msgstr "Partner mit dieser Nummer aktualisieren"
-
-#~ msgid "phone.common"
-#~ msgstr "phone.common"

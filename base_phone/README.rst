@@ -17,21 +17,29 @@ Base Phone
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Fconnector--telephony-lightgray.png?logo=github
-    :target: https://github.com/OCA/connector-telephony/tree/14.0/base_phone
+    :target: https://github.com/OCA/connector-telephony/tree/17.0/base_phone
     :alt: OCA/connector-telephony
 .. |badge4| image:: https://img.shields.io/badge/weblate-Translate%20me-F47D42.png
-    :target: https://translation.odoo-community.org/projects/connector-telephony-14-0/connector-telephony-14-0-base_phone
+    :target: https://translation.odoo-community.org/projects/connector-telephony-17-0/connector-telephony-17-0-base_phone
     :alt: Translate me on Weblate
 .. |badge5| image:: https://img.shields.io/badge/runboat-Try%20me-875A7B.png
-    :target: https://runboat.odoo-community.org/builds?repo=OCA/connector-telephony&target_branch=14.0
+    :target: https://runboat.odoo-community.org/builds?repo=OCA/connector-telephony&target_branch=17.0
     :alt: Try me on Runboat
 
 |badge1| |badge2| |badge3| |badge4| |badge5|
 
-This module provides common methods and wizards which can be useful to develop a connector between Odoo and a telephony system. It depends on the official module *phone_validation* which handle the reformatting of phone numbers using the `phonenumbers <https://github.com/daviddrysdale/python-phonenumbers>`_ Python library, which is a port of the library used in Android smartphones. For example, if
-your user is linked to a French company and you update the form view of a
-partner with a badly written French phone number such as '01-55-42-12-42',
-Odoo will automatically update the phone number to `E.164 <https://en.wikipedia.org/wiki/E.164>`_ format '+33155421242'. This module extends this reformatting to create() and write() methods.
+This module provides common methods and wizards which can be useful to
+develop a connector between Odoo and a telephony system. It depends on
+the official module *phone_validation* which handle the reformatting of
+phone numbers using the
+`phonenumbers <https://github.com/daviddrysdale/python-phonenumbers>`__
+Python library, which is a port of the library used in Android
+smartphones. For example, if your user is linked to a French company and
+you update the form view of a partner with a badly written French phone
+number such as '01-55-42-12-42', Odoo will automatically update the
+phone number to `E.164 <https://en.wikipedia.org/wiki/E.164>`__ format
+'+33155421242'. This module extends this reformatting to create() and
+write() methods.
 
 This module is used by the Odoo-Asterisk connector of the OCA.
 
@@ -46,7 +54,7 @@ Bug Tracker
 Bugs are tracked on `GitHub Issues <https://github.com/OCA/connector-telephony/issues>`_.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us to smash it by providing a detailed and welcomed
-`feedback <https://github.com/OCA/connector-telephony/issues/new?body=module:%20base_phone%0Aversion:%2014.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+`feedback <https://github.com/OCA/connector-telephony/issues/new?body=module:%20base_phone%0Aversion:%2017.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
 
 Do not contact contributors directly about support or help with technical issues.
 
@@ -54,18 +62,18 @@ Credits
 =======
 
 Authors
-~~~~~~~
+-------
 
 * Akretion
 
 Contributors
-~~~~~~~~~~~~
+------------
 
-* Alexis de Lattre <alexis.delattre@akretion.com>
-* Sébastien Beau <sebastien.beau@akretion.com>
+-  Alexis de Lattre <alexis.delattre@akretion.com>
+-  Sébastien Beau <sebastien.beau@akretion.com>
 
 Maintainers
-~~~~~~~~~~~
+-----------
 
 This module is maintained by the OCA.
 
@@ -85,6 +93,6 @@ Current `maintainer <https://odoo-community.org/page/maintainer-role>`__:
 
 |maintainer-alexis-via| 
 
-This module is part of the `OCA/connector-telephony <https://github.com/OCA/connector-telephony/tree/14.0/base_phone>`_ project on GitHub.
+This module is part of the `OCA/connector-telephony <https://github.com/OCA/connector-telephony/tree/17.0/base_phone>`_ project on GitHub.
 
 You are welcome to contribute. To learn how please visit https://odoo-community.org/page/Contribute.
