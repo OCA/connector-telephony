@@ -4,17 +4,16 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 14.0\n"
+"Project-Id-Version: Odoo Server 15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2022-08-05 17:06+0000\n"
-"Last-Translator: Nicolas Rodriguez Sande <nicolasrsande@gmail.com>\n"
-"Language-Team: none\n"
-"Language: es_AR\n"
+"POT-Creation-Date: 2023-05-01 07:19+0000\n"
+"PO-Revision-Date: 2023-05-01 07:19+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.3.2\n"
+"Plural-Forms: \n"
 
 #. module: base_phone
 #: model_terms:ir.ui.view,arch_db:base_phone.res_config_settings_view_form
@@ -36,7 +35,7 @@ msgstr "Cancelar"
 #: code:addons/base_phone/static/src/js/phone_widget.js:0
 #, python-format
 msgid "Click2dial successfull"
-msgstr ""
+msgstr "Click2dial satisfactorio"
 
 #. module: base_phone
 #. openerp-web
@@ -115,12 +114,7 @@ msgstr "Llamar"
 
 #. module: base_phone
 #: model:ir.model.fields,field_description:base_phone.field_number_not_found__display_name
-#: model:ir.model.fields,field_description:base_phone.field_phone_common__display_name
-#: model:ir.model.fields,field_description:base_phone.field_phone_validation_mixin__display_name
 #: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers__display_name
-#: model:ir.model.fields,field_description:base_phone.field_res_company__display_name
-#: model:ir.model.fields,field_description:base_phone.field_res_config_settings__display_name
-#: model:ir.model.fields,field_description:base_phone.field_res_partner__display_name
 msgid "Display Name"
 msgstr "Nombre para mostrar"
 
@@ -156,14 +150,9 @@ msgstr "Fijo/Movil"
 
 #. module: base_phone
 #: model:ir.model.fields,field_description:base_phone.field_number_not_found__id
-#: model:ir.model.fields,field_description:base_phone.field_phone_common__id
-#: model:ir.model.fields,field_description:base_phone.field_phone_validation_mixin__id
 #: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers__id
-#: model:ir.model.fields,field_description:base_phone.field_res_company__id
-#: model:ir.model.fields,field_description:base_phone.field_res_config_settings__id
-#: model:ir.model.fields,field_description:base_phone.field_res_partner__id
 msgid "ID"
-msgstr "ID"
+msgstr ""
 
 #. module: base_phone
 #: model:ir.model.fields,help:base_phone.field_res_company__number_of_digits_to_match_from_end
@@ -177,23 +166,18 @@ msgid ""
 "digits of the phone number presented by the calling party. N is the value "
 "you should enter in this field."
 msgstr ""
-"En varias situaciones, el sistema va a necesitar encontrar un Contacto/Lead/"
-"Empleado... desde un número telefónico representado por el número entrante. "
-"Como los números representados por el operador no siempre son mostrados en "
-"el formato estándar, el mejor metodo para encontrar el objeto relacionado en "
-"el sistema es tratar de coincidir (match) la parte final del número "
-"telefónico en el sistema con los últimos N dígitos del número telefónico "
-"presentado como número entrante. N es el valor que debes ingresar en este "
-"campo."
+"En varias situaciones, el sistema va a necesitar encontrar un "
+"Contacto/Lead/Empleado... desde un número telefónico representado por el "
+"número entrante. Como los números representados por el operador no siempre "
+"son mostrados en el formato estándar, el mejor metodo para encontrar el "
+"objeto relacionado en el sistema es tratar de coincidir (match) la parte "
+"final del número telefónico en el sistema con los últimos N dígitos del "
+"número telefónico presentado como número entrante. N es el valor que debes "
+"ingresar en este campo."
 
 #. module: base_phone
 #: model:ir.model.fields,field_description:base_phone.field_number_not_found____last_update
-#: model:ir.model.fields,field_description:base_phone.field_phone_common____last_update
-#: model:ir.model.fields,field_description:base_phone.field_phone_validation_mixin____last_update
 #: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers____last_update
-#: model:ir.model.fields,field_description:base_phone.field_res_company____last_update
-#: model:ir.model.fields,field_description:base_phone.field_res_config_settings____last_update
-#: model:ir.model.fields,field_description:base_phone.field_res_partner____last_update
 msgid "Last Modified on"
 msgstr "Última modificación en"
 
@@ -272,12 +256,12 @@ msgstr "Contacto/Cliente: %s"
 #. module: base_phone
 #: model:res.groups,name:base_phone.group_callerid
 msgid "Phone CallerID"
-msgstr "CallerID"
+msgstr "Identificación de llamada del teléfono"
 
 #. module: base_phone
 #: model:ir.model,name:base_phone.model_phone_validation_mixin
 msgid "Phone Validation Mixin"
-msgstr ""
+msgstr "Teléfono validación"
 
 #. module: base_phone
 #: model:ir.model.fields,help:base_phone.field_number_not_found__calling_number
@@ -285,16 +269,18 @@ msgid ""
 "Phone number of calling party that has been obtained from the telephony "
 "server, in the format used by the telephony server (not E.164)."
 msgstr ""
+"Número de teléfono del interlocutor que ha sido obtenido desde el servidor "
+"de telefonía, en el formato usado por el servidor de telefonía (no E.164)."
 
 #. module: base_phone
 #: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers__phonenumbers_not_reformatted
 msgid "Phone numbers that couldn't be reformatted"
-msgstr ""
+msgstr "Números de teléfono que no pudieron reformatearse"
 
 #. module: base_phone
 #: model_terms:ir.ui.view,arch_db:base_phone.reformat_all_phonenumbers_form
 msgid "Phone numbers that couldn't be reformatted:"
-msgstr ""
+msgstr "Números de teléfono que no pudieron reformatearse:"
 
 #. module: base_phone
 #: model:ir.actions.act_window,name:base_phone.reformat_all_phonenumbers_action
@@ -356,8 +342,8 @@ msgid ""
 "standard international format e.g. +33 1 41 98 12 42"
 msgstr ""
 "Esta herramienta le ayudara a reformatear todos los números de teléfono y "
-"móviles de todos los contactos en el formato estándar internacional. E.j. +"
-"33 1 41 98 12 42"
+"móviles de todos los contactos en el formato estándar internacional. E.j. "
+"+33 1 41 98 12 42"
 
 #. module: base_phone
 #. openerp-web
