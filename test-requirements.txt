@@ -1,0 +1,1 @@
+odoo-addon-base_phone @git+https://github.com/OCA/connector-telephony@refs/pull/300/head#subdirectory=setup/base_phone
