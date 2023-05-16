@@ -50,14 +50,14 @@ class TestBasePhone(TransactionCase):
         partner1 = rpo.create(
             {
                 "name": "Partner 1",
-                "phone": "04-72-08-87-32",
-                "mobile": "06.42.77.42.66",
+                "phone": "04-72-98-76-54",
+                "mobile": "06.42.12.34.56",
             }
         )
         partner1._onchange_phone_validation()
         partner1._onchange_mobile_validation()
-        self.assertEqual(partner1.phone, "+33 4 72 08 87 32")
-        self.assertEqual(partner1.mobile, "+33 6 42 77 42 66")
+        self.assertEqual(partner1.phone, "+33 4 72 98 76 54")
+        self.assertEqual(partner1.mobile, "+33 6 42 12 34 56")
         # Create a partner with country
         parent_partner2 = rpo.create(
             {
@@ -70,15 +70,15 @@ class TestBasePhone(TransactionCase):
             {
                 "name": "Partner 2",
                 "parent_id": parent_partner2.id,
-                "phone": "(0) 21 619 10 10",
-                "mobile": "(0) 79 606 42 42",
+                "phone": "(0) 21 123 45 67",
+                "mobile": "(0) 79 987 65 43",
             }
         )
         partner2._onchange_phone_validation()
         partner2._onchange_mobile_validation()
         self.assertEqual(partner2.country_id, self.env.ref("base.ch"))
-        self.assertEqual(partner2.phone, "+41 21 619 10 10")
-        self.assertEqual(partner2.mobile, "+41 79 606 42 42")
+        self.assertEqual(partner2.phone, "+41 21 123 45 67")
+        self.assertEqual(partner2.mobile, "+41 79 987 65 43")
         # Write on an existing partner
         partner3 = rpo.create(
             {
@@ -101,7 +101,7 @@ class TestBasePhone(TransactionCase):
         self.assertEqual(partner3.phone, "+33 4 72 89 32 43")
         # Test get_name_from_phone_number
         pco = self.env["phone.common"]
-        name = pco.get_name_from_phone_number("0642774266")
+        name = pco.get_name_from_phone_number("0642123456")
         self.assertEqual(name, "Partner 1")
-        name2 = pco.get_name_from_phone_number("0041216191010")
+        name2 = pco.get_name_from_phone_number("0041211234567")
         self.assertEqual(name2, "Parent Partner 2, Partner 2")
