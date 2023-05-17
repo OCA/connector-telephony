@@ -2,7 +2,7 @@
 # @author: Alexis de Lattre <alexis.delattre@akretion.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from odoo.tests.common import TransactionCase
+from odoo.tests.common import Form, TransactionCase
 
 
 class TestBasePhone(TransactionCase):
@@ -44,61 +44,73 @@ class TestBasePhone(TransactionCase):
         phone_to_dial = self.phco.convert_to_dial_number("+32 455 78 99 88")
         self.assertEqual(phone_to_dial, "0032455789988")
 
-    def test_partner_phone_formatting(self):
+    def create_partner(self, vals):
         rpo = self.env["res.partner"]
+        partner_form = Form(rpo)
+        for key, value in vals.items():
+            if key == "name":
+                partner_form.name = value
+            elif key == "phone":
+                partner_form.phone = value
+            elif key == "mobile":
+                partner_form.mobile = value
+            elif key == "country_id":
+                partner_form.country_id = value
+            # elif key == "is_company":
+            #     partner_form.is_company = value
+            #     AssertionError: can't write on invisible field is_company
+            elif key == "parent_id":
+                partner_form.parent_id = value
+        res = partner_form.save()
+        return res
+
+    def test_partner_phone_formatting(self):
         # Create an existing partner without country
-        partner1 = rpo.create(
-            {
-                "name": "Partner 1",
-                "phone": "04-72-98-76-54",
-                "mobile": "06.42.12.34.56",
-            }
-        )
-        partner1._onchange_phone_validation()
-        partner1._onchange_mobile_validation()
-        self.assertEqual(partner1.phone, "+33 4 72 98 76 54")
-        self.assertEqual(partner1.mobile, "+33 6 42 12 34 56")
+        vals = {
+            "name": "Partner 1",
+            "phone": "04-72-98-76-54",
+            "mobile": "06.42.12.34.56",
+        }
+        partner_1 = self.create_partner(vals)
+        self.assertEqual(partner_1.phone, "+33 4 72 98 76 54")
+        self.assertEqual(partner_1.mobile, "+33 6 42 12 34 56")
         # Create a partner with country
-        parent_partner2 = rpo.create(
-            {
-                "name": "Parent Partner 2",
-                "country_id": self.env.ref("base.ch").id,
-                "is_company": True,
-            }
-        )
-        partner2 = rpo.create(
-            {
-                "name": "Partner 2",
-                "parent_id": parent_partner2.id,
-                "phone": "(0) 21 123 45 67",
-                "mobile": "(0) 79 987 65 43",
-            }
-        )
-        partner2._onchange_phone_validation()
-        partner2._onchange_mobile_validation()
+        vals = {
+            "name": "Parent Partner 2",
+            "country_id": self.env.ref("base.ch"),
+        }
+        parent_partner2 = self.create_partner(vals)
+        parent_partner2.is_company = True
+        vals = {
+            "name": "Partner 2",
+            "parent_id": parent_partner2,
+            "phone": "(0) 21 123 45 67",
+            "mobile": "(0) 79 987 65 43",
+        }
+        partner2 = self.create_partner(vals)
         self.assertEqual(partner2.country_id, self.env.ref("base.ch"))
         self.assertEqual(partner2.phone, "+41 21 123 45 67")
         self.assertEqual(partner2.mobile, "+41 79 987 65 43")
         # Write on an existing partner
-        partner3 = rpo.create(
-            {
-                "name": "Partner 3",
-                "country_id": self.env.ref("base.be").id,
-                "is_company": True,
-            }
-        )
-        partner3.write({"phone": "(0) 2 391 43 74"})
-        partner3._onchange_phone_validation()
-        self.assertEqual(partner3.phone, "+32 2 391 43 74")
-        # Write on an existing partner with country at the same time
-        partner3.write(
-            {
-                "phone": "04 72 89 32 43",
-                "country_id": self.fr_country_id,
-            }
-        )
-        partner3._onchange_phone_validation()
-        self.assertEqual(partner3.phone, "+33 4 72 89 32 43")
+        vals = {
+            "name": "Partner 3",
+            "country_id": self.env.ref("base.be"),
+        }
+        partner3 = self.create_partner(vals)
+        partner3.is_company = True
+        partner3_form = Form(partner3)
+        partner3_form.phone = "(0) 2 312 34 56"
+        self.assertEqual(partner3_form.phone, "+32 2 312 34 56")
+        partner3_form.mobile = "04 72 98 76 54"
+        # Changing country_id should change phone prefix and format
+        partner3_form.country_id = self.env.ref("base.fr")
+        # The number is valid in Belgium but becomes invalid in France
+        # so it is kept at national format
+        self.assertEqual(partner3_form.phone, "02 312 34 56")
+        self.assertEqual(partner3_form.mobile, "+33 4 72 98 76 54")
+        # Change back to Belgium country
+        partner3_form.country_id = self.env.ref("base.be")
+        self.assertEqual(partner3_form.phone, "+32 2 312 34 56")
         # Test get_name_from_phone_number
         pco = self.env["phone.common"]
         name = pco.get_name_from_phone_number("0642123456")
