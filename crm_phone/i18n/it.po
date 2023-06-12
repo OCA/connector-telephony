@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: connector-telephony (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-06-24 19:57+0000\n"
-"PO-Revision-Date: 2023-05-31 15:09+0000\n"
+"PO-Revision-Date: 2023-06-12 16:10+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (http://www.transifex.com/oca/"
 "OCA-connector-telephony-8-0/language/it/)\n"
@@ -140,7 +140,7 @@ msgstr ""
 #. module: crm_phone
 #: model:ir.model,name:crm_phone.model_crm_lead
 msgid "Lead/Opportunity"
-msgstr "Lead/Opportunità"
+msgstr "Contatto/Opportunità"
 
 #. module: crm_phone
 #: code:addons/crm_phone/wizard/number_not_found.py:75
