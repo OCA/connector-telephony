@@ -1,0 +1,99 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* sms_ovh_http
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2023-06-14 19:08+0000\n"
+"Last-Translator: Francesco Foresti <francesco.foresti@ooops404.com>\n"
+"Language-Team: none\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17\n"
+
+#. module: sms_ovh_http
+#: model:ir.model.fields,field_description:sms_ovh_http.field_iap_account__sms_ovh_http_login
+msgid "API User ID"
+msgstr "ID utente API"
+
+#. module: sms_ovh_http
+#: model:ir.model.fields,field_description:sms_ovh_http.field_iap_account__sms_ovh_http_password
+msgid "API User Password"
+msgstr "Password utente API"
+
+#. module: sms_ovh_http
+#: code:addons/sms_ovh_http/models/sms_api.py:0
+#, python-format
+msgid "Batch sending is not support with OVH"
+msgstr "Invio in batch non è supportato da OVH"
+
+#. module: sms_ovh_http
+#: model:ir.model.fields,field_description:sms_ovh_http.field_iap_account__display_name
+#: model:ir.model.fields,field_description:sms_ovh_http.field_sms_api__display_name
+#: model:ir.model.fields,field_description:sms_ovh_http.field_sms_sms__display_name
+msgid "Display Name"
+msgstr "Nome visualizzato"
+
+#. module: sms_ovh_http
+#: model:ir.model.fields,field_description:sms_ovh_http.field_sms_sms__error_detail
+msgid "Error Detail"
+msgstr "Dettagli errore"
+
+#. module: sms_ovh_http
+#: model:ir.model,name:sms_ovh_http.model_iap_account
+msgid "IAP Account"
+msgstr "Conto IAP"
+
+#. module: sms_ovh_http
+#: model:ir.model.fields,field_description:sms_ovh_http.field_iap_account__id
+#: model:ir.model.fields,field_description:sms_ovh_http.field_sms_api__id
+#: model:ir.model.fields,field_description:sms_ovh_http.field_sms_sms__id
+msgid "ID"
+msgstr "ID"
+
+#. module: sms_ovh_http
+#: model:ir.model.fields,field_description:sms_ovh_http.field_iap_account____last_update
+#: model:ir.model.fields,field_description:sms_ovh_http.field_sms_api____last_update
+#: model:ir.model.fields,field_description:sms_ovh_http.field_sms_sms____last_update
+msgid "Last Modified on"
+msgstr "Ultima modifica il"
+
+#. module: sms_ovh_http
+#: model_terms:ir.ui.view,arch_db:sms_ovh_http.iap_account_view_form
+msgid "OVH account"
+msgstr "Conto OVH"
+
+#. module: sms_ovh_http
+#: model:ir.model,name:sms_ovh_http.model_sms_sms
+msgid "Outgoing SMS"
+msgstr "SMS in uscita"
+
+#. module: sms_ovh_http
+#: model:ir.model.fields,field_description:sms_ovh_http.field_iap_account__provider
+msgid "Provider"
+msgstr "Gestore"
+
+#. module: sms_ovh_http
+#: model:ir.model,name:sms_ovh_http.model_sms_api
+msgid "SMS API"
+msgstr "API SMS"
+
+#. module: sms_ovh_http
+#: model:ir.model.fields,field_description:sms_ovh_http.field_iap_account__sms_ovh_http_account
+msgid "SMS Account"
+msgstr "Conto SMS"
+
+#. module: sms_ovh_http
+#: model:ir.model.fields.selection,name:sms_ovh_http.selection__iap_account__provider__sms_ovh_http
+msgid "SMS OVH http"
+msgstr "SMS OVH http"
+
+#. module: sms_ovh_http
+#: model:ir.model.fields,field_description:sms_ovh_http.field_iap_account__sms_ovh_http_from
+msgid "Sender Name"
+msgstr "Nome mittente"

@@ -4,7 +4,7 @@
 
 {
     "name": "Asterisk connector",
-    "version": "14.0.1.0.0",
+    "version": "14.0.2.0.0",
     "category": "Phone",
     "license": "AGPL-3",
     "summary": "Asterisk-Odoo connector",
@@ -12,7 +12,7 @@
     "maintainers": ["alexis-via"],
     "website": "https://github.com/OCA/connector-telephony",
     "depends": ["base_phone"],
-    "external_dependencies": {"python": ["Asterisk"]},
+    "external_dependencies": {"python": ["requests"]},
     "data": [
         "views/asterisk_server.xml",
         "views/res_users.xml",
