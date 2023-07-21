@@ -4,23 +4,24 @@
 
 from odoo import api, fields, models
 
+from odoo.addons.phone_validation.tools import phone_validation
+
 
 class CrmPhonecall(models.Model):
     _name = "crm.phonecall"
     _description = "Phone Call"
-    _inherit = ["mail.thread", "mail.activity.mixin", "phone.validation.mixin"]
+    _inherit = ["mail.thread", "mail.activity.mixin"]
     _order = "id desc"
 
     # Restore the object that existed in v8
     # and doesn't exist in v9 community any more
     name = fields.Char(string="Call Summary", required=True, tracking=True)
     date = fields.Datetime(
-        string="Date",
         tracking=True,
         copy=False,
         default=lambda self: fields.Datetime.now(),
     )
-    description = fields.Text(string="Description", copy=False)
+    description = fields.Text(copy=False)
     company_id = fields.Many2one(
         "res.company", string="Company", default=lambda self: self.env.company
     )
@@ -43,7 +44,6 @@ class CrmPhonecall(models.Model):
     partner_mobile = fields.Char(string="Mobile")
     priority = fields.Selection(
         [("0", "Low"), ("1", "Normal"), ("2", "High")],
-        string="Priority",
         tracking=True,
         default="1",
     )
@@ -93,12 +93,12 @@ class CrmPhonecall(models.Model):
     @api.onchange("partner_phone")
     def onchange_partner_phone(self):
         if self.partner_phone:
-            self.partner_phone = self.phone_format(self.partner_phone)
+            self.partner_phone = phone_validation.phone_format(self.partner_phone)
 
     @api.onchange("partner_mobile")
     def onchange_partner_mobile(self):
         if self.partner_mobile:
-            self.partner_mobile = self.phone_format(self.partner_mobile)
+            self.partner_mobile = phone_validation.phone_format(self.partner_mobile)
 
     def schedule_another_call(self):
         self.ensure_one()

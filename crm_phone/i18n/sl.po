@@ -9,16 +9,15 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-01-25 03:36+0000\n"
-"PO-Revision-Date: 2023-03-31 21:25+0000\n"
-"Last-Translator: Matjaz Mozetic <matjaz@luxim.si>\n"
+"PO-Revision-Date: 2017-01-25 03:36+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
 "Language-Team: Slovenian (https://www.transifex.com/oca/teams/23907/sl/)\n"
 "Language: sl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=4; plural=n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n"
-"%100==4 ? 2 : 3;\n"
-"X-Generator: Weblate 4.14.1\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n"
+"%100==4 ? 2 : 3);\n"
 
 #. module: crm_phone
 #: model:ir.model.fields,field_description:crm_phone.field_crm_phonecall__message_needaction
@@ -167,7 +166,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:crm_phone.field_res_users__display_name
 #: model:ir.model.fields,field_description:crm_phone.field_wizard_create_crm_phonecall__display_name
 msgid "Display Name"
-msgstr "Prikazani naziv"
+msgstr "Prikazni naziv"
 
 #. module: crm_phone
 #: model:ir.model.fields,field_description:crm_phone.field_crm_phonecall__message_follower_ids

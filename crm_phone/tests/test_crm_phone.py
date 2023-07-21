@@ -6,19 +6,65 @@ from odoo.tests.common import TransactionCase
 
 
 class TestCrmPhone(TransactionCase):
-    def setUp(self):
-        super(TestCrmPhone, self).setUp()
-        self.fr_country_id = self.env.ref("base.fr").id
-        self.phco = self.env["phone.common"]
-        self.env.company.write({"country_id": self.fr_country_id})
-        self.lead_akretion = self.env["crm.lead"].create(
+    @classmethod
+    def setUpClass(cls):
+        super(TestCrmPhone, cls).setUpClass()
+        cls.fr_country_id = cls.env.ref("base.fr").id
+        cls.phco = cls.env["phone.common"]
+        cls.env.company.write({"country_id": cls.fr_country_id})
+        cls.lead_akretion = cls.env["crm.lead"].create(
             {
                 "name": "Deployment at Akretion France",
                 "partner_name": "Akretion France",
-                "country_id": self.fr_country_id,
+                "country_id": cls.fr_country_id,
                 "phone": "+33 4 78 42 42 42",
             }
         )
+
+        cls.lead1 = cls.env["crm.lead"].create(
+            {
+                "name": "The super deal of the year !",
+                "partner_name": "Ford",
+                "contact_name": "Jacques Toufaux",
+                "mobile": "06.42.77.42.77",
+                "country_id": cls.fr_country_id,
+            }
+        )
+        cls.lead1._onchange_mobile_validation()
+
+        cls.lead2 = cls.env["crm.lead"].create(
+            {
+                "name": "Automobile Odoo deployment",
+                "partner_name": "Kia",
+                "contact_name": "Mikaël Content",
+                "country_id": cls.env.ref("base.ch").id,
+                "phone": "04 31 23 45 67",
+            }
+        )
+        cls.lead2._onchange_phone_validation()
+
+        cls.lead3 = cls.env["crm.lead"].create(
+            {
+                "name": "Angela Strasse",
+                "country_id": cls.env.ref("base.de").id,
+                "phone": "08912345678",
+            }
+        )
+        cls.lead3._onchange_phone_validation()
+        cls.partner4 = cls.env["res.partner"].create(
+            {
+                "name": "Belgian Guy",
+                "country_id": cls.env.ref("base.be").id,
+            }
+        )
+        cls.lead4 = cls.env["crm.lead"].create(
+            {
+                "name": "Large Odoo deployment",
+                "partner_id": cls.partner4.id,
+                "mobile": "(0) 2-391-43-75",
+            }
+        )
+        cls.lead4._onchange_mobile_validation()
 
     def test_lookup(self):
         res = self.phco.get_record_from_phone_number("0478424242")
@@ -30,53 +76,10 @@ class TestCrmPhone(TransactionCase):
         )
 
     def test_crm_phone_formatting(self):
-        clo = self.env["crm.lead"]
-        lead1 = clo.create(
-            {
-                "name": "The super deal of the year !",
-                "partner_name": "Ford",
-                "contact_name": "Jacques Toufaux",
-                "mobile": "06.42.77.42.77",
-                "country_id": self.fr_country_id,
-            }
-        )
-        lead1._onchange_mobile_validation()
-        self.assertEqual(lead1.mobile, "+33 6 42 77 42 77")
-        lead2 = clo.create(
-            {
-                "name": "Automobile Odoo deployment",
-                "partner_name": "Kia",
-                "contact_name": "Mikaël Content",
-                "country_id": self.env.ref("base.ch").id,
-                "phone": "04 31 23 45 67",
-            }
-        )
-        lead2._onchange_phone_validation()
-        self.assertEqual(lead2.phone, "+41 43 123 45 67")
-        lead3 = clo.create(
-            {
-                "name": "Angela Strasse",
-                "country_id": self.env.ref("base.de").id,
-                "phone": "08912345678",
-            }
-        )
-        lead3._onchange_phone_validation()
-        self.assertEqual(lead3.phone, "+49 89 12345678")
-        partner4 = self.env["res.partner"].create(
-            {
-                "name": "Belgian Guy",
-                "country_id": self.env.ref("base.be").id,
-            }
-        )
-        lead4 = clo.create(
-            {
-                "name": "Large Odoo deployment",
-                "partner_id": partner4.id,
-                "mobile": "(0) 2-391-43-75",
-            }
-        )
-        lead4._onchange_mobile_validation()
-        self.assertEqual(lead4.mobile, "+32 2 391 43 75")
+        self.assertEqual(self.lead1.mobile, "+33 6 42 77 42 77")
+        self.assertEqual(self.lead2.phone, "+41 43 123 45 67")
+        self.assertEqual(self.lead3.phone, "+49 89 12345678")
+        self.assertEqual(self.lead4.mobile, "+32 2 391 43 75")
         pco = self.env["phone.common"]
         name = pco.get_name_from_phone_number("0642774277")
         self.assertEqual(name, "Jacques Toufaux (Ford)")
