@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="iap_account_view_form" model="ir.ui.view">
+        <field name="model">iap.account</field>
+        <field name="inherit_id" ref="iap.iap_account_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='account']" position="after">
+                <group
+                    string="Twilio account"
+                    name="twilio"
+                    attrs="{'invisible': [('provider', '!=', 'twilio')]}"
+                >
+                    <field name="twilio_production_env" widget="boolean_toggle" />
+                    <field
+                        name="twilio_test_account_sid"
+                        attrs="{'invisible': [('twilio_production_env', '=', True)]}"
+                    />
+                    <field
+                        name="twilio_test_auth_token"
+                        password="True"
+                        attrs="{'invisible': [('twilio_production_env', '=', True)]}"
+                    />
+                    <field
+                        name="twilio_account_sid"
+                        attrs="{'required': [('provider', '=', 'twilio'),('twilio_production_env', '=', True)]}"
+                    />
+                    <field
+                        name="twilio_auth_token"
+                        password="True"
+                        attrs="{'required': [('provider', '=', 'twilio'),('twilio_production_env', '=', True)]}"
+                    />
+                    <field
+                        name="twilio_number_id"
+                        attrs="{'required': [('provider', '=', 'twilio'),('twilio_production_env', '=', True)]}"
+                    />
+                    <field name="twilio_balance_account" />
+                    <button
+                        name="retrieve_phone_numbers"
+                        type="object"
+                        string="Retrieve Twilio Numbers"
+                    />
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>
