@@ -108,7 +108,6 @@ msgstr "Teléfono actual"
 #. module: base_phone
 #. openerp-web
 #: code:addons/base_phone/static/src/xml/phone.xml:0
-#: code:addons/base_phone/static/src/xml/phone.xml:0
 #, python-format
 msgid "Dial"
 msgstr "Llamar"
@@ -344,8 +343,7 @@ msgstr "Preferencias de Telefonia"
 #. module: base_phone
 #: model:ir.model.constraint,message:base_phone.constraint_res_company_number_of_digits_to_match_from_end_positive
 msgid ""
-"The value of the field 'Number of Digits To Match From End' must be "
-"positive."
+"The value of the field 'Number of Digits To Match From End' must be positive."
 msgstr ""
 "El valor del campo 'Número de dígitos desde el final' debe ser positivo."
 
@@ -356,8 +354,8 @@ msgid ""
 "standard international format e.g. +33 1 41 98 12 42"
 msgstr ""
 "Esta herramienta le ayudara a reformatear todos los números de teléfono y "
-"móviles de todos los contactos en el formato estándar internacional. E.j. +"
-"33 1 41 98 12 42"
+"móviles de todos los contactos en el formato estándar internacional. E.j. "
+"+33 1 41 98 12 42"
 
 #. module: base_phone
 #. openerp-web
