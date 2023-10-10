@@ -36,14 +36,14 @@ msgstr "Cancelar"
 
 #. module: base_phone
 #. openerp-web
-#: code:addons/base_phone/static/src/js/phone_widget.js:74
+#: code:addons/base_phone/static/src/js/phone_widget.js:0
 #, python-format
 msgid "Click2dial successfull"
 msgstr ""
 
 #. module: base_phone
 #. openerp-web
-#: code:addons/base_phone/static/src/js/phone_widget.js:56
+#: code:addons/base_phone/static/src/js/phone_widget.js:0
 #, python-format
 msgid "Click2dial to %s"
 msgstr ""
@@ -75,7 +75,7 @@ msgid "Contact"
 msgstr ""
 
 #. module: base_phone
-#: code:addons/base_phone/wizard/number_not_found.py:78
+#: code:addons/base_phone/wizard/number_not_found.py:0
 #: model_terms:ir.ui.view,arch_db:base_phone.number_not_found_form
 #, python-format
 msgid "Create New Partner"
@@ -110,7 +110,7 @@ msgstr ""
 
 #. module: base_phone
 #. openerp-web
-#: code:addons/base_phone/static/src/xml/phone.xml:12
+#: code:addons/base_phone/static/src/xml/phone.xml:0
 #, python-format
 msgid "Dial"
 msgstr ""
@@ -123,12 +123,12 @@ msgid "Display Name"
 msgstr ""
 
 #. module: base_phone
-#: selection:reformat.all.phonenumbers,state:0
+#: model:ir.model.fields.selection,name:base_phone.selection__reformat_all_phonenumbers__state__done
 msgid "Done"
 msgstr ""
 
 #. module: base_phone
-#: selection:reformat.all.phonenumbers,state:0
+#: model:ir.model.fields.selection,name:base_phone.selection__reformat_all_phonenumbers__state__draft
 msgid "Draft"
 msgstr ""
 
@@ -143,7 +143,7 @@ msgid "E.164 equivalent of the calling number."
 msgstr ""
 
 #. module: base_phone
-#: selection:number.not.found,number_type:0
+#: model:ir.model.fields.selection,name:base_phone.selection__number_not_found__number_type__phone
 msgid "Fixed"
 msgstr ""
 
@@ -192,13 +192,13 @@ msgid "Last Updated on"
 msgstr "Última actualización en"
 
 #. module: base_phone
-#: code:addons/base_phone/wizard/number_not_found.py:48
+#: code:addons/base_phone/wizard/number_not_found.py:0
 #, python-format
 msgid "Missing country on company %s"
 msgstr ""
 
 #. module: base_phone
-#: selection:number.not.found,number_type:0
+#: model:ir.model.fields.selection,name:base_phone.selection__number_not_found__number_type__mobile
 msgid "Mobile"
 msgstr ""
 
@@ -214,7 +214,7 @@ msgstr ""
 
 #. module: base_phone
 #. openerp-web
-#: code:addons/base_phone/static/src/js/phone_widget.js:75
+#: code:addons/base_phone/static/src/js/phone_widget.js:0
 #, python-format
 msgid "Number dialed: %s"
 msgstr ""
@@ -246,7 +246,7 @@ msgid "Partner to Update"
 msgstr ""
 
 #. module: base_phone
-#: code:addons/base_phone/wizard/number_not_found.py:96
+#: code:addons/base_phone/wizard/number_not_found.py:0
 #, python-format
 msgid "Partner: %s"
 msgstr ""
@@ -291,7 +291,7 @@ msgid "Reformat all phone numbers"
 msgstr ""
 
 #. module: base_phone
-#: code:addons/base_phone/wizard/number_not_found.py:92
+#: code:addons/base_phone/wizard/number_not_found.py:0
 #, python-format
 msgid "Select the Partner to Update."
 msgstr ""
@@ -322,7 +322,7 @@ msgid "Telephony Preferences"
 msgstr ""
 
 #. module: base_phone
-#: sql_constraint:res.company:0
+#: model:ir.model.constraint,message:base_phone.constraint_res_company_number_of_digits_to_match_from_end_positive
 msgid ""
 "The value of the field 'Number of Digits To Match From End' must be positive."
 msgstr ""
@@ -336,7 +336,7 @@ msgstr ""
 
 #. module: base_phone
 #. openerp-web
-#: code:addons/base_phone/static/src/js/phone_widget.js:57
+#: code:addons/base_phone/static/src/js/phone_widget.js:0
 #, python-format
 msgid "Unhook your ringing phone"
 msgstr ""
