@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field
+      name="name"
+    >res.config.settings.view.form.inherit.sms_global_digital</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="base_setup.res_config_settings_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='contacts_setting_container']" position="inside">
+                <div class="col-12 col-lg-6 o_setting_box" id="global_digital">
+                    <div class="o_setting_right_pane" id="global_digital_settings">
+                        <div class="o_form_label">
+                            Send SMS with Global Digital
+                        </div>
+                        <div class="text-muted">
+                             Send texts to your contacts with Global Digital
+                        </div>
+                        <div class="mt-2">
+                            <a
+                href="https://www.globaldigital.pt/pt/comprar-creditos"
+                class="oe_link"
+                target="_blank"
+              >
+                                <i class="fa fa-arrow-right" /> Buy credits
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="iap_account_view_form" model="ir.ui.view">
+        <field name="model">iap.account</field>
+        <field name="inherit_id" ref="iap.iap_account_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='account']" position="after">
+                <group
+          string="Global Digital account"
+          name="Global Digital"
+          attrs="{'invisible': [('provider', '!=', 'sms_global_digital')]}"
+        >
+                    <field name="sms_global_digital_sender_id" />
+                    <field name="sms_global_digital_api_key" />
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>

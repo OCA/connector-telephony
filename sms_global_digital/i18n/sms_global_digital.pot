@@ -1,0 +1,108 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* sms_global_digital
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-05-13 14:05+0000\n"
+"PO-Revision-Date: 2022-05-13 14:05+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: sms_global_digital
+#: model_terms:ir.ui.view,arch_db:sms_global_digital.res_config_settings_view_form
+msgid "<i class=\"fa fa-arrow-right\"/> Buy credits"
+msgstr ""
+
+#. module: sms_global_digital
+#: model:ir.model.fields,field_description:sms_global_digital.field_iap_account__sms_global_digital_api_key
+msgid "Api Key"
+msgstr ""
+
+#. module: sms_global_digital
+#: code:addons/sms_global_digital/models/sms_api.py:0
+#, python-format
+msgid "Batch sending is not support with Global Digital"
+msgstr ""
+
+#. module: sms_global_digital
+#: model:ir.model.fields,field_description:sms_global_digital.field_iap_account__display_name
+#: model:ir.model.fields,field_description:sms_global_digital.field_sms_api__display_name
+#: model:ir.model.fields,field_description:sms_global_digital.field_sms_sms__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: sms_global_digital
+#: model:ir.model.fields,field_description:sms_global_digital.field_sms_sms__error_detail
+msgid "Error Detail"
+msgstr ""
+
+#. module: sms_global_digital
+#: model_terms:ir.ui.view,arch_db:sms_global_digital.iap_account_view_form
+msgid "Global Digital account"
+msgstr ""
+
+#. module: sms_global_digital
+#: model:ir.model,name:sms_global_digital.model_iap_account
+msgid "IAP Account"
+msgstr ""
+
+#. module: sms_global_digital
+#: model:ir.model.fields,field_description:sms_global_digital.field_iap_account__id
+#: model:ir.model.fields,field_description:sms_global_digital.field_sms_api__id
+#: model:ir.model.fields,field_description:sms_global_digital.field_sms_sms__id
+msgid "ID"
+msgstr ""
+
+#. module: sms_global_digital
+#: model:ir.model.fields,field_description:sms_global_digital.field_iap_account__sequence
+msgid "Iap Account Sequence"
+msgstr ""
+
+#. module: sms_global_digital
+#: model:ir.model.fields,field_description:sms_global_digital.field_iap_account____last_update
+#: model:ir.model.fields,field_description:sms_global_digital.field_sms_api____last_update
+#: model:ir.model.fields,field_description:sms_global_digital.field_sms_sms____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: sms_global_digital
+#: model:ir.model,name:sms_global_digital.model_sms_sms
+msgid "Outgoing SMS"
+msgstr ""
+
+#. module: sms_global_digital
+#: model:ir.model.fields,field_description:sms_global_digital.field_iap_account__provider
+msgid "Provider"
+msgstr ""
+
+#. module: sms_global_digital
+#: model:ir.model,name:sms_global_digital.model_sms_api
+msgid "SMS API"
+msgstr ""
+
+#. module: sms_global_digital
+#: model:ir.model.fields.selection,name:sms_global_digital.selection__iap_account__provider__sms_global_digital
+msgid "SMS Global digital"
+msgstr ""
+
+#. module: sms_global_digital
+#: model_terms:ir.ui.view,arch_db:sms_global_digital.res_config_settings_view_form
+msgid "Send SMS with Global Digital"
+msgstr ""
+
+#. module: sms_global_digital
+#: model_terms:ir.ui.view,arch_db:sms_global_digital.res_config_settings_view_form
+msgid "Send texts to your contacts with Global Digital"
+msgstr ""
+
+#. module: sms_global_digital
+#: model:ir.model.fields,field_description:sms_global_digital.field_iap_account__sms_global_digital_sender_id
+msgid "Sender ID"
+msgstr ""
