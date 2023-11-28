@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: connector-telephony (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-05-04 00:44+0000\n"
-"PO-Revision-Date: 2023-10-29 08:32+0000\n"
+"PO-Revision-Date: 2023-11-28 14:35+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (http://www.transifex.com/oca/"
 "OCA-connector-telephony-8-0/language/it/)\n"
@@ -158,7 +158,7 @@ msgstr ""
 #: code:addons/asterisk_click2dial/asterisk_click2dial.py:227
 #, python-format
 msgid "Connection Test Failed!"
-msgstr "Test connessione Fallito!"
+msgstr "Test connessione fallito!"
 
 #. module: asterisk_click2dial
 #: code:addons/asterisk_click2dial/asterisk_click2dial.py:233
