@@ -1,0 +1,42 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* sms_no_automatic_delete
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#. module: sms_no_automatic_delete
+#: model:ir.model.fields,field_description:sms_no_automatic_delete.field_sms_sms__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: sms_no_automatic_delete
+#: model:ir.model.fields,field_description:sms_no_automatic_delete.field_sms_sms__id
+msgid "ID"
+msgstr ""
+
+#. module: sms_no_automatic_delete
+#: model:ir.model.fields,field_description:sms_no_automatic_delete.field_sms_sms____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: sms_no_automatic_delete
+#: model:ir.model,name:sms_no_automatic_delete.model_sms_sms
+msgid "Outgoing SMS"
+msgstr ""
+
+#. module: sms_no_automatic_delete
+#: model:ir.actions.server,name:sms_no_automatic_delete.ir_cron_sms_no_automatic_delete_ir_actions_server
+#: model:ir.cron,cron_name:sms_no_automatic_delete.ir_cron_sms_no_automatic_delete
+#: model:ir.cron,name:sms_no_automatic_delete.ir_cron_sms_no_automatic_delete
+msgid "SMS: SMS Purge"
+msgstr ""
