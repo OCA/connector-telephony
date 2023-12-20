@@ -11,20 +11,20 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-02-10 01:40+0000\n"
-"PO-Revision-Date: 2019-02-07 17:50+0000\n"
-"Last-Translator: Marta Vázquez Rodríguez <vazrodmar@gmail.com>\n"
+"PO-Revision-Date: 2023-12-20 19:33+0000\n"
+"Last-Translator: Ivorra78 <informatica@totmaterial.es>\n"
 "Language-Team: Spanish (https://www.transifex.com/oca/teams/23907/es/)\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 3.4\n"
+"X-Generator: Weblate 4.17\n"
 
 #. module: base_phone
 #: model_terms:ir.ui.view,arch_db:base_phone.res_config_settings_view_form
 msgid "<span class=\"o_form_label\">Incoming calls</span>"
-msgstr ""
+msgstr "<span class=\"o_form_label\">Llamadas entrantes</span>"
 
 #. module: base_phone
 #: model:ir.model.fields,field_description:base_phone.field_number_not_found__calling_number
@@ -46,9 +46,9 @@ msgstr "Click2dial satisfactorio"
 #. module: base_phone
 #. openerp-web
 #: code:addons/base_phone/static/src/js/phone_widget.js:0
-#, fuzzy, python-format
+#, python-format
 msgid "Click2dial to %s"
-msgstr "Click2dial iniciado"
+msgstr "Click2dial a %s"
 
 #. module: base_phone
 #: model_terms:ir.ui.view,arch_db:base_phone.number_not_found_form
@@ -236,9 +236,9 @@ msgstr "Número convertido a formato internacional:"
 #. module: base_phone
 #. openerp-web
 #: code:addons/base_phone/static/src/js/phone_widget.js:0
-#, fuzzy, python-format
+#, python-format
 msgid "Number dialed: %s"
-msgstr "Número marcado:"
+msgstr "Número marcado: %s"
 
 #. module: base_phone
 #: model:ir.model,name:base_phone.model_number_not_found
@@ -247,9 +247,8 @@ msgstr "Número no encontrado"
 
 #. module: base_phone
 #: model_terms:ir.ui.view,arch_db:base_phone.res_config_settings_view_form
-#, fuzzy
 msgid "Number of Digits"
-msgstr "Número de dígitos que coinciden al final"
+msgstr "Número de Dígitos"
 
 #. module: base_phone
 #: model:ir.model.fields,field_description:base_phone.field_res_company__number_of_digits_to_match_from_end
@@ -326,6 +325,9 @@ msgid ""
 "Set how many digits must be identical from the end of the phone number to "
 "declare it as a match with a partner, a lead, an employee, a candidate, etc."
 msgstr ""
+"Establezca cuántos dígitos deben ser idénticos desde el final del número de "
+"teléfono para declararlo como coincidente con un socio, un cliente "
+"potencial, un empleado, un candidato, etc."
 
 #. module: base_phone
 #: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers__state
