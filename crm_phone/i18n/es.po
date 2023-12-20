@@ -11,50 +11,50 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-02-10 01:40+0000\n"
-"PO-Revision-Date: 2018-02-10 01:40+0000\n"
-"Last-Translator: enjolras <yo@miguelrevilla.com>, 2018\n"
+"PO-Revision-Date: 2023-12-20 19:33+0000\n"
+"Last-Translator: Ivorra78 <informatica@totmaterial.es>\n"
 "Language-Team: Spanish (https://www.transifex.com/oca/teams/23907/es/)\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17\n"
 
 #. module: crm_phone
 #: model:ir.model.fields,field_description:crm_phone.field_crm_phonecall__message_needaction
 msgid "Action Needed"
-msgstr ""
+msgstr "Necesita Acción"
 
 #. module: crm_phone
 #: model:ir.model.fields,field_description:crm_phone.field_crm_phonecall__activity_ids
 msgid "Activities"
-msgstr ""
+msgstr "Actividades"
 
 #. module: crm_phone
 #: model:ir.model.fields,field_description:crm_phone.field_crm_phonecall__activity_exception_decoration
 msgid "Activity Exception Decoration"
-msgstr ""
+msgstr "Decoración de Actividad de Excepción"
 
 #. module: crm_phone
 #: model:ir.model.fields,field_description:crm_phone.field_crm_phonecall__activity_state
 msgid "Activity State"
-msgstr ""
+msgstr "Estado de la Actividad"
 
 #. module: crm_phone
 #: model:ir.model.fields,field_description:crm_phone.field_crm_phonecall__activity_type_icon
 msgid "Activity Type Icon"
-msgstr ""
+msgstr "Icono de Tipo de Actividad"
 
 #. module: crm_phone
 #: model:ir.model.fields,field_description:crm_phone.field_crm_phonecall__message_attachment_count
 msgid "Attachment Count"
-msgstr ""
+msgstr "Conteo de Anexos"
 
 #. module: crm_phone
 #: model_terms:ir.ui.view,arch_db:crm_phone.create_crm_phonecall_view
-#, fuzzy
 msgid "CRM Phone Call"
-msgstr "Llamada CRM"
+msgstr "Llamada Telefónica CRM"
 
 #. module: crm_phone
 #: model:ir.model.fields,field_description:crm_phone.field_crm_phonecall__name
@@ -75,7 +75,7 @@ msgstr "Cancelada"
 #. module: crm_phone
 #: model:ir.model,name:crm_phone.model_phone_common
 msgid "Common methods for phone features"
-msgstr ""
+msgstr "Métodos comunes para funciones del teléfono"
 
 #. module: crm_phone
 #: model:ir.model.fields,field_description:crm_phone.field_crm_phonecall__company_id
@@ -102,22 +102,22 @@ msgstr "Crear una llamada en CRM"
 #. module: crm_phone
 #: model_terms:ir.ui.view,arch_db:crm_phone.number_not_found_form
 msgid "Create New Lead"
-msgstr ""
+msgstr "Crear un Nuevo Cliente Potencial"
 
 #. module: crm_phone
 #: model_terms:ir.ui.view,arch_db:crm_phone.number_not_found_form
 msgid "Create New Opportunity"
-msgstr ""
+msgstr "Crear una Nueva Oportunidad"
 
 #. module: crm_phone
 #: model_terms:ir.ui.view,arch_db:crm_phone.create_crm_phonecall_view
 msgid "Create a phone call in the CRM ?"
-msgstr ""
+msgstr "Crear una llamada telefónica en el CRM ?"
 
 #. module: crm_phone
 #: model_terms:ir.ui.view,arch_db:crm_phone.number_not_found_form
 msgid "Create or Update a Lead"
-msgstr ""
+msgstr "Crear o Actualizar un Cliente Potencial"
 
 #. module: crm_phone
 #: model:ir.model.fields,field_description:crm_phone.field_crm_phonecall__create_uid
@@ -172,22 +172,22 @@ msgstr "Nombre mostrado"
 #. module: crm_phone
 #: model:ir.model.fields,field_description:crm_phone.field_crm_phonecall__message_follower_ids
 msgid "Followers"
-msgstr ""
+msgstr "Seguidores"
 
 #. module: crm_phone
 #: model:ir.model.fields,field_description:crm_phone.field_crm_phonecall__message_channel_ids
 msgid "Followers (Channels)"
-msgstr ""
+msgstr "Seguidores/as (Canales)"
 
 #. module: crm_phone
 #: model:ir.model.fields,field_description:crm_phone.field_crm_phonecall__message_partner_ids
 msgid "Followers (Partners)"
-msgstr ""
+msgstr "Seguidores (Socios)"
 
 #. module: crm_phone
 #: model:ir.model.fields,help:crm_phone.field_crm_phonecall__activity_type_icon
 msgid "Font awesome icon e.g. fa-tasks"
-msgstr ""
+msgstr "Fuente iconos sorprendentes , por ejemplo fa-tasks"
 
 #. module: crm_phone
 #: model_terms:ir.ui.view,arch_db:crm_phone.crm_phonecall_search
@@ -219,24 +219,24 @@ msgstr "ID"
 #. module: crm_phone
 #: model:ir.model.fields,field_description:crm_phone.field_crm_phonecall__activity_exception_icon
 msgid "Icon"
-msgstr ""
+msgstr "Icono"
 
 #. module: crm_phone
 #: model:ir.model.fields,help:crm_phone.field_crm_phonecall__activity_exception_icon
 msgid "Icon to indicate an exception activity."
-msgstr ""
+msgstr "Icono para indicar la excepción de la actividad."
 
 #. module: crm_phone
 #: model:ir.model.fields,help:crm_phone.field_crm_phonecall__message_needaction
 #: model:ir.model.fields,help:crm_phone.field_crm_phonecall__message_unread
 msgid "If checked, new messages require your attention."
-msgstr ""
+msgstr "Si está marcado los nuevos mensajes requieren atención."
 
 #. module: crm_phone
 #: model:ir.model.fields,help:crm_phone.field_crm_phonecall__message_has_error
 #: model:ir.model.fields,help:crm_phone.field_crm_phonecall__message_has_sms_error
 msgid "If checked, some messages have a delivery error."
-msgstr ""
+msgstr "Si esta marcado, algunos mensajes tienen un error de entrega."
 
 #. module: crm_phone
 #: model:ir.model.fields.selection,name:crm_phone.selection__crm_phonecall__direction__inbound
@@ -247,7 +247,7 @@ msgstr "Entrante"
 #. module: crm_phone
 #: model:ir.model.fields,field_description:crm_phone.field_crm_phonecall__message_is_follower
 msgid "Is Follower"
-msgstr ""
+msgstr "Es Seguidor/a"
 
 #. module: crm_phone
 #: model:ir.model.fields,field_description:crm_phone.field_crm_lead____last_update
@@ -275,24 +275,24 @@ msgstr "Última actualización el"
 #. module: crm_phone
 #: model:ir.model.fields,field_description:crm_phone.field_number_not_found__to_update_lead_id
 msgid "Lead or Opportunity to Update"
-msgstr ""
+msgstr "Dirección u Oportunidad de Actualización"
 
 #. module: crm_phone
 #: model:ir.model.fields,help:crm_phone.field_number_not_found__to_update_lead_id
 msgid "Lead or opportunity on which the phone number will be written."
-msgstr ""
+msgstr "Plomo u oportunidad en la que se escribirá el número de teléfono."
 
 #. module: crm_phone
 #: model:ir.model,name:crm_phone.model_crm_lead
 #: model:ir.model.fields,field_description:crm_phone.field_crm_phonecall__opportunity_id
 msgid "Lead/Opportunity"
-msgstr ""
+msgstr "Iniciativa/Oportundad"
 
 #. module: crm_phone
 #: model:ir.actions.act_window,name:crm_phone.crm_phonecall_action_done
 #: model:ir.ui.menu,name:crm_phone.crm_phonecall_menu_done
 msgid "Logged Calls"
-msgstr ""
+msgstr "Llamadas Registradas"
 
 #. module: crm_phone
 #: model:ir.model.fields.selection,name:crm_phone.selection__crm_phonecall__priority__0
@@ -302,22 +302,22 @@ msgstr "Baja"
 #. module: crm_phone
 #: model:ir.model.fields,field_description:crm_phone.field_crm_phonecall__message_main_attachment_id
 msgid "Main Attachment"
-msgstr ""
+msgstr "Archivo Adjunto Principal"
 
 #. module: crm_phone
 #: model:ir.model.fields,field_description:crm_phone.field_crm_phonecall__message_has_error
 msgid "Message Delivery error"
-msgstr ""
+msgstr "Error en Entrega de Mensajes"
 
 #. module: crm_phone
 #: model:ir.model.fields,field_description:crm_phone.field_crm_phonecall__message_ids
 msgid "Messages"
-msgstr ""
+msgstr "Mensaje"
 
 #. module: crm_phone
 #: model_terms:ir.ui.view,arch_db:crm_phone.crm_phonecall_form
 msgid "Minutes of the phone call..."
-msgstr ""
+msgstr "Minutos de la llamada telefónica..."
 
 #. module: crm_phone
 #: model:ir.model.fields,field_description:crm_phone.field_crm_phonecall__partner_mobile
@@ -328,7 +328,7 @@ msgstr "Teléfono móvil"
 #. module: crm_phone
 #: model:ir.model.fields,field_description:crm_phone.field_crm_phonecall__my_activity_date_deadline
 msgid "My Activity Deadline"
-msgstr ""
+msgstr "Fecha Límite de Mi Actividad"
 
 #. module: crm_phone
 #: model_terms:ir.ui.view,arch_db:crm_phone.crm_phonecall_search
@@ -343,22 +343,22 @@ msgstr "Mi equipo"
 #. module: crm_phone
 #: model:ir.model.fields,field_description:crm_phone.field_crm_phonecall__activity_date_deadline
 msgid "Next Activity Deadline"
-msgstr ""
+msgstr "Fecha Límite para la Siguiente Actividad"
 
 #. module: crm_phone
 #: model:ir.model.fields,field_description:crm_phone.field_crm_phonecall__activity_summary
 msgid "Next Activity Summary"
-msgstr ""
+msgstr "Resumen Siguiente Actividad"
 
 #. module: crm_phone
 #: model:ir.model.fields,field_description:crm_phone.field_crm_phonecall__activity_type_id
 msgid "Next Activity Type"
-msgstr ""
+msgstr "Tipo de la Siguiente Acción"
 
 #. module: crm_phone
 #: model_terms:ir.ui.view,arch_db:crm_phone.create_crm_phonecall_view
 msgid "No"
-msgstr ""
+msgstr "No"
 
 #. module: crm_phone
 #: model:ir.model.fields.selection,name:crm_phone.selection__crm_phonecall__priority__1
@@ -372,9 +372,8 @@ msgstr "Número no encontrado"
 
 #. module: crm_phone
 #: model:ir.model.fields,field_description:crm_phone.field_crm_phonecall__message_needaction_counter
-#, fuzzy
 msgid "Number of Actions"
-msgstr "Número de llamadas"
+msgstr "Número de Acciones"
 
 #. module: crm_phone
 #: model:ir.model.fields,field_description:crm_phone.field_crm_lead__phonecall_count
@@ -386,23 +385,22 @@ msgstr "Número de llamadas"
 #. module: crm_phone
 #: model:ir.model.fields,field_description:crm_phone.field_crm_phonecall__message_has_error_counter
 msgid "Number of errors"
-msgstr ""
+msgstr "Número de Errores"
 
 #. module: crm_phone
 #: model:ir.model.fields,help:crm_phone.field_crm_phonecall__message_needaction_counter
 msgid "Number of messages which requires an action"
-msgstr ""
+msgstr "Números de mensajes que requieren una acción"
 
 #. module: crm_phone
 #: model:ir.model.fields,help:crm_phone.field_crm_phonecall__message_has_error_counter
 msgid "Number of messages with delivery error"
-msgstr ""
+msgstr "Número de mensajes con error de entrega"
 
 #. module: crm_phone
 #: model:ir.model.fields,help:crm_phone.field_crm_phonecall__message_unread_counter
-#, fuzzy
 msgid "Number of unread messages"
-msgstr "Número de llamadas"
+msgstr "Número de mensajes no leídos"
 
 #. module: crm_phone
 #: model:ir.model.fields.selection,name:crm_phone.selection__crm_phonecall__direction__outbound
@@ -425,7 +423,7 @@ msgstr "Teléfono"
 #: model:ir.model,name:crm_phone.model_crm_phonecall
 #: model_terms:ir.ui.view,arch_db:crm_phone.crm_phonecall_form
 msgid "Phone Call"
-msgstr ""
+msgstr "Llamada Telefónica"
 
 #. module: crm_phone
 #: model:ir.actions.act_window,name:crm_phone.crm_phonecall_action
@@ -436,12 +434,12 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:crm_phone.crm_phonecall_calendar
 #: model_terms:ir.ui.view,arch_db:crm_phone.crm_phonecall_tree
 msgid "Phone Calls"
-msgstr ""
+msgstr "Llamadas Telefónicas"
 
 #. module: crm_phone
 #: model_terms:ir.ui.view,arch_db:crm_phone.crm_phonecall_search
 msgid "Phonecalls"
-msgstr ""
+msgstr "Llamadas telefónicas"
 
 #. module: crm_phone
 #: model:ir.model.fields,field_description:crm_phone.field_crm_phonecall__priority
@@ -451,12 +449,12 @@ msgstr "Prioridad"
 #. module: crm_phone
 #: model:ir.model.fields,field_description:crm_phone.field_res_users__context_propose_creation_crm_call
 msgid "Propose to create a call in CRM after a click2dial"
-msgstr ""
+msgstr "Proponer crear una llamada en CRM después de un click2dial"
 
 #. module: crm_phone
 #: model:ir.model,name:crm_phone.model_wizard_create_crm_phonecall
 msgid "Propose to create a phone call in CRM"
-msgstr ""
+msgstr "Proponer la creación de una llamada telefónica en CRM"
 
 #. module: crm_phone
 #: model:ir.model.fields,field_description:crm_phone.field_crm_phonecall__user_id
@@ -467,12 +465,12 @@ msgstr "Responsable"
 #. module: crm_phone
 #: model:ir.model.fields,field_description:crm_phone.field_crm_phonecall__activity_user_id
 msgid "Responsible User"
-msgstr ""
+msgstr "Usuario Responsable"
 
 #. module: crm_phone
 #: model:ir.model.fields,field_description:crm_phone.field_crm_phonecall__message_has_sms_error
 msgid "SMS Delivery error"
-msgstr ""
+msgstr "Error de entrega de mensaje SMS"
 
 #. module: crm_phone
 #: model:ir.model.fields,field_description:crm_phone.field_crm_phonecall__team_id
@@ -500,7 +498,7 @@ msgstr "Buscar llamadas"
 #: code:addons/crm_phone/wizard/number_not_found.py:0
 #, python-format
 msgid "Select the Lead or Opportunity to Update."
-msgstr ""
+msgstr "Seleccione el Cliente Potencial o la Oportunidad que desea Actualizar."
 
 #. module: crm_phone
 #: model_terms:ir.ui.view,arch_db:crm_phone.crm_phonecall_search
@@ -520,6 +518,10 @@ msgid ""
 "Today: Activity date is today\n"
 "Planned: Future activities."
 msgstr ""
+"Estado basado en actividades\n"
+"Vencida: la fecha tope ya ha pasado\n"
+"Hoy: la fecha tope es hoy\n"
+"Planificada: futuras actividades."
 
 #. module: crm_phone
 #: model_terms:ir.ui.view,arch_db:crm_phone.crm_phonecall_search
@@ -533,6 +535,9 @@ msgid ""
 "When the call is over, the status is set to Held.\n"
 "If the call is not applicable anymore, the status can be set to Cancelled."
 msgstr ""
+"El estado se establece en Confirmado, cuando se crea un caso.\n"
+"Cuando finaliza la llamada, el estado pasa a Retenido.\n"
+"Si la llamada ya no es aplicable, el estado puede establecerse en Cancelado."
 
 #. module: crm_phone
 #: model:ir.model.fields.selection,name:crm_phone.selection__crm_phonecall__state__open
@@ -548,7 +553,7 @@ msgstr "Tipo"
 #. module: crm_phone
 #: model:ir.model.fields,help:crm_phone.field_crm_phonecall__activity_exception_decoration
 msgid "Type of the exception activity on record."
-msgstr ""
+msgstr "Tipo de actividad excepcional registrada."
 
 #. module: crm_phone
 #: model_terms:ir.ui.view,arch_db:crm_phone.crm_phonecall_search
@@ -558,17 +563,17 @@ msgstr "Sin asignar"
 #. module: crm_phone
 #: model:ir.model.fields,field_description:crm_phone.field_crm_phonecall__message_unread
 msgid "Unread Messages"
-msgstr ""
+msgstr "Mensajes No Leídos"
 
 #. module: crm_phone
 #: model:ir.model.fields,field_description:crm_phone.field_crm_phonecall__message_unread_counter
 msgid "Unread Messages Counter"
-msgstr ""
+msgstr "Contador de Mensajes no Leídos"
 
 #. module: crm_phone
 #: model_terms:ir.ui.view,arch_db:crm_phone.number_not_found_form
 msgid "Update Existing Lead/Opportunity"
-msgstr ""
+msgstr "Actualizar Cliente Potencial/Oportunidad Existente"
 
 #. module: crm_phone
 #: model:ir.model,name:crm_phone.model_res_users
@@ -578,12 +583,12 @@ msgstr "Usuarios"
 #. module: crm_phone
 #: model:ir.model.fields,field_description:crm_phone.field_crm_phonecall__website_message_ids
 msgid "Website Messages"
-msgstr ""
+msgstr "Mensajes de la Página web"
 
 #. module: crm_phone
 #: model:ir.model.fields,help:crm_phone.field_crm_phonecall__website_message_ids
 msgid "Website communication history"
-msgstr ""
+msgstr "Historial de la comunicación del sitio web"
 
 #. module: crm_phone
 #: model_terms:ir.ui.view,arch_db:crm_phone.create_crm_phonecall_view
