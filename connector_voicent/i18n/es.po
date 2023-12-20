@@ -6,159 +6,161 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2023-12-20 16:34+0000\n"
+"Last-Translator: Ivorra78 <informatica@totmaterial.es>\n"
 "Language-Team: none\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17\n"
 
 #. module: connector_voicent
 #: model:ir.model.fields,field_description:connector_voicent.field_res_partner__can_call
 #: model:ir.model.fields,field_description:connector_voicent.field_res_users__can_call
 msgid "Accepts Voicent Calls"
-msgstr ""
+msgstr "Acepta Llamadas de Voz"
 
 #. module: connector_voicent
 #: model:ir.model.fields,field_description:connector_voicent.field_backend_voicent__active
 msgid "Active"
-msgstr ""
+msgstr "Activo"
 
 #. module: connector_voicent
 #: model:ir.model.fields,field_description:connector_voicent.field_backend_voicent_call_line__applies_on
 msgid "Applies on"
-msgstr ""
+msgstr "Aplicar en"
 
 #. module: connector_voicent
 #: model_terms:ir.ui.view,arch_db:connector_voicent.backend_voicent_search_view
 msgid "Archived"
-msgstr ""
+msgstr "Archivado"
 
 #. module: connector_voicent
 #: model:ir.model.fields.selection,name:connector_voicent.selection__backend_voicent_call_line_contact__name__assigned_to
 msgid "Assigned To"
-msgstr ""
+msgstr "Asignado a"
 
 #. module: connector_voicent
 #: model:ir.model.fields.selection,name:connector_voicent.selection__backend_voicent_call_line__msgtype__audio
 msgid "Audio"
-msgstr ""
+msgstr "Audio"
 
 #. module: connector_voicent
 #: model:ir.model.fields.selection,name:connector_voicent.selection__backend_voicent_call_line_reply__reply_field__availableagents
 msgid "Available Agents"
-msgstr ""
+msgstr "Agentes Disponibles"
 
 #. module: connector_voicent
 #: model:ir.model.fields,field_description:connector_voicent.field_backend_voicent_call_line__backend_id
 #: model:ir.model.fields,field_description:connector_voicent.field_backend_voicent_time_line__backend_id
 msgid "Backend"
-msgstr ""
+msgstr "Servidor"
 
 #. module: connector_voicent
 #: model:ir.ui.menu,name:connector_voicent.menu_voicent_backend_root
 msgid "Backends"
-msgstr ""
+msgstr "Servidores"
 
 #. module: connector_voicent
 #: model:ir.model.fields.selection,name:connector_voicent.selection__backend_voicent_call_line_contact__name__business
 msgid "Business"
-msgstr ""
+msgstr "Empresas"
 
 #. module: connector_voicent
 #: model:ir.model.fields,field_description:connector_voicent.field_backend_voicent_call_line_contact__line_id
 #: model:ir.model.fields,field_description:connector_voicent.field_backend_voicent_call_line_reply__line_id
 msgid "Call Line"
-msgstr ""
+msgstr "Línea de Llamadas"
 
 #. module: connector_voicent
 #: model:ir.model.fields,field_description:connector_voicent.field_backend_voicent__call_line_ids
 #: model_terms:ir.ui.view,arch_db:connector_voicent.backend_voicent_form_view
 msgid "Call Lines"
-msgstr ""
+msgstr "Líneas de llamada"
 
 #. module: connector_voicent
 #: model:ir.model.fields,field_description:connector_voicent.field_backend_voicent__time_line_ids
 #: model_terms:ir.ui.view,arch_db:connector_voicent.backend_voicent_form_view
 msgid "Call Times"
-msgstr ""
+msgstr "Líneas de llamada"
 
 #. module: connector_voicent
 #: model:ir.model.fields.selection,name:connector_voicent.selection__backend_voicent_call_line_reply__reply_field__callback
 msgid "Callback"
-msgstr ""
+msgstr "Devolución de llamada"
 
 #. module: connector_voicent
 #: model:ir.model.fields,field_description:connector_voicent.field_backend_voicent__callerid
 msgid "Caller ID"
-msgstr ""
+msgstr "ID de Llamada"
 
 #. module: connector_voicent
 #: model:ir.model.fields.selection,name:connector_voicent.selection__backend_voicent_call_line_reply__reply_field__campid
 msgid "Campaign ID"
-msgstr ""
+msgstr "ID de Campaña"
 
 #. module: connector_voicent
 #: model:ir.model.fields.selection,name:connector_voicent.selection__backend_voicent_call_line_reply__reply_field__campname
 msgid "Campaign Name"
-msgstr ""
+msgstr "Nombre de Campaña"
 
 #. module: connector_voicent
 #: model:ir.model.fields.selection,name:connector_voicent.selection__backend_voicent_call_line_reply__reply_field__campsize
 msgid "Campaign Size"
-msgstr ""
+msgstr "Tamaño de la Campaña"
 
 #. module: connector_voicent
 #: model:ir.model.fields.selection,name:connector_voicent.selection__backend_voicent_call_line_contact__name__category
 msgid "Category"
-msgstr ""
+msgstr "Categoría"
 
 #. module: connector_voicent
 #: model_terms:ir.actions.act_window,help:connector_voicent.action_backend_voicent_act_window
 msgid "Click to add new Voicent Backend"
-msgstr ""
+msgstr "Haga clic para añadir un nuevo Servidor Voicent"
 
 #. module: connector_voicent
 #: model:ir.model,name:connector_voicent.model_backend_voicent_call_line_contact
 msgid "Columns of the CSV file to provide the contact list"
-msgstr ""
+msgstr "Columnas del archivo CSV para proporcionar la lista de contactos"
 
 #. module: connector_voicent
 #: model:ir.model.fields.selection,name:connector_voicent.selection__backend_voicent_call_line_reply__reply_field__connected
 msgid "Connected"
-msgstr ""
+msgstr "Conectado"
 
 #. module: connector_voicent
 #: model:ir.model,name:connector_voicent.model_res_partner
 msgid "Contact"
-msgstr ""
+msgstr "Contacto"
 
 #. module: connector_voicent
 #: model:ir.model.fields.selection,name:connector_voicent.selection__backend_voicent_call_line_reply__reply_field__dnc
 msgid "Contact DNC"
-msgstr ""
+msgstr "Contacto DNC"
 
 #. module: connector_voicent
 #: model:ir.model.fields,field_description:connector_voicent.field_backend_voicent_call_line__contact_ids
 #: model_terms:ir.ui.view,arch_db:connector_voicent.backend_voicent_call_line_form_view
 msgid "Contact Info"
-msgstr ""
+msgstr "Info de Contacto"
 
 #. module: connector_voicent
 #: model:ir.model.fields.selection,name:connector_voicent.selection__backend_voicent_call_line_reply__reply_field__nophone
 msgid "Contact No Phone"
-msgstr ""
+msgstr "Número de Teléfono de Contacto"
 
 #. module: connector_voicent
 #: model:ir.model.fields.selection,name:connector_voicent.selection__backend_voicent_call_line_contact__name__contact_status
 msgid "Contact Status"
-msgstr ""
+msgstr "Situación de Contacto"
 
 #. module: connector_voicent
 #: model_terms:ir.ui.view,arch_db:connector_voicent.backend_voicent_call_line_form_view
 msgid "Contacts"
-msgstr ""
+msgstr "Contactos"
 
 #. module: connector_voicent
 #: model:ir.model.fields,field_description:connector_voicent.field_backend_voicent__create_uid
@@ -167,7 +169,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:connector_voicent.field_backend_voicent_call_line_reply__create_uid
 #: model:ir.model.fields,field_description:connector_voicent.field_backend_voicent_time_line__create_uid
 msgid "Created by"
-msgstr ""
+msgstr "Creado Por"
 
 #. module: connector_voicent
 #: model:ir.model.fields,field_description:connector_voicent.field_backend_voicent__create_date
@@ -176,22 +178,22 @@ msgstr ""
 #: model:ir.model.fields,field_description:connector_voicent.field_backend_voicent_call_line_reply__create_date
 #: model:ir.model.fields,field_description:connector_voicent.field_backend_voicent_time_line__create_date
 msgid "Created on"
-msgstr ""
+msgstr "Creado el"
 
 #. module: connector_voicent
 #: model_terms:ir.ui.view,arch_db:connector_voicent.backend_voicent_form_view
 msgid "Debug"
-msgstr ""
+msgstr "Depuración"
 
 #. module: connector_voicent
 #: model:ir.model.fields,field_description:connector_voicent.field_backend_voicent_call_line_contact__default_value
 msgid "Default Value"
-msgstr ""
+msgstr "Valor Predeterminado"
 
 #. module: connector_voicent
 #: model:ir.model.fields.selection,name:connector_voicent.selection__backend_voicent_call_line_reply__reply_field__disc
 msgid "Disc. Number"
-msgstr ""
+msgstr "Disco. Número"
 
 #. module: connector_voicent
 #: model:ir.model.fields,field_description:connector_voicent.field_backend_voicent__display_name
@@ -201,37 +203,37 @@ msgstr ""
 #: model:ir.model.fields,field_description:connector_voicent.field_backend_voicent_time_line__display_name
 #: model:ir.model.fields,field_description:connector_voicent.field_res_partner__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Mostrar Nombre"
 
 #. module: connector_voicent
 #: model:ir.model.fields.selection,name:connector_voicent.selection__backend_voicent_call_line_reply__reply_field__dropped
 msgid "Dropped"
-msgstr ""
+msgstr "Se ha caído"
 
 #. module: connector_voicent
 #: model:ir.model.fields.selection,name:connector_voicent.selection__backend_voicent_call_line_contact__name__email
 msgid "Email"
-msgstr ""
+msgstr "Correo Electrónico"
 
 #. module: connector_voicent
 #: model:ir.model.fields.selection,name:connector_voicent.selection__backend_voicent_call_line_reply__reply_field__failed
 msgid "Failed"
-msgstr ""
+msgstr "Fallido"
 
 #. module: connector_voicent
 #: model:ir.model.fields.selection,name:connector_voicent.selection__backend_voicent_call_line_reply__reply_field__fax
 msgid "Fax"
-msgstr ""
+msgstr "Fax"
 
 #. module: connector_voicent
 #: model:ir.model.fields.selection,name:connector_voicent.selection__backend_voicent_call_line_contact__name__first_name
 msgid "First Name (Required)"
-msgstr ""
+msgstr "Nombre de pila (Obligatorio)"
 
 #. module: connector_voicent
 #: model:ir.model.fields,field_description:connector_voicent.field_backend_voicent__host
 msgid "Host"
-msgstr ""
+msgstr "Huésped"
 
 #. module: connector_voicent
 #: model:ir.model.fields,field_description:connector_voicent.field_backend_voicent__id
@@ -241,17 +243,17 @@ msgstr ""
 #: model:ir.model.fields,field_description:connector_voicent.field_backend_voicent_time_line__id
 #: model:ir.model.fields,field_description:connector_voicent.field_res_partner__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: connector_voicent
 #: model:ir.model.fields.selection,name:connector_voicent.selection__backend_voicent_call_line__msgtype__ivr
 msgid "IVR"
-msgstr ""
+msgstr "IVR"
 
 #. module: connector_voicent
 #: model_terms:ir.ui.view,arch_db:connector_voicent.backend_voicent_call_line_form_view
 msgid "If"
-msgstr ""
+msgstr "If"
 
 #. module: connector_voicent
 #: model:ir.model.fields,help:connector_voicent.field_backend_voicent_call_line_reply__action_id
@@ -260,16 +262,20 @@ msgid ""
 "                                the Voicent reply value, the server action is\n"
 "                                executed."
 msgstr ""
+"Si el campo de respuesta de Voicent es igual a\n"
+"                                el valor de respuesta de Voicent, se ejecuta "
+"la acción del servidor.\n"
+"                                ejecutada."
 
 #. module: connector_voicent
 #: model:ir.model.fields.selection,name:connector_voicent.selection__backend_voicent_call_line_reply__reply_field__info
 msgid "Info"
-msgstr ""
+msgstr "Info"
 
 #. module: connector_voicent
 #: model:ir.model.fields.selection,name:connector_voicent.selection__backend_voicent_call_line_reply__reply_field__in
 msgid "Interested"
-msgstr ""
+msgstr "Interesado"
 
 #. module: connector_voicent
 #: model:ir.model.fields,field_description:connector_voicent.field_backend_voicent____last_update
@@ -279,12 +285,12 @@ msgstr ""
 #: model:ir.model.fields,field_description:connector_voicent.field_backend_voicent_time_line____last_update
 #: model:ir.model.fields,field_description:connector_voicent.field_res_partner____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Última Modificación el"
 
 #. module: connector_voicent
 #: model:ir.model.fields.selection,name:connector_voicent.selection__backend_voicent_call_line_contact__name__last_name
 msgid "Last Name"
-msgstr ""
+msgstr "Apellido"
 
 #. module: connector_voicent
 #: model:ir.model.fields,field_description:connector_voicent.field_backend_voicent__write_uid
@@ -293,7 +299,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:connector_voicent.field_backend_voicent_call_line_reply__write_uid
 #: model:ir.model.fields,field_description:connector_voicent.field_backend_voicent_time_line__write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "Última Actualización por"
 
 #. module: connector_voicent
 #: model:ir.model.fields,field_description:connector_voicent.field_backend_voicent__write_date
@@ -302,52 +308,52 @@ msgstr ""
 #: model:ir.model.fields,field_description:connector_voicent.field_backend_voicent_call_line_reply__write_date
 #: model:ir.model.fields,field_description:connector_voicent.field_backend_voicent_time_line__write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "Última Actualización el"
 
 #. module: connector_voicent
 #: model:ir.model.fields.selection,name:connector_voicent.selection__backend_voicent_call_line_contact__name__lead_source
 msgid "Lead Source"
-msgstr ""
+msgstr "Fuente Principal"
 
 #. module: connector_voicent
 #: model:ir.model.fields.selection,name:connector_voicent.selection__backend_voicent_call_line_reply__reply_field__linebusy
 msgid "Line Busy"
-msgstr ""
+msgstr "Línea Ocupada"
 
 #. module: connector_voicent
 #: model:ir.model.fields.selection,name:connector_voicent.selection__backend_voicent_call_line_reply__reply_field__lines
 msgid "Lines"
-msgstr ""
+msgstr "Líneas"
 
 #. module: connector_voicent
 #: model:ir.model.fields.selection,name:connector_voicent.selection__backend_voicent_call_line_reply__reply_field__live
 msgid "Live Answer"
-msgstr ""
+msgstr "Respuesta en Directo"
 
 #. module: connector_voicent
 #: model:ir.model.fields.selection,name:connector_voicent.selection__backend_voicent_call_line_reply__reply_field__machine
 msgid "Machine Answer"
-msgstr ""
+msgstr "Respuesta de la Máquina"
 
 #. module: connector_voicent
 #: model:ir.model.fields.selection,name:connector_voicent.selection__backend_voicent_call_line_reply__reply_field__made
 msgid "Made"
-msgstr ""
+msgstr "Hecho"
 
 #. module: connector_voicent
 #: model:ir.model.fields.selection,name:connector_voicent.selection__backend_voicent_call_line_reply__reply_field__maxlines
 msgid "Max Lines"
-msgstr ""
+msgstr "Líneas Max"
 
 #. module: connector_voicent
 #: model:ir.model.fields,field_description:connector_voicent.field_backend_voicent_call_line__msginfo
 msgid "Message Info"
-msgstr ""
+msgstr "Info del Mensaje"
 
 #. module: connector_voicent
 #: model:ir.model.fields,field_description:connector_voicent.field_backend_voicent_call_line__msgtype
 msgid "Message Type"
-msgstr ""
+msgstr "Tipo de Mensaje"
 
 #. module: connector_voicent
 #: model:ir.model.fields,field_description:connector_voicent.field_backend_voicent__name
@@ -355,140 +361,140 @@ msgstr ""
 #: model:ir.model.fields,field_description:connector_voicent.field_backend_voicent_call_line_reply__name
 #: model:ir.model.fields,field_description:connector_voicent.field_backend_voicent_time_line__name
 msgid "Name"
-msgstr ""
+msgstr "Nombre"
 
 #. module: connector_voicent
 #: model_terms:ir.ui.view,arch_db:connector_voicent.backend_voicent_form_view
 msgid "Name of the backend..."
-msgstr ""
+msgstr "Nombre del servidor..."
 
 #. module: connector_voicent
 #: model_terms:ir.ui.view,arch_db:connector_voicent.backend_voicent_call_line_form_view
 msgid "Name of the call line..."
-msgstr ""
+msgstr "Nombre de la línea de llamada..."
 
 #. module: connector_voicent
 #: model:ir.model.fields,field_description:connector_voicent.field_backend_voicent__next_call
 msgid "Next Call"
-msgstr ""
+msgstr "Siguiente Llamada"
 
 #. module: connector_voicent
 #: model:ir.model.fields.selection,name:connector_voicent.selection__backend_voicent_call_line_reply__reply_field__noact
 msgid "No Activity"
-msgstr ""
+msgstr "Sin Actividad"
 
 #. module: connector_voicent
 #: model:ir.model.fields.selection,name:connector_voicent.selection__backend_voicent_call_line_reply__reply_field__noanswer
 msgid "No Answer"
-msgstr ""
+msgstr "Sin Respuesta"
 
 #. module: connector_voicent
 #: model:ir.model.fields.selection,name:connector_voicent.selection__backend_voicent_call_line_reply__reply_field__notin
 msgid "Not Interested"
-msgstr ""
+msgstr "No Interesado"
 
 #. module: connector_voicent
 #: model:ir.model.fields.selection,name:connector_voicent.selection__backend_voicent_call_line_reply__reply_field__notes
 msgid "Notes"
-msgstr ""
+msgstr "Notas"
 
 #. module: connector_voicent
 #: model:ir.model.fields,field_description:connector_voicent.field_backend_voicent__line
 msgid "Number of lines"
-msgstr ""
+msgstr "Número de líneas"
 
 #. module: connector_voicent
 #: model:ir.model.fields,field_description:connector_voicent.field_backend_voicent_call_line_contact__field_domain
 msgid "Odoo Field"
-msgstr ""
+msgstr "Campo de Odoo"
 
 #. module: connector_voicent
 #: model:ir.model.fields.selection,name:connector_voicent.selection__backend_voicent_call_line_reply__reply_field__optout
 msgid "Opt Out"
-msgstr ""
+msgstr "Exclusión Voluntaria"
 
 #. module: connector_voicent
 #: model:ir.model.fields,field_description:connector_voicent.field_backend_voicent_call_line_contact__other
 #: model:ir.model.fields.selection,name:connector_voicent.selection__backend_voicent_call_line_contact__name__other
 msgid "Other"
-msgstr ""
+msgstr "Otra"
 
 #. module: connector_voicent
 #: model:ir.model.fields.selection,name:connector_voicent.selection__backend_voicent_call_line_contact__name__phone
 msgid "Phone (Required)"
-msgstr ""
+msgstr "Teléfono (Obligatorio)"
 
 #. module: connector_voicent
 #: model:ir.model.fields,field_description:connector_voicent.field_backend_voicent__port
 msgid "Port"
-msgstr ""
+msgstr "Puerto"
 
 #. module: connector_voicent
 #: model:ir.model.fields,field_description:connector_voicent.field_backend_voicent_call_line__reply_ids
 #: model_terms:ir.ui.view,arch_db:connector_voicent.backend_voicent_call_line_form_view
 msgid "Replies"
-msgstr ""
+msgstr "Respuestas"
 
 #. module: connector_voicent
 #: model:ir.model,name:connector_voicent.model_backend_voicent_call_line_reply
 msgid "Reply to a Voicent Call"
-msgstr ""
+msgstr "Responder a una llamada de voz"
 
 #. module: connector_voicent
 #: model:ir.model.fields,field_description:connector_voicent.field_backend_voicent_call_line__sequence
 #: model:ir.model.fields,field_description:connector_voicent.field_backend_voicent_call_line_contact__sequence
 msgid "Sequence"
-msgstr ""
+msgstr "Secuencia"
 
 #. module: connector_voicent
 #: model:ir.model.fields,field_description:connector_voicent.field_backend_voicent_call_line_reply__action_id
 msgid "Server Action"
-msgstr ""
+msgstr "Acción de Servidor"
 
 #. module: connector_voicent
 #: model:ir.model.fields.selection,name:connector_voicent.selection__backend_voicent_call_line_reply__reply_field__serverr
 msgid "Service Error"
-msgstr ""
+msgstr "Error de Servicio"
 
 #. module: connector_voicent
 #: model:ir.model.fields.selection,name:connector_voicent.selection__backend_voicent_call_line_reply__reply_field__status
 msgid "Status"
-msgstr ""
+msgstr "Situación"
 
 #. module: connector_voicent
 #: model:ir.model.fields.selection,name:connector_voicent.selection__backend_voicent_call_line__msgtype__survey
 msgid "Survey"
-msgstr ""
+msgstr "Planificación"
 
 #. module: connector_voicent
 #: model:ir.model.fields.selection,name:connector_voicent.selection__backend_voicent_call_line__msgtype__template
 msgid "Template"
-msgstr ""
+msgstr "Plantilla"
 
 #. module: connector_voicent
 #: model:ir.model.fields.selection,name:connector_voicent.selection__backend_voicent_call_line__msgtype__tts
 msgid "Text-To-Speech"
-msgstr ""
+msgstr "Conversión de Texto a Voz"
 
 #. module: connector_voicent
 #: model_terms:ir.ui.view,arch_db:connector_voicent.backend_voicent_call_line_form_view
 msgid "Then, execute"
-msgstr ""
+msgstr "Luego, ejecute"
 
 #. module: connector_voicent
 #: model:ir.model.fields,field_description:connector_voicent.field_backend_voicent_time_line__time
 msgid "Time"
-msgstr ""
+msgstr "Tiempo"
 
 #. module: connector_voicent
 #: model:ir.model.fields.selection,name:connector_voicent.selection__backend_voicent_call_line_reply__reply_field__totalagents
 msgid "Total Agents"
-msgstr ""
+msgstr "Agentes Totales"
 
 #. module: connector_voicent
 #: model:ir.ui.menu,name:connector_voicent.menu_voicent_root
 msgid "Voicent"
-msgstr ""
+msgstr "Voz"
 
 #. module: connector_voicent
 #: model:ir.actions.act_window,name:connector_voicent.action_backend_voicent_act_window
@@ -496,62 +502,62 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:connector_voicent.backend_voicent_form_view
 #: model_terms:ir.ui.view,arch_db:connector_voicent.backend_voicent_search_view
 msgid "Voicent Backend"
-msgstr ""
+msgstr "Servidor de Voz"
 
 #. module: connector_voicent
 #: model:ir.model,name:connector_voicent.model_backend_voicent_call_line
 #: model_terms:ir.ui.view,arch_db:connector_voicent.backend_voicent_call_line_form_view
 msgid "Voicent Backend Call Line"
-msgstr ""
+msgstr "Línea de Llamada Servidor de Voz"
 
 #. module: connector_voicent
 #: model_terms:ir.ui.view,arch_db:connector_voicent.backend_voicent_call_line_tree_view
 msgid "Voicent Backend Call Lines"
-msgstr ""
+msgstr "Líneas de Llamadas Servidor de Voz"
 
 #. module: connector_voicent
 #: model:ir.model,name:connector_voicent.model_backend_voicent_time_line
 msgid "Voicent Backend Time Line"
-msgstr ""
+msgstr "Línea de Tiempo del Servidor de Voz"
 
 #. module: connector_voicent
 #: model_terms:ir.ui.view,arch_db:connector_voicent.backend_voicent_tree_view
 msgid "Voicent Backends"
-msgstr ""
+msgstr "Servidores de Voz"
 
 #. module: connector_voicent
 #: model:ir.model.fields,field_description:connector_voicent.field_backend_voicent_call_line_contact__name
 msgid "Voicent Field"
-msgstr ""
+msgstr "Campo de Voz"
 
 #. module: connector_voicent
 #: model:ir.model.fields,field_description:connector_voicent.field_backend_voicent_call_line_reply__reply_field
 msgid "Voicent Reply Field"
-msgstr ""
+msgstr "Campo de Respuesta Voz"
 
 #. module: connector_voicent
 #: model:ir.model.fields,field_description:connector_voicent.field_backend_voicent_call_line_reply__reply_value
 msgid "Voicent Reply Value"
-msgstr ""
+msgstr "Valor de Respuesta de Voz"
 
 #. module: connector_voicent
 #: model:ir.actions.server,name:connector_voicent.fetch_check_the_voicent_status_ir_actions_server
 #: model:ir.cron,cron_name:connector_voicent.fetch_check_the_voicent_status
 #: model:ir.cron,name:connector_voicent.fetch_check_the_voicent_status
 msgid "Voicent: Update the next call"
-msgstr ""
+msgstr "Voz: Actualizar la siguiente llamada"
 
 #. module: connector_voicent
 #: model:ir.model.fields.selection,name:connector_voicent.selection__backend_voicent_call_line_reply__reply_field__wit
 msgid "Wit"
-msgstr ""
+msgstr "Ingenio"
 
 #. module: connector_voicent
 #: model_terms:ir.ui.view,arch_db:connector_voicent.backend_voicent_call_line_form_view
 msgid "contains"
-msgstr ""
+msgstr "contiene"
 
 #. module: connector_voicent
 #: model_terms:ir.ui.view,arch_db:connector_voicent.backend_voicent_call_line_form_view
 msgid "partner_id.name or partner_id.phone"
-msgstr ""
+msgstr "partner_id.name or partner_id.phone"
