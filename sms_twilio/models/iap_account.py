@@ -41,7 +41,7 @@ class IapAccount(models.Model):
     twilio_test_account_sid = fields.Char(string="Twilio TEST Account SID")
     twilio_test_auth_token = fields.Char(string="Twilio TEST Auth Token")
     twilio_account_sid = fields.Char(string="Twilio Account SID")
-    twilio_auth_token = fields.Char(string="Twilio Auth Token")
+    twilio_auth_token = fields.Char()
     twilio_number_id = fields.Many2one("twilio.phone.number", string="Twilio Number")
 
     twilio_balance_account = fields.Char(
