@@ -10,7 +10,7 @@ class TwilioPhoneNumber(models.Model):
     _description = "Twilio Phone Number"
 
     name = fields.Char(string="Friendly Name")
-    phone_number = fields.Char(string="Phone Number")
+    phone_number = fields.Char()
     has_sms_enabled = fields.Boolean(string="SMS Enabled")
     sid = fields.Char(string="SID")
 

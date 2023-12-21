@@ -37,7 +37,7 @@ class SmsApi(models.AbstractModel):
             client.messages.create(to=number, from_=from_number, body=message)
         except TwilioRestException as e:
             self.env["sms.sms"].browse(sms_id).error_detail = e.msg
-            raise UserError(e.msg)
+            raise UserError(e.msg) from e
         return "success"
 
     @api.model
