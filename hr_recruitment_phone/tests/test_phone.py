@@ -11,19 +11,21 @@ class TestRecruitmentPhone(TransactionCase):
         self.fr_country_id = self.env.ref("base.fr").id
         self.phco = self.env["phone.common"]
         self.env.company.write({"country_id": self.fr_country_id})
-        self.test_record = self.env["hr.applicant"].create(
+        self.partner = self.env["res.partner"].create(
             {
-                "name": "Expert Odoo",
-                "partner_name": "Alexis de Lattre",
-                "partner_phone": "+33 4 78 52 52 52",
+                "name": "Partner 0",
+                "country_id": self.fr_country_id,
+                "phone": "+33 4 78 32 32 32",
             }
         )
 
     def test_lookup(self):
-        res = self.phco.get_record_from_phone_number("0478525252")
+        res = self.phco.get_record_from_phone_number("0478323232")
         self.assertIsInstance(res, tuple)
-        self.assertEqual(res[0], "hr.applicant")
-        self.assertEqual(res[1], self.test_record.id)
+        self.assertEqual(res[0], "res.partner")
+        self.assertEqual(res[1], self.partner.id)
         self.assertEqual(
-            res[2], self.test_record.with_context(callerid=True).name_get()[0][1]
+            res[2], self.partner.with_context(callerid=True).name_get()[0][1]
         )
+        res = self.phco.get_record_from_phone_number("0499889988")
+        self.assertFalse(res)

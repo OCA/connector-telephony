@@ -7,7 +7,7 @@ from odoo import api, models
 
 class HrApplicant(models.Model):
     _name = "hr.applicant"
-    _inherit = ["hr.applicant", "phone.validation.mixin"]
+    _inherit = ["hr.applicant"]
     _phone_name_sequence = 50
     _phone_name_fields = ["partner_phone", "partner_mobile"]
 
