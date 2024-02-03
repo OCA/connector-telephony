@@ -5,40 +5,96 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: OpenERP Server 6.0.2\n"
-"Report-Msgid-Bugs-To: support@openerp.com\n"
-"POT-Creation-Date: 2011-11-09 15:28+0000\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-06-02 23:46+0000\n"
 "PO-Revision-Date: 2011-11-09 16:30+0100\n"
 "Last-Translator: Jesús Martín <jmartin@zikzakmedia.com>\n"
 "Language-Team: \n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: \n"
 
 #. module: asterisk_click2dial_crm
+#: model:ir.actions.act_window,name:asterisk_click2dial_crm.action_create_crm_phonecall
+msgid "Create CRM phonecall"
+msgstr ""
+
+#. module: asterisk_click2dial_crm
+#: code:addons/asterisk_click2dial_crm/wizard/create_crm_phonecall.py:45
+#, python-format
+msgid "Call with"
+msgstr ""
+
+#. module: asterisk_click2dial_crm
+#: view:wizard.open.calling.partner:0
+msgid "Create call in CRM"
+msgstr ""
+
+#. module: asterisk_click2dial_crm
+#: view:wizard.create.crm.phonecall:0
+msgid "CRM phone call"
+msgstr ""
+
+#. module: asterisk_click2dial_crm
+#: view:wizard.create.crm.phonecall:0
+msgid "No"
+msgstr ""
+
+#. module: asterisk_click2dial_crm
+#: model:ir.model,name:asterisk_click2dial_crm.model_wizard_open_calling_partner
+msgid "wizard.open.calling.partner"
+msgstr ""
+
+#. module: asterisk_click2dial_crm
+#: model:ir.model,name:asterisk_click2dial_crm.model_wizard_create_crm_phonecall
+msgid "wizard.create.crm.phonecall"
+msgstr ""
+
+#. module: asterisk_click2dial_crm
+#: field:res.users,context_propose_creation_crm_call:0
+msgid "Propose to create a call in CRM after a click2dial"
+msgstr ""
+
+#. module: asterisk_click2dial_crm
+#: view:wizard.create.crm.phonecall:0
+msgid "Create a phone call in the CRM ?"
+msgstr ""
+
+#. module: asterisk_click2dial_crm
+#: model:ir.model,name:asterisk_click2dial_crm.model_res_users
+msgid "res.users"
+msgstr ""
+
+#. module: asterisk_click2dial_crm
+#: view:wizard.create.crm.phonecall:0
+msgid "Yes"
+msgstr ""
+
+#. module: asterisk_click2dial_crm
 #: model:ir.model,name:asterisk_click2dial_crm.model_res_partner_address
 msgid "Partner Addresses"
 msgstr "Adreça de l'empresa"
 
-#. module: asterisk_click2dial_crm
-#: model:ir.module.module,description:asterisk_click2dial_crm.module_meta_information
-msgid ""
-"\n"
-"    Create a outbound phone call when the user makes a call phone by clicking\n"
-"    the click2dial button of the partner address view, and opens it in a new tab.\n"
-"    "
-msgstr ""
-"\n"
-"    Crea una trucada de telèfon sortint quan l'usuari fa una trucada de telèfon\n"
-"    mitjançant el botó click2dial de la vista d'adreces de l'empresa i l'obre a una\n"
-"    nova pestanya.\n"
-"    "
+#~ msgid ""
+#~ "\n"
+#~ "    Create a outbound phone call when the user makes a call phone by "
+#~ "clicking\n"
+#~ "    the click2dial button of the partner address view, and opens it in a "
+#~ "new tab.\n"
+#~ "    "
+#~ msgstr ""
+#~ "\n"
+#~ "    Crea una trucada de telèfon sortint quan l'usuari fa una trucada de "
+#~ "telèfon\n"
+#~ "    mitjançant el botó click2dial de la vista d'adreces de l'empresa i "
+#~ "l'obre a una\n"
+#~ "    nova pestanya.\n"
+#~ "    "
 
-#. module: asterisk_click2dial_crm
-#: model:ir.module.module,shortdesc:asterisk_click2dial_crm.module_meta_information
-msgid "Asterisk Click2dial CRM"
-msgstr "Asterisk Click2dial CRM"
+#~ msgid "Asterisk Click2dial CRM"
+#~ msgstr "Asterisk Click2dial CRM"
 
 #~ msgid "Reconciliation"
 #~ msgstr "Reconciliació"
-
