@@ -38,7 +38,7 @@ class ReformatAllPhonenumbers(models.TransientModel):
                 vals = {}
                 for field in fields:
                     if entry[field]:
-                        new_phone = entry.phone_format(entry[field])
+                        new_phone = entry._phone_format(number=entry[field])
                         if new_phone != entry[field]:
                             vals[field] = new_phone
                 if vals:

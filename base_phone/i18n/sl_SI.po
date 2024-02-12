@@ -39,13 +39,6 @@ msgid "Click2dial successfull"
 msgstr "Click2dial uspešen"
 
 #. module: base_phone
-#. odoo-javascript
-#: code:addons/base_phone/static/src/components/on_dial_button/on_dial_button.esm.js:0
-#, python-format
-msgid "Click2dial to %s"
-msgstr ""
-
-#. module: base_phone
 #: model_terms:ir.ui.view,arch_db:base_phone.number_not_found_form
 #: model_terms:ir.ui.view,arch_db:base_phone.reformat_all_phonenumbers_form
 msgid "Close"
@@ -208,13 +201,6 @@ msgstr "Številka ni najdena"
 #: model_terms:ir.ui.view,arch_db:base_phone.number_not_found_form
 msgid "Number converted to international format:"
 msgstr "Številka pretvorjena v mednarodni format:"
-
-#. module: base_phone
-#. odoo-javascript
-#: code:addons/base_phone/static/src/components/on_dial_button/on_dial_button.esm.js:0
-#, python-format
-msgid "Number dialed: %s"
-msgstr ""
 
 #. module: base_phone
 #: model:ir.model,name:base_phone.model_number_not_found

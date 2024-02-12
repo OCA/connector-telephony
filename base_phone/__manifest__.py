@@ -24,7 +24,7 @@
     ],
     "assets": {
         "web.assets_backend": [
-            "base_phone/static/src/components/**/*",
+            "base_phone/static/src/**/*",
         ],
     },
     "installable": True,

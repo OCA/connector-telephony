@@ -1,19 +1,18 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<!--
-  Copyright (C) 2012-2021 Akretion France (http://www.akretion.com/)
-  @author: Alexis de Lattre <alexis@via.ecp.fr>
-  License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
--->
+<!-- Copyright (C) 2012-2021 Akretion France (http://www.akretion.com/) @author:
+    Alexis de Lattre <alexis@via.ecp.fr> License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 <odoo>
     <record id="reformat_all_phonenumbers_form" model="ir.ui.view">
-        <field name="name">reformat_all_phonenumbers.form</field>
+        <field name="name">reformat.all.phonenumbers.form</field>
         <field name="model">reformat.all.phonenumbers</field>
         <field name="arch" type="xml">
-                <form string="Reformat all phone numbers">
-                    <div invisible="state not in ('draft')">
-                            This wizard reformats the phone and mobile numbers of all partners in standard international format e.g. +33 1 41 98 12 42</div>
-                    <div
-                    invisible="state not in ('done')"
+            <form string="Reformat all phone numbers">
+                <div invisible="state != 'draft'">
+                    This wizard reformats the phone and mobile numbers of all partners in
+                    standard international format e.g. +33 1 41 98 12 42
+                </div>
+                <div
+                    invisible="state != 'done'"
                 >Phone numbers that couldn't be reformatted:</div>
 
                 <group name="main">
@@ -21,7 +20,7 @@
                         name="phonenumbers_not_reformatted"
                         nolabel="1"
                         colspan="2"
-                        invisible="state not in ('done')"
+                        invisible="state != 'done'"
                     />
                     <field name="state" invisible="1" />
                 </group>
@@ -31,20 +30,20 @@
                         string="Reformat all phone numbers"
                         type="object"
                         class="btn-primary"
-                        invisible="state not in ('draft')"
+                        invisible="state != 'draft'"
                     />
                     <button
                         name="action_next"
                         type="object"
                         string="Close"
                         class="btn-primary"
-                        invisible="state not in ('done')"
+                        invisible="state != 'done'"
                     />
                     <button
                         special="cancel"
                         string="Cancel"
                         class="btn-default"
-                        invisible="state not in ('draft')"
+                        invisible="state != 'draft'"
                     />
                 </footer>
             </form>
@@ -64,7 +63,8 @@
         parent="menu_config_phone"
         sequence="100"
     />
-    <!-- Open the Reformat Phone Numbers wizard after the installation of the module -->
+    <!-- Open the Reformat Phone Numbers wizard after the installation of the
+        module -->
     <record id="reformat_all_phonenumbers_module_install" model="ir.actions.todo">
         <field name="action_id" ref="reformat_all_phonenumbers_action" />
     </record>

@@ -25,8 +25,7 @@ class PhoneCommon(models.AbstractModel):
         res = self.get_record_from_phone_number(presented_number)
         if res:
             return res[2]
-        else:
-            return False
+        return False
 
     @api.model
     def get_record_from_phone_number(self, presented_number):
@@ -92,7 +91,7 @@ class PhoneCommon(models.AbstractModel):
                 res_obj = obj.browse(obj_id)
                 # Use name_get()[0][1] instead of display_name
                 # to take the context into account with the callerid key
-                name = res_obj.name_get()[0][1]
+                name = res_obj.display_name
                 res = (obj._name, res_obj.id, name)
                 _logger.debug(
                     "Answer get_record_from_phone_number: (%s, %d, %s)",
@@ -142,7 +141,9 @@ class PhoneCommon(models.AbstractModel):
     def click2dial(self, erp_number):
         """This function is designed to be overridden in IPBX-specific
         modules, such as asterisk_click2dial or ovh_telephony_connector"""
-        return {"dialed_number": erp_number}
+        return {
+            "dialed_number": erp_number,
+        }
 
     @api.model
     def convert_to_dial_number(self, erp_number):
