@@ -7,7 +7,7 @@
             <form string="Phone CDR" edit="true" create="true" delete="true">
                 <sheet>
                     <group cols="4">
-                        <field name="guid" />
+                        <field name="guid" required="1" />
                         <field name="inbound_flag" />
                         <field name="call_start_time" />
                         <field name="call_connect_time" />
@@ -52,11 +52,10 @@
             </pivot>
         </field>
     </record>
-    <record model="ir.actions.act_window" id="phone_cdr_view_action">
+    <record id="phone_cdr_view_action" model="ir.actions.act_window">
         <field name="name">Phone Records</field>
         <field name="view_id" ref="view_phone_cdr_tree" />
         <field name="res_model">phone.cdr</field>
-        <field name="view_type">form</field>
         <field name="domain">[]</field>
         <field name="view_mode">tree,form,pivot</field>
     </record>

@@ -1,5 +1,5 @@
-# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
-
+# Copyright (C) 2024 Open Source Integrators
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 {
     "name": "Base Phone CDR",
     "category": "web",
@@ -13,6 +13,5 @@
         "view/res_users_view.xml",
         "view/res_partner_view.xml",
     ],
-    "qweb": ["static/src/xml/widget.xml"],
     "license": "AGPL-3",
 }

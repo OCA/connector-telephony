@@ -1,3 +1,5 @@
+# Copyright (C) 2024 Open Source Integrators
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 from odoo import api, fields, models
 
 
@@ -8,22 +10,29 @@ class PhoneCDR(models.Model):
     @api.depends("call_start_time", "call_connect_time", "inbound_flag")
     def _compute_ring_time(self):
         for rec in self:
+            ring_time = 0.0
             if rec.inbound_flag and rec.call_connect_time and rec.call_start_time:
                 duration = rec.call_connect_time - rec.call_start_time
-                duration_in_s = duration.total_seconds()
-                rec.ring_time = divmod(duration_in_s, 3600)[0]
+                ring_time = divmod(duration.total_seconds(), 3600)[0]
+            rec.ring_time = ring_time
 
     @api.depends("called_id", "inbound_flag")
     def _compute_odoo_user(self):
         for rec in self:
+            user_id = False
             if rec.inbound_flag:
-                rec.user_id = self.env["res.users"].search(
-                    [
-                        ("related_phone", "=", rec.called_id),
-                        ("related_phone", "!=", False),
-                    ],
-                    limit=1,
+                user_id = (
+                    self.env["res.users"]
+                    .search(
+                        [
+                            ("related_phone", "=", rec.called_id),
+                            ("related_phone", "!=", False),
+                        ],
+                        limit=1,
+                    )
+                    .id
                 )
+            rec.user_id = user_id
 
     guid = fields.Char("Call GUID")
     inbound_flag = fields.Selection(
@@ -53,14 +62,15 @@ class PhoneCDR(models.Model):
     )
     partner_id = fields.Many2one("res.partner", string="Partner")
 
-    @api.model
-    def create(self, vals):
-        res = super().create(vals)
-        if res.inbound_flag:
-            res.partner_id = self.env["res.partner"].search(
-                [("phone", "=", res.called_id), ("phone", "!=", False)], limit=1
-            )
-        return res
+    @api.model_create_multi
+    def create(self, vals_list):
+        phonc_cdr_rec = super().create(vals_list)
+        for rec in phonc_cdr_rec:
+            if rec.inbound_flag:
+                rec.partner_id = self.env["res.partner"].search(
+                    [("phone", "=", rec.called_id), ("phone", "!=", False)], limit=1
+                )
+        return phonc_cdr_rec
 
     def write(self, vals):
         res = super().write(vals)

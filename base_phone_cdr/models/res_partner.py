@@ -1,6 +1,8 @@
+# Copyright (C) 2024 Open Source Integrators
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 from ast import literal_eval
 
-from odoo import api, fields, models
+from odoo import fields, models
 
 
 class ResPartner(models.Model):
@@ -12,12 +14,11 @@ class ResPartner(models.Model):
 
     def _compute_total_cdr_count(self):
         for partner in self:
-            cdr_records = self.env["phone.cdr"].search(
+            cdr_records_count = self.env["phone.cdr"].search_count(
                 [("partner_id", "=", partner.id)]
             )
-            partner.total_cdr_count = cdr_records and len(cdr_records) or 0
+            partner.total_cdr_count = cdr_records_count
 
-    @api.multi
     def action_view_partner_cdr_records(self):
         self.ensure_one()
         action = self.env.ref("base_phone_cdr.phone_cdr_view_action").read()[0]
