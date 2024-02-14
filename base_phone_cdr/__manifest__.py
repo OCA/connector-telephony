@@ -3,8 +3,9 @@
 {
     "name": "Base Phone CDR",
     "category": "web",
-    "version": "12.0.1.0.0",
+    "version": "17.0.1.0.0",
     "author": "Open Source Integrators, Odoo Community Association (OCA)",
+    "website": "https://github.com/OCA/connector-telephony",
     "depends": ["base_phone_popup"],
     "data": [
         "view/phone_cdr_view.xml",

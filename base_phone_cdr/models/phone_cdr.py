@@ -55,7 +55,7 @@ class PhoneCDR(models.Model):
 
     @api.model
     def create(self, vals):
-        res = super(PhoneCDR, self).create(vals)
+        res = super().create(vals)
         if res.inbound_flag:
             res.partner_id = self.env["res.partner"].search(
                 [("phone", "=", res.called_id), ("phone", "!=", False)], limit=1
@@ -63,7 +63,7 @@ class PhoneCDR(models.Model):
         return res
 
     def write(self, vals):
-        res = super(PhoneCDR, self).write(vals)
+        res = super().write(vals)
         if vals.get("inbound_flag") or vals.get("called_id"):
             for rec in self:
                 rec.partner_id = self.env["res.partner"].search(
