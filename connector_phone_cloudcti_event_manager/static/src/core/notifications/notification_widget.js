@@ -1,8 +1,8 @@
 /** @odoo-module **/
 
-import { Notification } from "@web/core/notifications/notification";
-import { _t } from "@web/core/l10n/translation";
-import { patch } from "@web/core/utils/patch";
+import {Notification} from "@web/core/notifications/notification";
+import {_t} from "@web/core/l10n/translation";
+import {patch} from "@web/core/utils/patch";
 
 // patch(Notification.props ,{
 //     setup() {

@@ -1,11 +1,14 @@
-import logging
-import simplejson
 import datetime
+import logging
 import re
+
 import requests
+import simplejson
 from requests.auth import HTTPBasicAuth
-from odoo import _, api, fields, models
+
+from odoo import _, fields, models
 from odoo.exceptions import UserError
+
 from odoo.addons.web.controllers.utils import clean_action
 
 _logger = logging.getLogger(__name__)
@@ -19,10 +22,10 @@ class ResPartner(models.Model):
 
     def update_called_for_values(self):
         for partner in self:
-            if self._context.get('phone_partner'):
+            if self._context.get("phone_partner"):
                 partner.called_for_phone = True
                 partner.called_for_mobile = False
-            elif self._context.get('mobile_partner'):
+            elif self._context.get("mobile_partner"):
                 partner.called_for_phone = False
                 partner.called_for_mobile = True
             else:
@@ -31,34 +34,38 @@ class ResPartner(models.Model):
 
     def _get_cloudcti_credentials(self, user):
         company_id = user.company_id
-        if not all([
-            company_id.cloudcti_base_url,
-            company_id.cloudcti_signin_url,
-            company_id.cloudcti_out_url,
-            company_id.cloudcti_subscription_url
-        ]):
+        if not all(
+            [
+                company_id.cloudcti_base_url,
+                company_id.cloudcti_signin_url,
+                company_id.cloudcti_out_url,
+                company_id.cloudcti_subscription_url,
+            ]
+        ):
             raise UserError(_("Please configure CloudCTI URLs in Company Setting."))
 
-        if not user.token_expiration_time or (datetime.datetime.now() > user.token_expiration_time):
+        if not user.token_expiration_time or (
+            datetime.datetime.now() > user.token_expiration_time
+        ):
             expired = True
         else:
             expired = False
-        
+
         # Check if user.phone is not None and is a string
         if user.phone is not None and isinstance(user.phone, str):
-            cloudcti_username = re.sub(r'\D', '', user.phone)
+            cloudcti_username = re.sub(r"\D", "", user.phone)
         else:
-            cloudcti_username = ''
+            cloudcti_username = ""
 
         return {
-            'base_address': company_id.cloudcti_base_url,
-            'sign_address': company_id.cloudcti_signin_url,
-            'out_address': company_id.cloudcti_out_url,
-            'sub_address': company_id.cloudcti_subscription_url,
-            'token': user.cloudcti_token,
-            'expired': expired,
-            'cloudcti_username': cloudcti_username,
-            'cloudcti_password': user.phone_password,
+            "base_address": company_id.cloudcti_base_url,
+            "sign_address": company_id.cloudcti_signin_url,
+            "out_address": company_id.cloudcti_out_url,
+            "sub_address": company_id.cloudcti_subscription_url,
+            "token": user.cloudcti_token,
+            "expired": expired,
+            "cloudcti_username": cloudcti_username,
+            "cloudcti_password": user.phone_password,
         }
 
     def cloudcti_open_outgoing_notification(self):
@@ -72,7 +79,7 @@ class ResPartner(models.Model):
         }
         self.update_called_for_values()
         self.cloudcti_outgoing_call_notification()
-        #self.env["bus.bus"].sendone(channel, bus_message)
+        # self.env["bus.bus"].sendone(channel, bus_message)
 
     def cloudcti_outgoing_call_notification(self):
         # For Outgoing Calls
@@ -83,12 +90,16 @@ class ResPartner(models.Model):
         credentials = self._get_cloudcti_credentials(self.env.user)
 
         # if token is expired, get a new one
-        if credentials['expired']:
+        if credentials["expired"]:
             self.env.user.generate_cloudcti_access_token()
             credentials = self._get_cloudcti_credentials(self.env.user)
 
         # Fetched from partner
-        number = re.sub(r'\D', '', self.sudo().called_for_mobile and self.sudo().mobile or self.sudo().phone)
+        number = re.sub(
+            r"\D",
+            "",
+            self.sudo().called_for_mobile and self.sudo().mobile or self.sudo().phone,
+        )
 
         data = {
             "Number": number,
@@ -97,32 +108,27 @@ class ResPartner(models.Model):
         payload = simplejson.dumps(data)
 
         # use token credentials to connect
-        if credentials.get('token') and not credentials.get('expired'):
+        if credentials.get("token") and not credentials.get("expired"):
             headers = {
                 "content-type": "application/json",
                 "Authorization": "Bearer " + credentials.get("token"),
-                'Accept': 'text/plain'
+                "Accept": "text/plain",
             }
             url = credentials.get("out_address") + "/makecall"
-            response = requests.request(
-                "POST",
-                url,
-                data=payload,
-                headers=headers
-            )
+            response = requests.request("POST", url, data=payload, headers=headers)
 
         # not secure fallback to basic authentication
         else:
             headers = {"content-type": "application/json"}
-            url = credentials['base_address'] + "/makecall/" + number
+            url = credentials["base_address"] + "/makecall/" + number
             response = requests.request(
                 "GET",
                 url,
                 auth=HTTPBasicAuth(
                     credentials.get("cloudcti_username"),
-                    credentials.get("cloudcti_password")
+                    credentials.get("cloudcti_password"),
                 ),
-                headers=headers
+                headers=headers,
             )
         _logger.info("Response ---- %s", response.text)
         # error in response
@@ -155,7 +161,7 @@ class ResPartner(models.Model):
 
     # def incall_notify_by_login_test(self, number, login_list):
     #     self.incall_notify_by_login('(582) 126-8105',['admin'])
-             
+
     # @api.model
     # def incall_notify_by_login(self, number, login_list, calltype="Incoming Call"):
     #     number = False

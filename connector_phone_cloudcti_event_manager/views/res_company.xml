@@ -8,10 +8,10 @@
             <notebook position="inside">
                 <page string="CloudCTI API">
                     <group>
-                        <field name="cloudcti_base_url"/>
-                        <field name="cloudcti_out_url"/>
-                        <field name="cloudcti_signin_url"/>
-                        <field name="cloudcti_subscription_url"/>
+                        <field name="cloudcti_base_url" />
+                        <field name="cloudcti_out_url" />
+                        <field name="cloudcti_signin_url" />
+                        <field name="cloudcti_subscription_url" />
                         <field name="cloudcti_popup_time" />
                     </group>
                 </page>

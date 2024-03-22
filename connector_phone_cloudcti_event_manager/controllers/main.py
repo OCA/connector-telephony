@@ -1,38 +1,38 @@
-import logging
 import json
+import logging
 import re
+from datetime import datetime
+
+import phonenumbers
+import pytz
 
 from odoo import http
-from odoo.http import request, Response
-import pytz
-import phonenumbers
+from odoo.http import Response, request
 
-from datetime import datetime
 _logger = logging.getLogger(__name__)
 
-class CloudCTIVOIP(http.Controller):
 
+class CloudCTIVOIP(http.Controller):
     def map_state(self, instate, currentstate=False):
-        outstate = 'on_hold'
-        if instate == 'ringing':
-            outstate = 'offering'
-        elif instate == 'answered':
-            outstate = 'connected'
-        elif instate == 'ended':
-            if currentstate == 'offering':
-                outstate = 'missed'
-            elif currentstate == 'connected':
-                outstate = 'completed'
+        outstate = "on_hold"
+        if instate == "ringing":
+            outstate = "offering"
+        elif instate == "answered":
+            outstate = "connected"
+        elif instate == "ended":
+            if currentstate == "offering":
+                outstate = "missed"
+            elif currentstate == "connected":
+                outstate = "completed"
         else:
-            outstate = 'on_hold'
+            outstate = "on_hold"
         return outstate
 
     def create_cdr_record(self, user, payload):
         startdate = False
-        if payload.get('starttime'):
+        if payload.get("starttime"):
             startdate = self.convert_into_correct_timezone(
-                payload.get("starttime"),
-                user
+                payload.get("starttime"), user
             )
         vals = {
             "guid": payload.get("callid"),
@@ -43,15 +43,15 @@ class CloudCTIVOIP(http.Controller):
             "call_start_time": startdate,
             "state": self.map_state(payload.get("state")),
             "user_id": user.id,
-            "partner_ids": payload.get("partner_ids")
+            "partner_ids": payload.get("partner_ids"),
         }
         return request.env["phone.cdr"].sudo().create(vals)
 
     def convert_into_correct_timezone(self, record_date, user):
-        #CloudCTI provides date in UTC, so no conversion needed.
-        return re.sub(r"[TtzZ]"," ", record_date)
-        record_date = datetime.strptime(record_date, '%Y-%m-%d %H:%M:%S')
-        timezone = request.env.context.get('tz', False) or user.partner_id.tz
+        # CloudCTI provides date in UTC, so no conversion needed.
+        return re.sub(r"[TtzZ]", " ", record_date)
+        record_date = datetime.strptime(record_date, "%Y-%m-%d %H:%M:%S")
+        timezone = request.env.context.get("tz", False) or user.partner_id.tz
         return_date = None
         if timezone:
             src_tz = pytz.timezone("UTC")
@@ -88,33 +88,29 @@ class CloudCTIVOIP(http.Controller):
             check = True if state == "answered" else False
             update = False if state == "ringing" else True
         phone = phonenumbers.format_number(
-            phonenumbers.parse(phone, 'US'),
-            phonenumbers.PhoneNumberFormat.NATIONAL
+            phonenumbers.parse(phone, "US"), phonenumbers.PhoneNumberFormat.NATIONAL
         )
         other = phonenumbers.format_number(
-            phonenumbers.parse(other, 'US'),
-            phonenumbers.PhoneNumberFormat.NATIONAL
+            phonenumbers.parse(other, "US"), phonenumbers.PhoneNumberFormat.NATIONAL
         )
         user = request.env["res.users"].sudo().search([("phone", "=", phone)], limit=1)
         if not user:
             user = request.env["res.users"].sudo().browse(1)
         if not user:
-            return Response(json.dumps({'message': 'User Not found.', 'status': 404}))
+            return Response(json.dumps({"message": "User Not found.", "status": 404}))
         else:
             partner = (
-                request.env["phone.common"]
-                .sudo()
-                .get_record_from_phone_number(other)
+                request.env["phone.common"].sudo().get_record_from_phone_number(other)
             )
             if create:
                 payload = {
                     "callid": guid,
-                    "callerid": phone if direction=="outbound" else other,
-                    "calledid": phone if direction=="inbound" else other,
+                    "callerid": phone if direction == "outbound" else other,
+                    "calledid": phone if direction == "inbound" else other,
                     "direction": direction,
                     "state": state,
                     "starttime": starttime,
-                    "partner_ids": [(6, 0, partner.ids)]
+                    "partner_ids": [(6, 0, partner.ids)],
                 }
                 _logger.info("CDR Payload ---- %s", payload)
                 cdr = self.create_cdr_record(user, payload)
@@ -141,12 +137,12 @@ class CloudCTIVOIP(http.Controller):
                 if check and not cdr:
                     payload = {
                         "callid": guid,
-                        "callerid": phone if direction=="outbound" else other,
-                        "calledid": phone if direction=="inbound" else other,
+                        "callerid": phone if direction == "outbound" else other,
+                        "calledid": phone if direction == "inbound" else other,
                         "direction": direction,
                         "state": state,
                         "starttime": starttime,
-                        "partner_ids": [(6, 0, partner.ids)]
+                        "partner_ids": [(6, 0, partner.ids)],
                     }
                     _logger.info("CDR Payload ---- %s", payload)
                     cdr = self.create_cdr_record(user, payload)
@@ -157,7 +153,7 @@ class CloudCTIVOIP(http.Controller):
                 payload = {
                     "state": self.map_state(state, cdr.state),
                     "call_end_time": enddate,
-                    "call_duration": duration
+                    "call_duration": duration,
                 }
                 cdr.sudo().write(payload)
         return Response(json.dumps({}))

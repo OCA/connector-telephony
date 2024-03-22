@@ -6,13 +6,19 @@
         <field name="model">res.users</field>
         <field name="inherit_id" ref="base_phone_cdr.view_users_form_telephony_tab" />
         <field name="arch" type="xml">
-	        <field name="related_phone" position="replace"/>
+	        <field name="related_phone" position="replace" />
             <xpath expr="//group[@name='phone-preferences']" position="after">
                 <group name="cloudcti-preferences" string="CloudCTI Preferences">
                     <field name="cloudcti_token" />
                     <field name="session_id" />
                     <field name="token_expiration_time" />
-                    <button name="generate_cloudcti_access_token" type="object" class="oe_highlight" string="Generate Token" invisible="0" />
+                    <button
+                        name="generate_cloudcti_access_token"
+                        type="object"
+                        class="oe_highlight"
+                        string="Generate Token"
+                        invisible="0"
+                    />
                 </group>
             </xpath>
         </field>
@@ -29,10 +35,16 @@
                     <field name="cloudcti_token" />
                     <field name="session_id" />
                     <field name="token_expiration_time" />
-                    <button name="generate_cloudcti_access_token" type="object" class="oe_highlight" string="Generate Token" invisible="0" />
+                    <button
+                        name="generate_cloudcti_access_token"
+                        type="object"
+                        class="oe_highlight"
+                        string="Generate Token"
+                        invisible="0"
+                    />
                 </group>
             </xpath>
         </field>
     </record>
-	    
+
 </odoo>

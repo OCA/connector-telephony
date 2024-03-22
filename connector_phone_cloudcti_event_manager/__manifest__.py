@@ -4,8 +4,15 @@
     "summary": "This module integrates odoo with Phone Connector CloudCTI.",
     "version": "17.0.1.0.0",
     "author": "Open Source Integrators, Odoo Community Association (OCA)",
-    "website": "https://github.com/OCA/field-service",
-    "depends": ["base_phone_cdr", "inputmask_widget", "sale", "stock","crm", 'sale_crm'],
+    "website": "https://github.com/OCA/connector-telephony",
+    "depends": [
+        "base_phone_cdr",
+        "inputmask_widget",
+        "sale",
+        "stock",
+        "crm",
+        "sale_crm",
+    ],
     "data": [
         "views/res_company.xml",
         "views/res_users_view.xml",
@@ -15,9 +22,8 @@
         "views/stock_picking_views.xml",
         "views/crm_views.xml",
     ],
-    'assets': {
-        'web.assets_backend': [
-
+    "assets": {
+        "web.assets_backend": [
             "connector_phone_cloudcti_event_manager/static/src/services/*.js",
             # 'connector_phone_cloudcti_event_manager/static/src/core/**/*'
             # 'connector_phone_cloudcti_event_manager/static/src/js/widget.js',

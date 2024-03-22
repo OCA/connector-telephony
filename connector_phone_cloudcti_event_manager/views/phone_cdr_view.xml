@@ -3,36 +3,62 @@
     <record id="view_phone_cdr_tree_cloudcti" model="ir.ui.view">
         <field name="name">view.phone.cdr.tree</field>
         <field name="model">phone.cdr</field>
-        <field name="inherit_id" ref="base_phone_cdr.view_phone_cdr_tree"/>
+        <field name="inherit_id" ref="base_phone_cdr.view_phone_cdr_tree" />
         <field name="arch" type="xml">
             <xpath expr="//tree" position="attributes">
                 <attribute name="default_order">write_date desc</attribute>
             </xpath>
             <xpath expr="//field[@name='caller_id']" position="after">
-                <button type="object" name="cloudcti_open_outgoing_notification" class="btn-sm btn-link mb4 fa fa-phone" context="{'phone_partner': 1, 'call_no': caller_id}" />
+                <button
+                    type="object"
+                    name="cloudcti_open_outgoing_notification"
+                    class="btn-sm btn-link mb4 fa fa-phone"
+                    context="{'phone_partner': 1, 'call_no': caller_id}"
+                />
             </xpath>
             <xpath expr="//field[@name='called_id']" position="after">
-                <button type="object" name="cloudcti_open_outgoing_notification" class="btn-sm btn-link mb4 fa fa-phone" context="{'phone_partner': 1, 'call_no': called_id}" />
+                <button
+                    type="object"
+                    name="cloudcti_open_outgoing_notification"
+                    class="btn-sm btn-link mb4 fa fa-phone"
+                    context="{'phone_partner': 1, 'call_no': called_id}"
+                />
             </xpath>
         </field>
     </record>
     <record id="view_phone_cdr_form_cloudcti" model="ir.ui.view">
         <field name="name">view.phone.cdr.form</field>
         <field name="model">phone.cdr</field>
-        <field name="inherit_id" ref="base_phone_cdr.view_phone_cdr_form"/>
+        <field name="inherit_id" ref="base_phone_cdr.view_phone_cdr_form" />
         <field name="arch" type="xml">
             <xpath expr="//field[@name='caller_id']" position="replace">
-                <label for="caller_id"/>
+                <label for="caller_id" />
                 <div class="o_row">
-                    <field name="caller_id"/>
-                    <button type="object" name="cloudcti_open_outgoing_notification" class="btn-sm btn-link mb4 fa fa-phone" invisible="not caller_id" aria-label="Outgoing Call" title="Outgoing Call" context="{'phone_partner': 1, 'call_no': caller_id}" />
+                    <field name="caller_id" />
+                    <button
+                        type="object"
+                        name="cloudcti_open_outgoing_notification"
+                        class="btn-sm btn-link mb4 fa fa-phone"
+                        invisible="not caller_id"
+                        aria-label="Outgoing Call"
+                        title="Outgoing Call"
+                        context="{'phone_partner': 1, 'call_no': caller_id}"
+                    />
                 </div>
             </xpath>
             <xpath expr="//field[@name='called_id']" position="replace">
-                <label for="called_id"/>
+                <label for="called_id" />
                 <div class="o_row">
-                    <field name="called_id"/>
-                    <button type="object" name="cloudcti_open_outgoing_notification" class="btn-sm btn-link mb4 fa fa-phone" aria-label="Outgoing Call" title="Outgoing Call" invisible="not called_id" context="{'phone_partner': 1, 'call_no': called_id}" />
+                    <field name="called_id" />
+                    <button
+                        type="object"
+                        name="cloudcti_open_outgoing_notification"
+                        class="btn-sm btn-link mb4 fa fa-phone"
+                        aria-label="Outgoing Call"
+                        title="Outgoing Call"
+                        invisible="not called_id"
+                        context="{'phone_partner': 1, 'call_no': called_id}"
+                    />
                 </div>
             </xpath>
         </field>

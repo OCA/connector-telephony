@@ -1,53 +1,140 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <odoo>
     <record id="crm_lead_view_form_inherit_cloud_cti" model="ir.ui.view">
         <field name="name">crm.lead.form.inherit.cloud.cti</field>
         <field name="model">crm.lead</field>
-        <field name="inherit_id" ref="crm.crm_lead_view_form"/>
+        <field name="inherit_id" ref="crm.crm_lead_view_form" />
         <field name="arch" type="xml">
-            <xpath expr="//group[@name='opportunity_partner']/label[@for='phone']" position="attributes">
+            <xpath
+                expr="//group[@name='opportunity_partner']/label[@for='phone']"
+                position="attributes"
+            >
                 <attribute name="invisible">1</attribute>
             </xpath>
-            <xpath expr="//group[@name='opportunity_partner']/div[2]" position="attributes">
+            <xpath
+                expr="//group[@name='opportunity_partner']/div[2]"
+                position="attributes"
+            >
                 <attribute name="invisible">1</attribute>
             </xpath>
             <xpath expr="//group[@name='opportunity_partner']/div[2]" position="after">
-                <label for="phone" class="oe_inline"/>
+                <label for="phone" class="oe_inline" />
                 <div class="o_row o_row_readonly">
-                    <button name="phone_action_blacklist_remove" class="fa fa-ban text-danger" title="This phone number is blacklisted for SMS Marketing. Click to unblacklist." type="object" context="{'default_phone': phone}" groups="base.group_user" invisible="not phone_blacklisted"/>
-                    <field name="phone" widget="mask" data-inputmask="'mask': '(999) 999-9999'"/>
-                    <button type="object" name="cloudcti_open_outgoing_notification" class="btn-sm btn-link mb4 fa fa-phone" aria-label="Outgoing Call" title="Outgoing Call" invisible="not phone" context="{'phone_partner': 1, 'call_no': phone}"/>
-                    <span class="fa fa-exclamation-triangle text-warning oe_edit_only" title="By saving this change, the customer phone number will also be updated." invisible="not partner_phone_update"/>
+                    <button
+                        name="phone_action_blacklist_remove"
+                        class="fa fa-ban text-danger"
+                        title="This phone number is blacklisted for SMS Marketing. Click to unblacklist."
+                        type="object"
+                        context="{'default_phone': phone}"
+                        groups="base.group_user"
+                        invisible="not phone_blacklisted"
+                    />
+                    <field
+                        name="phone"
+                        widget="mask"
+                        data-inputmask="'mask': '(999) 999-9999'"
+                    />
+                    <button
+                        type="object"
+                        name="cloudcti_open_outgoing_notification"
+                        class="btn-sm btn-link mb4 fa fa-phone"
+                        aria-label="Outgoing Call"
+                        title="Outgoing Call"
+                        invisible="not phone"
+                        context="{'phone_partner': 1, 'call_no': phone}"
+                    />
+                    <span
+                        class="fa fa-exclamation-triangle text-warning oe_edit_only"
+                        title="By saving this change, the customer phone number will also be updated."
+                        invisible="not partner_phone_update"
+                    />
                 </div>
             </xpath>
-            <xpath expr="//group[@name='lead_info']/label[@for='phone_group_lead_info']" position="attributes">
+            <xpath
+                expr="//group[@name='lead_info']/label[@for='phone_group_lead_info']"
+                position="attributes"
+            >
                 <attribute name="invisible">1</attribute>
             </xpath>
             <xpath expr="//group[@name='lead_info']/div[3]" position="attributes">
                 <attribute name="invisible">1</attribute>
             </xpath>
             <xpath expr="//group[@name='lead_info']/div[3]" position="after">
-                <label for="phone_group_lead_info" class="oe_inline"/>
+                <label for="phone_group_lead_info" class="oe_inline" />
                 <div class="o_row o_row_readonly">
-                    <button name="phone_action_blacklist_remove" class="fa fa-ban text-danger" title="This phone number is blacklisted for SMS Marketing. Click to unblacklist." type="object" context="{'default_phone': phone}" groups="base.group_user" invisible="not phone_blacklisted"/>
-                    <field name="phone" widget="mask" data-inputmask="'mask': '(999) 999-9999'"/>
-                    <button type="object" name="cloudcti_open_outgoing_notification" class="btn-sm btn-link mb4 fa fa-phone" aria-label="Outgoing Call" title="Outgoing Call" invisible="not phone" context="{'phone_partner': 1, 'call_no': phone}"/>
-                    <span class="fa fa-exclamation-triangle text-warning oe_edit_only" title="By saving this change, the customer phone number will also be updated." invisible="not partner_phone_update"/>
+                    <button
+                        name="phone_action_blacklist_remove"
+                        class="fa fa-ban text-danger"
+                        title="This phone number is blacklisted for SMS Marketing. Click to unblacklist."
+                        type="object"
+                        context="{'default_phone': phone}"
+                        groups="base.group_user"
+                        invisible="not phone_blacklisted"
+                    />
+                    <field
+                        name="phone"
+                        widget="mask"
+                        data-inputmask="'mask': '(999) 999-9999'"
+                    />
+                    <button
+                        type="object"
+                        name="cloudcti_open_outgoing_notification"
+                        class="btn-sm btn-link mb4 fa fa-phone"
+                        aria-label="Outgoing Call"
+                        title="Outgoing Call"
+                        invisible="not phone"
+                        context="{'phone_partner': 1, 'call_no': phone}"
+                    />
+                    <span
+                        class="fa fa-exclamation-triangle text-warning oe_edit_only"
+                        title="By saving this change, the customer phone number will also be updated."
+                        invisible="not partner_phone_update"
+                    />
                 </div>
             </xpath>
-            <xpath expr="//page[@name='lead']/group/group[@class='mt48']/label[@for='mobile_page_lead']" position="attributes">
+            <xpath
+                expr="//page[@name='lead']/group/group[@class='mt48']/label[@for='mobile_page_lead']"
+                position="attributes"
+            >
                 <attribute name="invisible">1</attribute>
             </xpath>
-            <xpath expr="//page[@name='lead']/group/group[@class='mt48']/div[2]" position="attributes">
+            <xpath
+                expr="//page[@name='lead']/group/group[@class='mt48']/div[2]"
+                position="attributes"
+            >
                 <attribute name="invisible">1</attribute>
             </xpath>
-            <xpath expr="//page[@name='lead']/group/group[@class='mt48']/div[2]" position="after">
-                <label for="mobile_page_lead" class="oe_inline"/>
+            <xpath
+                expr="//page[@name='lead']/group/group[@class='mt48']/div[2]"
+                position="after"
+            >
+                <label for="mobile_page_lead" class="oe_inline" />
                 <div class="o_row o_row_readonly">
-                    <button name="phone_action_blacklist_remove" class="fa fa-ban text-danger" title="This phone number is blacklisted for SMS Marketing. Click to unblacklist." type="object" context="{'default_phone': mobile}" groups="base.group_user" invisible="not mobile_blacklisted"/>
-                    <field name="mobile" id="mobile_page_lead" widget="mask" data-inputmask="'mask': '(999) 999-9999'"/>
-                    <button type="object" name="cloudcti_open_outgoing_notification" class="btn-sm btn-link mb4 fa fa-mobile" aria-label="Outgoing Call" title="Outgoing Call" invisible="not mobile" context="{'mobile_partner': 1, 'call_no':mobile}"/>
-                </div>    
+                    <button
+                        name="phone_action_blacklist_remove"
+                        class="fa fa-ban text-danger"
+                        title="This phone number is blacklisted for SMS Marketing. Click to unblacklist."
+                        type="object"
+                        context="{'default_phone': mobile}"
+                        groups="base.group_user"
+                        invisible="not mobile_blacklisted"
+                    />
+                    <field
+                        name="mobile"
+                        id="mobile_page_lead"
+                        widget="mask"
+                        data-inputmask="'mask': '(999) 999-9999'"
+                    />
+                    <button
+                        type="object"
+                        name="cloudcti_open_outgoing_notification"
+                        class="btn-sm btn-link mb4 fa fa-mobile"
+                        aria-label="Outgoing Call"
+                        title="Outgoing Call"
+                        invisible="not mobile"
+                        context="{'mobile_partner': 1, 'call_no':mobile}"
+                    />
+                </div>
             </xpath>
         </field>
     </record>

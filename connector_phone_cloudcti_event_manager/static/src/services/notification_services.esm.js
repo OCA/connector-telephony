@@ -3,7 +3,7 @@
 import {markup} from "@odoo/owl";
 import {browser} from "@web/core/browser/browser";
 import {registry} from "@web/core/registry";
-import { _t } from "@web/core/l10n/translation";
+import {_t} from "@web/core/l10n/translation";
 
 export const webNotificationCloudCtiService = {
     dependencies: ["bus_service", "notification"],
@@ -46,20 +46,21 @@ export const webNotificationCloudCtiService = {
 
         bus_service.addEventListener("notification", ({detail: notifications}) => {
             for (const {payload, type} of notifications) {
-                console.log("?///////////////////", type, notifications)
+                console.log("?///////////////////", type, notifications);
                 if (type === "web.notify.custom") {
                     displaywebNotification(payload);
                 }
-                
             }
         });
         bus_service.start();
     },
 };
 
-registry.category("services").add("webNotificationCloudCti", webNotificationCloudCtiService);
+registry
+    .category("services")
+    .add("webNotificationCloudCti", webNotificationCloudCtiService);
 
-// bus_service.addEventListener("notification", ({detail: notifications}) => {
+// Bus_service.addEventListener("notification", ({detail: notifications}) => {
 //     for (const {payload, type} of notifications) {
 //         console.log("?///////////////////", type, notifications)
 //         if (type === "web.notify.incoming") {

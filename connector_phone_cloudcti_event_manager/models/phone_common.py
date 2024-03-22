@@ -31,17 +31,21 @@ class PhoneCommon(models.AbstractModel):
             end_number_to_match = presented_number[
                 -nr_digits_to_match_from_end : len(presented_number)
             ]
-            partners = self.env["res.partner"].sudo().search(
-                [
-                    "|",
-                    ("phone", "ilike", end_number_to_match),
-                    ("mobile", "ilike", end_number_to_match),
-                ]
+            partners = (
+                self.env["res.partner"]
+                .sudo()
+                .search(
+                    [
+                        "|",
+                        ("phone", "ilike", end_number_to_match),
+                        ("mobile", "ilike", end_number_to_match),
+                    ]
+                )
             )
         return partners
-    
+
     def incall_notify_by_login_test(self, number, login_list):
-        self.incall_notify_by_login('(582) 126-8105',['admin'])
+        self.incall_notify_by_login("(582) 126-8105", ["admin"])
 
     @api.model
     def incall_notify_by_login(self, number, login_list, calltype="Incoming Call"):
@@ -63,9 +67,6 @@ class PhoneCommon(models.AbstractModel):
                 "id": partners.ids,
             }
             self.sudo().env["bus.bus"].sendone(channel, bus_message)
-            _logger.debug(
-                "This action has been sent to user ID %d"
-                % (user.id)
-            )
+            _logger.debug("This action has been sent to user ID %d" % (user.id))
             response = partners[0].name
         return response

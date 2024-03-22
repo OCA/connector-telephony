@@ -1,6 +1,5 @@
 /** @odoo-module **/
 
-
 /** @odoo-module **/
 
 import {markup} from "@odoo/owl";
@@ -13,9 +12,6 @@ import {registry} from "@web/core/registry";
 // import {patch} from "@web/core/utils/patch";
 // import { useService } from "@web/core/utils/hooks";
 
-
-
-
 // class OutGoingNotification extends Notification {
 //     // static template = "connector_phone_cloudcti_event_manager.OutGoingNotification";
 //     setup() {
@@ -25,7 +21,7 @@ import {registry} from "@web/core/registry";
 //         // {
 //         //     title: _t("warning head"),
 //         //     type: "warning",
-//         //     sticky: true                
+//         //     sticky: true
 //         // });
 //     }
 // }
