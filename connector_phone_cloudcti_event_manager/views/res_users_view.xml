@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="view_users_form_telephony_tab_cloudcti" model="ir.ui.view">
+        <field name="name">base_phone.res.users.telephony_tab.cloudcti</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base_phone_cdr.view_users_form_telephony_tab" />
+        <field name="arch" type="xml">
+	        <field name="related_phone" position="replace"/>
+            <xpath expr="//group[@name='phone-preferences']" position="after">
+                <group name="cloudcti-preferences" string="CloudCTI Preferences">
+                    <field name="cloudcti_token" />
+                    <field name="session_id" />
+                    <field name="token_expiration_time" />
+                    <button name="generate_cloudcti_access_token" type="object" class="oe_highlight" string="Generate Token" invisible="0" />
+                </group>
+            </xpath>
+        </field>
+    </record>
+    <record id="view_users_form_simple_modif_telephony_tab" model="ir.ui.view">
+        <field name="name">base_phone.user_preferences.view</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base_phone.view_users_form_simple_modif" />
+        <field name="arch" type="xml">
+            <!-- No fields avalable in this view  -->
+            <!-- <xpath expr="//field[@name='related_phone']" position="replace"/> -->
+            <xpath expr="//group[@name='phone']" position="after">
+                <group name="cloudcti" string="CloudCTI">
+                    <field name="cloudcti_token" />
+                    <field name="session_id" />
+                    <field name="token_expiration_time" />
+                    <button name="generate_cloudcti_access_token" type="object" class="oe_highlight" string="Generate Token" invisible="0" />
+                </group>
+            </xpath>
+        </field>
+    </record>
+	    
+</odoo>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_company_cloudcti_api_form" model="ir.ui.view">
+        <field name="name">Company CloudCTI API</field>
+        <field name="model">res.company</field>
+        <field name="inherit_id" ref="base.view_company_form" />
+        <field name="arch" type="xml">
+            <notebook position="inside">
+                <page string="CloudCTI API">
+                    <group>
+                        <field name="cloudcti_base_url"/>
+                        <field name="cloudcti_out_url"/>
+                        <field name="cloudcti_signin_url"/>
+                        <field name="cloudcti_subscription_url"/>
+                        <field name="cloudcti_popup_time" />
+                    </group>
+                </page>
+            </notebook>
+        </field>
+    </record>
+
+</odoo>

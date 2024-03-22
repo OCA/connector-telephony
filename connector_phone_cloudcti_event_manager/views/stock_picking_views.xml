@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="stock_picking_custom_cloud_cti" model="ir.ui.view">
+        <field name="name">stock.picking.custom.cloud.cti</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form"/>
+        <field name="arch" type="xml">
+	    <xpath expr="//field[@name='partner_id']" position="after">
+                <label for="partner_phone"/>
+                <div class="o_row">
+                    <field name="partner_phone" widget="mask" data-inputmask="'mask': '(999) 999-9999'"/>
+                    <butto type="object" name="cloudcti_open_outgoing_notification" class="btn-sm btn-link mb4 fa fa-phone" aria-label="Outgoing Call" title="Outgoing Call" invisible="not partner_phone" context="{'phone_partner': 1, 'call_no': partner_phone}" />
+                </div>
+                <label for="partner_mobile"/>
+                <div class="o_row">
+                    <field name="partner_mobile" widget="mask" data-inputmask="'mask': '(999) 999-9999'"/>
+                    <butto type="object" name="cloudcti_open_outgoing_notification" class="btn-sm btn-link mb4 fa fa-phone" aria-label="Outgoing Call" title="Outgoing Call" invisible="not partner_mobile" context="{'phone_partner': 1, 'call_no': partner_mobile}" />
+                </div>
+            </xpath>
+        </field>   
+    </record>
+</odoo>

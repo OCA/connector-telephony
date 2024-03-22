@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="sale_order_custom_cloud_cti" model="ir.ui.view">
+        <field name="name">sale.order.custom.cloud.cti</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='action_draft']" position="after">
+                <header>
+                     <button string="Test" type="object" name="action_test_sticky" class="oe_highlight"/>
+                </header>
+            </xpath>
+	        <xpath expr="//field[@name='partner_id']" position="after">
+                <label for="partner_phone"/>
+                <div class="o_row">
+                    <field name="partner_phone" widget="mask" data-inputmask="'mask': '(999) 999-9999'"/>
+                    <butto type="object" name="cloudcti_open_outgoing_notification" class="btn-sm btn-link mb4 fa fa-phone" aria-label="Outgoing Call" title="Outgoing Call" invisible="not partner_phone" context="{'phone_partner': 1, 'call_no': partner_phone}" />
+                </div>
+                <label for="partner_mobile"/>
+                <div class="o_row">
+                    <field name="partner_mobile" widget="mask" data-inputmask="'mask': '(999) 999-9999'"/>
+                    <butto type="object" name="cloudcti_open_outgoing_notification" class="btn-sm btn-link mb4 fa fa-phone" aria-label="Outgoing Call" title="Outgoing Call" invisible="not partner_mobile" context="{'phone_partner': 1, 'call_no': partner_mobile}" />
+                </div>
+            </xpath>
+            <!--
+	    <xpath expr="//field[@name='partner_invoice_id']" position="after">
+                <label for="invoice_phone"/>
+                <div class="o_row">
+                    <field name="invoice_phone" widget="mask" data-inputmask="'mask': '(999) 999-9999'"/>
+                    <button
+                        type="object"
+                        name="cloudcti_open_outgoing_notification"
+                        class="btn-sm btn-link mb4 fa fa-phone"
+                        aria-label="Outgoing Call"
+                        title="Outgoing Call"
+                        attrs="{'invisible':[('invoice_phone', '=', False)]}"
+                        context="{'phone_partner': 1, 'call_no': invoice_phone}"
+                    />
+                </div>
+                <label for="invoice_mobile"/>
+                <div class="o_row">
+                    <field name="invoice_mobile" widget="mask" data-inputmask="'mask': '(999) 999-9999'"/>
+                    <button
+                        type="object"
+                        name="cloudcti_open_outgoing_notification"
+                        class="btn-sm btn-link mb4 fa fa-mobile"
+                        aria-label="Outgoing Call"
+                        title="Outgoing Call"
+                        attrs="{'invisible':[('invoice_mobile', '=', False)]}"
+                        context="{'mobile_partner': 1, 'call_no': invoice_mobile}"
+                    />
+                </div>
+            </xpath>
+	    <xpath expr="//field[@name='partner_shipping_id']" position="after">
+                <label for="delivery_phone"/>
+                <div class="o_row">
+                    <field name="delivery_phone" widget="mask" data-inputmask="'mask': '(999) 999-9999'"/>
+                    <button
+                        type="object"
+                        name="cloudcti_open_outgoing_notification"
+                        class="btn-sm btn-link mb4 fa fa-phone"
+                        aria-label="Outgoing Call"
+                        title="Outgoing Call"
+                        attrs="{'invisible':[('delivery_phone', '=', False)]}"
+                        context="{'phone_partner': 1, 'call_no': delivery_phone}"
+                    />
+                </div>
+                <label for="delivery_mobile"/>
+                <div class="o_row">
+                    <field name="delivery_mobile" widget="mask" data-inputmask="'mask': '(999) 999-9999'"/>
+                    <button
+                        type="object"
+                        name="cloudcti_open_outgoing_notification"
+                        class="btn-sm btn-link mb4 fa fa-mobile"
+                        aria-label="Outgoing Call"
+                        title="Outgoing Call"
+                        attrs="{'invisible':[('delivery_mobile', '=', False)]}"
+                        context="{'mobile_partner': 1, 'call_no': delivery_mobile}"
+                    />
+                </div>
+            </xpath>
+            -->
+        </field>   
+    </record>
+</odoo>
