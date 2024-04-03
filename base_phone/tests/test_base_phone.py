@@ -7,7 +7,7 @@ from odoo.tests.common import TransactionCase
 
 class TestBasePhone(TransactionCase):
     def setUp(self):
-        super(TestBasePhone, self).setUp()
+        super().setUp()
         self.fr_country_id = self.env.ref("base.fr").id
         self.phco = self.env["phone.common"]
         self.env.company.write({"country_id": self.fr_country_id})

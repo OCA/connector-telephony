@@ -20,7 +20,7 @@ class ResPartner(models.Model):
             res = []
             for partner in self:
                 if partner.parent_id and partner.parent_id.is_company:
-                    name = "{}, {}".format(partner.parent_id.name, partner.name)
+                    name = f"{partner.parent_id.name}, {partner.name}"
                 else:
                     name = partner.name
                 res.append((partner.id, name))

@@ -38,8 +38,7 @@ class PhoneCommon(models.AbstractModel):
         )
         if not isinstance(presented_number, str):
             _logger.warning(
-                "Number '%s' should be a 'str' but it is a '%s'"
-                % (presented_number, type(presented_number))
+                f"Number {presented_number} should be a 'str' but it is a {type(presented_number)}"
             )
             return False
         if not presented_number.isdigit():
