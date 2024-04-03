@@ -71,6 +71,10 @@ Contributors
 
 -  Alexis de Lattre <alexis.delattre@akretion.com>
 -  Sébastien Beau <sebastien.beau@akretion.com>
+-  `Dixmit <https://www.dixmit.com>`__:
+
+   -  Luis David Rodríguez
+   -  Enric Tobella
 
 Maintainers
 -----------

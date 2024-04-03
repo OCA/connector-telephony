@@ -10,16 +10,18 @@
         <field name="model">reformat.all.phonenumbers</field>
         <field name="arch" type="xml">
                 <form string="Reformat all phone numbers">
-                    <div states="draft">
+                    <div invisible="state not in ('draft')">
                             This wizard reformats the phone and mobile numbers of all partners in standard international format e.g. +33 1 41 98 12 42</div>
-                    <div states="done">Phone numbers that couldn't be reformatted:</div>
+                    <div
+                    invisible="state not in ('done')"
+                >Phone numbers that couldn't be reformatted:</div>
 
                 <group name="main">
                     <field
                         name="phonenumbers_not_reformatted"
                         nolabel="1"
                         colspan="2"
-                        states="done"
+                        invisible="state not in ('done')"
                     />
                     <field name="state" invisible="1" />
                 </group>
@@ -29,20 +31,20 @@
                         string="Reformat all phone numbers"
                         type="object"
                         class="btn-primary"
-                        states="draft"
+                        invisible="state not in ('draft')"
                     />
                     <button
                         name="action_next"
                         type="object"
                         string="Close"
                         class="btn-primary"
-                        states="done"
+                        invisible="state not in ('done')"
                     />
                     <button
                         special="cancel"
                         string="Cancel"
                         class="btn-default"
-                        states="draft"
+                        invisible="state not in ('draft')"
                     />
                 </footer>
             </form>
