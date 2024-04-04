@@ -10,6 +10,7 @@ msgstr ""
 "PO-Revision-Date: 2023-05-01 07:17+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -31,15 +32,15 @@ msgid "Cancel"
 msgstr "Abbruch"
 
 #. module: base_phone
-#. openerp-web
-#: code:addons/base_phone/static/src/js/phone_widget.js:0
+#. odoo-javascript
+#: code:addons/base_phone/static/src/components/on_dial_button/on_dial_button.esm.js:0
 #, python-format
 msgid "Click2dial successfull"
 msgstr "Click2dial erfolgreich"
 
 #. module: base_phone
-#. openerp-web
-#: code:addons/base_phone/static/src/js/phone_widget.js:0
+#. odoo-javascript
+#: code:addons/base_phone/static/src/components/on_dial_button/on_dial_button.esm.js:0
 #, python-format
 msgid "Click2dial to %s"
 msgstr ""
@@ -71,6 +72,7 @@ msgid "Contact"
 msgstr "Kontakt"
 
 #. module: base_phone
+#. odoo-python
 #: code:addons/base_phone/wizard/number_not_found.py:0
 #: model_terms:ir.ui.view,arch_db:base_phone.number_not_found_form
 #, python-format
@@ -105,19 +107,22 @@ msgid "Current Phone"
 msgstr "Aktuelle Telefonnummer"
 
 #. module: base_phone
-#. openerp-web
-#: code:addons/base_phone/static/src/xml/phone.xml:0
-#: code:addons/base_phone/static/src/xml/phone.xml:0
+#. odoo-javascript
+#: code:addons/base_phone/static/src/components/on_dial_button/on_dial_button.xml:0
 #, python-format
 msgid "Dial"
 msgstr "Wählen"
 
 #. module: base_phone
+#. odoo-javascript
+#: code:addons/base_phone/static/src/components/on_dial_button/on_dial_button.esm.js:0
+#, python-format
+msgid "Dial phone"
+msgstr ""
+
+#. module: base_phone
 #: model:ir.model.fields,field_description:base_phone.field_number_not_found__display_name
 #: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers__display_name
-#: model:ir.model.fields,field_description:base_phone.field_res_company__display_name
-#: model:ir.model.fields,field_description:base_phone.field_res_config_settings__display_name
-#: model:ir.model.fields,field_description:base_phone.field_res_partner__display_name
 msgid "Display Name"
 msgstr "Anzeigename"
 
@@ -154,9 +159,6 @@ msgstr "Festnetz/Mobil"
 #. module: base_phone
 #: model:ir.model.fields,field_description:base_phone.field_number_not_found__id
 #: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers__id
-#: model:ir.model.fields,field_description:base_phone.field_res_company__id
-#: model:ir.model.fields,field_description:base_phone.field_res_config_settings__id
-#: model:ir.model.fields,field_description:base_phone.field_res_partner__id
 msgid "ID"
 msgstr ""
 
@@ -180,15 +182,6 @@ msgstr ""
 "eingeben sollten."
 
 #. module: base_phone
-#: model:ir.model.fields,field_description:base_phone.field_number_not_found____last_update
-#: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers____last_update
-#: model:ir.model.fields,field_description:base_phone.field_res_company____last_update
-#: model:ir.model.fields,field_description:base_phone.field_res_config_settings____last_update
-#: model:ir.model.fields,field_description:base_phone.field_res_partner____last_update
-msgid "Last Modified on"
-msgstr "Zuletzt geändert am"
-
-#. module: base_phone
 #: model:ir.model.fields,field_description:base_phone.field_number_not_found__write_uid
 #: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers__write_uid
 msgid "Last Updated by"
@@ -201,6 +194,7 @@ msgid "Last Updated on"
 msgstr "Zuletzt aktualisiert am"
 
 #. module: base_phone
+#. odoo-python
 #: code:addons/base_phone/wizard/number_not_found.py:0
 #, python-format
 msgid "Missing country on company %s"
@@ -222,8 +216,8 @@ msgid "Number converted to international format:"
 msgstr "Nummer in internationales Format umgewandelt:"
 
 #. module: base_phone
-#. openerp-web
-#: code:addons/base_phone/static/src/js/phone_widget.js:0
+#. odoo-javascript
+#: code:addons/base_phone/static/src/components/on_dial_button/on_dial_button.esm.js:0
 #, python-format
 msgid "Number dialed: %s"
 msgstr ""
@@ -255,6 +249,7 @@ msgid "Partner to Update"
 msgstr "Zu aktualisierender Partner"
 
 #. module: base_phone
+#. odoo-python
 #: code:addons/base_phone/wizard/number_not_found.py:0
 #, python-format
 msgid "Partner: %s"
@@ -276,8 +271,8 @@ msgid ""
 "Phone number of calling party that has been obtained from the telephony "
 "server, in the format used by the telephony server (not E.164)."
 msgstr ""
-"Telefonnummer des Anrufers der vom Telefonieserver erhalten wurde, im Format"
-" des Telefonieservers (nicht E.164)."
+"Telefonnummer des Anrufers der vom Telefonieserver erhalten wurde, im Format "
+"des Telefonieservers (nicht E.164)."
 
 #. module: base_phone
 #: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers__phonenumbers_not_reformatted
@@ -302,6 +297,7 @@ msgid "Reformat all phone numbers"
 msgstr "Formatiere alle Telefonnummern um"
 
 #. module: base_phone
+#. odoo-python
 #: code:addons/base_phone/wizard/number_not_found.py:0
 #, python-format
 msgid "Select the Partner to Update."
@@ -334,11 +330,10 @@ msgstr "Telefonie Einstellungen"
 #. module: base_phone
 #: model:ir.model.constraint,message:base_phone.constraint_res_company_number_of_digits_to_match_from_end_positive
 msgid ""
-"The value of the field 'Number of Digits To Match From End' must be "
-"positive."
+"The value of the field 'Number of Digits To Match From End' must be positive."
 msgstr ""
-"Der Wert des Feldes 'Anzahl der übereinstimmenden Stellen vom Ende her' muss"
-" positiv sein"
+"Der Wert des Feldes 'Anzahl der übereinstimmenden Stellen vom Ende her' muss "
+"positiv sein"
 
 #. module: base_phone
 #: model_terms:ir.ui.view,arch_db:base_phone.reformat_all_phonenumbers_form
@@ -350,8 +345,8 @@ msgstr ""
 "Partner im standard internationen Format - zB +33141981242 - neu"
 
 #. module: base_phone
-#. openerp-web
-#: code:addons/base_phone/static/src/js/phone_widget.js:0
+#. odoo-javascript
+#: code:addons/base_phone/static/src/components/on_dial_button/on_dial_button.esm.js:0
 #, python-format
 msgid "Unhook your ringing phone"
 msgstr "Nimm das klingelde Telefon ab"
@@ -360,3 +355,6 @@ msgstr "Nimm das klingelde Telefon ab"
 #: model_terms:ir.ui.view,arch_db:base_phone.number_not_found_form
 msgid "Update Existing Partner"
 msgstr "Einen Partner anlegen oder aktualisieren"
+
+#~ msgid "Last Modified on"
+#~ msgstr "Zuletzt geändert am"
