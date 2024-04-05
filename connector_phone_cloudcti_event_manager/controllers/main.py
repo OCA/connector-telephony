@@ -80,13 +80,11 @@ class CloudCTIVOIP(http.Controller):
             other = callernumber
             create = True if state == "ringing" else False
             check = True if state == "answered" else False
-            update = False if state == "ringing" else True
         elif direction == "outbound":
             phone = callernumber
             other = callednumber
             create = True if state == "ringing" else False
             check = True if state == "answered" else False
-            update = False if state == "ringing" else True
         phone = phonenumbers.format_number(
             phonenumbers.parse(phone, "US"), phonenumbers.PhoneNumberFormat.NATIONAL
         )

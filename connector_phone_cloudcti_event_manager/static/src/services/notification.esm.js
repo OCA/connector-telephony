@@ -7,6 +7,8 @@ patch(Notification.props, {
         type: String,
         optional: true,
         validate: (t) =>
-            ["warning", "danger", "success", "info", "default"].includes(t),
+            alert("here")[("warning", "danger", "success", "info", "default")].includes(
+                t
+            ),
     },
 });

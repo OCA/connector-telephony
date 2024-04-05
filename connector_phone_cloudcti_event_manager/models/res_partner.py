@@ -13,6 +13,14 @@ from odoo.addons.web.controllers.utils import clean_action
 
 _logger = logging.getLogger(__name__)
 
+DEFAULT_MESSAGE = "Default message"
+
+SUCCESS = "success"
+DANGER = "danger"
+WARNING = "warning"
+INFO = "info"
+DEFAULT = "default"
+
 
 class ResPartner(models.Model):
     _inherit = "res.partner"
@@ -69,17 +77,20 @@ class ResPartner(models.Model):
         }
 
     def cloudcti_open_outgoing_notification(self):
-        channel = "notify_info_%s" % self.env.user.id
         bus_message = {
+            "target": self.id,
             "message": _("Calling from : %s" % self.env.user.phone),
             "title": _("Outgoing Call to %s" % self.display_name),
             "action_link_name": "action_link_name",
-            "Outnotification": "OutGoingNotification",
-            "id": self.id,
+            "notification": "OutGoingNotification",
+            "id": self.ids,
+            "type": "default",
         }
         self.update_called_for_values()
         self.cloudcti_outgoing_call_notification()
-        # self.env["bus.bus"].sendone(channel, bus_message)
+        self.sudo().env["bus.bus"]._sendone(
+            self.env.user.partner_id, "web.notify.outgoing", [bus_message]
+        )
 
     def cloudcti_outgoing_call_notification(self):
         # For Outgoing Calls
@@ -156,23 +167,5 @@ class ResPartner(models.Model):
             else:
                 action["views"] = form_view
             action["res_id"] = partners[0]
-        action = clean_action(action)
+        action = clean_action(action, self.env)
         return action
-
-    # def incall_notify_by_login_test(self, number, login_list):
-    #     self.incall_notify_by_login('(582) 126-8105',['admin'])
-
-    # @api.model
-    # def incall_notify_by_login(self, number, login_list, calltype="Incoming Call"):
-    #     number = False
-    #     assert isinstance(login_list, list), "login_list must be a list"
-    #     bus_message = {
-    #         "message": _(calltype + " from : " + self.name),
-    #         "title": _(calltype),
-    #         "action_link_name": "action_link_name",
-    #         "notification": "IncomingNotification",
-    #         "id": self.id,
-    #         "phone": number
-    #     }
-
-    #     return bus_message
