@@ -20,7 +20,6 @@ class NumberNotFound(models.TransientModel):
     _description = "Number not found"
 
     calling_number = fields.Char(
-        string="Calling Number",
         size=64,
         readonly=True,
         help="Phone number of calling party that has been obtained from the "
