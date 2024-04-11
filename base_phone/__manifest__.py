@@ -21,8 +21,11 @@
         "views/res_users_view.xml",
         "wizard/reformat_all_phonenumbers_view.xml",
         "wizard/number_not_found_view.xml",
-        "views/web_phone.xml",
     ],
-    "qweb": ["static/src/xml/phone.xml"],
+    "assets": {
+        "web.assets_backend": [
+            "base_phone/static/src/components/**/*",
+        ],
+    },
     "installable": True,
 }

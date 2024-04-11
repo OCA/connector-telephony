@@ -45,7 +45,7 @@ msgstr "Tıkla çevir başarılı"
 #. openerp-web
 #: code:addons/base_phone/static/src/js/phone_widget.js:0
 #, fuzzy, python-format
-msgid "Click2dial to %s"
+msgid "Click2dial to "
 msgstr "Tıkla çevir başlatıldı"
 
 #. module: base_phone
@@ -228,7 +228,7 @@ msgstr "Uluslarası biçime çevrilen numara:"
 #. openerp-web
 #: code:addons/base_phone/static/src/js/phone_widget.js:0
 #, fuzzy, python-format
-msgid "Number dialed: %s"
+msgid "Number dialed: "
 msgstr "Aranan numara:"
 
 #. module: base_phone
