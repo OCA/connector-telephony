@@ -21,17 +21,15 @@ class AsteriskServer(models.Model):
     _description = "Asterisk Servers"
 
     name = fields.Char(string="Asterisk Server Name", required=True)
-    active = fields.Boolean(string="Active", default=True)
+    active = fields.Boolean(default=True)
     ip_address = fields.Char(string="Asterisk IP address or DNS", required=True)
     port = fields.Integer(
-        string="Port",
         required=True,
         default=5038,
         help="TCP port on which the Asterisk REST Interface listens. "
         "Defined in /etc/asterisk/ari.conf on Asterisk.",
     )
     out_prefix = fields.Char(
-        string="Out Prefix",
         size=4,
         help="Prefix to dial to make outgoing "
         "calls. If you don't use a prefix to make outgoing calls, "
@@ -59,14 +57,12 @@ class AsteriskServer(models.Model):
         "server.",
     )
     wait_time = fields.Integer(
-        string="Wait Time",
         required=True,
         default=15,
         help="Amount of time (in seconds) Asterisk will try to reach "
         "the user's phone before hanging up.",
     )
     extension_priority = fields.Integer(
-        string="Extension Priority",
         required=True,
         default=1,
         help="Priority of the extension in the Asterisk dialplan. Refer "
@@ -108,8 +104,8 @@ class AsteriskServer(models.Model):
             if out_prefix[1] and not out_prefix[1].isdigit():
                 raise ValidationError(
                     _(
-                        "Only use digits for the '%s' on the Asterisk server "
-                        "'%s'" % (out_prefix[0], server.name)
+                        "Only use digits for the '%(out_prefix[0])s' on the Asterisk server "
+                        "'%(server.name)s'"
                     )
                 )
             if server.wait_time < 1 or server.wait_time > 120:
@@ -138,10 +134,10 @@ class AsteriskServer(models.Model):
                     try:
                         check_str[1].encode("ascii")
                     except UnicodeEncodeError:
-                        raise ValidationError(
+                        raise ValidationError from None(
                             _(
-                                "The '%s' should only have ASCII caracters for "
-                                "the Asterisk server '%s'" % (check_str[0], server.name)
+                                "The '%(check_str[0])s' should only have ASCII caracters for "
+                                "the Asterisk server '%(server.name)s'"
                             )
                         )
 
@@ -160,7 +156,9 @@ class AsteriskServer(models.Model):
         try:
             res = requests.get(url, auth=auth, timeout=TIMEOUT)
         except Exception as e:
-            raise UserError(_("Connection Test Failed! The error message is: %s" % e))
+            raise UserError from None(
+                _("Connection Test Failed! The error message is: %s" % e)
+            )
         if res.status_code != 200:
             raise UserError(
                 _("Connection Test Failed! HTTP error code: %s" % res.status_code)
@@ -221,7 +219,7 @@ class AsteriskServer(models.Model):
                 ast_server.ip_address,
             )
             _logger.error("Here are the details of the error: '%s'", str(e))
-            raise UserError(
+            raise UserError from None(
                 _(
                     "Can't get calling number from  Asterisk.\nHere is the "
                     "error: '%s'" % str(e)
