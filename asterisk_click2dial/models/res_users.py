@@ -9,9 +9,7 @@ from odoo.exceptions import UserError, ValidationError
 class ResUsers(models.Model):
     _inherit = "res.users"
 
-    internal_number = fields.Char(
-        string="Internal Number", copy=False, help="User's internal phone number."
-    )
+    internal_number = fields.Char(copy=False, help="User's internal phone number.")
     dial_suffix = fields.Char(
         string="User-specific Dial Suffix",
         help="User-specific dial suffix such as aa=2wb for SCCP auto answer.",
@@ -101,12 +99,11 @@ class ResUsers(models.Model):
                     try:
                         check_string[1].encode("ascii")
                     except UnicodeEncodeError:
-                        raise ValidationError(
+                        raise ValidationError from None(
                             _(
-                                "The '%s' for the user '%s' should only have "
-                                "ASCII caracters"
+                                "The '%(check_string[0])s' for the user '%(user.name)s'"
+                                " should only have ASCII caracters"
                             )
-                            % (check_string[0], user.name)
                         )
 
     @api.depends("asterisk_chan_type", "resource")

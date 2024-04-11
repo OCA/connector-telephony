@@ -70,7 +70,7 @@ class PhoneCommon(models.AbstractModel):
                 ast_server.ip_address,
             )
             _logger.error("Here are the details of the error: '%s'", str(e))
-            raise UserError(
+            raise UserError from None(
                 _("Click to dial with Asterisk failed.\nHere is the error: '%s'")
                 % str(e)
             )
