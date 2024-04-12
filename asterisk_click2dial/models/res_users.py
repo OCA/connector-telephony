@@ -99,19 +99,19 @@ class ResUsers(models.Model):
                     try:
                         check_string[1].encode("ascii")
                     except UnicodeEncodeError:
-                        raise ValidationError from None(
+                        raise ValidationError(
                             _(
-                                "The '%(check_string[0])s' for the user '%(user.name)s'"
-                                " should only have ASCII caracters"
+                                f"The {check_string[0]} for the user {user.name} "
+                                "should only have ASCII caracters"
                             )
-                        )
+                        ) from None
 
     @api.depends("asterisk_chan_type", "resource")
     def _compute_asterisk_chan_name(self):
         for user in self:
             chan_name = False
             if user.asterisk_chan_type and user.resource:
-                chan_name = "%s/%s" % (user.asterisk_chan_type, user.resource)
+                chan_name = f"{user.asterisk_chan_type}/{user.resource}"
             user.asterisk_chan_name = chan_name
 
     def get_asterisk_server_from_user(self):
