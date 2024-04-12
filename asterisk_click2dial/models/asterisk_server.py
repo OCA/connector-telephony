@@ -25,7 +25,7 @@ class AsteriskServer(models.Model):
     ip_address = fields.Char(string="Asterisk IP address or DNS", required=True)
     port = fields.Integer(
         required=True,
-        default=5038,
+        default=8088,
         help="TCP port on which the Asterisk REST Interface listens. "
         "Defined in /etc/asterisk/ari.conf on Asterisk.",
     )
@@ -104,8 +104,8 @@ class AsteriskServer(models.Model):
             if out_prefix[1] and not out_prefix[1].isdigit():
                 raise ValidationError(
                     _(
-                        "Only use digits for the '%(out_prefix[0])s' on the Asterisk server "
-                        "'%(server.name)s'"
+                        f"Only use digits for the {out_prefix[0]} on the Asterisk server "
+                        f"{server.name}"
                     )
                 )
             if server.wait_time < 1 or server.wait_time > 120:
@@ -134,41 +134,47 @@ class AsteriskServer(models.Model):
                     try:
                         check_str[1].encode("ascii")
                     except UnicodeEncodeError:
-                        raise ValidationError from None(
+                        raise ValidationError(
                             _(
-                                "The '%(check_str[0])s' should only have ASCII caracters for "
-                                "the Asterisk server '%(server.name)s'"
+                                f"The {check_str[0]} should only have ASCII caracters for "
+                                f"the Asterisk server {server.name}"
                             )
-                        )
+                        ) from None
 
     @api.model
     def _get_connect_info(self, url_path):
         user = self.env.user
         ast_server = user.get_asterisk_server_from_user()
         auth = (ast_server.login, ast_server.password)
-        url = "http://%s:%s%s" % (ast_server.ip_address, ast_server.port, url_path)
+        url = f"http://{ast_server.ip_address}:{ast_server.port}{url_path}"
         return ast_server, auth, url
 
     def test_ari_connection(self):
         self.ensure_one()
         auth = (self.login, self.password)
-        url = "http://%s:%s/ari/asterisk/info" % (self.ip_address, self.port)
+        url = f"http://{self.ip_address}:{self.port}/ari/asterisk/info"
         try:
             res = requests.get(url, auth=auth, timeout=TIMEOUT)
         except Exception as e:
-            raise UserError from None(
-                _("Connection Test Failed! The error message is: %s" % e)
-            )
+            raise UserError(
+                _(f"Connection Test Failed! The error message is: {e}")
+            ) from None
         if res.status_code != 200:
             raise UserError(
                 _("Connection Test Failed! HTTP error code: %s" % res.status_code)
             )
-        raise UserError(
-            _(
-                "Connection Test Successfull! Odoo can successfully login to "
-                "the Asterisk Manager Interface."
-            )
-        )
+
+        return {
+            "type": "ir.actions.client",
+            "tag": "display_notification",
+            "params": {
+                "type": "success",
+                "message": _(
+                    "Connection Test Successfull! Odoo can successfully login to Asterisk."
+                ),
+                "next": {"type": "ir.actions.act_window_close"},
+            },
+        }
 
     @api.model
     def _get_calling_number_from_channel(self, chan, user):
@@ -204,9 +210,7 @@ class AsteriskServer(models.Model):
                 )
                 return False
             list_chan = res_req.json()
-            from pprint import pprint
 
-            pprint(list_chan)
             _logger.debug("Result of Status ARI request:")
             _logger.debug(pformat(list_chan))
             for chan in list_chan:
@@ -219,12 +223,12 @@ class AsteriskServer(models.Model):
                 ast_server.ip_address,
             )
             _logger.error("Here are the details of the error: '%s'", str(e))
-            raise UserError from None(
+            raise UserError(
                 _(
                     "Can't get calling number from  Asterisk.\nHere is the "
                     "error: '%s'" % str(e)
                 )
-            )
+            ) from None
 
         _logger.debug("Calling party number: '%s'", calling_party_number)
         return calling_party_number
