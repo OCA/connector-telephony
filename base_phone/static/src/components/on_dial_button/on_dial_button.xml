@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+
+    <!-- Copyright 2024 Dixmit
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+
+    <t t-name="base_phone.OnDialButton" owl="1">
+        <a
+            t-att-title="title"
+            t-on-click.prevent.stop="onClick"
+            class="ms-3 d-inline-flex align-items-center o_field_phone_dial"
+        ><i class="fa fa-phone-square" /><small class="fw-bold ms-1">Dial</small></a>
+    </t>
+
+</templates>
