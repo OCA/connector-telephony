@@ -8,8 +8,8 @@
 
 
 <record id="demo_ast_server" model="asterisk.server">
-    <field name="name">Akretion Asterisk IPBX</field>
-    <field name="ip_address">asterisk.akretion.com</field>
+    <field name="name">My Asterisk</field>
+    <field name="ip_address">localhost</field>
     <field name="login">odoo</field>
     <field name="password">mypassword</field>
     <field name="context">from-internal</field>
