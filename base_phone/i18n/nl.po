@@ -34,17 +34,10 @@ msgid "Cancel"
 msgstr "Annuleren"
 
 #. module: base_phone
-#. openerp-web
-#: code:addons/base_phone/static/src/js/phone_widget.js:0
+#. odoo-javascript
+#: code:addons/base_phone/static/src/components/on_dial_button/on_dial_button.esm.js:0
 #, python-format
 msgid "Click2dial successfull"
-msgstr ""
-
-#. module: base_phone
-#. openerp-web
-#: code:addons/base_phone/static/src/js/phone_widget.js:0
-#, python-format
-msgid "Click2dial to %s"
 msgstr ""
 
 #. module: base_phone
@@ -74,6 +67,7 @@ msgid "Contact"
 msgstr ""
 
 #. module: base_phone
+#. odoo-python
 #: code:addons/base_phone/wizard/number_not_found.py:0
 #: model_terms:ir.ui.view,arch_db:base_phone.number_not_found_form
 #, python-format
@@ -108,20 +102,22 @@ msgid "Current Phone"
 msgstr ""
 
 #. module: base_phone
-#. openerp-web
-#: code:addons/base_phone/static/src/xml/phone.xml:0
+#. odoo-javascript
+#: code:addons/base_phone/static/src/components/on_dial_button/on_dial_button.xml:0
 #, python-format
 msgid "Dial"
 msgstr ""
 
 #. module: base_phone
+#. odoo-javascript
+#: code:addons/base_phone/static/src/components/on_dial_button/on_dial_button.esm.js:0
+#, python-format
+msgid "Dial phone"
+msgstr ""
+
+#. module: base_phone
 #: model:ir.model.fields,field_description:base_phone.field_number_not_found__display_name
-#: model:ir.model.fields,field_description:base_phone.field_phone_common__display_name
-#: model:ir.model.fields,field_description:base_phone.field_phone_validation_mixin__display_name
 #: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers__display_name
-#: model:ir.model.fields,field_description:base_phone.field_res_company__display_name
-#: model:ir.model.fields,field_description:base_phone.field_res_config_settings__display_name
-#: model:ir.model.fields,field_description:base_phone.field_res_partner__display_name
 msgid "Display Name"
 msgstr ""
 
@@ -157,12 +153,7 @@ msgstr ""
 
 #. module: base_phone
 #: model:ir.model.fields,field_description:base_phone.field_number_not_found__id
-#: model:ir.model.fields,field_description:base_phone.field_phone_common__id
-#: model:ir.model.fields,field_description:base_phone.field_phone_validation_mixin__id
 #: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers__id
-#: model:ir.model.fields,field_description:base_phone.field_res_company__id
-#: model:ir.model.fields,field_description:base_phone.field_res_config_settings__id
-#: model:ir.model.fields,field_description:base_phone.field_res_partner__id
 msgid "ID"
 msgstr ""
 
@@ -181,12 +172,7 @@ msgstr ""
 
 #. module: base_phone
 #: model:ir.model.fields,field_description:base_phone.field_number_not_found____last_update
-#: model:ir.model.fields,field_description:base_phone.field_phone_common____last_update
-#: model:ir.model.fields,field_description:base_phone.field_phone_validation_mixin____last_update
 #: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers____last_update
-#: model:ir.model.fields,field_description:base_phone.field_res_company____last_update
-#: model:ir.model.fields,field_description:base_phone.field_res_config_settings____last_update
-#: model:ir.model.fields,field_description:base_phone.field_res_partner____last_update
 msgid "Last Modified on"
 msgstr ""
 
@@ -203,6 +189,7 @@ msgid "Last Updated on"
 msgstr ""
 
 #. module: base_phone
+#. odoo-python
 #: code:addons/base_phone/wizard/number_not_found.py:0
 #, python-format
 msgid "Missing country on company %s"
@@ -221,13 +208,6 @@ msgstr ""
 #. module: base_phone
 #: model_terms:ir.ui.view,arch_db:base_phone.number_not_found_form
 msgid "Number converted to international format:"
-msgstr ""
-
-#. module: base_phone
-#. openerp-web
-#: code:addons/base_phone/static/src/js/phone_widget.js:0
-#, python-format
-msgid "Number dialed: %s"
 msgstr ""
 
 #. module: base_phone
@@ -257,6 +237,7 @@ msgid "Partner to Update"
 msgstr ""
 
 #. module: base_phone
+#. odoo-python
 #: code:addons/base_phone/wizard/number_not_found.py:0
 #, python-format
 msgid "Partner: %s"
@@ -302,6 +283,7 @@ msgid "Reformat all phone numbers"
 msgstr ""
 
 #. module: base_phone
+#. odoo-python
 #: code:addons/base_phone/wizard/number_not_found.py:0
 #, python-format
 msgid "Select the Partner to Update."
@@ -345,8 +327,8 @@ msgid ""
 msgstr ""
 
 #. module: base_phone
-#. openerp-web
-#: code:addons/base_phone/static/src/js/phone_widget.js:0
+#. odoo-javascript
+#: code:addons/base_phone/static/src/components/on_dial_button/on_dial_button.esm.js:0
 #, python-format
 msgid "Unhook your ringing phone"
 msgstr ""
