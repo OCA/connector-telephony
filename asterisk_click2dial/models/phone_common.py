@@ -70,14 +70,14 @@ class PhoneCommon(models.AbstractModel):
                 ast_server.ip_address,
             )
             _logger.error("Here are the details of the error: '%s'", str(e))
-            raise UserError from None(
+            raise UserError(
                 _("Click to dial with Asterisk failed.\nHere is the error: '%s'")
                 % str(e)
-            )
+            ) from None
         if res_req.status_code != 200:
             raise UserError(
                 _("Click to dial with Asterisk failed.\nHTTP error code: %s.")
-                % res.status_code
+                % res_req.status_code
             )
 
         res["dialed_number"] = ast_number

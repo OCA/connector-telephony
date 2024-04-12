@@ -81,7 +81,7 @@
     <field name="name">asterisk.server.tree</field>
     <field name="model">asterisk.server</field>
     <field name="arch" type="xml">
-        <tree string="Asterisk Servers">
+        <tree>
             <field name="name" />
             <field name="ip_address" />
             <field name="company_id" groups="base.group_multi_company" />

@@ -4,7 +4,7 @@
 
 {
     "name": "Asterisk connector",
-    "version": "14.0.2.0.0",
+    "version": "16.0.1.0.0",
     "category": "Phone",
     "license": "AGPL-3",
     "summary": "Asterisk-Odoo connector",
@@ -18,10 +18,16 @@
         "views/res_users.xml",
         "security/ir.model.access.csv",
         "security/asterisk_security.xml",
-        "views/web_asterisk_click2dial.xml",
     ],
     "demo": ["demo/asterisk_click2dial_demo.xml"],
     "qweb": ["static/src/xml/asterisk_click2dial.xml"],
     "application": True,
     "installable": True,
+    "assets": {
+        "web.assets_backend": [
+            "asterisk_click2dial/static/src/scss/*.scss",
+            "asterisk_click2dial/static/src/components/**/*.js",
+            "asterisk_click2dial/static/src/components/**/*.xml",
+        ],
+    },
 }
