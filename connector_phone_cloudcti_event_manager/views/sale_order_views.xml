@@ -5,16 +5,6 @@
         <field name="model">sale.order</field>
         <field name="inherit_id" ref="sale.view_order_form" />
         <field name="arch" type="xml">
-            <xpath expr="//button[@name='action_draft']" position="after">
-                <header>
-                     <button
-                        string="Test"
-                        type="object"
-                        name="action_test_sticky"
-                        class="oe_highlight"
-                    />
-                </header>
-            </xpath>
 	        <xpath expr="//field[@name='partner_id']" position="after">
                 <label for="partner_phone" />
                 <div class="o_row">
