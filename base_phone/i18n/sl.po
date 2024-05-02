@@ -47,7 +47,7 @@ msgstr "Click2dial uspešen"
 #: code:addons/base_phone/static/src/js/phone_widget.js:0
 #, fuzzy, python-format
 msgid "Click2dial to %s"
-msgstr "Click2dial zagnan"
+msgstr "Click2dial %s"
 
 #. module: base_phone
 #: model_terms:ir.ui.view,arch_db:base_phone.number_not_found_form
@@ -228,9 +228,8 @@ msgstr "Številka pretvorjena v mednarodni format:"
 #. module: base_phone
 #. openerp-web
 #: code:addons/base_phone/static/src/js/phone_widget.js:0
-#, fuzzy, python-format
 msgid "Number dialed: %s"
-msgstr "Klicana številka:"
+msgstr "Klicana številka: %s"
 
 #. module: base_phone
 #: model:ir.model,name:base_phone.model_number_not_found
