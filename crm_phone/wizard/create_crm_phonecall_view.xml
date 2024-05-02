@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+  Copyright 2012-2018 Akretion France
+  @author: Alexis de Lattre <alexis.delattre@akretion.com>
+  License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+<odoo>
+
+<!-- Add button on the "Get partner from incoming phone call view" -->
+<record id="create_crm_phonecall_view" model="ir.ui.view">
+    <field name="name">create_crm_phonecall.view</field>
+    <field name="model">wizard.create.crm.phonecall</field>
+    <field name="arch" type="xml">
+        <form string="CRM Phone Call">
+            <div>Create a phone call in the CRM ?</div>
+            <footer>
+                <button
+                        name="button_create_outgoing_phonecall"
+                        string="Yes"
+                        type="object"
+                        class="btn-primary"
+                    />
+                <button special="cancel" string="No" class="oe_link" />
+            </footer>
+        </form>
+    </field>
+</record>
+
+
+<record id="action_create_crm_phonecall" model="ir.actions.act_window">
+    <field name="name">Create CRM phonecall</field>
+    <field name="res_model">wizard.create.crm.phonecall</field>
+    <field name="view_mode">form</field>
+    <field name="target">new</field>
+</record>
+
+
+</odoo>
