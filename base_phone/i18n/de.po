@@ -45,7 +45,7 @@ msgstr "Click2dial erfolgreich"
 #: code:addons/base_phone/static/src/js/phone_widget.js:0
 #, fuzzy, python-format
 msgid "Click2dial to %s"
-msgstr "Click2dial gestartet"
+msgstr "Click2dial %s"
 
 #. module: base_phone
 #: model_terms:ir.ui.view,arch_db:base_phone.number_not_found_form
@@ -232,9 +232,8 @@ msgstr "Nummer in internationales Format umgewandelt:"
 #. module: base_phone
 #. openerp-web
 #: code:addons/base_phone/static/src/js/phone_widget.js:0
-#, fuzzy, python-format
 msgid "Number dialed: %s"
-msgstr "Gewählte Nummer:"
+msgstr "Gewählte Nummer: %s"
 
 #. module: base_phone
 #: model:ir.model,name:base_phone.model_number_not_found
