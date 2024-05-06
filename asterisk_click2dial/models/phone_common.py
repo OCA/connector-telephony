@@ -29,7 +29,7 @@ class PhoneCommon(models.AbstractModel):
         # Add 'out prefix'
         if ast_server.out_prefix:
             _logger.debug("Out prefix = %s", ast_server.out_prefix)
-            ast_number = "%s%s" % (ast_server.out_prefix, ast_number)
+            ast_number = f"{ast_server.out_prefix}{ast_number}"
         _logger.debug("Number to be sent to Asterisk = %s", ast_number)
 
         # The user should have a CallerID

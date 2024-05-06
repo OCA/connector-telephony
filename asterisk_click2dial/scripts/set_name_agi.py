@@ -124,7 +124,7 @@ def geolocate_phone_number(number, my_country_code, lang):
         # Convert country code to country name
         country = phonenumbers.geocoder._region_display_name(country_code, lang.lower())
         if country and city:
-            res = "%s %s" % (country, city)
+            res = f"{country}{city}"
         elif country and not city:
             res = country
     return res
@@ -232,8 +232,7 @@ def main(args):
         if args.geoloc:
             # if the number is not found in Odoo, we try to geolocate
             agi.verbose(
-                "Trying to geolocate with country %s and lang %s"
-                % (args.country, args.lang)
+                f"Trying to geolocate with country {args.country} and lang {args.lang}"
             )
             res = geolocate_phone_number(phone_number, args.country, args.lang)
         else:
@@ -253,7 +252,7 @@ def main(args):
         if args.outgoing:
             agi.set_variable("connectedlinename", res)
         else:
-            agi.set_callerid('"%s"<%s>' % (res, phone_number))
+            agi.set_callerid(f"{res}<{phone_number}>")
 
 
 if __name__ == "__main__":
