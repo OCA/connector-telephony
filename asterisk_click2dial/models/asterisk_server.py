@@ -104,8 +104,8 @@ class AsteriskServer(models.Model):
             if out_prefix[1] and not out_prefix[1].isdigit():
                 raise ValidationError(
                     _(
-                        f"Only use digits for the {out_prefix[0]} on the Asterisk server "
-                        f"{server.name}"
+                        f"Only use digits for the {out_prefix[0]} on the Asterisk "
+                        f"server {server.name}"
                     )
                 )
             if server.wait_time < 1 or server.wait_time > 120:
@@ -136,8 +136,8 @@ class AsteriskServer(models.Model):
                     except UnicodeEncodeError:
                         raise ValidationError(
                             _(
-                                f"The {check_str[0]} should only have ASCII caracters for "
-                                f"the Asterisk server {server.name}"
+                                f"The {check_str[0]} should only have ASCII "
+                                f"caracters for the Asterisk server {server.name}"
                             )
                         ) from None
 
@@ -170,7 +170,8 @@ class AsteriskServer(models.Model):
             "params": {
                 "type": "success",
                 "message": _(
-                    "Connection Test Successfull! Odoo can successfully login to Asterisk."
+                    "Connection Test Successfull! Odoo can successfully login to"
+                    "Asterisk."
                 ),
                 "next": {"type": "ir.actions.act_window_close"},
             },

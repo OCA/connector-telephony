@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
@@ -369,61 +368,71 @@ ul.auto-toc {
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !! source digest: sha256:70c4fbe57dbcfd18cf15685ed8361c0af932e8f5c65668c39a947eeccfd1cc1e
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
-<p><a class="reference external image-reference" href="https://odoo-community.org/page/development-status"><img alt="Beta" src="https://img.shields.io/badge/maturity-Beta-yellow.png" /></a> <a class="reference external image-reference" href="http://www.gnu.org/licenses/agpl-3.0-standalone.html"><img alt="License: AGPL-3" src="https://img.shields.io/badge/licence-AGPL--3-blue.png" /></a> <a class="reference external image-reference" href="https://github.com/OCA/connector-telephony/tree/16.0/asterisk_click2dial"><img alt="OCA/connector-telephony" src="https://img.shields.io/badge/github-OCA%2Fconnector--telephony-lightgray.png?logo=github" /></a> <a class="reference external image-reference" href="https://translation.odoo-community.org/projects/connector-telephony-16-0/connector-telephony-16-0-asterisk_click2dial"><img alt="Translate me on Weblate" src="https://img.shields.io/badge/weblate-Translate%20me-F47D42.png" /></a> <a class="reference external image-reference" href="https://runboat.odoo-community.org/builds?repo=OCA/connector-telephony&amp;target_branch=16.0"><img alt="Try me on Runboat" src="https://img.shields.io/badge/runboat-Try%20me-875A7B.png" /></a></p>
-<p>The technical name of this module is <strong>asterisk_click2dial</strong>, but this module
-implements much more than a simple <em>click2dial</em> ! This module adds 3
-functionalities:</p>
+<p><a class="reference external image-reference" href="https://odoo-community.org/page/development-status"><img alt="Beta" src="https://img.shields.io/badge/maturity-Beta-yellow.png" /></a> <a class="reference external image-reference" href="http://www.gnu.org/licenses/agpl-3.0-standalone.html"><img alt="License: AGPL-3" src="https://img.shields.io/badge/licence-AGPL--3-blue.png" /></a> <a class="reference external image-reference" href="https://github.com/OCA/connector-telephony/tree/17.0/asterisk_click2dial"><img alt="OCA/connector-telephony" src="https://img.shields.io/badge/github-OCA%2Fconnector--telephony-lightgray.png?logo=github" /></a> <a class="reference external image-reference" href="https://translation.odoo-community.org/projects/connector-telephony-17-0/connector-telephony-17-0-asterisk_click2dial"><img alt="Translate me on Weblate" src="https://img.shields.io/badge/weblate-Translate%20me-F47D42.png" /></a> <a class="reference external image-reference" href="https://runboat.odoo-community.org/builds?repo=OCA/connector-telephony&amp;target_branch=17.0"><img alt="Try me on Runboat" src="https://img.shields.io/badge/runboat-Try%20me-875A7B.png" /></a></p>
+<p>The technical name of this module is <strong>asterisk_click2dial</strong>, but this
+module implements much more than a simple <em>click2dial</em> ! This module
+adds 3 functionalities:</p>
 <ol class="arabic">
-<li><p class="first">It adds a <em>Dial</em> button in the partner form view so that users can directly
-dial a phone number through Asterisk. This feature is usually known as
-<em>click2dial</em>. Here is how it works :</p>
+<li><p class="first">It adds a <em>Dial</em> button in the partner form view so that users can
+directly dial a phone number through Asterisk. This feature is
+usually known as <em>click2dial</em>. Here is how it works :</p>
 <ul class="simple">
-<li>In Odoo, the user clicks on the <em>Dial</em> button next to a phone number
-field in the partner form view (or any form view with a phone number).</li>
-<li>Odoo connects to the Asterisk Manager Interface and Asterisk makes the
-user’s phone ring.</li>
-<li>The user answers his own phone (if he doesn’t, the process stops here).</li>
-<li>Asterisk dials the phone number found in Odoo in place of the user.</li>
-<li>If the remote party answers, the user can talk to his correspondent.</li>
+<li>In Odoo, the user clicks on the <em>Dial</em> button next to a phone
+number field in the partner form view (or any form view with a
+phone number).</li>
+<li>Odoo connects to the Asterisk Manager Interface and Asterisk makes
+the user’s phone ring.</li>
+<li>The user answers his own phone (if he doesn’t, the process stops
+here).</li>
+<li>Asterisk dials the phone number found in Odoo in place of the
+user.</li>
+<li>If the remote party answers, the user can talk to his
+correspondent.</li>
 </ul>
 </li>
-<li><p class="first">It adds the ability to show the name of the calling party on the screen of
-your IP phone on incoming phone calls if the presented phone number is
-present in the partner/leads/employees/… of Odoo. Here is how it works:</p>
+<li><p class="first">It adds the ability to show the name of the calling party on the
+screen of your IP phone on incoming phone calls if the presented
+phone number is present in the partner/leads/employees/… of Odoo.
+Here is how it works:</p>
 <ul class="simple">
-<li>On incoming phone calls, the Asterisk dialplan executes an AGI script
-<strong>set_name_incoming_timeout.sh</strong>.</li>
-<li>The <em>set_name_incoming_timeout.sh</em> script calls the <em>set_name_agi.py</em>
-script with a short timeout.</li>
-<li>The <em>set_name_agi.py</em> script will make an XML-RPC request on the Odoo
-server to try to find the name of the person corresponding to the phone
-number presented by the calling party.</li>
-<li>If it finds the name, it is set as the CallerID name of the call, so as
-to be presented on the IP phone of the user.</li>
+<li>On incoming phone calls, the Asterisk dialplan executes an AGI
+script <strong>set_name_incoming_timeout.sh</strong>.</li>
+<li>The <em>set_name_incoming_timeout.sh</em> script calls the
+<em>set_name_agi.py</em> script with a short timeout.</li>
+<li>The <em>set_name_agi.py</em> script will make an XML-RPC request on the
+Odoo server to try to find the name of the person corresponding to
+the phone number presented by the calling party.</li>
+<li>If it finds the name, it is set as the CallerID name of the call,
+so as to be presented on the IP phone of the user.</li>
 </ul>
-<p>It also works on outgoing calls, so as to display the name of the callee on
-the SIP phone of the caller. For that, you should use the script
-<em>set_name_outgoing_timeout.sh</em>.</p>
+<p>It also works on outgoing calls, so as to display the name of the
+callee on the SIP phone of the caller. For that, you should use the
+script <em>set_name_outgoing_timeout.sh</em>.</p>
 </li>
-<li><p class="first">It adds a phone icon (<em>Open Caller</em>) in the top menu bar
-to get the partner/lead/candidate/event registrations
-corresponding to the calling party in one click. Here is how it works :</p>
+<li><p class="first">It adds a phone icon (<em>Open Caller</em>) in the top menu bar to get the
+partner/lead/candidate/event registrations corresponding to the
+calling party in one click. Here is how it works :</p>
 <ul class="simple">
 <li>When the user clicks on the phone icon, Odoo sends a query to the
-Asterisk Manager Interface to get a list of the current phone calls.</li>
-<li>If it finds a phone call involving the user’s phone, it gets the phone
-number of the calling party.</li>
+Asterisk Manager Interface to get a list of the current phone
+calls.</li>
+<li>If it finds a phone call involving the user’s phone, it gets the
+phone number of the calling party.</li>
 <li>It searches the phone number of the calling party in the
-Partners/Leads/Candidates/Event Registrations of Odoo. If a record matches,
-it takes you to the form view of this record. If no record matchs, it
-opens a wizard which proposes to create a new Partner with the presented
-phone number as <em>Phone</em> or <em>Mobile</em> number or update an existing Partner.</li>
+Partners/Leads/Candidates/Event Registrations of Odoo. If a record
+matches, it takes you to the form view of this record. If no
+record matchs, it opens a wizard which proposes to create a new
+Partner with the presented phone number as <em>Phone</em> or <em>Mobile</em>
+number or update an existing Partner.</li>
 </ul>
-<p>It is possible to get a pop-up of the record corresponding to the calling
-party without any action from the user via the module <em>base_phone_popup</em>.</p>
+<p>It is possible to get a pop-up of the record corresponding to the
+calling party without any action from the user via the module
+<em>base_phone_popup</em>.</p>
 </li>
 </ol>
-<p>A detailed documentation for this module is available on <a class="reference external" href="http://www.akretion.com/products-and-services/openerp-asterisk-voip-connector">this page</a> of Akretion’s Web site.</p>
+<p>A detailed documentation for this module is available on <a class="reference external" href="http://www.akretion.com/products-and-services/openerp-asterisk-voip-connector">this
+page</a>
+of Akretion’s Web site.</p>
 <p><strong>Table of contents</strong></p>
 <div class="contents local topic" id="contents">
 <ul class="simple">
@@ -441,7 +450,7 @@ party without any action from the user via the module <em>base_phone_popup</em>.
 <p>Bugs are tracked on <a class="reference external" href="https://github.com/OCA/connector-telephony/issues">GitHub Issues</a>.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us to smash it by providing a detailed and welcomed
-<a class="reference external" href="https://github.com/OCA/connector-telephony/issues/new?body=module:%20asterisk_click2dial%0Aversion:%2016.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**">feedback</a>.</p>
+<a class="reference external" href="https://github.com/OCA/connector-telephony/issues/new?body=module:%20asterisk_click2dial%0Aversion:%2017.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**">feedback</a>.</p>
 <p>Do not contact contributors directly about support or help with technical issues.</p>
 </div>
 <div class="section" id="credits">
@@ -467,7 +476,7 @@ mission is to support the collaborative development of Odoo features and
 promote its widespread use.</p>
 <p>Current <a class="reference external" href="https://odoo-community.org/page/maintainer-role">maintainer</a>:</p>
 <p><a class="reference external image-reference" href="https://github.com/alexis-via"><img alt="alexis-via" src="https://github.com/alexis-via.png?size=40px" /></a></p>
-<p>This module is part of the <a class="reference external" href="https://github.com/OCA/connector-telephony/tree/16.0/asterisk_click2dial">OCA/connector-telephony</a> project on GitHub.</p>
+<p>This module is part of the <a class="reference external" href="https://github.com/OCA/connector-telephony/tree/17.0/asterisk_click2dial">OCA/connector-telephony</a> project on GitHub.</p>
 <p>You are welcome to contribute. To learn how please visit <a class="reference external" href="https://odoo-community.org/page/Contribute">https://odoo-community.org/page/Contribute</a>.</p>
 </div>
 </div>
