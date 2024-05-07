@@ -136,8 +136,8 @@ class AsteriskServer(models.Model):
                     except UnicodeEncodeError:
                         raise ValidationError(
                             _(
-                                f"The {check_str[0]} should only have ASCII "
-                                f"caracters for the Asterisk server {server.name}"
+                                f"The {check_str[0]} should only have ASCII caracters "
+                                f"for the Asterisk server {server.name}"
                             )
                         ) from None
 
@@ -170,8 +170,8 @@ class AsteriskServer(models.Model):
             "params": {
                 "type": "success",
                 "message": _(
-                    "Connection Test Successfull! Odoo can successfully login to"
-                    "Asterisk."
+                    "Connection Test Successfull! Odoo can successfully "
+                    "login to Asterisk."
                 ),
                 "next": {"type": "ir.actions.act_window_close"},
             },

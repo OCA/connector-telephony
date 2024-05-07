@@ -52,11 +52,9 @@ export class Click2DialSystray extends Component {
             this.action.doAction(action);
         } else if (typeof r === "object" && r.length === 3) {
             this.notification.add(
-                `${_("Moving to form view of ")}${r[2]}${_("(")}${r[0]}${_(" ID ")}${
-                    r[1]
-                }${_(")")}`,
+                _t("Moving to form view of %s (%s ID %s)", r[2], r[0], r[1]),
                 {
-                    title: `${_("On the phone with ")}${r[2]}`,
+                    title: _t("On the phone with '%s'", r[2]),
                 }
             );
             var action_suc = {
