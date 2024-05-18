@@ -1,7 +1,8 @@
 [project]
 name = "odoo-addons-oca-connector-telephony"
-version = "17.0.20240404.0"
+version = "17.0.20240518.0"
 dependencies = [
+    "odoo-addon-asterisk_click2dial>=17.0dev,<17.1dev",
     "odoo-addon-base_phone>=17.0dev,<17.1dev",
 ]
 classifiers=[
