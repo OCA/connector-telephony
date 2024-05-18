@@ -95,7 +95,6 @@ msgstr "Busca do servidor Asterisk"
 #: model:ir.model,name:asterisk_click2dial.model_asterisk_server
 #: model:ir.ui.menu,name:asterisk_click2dial.act_menu_ast_server
 #: model_terms:ir.ui.view,arch_db:asterisk_click2dial.view_asterisk_server_form
-#: model_terms:ir.ui.view,arch_db:asterisk_click2dial.view_asterisk_server_tree
 msgid "Asterisk Servers"
 msgstr "Servidores Asterisk"
 
@@ -137,6 +136,7 @@ msgid "Call Detail Record (CDR) account used for billing this user."
 msgstr "Conta CDR usada para cobrar esse usuário."
 
 #. module: asterisk_click2dial
+#. odoo-python
 #: code:addons/asterisk_click2dial/models/res_users.py:0
 #: model:ir.model.fields,field_description:asterisk_click2dial.field_res_users__callerid
 #, python-format
@@ -149,8 +149,8 @@ msgid "Caller ID used for the calls initiated by this user."
 msgstr "ID de Chamada utilizado para as chamadas iniciadas por esse usuário."
 
 #. module: asterisk_click2dial
-#. openerp-web
-#: code:addons/asterisk_click2dial/static/src/js/asterisk_click2dial.js:0
+#. odoo-javascript
+#: code:addons/asterisk_click2dial/static/src/components/asterisk_click2dial/asterisk_click2dial.esm.js:0
 #, python-format
 msgid ""
 "Calling party number not retreived from IPBX or IPBX unreachable by Odoo"
@@ -158,16 +158,7 @@ msgstr ""
 "Número da parte que chama não recuperado do PBX ou PBX inacessível pelo Odoo"
 
 #. module: asterisk_click2dial
-#: code:addons/asterisk_click2dial/models/asterisk_server.py:0
-#, python-format
-msgid ""
-"Can't get calling number from  Asterisk.\n"
-"Here is the error: '%s'"
-msgstr ""
-"Não é possível obter o número de chamada do Asterisk.\n"
-"Aqui está o erro: '%s'"
-
-#. module: asterisk_click2dial
+#. odoo-python
 #: code:addons/asterisk_click2dial/models/phone_common.py:0
 #, python-format
 msgid ""
@@ -176,6 +167,7 @@ msgid ""
 msgstr ""
 
 #. module: asterisk_click2dial
+#. odoo-python
 #: code:addons/asterisk_click2dial/models/phone_common.py:0
 #, python-format
 msgid ""
@@ -199,28 +191,6 @@ msgstr "Empresa"
 #: model:ir.model.fields,help:asterisk_click2dial.field_asterisk_server__company_id
 msgid "Company who uses the Asterisk server."
 msgstr "Empresa que usa o servidor Asterisk."
-
-#. module: asterisk_click2dial
-#: code:addons/asterisk_click2dial/models/asterisk_server.py:0
-#, python-format
-msgid "Connection Test Failed! HTTP error code: %s"
-msgstr ""
-
-#. module: asterisk_click2dial
-#: code:addons/asterisk_click2dial/models/asterisk_server.py:0
-#, python-format
-msgid "Connection Test Failed! The error message is: %s"
-msgstr "Falha no teste de conexão! A mensagem de erro é: %s"
-
-#. module: asterisk_click2dial
-#: code:addons/asterisk_click2dial/models/asterisk_server.py:0
-#, python-format
-msgid ""
-"Connection Test Successfull! Odoo can successfully login to the Asterisk "
-"Manager Interface."
-msgstr ""
-"Teste de conexão bem-sucedido! O Odoo pode efetuar login com sucesso na "
-"interface do Asterisk Manager."
 
 #. module: asterisk_click2dial
 #: model:ir.model.fields,field_description:asterisk_click2dial.field_asterisk_server__create_uid
@@ -249,8 +219,6 @@ msgstr "Parâmetros do plano de discagem"
 
 #. module: asterisk_click2dial
 #: model:ir.model.fields,field_description:asterisk_click2dial.field_asterisk_server__display_name
-#: model:ir.model.fields,field_description:asterisk_click2dial.field_phone_common__display_name
-#: model:ir.model.fields,field_description:asterisk_click2dial.field_res_users__display_name
 msgid "Display Name"
 msgstr "Exibir Nome"
 
@@ -271,31 +239,23 @@ msgstr "IAX2"
 
 #. module: asterisk_click2dial
 #: model:ir.model.fields,field_description:asterisk_click2dial.field_asterisk_server__id
-#: model:ir.model.fields,field_description:asterisk_click2dial.field_phone_common__id
-#: model:ir.model.fields,field_description:asterisk_click2dial.field_res_users__id
 msgid "ID"
 msgstr "Identificação"
 
 #. module: asterisk_click2dial
-#. openerp-web
-#: code:addons/asterisk_click2dial/static/src/js/asterisk_click2dial.js:0
+#. odoo-javascript
+#: code:addons/asterisk_click2dial/static/src/components/asterisk_click2dial/asterisk_click2dial.esm.js:0
 #, python-format
 msgid "IPBX error"
 msgstr "erro IPBX"
 
 #. module: asterisk_click2dial
+#. odoo-python
 #: code:addons/asterisk_click2dial/models/res_users.py:0
 #: model:ir.model.fields,field_description:asterisk_click2dial.field_res_users__internal_number
 #, python-format
 msgid "Internal Number"
 msgstr "Número Interno"
-
-#. module: asterisk_click2dial
-#: model:ir.model.fields,field_description:asterisk_click2dial.field_asterisk_server____last_update
-#: model:ir.model.fields,field_description:asterisk_click2dial.field_phone_common____last_update
-#: model:ir.model.fields,field_description:asterisk_click2dial.field_res_users____last_update
-msgid "Last Modified on"
-msgstr "Última Modificação no"
 
 #. module: asterisk_click2dial
 #: model:ir.model.fields,field_description:asterisk_click2dial.field_asterisk_server__write_uid
@@ -320,56 +280,39 @@ msgid "MGCP"
 msgstr "MGCP"
 
 #. module: asterisk_click2dial
+#. odoo-python
 #: code:addons/asterisk_click2dial/models/phone_common.py:0
 #, python-format
 msgid "Missing phone number"
 msgstr "Número de telefone ausente"
 
 #. module: asterisk_click2dial
-#. openerp-web
-#: code:addons/asterisk_click2dial/static/src/js/asterisk_click2dial.js:0
+#. odoo-javascript
+#: code:addons/asterisk_click2dial/static/src/components/asterisk_click2dial/asterisk_click2dial.esm.js:0
 #, python-format
-msgid "Moving to form view of %s (%s ID %d)"
-msgstr "Movendo para a visualização de formulário de %s (%s ID %d)"
+msgid "Moving to form view of %s (%s ID %s)"
+msgstr ""
 
 #. module: asterisk_click2dial
-#: code:addons/asterisk_click2dial/models/res_users.py:0
-#, python-format
-msgid "No Asterisk server configured for the company '%s'."
-msgstr "Nenhum servidor Asterisk configurado para a empresa '%s'."
-
-#. module: asterisk_click2dial
+#. odoo-python
 #: code:addons/asterisk_click2dial/models/phone_common.py:0
 #, python-format
 msgid "No callerID configured for the current user"
 msgstr "Não há identificação de chamada definida para o usuário atual"
 
 #. module: asterisk_click2dial
-#. openerp-web
-#: code:addons/asterisk_click2dial/static/src/js/asterisk_click2dial.js:0
+#. odoo-javascript
+#: code:addons/asterisk_click2dial/static/src/components/asterisk_click2dial/asterisk_click2dial.esm.js:0
 #, python-format
 msgid "Number Not Found"
 msgstr "Número não encontrado"
 
 #. module: asterisk_click2dial
-#. openerp-web
-#: code:addons/asterisk_click2dial/static/src/js/asterisk_click2dial.js:0
+#. odoo-javascript
+#: code:addons/asterisk_click2dial/static/src/components/asterisk_click2dial/asterisk_click2dial.esm.js:0
 #, python-format
 msgid "On the phone with '%s'"
 msgstr "No telefone com '%s'"
-
-#. module: asterisk_click2dial
-#: code:addons/asterisk_click2dial/models/asterisk_server.py:0
-#, python-format
-msgid "Only use digits for the '%s' on the Asterisk server '%s'"
-msgstr "Use apenas dígitos para o '%s' no servidor Asterisk '%s'"
-
-#. module: asterisk_click2dial
-#. openerp-web
-#: code:addons/asterisk_click2dial/static/src/xml/asterisk_click2dial.xml:0
-#, python-format
-msgid "Open Caller"
-msgstr "Abrir chamador"
 
 #. module: asterisk_click2dial
 #: model_terms:ir.ui.view,arch_db:asterisk_click2dial.view_users_form
@@ -419,6 +362,7 @@ msgstr ""
 "extensions.conf no seu servidor Asterisk."
 
 #. module: asterisk_click2dial
+#. odoo-python
 #: code:addons/asterisk_click2dial/models/res_users.py:0
 #: model:ir.model.fields,field_description:asterisk_click2dial.field_res_users__resource
 #, python-format
@@ -510,33 +454,16 @@ msgid "Test Connection to Asterisk"
 msgstr "Teste de Conexão para Asterisk"
 
 #. module: asterisk_click2dial
-#: code:addons/asterisk_click2dial/models/res_users.py:0
-#, python-format
-msgid "The '%s' for the user '%s' should only have ASCII caracters"
-msgstr "O '%s' para os usuários '%s' deve ter apenas caracteres ASCII"
-
-#. module: asterisk_click2dial
-#: code:addons/asterisk_click2dial/models/asterisk_server.py:0
-#, python-format
-msgid "The '%s' should only have ASCII caracters for the Asterisk server '%s'"
-msgstr "O '%s' deve ter apenas caracteres ASCII para o servidor Asterisk '%s'"
-
-#. module: asterisk_click2dial
-#: code:addons/asterisk_click2dial/models/asterisk_server.py:0
-#, python-format
-msgid ""
-"The 'extension priority' must be a positive value for the Asterisk server "
-"'%s'"
-msgstr ""
-"A 'prioridade da extensão' deve ser um valor positivo para o servidor "
-"Asterisk '%s'"
-
-#. module: asterisk_click2dial
-#. openerp-web
-#: code:addons/asterisk_click2dial/static/src/js/asterisk_click2dial.js:0
+#. odoo-javascript
+#: code:addons/asterisk_click2dial/static/src/components/asterisk_click2dial/asterisk_click2dial.esm.js:0
 #, python-format
 msgid "The calling number is not a phone number!"
 msgstr "O número de chamada não é um número de telefone!"
+
+#. module: asterisk_click2dial
+#: model:ir.model,name:asterisk_click2dial.model_res_users
+msgid "User"
+msgstr ""
 
 #. module: asterisk_click2dial
 #: model:ir.model.fields,help:asterisk_click2dial.field_res_users__internal_number
@@ -566,32 +493,9 @@ msgstr ""
 "automática do SCCP."
 
 #. module: asterisk_click2dial
-#: model:ir.model,name:asterisk_click2dial.model_res_users
-msgid "Users"
-msgstr "Usuários"
-
-#. module: asterisk_click2dial
 #: model:ir.model.fields,field_description:asterisk_click2dial.field_asterisk_server__wait_time
 msgid "Wait Time"
 msgstr "Tempo de espera"
-
-#. module: asterisk_click2dial
-#: code:addons/asterisk_click2dial/models/asterisk_server.py:0
-#, python-format
-msgid ""
-"You should set a 'Wait time' value between 1 and 120 seconds for the "
-"Asterisk server '%s'"
-msgstr ""
-"Você deve definir um valor de 'Tempo de espera' entre 1 e 120 segundos para "
-"o servidor Asterisk '%s'"
-
-#. module: asterisk_click2dial
-#: code:addons/asterisk_click2dial/models/asterisk_server.py:0
-#, python-format
-msgid ""
-"You should set a TCP port between 1 and 65535 for the Asterisk server '%s'"
-msgstr ""
-"Você deve definir uma porta TCP entre 1 e 65535 para o servidor Asterisk '%s'"
 
 #. module: asterisk_click2dial
 #: model:ir.model.fields.selection,name:asterisk_click2dial.selection__res_users__asterisk_chan_type__zap
@@ -607,6 +511,81 @@ msgstr "mISDN"
 #: model_terms:ir.ui.view,arch_db:asterisk_click2dial.view_asterisk_server_form
 msgid "seconds"
 msgstr "segundos"
+
+#, python-format
+#~ msgid ""
+#~ "Can't get calling number from  Asterisk.\n"
+#~ "Here is the error: '%s'"
+#~ msgstr ""
+#~ "Não é possível obter o número de chamada do Asterisk.\n"
+#~ "Aqui está o erro: '%s'"
+
+#, python-format
+#~ msgid "Connection Test Failed! The error message is: %s"
+#~ msgstr "Falha no teste de conexão! A mensagem de erro é: %s"
+
+#, python-format
+#~ msgid ""
+#~ "Connection Test Successfull! Odoo can successfully login to the Asterisk "
+#~ "Manager Interface."
+#~ msgstr ""
+#~ "Teste de conexão bem-sucedido! O Odoo pode efetuar login com sucesso na "
+#~ "interface do Asterisk Manager."
+
+#~ msgid "Last Modified on"
+#~ msgstr "Última Modificação no"
+
+#, python-format
+#~ msgid "Moving to form view of %s (%s ID %d)"
+#~ msgstr "Movendo para a visualização de formulário de %s (%s ID %d)"
+
+#, python-format
+#~ msgid "No Asterisk server configured for the company '%s'."
+#~ msgstr "Nenhum servidor Asterisk configurado para a empresa '%s'."
+
+#, python-format
+#~ msgid "Only use digits for the '%s' on the Asterisk server '%s'"
+#~ msgstr "Use apenas dígitos para o '%s' no servidor Asterisk '%s'"
+
+#, python-format
+#~ msgid "Open Caller"
+#~ msgstr "Abrir chamador"
+
+#, python-format
+#~ msgid "The '%s' for the user '%s' should only have ASCII caracters"
+#~ msgstr "O '%s' para os usuários '%s' deve ter apenas caracteres ASCII"
+
+#, python-format
+#~ msgid ""
+#~ "The '%s' should only have ASCII caracters for the Asterisk server '%s'"
+#~ msgstr ""
+#~ "O '%s' deve ter apenas caracteres ASCII para o servidor Asterisk '%s'"
+
+#, python-format
+#~ msgid ""
+#~ "The 'extension priority' must be a positive value for the Asterisk server "
+#~ "'%s'"
+#~ msgstr ""
+#~ "A 'prioridade da extensão' deve ser um valor positivo para o servidor "
+#~ "Asterisk '%s'"
+
+#~ msgid "Users"
+#~ msgstr "Usuários"
+
+#, python-format
+#~ msgid ""
+#~ "You should set a 'Wait time' value between 1 and 120 seconds for the "
+#~ "Asterisk server '%s'"
+#~ msgstr ""
+#~ "Você deve definir um valor de 'Tempo de espera' entre 1 e 120 segundos "
+#~ "para o servidor Asterisk '%s'"
+
+#, python-format
+#~ msgid ""
+#~ "You should set a TCP port between 1 and 65535 for the Asterisk server '%s'"
+#~ msgstr ""
+#~ "Você deve definir uma porta TCP entre 1 e 65535 para o servidor Asterisk "
+#~ "'%s'"
 
 #~ msgid "AMI Login"
 #~ msgstr "Usuário AMI"
