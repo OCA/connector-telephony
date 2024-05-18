@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+  Copyright 2010-2021 Akretion France (http://www.akretion.com/)
+  @author: Alexis de Lattre <alexis.delattre@akretion.com>
+  License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+-->
+<odoo>
+
+
+<record id="view_asterisk_server_search" model="ir.ui.view">
+    <field name="name">asterisk.server.search</field>
+    <field name="model">asterisk.server</field>
+    <field name="arch" type="xml">
+        <search string="Asterisk Server Search">
+            <field
+                    name="name"
+                    filter_domain="['|', ('name', 'ilike', self), ('ip_address', 'ilike', self)]"
+                />
+            <separator />
+            <filter
+                    string="Archived"
+                    name="inactive"
+                    domain="[('active', '=', False)]"
+                />
+        </search>
+    </field>
+</record>
+
+<record id="view_asterisk_server_form" model="ir.ui.view">
+    <field name="name">asterisk.server.form</field>
+    <field name="model">asterisk.server</field>
+    <field name="arch" type="xml">
+        <form string="Asterisk Servers">
+            <sheet>
+                <widget
+                        name="web_ribbon"
+                        title="Archived"
+                        bg_color="bg-danger"
+                        invisible="active"
+                    />
+                <div class="oe_title">
+                    <label for="name" string="Server Name" class="oe_edit_only" />
+                    <h1>
+                        <field name="name" />
+                    </h1>
+                </div>
+                <group name="main">
+                    <field name="company_id" groups="base.group_multi_company" />
+                    <field name="active" invisible="1" />
+                </group>
+                <group name="ami" string="Asterisk REST Interface">
+                    <field name="ip_address" />
+                    <field name="port" />
+                    <field name="login" />
+                    <field name="password" password="True" />
+                    <button
+                            name="test_ari_connection"
+                            type="object"
+                            string="Test Connection to Asterisk"
+                            class="btn-default"
+                            colspan="2"
+                        />
+                </group>
+                <group name="dialplan" string="Dialplan Parameters">
+                    <field name="context" />
+                    <field name="extension_priority" />
+                    <field name="out_prefix" />
+                    <field name="alert_info" />
+                    <label for="wait_time" />
+                    <div>
+                        <field name="wait_time" class="oe_inline" />
+                         seconds
+                    </div>
+                </group>
+            </sheet>
+        </form>
+    </field>
+</record>
+
+<record id="view_asterisk_server_tree" model="ir.ui.view">
+    <field name="name">asterisk.server.tree</field>
+    <field name="model">asterisk.server</field>
+    <field name="arch" type="xml">
+        <tree>
+            <field name="name" />
+            <field name="ip_address" />
+            <field name="company_id" groups="base.group_multi_company" />
+        </tree>
+    </field>
+</record>
+
+<record id="action_asterisk_server" model="ir.actions.act_window">
+    <field name="name">Asterisk Servers</field>
+    <field name="res_model">asterisk.server</field>
+    <field name="view_mode">tree,form</field>
+</record>
+
+<!-- Menu entry under Settings > Technical > Phone -->
+<menuitem
+        action="action_asterisk_server"
+        id="act_menu_ast_server"
+        parent="base_phone.menu_config_phone"
+        sequence="50"
+    />
+
+
+</odoo>
