@@ -9,26 +9,27 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-12-01 08:49+0000\n"
-"PO-Revision-Date: 2022-02-01 19:33+0000\n"
-"Last-Translator: Rodrigo Macedo <rmsolucoeseminformatica@protonmail.com>\n"
-"Language-Team: Portuguese (Brazil) (https://www.transifex.com/oca/"
-"teams/23907/pt_BR/)\n"
+"PO-Revision-Date: 2024-05-29 19:36+0000\n"
+"Last-Translator: Rodrigo Macedo <sottomaiormacedotec@users.noreply."
+"translation.odoo-community.org>\n"
+"Language-Team: Portuguese (Brazil) (https://www.transifex.com/oca/teams/"
+"23907/pt_BR/)\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 4.3.2\n"
+"X-Generator: Weblate 4.17\n"
 
 #. module: asterisk_click2dial
 #: model:ir.model.fields,field_description:asterisk_click2dial.field_asterisk_server__login
 msgid "ARI Login"
-msgstr ""
+msgstr "Acesso ARI"
 
 #. module: asterisk_click2dial
 #: model:ir.model.fields,field_description:asterisk_click2dial.field_asterisk_server__password
 msgid "ARI Password"
-msgstr ""
+msgstr "Senha ARI"
 
 #. module: asterisk_click2dial
 #: model:ir.model.fields,field_description:asterisk_click2dial.field_asterisk_server__active
@@ -58,7 +59,7 @@ msgstr "Arquivado"
 #. module: asterisk_click2dial
 #: model:ir.model.fields,field_description:asterisk_click2dial.field_res_users__asterisk_chan_name
 msgid "Asterisk Channel Name"
-msgstr ""
+msgstr "Nome do canal Asterisk"
 
 #. module: asterisk_click2dial
 #: model:ir.model.fields,field_description:asterisk_click2dial.field_res_users__asterisk_chan_type
@@ -73,7 +74,7 @@ msgstr "Endereço IP ou DNS do Asterisk"
 #. module: asterisk_click2dial
 #: model_terms:ir.ui.view,arch_db:asterisk_click2dial.view_asterisk_server_form
 msgid "Asterisk REST Interface"
-msgstr ""
+msgstr "Interface REST do Asterisk"
 
 #. module: asterisk_click2dial
 #: model:ir.model.fields,field_description:asterisk_click2dial.field_res_users__asterisk_server_id
@@ -105,6 +106,8 @@ msgid ""
 "Asterisk channel type, as used in the Asterisk dialplan. If the user has a "
 "regular IP phone, the channel type is probably 'PJSIP'."
 msgstr ""
+"Tipo de canal Asterisk, conforme usado no dialplan Asterisk. Se o usuário "
+"tiver um telefone IP normal, o tipo de canal provavelmente será 'PJSIP'."
 
 #. module: asterisk_click2dial
 #: model:ir.model.fields,help:asterisk_click2dial.field_asterisk_server__context
@@ -174,6 +177,8 @@ msgid ""
 "Click to dial with Asterisk failed.\n"
 "HTTP error code: %s."
 msgstr ""
+"Clique para discar com Asterisk falhou.\n"
+"Código de erro HTTP: %s."
 
 #. module: asterisk_click2dial
 #: code:addons/asterisk_click2dial/models/phone_common.py:0
@@ -204,7 +209,7 @@ msgstr "Empresa que usa o servidor Asterisk."
 #: code:addons/asterisk_click2dial/models/asterisk_server.py:0
 #, python-format
 msgid "Connection Test Failed! HTTP error code: %s"
-msgstr ""
+msgstr "Falha no teste de conexão! Código de erro HTTP: %s"
 
 #. module: asterisk_click2dial
 #: code:addons/asterisk_click2dial/models/asterisk_server.py:0
@@ -313,6 +318,8 @@ msgid ""
 "Login that Odoo will use to communicate with the Asterisk REST Interface. "
 "Refer to /etc/asterisk/ari.conf on your Asterisk server."
 msgstr ""
+"Login que o Odoo usará para se comunicar com a interface REST do Asterisk. "
+"Consulte /etc/asterisk/ari.conf no seu servidor Asterisk."
 
 #. module: asterisk_click2dial
 #: model:ir.model.fields.selection,name:asterisk_click2dial.selection__res_users__asterisk_chan_type__mgcp
@@ -394,6 +401,8 @@ msgid ""
 "Password that Odoo will use to communicate with the Asterisk REST Interface. "
 "Refer to /etc/asterisk/ari.conf on your Asterisk server."
 msgstr ""
+"Senha que o Odoo usará para se comunicar com a interface REST do Asterisk. "
+"Consulte /etc/asterisk/ari.conf no seu servidor Asterisk."
 
 #. module: asterisk_click2dial
 #: model:ir.model.fields,field_description:asterisk_click2dial.field_asterisk_server__port
@@ -433,6 +442,11 @@ msgid ""
 "user, then the resource name for this user is 'phone1'.  For a SIP phone, "
 "the phone number is often used as resource name, but not always."
 msgstr ""
+"Nome do recurso para o tipo de canal selecionado. Por exemplo, se você usar "
+"'Dial(PJSIP/phone1)' em seu dialplan Asterisk para ligar para o telefone SIP "
+"deste usuário, então o nome do recurso para este usuário será 'phone1'. Para "
+"um telefone SIP, o número de telefone é frequentemente usado como nome de "
+"recurso, mas nem sempre."
 
 #. module: asterisk_click2dial
 #: model:ir.model.fields.selection,name:asterisk_click2dial.selection__res_users__asterisk_chan_type__sccp
@@ -503,6 +517,8 @@ msgid ""
 "TCP port on which the Asterisk REST Interface listens. Defined in /etc/"
 "asterisk/ari.conf on Asterisk."
 msgstr ""
+"Porta TCP na qual a interface REST do Asterisk escuta. Definido em /etc/"
+"asterisk/ari.conf no Asterisk."
 
 #. module: asterisk_click2dial
 #: model_terms:ir.ui.view,arch_db:asterisk_click2dial.view_asterisk_server_form
