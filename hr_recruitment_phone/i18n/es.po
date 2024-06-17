@@ -24,17 +24,11 @@ msgstr ""
 msgid "Applicant"
 msgstr "Solicitante"
 
-#. module: hr_recruitment_phone
-#: model:ir.model.fields,field_description:hr_recruitment_phone.field_hr_applicant__display_name
-msgid "Display Name"
-msgstr "Mostrar Nombre"
+#~ msgid "Display Name"
+#~ msgstr "Mostrar Nombre"
 
-#. module: hr_recruitment_phone
-#: model:ir.model.fields,field_description:hr_recruitment_phone.field_hr_applicant__id
-msgid "ID"
-msgstr "ID"
+#~ msgid "ID"
+#~ msgstr "ID"
 
-#. module: hr_recruitment_phone
-#: model:ir.model.fields,field_description:hr_recruitment_phone.field_hr_applicant____last_update
-msgid "Last Modified on"
-msgstr "Última Modificación el"
+#~ msgid "Last Modified on"
+#~ msgstr "Última Modificación el"
