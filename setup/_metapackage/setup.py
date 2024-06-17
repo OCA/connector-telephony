@@ -10,6 +10,7 @@ setuptools.setup(
     install_requires=[
         'odoo-addon-asterisk_click2dial>=16.0dev,<16.1dev',
         'odoo-addon-base_phone>=16.0dev,<16.1dev',
+        'odoo-addon-hr_recruitment_phone>=16.0dev,<16.1dev',
     ],
     classifiers=[
         'Programming Language :: Python',
