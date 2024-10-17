@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-01-25 03:36+0000\n"
-"PO-Revision-Date: 2024-07-22 08:58+0000\n"
+"PO-Revision-Date: 2024-10-17 16:06+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
 "Language: it\n"
@@ -45,7 +45,7 @@ msgid ""
 "Amount of time (in seconds) Asterisk will try to reach the user's phone "
 "before hanging up."
 msgstr ""
-"Quantità di tempo (in secodi) in cui Asterisk tenterà di contattare il "
+"Quantità di tempo (in secondi) in cui Asterisk tenterà di contattare il "
 "telefono dell'utente prima di chiudere."
 
 #. module: asterisk_click2dial
@@ -103,8 +103,8 @@ msgid ""
 "Asterisk channel type, as used in the Asterisk dialplan. If the user has a "
 "regular IP phone, the channel type is probably 'PJSIP'."
 msgstr ""
-"Tipo canale Asterisk, come utilizzato nel piano chiamata Asterisk. Se "
-"l'utente ha un telefono IP regolare, probabilmente il tipo canale è 'PJSIP'."
+"Tipo canale Asterisk, come utilizzato in Dialplan Asterisk. Se l'utente ha "
+"un telefono IP regolare, probabilmente il tipo canale è 'PJSIP'."
 
 #. module: asterisk_click2dial
 #: model:ir.model.fields,help:asterisk_click2dial.field_asterisk_server__context
@@ -112,7 +112,7 @@ msgid ""
 "Asterisk dialplan context from which the calls will be made. Refer to /etc/"
 "asterisk/extensions.conf on your Asterisk server."
 msgstr ""
-"Context piano chiamata Asterisk da cui le chiamate verranno effettuate. Fare "
+"Contesto Dialplan Asterisk da cui le chiamate verranno effettuate. Fare "
 "riferimento a /etc/asterisk/extensions.conf nel proprio server Asterisk."
 
 #. module: asterisk_click2dial
@@ -212,12 +212,12 @@ msgstr "DAHDI"
 #. module: asterisk_click2dial
 #: model:ir.model.fields,field_description:asterisk_click2dial.field_asterisk_server__context
 msgid "Dialplan Context"
-msgstr "Context piano chiamata"
+msgstr "Contesto Dialplan"
 
 #. module: asterisk_click2dial
 #: model_terms:ir.ui.view,arch_db:asterisk_click2dial.view_asterisk_server_form
 msgid "Dialplan Parameters"
-msgstr "Parametri piano chiamata"
+msgstr "Parametri Dialplan"
 
 #. module: asterisk_click2dial
 #: model:ir.model.fields,field_description:asterisk_click2dial.field_asterisk_server__display_name
@@ -363,8 +363,8 @@ msgid ""
 "Priority of the extension in the Asterisk dialplan. Refer to /etc/asterisk/"
 "extensions.conf on your Asterisk server."
 msgstr ""
-"Priorità dell'estensione nel piano chiamata Asterisk. Dare riferimento a /"
-"etc/asterisk/extensions.conf nel proprio server Asterisk."
+"Priorità dell'estensione in Dialplan Asterisk. Dare riferimento a /etc/"
+"asterisk/extensions.conf nel proprio server Asterisk."
 
 #. module: asterisk_click2dial
 #. odoo-python
@@ -383,10 +383,10 @@ msgid ""
 "the phone number is often used as resource name, but not always."
 msgstr ""
 "Il nome risorsa per il tipo canale selezionato. Per esempio, se si usa 'Dial("
-"PJSIP/phone1)' nel proprio piano chimata Asterix per far suonare il telefono "
-"SIP di questo utente, allora il nome risorsa per questo utente è 'phone1'. "
-"Per un telefono SIP, il numero di telefono è spesso usato cone nome risorsa, "
-"ma non sempre."
+"PJSIP/phone1)' nel proprio Diaplan Asterix per far suonare il telefono SIP "
+"di questo utente, allora il nome risorsa per questo utente è 'phone1'. Per "
+"un telefono SIP, il numero di telefono è spesso usato come nome risorsa, ma "
+"non sempre."
 
 #. module: asterisk_click2dial
 #: model:ir.model.fields.selection,name:asterisk_click2dial.selection__res_users__asterisk_chan_type__sccp
@@ -411,7 +411,7 @@ msgid ""
 "to have a special ring tone for click2dial (a silent one !) or to activate "
 "auto-answer for example."
 msgstr ""
-"Imposta l'intestazione informazone aiuto nella richiesta SIP al telefono IP "
+"Imposta l'intestazione informazione aiuto nella richiesta SIP al telefono IP "
 "dell'utente per la funzionalità cliccaXchiamare. Se vuoto, l'intestazione "
 "informazione aiuto non verrà aggiunta. La si può usare per avere una "
 "suoneria dedicata per cliccaXchiamare (una silenziosa!) o per attivare "
@@ -424,7 +424,7 @@ msgid ""
 "'originate' request for the click2dial feature. If you want to have several "
 "variable headers, separate them with '|'."
 msgstr ""
-"Imposta un campo 'Variabile' speficio per utente nella richiesta 'origine' "
+"Imposta un campo 'Variabile' specifico per utente nella richiesta 'origine' "
 "dell'interfaccia gestione Asterisk per la funzionalità cliccaXchiamare. Se "
 "si vogliono salvare diverse intestazioni, vanno separate con '|'."
 
@@ -436,7 +436,7 @@ msgid ""
 "You can use it to have a special ring tone for click2dial (a silent one !) "
 "or to activate auto-answer for example."
 msgstr ""
-"Imposta l'intestazione informazone aiuto nella richiesta SIP al telefono IP "
+"Imposta l'intestazione informazione aiuto nella richiesta SIP al telefono IP "
 "dell'utente per la funzionalità cliccaXchiamare. Se vuoto, l'intestazione "
 "informazione aiuto non verrà aggiunta. La si può usare per avere una "
 "suoneria dedicata per cliccaXchiamare (una silenziosa!) o per attivare "
@@ -464,7 +464,7 @@ msgstr ""
 #. module: asterisk_click2dial
 #: model_terms:ir.ui.view,arch_db:asterisk_click2dial.view_asterisk_server_form
 msgid "Test Connection to Asterisk"
-msgstr "Testa connessione con Asterisk"
+msgstr "Prova connessione con Asterisk"
 
 #. module: asterisk_click2dial
 #. odoo-javascript
