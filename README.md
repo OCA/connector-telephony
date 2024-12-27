@@ -25,6 +25,7 @@ addon | version | maintainers | summary
 [base_phone](base_phone/) | 16.0.1.0.0 | [![alexis-via](https://github.com/alexis-via.png?size=30px)](https://github.com/alexis-via) | Validate phone numbers
 [hr_phone](hr_phone/) | 16.0.1.0.0 | [![alexis-via](https://github.com/alexis-via.png?size=30px)](https://github.com/alexis-via) | Validate phone numbers in HR
 [hr_recruitment_phone](hr_recruitment_phone/) | 16.0.1.0.0 | [![alexis-via](https://github.com/alexis-via.png?size=30px)](https://github.com/alexis-via) | Validate phone numbers in HR Recruitment
+[sms_no_automatic_delete](sms_no_automatic_delete/) | 16.0.1.0.0 |  | Avoid automatic delete of sended sms
 
 [//]: # (end addons)
 
