@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2024 Hunki Enterprises BV
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl-3.0) -->
+<data>
+    <record id="view_ir_sms_gateway_form" model="ir.ui.view">
+        <field name="model">ir.sms.gateway</field>
+        <field
+            name="inherit_id"
+            ref="sms_alternative_provider.view_ir_sms_gateway_form"
+        />
+        <field name="arch" type="xml">
+            <group name="general" position="after">
+       <group
+                    name="messagebird"
+                    attrs="{'invisible': [('gateway_type', '!=', 'messagebird')]}"
+                >
+           <field
+                        name="messagebird_apikey"
+                        password="True"
+                        attrs="{'required': [('gateway_type', '=', 'messagebird')]}"
+                    />
+       </group>
+   </group>
+        </field>
+    </record>
+</data>
