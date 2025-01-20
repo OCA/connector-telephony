@@ -4,11 +4,11 @@
 {
     "name": "SMS Twilio",
     "summary": "Send sms using Twilio API",
-    "version": "17.0.1.0.0",
+    "version": "18.0.1.0.0",
     "category": "SMS",
     "website": "https://github.com/OCA/connector-telephony",
     "author": "Akretion, Odoo Community Association (OCA)",
-    "maintainers": ["mariadforgeflow"],
+    "maintainers": ["dnplkendall"],
     "license": "AGPL-3",
     "application": False,
     "installable": True,
