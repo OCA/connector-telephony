@@ -61,7 +61,7 @@ class IapAccount(models.Model):
                     # Only work with prod creds
                     client = item.get_twilio_client()
                     balance_obj = client.api.balance.fetch()
-                    balance = "%s: %s" % (balance_obj.currency, balance_obj.balance)
+                    balance = f"{balance_obj.currency}: {balance_obj.balance}"
                 except Exception as e:
                     _logger.error("Twilio Error: '%s'", str(e))
             item.twilio_balance_account = balance
