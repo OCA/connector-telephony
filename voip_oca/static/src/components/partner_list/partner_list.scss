@@ -1,0 +1,10 @@
+.o_voip_partner_item {
+    border-bottom: 1px solid var(--border-color, #d8dadd) !important;
+    align-items: center;
+    .image_40 {
+        width: 40px;
+        height: 40px;
+        border-radius: 0.25rem;
+        margin-right: 10px;
+    }
+}

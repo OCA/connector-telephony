@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Copyright 2025 Dixmit
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<templates xml:space="preserve">
+    <t t-name="voip.PhoneField" t-inherit="web.PhoneField" t-inherit-mode="extension">
+        <xpath expr="//a[hasclass('o_form_uri')]" position="attributes">
+            <attribute name="t-on-click">onPhoneClick</attribute>
+        </xpath>
+    </t>
+    <t
+        t-name="voip.FormPhoneField"
+        t-inherit="web.FormPhoneField"
+        t-inherit-mode="extension"
+    >
+        <xpath expr="//a[hasclass('o_form_uri')]" position="attributes">
+            <attribute name="t-on-click">onPhoneClick</attribute>
+        </xpath>
+        <xpath expr="//a[hasclass('o_phone_form_link')]" position="attributes">
+            <attribute name="t-on-click">onPhoneClick</attribute>
+        </xpath>
+    </t>
+</templates>

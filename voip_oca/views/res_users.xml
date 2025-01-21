@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2025 Dixmit
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record model="ir.ui.view" id="view_users_form">
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page name="voip" string="VOIP">
+                    <group>
+                        <field name="voip_pbx_id" string="PBX" />
+                        <field name="voip_username" string="Username" />
+                        <field name="voip_password" password="True" string="Password" />
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_users_form_simple_modif">
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form_simple_modif" />
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page name="voip" string="VOIP">
+                    <group>
+                        <field name="voip_pbx_id" widget="selection" string="PBX" />
+                        <field name="voip_username" string="Username" />
+                        <field name="voip_password" password="True" string="Password" />
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+
+
+
+
+</odoo>

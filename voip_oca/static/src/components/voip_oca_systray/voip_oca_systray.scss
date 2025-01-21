@@ -1,0 +1,11 @@
+.o_nav_entry {
+    &:hover {
+        background-color: rgba(0, 0, 0, 0.075);
+    }
+    &.o_voip_disconnected {
+        background-color: $o-danger !important;
+    }
+    &.o_voip_connecting {
+        background-color: $o-warning !important;
+    }
+}
