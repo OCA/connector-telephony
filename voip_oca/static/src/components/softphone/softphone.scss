@@ -1,0 +1,46 @@
+.o_voip_softphone {
+    width: 300px;
+    height: auto;
+    max-height: 70%;
+    z-index: 99;
+
+    .o_voip_softphone_header {
+        background-color: $o-community-color !important;
+        .o_voip_status_icon {
+            color: $o-info;
+            &.o_voip_connected {
+                color: $o-success !important;
+            }
+            &.o_voip_disconnected {
+                color: $o-danger !important;
+            }
+            &.o_voip_connecting {
+                color: $o-warning !important;
+            }
+        }
+    }
+
+    .o_voip_softphone_content {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+        overflow-y: auto;
+        .nav-tabs {
+            justify-content: space-evenly;
+            .nav-item {
+                flex: 1;
+            }
+        }
+    }
+    .o_voip_softphone_detail {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+        overflow-y: auto;
+        min-height: 300px;
+        max-height: calc(60vh - 200px);
+    }
+    .o_voip_softphone_footer {
+        border-top: 1px solid var(--border-color, #d8dadd) !important;
+    }
+}
