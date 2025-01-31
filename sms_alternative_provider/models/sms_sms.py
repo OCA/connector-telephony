@@ -29,7 +29,7 @@ class SmsSms(models.Model):
                 actual_iap_results.extend(results)
             else:
                 provider._handle_results(
-                    results, unlink_failed=unlink_failed, unlink_sent=unlink_sent
+                    [], results, unlink_failed=unlink_failed, unlink_sent=unlink_sent
                 )
 
         if actual_iap_results:
