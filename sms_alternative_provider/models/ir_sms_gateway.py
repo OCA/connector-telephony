@@ -1,7 +1,6 @@
 # Copyright 2024 Hunki Enterprises BV
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl-3.0)
 
-import operator
 
 from odoo import _, api, exceptions, fields, models
 
@@ -10,7 +9,7 @@ class IrSmsGateway(models.Model):
 
     _name = "ir.sms.gateway"
     _order = "sequence"
-    _desc = "SMS gateway provider"
+    _description = "SMS gateway provider"
 
     name = fields.Char(required=True)
     active = fields.Boolean(default=True)
@@ -43,7 +42,7 @@ class IrSmsGateway(models.Model):
 
     # SMS sending functions
 
-    def send(self, messages):
+    def _send_via_self(self, messages):
         """
         Send a list of SMS via the current provider
 
@@ -85,13 +84,13 @@ class IrSmsGateway(models.Model):
                 raise exceptions.UserError(
                     _("No suitable provider found for messages %s") % messages_to_send
                 )
-            provider_result = provider.send(messages_to_send) or []
+            provider_result = provider._send_via_self(messages_to_send) or []
             sms = SmsSms.browse(
-                filter(None, map(operator.itemgetter("id"), provider_result))
+                filter(None, map(lambda x: x.get("id"), provider_result))
             )
             sms.write({"sms_gateway_id": provider.id})
             if handle_results:
-                provider._handle_results(provider_result)
+                provider._handle_results(messages_to_send, provider_result)
             result.extend(provider_result)
         return result
 
@@ -140,9 +139,12 @@ class IrSmsGateway(models.Model):
             for prefix in self.prefix.split()
         )
 
-    def _handle_results(self, results, unlink_failed=False, unlink_sent=True):
+    def _handle_results(self, messages, results, unlink_failed=False, unlink_sent=True):
         """
-        Write state of sms.sms objects based on results
+        Write state of sms.sms objects based on results.
+
+        messages is the list of messages passed to _send
+        results is the list of results (provider-specific) as returned by _send
         """
         self.ensure_one()
         SmsSms = self.env["sms.sms"]
