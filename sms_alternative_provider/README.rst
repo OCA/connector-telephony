@@ -81,6 +81,8 @@ and declare a function named like \_send\_$type:
        #    'id': id of the sms.sms record
        #    'state': sms.sms#state
        #    'failure_type': sms.sms#failure_type if state == 'error'
+       #    # whatever other fields you want to write on the sms.sms record after sending,
+       #    # such as provider-specific extra information
        # }]
 
 Probably your provider needs some api key or similar to function, add
