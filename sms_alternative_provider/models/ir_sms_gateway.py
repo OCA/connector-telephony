@@ -165,6 +165,20 @@ class IrSmsGateway(models.Model):
                 to_unlink += sms
             if sms.state == "sent" and unlink_sent:
                 to_unlink += sms
+            self.env["mail.notification"].sudo().search(
+                [
+                    ("notification_type", "=", "sms"),
+                    ("sms_id", "=", sms.id),
+                    ("notification_status", "not in", ("sent", "canceled")),
+                ]
+            ).write(
+                {
+                    "notification_status": "sent"
+                    if sms.state == "sent"
+                    else "exception",
+                    "failure_type": sms.failure_type,
+                }
+            )
         to_unlink.unlink()
 
     # implementation of the iap (odoo native) provider
