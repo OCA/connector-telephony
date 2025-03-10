@@ -12,7 +12,7 @@ class PhoneValidationMixin(models.AbstractModel):
     _name = "phone.validation.mixin"
     _description = "Phone Validation Mixin"
 
-    def _phone_get_country(self):
+    def _phone_validation_get_country(self):
         if "country_id" in self and self.country_id:
             return self.country_id
         if "partner_id" in self and self.partner_id and self.partner_id.country_id:
@@ -20,7 +20,7 @@ class PhoneValidationMixin(models.AbstractModel):
         return self.env.company.country_id
 
     def phone_format(self, number, country=None, company=None):
-        country = country or self._phone_get_country()
+        country = country or self._phone_validation_get_country()
         if not country:
             return number
         return phone_validation.phone_format(
