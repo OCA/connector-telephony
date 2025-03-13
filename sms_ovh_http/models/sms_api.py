@@ -14,6 +14,8 @@ OVH_HTTP_ENDPOINT = "https://www.ovh.com/cgi-bin/sms/http2sms.cgi"
 class SmsApi(models.AbstractModel):
     _inherit = "sms.api"
 
+    HTTP_TIMEOUT = 10
+
     def _prepare_ovh_http_params(self, account, number, message):
         return {
             "smsAccount": account.sms_ovh_http_account,
@@ -37,6 +39,7 @@ class SmsApi(models.AbstractModel):
         r = requests.get(
             OVH_HTTP_ENDPOINT,
             params=self._prepare_ovh_http_params(account, number, message),
+            timeout=self.HTTP_TIMEOUT,
         )
         response = r.text
         if response[0:2] != "OK":

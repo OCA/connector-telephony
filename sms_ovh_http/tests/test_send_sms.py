@@ -4,12 +4,12 @@
 
 import requests_mock
 
-from odoo.tests import SavepointCase
+from odoo.tests import TransactionCase
 
 from ..models.sms_api import OVH_HTTP_ENDPOINT
 
 
-class SendSmsCase(SavepointCase):
+class SendSmsCase(TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
