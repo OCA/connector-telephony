@@ -9,7 +9,12 @@
                 t-on-click="() => this.onClick(activity)"
             >
                 <span class="fw-bold" t-esc="activity.main_partner_id[1]" />
-                <span class="fst-italic" t-esc="activity.res_name" />
+                <t t-if="activity.main_partner_id[1] != activity.res_name">
+                    <span class="fst-normal" t-esc="activity.res_name" />
+                </t>
+                <t t-if="activity.summary">
+                    <span class="fst-italic" t-esc="activity.summary" />
+                </t>
             </div>
         </t>
 
