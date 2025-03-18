@@ -2,16 +2,17 @@
 # @author: Alexis de Lattre <alexis.delattre@akretion.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from odoo.tests.common import TransactionCase
+from odoo.addons.base.tests.common import BaseCommon
 
 
-class TestEventPhone(TransactionCase):
-    def setUp(self):
-        super().setUp()
-        self.fr_country_id = self.env.ref("base.fr").id
-        self.phco = self.env["phone.common"]
-        self.env.company.write({"country_id": self.fr_country_id})
-        self.test_record = self.env["hr.employee"].create(
+class TestEventPhone(BaseCommon):
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.fr_country_id = cls.env.ref("base.fr").id
+        cls.phco = cls.env["phone.common"]
+        cls.env.company.write({"country_id": cls.fr_country_id})
+        cls.test_record = cls.env["hr.employee"].create(
             {"name": "Alexis de Lattre", "mobile_phone": "+33 6 78 72 72 72"}
         )
 
@@ -20,6 +21,4 @@ class TestEventPhone(TransactionCase):
         self.assertIsInstance(res, tuple)
         self.assertEqual(res[0], "res.partner")
         self.assertEqual(res[1], self.test_record.work_contact_id.id)
-        self.assertEqual(
-            res[2], self.test_record.with_context(callerid=True).name_get()[0][1]
-        )
+        self.assertEqual(res[2], self.test_record.display_name)
