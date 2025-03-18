@@ -10,7 +10,7 @@ from odoo.addons.sms.tests.common import MockSMS
 
 class TestSmsPurgeAndUnlink(TransactionCase, MockSMS):
     def setUp(self):
-        super(TestSmsPurgeAndUnlink, self).setUp()
+        super().setUp()
         self.sms_sms = self.env["sms.sms"]
         self.sms1 = self.sms_sms.create(
             {
