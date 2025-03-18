@@ -388,8 +388,14 @@ and saved.</p>
 </div>
 <div class="section" id="usage">
 <h1><a class="toc-backref" href="#toc-entry-1">Usage</a></h1>
-<p>To delete sent sms, the cron “SMS: SMS Purge” is used in order to choice
-the maximum days a sms will be saved (by default : days = 90).</p>
+<p>To delete sent SMS, the autovacuum _gc_device process is used to remove
+records that exceed the maximum retention period (default: 90 days)
+daily.</p>
+<p>To update the SMS Purge Days setting, follow these steps:</p>
+<ol class="arabic simple">
+<li>Go to *Settings &gt; General Settings &gt; Contacts &gt; SMS Purge Days.</li>
+<li>You update the maximum number of days an SMS will be retained.</li>
+</ol>
 </div>
 <div class="section" id="bug-tracker">
 <h1><a class="toc-backref" href="#toc-entry-2">Bug Tracker</a></h1>
@@ -413,6 +419,7 @@ If you spotted it first, help us to smash it by providing a detailed and welcome
 <li>Kévin Roche &lt;<a class="reference external" href="mailto:kevin.roche&#64;akretion.com">kevin.roche&#64;akretion.com</a>&gt;</li>
 <li>Sébastien Beau &lt;<a class="reference external" href="mailto:sebastien.beau&#64;akretion.com">sebastien.beau&#64;akretion.com</a>&gt;</li>
 <li>Bernat Puig &lt;<a class="reference external" href="mailto:bernat.puig&#64;forgeflow.com">bernat.puig&#64;forgeflow.com</a>&gt;</li>
+<li>Chau Le &lt;<a class="reference external" href="mailto:chaulb&#64;trobz.com">chaulb&#64;trobz.com</a>&gt;</li>
 </ul>
 </div>
 <div class="section" id="maintainers">

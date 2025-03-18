@@ -7,10 +7,10 @@
     "website": "https://github.com/OCA/connector-telephony",
     "license": "AGPL-3",
     "category": "",
-    "version": "16.0.1.0.0",
+    "version": "18.0.1.0.0",
     "depends": ["sms"],
     "data": [
-        "data/ir_cron_data.xml",
+        "views/res_config_settings.xml",
     ],
     "application": False,
     "installable": True,
