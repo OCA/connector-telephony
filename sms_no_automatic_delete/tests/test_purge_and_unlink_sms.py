@@ -3,28 +3,27 @@
 
 from datetime import datetime, timedelta
 
-from odoo.tests.common import TransactionCase
-
 from odoo.addons.sms.tests.common import MockSMS
 
 
-class TestSmsPurgeAndUnlink(TransactionCase, MockSMS):
-    def setUp(self):
-        super().setUp()
-        self.sms_sms = self.env["sms.sms"]
-        self.sms1 = self.sms_sms.create(
+class TestSmsPurgeAndUnlink(MockSMS):
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.sms_sms = cls.env["sms.sms"]
+        cls.sms1 = cls.sms_sms.create(
             {
                 "state": "outgoing",
                 "write_date": datetime.now() - timedelta(days=30),
             }
         )
-        self.sms2 = self.sms_sms.create(
+        cls.sms2 = cls.sms_sms.create(
             {
                 "state": "outgoing",
                 "write_date": datetime.now() - timedelta(days=61),
             }
         )
-        self.sms3 = self.sms_sms.create(
+        cls.sms3 = cls.sms_sms.create(
             {
                 "state": "outgoing",
                 "write_date": datetime.now() - timedelta(days=91),
@@ -41,23 +40,33 @@ class TestSmsPurgeAndUnlink(TransactionCase, MockSMS):
             self.sms2.send()
         self.assertEqual(self.sms2.state, "sent")
 
-    def test_sms_unlink(self):
-        # force_unlink=False by default
-        self.sms1.unlink()
-        self.assertTrue(self.sms1.exists())
-        # force_unlink=True
-        self.sms1.with_context(force_unlink=True).unlink()
-        self.assertFalse(self.sms1.exists())
+    def test_gc_device(self):
+        # Write SQL in order not to update write_date
+        with self.env.cr.savepoint():
+            self.env.cr.execute(
+                """
+                UPDATE sms_sms
+                SET to_delete = TRUE
+                WHERE id IN (%s, %s, %s)
+                """,
+                (self.sms1.id, self.sms2.id, self.sms3.id),
+            )
 
-    def test_sms_purge(self):
-        self.sms_sms._purge(120)
-        self.assertEqual(len(self.sms_sms.search([])), 3)
+        self.env["ir.config_parameter"].sudo().set_param(
+            "sms_no_automatic_delete.sms_purge_days", 90
+        )
 
-        self.sms_sms._purge(90)
-        self.assertEqual(len(self.sms_sms.search([])), 2)
+        self.sms_sms._gc_device()
 
-        self.sms_sms._purge(60)
-        self.assertEqual(len(self.sms_sms.search([])), 1)
+        self.assertTrue(self.sms1.exists(), "This SMS should not be deleted")
+        self.assertTrue(self.sms2.exists(), "This SMS should not be deleted")
+        self.assertFalse(self.sms3.exists(), "Old SMS should have been deleted")
 
-        self.sms_sms._purge(0)
-        self.assertEqual(len(self.sms_sms.search([])), 0)
+        self.env["ir.config_parameter"].sudo().set_param(
+            "sms_no_automatic_delete.sms_purge_days", 60
+        )
+
+        self.sms_sms._gc_device()
+
+        self.assertTrue(self.sms1.exists(), "This SMS should not be deleted")
+        self.assertFalse(self.sms2.exists(), "Old SMS should have been deleted")

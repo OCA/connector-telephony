@@ -1,37 +1,43 @@
 # Copyright 2021 Akretion (https://www.akretion.com).
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
+import logging
 from datetime import datetime, timedelta
 
 from odoo import api, models
+from odoo.tools.sql import SQL
+
+_logger = logging.getLogger(__name__)
 
 
 class SmsSms(models.Model):
     _inherit = "sms.sms"
 
-    @api.model
-    def _postprocess_iap_sent_sms(
-        self, iap_results, failure_reason=None, unlink_failed=False, unlink_sent=True
-    ):
-        # Update state of the sms as "sent" when they are sent.
-        ids = [item["res_id"] for item in iap_results if item["state"] == "success"]
-        self.browse(ids).write({"state": "sent"})
-        return super()._postprocess_iap_sent_sms(
-            iap_results,
-            failure_reason=failure_reason,
-            unlink_failed=unlink_failed,
-            unlink_sent=unlink_sent,
+    IAP_TO_SMS_STATE_SUCCESS = {
+        "processing": "process",
+        "success": "sent",
+        "sent": "sent",
+        "delivered": "sent",
+    }
+
+    @api.autovacuum
+    def _gc_device(self):
+        sms_purge_days = int(
+            self.env["ir.config_parameter"]
+            .sudo()
+            .get_param("sms_no_automatic_delete.sms_purge_days", 90)
         )
 
-    @api.model
-    def _purge(self, days):
-        sms = self.env["sms.sms"].search(
-            [("write_date", "<=", datetime.now() - timedelta(days=days))]
-        )
-        sms.with_context(force_unlink=True).unlink()
+        purge_date = datetime.now() - timedelta(days=sms_purge_days)
 
-    def unlink(self):
-        if self._context.get("force_unlink"):
-            return super().unlink()
-        else:
-            return True
+        self.env.cr.execute(
+            SQL(
+                """
+            DELETE FROM sms_sms
+            WHERE to_delete = TRUE AND write_date <= %(purge_date)s
+            """,
+                purge_date=purge_date,
+            )
+        )
+
+        _logger.info("GC'd %d sms marked for deletion", self._cr.rowcount)

@@ -40,8 +40,14 @@ and saved.
 Usage
 =====
 
-To delete sent sms, the cron "SMS: SMS Purge" is used in order to choice
-the maximum days a sms will be saved (by default : days = 90).
+To delete sent SMS, the autovacuum \_gc_device process is used to remove
+records that exceed the maximum retention period (default: 90 days)
+daily.
+
+To update the SMS Purge Days setting, follow these steps:
+
+1. Go to *Settings > General Settings > Contacts > SMS Purge Days*.
+2. You update the maximum number of days an SMS will be retained.
 
 Bug Tracker
 ===========
@@ -67,6 +73,7 @@ Contributors
 -  Kévin Roche <kevin.roche@akretion.com>
 -  Sébastien Beau <sebastien.beau@akretion.com>
 -  Bernat Puig <bernat.puig@forgeflow.com>
+-  Chau Le <chaulb@trobz.com>
 
 Maintainers
 -----------
