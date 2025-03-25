@@ -11,20 +11,21 @@
         <field name="arch" type="xml">
             <form string="Reformat all phone numbers">
                 <div invisible="state not in ('draft')">
-                            This wizard reformats the phone and mobile numbers of all partners in standard international format e.g. +33 1 41 98 12 42</div>
-                <div
-                    invisible="state not in ('done')"
-                >Phone numbers that couldn't be reformatted:</div>
+                    This wizard reformats the phone and mobile numbers of all partners in standard international format e.g. +33 1 41 98 12 42
+                </div>
 
-                <group name="main">
-                    <field
-                        name="phonenumbers_not_reformatted"
-                        nolabel="1"
-                        colspan="2"
-                        invisible="state not in ('done')"
-                    />
-                    <field name="state" invisible="1" />
-                </group>
+                <div invisible="state not in ('done')">
+                    Phone numbers that couldn't be reformatted:
+                </div>
+
+                <field
+                    name="phonenumbers_not_reformatted"
+                    nolabel="1"
+                    colspan="2"
+                    invisible="state not in ('done')"
+                    readonly="1"
+                />
+
                 <footer>
                     <button
                         name="run_reformat_all_phonenumbers"
@@ -34,7 +35,7 @@
                         invisible="state not in ('draft')"
                     />
                     <button
-                        name="action_next"
+                        name="execute"
                         type="object"
                         string="Close"
                         class="btn-primary"

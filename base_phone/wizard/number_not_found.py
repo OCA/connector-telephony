@@ -4,7 +4,7 @@
 
 import logging
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import UserError
 
 _logger = logging.getLogger(__name__)
@@ -48,13 +48,14 @@ class NumberNotFound(models.TransientModel):
 
     @api.model
     def default_get(self, fields_list):
-        res = super().default_get(fields_list)
-        if not res:
-            res = {}
+        res = super().default_get(fields_list) or {}
+
         if res.get("calling_number"):
             if not self.env.company.country_id:
                 raise UserError(
-                    _("Missing country on company %s") % self.env.company.display_name
+                    self.env._(
+                        "Missing country on company %s", self.env.company.display_name
+                    )
                 )
 
             country_code = self.env.company.country_id.code
@@ -83,9 +84,9 @@ class NumberNotFound(models.TransientModel):
         phonenumbers.number_type(parsed_num)
 
         context = dict(self._context or {})
-        context["default_%s" % self.number_type] = self.e164_number
+        context[f"default_{self.number_type}"] = self.e164_number
         action = {
-            "name": _("Create New Partner"),
+            "name": self.env._("Create New Partner"),
             "view_mode": "form,tree,kanban",
             "res_model": "res.partner",
             "type": "ir.actions.act_window",
@@ -98,10 +99,10 @@ class NumberNotFound(models.TransientModel):
         """Function called by the related button of the wizard"""
         self.ensure_one()
         if not self.to_update_partner_id:
-            raise UserError(_("Select the Partner to Update."))
+            raise UserError(self.env._("Select the Partner to Update."))
         self.to_update_partner_id.write({self.number_type: self.e164_number})
         action = {
-            "name": _("Partner: %s") % self.to_update_partner_id.name,
+            "name": self.env._("Partner: %s") % self.to_update_partner_id.name,
             "type": "ir.actions.act_window",
             "res_model": "res.partner",
             "view_mode": "form,tree,kanban",

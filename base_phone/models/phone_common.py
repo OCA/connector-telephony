@@ -23,10 +23,7 @@ class PhoneCommon(models.AbstractModel):
         """Function to get name from phone number. Usefull for use from IPBX
         to add CallerID name to incoming calls."""
         res = self.get_record_from_phone_number(presented_number)
-        if res:
-            return res[2]
-        else:
-            return False
+        return res[2] if res else False
 
     @api.model
     def get_record_from_phone_number(self, presented_number):
@@ -34,7 +31,7 @@ class PhoneCommon(models.AbstractModel):
         For example : ('res.partner', 42, 'Alexis de Lattre (Akretion)')
         """
         _logger.debug(
-            "Call get_name_from_phone_number with number = %s" % presented_number
+            f"Call get_name_from_phone_number with number = {presented_number}"
         )
         if not isinstance(presented_number, str):
             _logger.warning(
@@ -43,9 +40,7 @@ class PhoneCommon(models.AbstractModel):
             )
             return False
         if not presented_number.isdigit():
-            _logger.warning(
-                "Number '%s' should only contain digits." % presented_number
-            )
+            _logger.warning(f"Number '{presented_number}' should only contain digits.")
 
         nr_digits_to_match_from_end = (
             self.env.company.number_of_digits_to_match_from_end
@@ -62,50 +57,45 @@ class PhoneCommon(models.AbstractModel):
             obj = obj_dict["object"]
             pg_search_number = "%" + end_number_to_match
             _logger.debug(
-                "Will search phone and mobile numbers in %s ending with '%s'",
-                obj._name,
-                end_number_to_match,
+                f"Will search phone and mobile "
+                f"numbers in {obj._name} ending "
+                f"with '{end_number_to_match}'"
             )
-            sql = "SELECT id FROM %s WHERE " % obj._table
+            sql = f"SELECT id FROM {obj._table} WHERE "
             sql_where = []
             sql_args = []
             for field in obj_dict["fields"]:
-                sql_where.append("replace(%s, ' ', '') ilike %%s" % field)
+                sql_where.append(f"replace({field}, ' ', '') ilike %s")
                 sql_args.append(pg_search_number)
             sql += " or ".join(sql_where)
-            _logger.debug(
-                "get_record_from_phone_number sql=%s sql_args=%s", sql, sql_args
-            )
+            _logger.debug(f"get_record_from_phone_number sql={sql} sql_args={sql_args}")
             self._cr.execute(sql, tuple(sql_args))
             res_sql = self._cr.fetchall()
             if len(res_sql) > 1:
                 res_ids = [x[0] for x in res_sql]
                 _logger.warning(
-                    "There are several %s (IDS = %s) with a phone number "
-                    "ending with '%s'. Taking the first one.",
-                    obj._name,
-                    res_ids,
-                    end_number_to_match,
+                    f"There are several {obj._name} (IDS = {res_ids}) "
+                    f"with a phone number "
+                    f"ending with '{end_number_to_match}'. "
+                    f"Taking the first one."
                 )
             if res_sql:
                 obj_id = res_sql[0][0]
                 res_obj = obj.browse(obj_id)
                 # Use name_get()[0][1] instead of display_name
                 # to take the context into account with the callerid key
-                name = res_obj.name_get()[0][1]
+                res_obj.fetch(["display_name"])
+                name = res_obj.display_name
                 res = (obj._name, res_obj.id, name)
                 _logger.debug(
-                    "Answer get_record_from_phone_number: (%s, %d, %s)",
-                    res[0],
-                    res[1],
-                    res[2],
+                    f"Answer "
+                    f"get_record_from_phone_number: ({res[0]}, {res[1]}, {res[2]})"
                 )
                 return res
             else:
                 _logger.debug(
-                    "No match on %s for end of phone number '%s'",
-                    obj._name,
-                    end_number_to_match,
+                    f"No match on {obj._name} for end "
+                    f"of phone number '{end_number_to_match}'"
                 )
         return False
 
@@ -154,18 +144,18 @@ class PhoneCommon(models.AbstractModel):
         the numbers.
         """
         assert erp_number, "Missing phone number"
-        _logger.debug("Number before reformat = %s" % erp_number)
+        _logger.debug(f"Number before reformat = {erp_number}")
         # erp_number are supposed to be in International format, so no need to
         # give a country code here
         parsed_num = phonenumbers.parse(erp_number, None)
         country_code = self.env.company.country_id.code
         assert country_code, "Missing country on company"
-        _logger.debug("Country code = %s" % country_code)
+        _logger.debug(f"Country code = {country_code}")
         to_dial_number = phonenumbers.format_out_of_country_calling_number(
             parsed_num, country_code.upper()
         )
         to_dial_number = to_dial_number.translate(
             to_dial_number.maketrans("", "", " -.()/")
         )
-        _logger.debug("Number to be sent to phone system: %s" % to_dial_number)
+        _logger.debug(f"Number to be sent to phone system: {to_dial_number}")
         return to_dial_number

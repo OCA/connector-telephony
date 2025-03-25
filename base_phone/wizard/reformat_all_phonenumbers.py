@@ -11,7 +11,7 @@ logger = logging.getLogger(__name__)
 
 class ReformatAllPhonenumbers(models.TransientModel):
     _name = "reformat.all.phonenumbers"
-    _inherit = "res.config.installer"
+    _inherit = "res.config.settings"
     _description = "Reformat all phone numbers"
 
     phonenumbers_not_reformatted = fields.Text(

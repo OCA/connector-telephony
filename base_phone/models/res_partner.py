@@ -3,7 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 
-from odoo import models
+from odoo import api, models
 
 
 class ResPartner(models.Model):
@@ -15,15 +15,15 @@ class ResPartner(models.Model):
     _phone_name_sequence = 10
     _phone_name_fields = ["phone", "mobile"]
 
-    def name_get(self):
+    @api.depends("name")
+    @api.depends_context("callerid")
+    def _compute_display_name(self):
         if self._context.get("callerid"):
-            res = []
             for partner in self:
                 if partner.parent_id and partner.parent_id.is_company:
                     name = f"{partner.parent_id.name}, {partner.name}"
                 else:
-                    name = partner.name
-                res.append((partner.id, name))
-            return res
-        else:
-            return super().name_get()
+                    name = partner.name or ""
+                partner.display_name = name
+
+        return super()._compute_display_name()
