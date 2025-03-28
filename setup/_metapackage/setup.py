@@ -13,6 +13,7 @@ setuptools.setup(
         'odoo-addon-hr_phone>=16.0dev,<16.1dev',
         'odoo-addon-hr_recruitment_phone>=16.0dev,<16.1dev',
         'odoo-addon-sms_no_automatic_delete>=16.0dev,<16.1dev',
+        'odoo-addon-sms_ovh_http>=16.0dev,<16.1dev',
     ],
     classifiers=[
         'Programming Language :: Python',
