@@ -1,0 +1,366 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* base_phone
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 15.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-05-01 07:17+0000\n"
+"PO-Revision-Date: 2024-10-15 14:06+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
+"Language-Team: \n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.6.2\n"
+
+#. module: base_phone
+#: model_terms:ir.ui.view,arch_db:base_phone.res_config_settings_view_form
+msgid "<span class=\"o_form_label\">Incoming calls</span>"
+msgstr "<span class=\"o_form_label\">Chiamate in arrivo</span>"
+
+#. module: base_phone
+#: model:ir.model.fields,field_description:base_phone.field_number_not_found__calling_number
+msgid "Calling Number"
+msgstr "Numero chiamata"
+
+#. module: base_phone
+#: model_terms:ir.ui.view,arch_db:base_phone.reformat_all_phonenumbers_form
+msgid "Cancel"
+msgstr "Annulla"
+
+#. module: base_phone
+#. odoo-javascript
+#: code:addons/base_phone/static/src/components/on_dial_button/on_dial_button.esm.js:0
+#, python-format
+msgid "Click2dial successfull"
+msgstr "CliccaXChiamare riuscito"
+
+#. module: base_phone
+#. odoo-javascript
+#: code:addons/base_phone/static/src/components/on_dial_button/on_dial_button.esm.js:0
+#, python-format
+msgid "Click2dial to %s"
+msgstr "CliccaXChiamare a %s"
+
+#. module: base_phone
+#: model_terms:ir.ui.view,arch_db:base_phone.number_not_found_form
+#: model_terms:ir.ui.view,arch_db:base_phone.reformat_all_phonenumbers_form
+msgid "Close"
+msgstr "Chiudi"
+
+#. module: base_phone
+#: model:ir.model,name:base_phone.model_phone_common
+msgid "Common methods for phone features"
+msgstr "Metodi comuni per funzionalità telefono"
+
+#. module: base_phone
+#: model:ir.model,name:base_phone.model_res_company
+msgid "Companies"
+msgstr "Aziende"
+
+#. module: base_phone
+#: model:ir.model,name:base_phone.model_res_config_settings
+msgid "Config Settings"
+msgstr "Impostazioni di configurazione"
+
+#. module: base_phone
+#: model:ir.model,name:base_phone.model_res_partner
+msgid "Contact"
+msgstr "Contatto"
+
+#. module: base_phone
+#. odoo-python
+#: code:addons/base_phone/wizard/number_not_found.py:0
+#: model_terms:ir.ui.view,arch_db:base_phone.number_not_found_form
+#, python-format
+msgid "Create New Partner"
+msgstr "Crea nuovo partner"
+
+#. module: base_phone
+#: model_terms:ir.ui.view,arch_db:base_phone.number_not_found_form
+msgid "Create or Update a Partner"
+msgstr "Creare o aggiornare un partner"
+
+#. module: base_phone
+#: model:ir.model.fields,field_description:base_phone.field_number_not_found__create_uid
+#: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers__create_uid
+msgid "Created by"
+msgstr "Creato da"
+
+#. module: base_phone
+#: model:ir.model.fields,field_description:base_phone.field_number_not_found__create_date
+#: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers__create_date
+msgid "Created on"
+msgstr "Creato il"
+
+#. module: base_phone
+#: model:ir.model.fields,field_description:base_phone.field_number_not_found__current_partner_mobile
+msgid "Current Mobile"
+msgstr "Cellulare attuale"
+
+#. module: base_phone
+#: model:ir.model.fields,field_description:base_phone.field_number_not_found__current_partner_phone
+msgid "Current Phone"
+msgstr "Telefono attuale"
+
+#. module: base_phone
+#. odoo-javascript
+#: code:addons/base_phone/static/src/components/on_dial_button/on_dial_button.xml:0
+#, python-format
+msgid "Dial"
+msgstr "Componi"
+
+#. module: base_phone
+#. odoo-javascript
+#: code:addons/base_phone/static/src/components/on_dial_button/on_dial_button.esm.js:0
+#, python-format
+msgid "Dial phone"
+msgstr "Chiama telefono"
+
+#. module: base_phone
+#: model:ir.model.fields,field_description:base_phone.field_number_not_found__display_name
+#: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers__display_name
+msgid "Display Name"
+msgstr "Nome visualizzato"
+
+#. module: base_phone
+#: model:ir.model.fields.selection,name:base_phone.selection__reformat_all_phonenumbers__state__done
+msgid "Done"
+msgstr "Completato"
+
+#. module: base_phone
+#: model:ir.model.fields.selection,name:base_phone.selection__reformat_all_phonenumbers__state__draft
+msgid "Draft"
+msgstr "Bozza"
+
+#. module: base_phone
+#: model:ir.model.fields,field_description:base_phone.field_number_not_found__e164_number
+msgid "E.164 Number"
+msgstr "Numero E.164"
+
+#. module: base_phone
+#: model:ir.model.fields,help:base_phone.field_number_not_found__e164_number
+msgid "E.164 equivalent of the calling number."
+msgstr "E.164 equivalente al numero che chiama."
+
+#. module: base_phone
+#: model:ir.model.fields.selection,name:base_phone.selection__number_not_found__number_type__phone
+msgid "Fixed"
+msgstr "Fisso"
+
+#. module: base_phone
+#: model:ir.model.fields,field_description:base_phone.field_number_not_found__number_type
+msgid "Fixed/Mobile"
+msgstr "Fisso/cellulare"
+
+#. module: base_phone
+#: model:ir.model.fields,field_description:base_phone.field_number_not_found__id
+#: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers__id
+msgid "ID"
+msgstr "ID"
+
+#. module: base_phone
+#: model:ir.model.fields,help:base_phone.field_res_company__number_of_digits_to_match_from_end
+#: model:ir.model.fields,help:base_phone.field_res_config_settings__number_of_digits_to_match_from_end
+msgid ""
+"In several situations, Odoo will have to find a Partner/Lead/Employee/... "
+"from a phone number presented by the calling party. As the phone numbers "
+"presented by your phone operator may not always be displayed in a standard "
+"format, the best method to find the related Partner/Lead/Employee/... in "
+"Odoo is to try to match the end of the phone number in Odoo with the N last "
+"digits of the phone number presented by the calling party. N is the value "
+"you should enter in this field."
+msgstr ""
+"In diverse situazioni, Odoo dovrà cercare un partner/contatto/dipendente... "
+"da un numero di telefono presentato dal soggetto chiamante. Poiché il numero "
+"di telefono presentato dal vostro operatore telefonico potrebbe non essere "
+"visualizzato in formato standard, il miglior modo per trovare il partner/"
+"contatto/dipendente/... relativo in Odoo è di cercare la corrispondenza tra "
+"la fine del numero di telefono in Odoo con gli ultimi N numeri del numero di "
+"telefono presentato dal soggetto chiamante. N è il numero da inserire in "
+"questo campo."
+
+#. module: base_phone
+#: model:ir.model.fields,field_description:base_phone.field_number_not_found__write_uid
+#: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers__write_uid
+msgid "Last Updated by"
+msgstr "Ultimo aggiornamento di"
+
+#. module: base_phone
+#: model:ir.model.fields,field_description:base_phone.field_number_not_found__write_date
+#: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers__write_date
+msgid "Last Updated on"
+msgstr "Ultimo aggiornamento il"
+
+#. module: base_phone
+#. odoo-python
+#: code:addons/base_phone/wizard/number_not_found.py:0
+#, python-format
+msgid "Missing country on company %s"
+msgstr "Nazione mancante nell'azienda %s"
+
+#. module: base_phone
+#: model:ir.model.fields.selection,name:base_phone.selection__number_not_found__number_type__mobile
+msgid "Mobile"
+msgstr "Cellulare"
+
+#. module: base_phone
+#: model_terms:ir.ui.view,arch_db:base_phone.number_not_found_form
+msgid "Number Not Found"
+msgstr "Numero non trovato"
+
+#. module: base_phone
+#: model_terms:ir.ui.view,arch_db:base_phone.number_not_found_form
+msgid "Number converted to international format:"
+msgstr "Numero convertito in formato internazinale:"
+
+#. module: base_phone
+#. odoo-javascript
+#: code:addons/base_phone/static/src/components/on_dial_button/on_dial_button.esm.js:0
+#, python-format
+msgid "Number dialed: %s"
+msgstr "Numero chiamato: %s"
+
+#. module: base_phone
+#: model:ir.model,name:base_phone.model_number_not_found
+msgid "Number not found"
+msgstr "Numero non trovato"
+
+#. module: base_phone
+#: model_terms:ir.ui.view,arch_db:base_phone.res_config_settings_view_form
+msgid "Number of Digits"
+msgstr "Numero di cifre"
+
+#. module: base_phone
+#: model:ir.model.fields,field_description:base_phone.field_res_company__number_of_digits_to_match_from_end
+#: model:ir.model.fields,field_description:base_phone.field_res_config_settings__number_of_digits_to_match_from_end
+msgid "Number of Digits To Match From End"
+msgstr "Numero di cifre corrispondenti dalla fine"
+
+#. module: base_phone
+#: model:ir.model.fields,help:base_phone.field_number_not_found__to_update_partner_id
+msgid "Partner on which the phone number will be written"
+msgstr "Partner in cui verrà scritto il numero"
+
+#. module: base_phone
+#: model:ir.model.fields,field_description:base_phone.field_number_not_found__to_update_partner_id
+msgid "Partner to Update"
+msgstr "Partner da aggiornare"
+
+#. module: base_phone
+#. odoo-python
+#: code:addons/base_phone/wizard/number_not_found.py:0
+#, python-format
+msgid "Partner: %s"
+msgstr "Partner: %s"
+
+#. module: base_phone
+#: model:res.groups,name:base_phone.group_callerid
+msgid "Phone CallerID"
+msgstr "ID chamata telefonica"
+
+#. module: base_phone
+#: model:ir.model,name:base_phone.model_phone_validation_mixin
+msgid "Phone Validation Mixin"
+msgstr "Mixin validazione telefono"
+
+#. module: base_phone
+#: model:ir.model.fields,help:base_phone.field_number_not_found__calling_number
+msgid ""
+"Phone number of calling party that has been obtained from the telephony "
+"server, in the format used by the telephony server (not E.164)."
+msgstr ""
+"Numero di telefono del soggetto chiamante ottenuto dal server telefonico, "
+"nel formato usato dal server telefonico (non E.164)."
+
+#. module: base_phone
+#: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers__phonenumbers_not_reformatted
+msgid "Phone numbers that couldn't be reformatted"
+msgstr "Numeri telefonici che non possono essere riformattati"
+
+#. module: base_phone
+#: model_terms:ir.ui.view,arch_db:base_phone.reformat_all_phonenumbers_form
+msgid "Phone numbers that couldn't be reformatted:"
+msgstr "Numeri telefonici che non possono essere riformattati:"
+
+#. module: base_phone
+#: model:ir.actions.act_window,name:base_phone.reformat_all_phonenumbers_action
+#: model:ir.ui.menu,name:base_phone.reformat_all_phonenumbers_menu
+msgid "Reformat Phone Numbers"
+msgstr "Riformatta numeri telefonici"
+
+#. module: base_phone
+#: model:ir.model,name:base_phone.model_reformat_all_phonenumbers
+#: model_terms:ir.ui.view,arch_db:base_phone.reformat_all_phonenumbers_form
+msgid "Reformat all phone numbers"
+msgstr "Riformatta tutti i numeri telefonici"
+
+#. module: base_phone
+#. odoo-python
+#: code:addons/base_phone/wizard/number_not_found.py:0
+#, python-format
+msgid "Select the Partner to Update."
+msgstr "Selezionare il partner da aggiornare."
+
+#. module: base_phone
+#: model_terms:ir.ui.view,arch_db:base_phone.res_config_settings_view_form
+msgid ""
+"Set how many digits must be identical from the end of the phone number to "
+"declare it as a match with a partner, a lead, an employee, a candidate, etc."
+msgstr ""
+"Impostare quanti numeri devono essere identici dalla fine del numero di "
+"telefono per affermare la corrispondenza con un partner, un contatto, un "
+"dipendente, un candidato, ecc."
+
+#. module: base_phone
+#: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers__state
+msgid "State"
+msgstr "Stato"
+
+#. module: base_phone
+#: model:ir.ui.menu,name:base_phone.menu_config_phone
+#: model_terms:ir.ui.view,arch_db:base_phone.res_config_settings_view_form
+#: model_terms:ir.ui.view,arch_db:base_phone.view_users_form
+msgid "Telephony"
+msgstr "Telefonia"
+
+#. module: base_phone
+#: model_terms:ir.ui.view,arch_db:base_phone.view_users_form
+msgid "Telephony Preferences"
+msgstr "Preferenze telefonia"
+
+#. module: base_phone
+#: model:ir.model.constraint,message:base_phone.constraint_res_company_number_of_digits_to_match_from_end_positive
+msgid ""
+"The value of the field 'Number of Digits To Match From End' must be positive."
+msgstr ""
+"Il valore del campo 'Numero di cifre corrispondenti dalla fine' deve essere "
+"positivo."
+
+#. module: base_phone
+#: model_terms:ir.ui.view,arch_db:base_phone.reformat_all_phonenumbers_form
+msgid ""
+"This wizard reformats the phone and mobile numbers of all partners in "
+"standard international format e.g. +33 1 41 98 12 42"
+msgstr ""
+"Questa procedura guidata riformatta i numeri cellulari e fissi di tutti i "
+"partner con il formato internazionale standard es. +33 1 41 98 12 42"
+
+#. module: base_phone
+#. odoo-javascript
+#: code:addons/base_phone/static/src/components/on_dial_button/on_dial_button.esm.js:0
+#, python-format
+msgid "Unhook your ringing phone"
+msgstr "Rispondere al telefono che suona"
+
+#. module: base_phone
+#: model_terms:ir.ui.view,arch_db:base_phone.number_not_found_form
+msgid "Update Existing Partner"
+msgstr "Aggiorna partner esistente"
+
+#~ msgid "Last Modified on"
+#~ msgstr "Ultima modifica il"

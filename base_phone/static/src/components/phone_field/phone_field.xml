@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+
+    <!-- Copyright 2024 Dixmit
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+
+    <t t-inherit="web.PhoneField" t-inherit-mode="extension">
+        <xpath expr="//div[hasclass('o_phone_content')]//a" position="after">
+            <t t-if="props.record.data[props.name].length > 0">
+                <OnDialButton t-props="props" />
+            </t>
+        </xpath>
+    </t>
+
+    <t t-inherit="web.FormPhoneField" t-inherit-mode="extension">
+        <xpath expr="//div[hasclass('o_phone_content')]" position="inside">
+            <t t-if="props.record.data[props.name].length > 0">
+                <OnDialButton t-props="props" />
+            </t>
+        </xpath>
+    </t>
+
+</templates>
