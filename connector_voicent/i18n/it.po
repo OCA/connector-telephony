@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2025-05-21 10:26+0000\n"
+"PO-Revision-Date: 2025-05-29 14:33+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -203,7 +203,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:connector_voicent.field_backend_voicent_time_line__display_name
 #: model:ir.model.fields,field_description:connector_voicent.field_res_partner__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Nome visualizzato"
 
 #. module: connector_voicent
 #: model:ir.model.fields.selection,name:connector_voicent.selection__backend_voicent_call_line_reply__reply_field__dropped
