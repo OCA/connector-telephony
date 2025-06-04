@@ -6,4 +6,4 @@
 
 import {addModelNamesToFetch} from "@bus/../tests/helpers/model_definitions_helpers";
 
-addModelNamesToFetch(["voip.oca.call", "voip.oca.pbx"]);
+addModelNamesToFetch(["voip.call", "voip.pbx"]);

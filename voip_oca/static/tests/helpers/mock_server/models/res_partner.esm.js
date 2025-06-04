@@ -15,7 +15,7 @@ patch(MockServer.prototype, {
         switch (method) {
             case "format_partner":
                 return this._mockResPartner_FormatPartner(...args, kwargs);
-            case "get_voip_contacts":
+            case "voip_get_contacts":
                 return this._mockResPartner_GetVoipContacts(...args, kwargs);
             default:
                 return super._performRPC(...arguments);

@@ -8,7 +8,7 @@ class TestVoipOca(TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        cls.pbx = cls.env["voip.oca.pbx"].create(
+        cls.pbx = cls.env["voip.pbx"].create(
             {
                 "name": "Test PBX",
                 "mode": "prod",
@@ -54,7 +54,7 @@ class TestVoipOca(TransactionCase):
                 "user_id": cls.env.uid,
             }
         )
-        cls.call_01 = cls.env["voip.oca.call"].create(
+        cls.call_01 = cls.env["voip.call"].create(
             {
                 "phone_number": "Call 01",
                 "partner_id": cls.partner_01.id,
@@ -64,7 +64,7 @@ class TestVoipOca(TransactionCase):
                 "start_date": "2020-01-01 00:00:00",
             }
         )
-        cls.call_02 = cls.env["voip.oca.call"].create(
+        cls.call_02 = cls.env["voip.call"].create(
             {
                 "phone_number": "Call 02",
                 "type_call": "outgoing",
@@ -76,10 +76,10 @@ class TestVoipOca(TransactionCase):
         )
 
     def test_partner_search(self):
-        results = self.env["res.partner"].get_voip_contacts("1234567890", 0, 1000)
+        results = self.env["res.partner"].voip_get_contacts("1234567890", 0, 1000)
         self.assertIn(self.partner_01.id, [result["id"] for result in results])
         self.assertNotIn(self.partner_02.id, [result["id"] for result in results])
-        results = self.env["res.partner"].get_voip_contacts("0987654321", 0, 1000)
+        results = self.env["res.partner"].voip_get_contacts("0987654321", 0, 1000)
         self.assertNotIn(self.partner_01.id, [result["id"] for result in results])
         self.assertIn(self.partner_02.id, [result["id"] for result in results])
 
@@ -98,22 +98,22 @@ class TestVoipOca(TransactionCase):
         self.assertIn(self.activity_02.id, [result["id"] for result in results])
 
     def test_call_search(self):
-        results = self.env["voip.oca.call"].get_recent_calls("Call 01", 0, 1000)
+        results = self.env["voip.call"].get_recent_calls("Call 01", 0, 1000)
         self.assertIn(self.call_01.id, [result["id"] for result in results])
         self.assertNotIn(self.call_02.id, [result["id"] for result in results])
-        results = self.env["voip.oca.call"].get_recent_calls("Call 02", 0, 1000)
+        results = self.env["voip.call"].get_recent_calls("Call 02", 0, 1000)
         self.assertNotIn(self.call_01.id, [result["id"] for result in results])
         self.assertIn(self.call_02.id, [result["id"] for result in results])
 
     def test_call_process_ok(self):
-        call_data = self.env["voip.oca.call"].create_call(
+        call_data = self.env["voip.call"].create_call(
             {
                 "phone_number": "1234567890",
                 "type_call": "incoming",
                 "pbx_id": self.pbx.id,
             }
         )
-        call = self.env["voip.oca.call"].browse(call_data["id"])
+        call = self.env["voip.call"].browse(call_data["id"])
         self.assertEqual(call.partner_id, self.partner_01)
         self.assertEqual(call.state, "calling")
         self.assertFalse(call.start_date)
@@ -127,14 +127,14 @@ class TestVoipOca(TransactionCase):
         self.assertTrue(call.end_date)
 
     def test_call_process_rejected(self):
-        call_data = self.env["voip.oca.call"].create_call(
+        call_data = self.env["voip.call"].create_call(
             {
                 "phone_number": "1234567890",
                 "type_call": "incoming",
                 "pbx_id": self.pbx.id,
             }
         )
-        call = self.env["voip.oca.call"].browse(call_data["id"])
+        call = self.env["voip.call"].browse(call_data["id"])
         self.assertEqual(call.partner_id, self.partner_01)
         self.assertEqual(call.state, "calling")
         self.assertFalse(call.start_date)

@@ -48,6 +48,23 @@ support this protocol.
 .. contents::
    :local:
 
+Use Cases / Context
+===================
+
+This module is intended to integrate directly with a VOIP Provider.
+
+The provider need to supply a WebRTC system where we will plug on it.
+
+Currently, it has been tested with:
+
+- `Zerovoz <https://zerovoz.com/>`__
+- `Ringover <https://www.ringover.es/>`__
+
+Theoretically, it should work with
+
+- Axivox
+- OnSIP
+
 Configuration
 =============
 
@@ -168,9 +185,11 @@ The following options are interesting but are not implemented right now:
 - Create a call system where the calls are done automatically according
   to tasks
 
-The following options will be done before release:
+Not contempled behavior
+-----------------------
 
-- Show the status of the VOIP connection on the header
+We are not supporting setting two configuration for user. Not even a
+different configuration for company in the user.
 
 Bug Tracker
 ===========

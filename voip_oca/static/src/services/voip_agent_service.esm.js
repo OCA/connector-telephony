@@ -228,7 +228,7 @@ export class VoipAgent {
         }
     }
     async createCall(options) {
-        const call = await this.orm.call("voip.oca.call", "create_call", [
+        const call = await this.orm.call("voip.call", "create_call", [
             {
                 pbx_id: this.voip.pbx_id,
                 ...options,
@@ -241,6 +241,7 @@ export class VoipAgent {
         }
     }
     async call({number, partner}) {
+        console.log(arguments);
         this.voip.isOpened = true;
         this.voip.isFolded = false;
         var phone_number = number;
@@ -257,7 +258,7 @@ export class VoipAgent {
         this.voip.inCall = true;
         if (this.voip.mode === "prod") {
             const destination_number = SIP.UserAgent.makeURI(
-                `sip:${phone_number}@${this.voip.pbx_domain}`
+                `sip:${phone_number.replace(/\D/g, "")}@${this.voip.pbx_domain}`
             );
             this.session = new SIP.Inviter(this.agent, destination_number);
             this.session.delegate = {
@@ -331,9 +332,7 @@ export class VoipAgent {
         this.callAudio.srcObject = null;
         this.callAudio.pause();
         this.voip.call.update(
-            await this.orm.call("voip.oca.call", "terminate_call", [
-                [this.voip.call.id],
-            ])
+            await this.orm.call("voip.call", "terminate_call", [[this.voip.call.id]])
         );
         this.voip.inCall = false;
         this.session = false;

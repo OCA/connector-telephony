@@ -18,8 +18,6 @@ class ResConfigSettings(models.AbstractModel):
             record.activity_main_partner_id = record.get_activity_main_partner_id()
 
     def get_activity_main_partner_id(self):
-        if self._name == "res.partner":
-            return self
         if "partner_id" in self._fields:
             return self.partner_id
         return self.env["res.partner"]
