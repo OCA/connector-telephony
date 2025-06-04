@@ -8,7 +8,7 @@
 import {click, contains} from "@web/../tests/utils";
 import {start} from "@mail/../tests/helpers/test_utils";
 
-QUnit.module("Soptphone");
+QUnit.module("Softphone");
 
 QUnit.test("Click on softphone hides the information", async () => {
     start();

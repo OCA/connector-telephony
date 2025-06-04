@@ -68,12 +68,12 @@ export class VoipOCA {
     }
     async acceptCall() {
         this.call.update(
-            await this.orm.call("voip.oca.call", "accept_call", [[this.call.id]])
+            await this.orm.call("voip.call", "accept_call", [[this.call.id]])
         );
     }
     async rejectCall() {
         this.call.update(
-            await this.orm.call("voip.oca.call", "reject_call", [[this.call.id]])
+            await this.orm.call("voip.call", "reject_call", [[this.call.id]])
         );
         this.inCall = false;
         this.call = false;
@@ -128,7 +128,7 @@ export class VoipOCA {
 
     /* Search functions */
     async searchPartners(_search = "", offset = 0, limit = 13) {
-        const partners = await this.orm.call("res.partner", "get_voip_contacts", [], {
+        const partners = await this.orm.call("res.partner", "voip_get_contacts", [], {
             offset,
             limit,
             _search,
@@ -153,7 +153,7 @@ export class VoipOCA {
         }
     }
     async searchCalls(_search = "", offset = 0, limit = 13) {
-        const calls = await this.orm.call("voip.oca.call", "get_recent_calls", [], {
+        const calls = await this.orm.call("voip.call", "get_recent_calls", [], {
             offset,
             limit,
             _search,

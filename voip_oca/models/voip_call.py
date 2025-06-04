@@ -7,7 +7,7 @@ from odoo.osv import expression
 
 
 class VoipOcaCall(models.Model):
-    _name = "voip.oca.call"
+    _name = "voip.call"
     _description = "Voip OCA Call"
 
     phone_number = fields.Char(required=True)
@@ -30,7 +30,7 @@ class VoipOcaCall(models.Model):
         default="calling",
         index=True,
     )
-    pbx_id = fields.Many2one("voip.oca.pbx", "PBX")
+    pbx_id = fields.Many2one("voip.pbx", "PBX")
     end_date = fields.Datetime()
     start_date = fields.Datetime()
     activity_name = fields.Char(

@@ -9,7 +9,7 @@
             </button>
         </div>
         <div
-            class="o_voip_oca_partner_header d-flex flex-column justify-content-center align-items-center"
+            class="o_voip_partner_header d-flex flex-column justify-content-center align-items-center"
         >
             <t t-if="props.partner.id">
                 <img
@@ -34,7 +34,7 @@
                 </t>
             </span>
         </div>
-        <div class="o_voip_oca_partner_actions d-flex flex-column px-3 pt-4">
+        <div class="o_voip_partner_actions d-flex flex-column px-3 pt-4">
             <span>Actions</span>
             <div class="d-flex justify-content-around my-3">
                 <button
@@ -69,7 +69,7 @@
         </div>
         <div
             t-if="props.activity.id"
-            class="o_voip_oca_partner_activity d-flex flex-column px-3"
+            class="o_voip_partner_activity d-flex flex-column px-3"
         >
             <span>Related activity</span>
             <div class="d-flex justify-content-around my-3">

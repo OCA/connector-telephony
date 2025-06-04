@@ -9,7 +9,7 @@ import {click, contains} from "@web/../tests/utils";
 import {nextTick} from "@web/../tests/helpers/utils";
 import {start} from "@mail/../tests/helpers/test_utils";
 
-QUnit.module("Soptphone Numpad");
+QUnit.module("Softphone Numpad");
 
 QUnit.test("Click on numpad and numpad buttons", async () => {
     start();

@@ -10,7 +10,7 @@ import {patch} from "@web/core/utils/patch";
 patch(MockServer.prototype, {
     _mockResUsers_InitMessaging(ids) {
         const user = this.getRecords("res.users", [["id", "in", ids]])[0];
-        const pbx = this.getRecords("voip.oca.pbx", [["id", "in", user.voip_pbx_id]]);
+        const pbx = this.getRecords("voip.pbx", [["id", "in", user.voip_pbx_id]]);
         return {
             ...super._mockResUsers_InitMessaging(...arguments),
             voip: {
