@@ -12,7 +12,7 @@ patch(MockServer.prototype, {
      * @override
      */
     async _performRPC(_route, {model, method, args, kwargs}) {
-        if (model !== "voip.oca.call") {
+        if (model !== "voip.call") {
             return super._performRPC(...arguments);
         }
         switch (method) {
@@ -25,7 +25,7 @@ patch(MockServer.prototype, {
         }
     },
     _mockVoipOcaCall_FormatCall(ids) {
-        const res = this.mockRead("voip.oca.call", [ids])[0];
+        const res = this.mockRead("voip.call", [ids])[0];
         return {
             id: res.id,
             creationDate: res.create_date,
@@ -41,7 +41,7 @@ patch(MockServer.prototype, {
         };
     },
     _mockVoipOcaCall_GetRecentCalls() {
-        return this.getRecords("voip.oca.call", []).map((record) =>
+        return this.getRecords("voip.call", []).map((record) =>
             this._mockVoipOcaCall_FormatCall(record.id)
         );
     },

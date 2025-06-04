@@ -5,7 +5,7 @@ from odoo import fields, models
 
 
 class VoipOcaPbx(models.Model):
-    _name = "voip.oca.pbx"
+    _name = "voip.pbx"
     _description = "Voip Pbx"
 
     name = fields.Char(required=True)

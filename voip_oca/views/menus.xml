@@ -4,8 +4,8 @@
 <odoo>
     <menuitem
         name="Voip/Calls"
-        id="voip_oca_call_menu_action"
+        id="voip_call_menu_action"
         parent="mail.mail_menu_technical"
-        action="voip_oca.voip_oca_call_act_window_tree"
+        action="voip_oca.voip_call_act_window_list"
     />
 </odoo>

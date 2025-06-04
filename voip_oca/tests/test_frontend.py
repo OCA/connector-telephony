@@ -12,7 +12,7 @@ class TestFrontend(common.HttpCase):
     def setUpClass(cls):
         super().setUpClass()
 
-        cls.pbx = cls.env["voip.oca.pbx"].create(
+        cls.pbx = cls.env["voip.pbx"].create(
             {
                 "name": "Test PBX",
                 "mode": "prod",

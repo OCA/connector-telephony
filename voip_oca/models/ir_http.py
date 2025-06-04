@@ -13,7 +13,7 @@ class Http(models.AbstractModel):
         user = request.env.user
         res.update(
             {
-                "voip": user._get_voip_info(),
+                "voip": user._voip_get_info(),
             }
         )
         return res

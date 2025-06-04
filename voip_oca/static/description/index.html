@@ -384,27 +384,46 @@ support this protocol.</p>
 <p><strong>Table of contents</strong></p>
 <div class="contents local topic" id="contents">
 <ul class="simple">
-<li><a class="reference internal" href="#configuration" id="toc-entry-1">Configuration</a><ul>
-<li><a class="reference internal" href="#create-the-pbx-connection" id="toc-entry-2">Create the PBX Connection</a></li>
-<li><a class="reference internal" href="#configure-users" id="toc-entry-3">Configure users</a></li>
+<li><a class="reference internal" href="#use-cases-context" id="toc-entry-1">Use Cases / Context</a></li>
+<li><a class="reference internal" href="#configuration" id="toc-entry-2">Configuration</a><ul>
+<li><a class="reference internal" href="#create-the-pbx-connection" id="toc-entry-3">Create the PBX Connection</a></li>
+<li><a class="reference internal" href="#configure-users" id="toc-entry-4">Configure users</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#usage" id="toc-entry-4">Usage</a></li>
-<li><a class="reference internal" href="#known-issues-roadmap" id="toc-entry-5">Known issues / Roadmap</a></li>
-<li><a class="reference internal" href="#bug-tracker" id="toc-entry-6">Bug Tracker</a></li>
-<li><a class="reference internal" href="#credits" id="toc-entry-7">Credits</a><ul>
-<li><a class="reference internal" href="#authors" id="toc-entry-8">Authors</a></li>
-<li><a class="reference internal" href="#contributors" id="toc-entry-9">Contributors</a></li>
-<li><a class="reference internal" href="#other-credits" id="toc-entry-10">Other credits</a></li>
-<li><a class="reference internal" href="#maintainers" id="toc-entry-11">Maintainers</a></li>
+<li><a class="reference internal" href="#usage" id="toc-entry-5">Usage</a></li>
+<li><a class="reference internal" href="#known-issues-roadmap" id="toc-entry-6">Known issues / Roadmap</a><ul>
+<li><a class="reference internal" href="#not-contempled-behavior" id="toc-entry-7">Not contempled behavior</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#bug-tracker" id="toc-entry-8">Bug Tracker</a></li>
+<li><a class="reference internal" href="#credits" id="toc-entry-9">Credits</a><ul>
+<li><a class="reference internal" href="#authors" id="toc-entry-10">Authors</a></li>
+<li><a class="reference internal" href="#contributors" id="toc-entry-11">Contributors</a></li>
+<li><a class="reference internal" href="#other-credits" id="toc-entry-12">Other credits</a></li>
+<li><a class="reference internal" href="#maintainers" id="toc-entry-13">Maintainers</a></li>
 </ul>
 </li>
 </ul>
 </div>
+<div class="section" id="use-cases-context">
+<h1><a class="toc-backref" href="#toc-entry-1">Use Cases / Context</a></h1>
+<p>This module is intended to integrate directly with a VOIP Provider.</p>
+<p>The provider need to supply a WebRTC system where we will plug on it.</p>
+<p>Currently, it has been tested with:</p>
+<ul class="simple">
+<li><a class="reference external" href="https://zerovoz.com/">Zerovoz</a></li>
+<li><a class="reference external" href="https://www.ringover.es/">Ringover</a></li>
+</ul>
+<p>Theoretically, it should work with</p>
+<ul class="simple">
+<li>Axivox</li>
+<li>OnSIP</li>
+</ul>
+</div>
 <div class="section" id="configuration">
-<h1><a class="toc-backref" href="#toc-entry-1">Configuration</a></h1>
+<h1><a class="toc-backref" href="#toc-entry-2">Configuration</a></h1>
 <div class="section" id="create-the-pbx-connection">
-<h2><a class="toc-backref" href="#toc-entry-2">Create the PBX Connection</a></h2>
+<h2><a class="toc-backref" href="#toc-entry-3">Create the PBX Connection</a></h2>
 <ul class="simple">
 <li>Access in Debug mode.</li>
 <li>Go to <tt class="docutils literal">Settings &gt; Technical &gt; Discuss &gt; PBX Servers</tt>.</li>
@@ -414,7 +433,7 @@ support this protocol.</p>
 never contact the PBX server.</p>
 </div>
 <div class="section" id="configure-users">
-<h2><a class="toc-backref" href="#toc-entry-3">Configure users</a></h2>
+<h2><a class="toc-backref" href="#toc-entry-4">Configure users</a></h2>
 <p>For each user, we need to define their PBX server, user and password if
 we want it to be able to access the PBX server and make calls. To do
 this, we have two options:</p>
@@ -428,7 +447,7 @@ information in the VOIP tab.</li>
 </div>
 </div>
 <div class="section" id="usage">
-<h1><a class="toc-backref" href="#toc-entry-4">Usage</a></h1>
+<h1><a class="toc-backref" href="#toc-entry-5">Usage</a></h1>
 <p>Automatically the system will login into the PBX server once we enter
 odoo with our user. If we are on a test environment, no login is made
 and the libraries of SIP are not loaded.</p>
@@ -510,20 +529,21 @@ try to find the related partner and will open the widget automatically.</p>
 </div>
 </div>
 <div class="section" id="known-issues-roadmap">
-<h1><a class="toc-backref" href="#toc-entry-5">Known issues / Roadmap</a></h1>
+<h1><a class="toc-backref" href="#toc-entry-6">Known issues / Roadmap</a></h1>
 <p>The following options are interesting but are not implemented right now:</p>
 <ul class="simple">
 <li>Allow to enable or disable the VOIP as a user (Login / Logout)</li>
 <li>Create a call system where the calls are done automatically according
 to tasks</li>
 </ul>
-<p>The following options will be done before release:</p>
-<ul class="simple">
-<li>Show the status of the VOIP connection on the header</li>
-</ul>
+<div class="section" id="not-contempled-behavior">
+<h2><a class="toc-backref" href="#toc-entry-7">Not contempled behavior</a></h2>
+<p>We are not supporting setting two configuration for user. Not even a
+different configuration for company in the user.</p>
+</div>
 </div>
 <div class="section" id="bug-tracker">
-<h1><a class="toc-backref" href="#toc-entry-6">Bug Tracker</a></h1>
+<h1><a class="toc-backref" href="#toc-entry-8">Bug Tracker</a></h1>
 <p>Bugs are tracked on <a class="reference external" href="https://github.com/OCA/connector-telephony/issues">GitHub Issues</a>.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us to smash it by providing a detailed and welcomed
@@ -531,15 +551,15 @@ If you spotted it first, help us to smash it by providing a detailed and welcome
 <p>Do not contact contributors directly about support or help with technical issues.</p>
 </div>
 <div class="section" id="credits">
-<h1><a class="toc-backref" href="#toc-entry-7">Credits</a></h1>
+<h1><a class="toc-backref" href="#toc-entry-9">Credits</a></h1>
 <div class="section" id="authors">
-<h2><a class="toc-backref" href="#toc-entry-8">Authors</a></h2>
+<h2><a class="toc-backref" href="#toc-entry-10">Authors</a></h2>
 <ul class="simple">
 <li>Dixmit</li>
 </ul>
 </div>
 <div class="section" id="contributors">
-<h2><a class="toc-backref" href="#toc-entry-9">Contributors</a></h2>
+<h2><a class="toc-backref" href="#toc-entry-11">Contributors</a></h2>
 <ul class="simple">
 <li><a class="reference external" href="https://www.dixmit.com">Dixmit</a>:<ul>
 <li>Enric Alomar</li>
@@ -549,7 +569,7 @@ If you spotted it first, help us to smash it by providing a detailed and welcome
 </ul>
 </div>
 <div class="section" id="other-credits">
-<h2><a class="toc-backref" href="#toc-entry-10">Other credits</a></h2>
+<h2><a class="toc-backref" href="#toc-entry-12">Other credits</a></h2>
 <p>The development of this module has been financially supported by:</p>
 <ul class="simple">
 <li>Associacion Española de Odoo (<a class="reference external" href="https://www.aeodoo.org/">AEODOO</a>)</li>
@@ -562,7 +582,7 @@ If you spotted it first, help us to smash it by providing a detailed and welcome
 </ul>
 </div>
 <div class="section" id="maintainers">
-<h2><a class="toc-backref" href="#toc-entry-11">Maintainers</a></h2>
+<h2><a class="toc-backref" href="#toc-entry-13">Maintainers</a></h2>
 <p>This module is maintained by the OCA.</p>
 <a class="reference external image-reference" href="https://odoo-community.org">
 <img alt="Odoo Community Association" src="https://odoo-community.org/logo.png" />

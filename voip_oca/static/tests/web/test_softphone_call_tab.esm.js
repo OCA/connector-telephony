@@ -10,11 +10,11 @@ import {click, contains} from "@web/../tests/utils";
 import {start} from "@mail/../tests/helpers/test_utils";
 import {startServer} from "@bus/../tests/helpers/mock_python_environment";
 
-QUnit.module("Soptphone > Call Tab");
+QUnit.module("Softphone > Call Tab");
 
 QUnit.test("Check Call", async () => {
     const pyEnv = await startServer();
-    const pbxId = pyEnv["voip.oca.pbx"].create([
+    const pbxId = pyEnv["voip.pbx"].create([
         {
             name: "Test PBX",
             domain: "pbx.domain",
@@ -32,7 +32,7 @@ QUnit.test("Check Call", async () => {
             phone: "777 777",
         },
     ]);
-    pyEnv["voip.oca.call"].create([
+    pyEnv["voip.call"].create([
         {
             name: "Test Partner",
             phone_number: "+34 666 666 666",
@@ -63,7 +63,7 @@ QUnit.test("Check Call", async () => {
     await click(".o_voip_softphone li a[name='call_list']");
     await contains(".o_voip_softphone .o_voip_call_item", {count: 2});
     await click(".o_voip_softphone .o_voip_call_item", {text: "Test Partner"});
-    await contains(".o_voip_softphone .o_voip_oca_partner_header");
-    await contains(".o_voip_softphone .o_voip_oca_partner_actions");
-    await contains(".o_voip_softphone .o_voip_oca_partner_activity", {count: 0});
+    await contains(".o_voip_softphone .o_voip_partner_header");
+    await contains(".o_voip_softphone .o_voip_partner_actions");
+    await contains(".o_voip_softphone .o_voip_partner_activity", {count: 0});
 });

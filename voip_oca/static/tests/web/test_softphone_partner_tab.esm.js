@@ -10,7 +10,7 @@ import {click, contains} from "@web/../tests/utils";
 import {start} from "@mail/../tests/helpers/test_utils";
 import {startServer} from "@bus/../tests/helpers/mock_python_environment";
 
-QUnit.module("Soptphone > Partner Tab");
+QUnit.module("Softphone > Partner Tab");
 
 QUnit.test("Check Partner", async () => {
     const pyEnv = await startServer();
@@ -31,7 +31,7 @@ QUnit.test("Check Partner", async () => {
     await click(".o_voip_softphone li a[name='partner_list']");
     await contains(".o_voip_softphone .o_voip_partner_item", {count: 2});
     await click(".o_voip_softphone .o_voip_partner_item", {text: "Test Partner"});
-    await contains(".o_voip_softphone .o_voip_oca_partner_header");
-    await contains(".o_voip_softphone .o_voip_oca_partner_actions");
-    await contains(".o_voip_softphone .o_voip_oca_partner_activity", {count: 0});
+    await contains(".o_voip_softphone .o_voip_partner_header");
+    await contains(".o_voip_softphone .o_voip_partner_actions");
+    await contains(".o_voip_softphone .o_voip_partner_activity", {count: 0});
 });
