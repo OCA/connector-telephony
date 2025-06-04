@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2024-01-03 15:36+0000\n"
+"PO-Revision-Date: 2025-06-04 10:26+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.17\n"
+"X-Generator: Weblate 5.10.4\n"
 
 #. module: sms_ovh_http
 #: model:ir.model.fields,field_description:sms_ovh_http.field_iap_account__sms_ovh_http_login
@@ -91,7 +91,7 @@ msgstr "Conto SMS"
 #. module: sms_ovh_http
 #: model:ir.model.fields.selection,name:sms_ovh_http.selection__iap_account__provider__sms_ovh_http
 msgid "SMS OVH http"
-msgstr "SMS OVH http"
+msgstr "HTTP OVH SMS"
 
 #. module: sms_ovh_http
 #: model:ir.model.fields,field_description:sms_ovh_http.field_iap_account__sms_ovh_http_from
