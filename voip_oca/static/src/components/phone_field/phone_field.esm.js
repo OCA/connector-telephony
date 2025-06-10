@@ -1,4 +1,3 @@
-/** @odoo-module **/
 /*
     Copyright 2025 Dixmit
     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
@@ -18,7 +17,6 @@ patch(PhoneField.prototype, {
         }
         ev.preventDefault();
         ev.stopPropagation();
-        console.log(this.props.record, this.props.name);
         this.agent.call({number: this.props.record.data[this.props.name]});
     },
 });

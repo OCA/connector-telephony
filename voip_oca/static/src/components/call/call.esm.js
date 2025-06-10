@@ -1,4 +1,3 @@
-/** @odoo-module **/
 /*
     Copyright 2025 Dixmit
     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
@@ -114,8 +113,6 @@ export class Call extends Component {
         this.state.numpad = !this.state.numpad;
     }
     onNumpadValue(key) {
-        console.log(this.agent.session);
-        console.log(this.agent.session.sessionDescriptionHandler);
         this.agent.session?.sessionDescriptionHandler.sendDtmf(key);
     }
 }

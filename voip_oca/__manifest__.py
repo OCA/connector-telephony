@@ -4,7 +4,7 @@
 {
     "name": "Voip OCA",
     "summary": "Provides the use of Voip",
-    "version": "17.0.1.0.0",
+    "version": "18.0.1.0.0",
     "author": "Dixmit, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/connector-telephony",
     "license": "AGPL-3",
@@ -27,11 +27,8 @@
         "voip_oca.agent_assets": [
             "voip_oca/static/lib/*.js",
         ],
-        "web.qunit_suite_tests": [
-            "voip_oca/static/tests/web/**/*.esm.js",
-        ],
-        "web.tests_assets": [
-            "voip_oca/static/tests/helpers/**/*.esm.js",
+        "web.assets_unit_tests": [
+            "voip_oca/static/tests/**/*",
         ],
     },
 }

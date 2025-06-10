@@ -1,4 +1,3 @@
-/** @odoo-module **/
 /*
     Copyright 2025 Dixmit
     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
@@ -13,8 +12,7 @@ export class Partner extends Component {
         this.action = useService("action");
         this.voip = useService("voip_oca");
         this.agent = useService("voip_agent_oca");
-        this.activityService = useService("mail.activity");
-        this.threadService = useService("mail.thread");
+        this.store = useService("mail.store");
     }
     get phoneNumber() {
         return (
@@ -101,23 +99,22 @@ export class Partner extends Component {
         this.agent.call({number: this.phoneNumber, partner: this.props.partner});
     }
     async onMarkAsDone() {
-        await this.activityService.markAsDone(this.props.activity);
-        await this.threadService.fetchData(
-            this.threadService.getThread(
-                this.props.activity.res_model,
-                this.props.activity.res_id
-            ),
-            ["activities"]
-        );
+        const thread = this.store.Thread.insert({
+            model: this.props.activity.res_model,
+            id: this.props.activity.res_id,
+        });
+        await this.props.activity.markAsDone();
+        await thread.fetchData(["activities"]);
+        await this.store.fetchData({systray_get_activities: true});
         this.voip.call = false;
         this.voip.activity = false;
         this.voip.partner = false;
     }
     async onEdit() {
-        await this.activityService.edit(this.props.activity.id);
+        await this.props.activity.edit();
     }
     async onDelete() {
-        await this.activityService.delete(this.props.activity);
+        await this.props.activity.delete();
         await this.env.services.orm.unlink("mail.activity", [this.props.activity.id]);
         this.voip.call = false;
         this.voip.activity = false;

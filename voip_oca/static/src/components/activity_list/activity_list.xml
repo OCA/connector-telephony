@@ -8,8 +8,8 @@
                 class="o_voip_activity_item d-flex flex-column p-3 cursor-pointer"
                 t-on-click="() => this.onClick(activity)"
             >
-                <span class="fw-bold" t-esc="activity.main_partner_id[1]" />
-                <t t-if="activity.main_partner_id[1] != activity.res_name">
+                <span class="fw-bold" t-esc="activity.main_partner" />
+                <t t-if="activity.main_partner != activity.res_name">
                     <span class="fst-normal" t-esc="activity.res_name" />
                 </t>
                 <t t-if="activity.summary">

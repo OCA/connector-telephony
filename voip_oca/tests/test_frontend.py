@@ -65,6 +65,3 @@ class TestFrontend(common.HttpCase):
         session_info = response.json()["result"]
         self.assertEqual(session_info["voip"]["pbx_id"], self.pbx.id)
         self.assertEqual(session_info["voip"]["mode"], "prod")
-
-    def test_javascript(self):
-        self.browser_js("/web/tests?module=voip_oca", "", login="admin", timeout=1800)

@@ -1,4 +1,3 @@
-/** @odoo-module **/
 /* global SIP */
 /*
     Copyright 2025 Dixmit

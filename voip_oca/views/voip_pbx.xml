@@ -32,10 +32,10 @@
     <record model="ir.ui.view" id="voip_pbx_list_view">
         <field name="model">voip.pbx</field>
         <field name="arch" type="xml">
-            <tree>
+            <list>
                 <field name="name" />
                 <field name="mode" />
-            </tree>
+            </list>
         </field>
     </record>
 

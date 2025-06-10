@@ -1,4 +1,3 @@
-/** @odoo-module **/
 /*
     Copyright 2025 Dixmit
     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
@@ -10,6 +9,7 @@ import {reactive} from "@odoo/owl";
 import {registry} from "@web/core/registry";
 import {session} from "@web/session";
 import {url} from "@web/core/utils/urls";
+import {user} from "@web/core/user";
 
 export class VoipOCA {
     constructor(env, services) {
@@ -18,7 +18,7 @@ export class VoipOCA {
         delete session.voip;
         this.status = "disconnected";
         this.selectedTab = "activity_list";
-        this.uid = session.uid;
+        this.uid = user.userId;
         this.store = services["mail.store"];
         this.numpadTab = false;
         this.orm = services.orm;
@@ -107,7 +107,6 @@ export class VoipOCA {
     }
 
     get calls() {
-        console.log("Gettings calls");
         return Object.values(this.store.Call.records)
             .filter(
                 (call) =>
@@ -148,7 +147,10 @@ export class VoipOCA {
                 _search,
             }
         );
-        for (const activity of activities) {
+        if (!activities["mail.activity"]) {
+            return;
+        }
+        for (const activity of activities["mail.activity"]) {
             this.store.Activity.insert({...activity});
         }
     }
