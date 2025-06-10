@@ -85,12 +85,16 @@
                             class="btn shadow-none"
                             title="Open Numpad"
                             t-on-click="() => this.onOpenNumpad()"
-                        ><i class="fa fa-fw fa-lg fa-keyboard-o" /></button>
+                        >
+                            <i class="fa fa-fw fa-lg fa-keyboard-o" />
+                        </button>
                         <button
                             class="btn shadow-none"
                             title="Call"
                             t-on-click="() => this.onCall()"
-                        ><i class="fa fa-fw fa-lg fa-phone" /></button>
+                        >
+                            <i class="fa fa-fw fa-lg fa-phone" />
+                        </button>
                     </div>
                 </t>
             </div>

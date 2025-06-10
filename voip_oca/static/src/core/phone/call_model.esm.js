@@ -10,14 +10,14 @@ import {durationStr} from "../../utils/utils.esm";
  * @property {[number, string]} user_id
  * @property {[number, string]} create_uid
  * @property {[number, string]} write_uid
- * @property {string} phone_number
+ * @property {String} phone_number
  * @property {'incoming'|'outgoing'} type_call
  * @property {'aborted', 'calling', 'missed', 'ongoing', 'rejected', 'terminated'} state
- * @property {string} activity_name
- * @property {string} end_date
- * @property {string} start_date
- * @property {string} create_date
- * @property {string} write_date
+ * @property {String} activity_name
+ * @property {String} end_date
+ * @property {String} start_date
+ * @property {String} create_date
+ * @property {String} write_date
  */
 
 export class Call extends Record {

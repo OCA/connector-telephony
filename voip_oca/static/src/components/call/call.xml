@@ -7,7 +7,6 @@
             <div
                 class="d-flex flex-column justify-content-center align-items-center py-2"
             >
-
                 <t t-if="voip.partner and voip.partner.id">
                     <img
                         class="rounded-circle"
@@ -38,18 +37,24 @@
                         class="btn btn-secondary p-3 rounded-circle"
                         title="Send email"
                         t-on-click="onEmailClick"
-                    ><i class="fa fa-fw fa-lg fa-envelope-o" /></button>
+                    >
+                        <i class="fa fa-fw fa-lg fa-envelope-o" />
+                    </button>
                     <button
                         t-if="voip.partner and voip.partner.id"
                         class="btn btn-secondary p-3 rounded-circle"
                         title="Info contact"
                         t-on-click="onOpenPartnerClick"
-                    ><i class="fa fa-fw fa-lg fa-user" /></button>
+                    >
+                        <i class="fa fa-fw fa-lg fa-user" />
+                    </button>
                     <button
                         class="btn btn-secondary p-3 rounded-circle"
                         title="Schedule activity"
                         t-on-click="onScheduleActivity"
-                    ><i class="fa fa-fw fa-lg fa-clock-o" /></button>
+                    >
+                        <i class="fa fa-fw fa-lg fa-clock-o" />
+                    </button>
                 </div>
             </div>
             <div
@@ -61,9 +66,10 @@
                         class="btn btn-success p-3 rounded-circle"
                         title="Accept"
                         t-on-click="onAccept"
-                    ><i class="fa fa-fw fa-lg fa-phone" /></button>
+                    >
+                        <i class="fa fa-fw fa-lg fa-phone" />
+                    </button>
                 </div>
-
             </div>
             <div class="d-flex flex-column px-3" t-if="voip.call.state == 'ongoing' ">
                 <span>Call</span>
@@ -72,19 +78,25 @@
                         class="btn btn-secondary p-3 rounded-circle"
                         title="Transfer"
                         t-on-click="onTransfer"
-                    ><i class="fa fa-fw fa-lg fa-arrows-h" /></button>
+                    >
+                        <i class="fa fa-fw fa-lg fa-arrows-h" />
+                    </button>
                     <button
                         class="btn btn-secondary p-3 rounded-circle"
                         title="Mute"
                         t-on-click="onMute"
-                    ><i class="fa fa-fw fa-lg fa-microphone" /></button>
+                    >
+                        <i class="fa fa-fw fa-lg fa-microphone" />
+                    </button>
                     <button
                         class="btn btn-secondary p-3 rounded-circle"
                         title="Pause"
                         t-on-click="onHold"
-                    ><i
+                    >
+                        <i
                             t-attf-class="fa fa-fw fa-lg #{ agent.isHolded? 'fa-play': 'fa-pause' }"
-                        /></button>
+                        />
+                    </button>
                 </div>
             </div>
         </t>
@@ -98,12 +110,16 @@
                 class="btn shadow-none"
                 title="Open Numpad"
                 t-on-click="() => this.onOpenNumpad()"
-            ><i class="fa fa-fw fa-lg fa-keyboard-o" /></button>
+            >
+                <i class="fa fa-fw fa-lg fa-keyboard-o" />
+            </button>
             <button
                 class="btn text-danger shadow-none"
                 title="Call"
                 t-on-click="() => this.onHangup()"
-            ><i class="fa fa-fw fa-lg fa-phone" /></button>
+            >
+                <i class="fa fa-fw fa-lg fa-phone" />
+            </button>
         </div>
     </t>
 </templates>
