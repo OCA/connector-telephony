@@ -90,10 +90,14 @@ class TestVoipOca(TransactionCase):
         self.assertEqual(self.activity_02.main_partner, self.partner_02.name)
 
     def test_activity_search(self):
-        results = self.env["mail.activity"].get_call_activities("Activity 01", 0, 1000)
+        results = self.env["mail.activity"].get_call_activities("Activity 01", 0, 1000)[
+            "mail.activity"
+        ]
         self.assertIn(self.activity_01.id, [result["id"] for result in results])
         self.assertNotIn(self.activity_02.id, [result["id"] for result in results])
-        results = self.env["mail.activity"].get_call_activities("Activity 02", 0, 1000)
+        results = self.env["mail.activity"].get_call_activities("Activity 02", 0, 1000)[
+            "mail.activity"
+        ]
         self.assertNotIn(self.activity_01.id, [result["id"] for result in results])
         self.assertIn(self.activity_02.id, [result["id"] for result in results])
 

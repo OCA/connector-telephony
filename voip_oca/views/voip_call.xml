@@ -6,7 +6,7 @@
         <field name="name">voip.call.list</field>
         <field name="model">voip.call</field>
         <field name="arch" type="xml">
-            <tree editable="top">
+            <list editable="top">
                 <field name="display_name" />
                 <field name="phone_number" />
                 <field name="type_call" />
@@ -15,7 +15,7 @@
                 <field name="end_date" />
                 <field name="user_id" />
                 <field name="partner_id" />
-            </tree>
+            </list>
         </field>
     </record>
 
