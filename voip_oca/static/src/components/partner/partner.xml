@@ -42,29 +42,39 @@
                     class="btn btn-secondary p-3 rounded-circle"
                     title="Related document"
                     t-on-click="onOpenDocument"
-                ><i class="fa fa-fw fa-lg fa-file-text-o" /></button>
+                >
+                    <i class="fa fa-fw fa-lg fa-file-text-o" />
+                </button>
                 <button
                     class="btn btn-secondary p-3 rounded-circle"
                     title="Send email"
                     t-on-click="onEmailClick"
-                ><i class="fa fa-fw fa-lg fa-envelope-o" /></button>
+                >
+                    <i class="fa fa-fw fa-lg fa-envelope-o" />
+                </button>
                 <button
                     t-if="this.props.partner.id"
                     class="btn btn-secondary p-3 rounded-circle"
                     title="Info contact"
                     t-on-click="onOpenPartnerClick"
-                ><i class="fa fa-fw fa-lg fa-user" /></button>
+                >
+                    <i class="fa fa-fw fa-lg fa-user" />
+                </button>
                 <button
                     t-if="!this.props.partner.id"
                     class="btn btn-secondary p-3 rounded-circle"
                     title="New contact"
                     t-on-click="onNewPartnerClick"
-                ><i class="fa fa-fw fa-lg fa-plus" /></button>
+                >
+                    <i class="fa fa-fw fa-lg fa-plus" />
+                </button>
                 <button
                     class="btn btn-secondary p-3 rounded-circle"
                     title="Schedule activity"
                     t-on-click="onScheduleActivity"
-                ><i class="fa fa-fw fa-lg fa-clock-o" /></button>
+                >
+                    <i class="fa fa-fw fa-lg fa-clock-o" />
+                </button>
             </div>
         </div>
         <div
@@ -77,19 +87,24 @@
                     class="btn btn-secondary p-3 rounded-circle"
                     title="Mark as done"
                     t-on-click="onMarkAsDone"
-                ><i class="fa fa-fw fa-lg fa-check" /></button>
+                >
+                    <i class="fa fa-fw fa-lg fa-check" />
+                </button>
                 <button
                     class="btn btn-secondary p-3 rounded-circle"
                     title="Edit activity"
                     t-on-click="onEdit"
-                ><i class="fa fa-fw fa-lg fa-pencil" /></button>
+                >
+                    <i class="fa fa-fw fa-lg fa-pencil" />
+                </button>
                 <button
                     class="btn btn-secondary p-3 rounded-circle"
                     title="Cancel activity"
                     t-on-click="onDelete"
-                ><i class="fa fa-fw fa-lg fa-times" /></button>
+                >
+                    <i class="fa fa-fw fa-lg fa-times" />
+                </button>
             </div>
         </div>
-
     </t>
 </templates>

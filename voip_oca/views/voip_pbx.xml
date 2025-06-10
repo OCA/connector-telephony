@@ -53,5 +53,4 @@
         <field name="action" ref="voip_pbx_act_window" />
         <field name="sequence" eval="16" />
     </record>
-
 </odoo>

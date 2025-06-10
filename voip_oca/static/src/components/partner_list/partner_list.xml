@@ -12,6 +12,5 @@
                 <span class="fw-bolder" t-esc="partner.displayName" />
             </div>
         </t>
-
     </t>
 </templates>

@@ -8,10 +8,10 @@
                 Transfer to
                 <span class="flex-grow-1" />
                 <button
-                    class="btn-close btn-sm"
-                    data-hotkey="x"
-                    t-on-click="props.close"
-                />
+                class="btn-close btn-sm"
+                data-hotkey="x"
+                t-on-click="props.close"
+            />
             </h3>
             <div class="d-flex p-2">
                 <input
