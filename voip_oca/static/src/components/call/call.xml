@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Copyright 2025 Dixmit
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<templates xml:space="preserve">
+    <t t-name="voip_oca.Call">
+        <t t-if="!this.state.numpad">
+            <div
+                class="d-flex flex-column justify-content-center align-items-center py-2"
+            >
+
+                <t t-if="voip.partner and voip.partner.id">
+                    <img
+                        class="rounded-circle"
+                        t-att-src="voip.imagePartner(voip.partner.id)"
+                    />
+                    <span class="mt-2 fw-bolder" t-esc="voip.partner.name" />
+                    <span class="mt-2" t-esc="voip.partner.displayName" />
+                </t>
+                <t t-else="">
+                    <span class="fw-bolder">No contact info</span>
+                </t>
+                <span class="mt-2">
+                    <i class="fa fa-phone" />
+                    <span class="mt-2 mx-2" t-esc="voip.call.phoneNumber" />
+                </span>
+                <span class="mt-2 small text-muted" t-if="voip.call">
+                    <i class="px-2" t-att-class="voip.call.iconTypeCall" />
+                    <t t-esc="voip.call.dateStr" />
+                </span>
+                <span class="mt-2 small">
+                    In call for: <t t-esc="duration" />
+                </span>
+            </div>
+            <div class="d-flex flex-column px-3 pt-2">
+                <span>Actions</span>
+                <div class="d-flex justify-content-around my-3">
+                    <button
+                        class="btn btn-secondary p-3 rounded-circle"
+                        title="Send email"
+                        t-on-click="onEmailClick"
+                    ><i class="fa fa-fw fa-lg fa-envelope-o" /></button>
+                    <button
+                        t-if="voip.partner and voip.partner.id"
+                        class="btn btn-secondary p-3 rounded-circle"
+                        title="Info contact"
+                        t-on-click="onOpenPartnerClick"
+                    ><i class="fa fa-fw fa-lg fa-user" /></button>
+                    <button
+                        class="btn btn-secondary p-3 rounded-circle"
+                        title="Schedule activity"
+                        t-on-click="onScheduleActivity"
+                    ><i class="fa fa-fw fa-lg fa-clock-o" /></button>
+                </div>
+            </div>
+            <div
+                class="d-flex flex-column px-3"
+                t-if="voip.call.state == 'calling' and voip.call.typeCall == 'incoming'"
+            >
+                <div class="d-flex justify-content-around my-3">
+                    <button
+                        class="btn btn-success p-3 rounded-circle"
+                        title="Accept"
+                        t-on-click="onAccept"
+                    ><i class="fa fa-fw fa-lg fa-phone" /></button>
+                </div>
+
+            </div>
+            <div class="d-flex flex-column px-3" t-if="voip.call.state == 'ongoing' ">
+                <span>Call</span>
+                <div class="d-flex justify-content-around my-3">
+                    <button
+                        class="btn btn-secondary p-3 rounded-circle"
+                        title="Transfer"
+                        t-on-click="onTransfer"
+                    ><i class="fa fa-fw fa-lg fa-arrows-h" /></button>
+                    <button
+                        class="btn btn-secondary p-3 rounded-circle"
+                        title="Mute"
+                        t-on-click="onMute"
+                    ><i class="fa fa-fw fa-lg fa-microphone" /></button>
+                    <button
+                        class="btn btn-secondary p-3 rounded-circle"
+                        title="Pause"
+                        t-on-click="onHold"
+                    ><i
+                            t-attf-class="fa fa-fw fa-lg #{ agent.isHolded? 'fa-play': 'fa-pause' }"
+                        /></button>
+                </div>
+            </div>
+        </t>
+        <t t-else="">
+            <Numpad onNumpadValue.bind="onNumpadValue" />
+        </t>
+        <div
+            class="o_voip_softphone_footer d-flex justify-content-around align-items-center p-3"
+        >
+            <button
+                class="btn shadow-none"
+                title="Open Numpad"
+                t-on-click="() => this.onOpenNumpad()"
+            ><i class="fa fa-fw fa-lg fa-keyboard-o" /></button>
+            <button
+                class="btn text-danger shadow-none"
+                title="Call"
+                t-on-click="() => this.onHangup()"
+            ><i class="fa fa-fw fa-lg fa-phone" /></button>
+        </div>
+    </t>
+</templates>

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Copyright 2025 Dixmit
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<templates xml:space="preserve">
+    <t t-name="voip_oca.VoipOCASoftphone">
+        <div
+            t-attf-class="o_voip_softphone position-absolute d-flex flex-column bottom-0 ms-2 bg-white shadow"
+            t-if="voip.isOpened"
+        >
+            <div
+                class="o_voip_softphone_header d-flex justify-content-between align-items-center rounded-top-3 cursor-pointer text-white"
+                t-on-click="onClickBar"
+            >
+                <div>
+                    <span
+                        t-attf-class="o_voip_status_icon fa fa-circle ms-3 me-1 o_voip_#{voip.status}"
+                    />
+                    <span class="oi oi-large oi-voip mx-1" />
+                    <span class="mx-1">VoIP</span>
+                </div>
+                <div>
+                    <button
+                        class="btn btn-small text-white border-0 shadow-none"
+                        type="button"
+                        t-on-click="onClosePhone"
+                    >
+                        <i class="fa fa-close" />
+                    </button>
+                </div>
+            </div>
+            <div t-if="!voip.isFolded" class="o_voip_softphone_content">
+                <div t-if="voip.inCall">
+                    <Call />
+                </div>
+                <t t-else="">
+                    <div t-if="voip.numpadTab">
+                        <Numpad onCall.bind="onCall" />
+                    </div>
+                    <div t-if="voip.partner and !voip.numpadTab">
+                        <Partner t-props="voip.partnerProps" />
+                    </div>
+                    <div
+                        t-if="!voip.partner and !voip.numpadTab"
+                        class="o_voip_softphone_detail"
+                    >
+                        <div class="d-flex" t-if="showInput">
+                            <input
+                                class="form-control border-0 shadow-none"
+                                placeholder="Search"
+                                t-model.trim="voip.searchValue"
+                                t-ref="searchInput"
+                                t-on-input="onSearchInput"
+                            />
+                            <button class="oi oi-search btn" />
+                        </div>
+
+                        <ul class="nav nav-tabs text-center">
+                            <li
+                                class="nav-item fs-6"
+                                t-foreach="tabElements"
+                                t-as="tab"
+                                t-key="tab[0]"
+                                t-if="!voip.numpadTab and !voip.partner"
+                            >
+                                <a
+                                    t-attf-class="nav-link #{voip.selectedTab == tab[0] ? 'active' : ''}"
+                                    t-att-name="tab[0]"
+                                    aria-current="page"
+                                    href="#"
+                                    t-esc="tab[1].title"
+                                    t-on-click="() =>this.onSelectTab(tab[0])"
+                                />
+                            </li>
+                        </ul>
+                        <t
+                            t-component="childComponent"
+                            t-props="childComponentProps"
+                            t-if="childComponent"
+                        />
+                    </div>
+                    <div
+                        class="o_voip_softphone_footer d-flex justify-content-around align-items-center p-3"
+                    >
+                        <button
+                            class="btn shadow-none"
+                            title="Open Numpad"
+                            t-on-click="() => this.onOpenNumpad()"
+                        ><i class="fa fa-fw fa-lg fa-keyboard-o" /></button>
+                        <button
+                            class="btn shadow-none"
+                            title="Call"
+                            t-on-click="() => this.onCall()"
+                        ><i class="fa fa-fw fa-lg fa-phone" /></button>
+                    </div>
+                </t>
+            </div>
+        </div>
+    </t>
+</templates>
