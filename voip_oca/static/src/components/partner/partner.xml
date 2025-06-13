@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Copyright 2025 Dixmit
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<templates xml:space="preserve">
+    <t t-name="voip_oca.Partner">
+        <div class="d-flex align-items-start w-100 py-2">
+            <button class="btn" t-on-click="onClose">
+                <i class="fa fa-chevron-left" />
+            </button>
+        </div>
+        <div
+            class="o_voip_partner_header d-flex flex-column justify-content-center align-items-center"
+        >
+            <t t-if="props.partner.id">
+                <img
+                    class="rounded-circle"
+                    t-att-src="voip.imagePartner(props.partner.id)"
+                />
+                <span class="mt-2 fw-bolder" t-esc="props.partner.name" />
+            </t>
+            <t t-else="">
+                <span class="fw-bolder">No contact info</span>
+            </t>
+            <t t-if="phoneNumber">
+                <button class="btn text-success" t-on-click="onCall">
+                    <i class="fa fa-phone" />
+                    <span class="mt-2 mx-2" t-esc="phoneNumber" />
+                </button>
+            </t>
+            <span class="mt-2 small text-muted" t-if="props.call">
+                <i class="px-2" t-att-class="props.call.iconTypeCall" />
+                <t t-esc="props.call.dateStr" />
+                <t t-if="props.call.duration"> • <t t-esc="props.call.durationStr" />
+                </t>
+            </span>
+        </div>
+        <div class="o_voip_partner_actions d-flex flex-column px-3 pt-4">
+            <span>Actions</span>
+            <div class="d-flex justify-content-around my-3">
+                <button
+                    t-if="this.props.activity.id"
+                    class="btn btn-secondary p-3 rounded-circle"
+                    title="Related document"
+                    t-on-click="onOpenDocument"
+                >
+                    <i class="fa fa-fw fa-lg fa-file-text-o" />
+                </button>
+                <button
+                    class="btn btn-secondary p-3 rounded-circle"
+                    title="Send email"
+                    t-on-click="onEmailClick"
+                >
+                    <i class="fa fa-fw fa-lg fa-envelope-o" />
+                </button>
+                <button
+                    t-if="this.props.partner.id"
+                    class="btn btn-secondary p-3 rounded-circle"
+                    title="Info contact"
+                    t-on-click="onOpenPartnerClick"
+                >
+                    <i class="fa fa-fw fa-lg fa-user" />
+                </button>
+                <button
+                    t-if="!this.props.partner.id"
+                    class="btn btn-secondary p-3 rounded-circle"
+                    title="New contact"
+                    t-on-click="onNewPartnerClick"
+                >
+                    <i class="fa fa-fw fa-lg fa-plus" />
+                </button>
+                <button
+                    class="btn btn-secondary p-3 rounded-circle"
+                    title="Schedule activity"
+                    t-on-click="onScheduleActivity"
+                >
+                    <i class="fa fa-fw fa-lg fa-clock-o" />
+                </button>
+            </div>
+        </div>
+        <div
+            t-if="props.activity.id"
+            class="o_voip_partner_activity d-flex flex-column px-3"
+        >
+            <span>Related activity</span>
+            <div class="d-flex justify-content-around my-3">
+                <button
+                    class="btn btn-secondary p-3 rounded-circle"
+                    title="Mark as done"
+                    t-on-click="onMarkAsDone"
+                >
+                    <i class="fa fa-fw fa-lg fa-check" />
+                </button>
+                <button
+                    class="btn btn-secondary p-3 rounded-circle"
+                    title="Edit activity"
+                    t-on-click="onEdit"
+                >
+                    <i class="fa fa-fw fa-lg fa-pencil" />
+                </button>
+                <button
+                    class="btn btn-secondary p-3 rounded-circle"
+                    title="Cancel activity"
+                    t-on-click="onDelete"
+                >
+                    <i class="fa fa-fw fa-lg fa-times" />
+                </button>
+            </div>
+        </div>
+    </t>
+</templates>

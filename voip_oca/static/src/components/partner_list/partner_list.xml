@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Copyright 2025 Dixmit
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<templates xml:space="preserve">
+    <t t-name="voip_oca.PartnerList">
+        <t t-foreach="props.records" t-as="partner" t-key="partner.id">
+            <div
+                class="o_voip_partner_item d-flex cursor-pointer p-3"
+                t-on-click="() => this.onClick(partner)"
+            >
+                <img class="image_40" t-att-src="voip.imagePartner(partner.id)" />
+                <span class="fw-bolder" t-esc="partner.displayName" />
+            </div>
+        </t>
+    </t>
+</templates>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Copyright 2025 Dixmit
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<templates xml:space="preserve">
+    <t t-name="voip_oca.ActivityList">
+        <t t-foreach="props.records" t-as="activity" t-key="activity.id">
+            <div
+                class="o_voip_activity_item d-flex flex-column p-3 cursor-pointer"
+                t-on-click="() => this.onClick(activity)"
+            >
+                <span class="fw-bold" t-esc="activity.main_partner" />
+                <t t-if="activity.main_partner != activity.res_name">
+                    <span class="fst-normal" t-esc="activity.res_name" />
+                </t>
+                <t t-if="activity.summary">
+                    <span class="fst-italic" t-esc="activity.summary" />
+                </t>
+            </div>
+        </t>
+    </t>
+</templates>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Copyright 2025 Dixmit
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<templates xml:space="preserve">
+    <t t-name="voip_oca.CallList">
+        <t t-foreach="props.records" t-as="call" t-key="call.id">
+            <div
+                class="o_voip_call_item d-flex flex-column p-3 cursor-pointer"
+                t-on-click="() => this.onClick(call)"
+            >
+                <span class="fw-bold" t-esc="call.partner[1]" />
+                <span t-esc="call.displayName" />
+                <div class="small text-muted">
+                    <t t-esc="call.dateStr" />
+                    <t t-if="call.duration"> • <t t-esc="call.durationStr" />
+                    </t>
+                </div>
+            </div>
+        </t>
+    </t>
+</templates>

@@ -1,0 +1,23 @@
+<odoo>
+    <record id="voip_call_1" model="voip.call">
+        <field name="partner_id" ref="base.res_partner_1" />
+        <field name="user_id" ref="base.user_admin" />
+        <field name="phone_number">+1234567890</field>
+        <field name="type_call">outgoing</field>
+        <field name="state">terminated</field>
+        <field name="activity_name">Call to +1234567890</field>
+        <field name="end_date">2020-01-01 10:15:00</field>
+        <field name="start_date">2020-01-01 10:00:00</field>
+    </record>
+
+    <record id="voip_call_2" model="voip.call">
+        <field name="partner_id" ref="base.res_partner_2" />
+        <field name="user_id" ref="base.user_admin" />
+        <field name="phone_number">+1234567842</field>
+        <field name="type_call">incoming</field>
+        <field name="state">missed</field>
+        <field name="activity_name">Call to +1234567890</field>
+        <field name="end_date">2020-01-01 15:37:00</field>
+        <field name="start_date">2020-01-01 14:00:00</field>
+    </record>
+</odoo>

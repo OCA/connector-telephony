@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2025 Dixmit
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record model="ir.ui.view" id="voip_pbx_form_view">
+        <field name="model">voip.pbx</field>
+        <field name="arch" type="xml">
+            <form>
+                <header />
+                <sheet>
+                    <group>
+                        <field name="name" />
+                        <field name="domain" />
+                        <field name="ws_server" />
+                        <field name="mode" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="voip_pbx_search_view">
+        <field name="model">voip.pbx</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" />
+                <field name="mode" />
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="voip_pbx_list_view">
+        <field name="model">voip.pbx</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name" />
+                <field name="mode" />
+            </list>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="voip_pbx_act_window">
+        <field name="name">PBX Servers</field>
+        <field name="res_model">voip.pbx</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+
+    <record model="ir.ui.menu" id="voip_pbx_menu">
+        <field name="name">PBX Servers</field>
+        <field name="parent_id" ref="mail.mail_menu_technical" />
+        <field name="action" ref="voip_pbx_act_window" />
+        <field name="sequence" eval="16" />
+    </record>
+</odoo>

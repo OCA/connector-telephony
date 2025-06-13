@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_voip_call,access_voip_call,model_voip_call,base.group_user,1,1,1,1
+access_voip_pbx_access,access_voip_pbx,model_voip_pbx,base.group_user,1,0,0,0
+access_voip_pbx_manage,access_voip_pbx,model_voip_pbx,base.group_system,1,1,1,1

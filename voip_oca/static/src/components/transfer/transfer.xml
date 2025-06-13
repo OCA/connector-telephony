@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Copyright 2025 Dixmit
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<templates xml:space="preserve">
+    <t t-name="voip_oca.Transfer">
+        <div>
+            <h3 class="popover-header d-flex">
+                Transfer to
+                <span class="flex-grow-1" />
+                <button
+                class="btn-close btn-sm"
+                data-hotkey="x"
+                t-on-click="props.close"
+            />
+            </h3>
+            <div class="d-flex p-2">
+                <input
+                    class="form-control"
+                    type="text"
+                    placeholder="Enter number"
+                    t-model="state.value"
+                    t-ref="input"
+                    t-on-keydown="onKeydown"
+                />
+                <button
+                    class="btn btn-primary ms-2"
+                    data-hotkey="q"
+                    t-on-click="transfer"
+                >Transfer</button>
+            </div>
+        </div>
+    </t>
+</templates>
