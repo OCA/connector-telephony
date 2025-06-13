@@ -1,0 +1,588 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* voip_oca
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: voip_oca
+#. odoo-javascript
+#: code:addons/voip_oca/static/src/utils/utils.esm.js:0
+#, python-format
+msgid "%(minutes)s min %(seconds)s sec"
+msgstr ""
+
+#. module: voip_oca
+#. odoo-javascript
+#: code:addons/voip_oca/static/src/utils/utils.esm.js:0
+#, python-format
+msgid "%(minutes)s minutes"
+msgstr ""
+
+#. module: voip_oca
+#. odoo-javascript
+#: code:addons/voip_oca/static/src/utils/utils.esm.js:0
+#, python-format
+msgid "%(seconds)s seconds"
+msgstr ""
+
+#. module: voip_oca
+#. odoo-javascript
+#: code:addons/voip_oca/static/src/utils/utils.esm.js:0
+#, python-format
+msgid "1 minute"
+msgstr ""
+
+#. module: voip_oca
+#. odoo-javascript
+#: code:addons/voip_oca/static/src/utils/utils.esm.js:0
+#, python-format
+msgid "1 second"
+msgstr ""
+
+#. module: voip_oca
+#. odoo-javascript
+#: code:addons/voip_oca/static/src/utils/utils.esm.js:0
+#, python-format
+msgid "2 minutes"
+msgstr ""
+
+#. module: voip_oca
+#: model:ir.model.fields.selection,name:voip_oca.selection__voip_call__state__aborted
+msgid "Aborted"
+msgstr ""
+
+#. module: voip_oca
+#. odoo-javascript
+#: code:addons/voip_oca/static/src/components/call/call.xml:0
+#, python-format
+msgid "Accept"
+msgstr ""
+
+#. module: voip_oca
+#. odoo-javascript
+#: code:addons/voip_oca/static/src/components/call/call.xml:0
+#: code:addons/voip_oca/static/src/components/partner/partner.xml:0
+#, python-format
+msgid "Actions"
+msgstr ""
+
+#. module: voip_oca
+#. odoo-javascript
+#: code:addons/voip_oca/static/src/components/activity_list/activity_list.esm.js:0
+#, python-format
+msgid "Activities"
+msgstr ""
+
+#. module: voip_oca
+#: model:ir.model,name:voip_oca.model_mail_activity
+msgid "Activity"
+msgstr ""
+
+#. module: voip_oca
+#: model:ir.model,name:voip_oca.model_mail_activity_mixin
+msgid "Activity Mixin"
+msgstr ""
+
+#. module: voip_oca
+#: model:ir.model.fields,field_description:voip_oca.field_voip_call__activity_name
+msgid "Activity Name"
+msgstr ""
+
+#. module: voip_oca
+#. odoo-javascript
+#: code:addons/voip_oca/static/src/services/voip_agent_service.esm.js:0
+#, python-format
+msgid ""
+"An error occurred during the connection:\n"
+"\n"
+"%(error)s"
+msgstr ""
+
+#. module: voip_oca
+#. odoo-javascript
+#: code:addons/voip_oca/static/src/services/voip_agent_service.esm.js:0
+#, python-format
+msgid ""
+"An error occurred during the instantiation of the User Agent:\n"
+"\n"
+"%(error)s"
+msgstr ""
+
+#. module: voip_oca
+#. odoo-javascript
+#: code:addons/voip_oca/static/src/services/voip_agent_service.esm.js:0
+#, python-format
+msgid ""
+"An error occurred during the registration of the User Agent:\n"
+"\n"
+"%(error)s"
+msgstr ""
+
+#. module: voip_oca
+#. odoo-javascript
+#: code:addons/voip_oca/static/src/components/call/call.xml:0
+#: code:addons/voip_oca/static/src/components/call/call.xml:0
+#: code:addons/voip_oca/static/src/components/softphone/softphone.xml:0
+#, python-format
+msgid "Call"
+msgstr ""
+
+#. module: voip_oca
+#. odoo-javascript
+#: code:addons/voip_oca/static/src/services/voip_agent_service.esm.js:0
+#, python-format
+msgid ""
+"Call rejected. Reason:\n"
+"\n"
+"%(reason)s"
+msgstr ""
+
+#. module: voip_oca
+#: model:ir.model.fields.selection,name:voip_oca.selection__voip_call__state__calling
+msgid "Calling"
+msgstr ""
+
+#. module: voip_oca
+#. odoo-javascript
+#: code:addons/voip_oca/static/src/components/call_list/call_list.esm.js:0
+#: model:ir.actions.act_window,name:voip_oca.voip_call_act_window_list
+#, python-format
+msgid "Calls"
+msgstr ""
+
+#. module: voip_oca
+#. odoo-javascript
+#: code:addons/voip_oca/static/src/components/partner/partner.xml:0
+#, python-format
+msgid "Cancel activity"
+msgstr ""
+
+#. module: voip_oca
+#: model:ir.model,name:voip_oca.model_res_partner
+#: model:ir.model.fields,field_description:voip_oca.field_voip_call__partner_id
+msgid "Contact"
+msgstr ""
+
+#. module: voip_oca
+#. odoo-javascript
+#: code:addons/voip_oca/static/src/components/partner_list/partner_list.esm.js:0
+#, python-format
+msgid "Contacts"
+msgstr ""
+
+#. module: voip_oca
+#: model:ir.model.fields,field_description:voip_oca.field_voip_call__create_uid
+#: model:ir.model.fields,field_description:voip_oca.field_voip_pbx__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: voip_oca
+#: model:ir.model.fields,field_description:voip_oca.field_voip_call__create_date
+#: model:ir.model.fields,field_description:voip_oca.field_voip_pbx__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: voip_oca
+#. odoo-javascript
+#: code:addons/voip_oca/static/src/components/numpad/numpad.xml:0
+#, python-format
+msgid "Delete"
+msgstr ""
+
+#. module: voip_oca
+#: model:ir.model.fields,field_description:voip_oca.field_voip_call__display_name
+#: model:ir.model.fields,field_description:voip_oca.field_voip_pbx__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: voip_oca
+#: model:ir.model.fields,field_description:voip_oca.field_voip_pbx__domain
+msgid "Domain"
+msgstr ""
+
+#. module: voip_oca
+#. odoo-javascript
+#: code:addons/voip_oca/static/src/components/partner/partner.xml:0
+#, python-format
+msgid "Edit activity"
+msgstr ""
+
+#. module: voip_oca
+#: model:ir.model.fields,field_description:voip_oca.field_voip_call__end_date
+msgid "End Date"
+msgstr ""
+
+#. module: voip_oca
+#. odoo-javascript
+#: code:addons/voip_oca/static/src/components/transfer/transfer.xml:0
+#, python-format
+msgid "Enter number"
+msgstr ""
+
+#. module: voip_oca
+#. odoo-javascript
+#: code:addons/voip_oca/static/src/components/numpad/numpad.xml:0
+#, python-format
+msgid "Enter number..."
+msgstr ""
+
+#. module: voip_oca
+#: model:ir.model.fields,field_description:voip_oca.field_voip_pbx__mode
+msgid "Environment"
+msgstr ""
+
+#. module: voip_oca
+#. odoo-javascript
+#: code:addons/voip_oca/static/src/services/voip_agent_service.esm.js:0
+#, python-format
+msgid ""
+"Failed to establish the call:\n"
+"\n"
+"%(error)s"
+msgstr ""
+
+#. module: voip_oca
+#. odoo-javascript
+#: code:addons/voip_oca/static/src/services/voip_agent_service.esm.js:0
+#, python-format
+msgid ""
+"Failed to load the SIP.js library:\n"
+"\n"
+"%(error)s"
+msgstr ""
+
+#. module: voip_oca
+#. odoo-javascript
+#: code:addons/voip_oca/static/src/services/voip_agent_service.esm.js:0
+#, python-format
+msgid ""
+"Failed to put the call on hold/unhold:\n"
+"\n"
+"%(error)s"
+msgstr ""
+
+#. module: voip_oca
+#. odoo-javascript
+#: code:addons/voip_oca/static/src/services/voip_agent_service.esm.js:0
+#, python-format
+msgid "Failed to reconnect the User Agent. Please reload the page."
+msgstr ""
+
+#. module: voip_oca
+#: model:ir.model,name:voip_oca.model_ir_http
+msgid "HTTP Routing"
+msgstr ""
+
+#. module: voip_oca
+#: model:ir.model.fields,field_description:voip_oca.field_voip_call__id
+#: model:ir.model.fields,field_description:voip_oca.field_voip_pbx__id
+msgid "ID"
+msgstr ""
+
+#. module: voip_oca
+#. odoo-javascript
+#: code:addons/voip_oca/static/src/components/call/call.xml:0
+#, python-format
+msgid "In call for:"
+msgstr ""
+
+#. module: voip_oca
+#: model:ir.model.fields.selection,name:voip_oca.selection__voip_call__type_call__incoming
+msgid "Incoming"
+msgstr ""
+
+#. module: voip_oca
+#. odoo-javascript
+#: code:addons/voip_oca/static/src/components/call/call.xml:0
+#: code:addons/voip_oca/static/src/components/partner/partner.xml:0
+#, python-format
+msgid "Info contact"
+msgstr ""
+
+#. module: voip_oca
+#: model:ir.model.fields,field_description:voip_oca.field_voip_call__write_uid
+#: model:ir.model.fields,field_description:voip_oca.field_voip_pbx__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: voip_oca
+#: model:ir.model.fields,field_description:voip_oca.field_voip_call__write_date
+#: model:ir.model.fields,field_description:voip_oca.field_voip_pbx__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: voip_oca
+#: model:ir.model.fields,field_description:voip_oca.field_mail_activity__main_partner_id
+#: model:ir.model.fields,field_description:voip_oca.field_mail_activity_mixin__activity_main_partner_id
+#: model:ir.model.fields,field_description:voip_oca.field_res_partner__activity_main_partner_id
+#: model:ir.model.fields,field_description:voip_oca.field_res_users__activity_main_partner_id
+msgid "Main Contact"
+msgstr ""
+
+#. module: voip_oca
+#: model:ir.model.fields,field_description:voip_oca.field_mail_activity__main_partner
+msgid "Main Partner"
+msgstr ""
+
+#. module: voip_oca
+#. odoo-javascript
+#: code:addons/voip_oca/static/src/components/partner/partner.xml:0
+#, python-format
+msgid "Mark as done"
+msgstr ""
+
+#. module: voip_oca
+#: model:ir.model.fields.selection,name:voip_oca.selection__voip_call__state__missed
+msgid "Missed"
+msgstr ""
+
+#. module: voip_oca
+#. odoo-javascript
+#: code:addons/voip_oca/static/src/components/call/call.xml:0
+#, python-format
+msgid "Mute"
+msgstr ""
+
+#. module: voip_oca
+#: model:ir.model.fields,field_description:voip_oca.field_voip_pbx__name
+msgid "Name"
+msgstr ""
+
+#. module: voip_oca
+#. odoo-javascript
+#: code:addons/voip_oca/static/src/components/partner/partner.xml:0
+#, python-format
+msgid "New contact"
+msgstr ""
+
+#. module: voip_oca
+#. odoo-javascript
+#: code:addons/voip_oca/static/src/components/call/call.xml:0
+#: code:addons/voip_oca/static/src/components/partner/partner.xml:0
+#, python-format
+msgid "No contact info"
+msgstr ""
+
+#. module: voip_oca
+#: model:ir.model.fields.selection,name:voip_oca.selection__voip_call__state__ongoing
+msgid "Ongoing"
+msgstr ""
+
+#. module: voip_oca
+#. odoo-javascript
+#: code:addons/voip_oca/static/src/components/call/call.xml:0
+#: code:addons/voip_oca/static/src/components/softphone/softphone.xml:0
+#, python-format
+msgid "Open Numpad"
+msgstr ""
+
+#. module: voip_oca
+#: model:ir.model.fields.selection,name:voip_oca.selection__voip_call__type_call__outgoing
+msgid "Outgoing"
+msgstr ""
+
+#. module: voip_oca
+#: model:ir.model.fields,field_description:voip_oca.field_voip_call__pbx_id
+#: model_terms:ir.ui.view,arch_db:voip_oca.view_users_form
+#: model_terms:ir.ui.view,arch_db:voip_oca.view_users_form_simple_modif
+msgid "PBX"
+msgstr ""
+
+#. module: voip_oca
+#: model:ir.actions.act_window,name:voip_oca.voip_pbx_act_window
+#: model:ir.ui.menu,name:voip_oca.voip_pbx_menu
+msgid "PBX Servers"
+msgstr ""
+
+#. module: voip_oca
+#: model_terms:ir.ui.view,arch_db:voip_oca.view_users_form
+#: model_terms:ir.ui.view,arch_db:voip_oca.view_users_form_simple_modif
+msgid "Password"
+msgstr ""
+
+#. module: voip_oca
+#. odoo-javascript
+#: code:addons/voip_oca/static/src/components/call/call.xml:0
+#, python-format
+msgid "Pause"
+msgstr ""
+
+#. module: voip_oca
+#: model:ir.model.fields,field_description:voip_oca.field_voip_call__phone_number
+msgid "Phone Number"
+msgstr ""
+
+#. module: voip_oca
+#: model:ir.model.fields.selection,name:voip_oca.selection__voip_pbx__mode__prod
+msgid "Production"
+msgstr ""
+
+#. module: voip_oca
+#: model:ir.model.fields.selection,name:voip_oca.selection__voip_call__state__rejected
+msgid "Rejected"
+msgstr ""
+
+#. module: voip_oca
+#. odoo-javascript
+#: code:addons/voip_oca/static/src/components/partner/partner.xml:0
+#, python-format
+msgid "Related activity"
+msgstr ""
+
+#. module: voip_oca
+#. odoo-javascript
+#: code:addons/voip_oca/static/src/components/partner/partner.xml:0
+#, python-format
+msgid "Related document"
+msgstr ""
+
+#. module: voip_oca
+#: model:ir.model.fields,field_description:voip_oca.field_voip_call__user_id
+msgid "Responsible"
+msgstr ""
+
+#. module: voip_oca
+#. odoo-javascript
+#: code:addons/voip_oca/static/src/components/call/call.xml:0
+#: code:addons/voip_oca/static/src/components/partner/partner.xml:0
+#, python-format
+msgid "Schedule activity"
+msgstr ""
+
+#. module: voip_oca
+#. odoo-javascript
+#: code:addons/voip_oca/static/src/components/softphone/softphone.xml:0
+#, python-format
+msgid "Search"
+msgstr ""
+
+#. module: voip_oca
+#. odoo-javascript
+#: code:addons/voip_oca/static/src/components/call/call.xml:0
+#: code:addons/voip_oca/static/src/components/partner/partner.xml:0
+#, python-format
+msgid "Send email"
+msgstr ""
+
+#. module: voip_oca
+#. odoo-javascript
+#: code:addons/voip_oca/static/src/components/voip_oca_systray/voip_oca_systray.xml:0
+#, python-format
+msgid "Softphone"
+msgstr ""
+
+#. module: voip_oca
+#: model:ir.model.fields,field_description:voip_oca.field_voip_call__start_date
+msgid "Start Date"
+msgstr ""
+
+#. module: voip_oca
+#: model:ir.model.fields,field_description:voip_oca.field_voip_call__state
+msgid "State"
+msgstr ""
+
+#. module: voip_oca
+#: model:ir.model.fields.selection,name:voip_oca.selection__voip_call__state__terminated
+msgid "Terminated"
+msgstr ""
+
+#. module: voip_oca
+#: model:ir.model.fields.selection,name:voip_oca.selection__voip_pbx__mode__test
+msgid "Test"
+msgstr ""
+
+#. module: voip_oca
+#: model:ir.model.fields,help:voip_oca.field_voip_call__activity_name
+msgid "The name of the activity related to this phone call, if any."
+msgstr ""
+
+#. module: voip_oca
+#. odoo-javascript
+#: code:addons/voip_oca/static/src/components/call/call.xml:0
+#: code:addons/voip_oca/static/src/components/transfer/transfer.xml:0
+#, python-format
+msgid "Transfer"
+msgstr ""
+
+#. module: voip_oca
+#. odoo-javascript
+#: code:addons/voip_oca/static/src/components/transfer/transfer.xml:0
+#, python-format
+msgid "Transfer to"
+msgstr ""
+
+#. module: voip_oca
+#: model:ir.model.fields,field_description:voip_oca.field_voip_call__type_call
+msgid "Type Call"
+msgstr ""
+
+#. module: voip_oca
+#: model:ir.model,name:voip_oca.model_res_users
+msgid "User"
+msgstr ""
+
+#. module: voip_oca
+#: model_terms:ir.ui.view,arch_db:voip_oca.view_users_form
+#: model_terms:ir.ui.view,arch_db:voip_oca.view_users_form_simple_modif
+msgid "Username"
+msgstr ""
+
+#. module: voip_oca
+#: model_terms:ir.ui.view,arch_db:voip_oca.view_users_form
+#: model_terms:ir.ui.view,arch_db:voip_oca.view_users_form_simple_modif
+msgid "VOIP"
+msgstr ""
+
+#. module: voip_oca
+#. odoo-javascript
+#: code:addons/voip_oca/static/src/components/softphone/softphone.xml:0
+#, python-format
+msgid "VoIP"
+msgstr ""
+
+#. module: voip_oca
+#: model:ir.model,name:voip_oca.model_voip_call
+msgid "Voip OCA Call"
+msgstr ""
+
+#. module: voip_oca
+#: model:ir.model.fields,field_description:voip_oca.field_res_users__voip_password
+msgid "Voip Password"
+msgstr ""
+
+#. module: voip_oca
+#: model:ir.model,name:voip_oca.model_voip_pbx
+#: model:ir.model.fields,field_description:voip_oca.field_res_users__voip_pbx_id
+msgid "Voip Pbx"
+msgstr ""
+
+#. module: voip_oca
+#: model:ir.model.fields,field_description:voip_oca.field_res_users__voip_username
+msgid "Voip Username"
+msgstr ""
+
+#. module: voip_oca
+#: model:ir.ui.menu,name:voip_oca.voip_call_menu_action
+msgid "Voip/Calls"
+msgstr ""
+
+#. module: voip_oca
+#: model:ir.model.fields,field_description:voip_oca.field_voip_pbx__ws_server
+msgid "Ws Server"
+msgstr ""
+
+#. module: voip_oca
+#. odoo-javascript
+#: code:addons/voip_oca/static/src/utils/utils.esm.js:0
+#, python-format
+msgid "less than a second"
+msgstr ""
