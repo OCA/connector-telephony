@@ -10,19 +10,20 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-06-24 19:50+0000\n"
-"PO-Revision-Date: 2017-06-24 19:50+0000\n"
-"Last-Translator: Ediz Duman <neps1192@gmail.com>, 2016\n"
+"PO-Revision-Date: 2025-06-13 11:26+0000\n"
+"Last-Translator: Betül Öğmen <betulo@eska.biz>\n"
 "Language-Team: Turkish (https://www.transifex.com/oca/teams/23907/tr/)\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Weblate 5.10.4\n"
 
 #. module: base_phone
 #: model_terms:ir.ui.view,arch_db:base_phone.res_config_settings_view_form
 msgid "<span class=\"o_form_label\">Incoming calls</span>"
-msgstr ""
+msgstr "<span class=\"o_form_label\">Gelen çağrılar</span>"
 
 #. module: base_phone
 #: model:ir.model.fields,field_description:base_phone.field_number_not_found__calling_number
@@ -57,7 +58,7 @@ msgstr "Kapat"
 #. module: base_phone
 #: model:ir.model,name:base_phone.model_phone_common
 msgid "Common methods for phone features"
-msgstr ""
+msgstr "Telefon özellikleri için genel yöntemler"
 
 #. module: base_phone
 #: model:ir.model,name:base_phone.model_res_company
@@ -67,12 +68,12 @@ msgstr "Şirketler"
 #. module: base_phone
 #: model:ir.model,name:base_phone.model_res_config_settings
 msgid "Config Settings"
-msgstr ""
+msgstr "Yapılandırma Ayarları"
 
 #. module: base_phone
 #: model:ir.model,name:base_phone.model_res_partner
 msgid "Contact"
-msgstr ""
+msgstr "Kontak"
 
 #. module: base_phone
 #: code:addons/base_phone/wizard/number_not_found.py:0
@@ -179,6 +180,13 @@ msgid ""
 "digits of the phone number presented by the calling party. N is the value "
 "you should enter in this field."
 msgstr ""
+"Birçok durumda, Odoo arayan tarafın sunduğu bir telefon numarasından bir "
+"Ortak/Potansiyel Müşteri/Çalışan/... bulmak zorunda kalacaktır. Telefon "
+"operatörünüz tarafından sunulan telefon numaraları her zaman standart bir "
+"biçimde görüntülenmeyebilir, bu nedenle Odoo'da ilgili Ortak/Potansiyel Müş"
+"teri/Çalışan/...'ı bulmanın en iyi yöntemi, Odoo'daki telefon numarasının "
+"sonunu arayan tarafın sunduğu telefon numarasının son N rakamıyla "
+"eşleştirmeye çalışmaktır. N, bu alana girmeniz gereken değerdir."
 
 #. module: base_phone
 #: model:ir.model.fields,field_description:base_phone.field_number_not_found____last_update
@@ -207,7 +215,7 @@ msgstr "Son Güncellenme"
 #: code:addons/base_phone/wizard/number_not_found.py:0
 #, python-format
 msgid "Missing country on company %s"
-msgstr ""
+msgstr "%s şirketinde ülke eksik"
 
 #. module: base_phone
 #: model:ir.model.fields.selection,name:base_phone.selection__number_not_found__number_type__mobile
@@ -237,9 +245,8 @@ msgstr "Numara bulunamadı"
 
 #. module: base_phone
 #: model_terms:ir.ui.view,arch_db:base_phone.res_config_settings_view_form
-#, fuzzy
 msgid "Number of Digits"
-msgstr "Sondan eşleştirilecek rakam adedi"
+msgstr "Rakam Sayısı"
 
 #. module: base_phone
 #: model:ir.model.fields,field_description:base_phone.field_res_company__number_of_digits_to_match_from_end
@@ -271,7 +278,7 @@ msgstr "Telefon CallerID"
 #. module: base_phone
 #: model:ir.model,name:base_phone.model_phone_validation_mixin
 msgid "Phone Validation Mixin"
-msgstr ""
+msgstr "Telefon Doğrulama Karışımı"
 
 #. module: base_phone
 #: model:ir.model.fields,help:base_phone.field_number_not_found__calling_number
@@ -316,6 +323,9 @@ msgid ""
 "Set how many digits must be identical from the end of the phone number to "
 "declare it as a match with a partner, a lead, an employee, a candidate, etc."
 msgstr ""
+"Telefon numarasının bir ortak, potansiyel müşteri, çalışan, aday vb. ile "
+"eşleştiğini beyan etmek için, numaranın sonundan itibaren kaç rakamın aynı "
+"olması gerektiğini belirleyin."
 
 #. module: base_phone
 #: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers__state
