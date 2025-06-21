@@ -27,6 +27,7 @@ addon | version | maintainers | summary
 [hr_recruitment_phone](hr_recruitment_phone/) | 16.0.1.0.0 | <a href='https://github.com/alexis-via'><img src='https://github.com/alexis-via.png' width='32' height='32' style='border-radius:50%;' alt='alexis-via'/></a> | Validate phone numbers in HR Recruitment
 [sms_no_automatic_delete](sms_no_automatic_delete/) | 16.0.1.0.0 |  | Avoid automatic delete of sended sms
 [sms_ovh_http](sms_ovh_http/) | 16.0.1.0.0 | <a href='https://github.com/sebastienbeau'><img src='https://github.com/sebastienbeau.png' width='32' height='32' style='border-radius:50%;' alt='sebastienbeau'/></a> | Send sms using ovh http API
+[sms_twilio](sms_twilio/) | 16.0.1.0.0 | <a href='https://github.com/mariadforgeflow'><img src='https://github.com/mariadforgeflow.png' width='32' height='32' style='border-radius:50%;' alt='mariadforgeflow'/></a> | Send sms using Twilio API
 
 [//]: # (end addons)
 
