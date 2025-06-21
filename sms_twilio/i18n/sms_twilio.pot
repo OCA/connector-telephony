@@ -1,0 +1,191 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* sms_twilio
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: sms_twilio
+#: model:ir.model.fields,field_description:sms_twilio.field_iap_account__twilio_balance_account
+msgid "Account Balance"
+msgstr ""
+
+#. module: sms_twilio
+#. odoo-python
+#: code:addons/sms_twilio/models/sms_api.py:0
+#, python-format
+msgid "Batch sending is not supported with Twilio"
+msgstr ""
+
+#. module: sms_twilio
+#. odoo-python
+#: code:addons/sms_twilio/models/iap_account.py:0
+#: code:addons/sms_twilio/models/iap_account.py:0
+#, python-format
+msgid "Configure Twilio Credentials first"
+msgstr ""
+
+#. module: sms_twilio
+#: model:ir.model.fields,field_description:sms_twilio.field_twilio_phone_number__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: sms_twilio
+#: model:ir.model.fields,field_description:sms_twilio.field_twilio_phone_number__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: sms_twilio
+#: model:ir.model.fields,field_description:sms_twilio.field_twilio_phone_number__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: sms_twilio
+#: model:ir.model.fields,field_description:sms_twilio.field_sms_sms__error_detail
+msgid "Error Detail"
+msgstr ""
+
+#. module: sms_twilio
+#: model:ir.model.fields,field_description:sms_twilio.field_twilio_phone_number__name
+msgid "Friendly Name"
+msgstr ""
+
+#. module: sms_twilio
+#: model:ir.model,name:sms_twilio.model_iap_account
+msgid "IAP Account"
+msgstr ""
+
+#. module: sms_twilio
+#: model:ir.model.fields,field_description:sms_twilio.field_twilio_phone_number__id
+msgid "ID"
+msgstr ""
+
+#. module: sms_twilio
+#: model:ir.model.fields,field_description:sms_twilio.field_twilio_phone_number____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: sms_twilio
+#: model:ir.model.fields,field_description:sms_twilio.field_twilio_phone_number__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: sms_twilio
+#: model:ir.model.fields,field_description:sms_twilio.field_twilio_phone_number__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: sms_twilio
+#: model:ir.model,name:sms_twilio.model_sms_sms
+msgid "Outgoing SMS"
+msgstr ""
+
+#. module: sms_twilio
+#: model:ir.model.fields,field_description:sms_twilio.field_twilio_phone_number__phone_number
+msgid "Phone Number"
+msgstr ""
+
+#. module: sms_twilio
+#: model:ir.model.fields,field_description:sms_twilio.field_iap_account__twilio_production_env
+msgid "Production Environment"
+msgstr ""
+
+#. module: sms_twilio
+#: model:ir.model.fields,field_description:sms_twilio.field_iap_account__provider
+msgid "Provider"
+msgstr ""
+
+#. module: sms_twilio
+#: model_terms:ir.ui.view,arch_db:sms_twilio.iap_account_view_form
+msgid "Retrieve Twilio Numbers"
+msgstr ""
+
+#. module: sms_twilio
+#: model:ir.model.fields,field_description:sms_twilio.field_twilio_phone_number__sid
+msgid "SID"
+msgstr ""
+
+#. module: sms_twilio
+#: model:ir.model,name:sms_twilio.model_sms_api
+msgid "SMS API"
+msgstr ""
+
+#. module: sms_twilio
+#: model:ir.model.fields,field_description:sms_twilio.field_twilio_phone_number__has_sms_enabled
+msgid "SMS Enabled"
+msgstr ""
+
+#. module: sms_twilio
+#. odoo-python
+#: code:addons/sms_twilio/models/iap_account.py:0
+#, python-format
+msgid ""
+"Select a valid Twilio Number before changing to Production Environment."
+msgstr ""
+
+#. module: sms_twilio
+#: model:ir.model.fields,help:sms_twilio.field_iap_account__twilio_production_env
+msgid ""
+"Test credentials can currently be used to interact with the following three resources:\n"
+" - Buying phone numbers - Sending SMS messages - Making calls\n"
+"If in test environment, although being able to perform the above actions, they will not show in your Twilio account, and the only valid Twilio Number is the TEST Phone.\n"
+"Production keys are needed to perform all the other actions like retrieve account balance or phone numbers. If this field is not enabled, the three cases mentioned above will be performed using test credentials."
+msgstr ""
+
+#. module: sms_twilio
+#: model:ir.model.fields.selection,name:sms_twilio.selection__iap_account__provider__twilio
+msgid "Twilio"
+msgstr ""
+
+#. module: sms_twilio
+#: model:ir.model.fields,field_description:sms_twilio.field_iap_account__twilio_account_sid
+msgid "Twilio Account SID"
+msgstr ""
+
+#. module: sms_twilio
+#: model:ir.model.fields,field_description:sms_twilio.field_iap_account__twilio_auth_token
+msgid "Twilio Auth Token"
+msgstr ""
+
+#. module: sms_twilio
+#: model:ir.model.fields,field_description:sms_twilio.field_iap_account__twilio_number_id
+msgid "Twilio Number"
+msgstr ""
+
+#. module: sms_twilio
+#: model:ir.model,name:sms_twilio.model_twilio_phone_number
+msgid "Twilio Phone Number"
+msgstr ""
+
+#. module: sms_twilio
+#: model:ir.model.fields,field_description:sms_twilio.field_iap_account__twilio_test_account_sid
+msgid "Twilio TEST Account SID"
+msgstr ""
+
+#. module: sms_twilio
+#: model:ir.model.fields,field_description:sms_twilio.field_iap_account__twilio_test_auth_token
+msgid "Twilio TEST Auth Token"
+msgstr ""
+
+#. module: sms_twilio
+#: model_terms:ir.ui.view,arch_db:sms_twilio.iap_account_view_form
+msgid "Twilio account"
+msgstr ""
+
+#. module: sms_twilio
+#: model:ir.model.constraint,message:sms_twilio.constraint_twilio_phone_number_uniq_phone_number
+msgid "You already have this phone number used in other record"
+msgstr ""
+
+#. module: sms_twilio
+#: model:ir.model.constraint,message:sms_twilio.constraint_twilio_phone_number_uniq_phone_sid
+msgid "You already have this sid used in other record"
+msgstr ""
