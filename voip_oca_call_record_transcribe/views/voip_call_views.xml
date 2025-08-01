@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2025 ForgeFlow, S.L.
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="voip_call_list_view_inh_call_record" model="ir.ui.view">
+        <field name="name">voip.call.list.record.transcript</field>
+        <field name="model">voip.call</field>
+        <field
+            name="inherit_id"
+            ref="voip_oca_call_record.voip_call_list_view_inh_call_record"
+        />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='recording']" position="after">
+                <field name="transcript_state" />
+                <field name="transcript" />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="voip_call_form_view_inh_call_record" model="ir.ui.view">
+        <field name="name">voip.call.form.record.transcript</field>
+        <field name="model">voip.call</field>
+        <field
+            name="inherit_id"
+            ref="voip_oca_call_record.voip_call_form_view_inh_call_record"
+        />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='recording']" position="after">
+                <field name="transcript_state" />
+                <field name="transcript" />
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.actions.server" id="action_transcribe_call">
+        <field name="name">Transcribe call</field>
+        <field name="model_id" ref="voip_oca.model_voip_call" />
+        <field name="binding_model_id" ref="voip_oca.model_voip_call" />
+        <field name="state">code</field>
+        <field name="binding_view_types">form</field>
+        <field name="code">
+if records:
+    action = records.transcribe_calls()
+            </field>
+    </record>
+</odoo>

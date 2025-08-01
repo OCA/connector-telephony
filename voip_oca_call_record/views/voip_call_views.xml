@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2025 ForgeFlow, S.L.
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="voip_call_list_view_inh_call_record" model="ir.ui.view">
+        <field name="name">voip.call.list.record</field>
+        <field name="model">voip.call</field>
+        <field name="inherit_id" ref="voip_oca.voip_call_list_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="recording_filename" column_invisible="1" />
+                <field name="recording" filename="recording_filename" widget="binary" />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="voip_call_form_view_inh_call_record" model="ir.ui.view">
+        <field name="name">voip.call.form.record</field>
+        <field name="model">voip.call</field>
+        <field name="inherit_id" ref="voip_oca.voip_call_form_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="recording_filename" invisible="1" />
+                <field name="recording" filename="recording_filename" widget="binary" />
+            </xpath>
+        </field>
+    </record>
+</odoo>

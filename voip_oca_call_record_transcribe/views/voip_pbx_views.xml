@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2025 ForgeFlow, S.L.
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record model="ir.ui.view" id="voip_pbx_form_view">
+        <field name="model">voip.pbx</field>
+        <field name="inherit_id" ref="voip_oca.voip_pbx_form_view" />
+        <field name="arch" type="xml">
+            <field name="mode" position="after">
+                <field name="transcribe_call_records" />
+            </field>
+        </field>
+    </record>
+</odoo>

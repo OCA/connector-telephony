@@ -6,7 +6,7 @@
         <field name="name">voip.call.list</field>
         <field name="model">voip.call</field>
         <field name="arch" type="xml">
-            <list editable="top">
+            <list>
                 <field name="display_name" />
                 <field name="phone_number" />
                 <field name="type_call" />
@@ -19,10 +19,36 @@
         </field>
     </record>
 
+    <record id="voip_call_form_view" model="ir.ui.view">
+        <field name="name">voip.call.form</field>
+        <field name="model">voip.call</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_button_box" name="button_box" />
+                    <div class="oe_title">
+                        <h2>
+                            <field name="display_name" decoration-bf="1" />
+                        </h2>
+                    </div>
+                    <group>
+                        <field name="phone_number" />
+                        <field name="type_call" />
+                        <field name="state" />
+                        <field name="start_date" />
+                        <field name="end_date" />
+                        <field name="user_id" />
+                        <field name="partner_id" />
+                    </group>
+                    <notebook />
+                </sheet>
+            </form>
+        </field>
+    </record>
     <record id="voip_call_act_window_list" model="ir.actions.act_window">
         <field name="name">Calls</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">voip.call</field>
-        <field name="view_mode">list</field>
+        <field name="view_mode">list,form</field>
     </record>
 </odoo>

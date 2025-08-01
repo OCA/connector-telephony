@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Copyright 2025 ForgeFlow, S.L.
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<templates xml:space="preserve">
+    <t
+        t-name="voip_oca_record_call.CallRecordingButtons"
+        t-inherit="voip_oca.Call"
+        t-inherit-mode="extension"
+    >
+        <xpath expr="//span[@class='mt-2 small']" position="after">
+            <span
+                t-if="voip.isRecording and !voip.isPaused"
+                class="o_voip_recording_indicator"
+            >
+                <i class="fa fa-circle text-danger blink" /> Recording...
+            </span>
+            <span t-if="voip.isRecording and voip.isPaused" class="text-warning">
+                <i class="fa fa-pause" /> Paused
+            </span>
+        </xpath>
+        <xpath expr="//button[@title='Schedule activity']" position="after">
+            <button
+                class="btn btn-danger shadow-none o_voip_record_start"
+                title="Start Recording"
+                t-if="!voip.isRecording"
+                t-on-click="() => this.agent.startRecording()"
+            >
+                <i class="fa fa-fw fa-lg fa-circle" />
+            </button>
+            <button
+                class="btn btn-danger shadow-none o_voip_record_pause"
+                title="Pause Recording"
+                t-if="voip.isRecording and !voip.isPaused"
+                t-on-click="() => this.agent.pauseRecording()"
+            >
+                <i class="fa fa-fw fa-lg fa-pause" />
+            </button>
+            <button
+                class="btn btn-warning shadow-none o_voip_record_resume"
+                title="Resume Recording"
+                t-if="voip.isRecording and voip.isPaused"
+                t-on-click="() => this.agent.resumeRecording()"
+            >
+                <i class="fa fa-fw fa-lg fa-play" />
+            </button>
+        </xpath>
+    </t>
+</templates>
