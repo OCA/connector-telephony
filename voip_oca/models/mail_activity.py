@@ -2,6 +2,7 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 from odoo import api, fields, models
+from odoo.exceptions import AccessError
 from odoo.osv import expression
 
 
@@ -40,5 +41,16 @@ class VoipOcaActivity(models.Model):
                 [[(field, "ilike", _search)] for field in search_fields]
             )
             domain = expression.AND([domain, search_domain])
-        activities = self.search(domain, offset=offset, limit=limit)
-        return activities.activity_format()
+        all_activities = self.search(domain, offset=offset, limit=limit)
+        # Filter activities to avoid accessing records that the user cannot read
+        # due to multi-company restrictions or other access rules in the res_model.
+        no_access_ids = []
+        for activity in all_activities:
+            try:
+                res_record = self.env[activity.res_model].browse(activity.res_id)
+                res_record.check_access_rule("read")
+            except AccessError:
+                no_access_ids.append(activity.id)
+        if no_access_ids:
+            all_activities -= self.browse(no_access_ids)
+        return all_activities.activity_format()
