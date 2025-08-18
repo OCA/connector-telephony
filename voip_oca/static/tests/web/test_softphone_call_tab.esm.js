@@ -9,6 +9,8 @@ import {click, contains} from "@web/../tests/utils";
 
 import {start} from "@mail/../tests/helpers/test_utils";
 import {startServer} from "@bus/../tests/helpers/mock_python_environment";
+import {patchWithCleanup} from "@web/../tests/helpers/utils";
+import {session} from "@web/session";
 
 QUnit.module("Softphone > Call Tab");
 
@@ -22,6 +24,10 @@ QUnit.test("Check Call", async () => {
             mode: "test",
         },
     ]);
+    patchWithCleanup(session, {
+        ...session,
+        voip: {pbx_id: pbxId},
+    });
     const [partnerId1, partnerId2] = pyEnv["res.partner"].create([
         {
             name: "Test Partner",

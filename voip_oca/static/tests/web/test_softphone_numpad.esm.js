@@ -6,12 +6,27 @@
 */
 
 import {click, contains} from "@web/../tests/utils";
-import {nextTick} from "@web/../tests/helpers/utils";
+import {nextTick, patchWithCleanup} from "@web/../tests/helpers/utils";
 import {start} from "@mail/../tests/helpers/test_utils";
+import {startServer} from "@bus/../tests/helpers/mock_python_environment";
+import {session} from "@web/session";
 
 QUnit.module("Softphone Numpad");
 
 QUnit.test("Click on numpad and numpad buttons", async () => {
+    const pyEnv = await startServer();
+    const pbxId = pyEnv["voip.pbx"].create([
+        {
+            name: "Test PBX",
+            domain: "pbx.domain",
+            ws_server: "wss://pbx.domain",
+            mode: "test",
+        },
+    ]);
+    patchWithCleanup(session, {
+        ...session,
+        voip: {pbx_id: pbxId},
+    });
     start();
     await contains(".o_menu_systray .o_nav_entry[title='Softphone']");
     await click(".o_menu_systray .o_nav_entry[title='Softphone']");
