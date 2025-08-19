@@ -6,6 +6,8 @@ import {click, start, startServer} from "@mail/../tests/mail_test_helpers";
 import {expect, test} from "@odoo/hoot";
 import {animationFrame} from "@odoo/hoot-dom";
 import {defineVoipModels} from "../voip_test_helpers.esm";
+import {patchWithCleanup} from "@web/../tests/web_test_helpers";
+import {session} from "@web/session";
 
 // As we use mail as a dependancy, we need to declare models.
 defineVoipModels();
@@ -46,6 +48,10 @@ test("Check Call Tab", async () => {
             create_date: "2016-12-11 05:15:00",
         },
     ]);
+    patchWithCleanup(session, {
+        ...session,
+        voip: {pbx_id: 1},
+    });
     await start();
     expect(".o_menu_systray .o_nav_entry[title='Softphone']").toHaveCount(1);
     click(".o_menu_systray .o_nav_entry[title='Softphone']");

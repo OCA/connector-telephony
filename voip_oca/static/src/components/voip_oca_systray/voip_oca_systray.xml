@@ -8,6 +8,7 @@
                 t-attf-class="o_nav_entry o_voip_#{ voip_oca.status }"
                 title="Softphone"
                 t-on-click="onClick"
+                t-if="voip_oca.pbx_id"
             >
                 <i class="oi oi-large oi-voip" />
             </button>
