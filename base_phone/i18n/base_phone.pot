@@ -21,16 +21,6 @@ msgid ""
 msgstr ""
 
 #. module: base_phone
-#: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers__unsplash_access_key
-msgid "Access Key"
-msgstr ""
-
-#. module: base_phone
-#: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers__snailmail_cover
-msgid "Add a Cover Page"
-msgstr ""
-
-#. module: base_phone
 #: model:ir.model.fields,help:base_phone.field_reformat_all_phonenumbers__tenor_api_key
 msgid ""
 "Add a Tenor GIF API key to enable GIFs support. "
@@ -65,11 +55,6 @@ msgstr ""
 #. module: base_phone
 #: model:ir.model.fields,help:base_phone.field_reformat_all_phonenumbers__group_multi_currency
 msgid "Allows to work in a multi currency environment"
-msgstr ""
-
-#. module: base_phone
-#: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers__unsplash_app_id
-msgid "Application ID"
 msgstr ""
 
 #. module: base_phone
@@ -293,16 +278,6 @@ msgid "Get product pictures using barcode"
 msgstr ""
 
 #. module: base_phone
-#: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers__google_gmail_client_identifier
-msgid "Gmail Client Id"
-msgstr ""
-
-#. module: base_phone
-#: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers__google_gmail_client_secret
-msgid "Gmail Client Secret"
-msgstr ""
-
-#. module: base_phone
 #: model:ir.model.fields,field_description:base_phone.field_number_not_found__id
 #: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers__id
 msgid "ID"
@@ -337,11 +312,6 @@ msgstr ""
 #. module: base_phone
 #: model_terms:ir.ui.view,arch_db:base_phone.res_config_settings_view_form
 msgid "Incoming calls"
-msgstr ""
-
-#. module: base_phone
-#: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers__partner_autocomplete_insufficient_credit
-msgid "Insufficient credit"
 msgstr ""
 
 #. module: base_phone
@@ -488,16 +458,6 @@ msgid "Phone numbers that couldn't be reformatted:"
 msgstr ""
 
 #. module: base_phone
-#: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers__snailmail_duplex
-msgid "Print Both sides"
-msgstr ""
-
-#. module: base_phone
-#: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers__snailmail_color
-msgid "Print In Color"
-msgstr ""
-
-#. module: base_phone
 #: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers__profiling_enabled_until
 msgid "Profiling enabled until"
 msgstr ""
@@ -550,11 +510,6 @@ msgstr ""
 #. module: base_phone
 #: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers__show_effect
 msgid "Show Effect"
-msgstr ""
-
-#. module: base_phone
-#: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers__snailmail_cover_readonly
-msgid "Snailmail Cover Readonly"
 msgstr ""
 
 #. module: base_phone
