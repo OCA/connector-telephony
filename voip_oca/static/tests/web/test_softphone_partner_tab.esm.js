@@ -9,11 +9,25 @@ import {click, contains} from "@web/../tests/utils";
 
 import {start} from "@mail/../tests/helpers/test_utils";
 import {startServer} from "@bus/../tests/helpers/mock_python_environment";
+import {patchWithCleanup} from "@web/../tests/helpers/utils";
+import {session} from "@web/session";
 
 QUnit.module("Softphone > Partner Tab");
 
 QUnit.test("Check Partner", async () => {
     const pyEnv = await startServer();
+    const pbxId = pyEnv["voip.pbx"].create([
+        {
+            name: "Test PBX",
+            domain: "pbx.domain",
+            ws_server: "wss://pbx.domain",
+            mode: "test",
+        },
+    ]);
+    patchWithCleanup(session, {
+        ...session,
+        voip: {pbx_id: pbxId},
+    });
     pyEnv["res.partner"].create([
         {
             name: "Test Partner",
