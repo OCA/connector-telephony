@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2025-08-06 14:27+0000\n"
+"PO-Revision-Date: 2025-08-28 08:25+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -517,7 +517,7 @@ msgstr "Stato"
 #. module: voip_oca
 #: model:ir.model.fields.selection,name:voip_oca.selection__voip_call__state__terminated
 msgid "Terminated"
-msgstr "Terminato"
+msgstr "Terminata"
 
 #. module: voip_oca
 #: model:ir.model.fields.selection,name:voip_oca.selection__voip_pbx__mode__test
