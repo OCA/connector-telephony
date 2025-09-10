@@ -7,7 +7,7 @@
         >
             <button class="dropdown-toggle " t-on-click="() => this.onOpenCaller()">
                 <i class="fa fa-phone" />
-        </button>
-    </div>
+            </button>
+        </div>
     </t>
 </templates>
