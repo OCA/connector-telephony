@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <templates xml:space="preserve">
 
-    <t t-name="asterisk_click2dial.Click2DialSystray" owl="1">
+    <t t-name="asterisk_click2dial.Click2DialSystray">
         <div
             class="o-dropdown dropdown o-dropdown--no-caret o-mail-DiscussSystray-class"
         >

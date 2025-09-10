@@ -4,7 +4,7 @@
 
 {
     "name": "Asterisk connector",
-    "version": "17.0.1.0.0",
+    "version": "18.0.1.0.0",
     "category": "Phone",
     "license": "AGPL-3",
     "summary": "Asterisk-Odoo connector",
@@ -20,7 +20,6 @@
         "security/asterisk_security.xml",
     ],
     "demo": ["demo/asterisk_click2dial_demo.xml"],
-    "qweb": ["static/src/xml/asterisk_click2dial.xml"],
     "application": True,
     "installable": True,
     "assets": {

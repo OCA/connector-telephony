@@ -76,21 +76,21 @@
     </record>
 
     <record id="view_asterisk_server_tree" model="ir.ui.view">
-        <field name="name">asterisk.server.tree</field>
+        <field name="name">asterisk.server.list</field>
         <field name="model">asterisk.server</field>
         <field name="arch" type="xml">
-            <tree>
+            <list>
                 <field name="name" />
                 <field name="ip_address" />
                 <field name="company_id" groups="base.group_multi_company" />
-            </tree>
+            </list>
         </field>
     </record>
 
     <record id="action_asterisk_server" model="ir.actions.act_window">
         <field name="name">Asterisk Servers</field>
         <field name="res_model">asterisk.server</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
     </record>
 
     <!-- Menu entry under Settings > Technical > Phone -->

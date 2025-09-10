@@ -7,6 +7,8 @@
 
 import {Component} from "@odoo/owl";
 import {_t} from "@web/core/l10n/translation";
+import { rpc } from "@web/core/network/rpc";
+import { user } from "@web/core/user";
 import {registry} from "@web/core/registry";
 import {useService} from "@web/core/utils/hooks";
 
@@ -14,17 +16,15 @@ const systrayRegistry = registry.category("systray");
 
 export class Click2DialSystray extends Component {
     setup() {
-        this.rpc = useService("rpc");
         this.action = useService("action");
         this.notification = useService("notification");
-        this.user = useService("user");
     }
 
     async onOpenCaller() {
         // Var session = require('web.session');
 
-        const r = await this.rpc("/asterisk_click2dial/get_record_from_my_channel", {
-            context: this.user.context,
+        const r = await rpc("/asterisk_click2dial/get_record_from_my_channel", {
+            context: user.context,
         });
         if (r === false) {
             this.notification.add(
