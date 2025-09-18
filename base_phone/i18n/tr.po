@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 15.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-05-01 07:21+0000\n"
-"PO-Revision-Date: 2025-09-18 16:42+0000\n"
+"PO-Revision-Date: 2025-09-18 19:42+0000\n"
 "Last-Translator: Tamer Sezgin <tamer.sezgin@gmail.com>\n"
 "Language-Team: \n"
 "Language: tr\n"
@@ -38,7 +38,7 @@ msgstr ""
 #. module: base_phone
 #: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers__alias_domain_id
 msgid "Alias Domain"
-msgstr ""
+msgstr "Alan Rumuzu"
 
 #. module: base_phone
 #: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers__module_mail_plugin
@@ -432,7 +432,7 @@ msgstr "Dil Sayısı"
 #. module: base_phone
 #: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers__module_partner_autocomplete
 msgid "Partner Autocomplete"
-msgstr ""
+msgstr "İş Ortağı Otomatik Tamamla"
 
 #. module: base_phone
 #: model:ir.model.fields,help:base_phone.field_number_not_found__to_update_partner_id
@@ -458,7 +458,7 @@ msgstr "Telefon CallerID"
 #. module: base_phone
 #: model:ir.model,name:base_phone.model_phone_validation_mixin
 msgid "Phone Validation Mixin"
-msgstr ""
+msgstr "Telefon Doğrulama Eklentisi"
 
 #. module: base_phone
 #: model:ir.model.fields,help:base_phone.field_number_not_found__calling_number
@@ -482,7 +482,7 @@ msgstr "Yeniden biçimlendirilemeyen telefon numaraları:"
 #. module: base_phone
 #: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers__profiling_enabled_until
 msgid "Profiling enabled until"
-msgstr ""
+msgstr "Profilleme etkinlik bitişi"
 
 #. module: base_phone
 #: model:ir.actions.act_window,name:base_phone.reformat_all_phonenumbers_action
@@ -499,22 +499,22 @@ msgstr "Bütün telefon numaralarını yeniden biçimlendir"
 #. module: base_phone
 #: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers__restrict_template_rendering
 msgid "Restrict Template Rendering"
-msgstr ""
+msgstr "Şablon Görselleştirmeyi Sınırla"
 
 #. module: base_phone
 #: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers__sfu_server_url
 msgid "SFU Server URL"
-msgstr ""
+msgstr "SFU Sunucu URL'i"
 
 #. module: base_phone
 #: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers__sfu_server_key
 msgid "SFU Server key"
-msgstr ""
+msgstr "SFU Sunucu anahtarı"
 
 #. module: base_phone
 #: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers__module_sms
 msgid "SMS"
-msgstr ""
+msgstr "SMS"
 
 #. module: base_phone
 #. odoo-python
@@ -528,11 +528,14 @@ msgid ""
 "Set how many digits must be identical from the end of the phone number to "
 "declare it as a match with a partner, a lead, an employee, a candidate, etc."
 msgstr ""
+"Bir iş ortağı, potansiyel müşteri, çalışan, aday vb. ile eşleştiğini "
+"belirtmek için telefon numarasının sonundan itibaren kaç hanenin aynı olması "
+"gerektiğini ayarlayın."
 
 #. module: base_phone
 #: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers__show_effect
 msgid "Show Effect"
-msgstr ""
+msgstr "Efekt Göster"
 
 #. module: base_phone
 #: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers__state
@@ -542,12 +545,12 @@ msgstr "Durumu"
 #. module: base_phone
 #: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers__module_google_gmail
 msgid "Support Gmail Authentication"
-msgstr ""
+msgstr "Gmail Kimlik Doğrulama Desteği"
 
 #. module: base_phone
 #: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers__module_microsoft_outlook
 msgid "Support Outlook Authentication"
-msgstr ""
+msgstr "Outlook Kimlik Doğrulama Desteği"
 
 #. module: base_phone
 #: model:ir.ui.menu,name:base_phone.menu_config_phone
@@ -565,21 +568,22 @@ msgstr "Telefon Ayarları"
 #: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers__auth_signup_template_user_id
 msgid "Template user for new users created through signup"
 msgstr ""
+"Başvuru ile kayıt yoluyla oluşturulan yeni kullanıcılar için şablon kullanıcı"
 
 #. module: base_phone
 #: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers__tenor_api_key
 msgid "Tenor API key"
-msgstr ""
+msgstr "Tenor API anahtarı"
 
 #. module: base_phone
 #: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers__tenor_gif_limit
 msgid "Tenor Gif Limit"
-msgstr ""
+msgstr "Tenor Gif Limiti"
 
 #. module: base_phone
 #: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers__tenor_content_filter
 msgid "Tenor content filter"
-msgstr ""
+msgstr "Tenor içerik filtresi"
 
 #. module: base_phone
 #: model:ir.model.fields,help:base_phone.field_reformat_all_phonenumbers__company_country_code
@@ -587,6 +591,8 @@ msgid ""
 "The ISO country code in two chars. \n"
 "You can use this field for quick search."
 msgstr ""
+"İki karakterden oluşan ISO ülke kodu.\n"
+"Bu alanı hızlı arama için kullanabilirsiniz."
 
 #. module: base_phone
 #: model:ir.model.constraint,message:base_phone.constraint_res_company_number_of_digits_to_match_from_end_positive
@@ -608,12 +614,12 @@ msgstr ""
 #. module: base_phone
 #: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers__twilio_account_token
 msgid "Twilio Account Auth Token"
-msgstr ""
+msgstr "Twilio Hesabı 'Auth Token'"
 
 #. module: base_phone
 #: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers__twilio_account_sid
 msgid "Twilio Account SID"
-msgstr ""
+msgstr "Twilio Hesabı SID"
 
 #. module: base_phone
 #. odoo-javascript
@@ -624,7 +630,7 @@ msgstr "Çalan telefonunuzu açın"
 #. module: base_phone
 #: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers__module_web_unsplash
 msgid "Unsplash Image Library"
-msgstr ""
+msgstr "Unsplash Resim Kütüphanesi"
 
 #. module: base_phone
 #: model_terms:ir.ui.view,arch_db:base_phone.number_not_found_form
@@ -634,17 +640,17 @@ msgstr "Bir iş ortağı Oluştur ya da Güncelle"
 #. module: base_phone
 #: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers__external_email_server_default
 msgid "Use Custom Email Servers"
-msgstr ""
+msgstr "Özel Email Sunucuları Kullan"
 
 #. module: base_phone
 #: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers__use_twilio_rtc_servers
 msgid "Use Twilio ICE servers"
-msgstr ""
+msgstr "Twilio ICE sunucuları kullan"
 
 #. module: base_phone
 #: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers__module_auth_oauth
 msgid "Use external authentication providers (OAuth)"
-msgstr ""
+msgstr "Harici kimlik doğrulama sağlayıcılarını (OAuth) kullan"
 
 #. module: base_phone
 #: model:ir.model.fields,help:base_phone.field_reformat_all_phonenumbers__restrict_template_rendering
@@ -653,26 +659,29 @@ msgid ""
 "However only Mail Template Editors will be able to create new dynamic "
 "templates or modify existing ones."
 msgstr ""
+"Kullanıcılar şablonları oluşturmaya devam edebilecek.\n"
+"Ancak yalnızca Posta Şablonu Düzenleyiciler (Mail Template Editor) yeni "
+"dinamik şablonlar oluşturabilecek veya mevcut şablonları değiştirebilecek."
 
 #. module: base_phone
 #: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers__module_voip
 msgid "VoIP"
-msgstr ""
+msgstr "VoIP"
 
 #. module: base_phone
 #: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers__web_app_name
 msgid "Web App Name"
-msgstr ""
+msgstr "Web Uygulaması Adı"
 
 #. module: base_phone
 #: model:ir.model.fields,help:base_phone.field_reformat_all_phonenumbers__tenor_content_filter
 msgid "https://developers.google.com/tenor/guides/content-filtering"
-msgstr ""
+msgstr "https://developers.google.com/tenor/guides/content-filtering"
 
 #. module: base_phone
 #: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers__module_google_recaptcha
 msgid "reCAPTCHA"
-msgstr ""
+msgstr "reCAPTCHA"
 
 #~ msgid "Last Modified on"
 #~ msgstr "Son Değişiklik"
