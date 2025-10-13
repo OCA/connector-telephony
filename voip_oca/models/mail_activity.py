@@ -40,5 +40,12 @@ class VoipOcaActivity(models.Model):
                 [[(field, "ilike", _search)] for field in search_fields]
             )
             domain = expression.AND([domain, search_domain])
-        activities = self.search(domain, offset=offset, limit=limit)
-        return activities.activity_format()
+        all_activities = self.search(domain, offset=offset, limit=limit)
+        # Filter activities to avoid accessing records that the user cannot read
+        # due to multi-company restrictions or other access rules in the res_model.
+        allowed_activity_ids = []
+        for activity in all_activities:
+            res_record = self.env[activity.res_model].browse(activity.res_id)
+            if res_record._filtered_access("read"):
+                allowed_activity_ids.append(activity.id)
+        return self.browse(allowed_activity_ids).activity_format()
