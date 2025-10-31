@@ -23,6 +23,7 @@ def iap_post(json_result):
 
 
 @patch("odoo.addons.iap.tools.iap_tools.requests.post")
+@patch("odoo.addons.sms.models.sms_api.SmsApi._contact_iap")
 class TestSmsAlternativeProvider(TransactionCase):
     @classmethod
     def setUpClass(cls):
@@ -34,19 +35,20 @@ class TestSmsAlternativeProvider(TransactionCase):
         # disable core's disabling of iap, we patch the call ourselves
         iap_patch.stop()
 
-    def test_iap(self, patched_iap_post):
+    def test_iap(self, patched_contact_iap, patched_iap_post):
         """Test that without extra configuration, we just use IAP"""
         self.env["iap.account"].search([("service_name", "=", "sms")]).unlink()
         sms = self.env["sms.sms"].create({"number": "424242", "body": "hello world"})
         patched_iap_post.side_effect = iap_post(
             {"result": [{"res_id": sms.id, "state": "success"}]}
         )
+        patched_contact_iap.return_value = [{"res_id": sms.id, "state": "success"}]
 
         sms.send(unlink_sent=False)
         self.assertEqual(sms.state, "sent")
         self.assertEqual(sms.sms_gateway_id, self.iap_gateway)
 
-    def test_restrictions(self, patched_iap_post):
+    def test_restrictions(self, patched_contact_iap, patched_iap_post):
         """Test that we can restrict gateways to certain numbers"""
         gw_no_restriction = self.iap_gateway
         gw_no_restriction.sequence = 99
@@ -59,6 +61,7 @@ class TestSmsAlternativeProvider(TransactionCase):
         patched_iap_post.side_effect = iap_post(
             {"result": [{"res_id": sms.id, "state": "success"}]}
         )
+        patched_contact_iap.return_value = [{"res_id": sms.id, "state": "success"}]
         sms.send(unlink_sent=False)
         self.assertEqual(sms.state, "sent")
         self.assertEqual(sms.sms_gateway_id, gw_32_49)
@@ -67,6 +70,7 @@ class TestSmsAlternativeProvider(TransactionCase):
         patched_iap_post.side_effect = iap_post(
             {"result": [{"res_id": sms.id, "state": "success"}]}
         )
+        patched_contact_iap.return_value = [{"res_id": sms.id, "state": "success"}]
         sms.send(unlink_sent=False)
         self.assertEqual(sms.state, "sent")
         self.assertEqual(sms.sms_gateway_id, gw_no_restriction)
