@@ -28,7 +28,7 @@ class SmsApi(models.AbstractModel):
         }
 
     def _get_sms_account(self):
-        return self.env["iap.account"].get("sms")
+        return self.env["iap.account"].get("sms").exists()
 
     def _send_sms_with_ovh_http(self, number, message, sms_id):
         # Try to return same error code like odoo
