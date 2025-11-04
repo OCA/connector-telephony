@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record model="ir.ui.view" id="sms_sms_list">
+        <field name="model">sms.message</field>
+        <field name="arch" type="xml">
+            <list string="SMS">
+                <field name="create_date" />
+                <field name="mobile" />
+                <field name="message" />
+                <field name="state" />
+                <field name="gateway_id" />
+                <button
+                    name="send"
+                    string="Send"
+                    type="object"
+                    invisible="state != 'draft'"
+                />
+                <button
+                    name="retry"
+                    string="Retry"
+                    type="object"
+                    invisible="state != 'error'"
+                />
+                <button
+                    name="cancel"
+                    string="Cancel"
+                    type="object"
+                    invisible="not state in ('draft', 'error')"
+                />
+            </list>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="sms_sms_form">
+        <field name="model">sms.message</field>
+        <field name="arch" type="xml">
+            <form string="SMS">
+                <header>
+                    <button
+                        name="send"
+                        string="Send"
+                        type="object"
+                        invisible="state != 'draft'"
+                    />
+                    <button
+                        name="retry"
+                        string="Retry"
+                        type="object"
+                        invisible="state != 'error'"
+                    />
+                    <button
+                        name="cancel"
+                        string="Cancel"
+                        type="object"
+                        invisible="not state in ('draft', 'error')"
+                    />
+                    <field name="state" widget="statusbar" />
+                </header>
+                <sheet>
+                    <group>
+                        <h1>
+                            <field name="partner_id" />
+                        </h1>
+                        <h2>
+                            <field name="mobile" />
+                        </h2>
+                        <group col="4">
+                            <field name="create_date" readonly="1" />
+                            <field name="gateway_id" colspan="2" />
+                            <field
+                                name="company_id"
+                                groups="base.group_multi_company"
+                            />
+                            <separator string="SMS Message" colspan="4" />
+                            <field name="message" colspan="4" nolabel="1" />
+                            <separator string="Last Error" colspan="4" />
+                            <field name="error" colspan="4" nolabel="1" />
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_sms_sms_list">
+        <field name="name">SMS</field>
+        <field name="res_model">sms.message</field>
+        <field name="view_mode">list,form</field>
+        <field name="view_id" ref="sms_sms_list" />
+    </record>
+
+    <menuitem
+        id="menu_gateway_administration_sms"
+        name="SMS Message"
+        sequence="110"
+        parent="base_phone.menu_config_phone"
+        action="action_sms_sms_list"
+    />
+</odoo>

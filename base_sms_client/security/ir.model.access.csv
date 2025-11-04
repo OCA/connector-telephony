@@ -1,4 +1,7 @@
-"id","name","model_id:id","group_id:id","perm_read","perm_write","perm_create","perm_unlink"
-"access_sms_gateway_global","sms.gateway Global","model_sms_gateway",,1,0,0,0
-"access_sms_sms_global","sms.sms Global","model_sms_sms",,1,0,0,0
-"access_sms_sms_user","sms.sms User","model_sms_sms","group_sms_user",1,1,1,1
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+edit_access_sms_gateway,Edit Access Sms Gateway,model_sms_gateway,base.group_user,0,1,1,1
+read_access_sms_gateway,Read Access Sms Gateway,model_sms_gateway,base.group_user,1,0,0,0
+edit_access_sms,Edit Access Sms,model_sms_message,base.group_user,1,1,1,1
+base_sms_client.access_wizard_mass_sms,access_wizard_mass_sms,base_sms_client.model_wizard_mass_sms,base.group_user,1,1,1,1
+base_sms_client.access_sms_template_preview,access_sms_template_preview,base_sms_client.model_sms_template_preview,base.group_user,1,1,1,1
+base_sms_client.access_sms_compose_message,access_sms_compose_message,base_sms_client.model_sms_compose_message,base.group_user,1,1,1,1

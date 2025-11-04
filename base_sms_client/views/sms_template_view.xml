@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2020 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <!-- Form View -->
+    <record model="ir.ui.view" id="sms_template_form_view">
+        <field name="model">sms.template</field>
+        <field name="arch" type="xml">
+            <form string="Templates">
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <field name="ref_ir_act_window" invisible="1" />
+
+                        <!-- Add Context Action Button -->
+                        <button
+                            class="oe_stat_button"
+                            groups="base.group_system"
+                            name="create_action"
+                            type="object"
+                            icon="fa-plus"
+                            help="Display an option on related documents to open a composition wizard with this template"
+                            invisible="ref_ir_act_window != False"
+                        >
+                            <div class="o_field_widget o_stat_info">
+                                <span class="o_stat_text">Add</span>
+                                <span class="o_stat_text">Context Action</span>
+                            </div>
+                        </button>
+
+                        <!-- Remove Context Action Button -->
+                        <button
+                            name="unlink_action"
+                            type="object"
+                            groups="base.group_system"
+                            class="oe_stat_button"
+                            icon="fa-minus"
+                            help="Remove the contextual action to use this template on related documents"
+                            widget="statinfo"
+                            invisible="ref_ir_act_window == False"
+                        >
+                            <div class="o_field_widget o_stat_info">
+                                <span class="o_stat_text">Remove</span>
+                                <span class="o_stat_text">Context Action</span>
+                            </div>
+                        </button>
+
+                        <field name="ref_ir_act_window" invisible="1" />
+
+                        <!-- Preview Button -->
+                        <button
+                            class="oe_stat_button"
+                            name="%(wizard_sms_template_preview)d"
+                            icon="fa-search-plus"
+                            string="Preview"
+                            type="action"
+                            target="new"
+                            context="{'template_id': id}"
+                        />
+                    </div>
+
+                    <div class="oe_title">
+                        <label for="name" class="oe_edit_only" />
+                        <h1>
+                            <field name="name" required="1" />
+                        </h1>
+                        <group>
+                            <field
+                                name="model_id"
+                                required="1"
+                                options="{'no_create': True}"
+                            />
+                            <field name="model" invisible="1" />
+                        </group>
+                    </div>
+
+                    <notebook>
+                        <page string="Content">
+                            <field name="message" />
+                        </page>
+
+                        <page string="SMS Configuration">
+                            <group>
+                                <field
+                                    name="mobile"
+                                    placeholder="Comma-separated recipient mobiles"
+                                />
+                                <field
+                                    name="partner_to"
+                                    string="To (Partner)"
+                                    placeholder="recipient partner"
+                                />
+                                <field name="lang" />
+                                <field name="gateway_id" />
+                            </group>
+                        </page>
+
+                        <page string="Dynamic Placeholder Generator">
+                            <group>
+                                <field
+                                    name="model_object_field"
+                                    domain="[('model_id','=',model_id),('ttype','not in', ['one2many','many2many'])]"
+                                />
+                                <field name="sub_object" readonly="1" />
+                                <field
+                                    name="sub_model_object_field"
+                                    domain="[('model_id','=',sub_object),('ttype','not in',['one2many','many2many'])]"
+                                    readonly="sub_object == False"
+                                    required="sub_object != False"
+                                />
+                                <field name="null_value" />
+                                <field name="copyvalue" />
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Search View -->
+    <record model="ir.ui.view" id="sms_template_search_view">
+        <field name="model">sms.template</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="model_id" />
+                <field name="gateway_id" />
+                <group expand="0" string="Group by...">
+                    <filter
+                        string="SMS Gateway"
+                        name="gateway"
+                        domain="[]"
+                        context="{'group_by':'gateway_id'}"
+                    />
+                    <filter
+                        string="Model"
+                        name="model"
+                        domain="[]"
+                        context="{'group_by':'model_id'}"
+                    />
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- List View -->
+    <record model="ir.ui.view" id="sms_template_list_view">
+        <field name="model">sms.template</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name" />
+                <field name="model_id" />
+                <field name="message" />
+                <field name="mobile" />
+            </list>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record model="ir.actions.act_window" id="sms_template_act_window">
+        <field name="name">SMS Templates</field>
+        <field name="res_model">sms.template</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+
+    <!-- Menu -->
+    <record model="ir.ui.menu" id="sms_template_menu">
+        <field name="name">SMS Templates</field>
+        <field name="parent_id" ref="base_phone.menu_config_phone" />
+        <field name="action" ref="sms_template_act_window" />
+        <field name="sequence" eval="120" />
+    </record>
+</odoo>

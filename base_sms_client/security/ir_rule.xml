@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!-- Record rule for SMS Gateway (edit) -->
+    <record id="rule_edit_access_sms_gateway" model="ir.rule">
+        <field name="name">Edit Access Sms Gateway</field>
+        <field name="model_id" ref="model_sms_gateway" />
+        <field name="groups" eval="[(4, ref('base.group_user'))]" />
+        <field name="domain_force">[('company_id','=', user.company_id.id)]</field>
+    </record>
+
+    <!-- Record rule for SMS Gateway (read) -->
+    <record id="rule_read_access_sms_gateway" model="ir.rule">
+        <field name="name">Read Access Sms Gateway</field>
+        <field name="model_id" ref="model_sms_gateway" />
+        <field name="groups" eval="[(4, ref('base.group_user'))]" />
+        <field name="domain_force">
+            ['|', '|',
+                ('company_id','=', user.company_id.id),
+                ('company_id','child_of',[user.company_id.id]),
+                ('company_id','=',user.company_id.parent_id.id)
+            ]
+        </field>
+    </record>
+
+    <!-- Record rule for SMS Messages -->
+    <record id="rule_edit_access_sms" model="ir.rule">
+        <field name="name">Edit Access Sms</field>
+        <field name="model_id" ref="model_sms_message" />
+        <field name="groups" eval="[(4, ref('base.group_user'))]" />
+        <field name="domain_force">[('company_id','=', user.company_id.id)]</field>
+    </record>
+</odoo>
