@@ -1,12 +1,14 @@
 # Copyright 2024 Hunki Enterprises BV
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl-3.0)
 
+import logging
 
 from odoo import _, api, exceptions, fields, models
 
+_logger = logging.getLogger(__name__)
+
 
 class IrSmsGateway(models.Model):
-
     _name = "ir.sms.gateway"
     _order = "sequence"
     _description = "SMS gateway provider"
@@ -37,163 +39,105 @@ class IrSmsGateway(models.Model):
         """
         for this in self:
             this.description = getattr(
-                this, "_get_description_%s" % this.gateway_type, lambda: False
+                this, f"_get_description_{this.gateway_type}", lambda: False
             )()
 
     # SMS sending functions
 
-    def _send_via_self(self, messages):
+    def _send_via_self(self, sms_records):
         """
-        Send a list of SMS via the current provider
-
+        Send SMS records via the current provider
         Return list of dictionaries [{
-            'id': sms.sms id,
-            'state': sms.sms#state,
-            'failure_type': sms.sms#failure_type
+            'uuid': sms.sms uuid,
+            'state': sms state,
+            'failure_reason': optional failure reason
         }]
         """
         self.ensure_one()
-        result = getattr(self, "_send_%s" % self.gateway_type)(messages) or []
+        # Convert sms records to message format for compatibility
+        messages = [
+            {
+                "id": sms.id,
+                "uuid": sms.uuid,
+                "number": sms.number,
+                "content": sms.body,
+            }
+            for sms in sms_records
+        ]
+
+        result = getattr(self, f"_send_{self.gateway_type}")(messages) or []
         return [dict(result_dict, sms_gateway_id=self.id) for result_dict in result]
 
     @api.model
-    def _send(self, messages, handle_results=True, raise_exception=True):
+    def _send(self, sms_records, handle_results=True, raise_exception=True):
         """
-        Select provider(s) based on messages, call their provider specific function
-        _send_$gateway_type to actually send SMS
-
-        messages is a list of dictionaries [{
-            'id': sms.sms id,
-            'number': phone number,
-            'content': sms content,
-        }]
-
-        Returns list of dictionaries [{
-            'id': sms.sms id,
-            'state': sms.sms#state,
-            'failure_type': sms.sms#failure_type,
-            'sms_gateway_id': ir.sms.gateway id
-        }]
+        Send SMS records using their assigned gateways.
+        sms_records: sms.sms recordset
+        Returns list of dictionaries with keys:
+          'uuid', 'state', 'failure_reason', 'sms_gateway_id'
         """
+        self.ensure_one()  # if this is meant to be called on a gateway record
         SmsSms = self.env["sms.sms"]
         result = []
-        providers = self._send_get_providers(messages)
-        provider2messages = providers._send_partition_providers(messages)
-        for provider, messages_to_send in provider2messages.items():
-            if not provider and raise_exception:
-                raise exceptions.UserError(
-                    _("No suitable provider found for messages %s") % messages_to_send
-                )
-            provider_result = provider._send_via_self(messages_to_send) or []
-            sms = SmsSms.browse(
-                filter(None, map(lambda x: x.get("id"), provider_result))
-            )
-            sms.write({"sms_gateway_id": provider.id})
+
+        if not sms_records:
+            return result
+
+        # Group SMS records by assigned gateway
+        gateway_groups = {}
+        for sms in sms_records:
+            gateway = sms.sms_gateway_id
+            gateway_groups.setdefault(gateway, SmsSms.browse([]))  # empty recordset
+            gateway_groups[gateway] |= sms  # add sms to the recordset
+
+        # Send messages per gateway
+        for gateway, records_to_send in gateway_groups.items():
+            if not gateway:
+                if raise_exception:
+                    raise exceptions.UserError(
+                        _("No gateway assigned for messages %s")
+                        % records_to_send.mapped("id")
+                    )
+                continue
+
+            # Call the gateway's _send_via_self with the recordset
+            provider_result = gateway._send_via_self(records_to_send) or []
+
             if handle_results:
-                provider._handle_results(messages_to_send, provider_result)
+                gateway._handle_results(records_to_send, provider_result)
+
             result.extend(provider_result)
+
         return result
-
-    @api.model
-    def _send_get_providers(self, messages):
-        """
-        Return all providers potentially suitable for the current context
-        """
-        return self.search(
-            ["|", ("company_id", "=", False), ("company_id", "=", self.env.company.id)]
-        )
-
-    def _send_partition_providers(self, messages):
-        """
-        Return a dict with providers in self as keys and lists of messages a provider
-        will handle as value
-        ie
-        {
-            ir.gateway.record(42,): [{message1}, {message2}],
-            ir.gateway.record(43,): [{message3}],
-            ir.gateway.record(44,): [],
-            ir.gateway.record(): [{messages not handled by any available provider}],
-        }
-        """
-        result = {}
-        remaining_messages = messages[:]
-        while remaining_messages:
-            message = remaining_messages.pop()
-            for this in self:
-                if this._can_send(message):
-                    result.setdefault(this, []).append(message)
-                    break
-            else:
-                result.setdefault(self.browse([]), []).append(message)
-        return result
-
-    def _can_send(self, message):
-        """
-        Determine if the provider can send a message
-        """
-        self.ensure_one()
-        if not self.prefix:
-            return True
-        return any(
-            (message.get("number") or "").startswith(prefix)
-            for prefix in self.prefix.split()
-        )
 
     def _handle_results(self, messages, results, unlink_failed=False, unlink_sent=True):
         """
         Write state of sms.sms objects based on results.
-
-        messages is the list of messages passed to _send
-        results is the list of results (provider-specific) as returned by _send
         """
         self.ensure_one()
         SmsSms = self.env["sms.sms"]
-        to_unlink = SmsSms.browse([])
-        for result in results:
-            data = {
-                key: value
-                for key, value in result.items()
-                if key in SmsSms._fields and key not in ("id", "sms_gateway_id")
-            }
-            if not data:
+
+        # Group results by UUID for processing
+        results_by_uuid = {result.get("uuid"): result for result in results}
+
+        # Process each message
+        for message in messages:
+            sms_uuid = message.get("uuid")
+            result = results_by_uuid.get(sms_uuid, {})
+
+            if not result:
                 continue
-            sms = SmsSms.browse(result.get("id", []))
+
+            # Find SMS record by UUID
+            sms = SmsSms.search([("uuid", "=", sms_uuid)], limit=1)
             if not sms:
                 continue
-            sms.write(data)
-            if sms.state == "error" and unlink_failed:
-                to_unlink += sms
-            if sms.state == "sent" and unlink_sent:
-                to_unlink += sms
-            self.env["mail.notification"].sudo().search(
-                [
-                    ("notification_type", "=", "sms"),
-                    ("sms_id", "=", sms.id),
-                    ("notification_status", "not in", ("sent", "canceled")),
-                ]
-            ).write(
-                {
-                    "notification_status": "sent"
-                    if sms.state == "sent"
-                    else "exception",
-                    "failure_type": sms.failure_type,
-                }
-            )
-        to_unlink.unlink()
 
-    # implementation of the iap (odoo native) provider
-    def _get_description_iap(self):
-        return _(
-            "Make sure you've configured an SMS provider in the IAP settings for "
-            "this to work"
-        )
-
-    def _send_iap(self, messages):
-        return [
-            dict(result, id=result.get("res_id"))
-            for result in self.env["sms.api"]
-            .with_context(force_iap=True)
-            ._send_sms_batch(
-                [dict(message, res_id=message.get("id")) for message in messages]
-            )
-        ]
+            # Update SMS state based on result
+            state = result.get("state", "error")
+            if state == "success":
+                sms.write({"state": "sent", "failure_type": False})
+            else:
+                # Map failure types appropriately
+                failure_type = "sms_server"
+                sms.write({"state": "error", "failure_type": failure_type})
