@@ -13,38 +13,41 @@
                         name="web_ribbon"
                         title="Archived"
                         bg_color="bg-danger"
-                        attrs="{'invisible': [('active', '=', True)]}"
+                        invisible="active == True"
                     />
-                <h1>
-                    <field name="name" placeholder="Name" />
-                </h1>
-                <group name="main">
-                    <group name="general">
-                        <field name="gateway_type" />
-                        <field
+                    <h1>
+                        <field name="name" placeholder="Name" />
+                    </h1>
+                    <group name="main">
+                        <group name="general">
+                            <field name="gateway_type" />
+                            <field
                                 name="prefix"
                                 placeholder="Restrict to area codes like +32 +31"
                             />
-                        <field name="company_id" groups="base.group_multi_company" />
+                            <field
+                                name="company_id"
+                                groups="base.group_multi_company"
+                            />
+                        </group>
                     </group>
-                </group>
-                <field name="description" />
+                    <field name="description" />
                 </sheet>
             </form>
         </field>
     </record>
 
-    <record id="view_ir_sms_gateway_tree" model="ir.ui.view">
+    <record id="view_ir_sms_gateway_list" model="ir.ui.view">
         <field name="model">ir.sms.gateway</field>
         <field name="arch" type="xml">
-            <tree decoration-muted="not active">
+            <list decoration-muted="not active">
                 <field name="active" invisible="1" />
                 <field name="sequence" widget="handle" />
                 <field name="name" />
                 <field name="gateway_type" />
                 <field name="prefix" />
                 <field name="company_id" groups="base.group_multi_company" />
-            </tree>
+            </list>
         </field>
     </record>
 
@@ -71,8 +74,8 @@
     <record id="action_ir_sms_gateway" model="ir.actions.act_window">
         <field name="name">SMS providers</field>
         <field name="res_model">ir.sms.gateway</field>
-        <field name="view_mode">tree,form</field>
-        <field name="view_id" ref="view_ir_sms_gateway_tree" />
+        <field name="view_mode">list,form</field>
+        <field name="view_id" ref="view_ir_sms_gateway_list" />
     </record>
 
     <menuitem
