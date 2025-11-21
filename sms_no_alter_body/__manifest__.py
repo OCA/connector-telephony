@@ -3,9 +3,9 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 {
-    "name": "SMS no atler body",
+    "name": "SMS no alter body",
     "summary": "Avoid sms formatting between html and text",
-    "version": "14.0.1.0.0",
+    "version": "18.0.1.0.0",
     "category": "Phone",
     "website": "https://github.com/OCA/connector-telephony",
     "author": "Akretion, Odoo Community Association (OCA)",

@@ -6,10 +6,11 @@ from odoo.tests.common import TransactionCase
 
 
 class TestSmsNoAlterBody(TransactionCase):
-    def setUp(self):
-        super().setUp()
-        self.partner = self.env["res.partner"].create(
-            {"name": "FOO", "mobile": "+3360707070707"}
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.partner = cls.env["res.partner"].create(
+            {"name": "FOO", "mobile": "+33607070707"}
         )
 
     def test_force_sms_body(self):

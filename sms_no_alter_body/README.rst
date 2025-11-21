@@ -1,5 +1,5 @@
 =================
-SMS no atler body
+SMS no alter body
 =================
 
 .. 
