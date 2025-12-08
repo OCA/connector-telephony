@@ -3,7 +3,7 @@
 
 import logging
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import UserError
 
 _logger = logging.getLogger(__name__)
@@ -50,7 +50,7 @@ class IapAccount(models.Model):
 
     def _get_service_from_provider(self):
         if self.provider == "twilio":
-            return "sms"
+            return self.env.ref("sms.iap_service_sms")
         return super()._get_service_from_provider()
 
     def _compute_balance_twilio(self):
@@ -60,8 +60,8 @@ class IapAccount(models.Model):
                 try:
                     # Only work with prod creds
                     client = item.get_twilio_client()
-                    balance_obj = client.api.balance.fetch()
-                    balance = "%s: %s" % (balance_obj.currency, balance_obj.balance)
+                    balance_obj = client.api.account.balance.fetch()
+                    balance = f"{balance_obj.currency}: {balance_obj.balance}"
                 except Exception as e:
                     _logger.error("Twilio Error: '%s'", str(e))
             item.twilio_balance_account = balance
@@ -69,7 +69,7 @@ class IapAccount(models.Model):
     def retrieve_phone_numbers(self):
         for item in self:
             if not item.twilio_account_sid or not item.twilio_auth_token:
-                raise UserError(_("Configure Twilio Credentials first"))
+                raise UserError(self.env._("Configure Twilio Credentials first"))
             try:
                 # Only work with prod creds
                 client = item.get_twilio_client()
@@ -104,7 +104,7 @@ class IapAccount(models.Model):
 
     def get_twilio_client(self, production=True):
         if not self.twilio_account_sid or not self.twilio_auth_token:
-            raise UserError(_("Configure Twilio Credentials first"))
+            raise UserError(self.env._("Configure Twilio Credentials first"))
         if not production:
             return Client(self.twilio_test_account_sid, self.twilio_test_auth_token)
         return Client(self.twilio_account_sid, self.twilio_auth_token)
@@ -129,7 +129,7 @@ class IapAccount(models.Model):
                 "twilio.phone.number"
             ].search([("sid", "=", "test")]):
                 raise UserError(
-                    _(
+                    self.env._(
                         "Select a valid Twilio Number before changing to Production"
                         " Environment."
                     )

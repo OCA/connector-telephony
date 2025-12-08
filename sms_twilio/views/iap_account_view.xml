@@ -8,30 +8,30 @@
                 <group
                     string="Twilio account"
                     name="twilio"
-                    attrs="{'invisible': [('provider', '!=', 'twilio')]}"
+                    invisible="provider != 'twilio'"
                 >
                     <field name="twilio_production_env" widget="boolean_toggle" />
                     <field
                         name="twilio_test_account_sid"
-                        attrs="{'invisible': [('twilio_production_env', '=', True)]}"
+                        invisible="twilio_production_env"
                     />
                     <field
                         name="twilio_test_auth_token"
                         password="True"
-                        attrs="{'invisible': [('twilio_production_env', '=', True)]}"
+                        invisible="twilio_production_env"
                     />
                     <field
                         name="twilio_account_sid"
-                        attrs="{'required': [('provider', '=', 'twilio'),('twilio_production_env', '=', True)]}"
+                        required="twilio_production_env and provider == 'twilio'"
                     />
                     <field
                         name="twilio_auth_token"
                         password="True"
-                        attrs="{'required': [('provider', '=', 'twilio'),('twilio_production_env', '=', True)]}"
+                        required="twilio_production_env and provider == 'twilio'"
                     />
                     <field
                         name="twilio_number_id"
-                        attrs="{'required': [('provider', '=', 'twilio'),('twilio_production_env', '=', True)]}"
+                        required="twilio_production_env and provider == 'twilio'"
                     />
                     <field name="twilio_balance_account" />
                     <button
@@ -40,6 +40,19 @@
                         string="Retrieve Twilio Numbers"
                     />
                 </group>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="sms_iap_account_view_form" model="ir.ui.view">
+        <field name="name">iap.account.sms.view.form</field>
+        <field name="model">iap.account</field>
+        <field name="inherit_id" ref="sms.iap_account_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//div[@role='status'][1]" position="attributes">
+                <attribute
+                    name="invisible"
+                >service_name != 'sms' or (state != 'unregistered' and state) or (provider != 'odoo')</attribute>
             </xpath>
         </field>
     </record>
