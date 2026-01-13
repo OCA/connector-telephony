@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2024 Hunki Enterprises BV
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl-3.0) -->
+<data>
+    <record id="view_ir_sms_gateway_form" model="ir.ui.view">
+        <field name="model">ir.sms.gateway</field>
+        <field name="arch" type="xml">
+            <form>
+                <field name="active" invisible="1" />
+                <sheet>
+                    <div class="oe_button_box" name="button_box" />
+                    <widget
+                        name="web_ribbon"
+                        title="Archived"
+                        bg_color="bg-danger"
+                        attrs="{'invisible': [('active', '=', True)]}"
+                    />
+                <h1>
+                    <field name="name" placeholder="Name" />
+                </h1>
+                <group name="main">
+                    <group name="general">
+                        <field name="gateway_type" />
+                        <field
+                                name="prefix"
+                                placeholder="Restrict to area codes like +32 +31"
+                            />
+                        <field name="company_id" groups="base.group_multi_company" />
+                    </group>
+                </group>
+                <field name="description" />
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_ir_sms_gateway_tree" model="ir.ui.view">
+        <field name="model">ir.sms.gateway</field>
+        <field name="arch" type="xml">
+            <tree decoration-muted="not active">
+                <field name="active" invisible="1" />
+                <field name="sequence" widget="handle" />
+                <field name="name" />
+                <field name="gateway_type" />
+                <field name="prefix" />
+                <field name="company_id" groups="base.group_multi_company" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_ir_sms_gateway_search" model="ir.ui.view">
+        <field name="model">ir.sms.gateway</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" />
+                <field name="gateway_type" />
+                <filter
+                    name="archived"
+                    string="Archived"
+                    domain="[('active', '=', False)]"
+                />
+                <filter
+                    name="group_type"
+                    string="Type"
+                    context="{'group_by': 'gateway_type'}"
+                />
+            </search>
+        </field>
+    </record>
+
+    <record id="action_ir_sms_gateway" model="ir.actions.act_window">
+        <field name="name">SMS providers</field>
+        <field name="res_model">ir.sms.gateway</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_ir_sms_gateway_tree" />
+    </record>
+
+    <menuitem
+        id="menu_ir_sms_gateway"
+        action="action_ir_sms_gateway"
+        parent="phone_validation.phone_menu_main"
+        sequence="100"
+    />
+</data>
