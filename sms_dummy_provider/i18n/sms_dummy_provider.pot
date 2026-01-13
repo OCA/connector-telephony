@@ -1,0 +1,39 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* sms_dummy_provider
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: sms_dummy_provider
+#: model:ir.model.fields.selection,name:sms_dummy_provider.selection__ir_sms_gateway__gateway_type__dummy
+msgid "Dummy"
+msgstr ""
+
+#. module: sms_dummy_provider
+#: model:ir.model,name:sms_dummy_provider.model_ir_sms_gateway
+msgid "SMS gateway provider"
+msgstr ""
+
+#. module: sms_dummy_provider
+#: model:ir.model.fields,field_description:sms_dummy_provider.field_ir_sms_gateway__dummy_result
+msgid "Sent messages"
+msgstr ""
+
+#. module: sms_dummy_provider
+#: model:ir.model.fields,field_description:sms_dummy_provider.field_ir_sms_gateway__dummy_state
+msgid "State"
+msgstr ""
+
+#. module: sms_dummy_provider
+#: model:ir.model.fields,field_description:sms_dummy_provider.field_ir_sms_gateway__gateway_type
+msgid "Type"
+msgstr ""
