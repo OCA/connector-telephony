@@ -1,0 +1,152 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* sms_alternative_provider
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: sms_alternative_provider
+#: model:ir.model.fields,field_description:sms_alternative_provider.field_ir_sms_gateway__active
+msgid "Active"
+msgstr ""
+
+#. module: sms_alternative_provider
+#: model_terms:ir.ui.view,arch_db:sms_alternative_provider.view_ir_sms_gateway_form
+#: model_terms:ir.ui.view,arch_db:sms_alternative_provider.view_ir_sms_gateway_search
+msgid "Archived"
+msgstr ""
+
+#. module: sms_alternative_provider
+#: model:ir.model.fields,field_description:sms_alternative_provider.field_ir_sms_gateway__company_id
+msgid "Company"
+msgstr ""
+
+#. module: sms_alternative_provider
+#: model:ir.model.fields,field_description:sms_alternative_provider.field_ir_sms_gateway__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: sms_alternative_provider
+#: model:ir.model.fields,field_description:sms_alternative_provider.field_ir_sms_gateway__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: sms_alternative_provider
+#: model:ir.model.fields,field_description:sms_alternative_provider.field_ir_sms_gateway__description
+msgid "Description"
+msgstr ""
+
+#. module: sms_alternative_provider
+#: model:ir.model.fields,field_description:sms_alternative_provider.field_ir_sms_gateway__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: sms_alternative_provider
+#: model:ir.model.fields,help:sms_alternative_provider.field_ir_sms_gateway__prefix
+msgid ""
+"Fill in for which phone number prefix(es) this provider is used, ie '+31' to"
+" use it for NL, '+31 +49' to use it for DE and NL, or '+3120' to use it for "
+"Amsterdam/NL. Leave empty to send to any number."
+msgstr ""
+
+#. module: sms_alternative_provider
+#: model:ir.model.fields,field_description:sms_alternative_provider.field_ir_sms_gateway__id
+msgid "ID"
+msgstr ""
+
+#. module: sms_alternative_provider
+#: model:ir.model.fields,field_description:sms_alternative_provider.field_ir_sms_gateway____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: sms_alternative_provider
+#: model:ir.model.fields,field_description:sms_alternative_provider.field_ir_sms_gateway__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: sms_alternative_provider
+#: model:ir.model.fields,field_description:sms_alternative_provider.field_ir_sms_gateway__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: sms_alternative_provider
+#. odoo-python
+#: code:addons/sms_alternative_provider/models/ir_sms_gateway.py:0
+#, python-format
+msgid ""
+"Make sure you've configured an SMS provider in the IAP settings for this to "
+"work"
+msgstr ""
+
+#. module: sms_alternative_provider
+#: model:ir.model.fields,field_description:sms_alternative_provider.field_ir_sms_gateway__name
+#: model_terms:ir.ui.view,arch_db:sms_alternative_provider.view_ir_sms_gateway_form
+msgid "Name"
+msgstr ""
+
+#. module: sms_alternative_provider
+#. odoo-python
+#: code:addons/sms_alternative_provider/models/ir_sms_gateway.py:0
+#, python-format
+msgid "No suitable provider found for messages %s"
+msgstr ""
+
+#. module: sms_alternative_provider
+#: model:ir.model.fields.selection,name:sms_alternative_provider.selection__ir_sms_gateway__gateway_type__iap
+msgid "Odoo IAP"
+msgstr ""
+
+#. module: sms_alternative_provider
+#: model:ir.model,name:sms_alternative_provider.model_sms_sms
+msgid "Outgoing SMS"
+msgstr ""
+
+#. module: sms_alternative_provider
+#: model:ir.model.fields,field_description:sms_alternative_provider.field_ir_sms_gateway__prefix
+msgid "Prefix"
+msgstr ""
+
+#. module: sms_alternative_provider
+#: model_terms:ir.ui.view,arch_db:sms_alternative_provider.view_ir_sms_gateway_form
+msgid "Restrict to area codes like +32 +31"
+msgstr ""
+
+#. module: sms_alternative_provider
+#: model:ir.model,name:sms_alternative_provider.model_sms_api
+msgid "SMS API"
+msgstr ""
+
+#. module: sms_alternative_provider
+#: model:ir.model,name:sms_alternative_provider.model_ir_sms_gateway
+msgid "SMS gateway provider"
+msgstr ""
+
+#. module: sms_alternative_provider
+#: model:ir.model.fields,field_description:sms_alternative_provider.field_sms_sms__sms_gateway_id
+msgid "SMS gateway used"
+msgstr ""
+
+#. module: sms_alternative_provider
+#: model:ir.actions.act_window,name:sms_alternative_provider.action_ir_sms_gateway
+#: model:ir.ui.menu,name:sms_alternative_provider.menu_ir_sms_gateway
+msgid "SMS providers"
+msgstr ""
+
+#. module: sms_alternative_provider
+#: model:ir.model.fields,field_description:sms_alternative_provider.field_ir_sms_gateway__sequence
+msgid "Sequence"
+msgstr ""
+
+#. module: sms_alternative_provider
+#: model:ir.model.fields,field_description:sms_alternative_provider.field_ir_sms_gateway__gateway_type
+#: model_terms:ir.ui.view,arch_db:sms_alternative_provider.view_ir_sms_gateway_search
+msgid "Type"
+msgstr ""
