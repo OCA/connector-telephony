@@ -41,7 +41,7 @@
         <field name="model">ir.sms.gateway</field>
         <field name="arch" type="xml">
             <list decoration-muted="not active">
-                <field name="active" invisible="1" />
+                <field name="active" column_invisible="1" />
                 <field name="sequence" widget="handle" />
                 <field name="name" />
                 <field name="gateway_type" />
@@ -72,7 +72,7 @@
     </record>
 
     <record id="action_ir_sms_gateway" model="ir.actions.act_window">
-        <field name="name">SMS providers</field>
+        <field name="name">SMS Providers</field>
         <field name="res_model">ir.sms.gateway</field>
         <field name="view_mode">list,form</field>
         <field name="view_id" ref="view_ir_sms_gateway_list" />

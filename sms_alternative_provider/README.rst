@@ -58,32 +58,19 @@ Usage
 This module doesn't do anything on its own, it is meant to be used by
 developers to implement SMS providers.
 
-To do this, it suffices to inherit the ``ir.sms.gateway`` model to add a
-type:
+To add a SMS provider, create an Python Class that implements SmsApiBase
+from connector-telephony/sms_alternative_provider/models/sms_api.py.
 
-::
+Required implementations:
 
-   gateway_type = fields.Selection(selection_add=[("your_sms_provider", "Your SMS provider")])
+- variable KEY
+- variable NAME
+- function \_send_sms_batch
 
-and declare a function named like \_send\_$type:
+Optional implementations:
 
-::
-
-   def _send_your_sms_provider(self, messages):
-       # do here whatever you need to send the list of messages:
-       # [{
-       #    'id': id of the sms.sms record (may not be set),
-       #    'number': the number to send the sms to
-       #    'content': the content of the message
-       # }]
-       # return a list of dicts with sending results:
-       # [{
-       #    'id': id of the sms.sms record
-       #    'state': sms.sms#state
-       #    'failure_type': sms.sms#failure_type if state == 'error'
-       #    # whatever other fields you want to write on the sms.sms record after sending,
-       #    # such as provider-specific extra information
-       # }]
+- variable DESCRIPTION
+- function \_get_sms_api_error_messages
 
 Probably your provider needs some api key or similar to function, add
 those fields prefixed with your gateway_type name to the gateway class:

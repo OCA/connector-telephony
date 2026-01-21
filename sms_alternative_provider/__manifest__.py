@@ -5,7 +5,6 @@
     "name": "Alternative providers for SMS",
     "summary": "Base module for implementing alternative SMS gateways",
     "version": "18.0.1.0.0",
-    "development_status": "Alpha",
     "category": "Tools",
     "website": "https://github.com/OCA/connector-telephony",
     "author": "Hunki Enterprises BV, Odoo Community Association (OCA)",

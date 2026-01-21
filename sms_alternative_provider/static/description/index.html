@@ -406,29 +406,19 @@ certain country or area codes</li>
 <h1><a class="toc-backref" href="#toc-entry-2">Usage</a></h1>
 <p>This module doesn’t do anything on its own, it is meant to be used by
 developers to implement SMS providers.</p>
-<p>To do this, it suffices to inherit the <tt class="docutils literal">ir.sms.gateway</tt> model to add a
-type:</p>
-<pre class="literal-block">
-gateway_type = fields.Selection(selection_add=[(&quot;your_sms_provider&quot;, &quot;Your SMS provider&quot;)])
-</pre>
-<p>and declare a function named like _send_$type:</p>
-<pre class="literal-block">
-def _send_your_sms_provider(self, messages):
-    # do here whatever you need to send the list of messages:
-    # [{
-    #    'id': id of the sms.sms record (may not be set),
-    #    'number': the number to send the sms to
-    #    'content': the content of the message
-    # }]
-    # return a list of dicts with sending results:
-    # [{
-    #    'id': id of the sms.sms record
-    #    'state': sms.sms#state
-    #    'failure_type': sms.sms#failure_type if state == 'error'
-    #    # whatever other fields you want to write on the sms.sms record after sending,
-    #    # such as provider-specific extra information
-    # }]
-</pre>
+<p>To add a SMS provider, create an Python Class that implements SmsApiBase
+from connector-telephony/sms_alternative_provider/models/sms_api.py.</p>
+<p>Required implementations:</p>
+<ul class="simple">
+<li>variable KEY</li>
+<li>variable NAME</li>
+<li>function _send_sms_batch</li>
+</ul>
+<p>Optional implementations:</p>
+<ul class="simple">
+<li>variable DESCRIPTION</li>
+<li>function _get_sms_api_error_messages</li>
+</ul>
 <p>Probably your provider needs some api key or similar to function, add
 those fields prefixed with your gateway_type name to the gateway class:</p>
 <pre class="literal-block">

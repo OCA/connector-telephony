@@ -3,6 +3,8 @@
 
 from odoo.tests.common import TransactionCase
 
+from odoo.addons.sms_alternative_provider.models.sms_api import SmsApi
+
 
 class TestSmsGateway(TransactionCase):
     @classmethod
@@ -16,6 +18,8 @@ class TestSmsGateway(TransactionCase):
             )
         )
 
+        cls.env["ir.sms.gateway"].search([]).unlink()
+
         cls.gateway = cls.env["ir.sms.gateway"].create(
             {
                 "name": "Test Gateway",
@@ -25,34 +29,24 @@ class TestSmsGateway(TransactionCase):
             }
         )
 
-    def test_handle_results_success(self):
-        sms = self.env["sms.sms"].create(
+        cls.gateway2 = cls.env["ir.sms.gateway"].create(
             {
-                "number": "+11111",
-                "body": "OK",
-                "sms_gateway_id": self.gateway.id,
+                "name": "Test Gateway 2",
+                "gateway_type": "iap",
+                "sequence": 2,
+                "active": True,
             }
         )
 
-        results = [{"uuid": sms.uuid, "state": "success"}]
+    def test_description_computed(self):
+        self.assertIn(SmsApi.DESCRIPTION, self.gateway.description)
 
-        self.gateway._handle_results([{"uuid": sms.uuid}], results)
+    def test_get_api_class(self):
+        self.assertEqual(self.gateway._get_api_class(), SmsApi)
 
-        self.assertEqual(sms.state, "sent")
-        self.assertFalse(sms.failure_type)
-
-    def test_handle_results_error(self):
-        sms = self.env["sms.sms"].create(
-            {
-                "number": "+22222",
-                "body": "ERR",
-                "sms_gateway_id": self.gateway.id,
-            }
-        )
-
-        results = [{"uuid": sms.uuid, "state": "server_error"}]
-
-        self.gateway._handle_results([{"uuid": sms.uuid}], results)
-
-        self.assertEqual(sms.state, "error")
-        self.assertEqual(sms.failure_type, "sms_server")
+    def test_get_default_gateway(self):
+        IrSmsGateway = self.env["ir.sms.gateway"]
+        self.assertEqual(self.gateway, IrSmsGateway._get_default_gateway())
+        self.gateway.sequence = 2
+        self.gateway2.sequence = 1
+        self.assertEqual(self.gateway2, IrSmsGateway._get_default_gateway())
