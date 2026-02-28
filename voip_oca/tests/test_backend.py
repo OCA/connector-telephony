@@ -25,7 +25,7 @@ class TestVoipOca(TransactionCase):
         cls.partner_02 = cls.env["res.partner"].create(
             {
                 "name": "Test Partner 01",
-                "mobile": "0987654321",
+                "phone": "0987654321",
             }
         )
         cls.activity_type = cls.env["mail.activity.type"].create(

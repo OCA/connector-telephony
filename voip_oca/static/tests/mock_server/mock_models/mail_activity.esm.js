@@ -13,6 +13,22 @@ export class MailActivity extends mailModels.MailActivity {
     main_partner = fields.Char();
     async get_call_activities() {
         const items = this.search([["activity_category", "=", "phonecall"]]);
-        return items.activity_format();
+        return this.activity_format(items);
+    }
+
+    _to_store(store) {
+        super._to_store(...arguments);
+        for (const activity of this) {
+            if (activity.main_partner_id) {
+                store._add_record_fields(this.browse(activity.id), {
+                    main_partner_id: activity.main_partner_id,
+                });
+            }
+            if (activity.main_partner) {
+                store._add_record_fields(this.browse(activity.id), {
+                    main_partner: activity.main_partner,
+                });
+            }
+        }
     }
 }

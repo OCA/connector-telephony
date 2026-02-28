@@ -53,7 +53,7 @@ class VoipOcaCall(models.Model):
             "id": self.id,
             "creationDate": self.create_date,
             "typeCall": self.type_call,
-            "displayName": self.display_name,
+            "display_name": self.display_name,
             "endDate": self.end_date,
             "partner": self.partner_id and self.partner_id.format_partner(),
             "phoneNumber": self.phone_number,
@@ -89,9 +89,7 @@ class VoipOcaCall(models.Model):
                 self.env["res.partner"]
                 .search(
                     [
-                        "|",
                         ("phone", "=", values.get("phone_number")),
-                        ("mobile", "=", values.get("phone_number")),
                     ],
                     limit=1,
                 )

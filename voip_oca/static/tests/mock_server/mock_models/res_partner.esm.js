@@ -9,18 +9,17 @@ export class ResPartner extends mailModels.ResPartner {
         return {
             id: this[0].id,
             type: "partner",
-            displayName: this[0].display_name,
+            display_name: this[0].display_name,
             email: this[0].email,
-            landlineNumber: this[0].phone,
-            mobileNumber: this[0].mobile,
+            phone: this[0].phone,
             name: this[0].name,
         };
     }
     voip_get_contacts() {
-        return this.search(["|", ["phone", "!=", false], ["mobile", "!=", false]]).map(
-            (contact) => {
-                return this.browse(contact).format_partner();
-            }
-        );
+        var result = [];
+        for (const contact of this.search([["phone", "!=", false]])) {
+            result.push(this.browse(contact).format_partner());
+        }
+        return {"res.partner": result};
     }
 }

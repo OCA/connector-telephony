@@ -13,7 +13,7 @@
                         t-att-src="voip.imagePartner(voip.partner.id)"
                     />
                     <span class="mt-2 fw-bolder" t-esc="voip.partner.name" />
-                    <span class="mt-2" t-esc="voip.partner.displayName" />
+                    <span class="mt-2" t-esc="voip.partner.display_name" />
                 </t>
                 <t t-else="">
                     <span class="fw-bolder">No contact info</span>
@@ -37,6 +37,7 @@
                         class="btn btn-secondary p-3 rounded-circle"
                         title="Send email"
                         t-on-click="onEmailClick"
+                        t-if="voip.partner and voip.partner.email"
                     >
                         <i class="fa fa-fw fa-lg fa-envelope-o" />
                     </button>
@@ -86,7 +87,11 @@
                         title="Mute"
                         t-on-click="onMute"
                     >
-                        <i class="fa fa-fw fa-lg fa-microphone" />
+                        <i class="fa fa-fw fa-lg fa-microphone" t-if="!agent.isMuted" />
+                        <i
+                            class="fa fa-fw fa-lg fa-microphone-slash"
+                            t-if="agent.isMuted"
+                        />
                     </button>
                     <button
                         class="btn btn-secondary p-3 rounded-circle"

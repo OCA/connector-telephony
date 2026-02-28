@@ -15,11 +15,7 @@ export class Partner extends Component {
         this.store = useService("mail.store");
     }
     get phoneNumber() {
-        return (
-            this.props.call.phoneNumber ||
-            this.props.partner.mobileNumber ||
-            this.props.partner.landlineNumber
-        );
+        return this.props.call.phoneNumber || this.props.partner.phone;
     }
     get model() {
         if (this.props.activity && this.props.activity.res_model) {
@@ -104,8 +100,8 @@ export class Partner extends Component {
             id: this.props.activity.res_id,
         });
         await this.props.activity.markAsDone();
-        await thread.fetchData(["activities"]);
-        await this.store.fetchData({systray_get_activities: true});
+        await thread.fetchThreadData(["activities"]);
+        await this.store.fetchStoreData("systray_get_activities");
         this.voip.call = false;
         this.voip.activity = false;
         this.voip.partner = false;

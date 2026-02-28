@@ -49,6 +49,7 @@
                     class="btn btn-secondary p-3 rounded-circle"
                     title="Send email"
                     t-on-click="onEmailClick"
+                    t-if="this.props.partner and this.props.partner.email"
                 >
                     <i class="fa fa-fw fa-lg fa-envelope-o" />
                 </button>

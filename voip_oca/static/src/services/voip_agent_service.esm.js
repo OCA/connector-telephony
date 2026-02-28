@@ -220,7 +220,7 @@ export class VoipAgent {
     }
     updateCallAudio() {
         if (this.session?.sessionDescriptionHandler) {
-            this.session.sessionDescriptionHandler.enableReceiverTracks(this.isHolded);
+            this.session.sessionDescriptionHandler.enableReceiverTracks(!this.isHolded);
             this.session.sessionDescriptionHandler.enableSenderTracks(
                 !this.isHolded && !this.isMuted
             );
@@ -234,18 +234,17 @@ export class VoipAgent {
             },
         ]);
 
-        this.voip.call = this.store.Call.insert(call);
+        this.voip.call = this.store["voip.call"].insert(call);
         if (call.partner) {
-            this.voip.partner = this.store.Persona.insert({...call.partner});
+            this.voip.partner = this.store["res.partner"].insert({...call.partner});
         }
     }
     async call({number, partner}) {
-        console.log(arguments);
         this.voip.isOpened = true;
         this.voip.isFolded = false;
         var phone_number = number;
         if (!number && partner) {
-            phone_number = partner.mobileNumber || partner.landlineNumber;
+            phone_number = partner.phone;
         }
         this.playTone("dialtone");
         await this.createCall({

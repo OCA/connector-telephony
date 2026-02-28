@@ -12,24 +12,23 @@ class VoipOcaCall(models.Model):
         return {
             "id": self.id,
             "type": "partner",
-            "displayName": self.display_name,
+            "display_name": self.display_name,
             "email": self.email,
-            "landlineNumber": self.phone,
-            "mobileNumber": self.mobile,
+            "phone": self.phone,
             "name": self.name,
         }
 
     @api.model
     def voip_get_contacts(self, _search, offset, limit):
-        domain = ["|", ("phone", "!=", False), ("mobile", "!=", False)]
+        domain = [("phone", "!=", False)]
         if _search:
-            search_fields = ["name", "phone", "mobile", "email"]
+            search_fields = ["name", "phone", "email"]
             search_domain = expression.OR(
                 [[(field, "ilike", _search)] for field in search_fields]
             )
             domain = expression.AND([domain, search_domain])
         contacts = self.search(domain, offset=offset, limit=limit)
-        return [contact.format_partner() for contact in contacts]
+        return {"res.partner": [contact.format_partner() for contact in contacts]}
 
     def get_activity_main_partner_id(self):
         """Override to return the partner itself."""

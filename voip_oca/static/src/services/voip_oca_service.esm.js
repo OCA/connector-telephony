@@ -56,7 +56,7 @@ export class VoipOCA {
     async open({partner = false, activity = false, call = false}) {
         let partner_id = partner && partner.id;
         if (activity) {
-            partner_id = activity.main_partner_id && activity.main_partner_id[0];
+            partner_id = activity.main_partner_id;
         } else if (call) {
             partner_id = call.partner && call.partner.id;
         }
@@ -81,20 +81,17 @@ export class VoipOCA {
     /* Elements */
 
     get partners() {
-        return Object.values(this.store.Persona.records).filter(
+        return Object.values(this.store["res.partner"].records).filter(
             (partner) =>
-                partner.hasPhoneNumber &&
+                partner.phone &&
                 (!this.searchValue ||
-                    [
-                        partner.name,
-                        partner.displayName,
-                        partner.mobileNumber,
-                        partner.landlineNumber,
-                    ].some((x) => matchString(x, this.searchValue)))
+                    [partner.name, partner.display_name, partner.phone].some((x) =>
+                        matchString(x, this.searchValue)
+                    ))
         );
     }
     get activities() {
-        return Object.values(this.store.Activity.records).filter(
+        return Object.values(this.store["mail.activity"].records).filter(
             (activity) =>
                 (!this.searchValue ||
                     [activity.summary, activity.resName, activity.main_partner].some(
@@ -102,16 +99,16 @@ export class VoipOCA {
                     )) &&
                 new Date(activity.date_deadline) <= new Date() &&
                 activity.activity_category === "phonecall" &&
-                activity.user_id[0] === this.uid
+                activity.user_id.id === this.uid
         );
     }
 
     get calls() {
-        return Object.values(this.store.Call.records)
+        return Object.values(this.store["voip.call"].records)
             .filter(
                 (call) =>
                     !this.searchValue ||
-                    [call.phoneNumber, call.displayName].some((x) =>
+                    [call.phoneNumber, call.display_name].some((x) =>
                         matchString(x, this.searchValue)
                     )
             )
@@ -132,9 +129,7 @@ export class VoipOCA {
             limit,
             _search,
         });
-        for (const partner of partners) {
-            this.store.Persona.insert({...partner, type: "partner"});
-        }
+        this.store.insert(partners);
     }
     async searchActivities(_search = "", offset = 0, limit = 13) {
         const activities = await this.orm.call(
@@ -147,12 +142,7 @@ export class VoipOCA {
                 _search,
             }
         );
-        if (!activities["mail.activity"]) {
-            return;
-        }
-        for (const activity of activities["mail.activity"]) {
-            this.store.Activity.insert({...activity});
-        }
+        this.store.insert(activities);
     }
     async searchCalls(_search = "", offset = 0, limit = 13) {
         const calls = await this.orm.call("voip.call", "get_recent_calls", [], {
@@ -160,9 +150,7 @@ export class VoipOCA {
             limit,
             _search,
         });
-        for (const call of calls) {
-            this.store.Call.insert({...call});
-        }
+        this.store.insert({"voip.call": calls});
     }
     /* Image functions */
     imagePartner(partner_id) {

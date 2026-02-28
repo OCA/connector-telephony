@@ -44,16 +44,18 @@ export class VoipOcaCall extends models.ServerModel {
     end_date = fields.Datetime();
 
     get_recent_calls() {
-        return this.search([["user_id", "=", this.env.user.id]]).map((item) =>
-            this.browse(item).format_call()
-        );
+        var result = [];
+        for (const call of this.search([["user_id", "=", this.env.user.id]])) {
+            result.push(this.browse(call).format_call());
+        }
+        return result;
     }
     format_call() {
         return {
             id: this[0].id,
             creationDate: this[0].create_date,
             typeCall: this[0].type_call,
-            displayName: this[0].display_name,
+            display_name: this[0].display_name,
             endDate: this[0].end_date,
             partner:
                 this[0].partner_id &&

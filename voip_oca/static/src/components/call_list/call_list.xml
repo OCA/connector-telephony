@@ -9,7 +9,7 @@
                 t-on-click="() => this.onClick(call)"
             >
                 <span class="fw-bold" t-esc="call.partner[1]" />
-                <span t-esc="call.displayName" />
+                <span t-esc="call.display_name" />
                 <div class="small text-muted">
                     <t t-esc="call.dateStr" />
                     <t t-if="call.duration"> • <t t-esc="call.durationStr" />

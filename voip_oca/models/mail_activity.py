@@ -4,6 +4,8 @@
 from odoo import api, fields, models
 from odoo.osv import expression
 
+from odoo.addons.mail.tools.discuss import Store
+
 
 class VoipOcaActivity(models.Model):
     _inherit = "mail.activity"
@@ -49,3 +51,9 @@ class VoipOcaActivity(models.Model):
             if res_record._filtered_access("read"):
                 allowed_activity_ids.append(activity.id)
         return self.browse(allowed_activity_ids).activity_format()
+
+    def _to_store_defaults(self, target):
+        return super()._to_store_defaults(target) + [
+            Store.One("main_partner_id", []),
+            "main_partner",
+        ]

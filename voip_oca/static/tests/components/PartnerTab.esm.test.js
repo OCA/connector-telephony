@@ -17,12 +17,12 @@ test("Check Partner Tab", async () => {
     pyEnv["res.partner"].create({
         name: "Test Partner",
         display_name: "Test Partner",
-        mobile: "123456789",
+        phone: "123456789",
     });
     pyEnv["res.partner"].create({
         name: "Test Partner 2",
         display_name: "Test Partner",
-        mobile: "123456789",
+        phone: "123456789",
     });
     patchWithCleanup(session, {
         ...session,

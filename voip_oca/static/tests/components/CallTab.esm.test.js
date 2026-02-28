@@ -17,7 +17,7 @@ test("Check Call Tab", async () => {
     const [partnerId1, partnerId2] = pyEnv["res.partner"].create([
         {
             name: "Test Partner",
-            mobile: "+34 666 666 666",
+            phone: "+34 666 666 666",
         },
         {
             name: "Other Test Partner",

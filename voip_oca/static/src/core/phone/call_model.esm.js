@@ -22,6 +22,7 @@ import {durationStr} from "../../utils/utils.esm";
 
 export class Call extends Record {
     static id = "id";
+    static _name = "voip.call";
     /** @type {Object.<number, Call>} */
     static records = {};
     /**
