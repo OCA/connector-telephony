@@ -25,5 +25,5 @@ class ResPartner(models.Model):
                 else:
                     name = partner.name or ""
                 partner.display_name = name
-
-        return super()._compute_display_name()
+        else:
+            return super()._compute_display_name()
