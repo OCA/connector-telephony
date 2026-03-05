@@ -3,7 +3,6 @@
 
 
 from odoo import api, fields, models
-from odoo.osv import expression
 
 
 class VoipOcaCall(models.Model):
@@ -71,10 +70,10 @@ class VoipOcaCall(models.Model):
                 "partner_id.name",
                 "activity_name",
             ]
-            search_domain = expression.OR(
+            search_domain = fields.Domain.OR(
                 [[(field, "ilike", _search)] for field in search_fields]
             )
-            domain = expression.AND([domain, search_domain])
+            domain = fields.Domain.AND([domain, search_domain])
         return [
             call.format_call()
             for call in self.search(

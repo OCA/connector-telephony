@@ -77,11 +77,19 @@ class TestVoipOca(TransactionCase):
 
     def test_partner_search(self):
         results = self.env["res.partner"].voip_get_contacts("1234567890", 0, 1000)
-        self.assertIn(self.partner_01.id, [result["id"] for result in results])
-        self.assertNotIn(self.partner_02.id, [result["id"] for result in results])
+        self.assertIn(
+            self.partner_01.id, [result["id"] for result in results["res.partner"]]
+        )
+        self.assertNotIn(
+            self.partner_02.id, [result["id"] for result in results["res.partner"]]
+        )
         results = self.env["res.partner"].voip_get_contacts("0987654321", 0, 1000)
-        self.assertNotIn(self.partner_01.id, [result["id"] for result in results])
-        self.assertIn(self.partner_02.id, [result["id"] for result in results])
+        self.assertNotIn(
+            self.partner_01.id, [result["id"] for result in results["res.partner"]]
+        )
+        self.assertIn(
+            self.partner_02.id, [result["id"] for result in results["res.partner"]]
+        )
 
     def test_activity_partner(self):
         self.assertEqual(self.activity_01.main_partner_id, self.partner_01)

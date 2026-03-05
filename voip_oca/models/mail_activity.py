@@ -2,7 +2,6 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 from odoo import api, fields, models
-from odoo.osv import expression
 
 from odoo.addons.mail.tools.discuss import Store
 
@@ -38,10 +37,10 @@ class VoipOcaActivity(models.Model):
         ]
         if _search:
             search_fields = ["res_name", "summary", "date_deadline"]
-            search_domain = expression.OR(
+            search_domain = fields.Domain.OR(
                 [[(field, "ilike", _search)] for field in search_fields]
             )
-            domain = expression.AND([domain, search_domain])
+            domain = fields.Domain.AND([domain, search_domain])
         all_activities = self.search(domain, offset=offset, limit=limit)
         # Filter activities to avoid accessing records that the user cannot read
         # due to multi-company restrictions or other access rules in the res_model.

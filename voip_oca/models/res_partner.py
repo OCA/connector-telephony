@@ -1,8 +1,7 @@
 # Copyright 2025 Dixmit
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo import api, models
-from odoo.osv import expression
+from odoo import api, fields, models
 
 
 class VoipOcaCall(models.Model):
@@ -23,10 +22,10 @@ class VoipOcaCall(models.Model):
         domain = [("phone", "!=", False)]
         if _search:
             search_fields = ["name", "phone", "email"]
-            search_domain = expression.OR(
+            search_domain = fields.Domain.OR(
                 [[(field, "ilike", _search)] for field in search_fields]
             )
-            domain = expression.AND([domain, search_domain])
+            domain = fields.Domain.AND([domain, search_domain])
         contacts = self.search(domain, offset=offset, limit=limit)
         return {"res.partner": [contact.format_partner() for contact in contacts]}
 
