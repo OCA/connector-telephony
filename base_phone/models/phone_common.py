@@ -81,9 +81,7 @@ class PhoneCommon(models.AbstractModel):
                 )
             if res_sql:
                 obj_id = res_sql[0][0]
-                res_obj = obj.browse(obj_id)
-                # Use name_get()[0][1] instead of display_name
-                # to take the context into account with the callerid key
+                res_obj = obj.browse(obj_id).with_context(callerid=True)
                 res_obj.fetch(["display_name"])
                 name = res_obj.display_name
                 res = (obj._name, res_obj.id, name)
