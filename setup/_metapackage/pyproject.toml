@@ -1,0 +1,11 @@
+[project]
+name = "odoo-addons-oca-connector-telephony"
+version = "19.0.20260519.0"
+dependencies = [
+    "odoo-addon-voip_oca==19.0.*",
+]
+classifiers=[
+    "Programming Language :: Python",
+    "Framework :: Odoo",
+    "Framework :: Odoo :: 19.0",
+]
