@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2025 Dixmit
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <menuitem
+        name="Voip/Calls"
+        id="voip_call_menu_action"
+        parent="mail.mail_menu_technical"
+        action="voip_oca.voip_call_act_window_list"
+    />
+</odoo>

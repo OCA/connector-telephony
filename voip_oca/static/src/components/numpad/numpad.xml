@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Copyright 2025 Dixmit
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<templates xml:space="preserve">
+    <t t-name="voip_oca.Numpad">
+        <div class="d-flex border-bottom justify-content-around">
+            <input
+                class="o_numpad_input ps-3 border-0 no-border"
+                placeholder="Enter number..."
+                t-model="voip.numpad.value"
+                t-ref="numpadValue"
+                t-on-keydown="onNumpadValue"
+            />
+            <button
+                class="btn o_numpad_delete"
+                title="Delete"
+                t-on-click="() => this.deleteNumber()"
+            >
+                <i class="fa fa-arrow-left" />
+            </button>
+        </div>
+        <div class="d-flex justify-content-center row row-cols-3 mx-0">
+            <button
+                t-foreach="keys"
+                t-as="key"
+                t-key="key"
+                t-esc="key"
+                t-on-click="() => this.onKeyClick(key)"
+                t-att-name="key"
+                class="o_numpad_button btn btn-light py-3 fw-normal fs-2 "
+            />
+        </div>
+    </t>
+</templates>
