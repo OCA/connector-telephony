@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 18.0\n"
+"Project-Id-Version: Odoo Server 19.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -180,6 +180,11 @@ msgid "Delete"
 msgstr ""
 
 #. module: voip_oca
+#: model:ir.model.fields,field_description:voip_oca.field_ir_http__display_name
+#: model:ir.model.fields,field_description:voip_oca.field_mail_activity__display_name
+#: model:ir.model.fields,field_description:voip_oca.field_mail_activity_mixin__display_name
+#: model:ir.model.fields,field_description:voip_oca.field_res_partner__display_name
+#: model:ir.model.fields,field_description:voip_oca.field_res_users__display_name
 #: model:ir.model.fields,field_description:voip_oca.field_voip_call__display_name
 #: model:ir.model.fields,field_description:voip_oca.field_voip_pbx__display_name
 msgid "Display Name"
@@ -257,6 +262,11 @@ msgid "HTTP Routing"
 msgstr ""
 
 #. module: voip_oca
+#: model:ir.model.fields,field_description:voip_oca.field_ir_http__id
+#: model:ir.model.fields,field_description:voip_oca.field_mail_activity__id
+#: model:ir.model.fields,field_description:voip_oca.field_mail_activity_mixin__id
+#: model:ir.model.fields,field_description:voip_oca.field_res_partner__id
+#: model:ir.model.fields,field_description:voip_oca.field_res_users__id
 #: model:ir.model.fields,field_description:voip_oca.field_voip_call__id
 #: model:ir.model.fields,field_description:voip_oca.field_voip_pbx__id
 msgid "ID"
@@ -293,6 +303,8 @@ msgid "Last Updated on"
 msgstr ""
 
 #. module: voip_oca
+#: model:ir.model.fields,field_description:voip_oca.field_ir_actions_server__activity_main_partner_id
+#: model:ir.model.fields,field_description:voip_oca.field_ir_cron__activity_main_partner_id
 #: model:ir.model.fields,field_description:voip_oca.field_mail_activity__main_partner_id
 #: model:ir.model.fields,field_description:voip_oca.field_mail_activity_mixin__activity_main_partner_id
 #: model:ir.model.fields,field_description:voip_oca.field_res_partner__activity_main_partner_id
