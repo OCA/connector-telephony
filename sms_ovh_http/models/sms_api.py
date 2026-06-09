@@ -5,23 +5,51 @@
 
 import requests
 
-from odoo import _, api, models
+from odoo import _
 from odoo.exceptions import UserError
+
+from odoo.addons.sms.tools.sms_api import (
+    SmsApi as OdooSmsApi,
+)
+from odoo.addons.sms_alternative_provider.models.sms_api import SmsApiBase
 
 OVH_HTTP_ENDPOINT = "https://www.ovh.com/cgi-bin/sms/http2sms.cgi"
 
 
-class SmsApi(models.AbstractModel):
-    _inherit = "sms.api"
-
+class OvhSmsApi(SmsApiBase, OdooSmsApi):
+    KEY = "ovh"
+    NAME = "OVH IAP"
+    DESCRIPTION = "Send sms through OVH IAP"
     HTTP_TIMEOUT = 10
+
+    def _contact_iap(self, local_endpoint, params, timeout=15):
+        return ""
+
+    def _send_sms_batch(
+        self, messages, delivery_reports_url=False
+    ):  # TODO RIGR: switch to kwargs in master
+        if self._is_sent_with_ovh():
+            if len(messages) != 1:
+                # we already have inherited the split_batch method on sms.sms
+                # so this case shouldsnot append
+                raise UserError(_("Batch sending is not support with OVH"))
+            state = self._send_sms_with_ovh_http(
+                messages[0]["numbers"][0]["number"],
+                messages[0]["content"],
+                messages[0]["numbers"][0]["uuid"],
+            )
+            return [
+                {"state": state, "credit": 0, "uuid": messages[0]["numbers"][0]["uuid"]}
+            ]
+        else:
+            return super()._send_sms_batch(messages)
 
     def _prepare_ovh_http_params(self, account, number, message):
         return {
             "smsAccount": account.sms_ovh_http_account,
             "login": account.sms_ovh_http_login,
             "password": account.sms_ovh_http_password,
-            "from": account.sms_ovh_http_from,
+            "from": account.sms_ovh_sender_name,
             "to": number,
             "message": message,
             "noStop": 1,
@@ -30,12 +58,12 @@ class SmsApi(models.AbstractModel):
     def _get_sms_account(self):
         return self.env["iap.account"].get("sms").exists()
 
-    def _send_sms_with_ovh_http(self, number, message, sms_id):
+    def _send_sms_with_ovh_http(self, number, message, uuid):
         # Try to return same error code like odoo
         # list is here: self.IAP_TO_SMS_STATE
         if not number:
             return "wrong_number_format"
-        account = self._get_sms_account()
+        account = self.account
         r = requests.get(
             OVH_HTTP_ENDPOINT,
             params=self._prepare_ovh_http_params(account, number, message),
@@ -43,36 +71,11 @@ class SmsApi(models.AbstractModel):
         )
         response = r.text
         if response[0:2] != "OK":
-            self.env["sms.sms"].browse(sms_id).error_detail = response
+            self.env["sms.sms"].search([("uuid", "=", uuid)])[
+                0
+            ].error_detail = response[3:]
             return "server_error"
         return "success"
 
     def _is_sent_with_ovh(self):
-        return self._get_sms_account().provider == "sms_ovh_http"
-
-    @api.model
-    def _send_sms(self, numbers, message):
-        if self._is_sent_with_ovh():
-            # This method seem to be deprecated (no odoo code use it)
-            # as OVH do not support it we do not support it
-            # Note: if you want to implement it becarefull just looping
-            # on the list of number is not the right way to do it.
-            # If you have an error, you will send and send again the same
-            # message
-            raise NotImplementedError
-        else:
-            return super()._send_sms(numbers, message)
-
-    @api.model
-    def _send_sms_batch(self, messages):
-        if self._is_sent_with_ovh():
-            if len(messages) != 1:
-                # we already have inherited the split_batch method on sms.sms
-                # so this case shouldsnot append
-                raise UserError(_("Batch sending is not support with OVH"))
-            state = self._send_sms_with_ovh_http(
-                messages[0]["number"], messages[0]["content"], messages[0]["res_id"]
-            )
-            return [{"state": state, "credit": 0, "res_id": messages[0]["res_id"]}]
-        else:
-            return super()._send_sms_batch(messages)
+        return self.account.provider == "sms_ovh_http"

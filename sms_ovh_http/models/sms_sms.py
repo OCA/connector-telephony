@@ -11,7 +11,7 @@ class SmsSms(models.Model):
     error_detail = fields.Text(readonly=True)
 
     def _split_batch(self):
-        if self.env["sms.api"]._is_sent_with_ovh():
+        if self.sms_gateway_id.iap_account_id.provider == "sms_ovh_http":
             # No batch with OVH
             for record in self:
                 yield [record.id]
