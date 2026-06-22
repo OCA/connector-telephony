@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2026-06-22 07:02+0000\n"
+"PO-Revision-Date: 2026-06-22 09:46+0000\n"
 "Last-Translator: Arnau Serra i de Paz <arnauserra24@gmail.com>\n"
 "Language-Team: none\n"
 "Language: ca\n"
@@ -678,6 +678,5 @@ msgstr "https://developers.google.com/tenor/guides/content-filtering"
 
 #. module: base_phone
 #: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers__module_google_recaptcha
-#, fuzzy
 msgid "reCAPTCHA"
 msgstr "reCAPTCHA"
