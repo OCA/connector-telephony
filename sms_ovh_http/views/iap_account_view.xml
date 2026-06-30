@@ -10,9 +10,10 @@
                     name="ovh"
                     attrs="{'invisible': [('provider', '!=', 'sms_ovh_http')]}"
                 >
-                    <field name="sms_ovh_http_account" />
-                    <field name="sms_ovh_http_login" />
-                    <field name="sms_ovh_http_password" />
+                    <field name="sms_ovh_http_app_key" />
+                    <field name="sms_ovh_http_app_secret" password="True" />
+                    <field name="sms_ovh_http_consumer_key" />
+                    <field name="sms_ovh_http_service_name" />
                     <field name="sms_ovh_http_from" />
                 </group>
             </xpath>

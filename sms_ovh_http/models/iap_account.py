@@ -12,10 +12,11 @@ class IapAccount(models.Model):
         selection_add=[("sms_ovh_http", "SMS OVH http")],
         ondelete={"sms_ovh_http": "cascade"},
     )
-    sms_ovh_http_account = fields.Char(string="SMS Account")
-    sms_ovh_http_login = fields.Char(string="API User ID")
-    sms_ovh_http_password = fields.Char(string="API User Password")
     sms_ovh_http_from = fields.Char(string="Sender Name")
+    sms_ovh_http_app_key = fields.Char(string="Application Key")
+    sms_ovh_http_app_secret = fields.Char(string="Application Secret")
+    sms_ovh_http_consumer_key = fields.Char(string="Consumer Key")
+    sms_ovh_http_service_name = fields.Char(string="Service Name")
 
     def _get_service_from_provider(self):
         if self.provider == "sms_ovh_http":
@@ -26,10 +27,11 @@ class IapAccount(models.Model):
         res = super()._server_env_fields
         res.update(
             {
-                "sms_ovh_http_account": {},
-                "sms_ovh_http_login": {},
-                "sms_ovh_http_password": {},
                 "sms_ovh_http_from": {},
+                "sms_ovh_http_app_key": {},
+                "sms_ovh_http_app_secret": {},
+                "sms_ovh_http_consumer_key": {},
+                "sms_ovh_http_service_name": {},
             }
         )
         return res

@@ -2,11 +2,11 @@
 # @author Sébastien BEAU <sebastien.beau@akretion.com>
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-import requests_mock
+from unittest.mock import patch
 
 from odoo.tests import TransactionCase
 
-from ..models.sms_api import OVH_HTTP_ENDPOINT
+from ..models.sms_api import OVH_API_ENDPOINT
 
 
 class SendSmsCase(TransactionCase):
@@ -17,9 +17,10 @@ class SendSmsCase(TransactionCase):
             {
                 "name": "OVH",
                 "provider": "sms_ovh_http",
-                "sms_ovh_http_account": "foo",
-                "sms_ovh_http_login": "bar",
-                "sms_ovh_http_password": "secret",
+                "sms_ovh_http_app_key": "app_key_test",
+                "sms_ovh_http_app_secret": "app_secret_test",
+                "sms_ovh_http_consumer_key": "consumer_key_test",
+                "sms_ovh_http_service_name": "sms-test-1",
                 "sms_ovh_http_from": "+33642424242",
             }
         )
@@ -28,8 +29,8 @@ class SendSmsCase(TransactionCase):
         self.assertEqual(self.account.service_name, "sms")
 
     def test_sending_sms(self):
-        with requests_mock.Mocker() as m:
-            m.get(OVH_HTTP_ENDPOINT, text="OK")
+        with patch("ovh.Client") as mock_client:
+            mock_instance = mock_client.return_value
             self.env["sms.api"]._send_sms_batch(
                 [
                     {
@@ -39,39 +40,37 @@ class SendSmsCase(TransactionCase):
                     }
                 ]
             )
-            self.assertEqual(len(m.request_history), 1)
-            params = m.request_history[0].qs
-            self.assertEqual(
-                params,
-                {
-                    "nostop": ["1"],
-                    "from": ["+33642424242"],
-                    "password": ["secret"],
-                    "message": ["alpha bravo charlie"],
-                    "to": ["+3360707070707"],
-                    "smsaccount": ["foo"],
-                    "login": ["bar"],
-                },
+            mock_client.assert_called_once_with(
+                endpoint=OVH_API_ENDPOINT,
+                application_key="app_key_test",
+                application_secret="app_secret_test",
+                consumer_key="consumer_key_test",
+            )
+            mock_instance.post.assert_called_once_with(
+                "/sms/sms-test-1/jobs",
+                message="Alpha Bravo Charlie",
+                sender="+33642424242",
+                receivers=["+3360707070707"],
+                noStopClause=True,
             )
 
     def test_partner_message_sms(self):
-        with requests_mock.Mocker() as m:
-            m.get(OVH_HTTP_ENDPOINT, text="OK")
+        with patch("ovh.Client") as mock_client:
+            mock_instance = mock_client.return_value
             partner = self.env["res.partner"].create(
                 {"name": "FOO", "mobile": "+3360707070707"}
             )
             partner._message_sms("Alpha Bravo Charlie")
-            self.assertEqual(len(m.request_history), 1)
-            params = m.request_history[0].qs
-            self.assertEqual(
-                params,
-                {
-                    "nostop": ["1"],
-                    "from": ["+33642424242"],
-                    "password": ["secret"],
-                    "message": ["alpha bravo charlie"],
-                    "to": ["+3360707070707"],
-                    "smsaccount": ["foo"],
-                    "login": ["bar"],
-                },
+            mock_client.assert_called_once_with(
+                endpoint=OVH_API_ENDPOINT,
+                application_key="app_key_test",
+                application_secret="app_secret_test",
+                consumer_key="consumer_key_test",
+            )
+            mock_instance.post.assert_called_once_with(
+                "/sms/sms-test-1/jobs",
+                message="Alpha Bravo Charlie",
+                sender="+33642424242",
+                receivers=["+3360707070707"],
+                noStopClause=True,
             )
