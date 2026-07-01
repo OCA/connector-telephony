@@ -4,8 +4,8 @@
 
 {
     "name": "Sms OVH HTTP",
-    "summary": "Send sms using ovh http API",
-    "version": "16.0.1.0.0",
+    "summary": "Send sms using ovh http API or new OVH API (python-ovh)",
+    "version": "16.0.2.0.0",
     "category": "SMS",
     "website": "https://github.com/OCA/connector-telephony",
     "author": "Akretion, Odoo Community Association (OCA)",
@@ -13,7 +13,7 @@
     "license": "AGPL-3",
     "application": False,
     "installable": True,
-    "external_dependencies": {"python": [], "bin": []},
+    "external_dependencies": {"python": ["ovh"], "bin": []},
     "depends": ["base_phone", "sms", "iap_alternative_provider"],
     "data": [
         "views/iap_account_view.xml",

@@ -3,49 +3,42 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 
-import requests
+import ovh
 
 from odoo import _, api, models
 from odoo.exceptions import UserError
 
-OVH_HTTP_ENDPOINT = "https://www.ovh.com/cgi-bin/sms/http2sms.cgi"
+OVH_API_ENDPOINT = "ovh-eu"
 
 
 class SmsApi(models.AbstractModel):
     _inherit = "sms.api"
 
-    HTTP_TIMEOUT = 10
-
-    def _prepare_ovh_http_params(self, account, number, message):
-        return {
-            "smsAccount": account.sms_ovh_http_account,
-            "login": account.sms_ovh_http_login,
-            "password": account.sms_ovh_http_password,
-            "from": account.sms_ovh_http_from,
-            "to": number,
-            "message": message,
-            "noStop": 1,
-        }
-
     def _get_sms_account(self):
         return self.env["iap.account"].get("sms").exists()
 
-    def _send_sms_with_ovh_http(self, number, message, sms_id):
-        # Try to return same error code like odoo
-        # list is here: self.IAP_TO_SMS_STATE
+    def _send_sms_with_ovh_api(self, number, message, sms_id):
         if not number:
             return "wrong_number_format"
         account = self._get_sms_account()
-        r = requests.get(
-            OVH_HTTP_ENDPOINT,
-            params=self._prepare_ovh_http_params(account, number, message),
-            timeout=self.HTTP_TIMEOUT,
+        client = ovh.Client(
+            endpoint=OVH_API_ENDPOINT,
+            application_key=account.sms_ovh_http_app_key,
+            application_secret=account.sms_ovh_http_app_secret,
+            consumer_key=account.sms_ovh_http_consumer_key,
         )
-        response = r.text
-        if response[0:2] != "OK":
-            self.env["sms.sms"].browse(sms_id).error_detail = response
+        try:
+            client.post(
+                "/sms/%s/jobs" % account.sms_ovh_http_service_name,
+                message=message,
+                sender=account.sms_ovh_http_from,
+                receivers=[number],
+                noStopClause=True,
+            )
+            return "success"
+        except ovh.exceptions.APIError as e:
+            self.env["sms.sms"].browse(sms_id).error_detail = str(e)
             return "server_error"
-        return "success"
 
     def _is_sent_with_ovh(self):
         return self._get_sms_account().provider == "sms_ovh_http"
@@ -53,12 +46,6 @@ class SmsApi(models.AbstractModel):
     @api.model
     def _send_sms(self, numbers, message):
         if self._is_sent_with_ovh():
-            # This method seem to be deprecated (no odoo code use it)
-            # as OVH do not support it we do not support it
-            # Note: if you want to implement it becarefull just looping
-            # on the list of number is not the right way to do it.
-            # If you have an error, you will send and send again the same
-            # message
             raise NotImplementedError
         else:
             return super()._send_sms(numbers, message)
@@ -67,12 +54,11 @@ class SmsApi(models.AbstractModel):
     def _send_sms_batch(self, messages):
         if self._is_sent_with_ovh():
             if len(messages) != 1:
-                # we already have inherited the split_batch method on sms.sms
-                # so this case shouldsnot append
-                raise UserError(_("Batch sending is not support with OVH"))
-            state = self._send_sms_with_ovh_http(
-                messages[0]["number"], messages[0]["content"], messages[0]["res_id"]
+                raise UserError(_("Batch sending is not supported with OVH"))
+            msg = messages[0]
+            state = self._send_sms_with_ovh_api(
+                msg["number"], msg["content"], msg["res_id"]
             )
-            return [{"state": state, "credit": 0, "res_id": messages[0]["res_id"]}]
+            return [{"state": state, "credit": 0, "res_id": msg["res_id"]}]
         else:
             return super()._send_sms_batch(messages)

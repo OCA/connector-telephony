@@ -1,2 +1,2 @@
-Implementation of **OVH http2sms API** for sending sms.
-This module depend of odoo native **sms** module it only implement ovh as provider instead of odoo SA.
+Implementation of **OVH API** for sending SMS using the official python-ovh SDK.
+This module depends on Odoo's native **sms** module and implements OVH as a provider instead of Odoo SA.

@@ -1,21 +1,16 @@
 To configure this module, you need to:
 
-* Go to settings > technical > IAP Account
+* Go to Settings > Technical > IAP Account
 * Create a new account with **SMS OVH HTTP** as provider
-* Fill your account information as follows:
-    * SMS Account
+* Fill in your OVH API credentials:
 
-      .. figure:: ../static/img/img.png
-         :width: 800 px
+  * **Application Key**: your OVH application key
+  * **Application Secret**: your OVH application secret
+  * **Consumer Key**: your OVH consumer key
+  * **Service Name**: your OVH SMS service name (e.g. ``sms-ab1234-1``)
+  * **Sender Name**: the sender name displayed on the SMS
 
-    * API User ID / API User Password
+* You can now send an SMS!
 
-      .. figure:: ../static/img/img_1.png
-         :width: 800 px
-
-    * Sender name
-
-      .. figure:: ../static/img/img_2.png
-         :width: 800 px
-
-    * You can now send an sms!
+To generate your OVH API credentials, visit https://api.ovh.com/createToken/ and
+request ``POST /sms/{serviceName}/jobs`` permission.

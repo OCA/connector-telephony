@@ -28,8 +28,8 @@ Sms OVH HTTP
 
 |badge1| |badge2| |badge3| |badge4| |badge5|
 
-Implementation of **OVH http2sms API** for sending sms.
-This module depend of odoo native **sms** module it only implement ovh as provider instead of odoo SA.
+Implementation of **OVH API** for sending SMS using the official python-ovh SDK.
+This module depends on Odoo's native **sms** module and implements OVH as a provider instead of Odoo SA.
 
 **Table of contents**
 
@@ -41,25 +41,20 @@ Configuration
 
 To configure this module, you need to:
 
-* Go to settings > technical > IAP Account
+* Go to Settings > Technical > IAP Account
 * Create a new account with **SMS OVH HTTP** as provider
-* Fill your account information as follows:
-    * SMS Account
+* Fill in your OVH API credentials:
 
-      .. figure:: https://raw.githubusercontent.com/OCA/connector-telephony/16.0/sms_ovh_http/static/img/img.png
-         :width: 800 px
+  * **Application Key**: your OVH application key
+  * **Application Secret**: your OVH application secret
+  * **Consumer Key**: your OVH consumer key
+  * **Service Name**: your OVH SMS service name (e.g. ``sms-ab1234-1``)
+  * **Sender Name**: the sender name displayed on the SMS
 
-    * API User ID / API User Password
+* You can now send an SMS!
 
-      .. figure:: https://raw.githubusercontent.com/OCA/connector-telephony/16.0/sms_ovh_http/static/img/img_1.png
-         :width: 800 px
-
-    * Sender name
-
-      .. figure:: https://raw.githubusercontent.com/OCA/connector-telephony/16.0/sms_ovh_http/static/img/img_2.png
-         :width: 800 px
-
-    * You can now send an sms!
+To generate your OVH API credentials, visit https://api.ovh.com/createToken/ and
+request ``POST /sms/{serviceName}/jobs`` permission.
 
 Bug Tracker
 ===========
