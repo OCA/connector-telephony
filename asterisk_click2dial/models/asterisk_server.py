@@ -104,29 +104,34 @@ class AsteriskServer(models.Model):
             if out_prefix[1] and not out_prefix[1].isdigit():
                 raise ValidationError(
                     _(
-                        f"Only use digits for the {out_prefix[0]} on the Asterisk "
-                        f"server {server.name}"
+                        "Only use digits for the %(prefix)s on the Asterisk "
+                        "server %(server)s",
+                        prefix=out_prefix[0],
+                        server=server.name,
                     )
                 )
             if server.wait_time < 1 or server.wait_time > 120:
                 raise ValidationError(
                     _(
                         "You should set a 'Wait time' value between 1 and 120 "
-                        "seconds for the Asterisk server '%s'" % server.name
+                        "seconds for the Asterisk server '%s'",
+                        server.name,
                     )
                 )
             if server.extension_priority < 1:
                 raise ValidationError(
                     _(
                         "The 'extension priority' must be a positive value for "
-                        "the Asterisk server '%s'" % server.name
+                        "the Asterisk server '%s'",
+                        server.name,
                     )
                 )
             if server.port > 65535 or server.port < 1:
                 raise ValidationError(
                     _(
                         "You should set a TCP port between 1 and 65535 for the "
-                        "Asterisk server '%s'" % server.name
+                        "Asterisk server '%s'",
+                        server.name,
                     )
                 )
             for check_str in [dialplan_context, alert_info, login, password]:
@@ -136,8 +141,10 @@ class AsteriskServer(models.Model):
                     except UnicodeEncodeError:
                         raise ValidationError(
                             _(
-                                f"The {check_str[0]} should only have ASCII caracters "
-                                f"for the Asterisk server {server.name}"
+                                "The %(name)s should only have ASCII caracters "
+                                "for the Asterisk server %(server)s",
+                                name=check_str[0],
+                                server=server.name,
                             )
                         ) from None
 
@@ -157,11 +164,11 @@ class AsteriskServer(models.Model):
             res = requests.get(url, auth=auth, timeout=TIMEOUT)
         except Exception as e:
             raise UserError(
-                _(f"Connection Test Failed! The error message is: {e}")
+                _("Connection Test Failed! The error message is: %s", e)
             ) from None
         if res.status_code != 200:
             raise UserError(
-                _("Connection Test Failed! HTTP error code: %s" % res.status_code)
+                _("Connection Test Failed! HTTP error code: %s", res.status_code)
             )
 
         return {
@@ -226,8 +233,8 @@ class AsteriskServer(models.Model):
             _logger.error("Here are the details of the error: '%s'", str(e))
             raise UserError(
                 _(
-                    "Can't get calling number from  Asterisk.\nHere is the "
-                    "error: '%s'" % str(e)
+                    "Can't get calling number from  Asterisk.\nHere is the error: '%s'",
+                    e,
                 )
             ) from None
 

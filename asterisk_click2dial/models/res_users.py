@@ -101,8 +101,10 @@ class ResUsers(models.Model):
                     except UnicodeEncodeError:
                         raise ValidationError(
                             _(
-                                f"The {check_string[0]} for the user {user.name} "
-                                "should only have ASCII caracters"
+                                "The %(name)s for the user %(user)s "
+                                "should only have ASCII caracters",
+                                name=check_string[0],
+                                user=user.name,
                             )
                         ) from None
 

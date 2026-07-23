@@ -147,7 +147,7 @@ def convert_to_ascii(my_unicode):
 def get_callerid_from_odoo(agi, phone_number):
     if args.notify and not args.login_list:
         agi.verbose(
-            "When using the notify option, you must give arguments " "to the script"
+            "When using the notify option, you must give arguments to the script"
         )
         exit(0)
 
@@ -166,8 +166,8 @@ def get_callerid_from_odoo(agi, phone_number):
 
     proto = args.ssl and "jsonrpc+ssl" or "jsonrpc"
     agi.verbose(
-        "Starting %s request on Odoo %s:%d database %s login %s"
-        % (proto.upper(), args.server, port, args.database, args.username)
+        f"Starting {proto.upper()} request on Odoo {args.server}:{port} "
+        f"database {args.database} login {args.username}"
     )
     res = False
     try:
@@ -177,9 +177,9 @@ def get_callerid_from_odoo(agi, phone_number):
             res = odoo.execute("phone.common", method, phone_number, args.login_list)
         else:
             res = odoo.execute("phone.common", method, phone_number)
-        agi.verbose("Called method %s" % method)
+        agi.verbose(f"Called method {method}")
     except Exception as e:
-        agi.verbose("Could not connect to Odoo in JSON-RPC. Error %s" % e)
+        agi.verbose(f"Could not connect to Odoo in JSON-RPC. Error {e}")
 
     # Function to limit the size of the name
     if res and len(res) > args.max_size:
@@ -190,8 +190,8 @@ def get_callerid_from_odoo(agi, phone_number):
 def main(args):
     agi = agilib.AGI()
     if args.outgoing:
-        phone_number = agi.env["agi_%s" % args.outgoing_agi_var]
-        agi.verbose("Dialed phone number is %s" % phone_number)
+        phone_number = agi.env[f"agi_{args.outgoing_agi_var}"]
+        agi.verbose(f"Dialed phone number is {phone_number}")
     else:
         # If we already have a "True" caller ID name
         # i.e. not just digits, but a real name, then we don't try to
@@ -205,7 +205,9 @@ def main(args):
             not in ["asterisk", "unknown", "anonymous"]
             and not args.notify
         ):
-            agi.verbose("Incoming CallerID name is %s" % agi.env["agi_calleridname"])
+            agi.verbose(
+                "Incoming CallerID name is {}".format(agi.env["agi_calleridname"])
+            )
             agi.verbose("As it is a real name, we do not change it")
             return True
 
@@ -217,10 +219,10 @@ def main(args):
     # Match for particular cases and anonymous phone calls
     # To test anonymous call in France, dial 3651 + number
     if not phone_number.isdigit():
-        agi.verbose("Phone number (%s) is not a digit" % phone_number)
+        agi.verbose(f"Phone number ({phone_number}) is not a digit")
         exit(0)
 
-    agi.verbose("Phone number = %s" % phone_number)
+    agi.verbose(f"Phone number = {phone_number}")
 
     res = False
     # This script can be used without "-s odoo_server" !
@@ -247,7 +249,7 @@ def main(args):
     if args.ascii:
         res = convert_to_ascii(res)
 
-    agi.verbose("Name = %s" % res)
+    agi.verbose(f"Name = {res}")
     if res:
         if args.outgoing:
             agi.set_variable("connectedlinename", res)

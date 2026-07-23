@@ -40,15 +40,15 @@ class PhoneCommon(models.AbstractModel):
         if user.asterisk_chan_type in ("SIP", "PJSIP"):
             # We can only have one alert-info header in a SIP request
             if user.alert_info:
-                variable.append("SIPAddHeader=Alert-Info: %s" % user.alert_info)
+                variable.append(f"SIPAddHeader=Alert-Info: {user.alert_info}")
             elif ast_server.alert_info:
-                variable.append("SIPAddHeader=Alert-Info: %s" % ast_server.alert_info)
+                variable.append(f"SIPAddHeader=Alert-Info: {ast_server.alert_info}")
             if user.variable:
                 for user_variable in user.variable.split("|"):
                     variable.append(user_variable.strip())
         channel = user.asterisk_chan_name
         if user.dial_suffix:
-            channel += "/%s" % user.dial_suffix
+            channel += f"/{user.dial_suffix}"
 
         params = {
             "endpoint": channel,

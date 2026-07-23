@@ -5,7 +5,10 @@
         <div
             class="o-dropdown dropdown o-dropdown--no-caret o-mail-DiscussSystray-class"
         >
-            <button class="dropdown-toggle " t-on-click="() => this.onOpenCaller()">
+            <button
+                class="dropdown-toggle o-no-caret"
+                t-on-click="() => this.onOpenCaller()"
+            >
                 <i class="fa fa-phone" />
             </button>
         </div>

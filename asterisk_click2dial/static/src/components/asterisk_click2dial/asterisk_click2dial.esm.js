@@ -1,5 +1,3 @@
-/** @odoo-module **/
-
 /*
     Copyright 2024 Dixmit
     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
@@ -8,23 +6,21 @@
 import {Component} from "@odoo/owl";
 import {_t} from "@web/core/l10n/translation";
 import {registry} from "@web/core/registry";
+import {rpc} from "@web/core/network/rpc";
 import {useService} from "@web/core/utils/hooks";
+import {user} from "@web/core/user";
 
 const systrayRegistry = registry.category("systray");
 
 export class Click2DialSystray extends Component {
     setup() {
-        this.rpc = useService("rpc");
         this.action = useService("action");
         this.notification = useService("notification");
-        this.user = useService("user");
     }
 
     async onOpenCaller() {
-        // Var session = require('web.session');
-
-        const r = await this.rpc("/asterisk_click2dial/get_record_from_my_channel", {
-            context: this.user.context,
+        const r = await rpc("/asterisk_click2dial/get_record_from_my_channel", {
+            context: user.context,
         });
         if (r === false) {
             this.notification.add(
@@ -61,7 +57,7 @@ export class Click2DialSystray extends Component {
                 type: "ir.actions.act_window",
                 res_model: r[0],
                 res_id: r[1],
-                view_mode: "form,tree",
+                view_mode: "form,list",
                 views: [[false, "form"]],
                 /* If you want to make it work with the 'web' module
         of Odoo Enterprise edition, you have to change the line
