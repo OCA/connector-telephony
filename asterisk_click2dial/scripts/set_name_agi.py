@@ -16,79 +16,79 @@
 #  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 """
- Name lookup in Odoo for incoming and outgoing calls with an
- Asterisk IPBX
+Name lookup in Odoo for incoming and outgoing calls with an
+Asterisk IPBX
 
- This script is designed to be used as an AGI on an Asterisk IPBX...
- BUT I advise you to use a wrapper around this script to control the
- execution time. Why ? Because if the script takes too much time to
- execute or get stucks (in the JSON-RPC request for example), then the
- incoming phone call will also get stucks and you will miss a call !
- The simplest solution I found is to use the "timeout" shell command to
- call this script, for example :
+This script is designed to be used as an AGI on an Asterisk IPBX...
+BUT I advise you to use a wrapper around this script to control the
+execution time. Why ? Because if the script takes too much time to
+execute or get stucks (in the JSON-RPC request for example), then the
+incoming phone call will also get stucks and you will miss a call !
+The simplest solution I found is to use the "timeout" shell command to
+call this script, for example :
 
- # timeout 2s get_name_agi.py <OPTIONS>
+# timeout 2s get_name_agi.py <OPTIONS>
 
- See my 2 sample wrappers "set_name_incoming_timeout.sh" and
- "set_name_outgoing_timeout.sh"
+See my 2 sample wrappers "set_name_incoming_timeout.sh" and
+"set_name_outgoing_timeout.sh"
 
- It's probably a good idea to create a user in Odoo dedicated to this task.
- This user only needs to be part of the group "Phone CallerID", which has
- read access on the 'res.partner' and other objects with phone numbers and
- names.
+It's probably a good idea to create a user in Odoo dedicated to this task.
+This user only needs to be part of the group "Phone CallerID", which has
+read access on the 'res.partner' and other objects with phone numbers and
+names.
 
- Note that this script can be used without Odoo, with just the
- geolocalisation feature : for that, don't use option --server ;
- only use --geoloc
+Note that this script can be used without Odoo, with just the
+geolocalisation feature : for that, don't use option --server ;
+only use --geoloc
 
- This script can be used both on incoming and outgoing calls :
+This script can be used both on incoming and outgoing calls :
 
- 1) INCOMING CALLS
- When executed from the dialplan on an incoming phone call, it will
- lookup in Odoo's partners and other objects with phone numbers
- (leads, employees, etc...), and, if it finds the phone number, it will
- get the corresponding name of the person and use this name as CallerID
- name for the incoming call.
+1) INCOMING CALLS
+When executed from the dialplan on an incoming phone call, it will
+lookup in Odoo's partners and other objects with phone numbers
+(leads, employees, etc...), and, if it finds the phone number, it will
+get the corresponding name of the person and use this name as CallerID
+name for the incoming call.
 
- Requires the "base_phone" module
- available from https://github.com/OCA/connector-telephony
+Requires the "base_phone" module
+available from https://github.com/OCA/connector-telephony
 
- Asterisk dialplan example :
+Asterisk dialplan example :
 
- [from-extern]
- exten = _0141981242,1,AGI(/usr/local/bin/set_name_incoming_timeout.sh)
- same = n,Dial(SIP/10, 30)
- same = n,Answer
- same = n,Voicemail(10@default,u)
- same = n,Hangup
+[from-extern]
+exten = _0141981242,1,AGI(/usr/local/bin/set_name_incoming_timeout.sh)
+same = n,Dial(SIP/10, 30)
+same = n,Answer
+same = n,Voicemail(10@default,u)
+same = n,Hangup
 
- 2) OUTGOING CALLS
- When executed from the dialplan on an outgoing call, it will
- lookup in Odoo the name corresponding to the phone number
- that is called by the user and it will update the name of the
- callee on the screen of the phone of the caller.
+2) OUTGOING CALLS
+When executed from the dialplan on an outgoing call, it will
+lookup in Odoo the name corresponding to the phone number
+that is called by the user and it will update the name of the
+callee on the screen of the phone of the caller.
 
- For that, it uses the CONNECTEDLINE dialplan function of Asterisk
- See the following page for more info:
- https://wiki.asterisk.org/wiki/display/AST/Manipulating+Party+ID+Information
+For that, it uses the CONNECTEDLINE dialplan function of Asterisk
+See the following page for more info:
+https://wiki.asterisk.org/wiki/display/AST/Manipulating+Party+ID+Information
 
- It is not possible to set the CONNECTEDLINE directly from an AGI script,
- (at least not with Asterisk 11) so the AGI script sets a variable
- "connectedlinename" that can then be read from the dialplan and passed
- as parameter to the CONNECTEDLINE function.
+It is not possible to set the CONNECTEDLINE directly from an AGI script,
+(at least not with Asterisk 11) so the AGI script sets a variable
+"connectedlinename" that can then be read from the dialplan and passed
+as parameter to the CONNECTEDLINE function.
 
- Here is the code that I used on the pre-process subroutine
- "odoo-out-call" of the Outgoing Call of my Xivo server :
+Here is the code that I used on the pre-process subroutine
+"odoo-out-call" of the Outgoing Call of my Xivo server :
 
- [odoo-out-call]
- exten = s,1,AGI(/var/lib/asterisk/agi-bin/set_name_outgoing_timeout.sh)
- same = n,Set(CONNECTEDLINE(name,i)=${connectedlinename})
- same = n,Set(CONNECTEDLINE(name-pres,i)=allowed)
- same = n,Set(CONNECTEDLINE(num,i)=${XIVO_DSTNUM})
- same = n,Set(CONNECTEDLINE(num-pres)=allowed)
- same = n,Return()
+[odoo-out-call]
+exten = s,1,AGI(/var/lib/asterisk/agi-bin/set_name_outgoing_timeout.sh)
+same = n,Set(CONNECTEDLINE(name,i)=${connectedlinename})
+same = n,Set(CONNECTEDLINE(name-pres,i)=allowed)
+same = n,Set(CONNECTEDLINE(num,i)=${XIVO_DSTNUM})
+same = n,Set(CONNECTEDLINE(num-pres)=allowed)
+same = n,Return()
 
- Of course, you should adapt this example to the Asterisk server you are using.
+Of course, you should adapt this example to the Asterisk server you are using.
 
 """
 
