@@ -1,0 +1,25 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* sms_no_automatic_delete
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: sms_no_automatic_delete
+#: model:ir.model,name:sms_no_automatic_delete.model_sms_sms
+msgid "Outgoing SMS"
+msgstr ""
+
+#. module: sms_no_automatic_delete
+#: model:ir.actions.server,name:sms_no_automatic_delete.ir_cron_sms_no_automatic_delete_ir_actions_server
+#: model:ir.cron,cron_name:sms_no_automatic_delete.ir_cron_sms_no_automatic_delete
+msgid "SMS: SMS Purge"
+msgstr ""
