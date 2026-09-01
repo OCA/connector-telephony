@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -14,12 +14,18 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: sms_no_automatic_delete
+#: model:ir.model,name:sms_no_automatic_delete.model_res_config_settings
+msgid "Config Settings"
+msgstr ""
+
+#. module: sms_no_automatic_delete
 #: model:ir.model,name:sms_no_automatic_delete.model_sms_sms
 msgid "Outgoing SMS"
 msgstr ""
 
 #. module: sms_no_automatic_delete
-#: model:ir.actions.server,name:sms_no_automatic_delete.ir_cron_sms_no_automatic_delete_ir_actions_server
-#: model:ir.cron,cron_name:sms_no_automatic_delete.ir_cron_sms_no_automatic_delete
-msgid "SMS: SMS Purge"
+#: model:ir.model.fields,field_description:sms_no_automatic_delete.field_reformat_all_phonenumbers__sms_purge_days
+#: model:ir.model.fields,field_description:sms_no_automatic_delete.field_res_config_settings__sms_purge_days
+#: model_terms:ir.ui.view,arch_db:sms_no_automatic_delete.res_config_settings_view_form
+msgid "SMS Purge Days"
 msgstr ""
