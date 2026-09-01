@@ -27,13 +27,18 @@ msgstr ""
 "valida. https://cloud.google.com/translate/docs/setup"
 
 #. module: base_phone
+#: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers__snailmail_cover
+msgid "Add a Cover Page"
+msgstr ""
+
+#. module: base_phone
 #: model:ir.model.fields,help:base_phone.field_reformat_all_phonenumbers__tenor_api_key
 msgid ""
-"Add a Tenor GIF API key to enable GIFs support. https://developers.google."
-"com/tenor/guides/quickstart#setup"
+"Add a Klipy GIF API key to enable GIFs support. https://docs.klipy.com/"
+"getting-started\n"
+"If you were using a Tenor GIF API key (service shutdown on June 30, 2026), "
+"please replace it here with a Klipy GIF API key"
 msgstr ""
-"Aggiungere una chiave API GIF Tenor per abilitare il supporto GIF. https://"
-"developers.google.com/tenor/guides/quickstart#setup"
 
 #. module: base_phone
 #: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers__alias_domain_id
@@ -341,6 +346,21 @@ msgid "Is Root Company"
 msgstr "È azienda radice"
 
 #. module: base_phone
+#: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers__tenor_api_key
+msgid "Klipy API key"
+msgstr ""
+
+#. module: base_phone
+#: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers__tenor_gif_limit
+msgid "Klipy GIF limits"
+msgstr ""
+
+#. module: base_phone
+#: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers__tenor_content_filter
+msgid "Klipy content filter"
+msgstr ""
+
+#. module: base_phone
 #: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers__module_auth_ldap
 msgid "LDAP Authentication"
 msgstr "Autenticazione LDAP"
@@ -481,6 +501,16 @@ msgid "Phone numbers that couldn't be reformatted:"
 msgstr "Numeri telefonici che non possono essere riformattati:"
 
 #. module: base_phone
+#: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers__snailmail_duplex
+msgid "Print Both sides"
+msgstr ""
+
+#. module: base_phone
+#: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers__snailmail_color
+msgid "Print In Color"
+msgstr ""
+
+#. module: base_phone
 #: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers__profiling_enabled_until
 msgid "Profiling enabled until"
 msgstr "Profilazione abilitata fino"
@@ -539,6 +569,11 @@ msgid "Show Effect"
 msgstr "Visualizza effetto"
 
 #. module: base_phone
+#: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers__snailmail_cover_readonly
+msgid "Snailmail Cover Readonly"
+msgstr ""
+
+#. module: base_phone
 #: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers__state
 msgid "State"
 msgstr "Stato"
@@ -569,21 +604,6 @@ msgstr "Preferenze telefonia"
 #: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers__auth_signup_template_user_id
 msgid "Template user for new users created through signup"
 msgstr "Utente modello per nuovi utenti creati attraverso l'iscrizione"
-
-#. module: base_phone
-#: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers__tenor_api_key
-msgid "Tenor API key"
-msgstr "Chiave API Tenor"
-
-#. module: base_phone
-#: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers__tenor_gif_limit
-msgid "Tenor Gif Limit"
-msgstr "Limite GIF Tenor"
-
-#. module: base_phone
-#: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers__tenor_content_filter
-msgid "Tenor content filter"
-msgstr "Filtro contenuto Tenor"
 
 #. module: base_phone
 #: model:ir.model.fields,help:base_phone.field_reformat_all_phonenumbers__company_country_code
@@ -675,13 +695,32 @@ msgstr "Nome app web"
 
 #. module: base_phone
 #: model:ir.model.fields,help:base_phone.field_reformat_all_phonenumbers__tenor_content_filter
-msgid "https://developers.google.com/tenor/guides/content-filtering"
-msgstr "https://developers.google.com/tenor/guides/content-filtering"
+msgid "https://docs.klipy.com/migrate-from-tenor/content-filtering"
+msgstr ""
 
 #. module: base_phone
 #: model:ir.model.fields,field_description:base_phone.field_reformat_all_phonenumbers__module_google_recaptcha
 msgid "reCAPTCHA"
 msgstr "reCAPTCHA"
+
+#~ msgid ""
+#~ "Add a Tenor GIF API key to enable GIFs support. https://"
+#~ "developers.google.com/tenor/guides/quickstart#setup"
+#~ msgstr ""
+#~ "Aggiungere una chiave API GIF Tenor per abilitare il supporto GIF. "
+#~ "https://developers.google.com/tenor/guides/quickstart#setup"
+
+#~ msgid "Tenor API key"
+#~ msgstr "Chiave API Tenor"
+
+#~ msgid "Tenor Gif Limit"
+#~ msgstr "Limite GIF Tenor"
+
+#~ msgid "Tenor content filter"
+#~ msgstr "Filtro contenuto Tenor"
+
+#~ msgid "https://developers.google.com/tenor/guides/content-filtering"
+#~ msgstr "https://developers.google.com/tenor/guides/content-filtering"
 
 #~ msgid "<span class=\"o_form_label\">Incoming calls</span>"
 #~ msgstr "<span class=\"o_form_label\">Chiamate in arrivo</span>"
