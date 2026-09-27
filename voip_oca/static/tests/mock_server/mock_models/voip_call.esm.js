@@ -18,12 +18,14 @@ export class VoipOcaCall extends models.ServerModel {
     });
     state = fields.Selection({
         selection: [
-            ["draft", "Draft"],
-            ["in_progress", "In Progress"],
-            ["done", "Done"],
-            ["cancelled", "Cancelled"],
+            ["aborted", "Aborted"],
+            ["calling", "Calling"],
+            ["missed", "Missed"],
+            ["ongoing", "Ongoing"],
+            ["rejected", "Rejected"],
+            ["terminated", "Terminated"],
         ],
-        default: "draft",
+        default: "calling",
     });
     duration = fields.Integer({
         string: "Duration",
