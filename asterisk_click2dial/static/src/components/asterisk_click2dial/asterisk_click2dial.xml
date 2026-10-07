@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+
+    <t t-name="asterisk_click2dial.Click2DialSystray" owl="1">
+        <div
+            class="o-dropdown dropdown o-dropdown--no-caret o-mail-DiscussSystray-class"
+        >
+            <button
+                class="dropdown-toggle o-no-caret"
+                t-on-click="() => this.onOpenCaller()"
+            >
+                <i class="fa fa-phone" />
+            </button>
+        </div>
+    </t>
+</templates>
