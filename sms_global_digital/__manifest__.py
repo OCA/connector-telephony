@@ -4,14 +4,14 @@
 {
     "name": "Sms Global Digital",
     "summary": "Send sms using global digital API",
-    "version": "16.0.1.0.0",
+    "version": "19.0.1.0.0",
     "category": "SMS",
     "website": "https://github.com/OCA/connector-telephony",
-    "author": "Exo Software",
+    "author": "Exo Software, Odoo Community Association (OCA)",
     "maintainers": ["tiagosrangel"],
     "license": "AGPL-3",
     "application": False,
     "installable": True,
-    "depends": ["base_phone", "sms", "iap_alternative_provider"],
-    "data": ["views/iap_account_views.xml", "views/res_config_settings_views.xml"],
+    "depends": ["sms", "iap_alternative_provider"],
+    "data": ["views/iap_account_views.xml"],
 }

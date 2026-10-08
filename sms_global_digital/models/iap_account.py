@@ -14,7 +14,7 @@ class IapAccount(models.Model):
 
     def _get_service_from_provider(self):
         if self.provider == "sms_global_digital":
-            return "sms"
+            return self.env.ref("sms.iap_service_sms")
         return super()._get_service_from_provider()
 
     @property

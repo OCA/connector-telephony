@@ -32,12 +32,19 @@ Sms Global Digital
 
 |badge1| |badge2| |badge3| |badge4| |badge5|
 
-Implementation of the Global Digital API for sending SMS.
+Implementation of the `Global Digital
+API <https://www.globaldigital.pt/pt/documentacao>`__ for sending SMS
+(the documentation is available in the Global Digital customer area and
+requires a login).
 
 This module relies on OCA's `IAP Alternative
 Provider <https://github.com/OCA/server-tools/tree/19.0/iap_alternative_provider>`__
 and Odoo's SMS modules for the messaging workflow and core
 functionality.
+
+This module was extracted from the
+`pt-tools <https://github.com/exosoftware/pt-tools/blob/16.0/sms_global_digital>`__
+repository with the author's authorization.
 
 **Table of contents**
 
@@ -53,6 +60,9 @@ To configure this module, you need to:
 - Go to the Settings / Technical / IAP / IAP Accounts menu
 - Create a new entry and select SMS Global Digital as the provider
 - Insert your API key and fill the other fields
+
+The HTTP API documentation is available in the Global Digital customer
+area at https://www.globaldigital.pt/pt/documentacao (login required).
 
 Usage
 =====
@@ -84,6 +94,8 @@ Contributors
 - `Exo Software <https://www.exosoftware.pt>`__:
 
      - Tiago Rangel <tiago.rangel@exo.pt>
+
+- Daniel Reis <dreis.pt@gmail.com>
 
 Maintainers
 -----------

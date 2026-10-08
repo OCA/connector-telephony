@@ -4,14 +4,34 @@
         <field name="model">iap.account</field>
         <field name="inherit_id" ref="iap.iap_account_view_form" />
         <field name="arch" type="xml">
+            <!-- The "not registered" banner is specific to Odoo IAP accounts:
+                 `state` is only filled by the Odoo IAP server, so an account
+                 using an alternative provider would always wrongly show it. -->
+            <xpath
+                expr="//button[@name='action_open_registration_wizard']/.."
+                position="attributes"
+            >
+                <attribute
+                    name="invisible"
+                >provider == 'sms_global_digital' or service_name != 'sms' or (state != 'unregistered' and state)</attribute>
+            </xpath>
             <xpath expr="//group[@name='account']" position="after">
                 <group
-          string="Global Digital account"
-          name="Global Digital"
-          attrs="{'invisible': [('provider', '!=', 'sms_global_digital')]}"
-        >
+                    string="Global Digital account"
+                    name="global_digital"
+                    invisible="provider != 'sms_global_digital'"
+                >
                     <field name="sms_global_digital_sender_id" />
                     <field name="sms_global_digital_api_key" />
+                    <div colspan="2">
+                        <a
+                            href="https://www.globaldigital.pt/pt/comprar-creditos"
+                            class="oe_link"
+                            target="_blank"
+                        >
+                            <i class="fa fa-arrow-right" /> Buy credits
+                        </a>
+                    </div>
                 </group>
             </xpath>
         </field>
