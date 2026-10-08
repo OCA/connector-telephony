@@ -1,3 +1,7 @@
+.. image:: https://odoo-community.org/readme-banner-image
+   :target: https://odoo-community.org/get-involved?utm_source=readme
+   :alt: Odoo Community Association
+
 ==================
 Sms Global Digital
 ==================
@@ -13,25 +17,27 @@ Sms Global Digital
 .. |badge1| image:: https://img.shields.io/badge/maturity-Beta-yellow.png
     :target: https://odoo-community.org/page/development-status
     :alt: Beta
-.. |badge2| image:: https://img.shields.io/badge/licence-AGPL--3-blue.png
+.. |badge2| image:: https://img.shields.io/badge/license-AGPL--3-blue.png
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
-.. |badge3| image:: https://img.shields.io/badge/github-OCA%2Fpt--tools-lightgray.png?logo=github
-    :target: https://github.com/OCA/pt-tools/tree/16.0/sms_global_digital
-    :alt: OCA/pt-tools
+.. |badge3| image:: https://img.shields.io/badge/github-OCA%2Fconnector--telephony-lightgray.png?logo=github
+    :target: https://github.com/OCA/connector-telephony/tree/19.0/sms_global_digital
+    :alt: OCA/connector-telephony
 .. |badge4| image:: https://img.shields.io/badge/weblate-Translate%20me-F47D42.png
-    :target: https://translation.odoo-community.org/projects/pt-tools-16-0/pt-tools-16-0-sms_global_digital
+    :target: https://translation.odoo-community.org/projects/connector-telephony-19-0/connector-telephony-19-0-sms_global_digital
     :alt: Translate me on Weblate
 .. |badge5| image:: https://img.shields.io/badge/runboat-Try%20me-875A7B.png
-    :target: https://runboat.odoo-community.org/builds?repo=OCA/pt-tools&target_branch=16.0
+    :target: https://runboat.odoo-community.org/builds?repo=OCA/connector-telephony&target_branch=19.0
     :alt: Try me on Runboat
 
 |badge1| |badge2| |badge3| |badge4| |badge5|
 
 Implementation of the Global Digital API for sending SMS.
 
-This module relies on OCA's `IAP Alternative Provider <https://github.com/OCA/server-tools/tree/14.0/iap_alternative_provider>`_
-and Odoo's SMS modules for the messaging workflow and core functionality.
+This module relies on OCA's `IAP Alternative
+Provider <https://github.com/OCA/server-tools/tree/19.0/iap_alternative_provider>`__
+and Odoo's SMS modules for the messaging workflow and core
+functionality.
 
 **Table of contents**
 
@@ -51,15 +57,16 @@ To configure this module, you need to:
 Usage
 =====
 
-Send your SMS messages as you normally do. If the setup is correct, messages will be sent through Global Digital provider.
+Send your SMS messages as you normally do. If the setup is correct,
+messages will be sent through Global Digital provider.
 
 Bug Tracker
 ===========
 
-Bugs are tracked on `GitHub Issues <https://github.com/OCA/pt-tools/issues>`_.
+Bugs are tracked on `GitHub Issues <https://github.com/OCA/connector-telephony/issues>`_.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us to smash it by providing a detailed and welcomed
-`feedback <https://github.com/OCA/pt-tools/issues/new?body=module:%20sms_global_digital%0Aversion:%2016.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+`feedback <https://github.com/OCA/connector-telephony/issues/new?body=module:%20sms_global_digital%0Aversion:%2019.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
 
 Do not contact contributors directly about support or help with technical issues.
 
@@ -67,19 +74,19 @@ Credits
 =======
 
 Authors
-~~~~~~~
+-------
 
 * Exo Software
 
 Contributors
-~~~~~~~~~~~~
+------------
 
-* `Exo Software <https://www.exosoftware.pt>`_:
+- `Exo Software <https://www.exosoftware.pt>`__:
 
-    * Tiago Rangel <tiago.rangel@exo.pt>
+     - Tiago Rangel <tiago.rangel@exo.pt>
 
 Maintainers
-~~~~~~~~~~~
+-----------
 
 This module is maintained by the OCA.
 
@@ -99,6 +106,6 @@ Current `maintainer <https://odoo-community.org/page/maintainer-role>`__:
 
 |maintainer-tiagosrangel| 
 
-This module is part of the `OCA/pt-tools <https://github.com/OCA/pt-tools/tree/16.0/sms_global_digital>`_ project on GitHub.
+This module is part of the `OCA/connector-telephony <https://github.com/OCA/connector-telephony/tree/19.0/sms_global_digital>`_ project on GitHub.
 
 You are welcome to contribute. To learn how please visit https://odoo-community.org/page/Contribute.
