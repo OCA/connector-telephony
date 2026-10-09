@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 14.0\n"
+"Project-Id-Version: Odoo Server 19.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-05-13 14:05+0000\n"
 "PO-Revision-Date: 2022-05-26 09:57+0100\n"
@@ -18,7 +18,7 @@ msgstr ""
 "X-Generator: Poedit 3.0.1\n"
 
 #. module: sms_global_digital
-#: model_terms:ir.ui.view,arch_db:sms_global_digital.res_config_settings_view_form
+#: model_terms:ir.ui.view,arch_db:sms_global_digital.iap_account_view_form
 msgid "<i class=\"fa fa-arrow-right\"/> Buy credits"
 msgstr "<i class=\"fa fa-arrow-right\"/> Comprar créditos"
 
@@ -28,22 +28,12 @@ msgid "Api Key"
 msgstr "Chave da api"
 
 #. module: sms_global_digital
-#: code:addons/sms_global_digital/models/sms_api.py:0
-#, python-format
-msgid "Batch sending is not support with Global Digital"
-msgstr "O envio em lote não é compatível com a Global Digital"
-
-#. module: sms_global_digital
 #: model:ir.model.fields,field_description:sms_global_digital.field_iap_account__display_name
-#: model:ir.model.fields,field_description:sms_global_digital.field_sms_api__display_name
+#: model:ir.model.fields,field_description:sms_global_digital.field_mail_notification__display_name
+#: model:ir.model.fields,field_description:sms_global_digital.field_res_company__display_name
 #: model:ir.model.fields,field_description:sms_global_digital.field_sms_sms__display_name
 msgid "Display Name"
 msgstr "Nome"
-
-#. module: sms_global_digital
-#: model:ir.model.fields,field_description:sms_global_digital.field_sms_sms__error_detail
-msgid "Error Detail"
-msgstr "Detalhes do erro"
 
 #. module: sms_global_digital
 #: model_terms:ir.ui.view,arch_db:sms_global_digital.iap_account_view_form
@@ -57,22 +47,11 @@ msgstr "Conta IAP"
 
 #. module: sms_global_digital
 #: model:ir.model.fields,field_description:sms_global_digital.field_iap_account__id
-#: model:ir.model.fields,field_description:sms_global_digital.field_sms_api__id
+#: model:ir.model.fields,field_description:sms_global_digital.field_mail_notification__id
+#: model:ir.model.fields,field_description:sms_global_digital.field_res_company__id
 #: model:ir.model.fields,field_description:sms_global_digital.field_sms_sms__id
 msgid "ID"
 msgstr "ID"
-
-#. module: sms_global_digital
-#: model:ir.model.fields,field_description:sms_global_digital.field_iap_account__sequence
-msgid "Iap Account Sequence"
-msgstr "Sequência de Contas Iap"
-
-#. module: sms_global_digital
-#: model:ir.model.fields,field_description:sms_global_digital.field_iap_account____last_update
-#: model:ir.model.fields,field_description:sms_global_digital.field_sms_api____last_update
-#: model:ir.model.fields,field_description:sms_global_digital.field_sms_sms____last_update
-msgid "Last Modified on"
-msgstr "Última modificação em"
 
 #. module: sms_global_digital
 #: model:ir.model,name:sms_global_digital.model_sms_sms
@@ -85,26 +64,91 @@ msgid "Provider"
 msgstr "Fornecedor"
 
 #. module: sms_global_digital
-#: model:ir.model,name:sms_global_digital.model_sms_api
-msgid "SMS API"
-msgstr "API de SMS"
-
-#. module: sms_global_digital
 #: model:ir.model.fields.selection,name:sms_global_digital.selection__iap_account__provider__sms_global_digital
 msgid "SMS Global digital"
 msgstr "SMS Global digital"
 
 #. module: sms_global_digital
-#: model_terms:ir.ui.view,arch_db:sms_global_digital.res_config_settings_view_form
-msgid "Send SMS with Global Digital"
-msgstr "Envie SMS com a Global Digital"
-
-#. module: sms_global_digital
-#: model_terms:ir.ui.view,arch_db:sms_global_digital.res_config_settings_view_form
-msgid "Send texts to your contacts with Global Digital"
-msgstr "Envie textos para seus contatos com a Global Digital"
-
-#. module: sms_global_digital
 #: model:ir.model.fields,field_description:sms_global_digital.field_iap_account__sms_global_digital_sender_id
 msgid "Sender ID"
 msgstr "ID do remetente"
+
+#. module: sms_global_digital
+#: model:ir.model,name:sms_global_digital.model_res_company
+msgid "Companies"
+msgstr "Empresas"
+
+#. module: sms_global_digital
+#: model:ir.model.fields,field_description:sms_global_digital.field_sms_sms__failure_type
+msgid "Failure Type"
+msgstr "Tipo de Falha"
+
+#. module: sms_global_digital
+#: model:ir.model.fields,field_description:sms_global_digital.field_mail_notification__failure_type
+msgid "Failure type"
+msgstr "Tipo de falha"
+
+#. module: sms_global_digital
+#: model:ir.model,name:sms_global_digital.model_mail_notification
+msgid "Message Notifications"
+msgstr "Notificações de Mensagens"
+
+#. module: sms_global_digital
+#: model_terms:ir.ui.view,arch_db:sms_global_digital.iap_account_view_form
+msgid "TEST"
+msgstr "TESTE"
+
+#. module: sms_global_digital
+#: model:ir.model.fields,field_description:sms_global_digital.field_iap_account__sms_global_digital_test_mode
+msgid "Test Mode"
+msgstr "Modo de Teste"
+
+#. module: sms_global_digital
+#: model:ir.model.fields.selection,name:sms_global_digital.selection__mail_notification__failure_type__sms_test
+#: model:ir.model.fields.selection,name:sms_global_digital.selection__sms_sms__failure_type__sms_test
+msgid "Test Mode: SMS not sent"
+msgstr "Modo de Teste: SMS não enviado"
+
+#. module: sms_global_digital
+#. odoo-python
+#: code:addons/sms_global_digital/models/sms_api.py:0
+msgid "Test mode: not sent to the Global Digital API"
+msgstr "Modo de teste: não enviado para a API da Global Digital"
+
+#. module: sms_global_digital
+#: model:ir.model.fields,help:sms_global_digital.field_iap_account__sms_global_digital_test_mode
+msgid ""
+"In test mode no SMS is sent to Global Digital: it is marked as failed with a"
+" 'Test Mode' reason instead. Set automatically by database neutralization."
+msgstr ""
+"Em modo de teste nenhum SMS é enviado para a Global Digital: é marcado como "
+"falhado com o motivo 'Modo de Teste'. Ativado automaticamente pela "
+"neutralização da base de dados."
+
+#~ msgid ""
+#~ "In test mode no SMS is sent to Global Digital: a notification with the "
+#~ "intended content is shown in Discuss instead. Set automatically by database "
+#~ "neutralization."
+#~ msgstr ""
+
+#, python-format
+#~ msgid "Batch sending is not support with Global Digital"
+#~ msgstr "O envio em lote não é compatível com a Global Digital"
+
+#~ msgid "Error Detail"
+#~ msgstr "Detalhes do erro"
+
+#~ msgid "Iap Account Sequence"
+#~ msgstr "Sequência de Contas Iap"
+
+#~ msgid "Last Modified on"
+#~ msgstr "Última modificação em"
+
+#~ msgid "SMS API"
+#~ msgstr "API de SMS"
+
+#~ msgid "Send SMS with Global Digital"
+#~ msgstr "Envie SMS com a Global Digital"
+
+#~ msgid "Send texts to your contacts with Global Digital"
+#~ msgstr "Envie textos para seus contatos com a Global Digital"

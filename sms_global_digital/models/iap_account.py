@@ -22,7 +22,7 @@ class IapAccount(models.Model):
     sms_global_digital_test_mode = fields.Boolean(
         string="Test Mode",
         help="In test mode no SMS is sent to Global Digital: "
-        "a notification with the intended content is shown in Discuss instead. "
+        "it is marked as failed with a 'Test Mode' reason instead. "
         "Set automatically by database neutralization.",
     )
 
