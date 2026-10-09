@@ -16,13 +16,51 @@ class GlobalDigitalApiMock:
     :param token: API key the mock accepts; any other token gets a 401
     :param invalid_numbers: numbers reported back in ``invalid_numbers``
     :param failed_numbers: numbers reported back in ``failed_numbers``
+    :param credit_balance: balance reported by the ``users/list.php`` endpoint
     """
 
-    def __init__(self, token, invalid_numbers=(), failed_numbers=()):
+    def __init__(
+        self, token, invalid_numbers=(), failed_numbers=(), credit_balance="0"
+    ):
         self.token = token
         self.invalid_numbers = set(invalid_numbers)
         self.failed_numbers = set(failed_numbers)
+        self.credit_balance = credit_balance
         self.calls = []
+
+    def get(self, url, **kwargs):
+        """Emulate ``requests.get`` on ``/api/users/list.php``.
+
+        API spec::
+
+            GET /api/users/list.php?token={api_key}&action=list
+
+            200 {"status": "200", "message": "OK.",
+                 "data": [{"email": str, "name": str, "number_tax": str,
+                           "phone": str, "address": str, "location": str,
+                           "postal_code": str, "country": str,
+                           "account_type": str, "credits": str,
+                           "comercial_code": str, "date_creation": str}]}
+            Errors: 400 Bad Request, 401 Unauthorized, 403 Forbidden,
+                    500/503 server errors
+        """
+        self.calls.append({"url": url, "json": None})
+        params = parse_qs(urlparse(url).query)
+        if params.get("action") != ["list"] or not params.get("token"):
+            return self._response(400, "Bad Request.")
+        if params["token"] != [self.token]:
+            return self._response(401, "Unauthorized.")
+        return self._response(
+            200,
+            "OK.",
+            data=[
+                {
+                    "email": "user@example.com",
+                    "name": "User",
+                    "credits": self.credit_balance,
+                }
+            ],
+        )
 
     def post(self, url, **kwargs):
         """Emulate ``requests.post`` on ``/api/sms/send.php``.
@@ -84,7 +122,7 @@ class TestSmsGlobalDigital(TransactionCase):
         super().setUpClass()
         cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
         cls.api_key = "gd-test-api-key"
-        cls.env["iap.account"].create(
+        cls.account = cls.env["iap.account"].create(
             {
                 "name": "Global Digital",
                 "provider": "sms_global_digital",
@@ -104,6 +142,16 @@ class TestSmsGlobalDigital(TransactionCase):
         )
         sms.send()
         return sms
+
+    def test_account_balance_from_provider(self):
+        """Opening the account form refreshes the Global Digital balance."""
+        api = GlobalDigitalApiMock(token=self.api_key, credit_balance="123")
+        with mock.patch.object(requests, "get", api.get):
+            self.account._get_account_information_from_iap()
+        self.assertEqual(self.account.balance, "123 credits")
+        (call,) = api.calls
+        self.assertIn("users/list.php", call["url"])
+        self.assertIn("action=list", call["url"])
 
     def test_send_sms(self):
         """An outgoing SMS is sent through the Global Digital API."""
