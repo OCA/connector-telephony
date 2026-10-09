@@ -1,0 +1,234 @@
+import json
+from unittest import mock
+from urllib.parse import parse_qs, urlparse
+
+import requests
+
+from odoo.tests import TransactionCase
+
+
+class GlobalDigitalApiMock:
+    """``requests.post`` compatible mock of the Global Digital send endpoint.
+
+    API documentation: https://www.globaldigital.pt/pt/documentacao
+    (available in the Global Digital customer area, login required).
+
+    :param token: API key the mock accepts; any other token gets a 401
+    :param invalid_numbers: numbers reported back in ``invalid_numbers``
+    :param failed_numbers: numbers reported back in ``failed_numbers``
+    :param credit_balance: balance reported by the ``users/list.php`` endpoint
+    """
+
+    def __init__(
+        self, token, invalid_numbers=(), failed_numbers=(), credit_balance="0"
+    ):
+        self.token = token
+        self.invalid_numbers = set(invalid_numbers)
+        self.failed_numbers = set(failed_numbers)
+        self.credit_balance = credit_balance
+        self.calls = []
+
+    def get(self, url, **kwargs):
+        """Emulate ``requests.get`` on ``/api/users/list.php``.
+
+        API spec::
+
+            GET /api/users/list.php?token={api_key}&action=list
+
+            200 {"status": "200", "message": "OK.",
+                 "data": [{"email": str, "name": str, "number_tax": str,
+                           "phone": str, "address": str, "location": str,
+                           "postal_code": str, "country": str,
+                           "account_type": str, "credits": str,
+                           "comercial_code": str, "date_creation": str}]}
+            Errors: 400 Bad Request, 401 Unauthorized, 403 Forbidden,
+                    500/503 server errors
+        """
+        self.calls.append({"url": url, "json": None})
+        params = parse_qs(urlparse(url).query)
+        if params.get("action") != ["list"] or not params.get("token"):
+            return self._response(400, "Bad Request.")
+        if params["token"] != [self.token]:
+            return self._response(401, "Unauthorized.")
+        return self._response(
+            200,
+            "OK.",
+            data=[
+                {
+                    "email": "user@example.com",
+                    "name": "User",
+                    "credits": self.credit_balance,
+                }
+            ],
+        )
+
+    def post(self, url, **kwargs):
+        """Emulate ``requests.post`` on ``/api/sms/send.php``.
+
+        API spec::
+
+            POST /api/sms/send.php?token={api_key}&action=simple
+            {"sender": str,
+             "phone_numbers": "digits-only-number,digits-only-number,..."
+                             (country code included, no "+"),
+             "message": str}
+
+            200 {"status": "200", "message": "OK.",
+                 "data": [{"total_sent": str, "total_failed": str,
+                           "failed_numbers": [str],
+                           "total_invalid": str, "invalid_numbers": [str]}]}
+            Errors: 400 Bad Request, 401 Unauthorized, 403 Forbidden,
+                    500/503 server errors
+        """
+        payload = kwargs.get("json") or {}
+        self.calls.append({"url": url, "json": payload})
+        params = parse_qs(urlparse(url).query)
+        if params.get("action") != ["simple"] or not params.get("token"):
+            return self._response(400, "Bad Request.")
+        if params["token"] != [self.token]:
+            return self._response(401, "Unauthorized.")
+        numbers = (payload.get("phone_numbers") or "").split(",")
+        invalid = [n for n in numbers if n in self.invalid_numbers]
+        failed = [n for n in numbers if n in self.failed_numbers]
+        return self._response(
+            200,
+            "OK.",
+            data=[
+                {
+                    "total_sent": str(len(numbers) - len(invalid) - len(failed)),
+                    "total_failed": str(len(failed)),
+                    "failed_numbers": failed,
+                    "total_invalid": str(len(invalid)),
+                    "invalid_numbers": invalid,
+                }
+            ],
+        )
+
+    @staticmethod
+    def _response(status_code, message, data=None):
+        body = {"status": str(status_code), "message": message}
+        if data is not None:
+            body["data"] = data
+        response = requests.models.Response()
+        response.status_code = status_code
+        response._content = json.dumps(body).encode()
+        response.headers["Content-Type"] = "application/json"
+        return response
+
+
+class TestSmsGlobalDigital(TransactionCase):
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
+        cls.api_key = "gd-test-api-key"
+        cls.account = cls.env["iap.account"].create(
+            {
+                "name": "Global Digital",
+                "provider": "sms_global_digital",
+                "service_id": cls.env.ref("sms.iap_service_sms").id,
+                "sms_global_digital_sender_id": "MyCompany",
+                "sms_global_digital_api_key": cls.api_key,
+                # scoped to the current company so iap.account.get() prefers
+                # it over a pre-existing global Odoo IAP account
+                "company_ids": [(4, cls.env.company.id)],
+            }
+        )
+
+    def _send_sms(self, numbers, body="Hello"):
+        """Create outgoing SMS records for ``numbers`` and send them."""
+        sms = self.env["sms.sms"].create(
+            [{"number": number, "body": body} for number in numbers]
+        )
+        sms.send()
+        return sms
+
+    def test_account_balance_from_provider(self):
+        """Opening the account form refreshes the Global Digital balance."""
+        api = GlobalDigitalApiMock(token=self.api_key, credit_balance="123")
+        with mock.patch.object(requests, "get", api.get):
+            self.account._get_account_information_from_iap()
+        self.assertEqual(self.account.balance, "123 credits")
+        (call,) = api.calls
+        self.assertIn("users/list.php", call["url"])
+        self.assertIn("action=list", call["url"])
+
+    def test_send_sms(self):
+        """An outgoing SMS is sent through the Global Digital API."""
+        api = GlobalDigitalApiMock(token=self.api_key)
+        with mock.patch.object(requests, "post", api.post):
+            sms = self._send_sms(["+351911111111"])
+        self.assertEqual(sms.state, "pending")
+        (call,) = api.calls
+        self.assertIn("action=simple", call["url"])
+        self.assertEqual(call["json"]["sender"], "MyCompany")
+        self.assertEqual(call["json"]["phone_numbers"], "351911111111")
+        self.assertEqual(call["json"]["message"], "Hello")
+
+    def test_send_sms_batch(self):
+        """SMS sharing the same body are sent in a single API request."""
+        api = GlobalDigitalApiMock(token=self.api_key)
+        with mock.patch.object(requests, "post", api.post):
+            sms = self._send_sms(["+351911111111", "+351922222222"])
+        self.assertEqual(len(api.calls), 1)
+        self.assertEqual(
+            api.calls[0]["json"]["phone_numbers"], "351911111111,351922222222"
+        )
+        self.assertEqual(set(sms.mapped("state")), {"pending"})
+
+    def test_send_sms_test_mode(self):
+        """In test mode the chatter SMS shows as failed, nothing is sent."""
+        self.account.sms_global_digital_test_mode = True
+        self.addCleanup(self.account.write, {"sms_global_digital_test_mode": False})
+        partner = self.env["res.partner"].create(
+            {"name": "SMS Target", "phone": "+351911111111"}
+        )
+        api = GlobalDigitalApiMock(token=self.api_key)
+        with mock.patch.object(requests, "post", api.post):
+            message = partner._message_sms("Hello")
+        self.assertFalse(api.calls)
+        # only the original SMS message is posted, visibly marked as not sent
+        self.assertEqual(partner.message_ids, message)
+        sms = self.env["sms.sms"].search([("mail_message_id", "=", message.id)])
+        self.assertEqual(sms.state, "error")
+        self.assertEqual(sms.failure_type, "sms_test")
+        notification = message.notification_ids
+        self.assertEqual(notification.notification_status, "exception")
+        self.assertEqual(notification.failure_type, "sms_test")
+
+    def test_send_sms_invalid_number(self):
+        """A number rejected by the API gets the number format error."""
+        api = GlobalDigitalApiMock(token=self.api_key, invalid_numbers={"351911111111"})
+        with mock.patch.object(requests, "post", api.post):
+            sms = self._send_sms(["+351911111111"])
+        self.assertEqual(sms.state, "error")
+        self.assertEqual(sms.failure_type, "sms_number_format")
+
+    def test_send_sms_failed_number(self):
+        """A number the API failed to reach gets the server error."""
+        api = GlobalDigitalApiMock(token=self.api_key, failed_numbers={"351911111111"})
+        with mock.patch.object(requests, "post", api.post):
+            sms = self._send_sms(["+351911111111"])
+        self.assertEqual(sms.state, "error")
+        self.assertEqual(sms.failure_type, "sms_server")
+
+    def test_send_sms_unconfigured(self):
+        """An account without API key marks the SMS as unregistered."""
+        self.account.sms_global_digital_api_key = False
+        self.addCleanup(
+            self.account.write, {"sms_global_digital_api_key": self.api_key}
+        )
+        api = GlobalDigitalApiMock(token=self.api_key)
+        with mock.patch.object(requests, "post", api.post):
+            sms = self._send_sms(["+351911111111"])
+        self.assertEqual(sms.state, "error")
+        self.assertEqual(sms.failure_type, "sms_acc")
+        self.assertFalse(api.calls)
+
+    def test_send_sms_unauthorized(self):
+        """A rejected API key marks the SMS with a server error."""
+        api = GlobalDigitalApiMock(token="other-api-key")
+        with mock.patch.object(requests, "post", api.post):
+            sms = self._send_sms(["+351911111111"])
+        self.assertEqual(sms.state, "error")
+        self.assertEqual(sms.failure_type, "sms_server")
