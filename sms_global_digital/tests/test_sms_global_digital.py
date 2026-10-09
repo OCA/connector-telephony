@@ -176,6 +176,26 @@ class TestSmsGlobalDigital(TransactionCase):
         )
         self.assertEqual(set(sms.mapped("state")), {"pending"})
 
+    def test_send_sms_test_mode(self):
+        """In test mode the chatter SMS shows as failed, nothing is sent."""
+        self.account.sms_global_digital_test_mode = True
+        self.addCleanup(self.account.write, {"sms_global_digital_test_mode": False})
+        partner = self.env["res.partner"].create(
+            {"name": "SMS Target", "phone": "+351911111111"}
+        )
+        api = GlobalDigitalApiMock(token=self.api_key)
+        with mock.patch.object(requests, "post", api.post):
+            message = partner._message_sms("Hello")
+        self.assertFalse(api.calls)
+        # only the original SMS message is posted, visibly marked as not sent
+        self.assertEqual(partner.message_ids, message)
+        sms = self.env["sms.sms"].search([("mail_message_id", "=", message.id)])
+        self.assertEqual(sms.state, "error")
+        self.assertEqual(sms.failure_type, "sms_test")
+        notification = message.notification_ids
+        self.assertEqual(notification.notification_status, "exception")
+        self.assertEqual(notification.failure_type, "sms_test")
+
     def test_send_sms_invalid_number(self):
         """A number rejected by the API gets the number format error."""
         api = GlobalDigitalApiMock(token=self.api_key, invalid_numbers={"351911111111"})
@@ -191,6 +211,19 @@ class TestSmsGlobalDigital(TransactionCase):
             sms = self._send_sms(["+351911111111"])
         self.assertEqual(sms.state, "error")
         self.assertEqual(sms.failure_type, "sms_server")
+
+    def test_send_sms_unconfigured(self):
+        """An account without API key marks the SMS as unregistered."""
+        self.account.sms_global_digital_api_key = False
+        self.addCleanup(
+            self.account.write, {"sms_global_digital_api_key": self.api_key}
+        )
+        api = GlobalDigitalApiMock(token=self.api_key)
+        with mock.patch.object(requests, "post", api.post):
+            sms = self._send_sms(["+351911111111"])
+        self.assertEqual(sms.state, "error")
+        self.assertEqual(sms.failure_type, "sms_acc")
+        self.assertFalse(api.calls)
 
     def test_send_sms_unauthorized(self):
         """A rejected API key marks the SMS with a server error."""

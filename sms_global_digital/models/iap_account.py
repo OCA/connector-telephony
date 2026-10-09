@@ -19,6 +19,12 @@ class IapAccount(models.Model):
 
     sms_global_digital_sender_id = fields.Char(string="Sender ID")
     sms_global_digital_api_key = fields.Char(string="Api Key")
+    sms_global_digital_test_mode = fields.Boolean(
+        string="Test Mode",
+        help="In test mode no SMS is sent to Global Digital: "
+        "a notification with the intended content is shown in Discuss instead. "
+        "Set automatically by database neutralization.",
+    )
 
     def _get_account_information_from_iap(self):
         # Global Digital accounts fetch their balance from the provider API

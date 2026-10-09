@@ -17,6 +17,10 @@ class SmsApiGlobalDigital(SmsApi):
     (available in the Global Digital customer area, login required).
     """
 
+    PROVIDER_TO_SMS_FAILURE_TYPE = SmsApi.PROVIDER_TO_SMS_FAILURE_TYPE | {
+        "test_mode": "sms_test",
+    }
+
     def _prepare_global_digital_params(self, numbers, message):
         # Phone numbers must include the country code, digits only (no "+")
         return {
@@ -25,40 +29,53 @@ class SmsApiGlobalDigital(SmsApi):
             "message": message,
         }
 
-    def _send_sms_with_global_digital(self, numbers, message):
-        """Send `message` to `numbers` with a single API request.
+    def _send_sms_with_global_digital(self, number_entries, message):
+        """Send `message` to `number_entries` with a single API request.
 
+        :param number_entries: list of ``{"number": ..., "uuid": ...}``
         :return: dict mapping each number to an Odoo provider state
         """
-        states = dict.fromkeys(numbers, "wrong_number_format")
-        to_send = [number for number in numbers if number]
+        states = {entry["number"]: "wrong_number_format" for entry in number_entries}
+        to_send = [entry for entry in number_entries if entry["number"]]
         if not to_send:
+            return states
+        if self.account.sms_global_digital_test_mode:
+            # Test mode (e.g. neutralized databases): never send a real SMS;
+            # the send resolves as an error so the chatter shows it was not sent
+            states.update({entry["number"]: "test_mode" for entry in to_send})
+            return states
+        if not self.account.sms_global_digital_api_key:
+            # Missing provider configuration is not a server error
+            _logger.info("Global Digital SMS not sent: no API key configured")
+            states.update({entry["number"]: "unregistered" for entry in to_send})
             return states
         try:
             response = requests.post(
                 GLOBAL_DIGITAL_ENDPOINT
                 + self.account.sms_global_digital_api_key
                 + "&action=simple",
-                json=self._prepare_global_digital_params(to_send, message),
+                json=self._prepare_global_digital_params(
+                    [entry["number"] for entry in to_send], message
+                ),
                 timeout=10,
             )
             response.raise_for_status()
             data = response.json()["data"][0]
         except (requests.exceptions.RequestException, ValueError, KeyError) as e:
             _logger.info("Global Digital SMS request failed: %s", e)
-            states.update(dict.fromkeys(to_send, "server_error"))
+            states.update({entry["number"]: "server_error" for entry in to_send})
             return states
 
         failed = set(data.get("failed_numbers") or [])
         invalid = set(data.get("invalid_numbers") or [])
-        for number in to_send:
-            raw_number = re.sub(r"\D", "", number)
+        for entry in to_send:
+            raw_number = re.sub(r"\D", "", entry["number"])
             if raw_number in invalid:
-                states[number] = "wrong_number_format"
+                states[entry["number"]] = "wrong_number_format"
             elif raw_number in failed:
-                states[number] = "server_error"
+                states[entry["number"]] = "server_error"
             else:
-                states[number] = "success"
+                states[entry["number"]] = "success"
         return states
 
     def _is_sent_with_global_digital(self):
@@ -68,13 +85,19 @@ class SmsApiGlobalDigital(SmsApi):
         if self._is_sent_with_global_digital():
             results = []
             for message in messages:
-                numbers = [number["number"] for number in message["numbers"]]
-                states = self._send_sms_with_global_digital(numbers, message["content"])
+                states = self._send_sms_with_global_digital(
+                    message["numbers"], message["content"]
+                )
                 results += [
                     {
                         "state": states[number["number"]],
                         "credit": 0,
                         "uuid": number["uuid"],
+                        "failure_reason": (
+                            self.env._("Test mode: not sent to the Global Digital API")
+                            if states[number["number"]] == "test_mode"
+                            else False
+                        ),
                     }
                     for number in message["numbers"]
                 ]
