@@ -3,9 +3,19 @@ Create the PBX Connection
 
 - Access in Debug mode.
 - Go to `Settings > Technical > Discuss > PBX Servers`.
-- Create a PBX server and define the domain name and websocket link.
+- Create a PBX server and define the domain name and websocket link.    
 
 You can set it as ``Test`` or ``Production``. Test environment will never contact the PBX server.
+
+Asterisk Configuration
+----------------------
+
+- Go to your FreePBX
+- Set up your extension to [accept websocket protocol](https://docs.asterisk.org/Configuration/WebRTC/Configuring-Asterisk-for-WebRTC-Clients/) 
+- In Odoo, the TLS secured web socket link has this pattern : 
+        `wss://[your_ipbx.fqdn][:websocket_listening_port]/ws`
+
+
 
 Configure users
 ---------------
