@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="iap_service_sms_ovh" model="iap.service">
+        <field name="name">SMS OVH</field>
+        <field name="technical_name">sms_ovh_http</field>
+        <field
+            name="description"
+        >Send SMS through OVH http2sms to your contacts directly from
+            your database.</field>
+        <field name="unit_name">Credits</field>
+        <field name="integer_balance">False</field>
+    </record>
+</odoo>
