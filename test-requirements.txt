@@ -1,0 +1,1 @@
+odoo-addon-sms_alternative_provider @ git+https://github.com/OCA/connector-telephony.git@refs/pull/360/head#subdirectory=sms_alternative_provider
