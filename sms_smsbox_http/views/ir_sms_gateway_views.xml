@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Copyright 2026 INVITU (<https://www.invitu.com>)
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="view_ir_sms_gateway_form" model="ir.ui.view">
+        <field name="model">ir.sms.gateway</field>
+        <field
+            name="inherit_id"
+            ref="sms_alternative_provider.view_ir_sms_gateway_form"
+        />
+        <field name="arch" type="xml">
+            <field name="company_id" position="after">
+                <field
+                    name="iap_account_id"
+                    string="SMSBOX Account"
+                    invisible="gateway_type != 'smsbox_http'"
+                    required="gateway_type == 'smsbox_http'"
+                    domain="[('provider', '=', 'sms_smsbox_http')]"
+                    context="{'default_provider': 'sms_smsbox_http'}"
+                />
+            </field>
+        </field>
+    </record>
+</odoo>
