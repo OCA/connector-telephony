@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Copyright 2026 INVITU (<https://www.invitu.com>)
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="iap_service_sms_smsbox_http" model="iap.service">
+        <field name="name">SMSBOX</field>
+        <field name="technical_name">sms_smsbox_http</field>
+        <field name="description">Send SMS with the SMSBOX HTTP API.</field>
+        <field name="unit_name">Credits</field>
+        <field name="integer_balance">False</field>
+    </record>
+</odoo>
