@@ -252,7 +252,7 @@ def main(args):
         if args.outgoing:
             agi.set_variable("connectedlinename", res)
         else:
-            agi.set_callerid(f"{res}<{phone_number}>")
+            agi.set_callerid(f'"{res}"<{phone_number}>')
 
 
 if __name__ == "__main__":
