@@ -1,0 +1,2 @@
+odoo-addon-sms_alternative_provider @ git+https://github.com/acsone/connector-telephony.git@refs/pull/2/head#subdirectory=sms_alternative_provider
+requests_mock
