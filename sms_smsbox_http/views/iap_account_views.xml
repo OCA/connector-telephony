@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Copyright 2026 INVITU (<https://www.invitu.com>)
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="iap_account_view_form" model="ir.ui.view">
+        <field name="model">iap.account</field>
+        <field name="inherit_id" ref="iap_alternative_provider.iap_account_view_form" />
+        <field name="arch" type="xml">
+            <group name="info" position="after">
+                <group
+                    string="SMSBOX"
+                    name="sms_smsbox_http"
+                    invisible="provider != 'sms_smsbox_http'"
+                >
+                    <field name="name" />
+                    <field name="sms_smsbox_http_api_key" password="True" />
+                    <field name="sms_smsbox_http_mode" />
+                    <field
+                        name="sms_smsbox_http_sender"
+                        invisible="sms_smsbox_http_mode != 'Expert'"
+                    />
+                    <field name="sms_smsbox_http_strategy" />
+                    <field
+                        name="sms_smsbox_http_callback_url"
+                        widget="CopyClipboardChar"
+                    />
+                </group>
+            </group>
+        </field>
+    </record>
+</odoo>
