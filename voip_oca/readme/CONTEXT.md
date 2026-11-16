@@ -6,6 +6,7 @@ Currently, it has been tested with:
 
 - [Zerovoz](https://zerovoz.com/)
 - [Ringover](https://www.ringover.es/)
+- [Asterisk and FreePBX](https://www.freepbx.org/)
 
 Theoretically, it should work with
 
