@@ -90,8 +90,10 @@ class VoipOcaCall(models.Model):
                 .search(
                     [
                         "|",
+                        "|",
                         ("phone", "=", values.get("phone_number")),
                         ("mobile", "=", values.get("phone_number")),
+                        ("phone_mobile_search", "ilike", values.get("phone_number")), 
                     ],
                     limit=1,
                 )
