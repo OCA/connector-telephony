@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2024 Hunki Enterprises BV
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl-3.0) -->
+<odoo noupdate="1">
+    <record id="ovh_gateway_iap" model="ir.sms.gateway">
+        <field name="name">OVH SMS</field>
+        <field name="gateway_type">ovh</field>
+    </record>
+</odoo>
